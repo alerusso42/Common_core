@@ -1,0 +1,18 @@
+{
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"files.associations": {
+		"malloc.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c",
+		"numbers": "cpp",
+		"*.tcc": "cpp",
+		"print_struct.h": "c",
+		"random": "cpp",
+		"limits": "cpp",
+		"algorithm": "cpp"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
+}
