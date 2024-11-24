@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_alloc_pkmn_memory.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 11:58:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 11:55:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	alloc_strs(int index, char *pokedex, char ***strings, int position)
 			count = index;
 			while (((pokedex[index] >= 'a') && (pokedex[index] <= 'z'))
 			|| ((pokedex[index] >= 'A') && (pokedex[index] <= 'Z'))
-			|| ((pokedex[index] >= '0') && (pokedex[index] <= '9')))
+			|| ((pokedex[index] >= '0') && (pokedex[index] <= '9'))
+			|| (pokedex[index] >= '_'))
 				++index;
 			count = index - count;
 			if (alloc_str(&(*strings)[position++], count + 1) != 0)

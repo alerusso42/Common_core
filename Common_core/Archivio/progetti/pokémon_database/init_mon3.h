@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mon3.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:34:39 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/22 09:49:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:09:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,20 @@ char	*find_1str(int i, int which_s, char *string, char *pokedex_copy)
 	while (pokedex_copy[i] != '\n')
 	{
 		if ((((pokedex_copy[i] >= 'a') && (pokedex_copy[i] <= 'z'))
-		|| ((pokedex_copy[i] >= 'A') && (pokedex_copy[i] <= 'Z')))
-		&& (which_s == 1))
+				|| ((pokedex_copy[i] >= 'A') && (pokedex_copy[i] <= 'Z')))
+			&& (which_s == 1))
 		{
 			sub_strcpy(&string, &pokedex_copy[i]);
 			return (string);
 		}
 		else if ((((pokedex_copy[i] >= 'a') && (pokedex_copy[i] <= 'z'))
-		|| ((pokedex_copy[i] >= 'A') && (pokedex_copy[i] <= 'Z')))
-		&& (which_s != 1))
+				|| ((pokedex_copy[i] >= 'A') && (pokedex_copy[i] <= 'Z')))
+			&& (which_s != 1))
 			--which_s;
 		while (((pokedex_copy[i] >= 'a') && (pokedex_copy[i] <= 'z'))
-		|| ((pokedex_copy[i] >= 'A') && (pokedex_copy[i] <= 'Z'))
-		|| ((pokedex_copy[i] >= '0') && (pokedex_copy[i] <= '9'))
-		|| (pokedex_copy[i] == '_'))
+			|| ((pokedex_copy[i] >= 'A') && (pokedex_copy[i] <= 'Z'))
+			|| ((pokedex_copy[i] >= '0') && (pokedex_copy[i] <= '9'))
+			|| (pokedex_copy[i] == '_'))
 			++i;
 		if (pokedex_copy[i] != '\n')
 			++i;

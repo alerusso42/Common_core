@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_alloc_pkmn_memory2.h                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/22 10:48:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:11:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 
 int		count_strings(int index, char *pokedex);
 int		alloc_strings_ptr(int index, char *pokedex, char ***strings);
-void 	*ft_calloc(size_t nmemb, size_t size);
-
+void	*ft_calloc(size_t nmemb, size_t size);
 
 int	count_strings(int index, char *pokedex)
 {
@@ -33,8 +32,8 @@ int	count_strings(int index, char *pokedex)
 			|| ((pokedex[index] >= 'A') && (pokedex[index] <= 'Z')))
 		{
 			while (((pokedex[index] >= 'a') && (pokedex[index] <= 'z'))
-			|| ((pokedex[index] >= 'A') && (pokedex[index] <= 'Z'))
-			|| ((pokedex[index] >= '0') && (pokedex[index] <= '9')))
+				|| ((pokedex[index] >= 'A') && (pokedex[index] <= 'Z'))
+				|| ((pokedex[index] >= '0') && (pokedex[index] <= '9')))
 			{
 				++index;
 			}
@@ -57,7 +56,7 @@ int	alloc_strings_ptr(int index, char *pokedex, char ***strings)
 	return (0);
 }
 
-void *ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	size_t	total_size;
 	void	*pointer;

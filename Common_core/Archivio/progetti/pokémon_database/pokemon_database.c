@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pokemon_database.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:45:39 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 12:28:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:05:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	main(int argc, char *argv[])
 	{
 		ft_printf("Inserisci il nome di uno o più ");
 		ft_printf("pokémon.\n");
-		ft_printf("Il programma ne restituisce le ");
-		ft_printf("statistiche.\n");
+		ft_printf("Il programma mostra e salva in una struct i dati");
 		return (42);
 	}
 	index = 1;

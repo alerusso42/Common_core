@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_ft2.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 11:44:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:09:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	sub_strcpy(char **dest, char *src)
 
 	i = 0;
 	while ((((src[i] >= 'a') && (src[i] <= 'z'))
-		|| ((src[i] >= 'A') && (src[i] <= 'Z'))
-		|| ((src[i] >= '0') && (src[i] <= '9'))
-		|| ((src[i] == ' ') || (src[i] == '_')))
+			|| ((src[i] >= 'A') && (src[i] <= 'Z'))
+			|| ((src[i] >= '0') && (src[i] <= '9'))
+			|| ((src[i] == ' ') || (src[i] == '_')))
 		&& ((src[i] != '\0')) && ((*dest)[i] != '\0'))
 	{
 		(*dest)[i] = src[i];
@@ -94,7 +94,8 @@ int	sub_strlen2(char *src)
 	i = 0;
 	while (((src[i] >= 'a') && (src[i] <= 'z'))
 		|| ((src[i] >= 'A') && (src[i] <= 'Z'))
-		|| ((src[i] >= '0') && (src[i] <= '9')))
+		|| ((src[i] >= '0') && (src[i] <= '9'))
+		|| (src[i] == ' '))
 	{
 		++i;
 	}

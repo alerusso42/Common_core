@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mon.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:34:39 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/22 09:09:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:02:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ int	fake_main(struct s_pkmn **pkmn, char *input)
 		return (1);
 	if (read_pokedex(pokedex_copy, pokedex, CHUNK) == 1)
 		return (erase_pokedex(pokedex_copy));
-	//ft_printf("\n%s\n", (*pokedex_copy));
 	register_mon1(pkmn, pokedex_copy, input);
 	erase_pokedex(pokedex_copy);
-	free_all_init(pkmn);
+	if ((*pkmn)->nbr != 0)
+		free_all_init(pkmn);
 	close(pokedex);
-	(*pkmn)->nbr = 0;
+	if ((*pkmn)->nbr == 0)
+		ft_printf("--ATTENZIONE: pokémon \"%s\" non trovato.", input);
 	return (0);
 }
 

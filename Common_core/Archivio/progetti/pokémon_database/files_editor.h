@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   files_editor.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:36:12 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/20 13:28:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:07:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILE_EDITOR_H
-# define FILE_EDITOR_H
+#ifndef FILES_EDITOR_H
+# define FILES_EDITOR_H
 # include "structs_info.h"
 # include "general_ft.h"
 # include "general_ft2.h"
@@ -45,7 +45,7 @@ int	insert_pkmn_index(char **pokedex_copy)
 
 int	generate_newpokedex(char **pokedex_update, char *pokedex_copy, int n_file)
 {
-	char *temp;
+	char	*temp;
 
 	if (alloc(&temp, 14) == 1)
 		return (1);
