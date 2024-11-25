@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/21 13:20:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:24:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
+#include "libft.h"
 
 char	*ft_strdup(const char *str);
 

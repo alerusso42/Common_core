@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:42:50 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 16:57:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:32:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <malloc.h>
-# include <string.h>
-# include <fcntl.h>
+#include <unistd.h>
+#include <malloc.h>
+#include <string.h>
+#include <fcntl.h>
+#include "libft.h"
 
-void 	ft_putchar_fd(char c, int fd);
-void	ft_itoa(int fd, int num, char *str);
+static void	ft_custom_itoa(int fd, int num, char *str);
 
 void ft_putnbr_fd(int n, int fd)
 {
 	char	string[12];
-	
-	ft_itoa(fd, n, string);
+
+	ft_custom_itoa(fd, n, string);
 }
 
-void	ft_itoa(int fd, int num, char *str)
+static void	ft_custom_itoa(int fd, int num, char *str)
 {
 	int		temp_num;
 	int		index;

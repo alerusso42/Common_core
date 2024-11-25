@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:59:49 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/21 13:19:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:23:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-
-int ft_memcmp(const void *s1, const void *s2, size_t n);
+#include "libft.h"
 
 int ft_memcmp(const void *s1, const void *s2, size_t n)
 {

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:44:58 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/21 13:20:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:24:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include <bsd/string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "libft.h"
 
 size_t  ft_strlcat(char *dst, const char *src, size_t size);
 

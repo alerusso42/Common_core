@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:59:33 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/21 13:21:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:25:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len);
-size_t 	string_len(const char *s);
+char			*ft_strnstr(const char *big, const char *little, size_t len);
+static size_t 	string_len(const char *s);
 
 /*
 int main()
@@ -51,7 +52,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (truncated_bigstring_pointer);
 }
 
-size_t string_len(const char *s)
+static size_t string_len(const char *s)
 {
     size_t  len;
 

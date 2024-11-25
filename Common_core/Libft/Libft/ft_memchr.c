@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:59:52 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/21 13:19:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:22:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-
-void *ft_memchr(const void *s, int c, size_t n);
+#include "libft.h"
 
 void *ft_memchr(const void *s, int c, size_t n)
 {

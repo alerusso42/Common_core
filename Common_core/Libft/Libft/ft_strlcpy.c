@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:29:30 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/21 13:21:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:25:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <bsd/string.h>
+#include "libft.h"
 
 size_t  ft_strlcpy(char *dst, const char *src, size_t size)
 {

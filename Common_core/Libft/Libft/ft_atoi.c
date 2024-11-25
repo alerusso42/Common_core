@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 17:15:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:27:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
 #define TOO_MUCH_SIGNS 0
 
 int			ft_atoi(char *str);
 static int	ft_isspace(char str);
-static int			ft_size(char *str, int *i);
-static int			ft_issign(char *str, int *i);
-static int			ft_isdigit(char str);
+static int	ft_size(char *str, int *i);
+static int	ft_issign(char *str, int *i);
 /*
 int main()
 {
@@ -115,11 +115,4 @@ int	ft_size(char *str, int *i)
 	if (make_power == 0)
 		size_numb = 0;
 	return (size_numb);
-}
-
-int	ft_isdigit(char str)
-{
-	if ((str >= '0') & (str <= '9'))
-		return (1);
-	return (0);
 }

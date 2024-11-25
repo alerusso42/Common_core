@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:59:47 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 17:10:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:23:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
+#include "libft.h"
 
 void *ft_memcpy(void *dest, const void *src, size_t n);
-static char *ft_strcpy(char *dst, const char *src);
 
 /*
 int main(int argc, char *argv[])
@@ -55,17 +55,4 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 	while ((n--) && ((char *)dest) && (*(char *)src != '\0'))
         *(char *)dest++ = *(char *)src++;
 	return (pointer);
-}
-
-static char    *ft_strcpy(char *dst, const char *src)
-{
-	int		i;
-    
-	i = -1;
-	while (src[++i])
-	{
-		dst[i] = src[i];
-	}
-	dst[i] = '\0';
-	return (dst);
 }

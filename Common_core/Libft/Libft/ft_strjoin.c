@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/22 15:27:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:24:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
+#include "libft.h"
 
 char *ft_strjoin(char const *s1, char const *s2);
 
@@ -42,6 +43,7 @@ char *ft_strjoin(char const *s1, char const *s2)
 	return (stringona);
 }
 
+/*
 int	main(int argc, char *argv[])
 {
 	char	*s1;
@@ -60,4 +62,4 @@ int	main(int argc, char *argv[])
 	printf("\n STRINGONA:%s\n", stringona);
 	return (0);
 }
-	
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:31:27 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 12:35:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:24:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+#include "libft.h"
 
-char	**ft_split(char const *str, char *c);
-int		ft_alloc(char ***strings, char *str, char *charset, int str_num);
-void	how_many_strings(char *str, char *charset, int *str_num, int *i);
-int		is_charset(char cmp, char *charset);
-void	ft_copy(char **strings, char *str, char *charset, int str_num);
+char		**ft_split(char const *str, char *c);
+static int	ft_alloc(char ***strings, char *str, char *charset, int str_num);
+static void	how_many_strings(char *str, char *charset, int *str_num, int *i);
+static int	is_charset(char cmp, char *charset);
+static void	ft_copy(char **strings, char *str, char *charset, int str_num);
 
+/*
 int main(int argc, char *argv[])
 {
     char    **strings;
@@ -39,7 +41,7 @@ int main(int argc, char *argv[])
     	printf("Stringa %d: %s\n", i + 1, strings[i]);
 	while (strings[i++] != NULL);
 	return (0);
-}
+}*/
 
 char	**ft_split(char const *str, char *c)
 {
@@ -54,7 +56,7 @@ char	**ft_split(char const *str, char *c)
 	return (strings);
 }
 
-void	how_many_strings(char *str, char *charset, int *str_num, int *i)
+static void	how_many_strings(char *str, char *charset, int *str_num, int *i)
 {
 	*i = 0;
 	*str_num = 0;
@@ -69,7 +71,7 @@ void	how_many_strings(char *str, char *charset, int *str_num, int *i)
 	}
 }
 
-int	is_charset(char cmp, char *charset)
+static int	is_charset(char cmp, char *charset)
 {
 	int	i;
 
@@ -83,7 +85,7 @@ int	is_charset(char cmp, char *charset)
 	return (0);
 }
 
-int	ft_alloc(char ***strings, char *str, char *charset, int str_num)
+static int	ft_alloc(char ***strings, char *str, char *charset, int str_num)
 {
 	int	str_len;
 	int	i;
@@ -112,7 +114,7 @@ int	ft_alloc(char ***strings, char *str, char *charset, int str_num)
 	return (0);
 }
 
-void	ft_copy(char **strings, char *str, char *charset, int str_num)
+static void	ft_copy(char **strings, char *str, char *charset, int str_num)
 {
 	int	i_str;
 	int	i_matrix;

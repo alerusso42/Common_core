@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:27:17 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/22 18:03:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:28:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
+#include "libft.h"
 #define TRUE 1
 #define FALSE 0
 #define GO_RIGHT 0
 #define GO_LEFT 1
 
 char 		*ft_strtrim(char const *s1, char const *set);
-static int	ft_strrchr(const char *s, int c);
 static char	*trimmer(const char *s1, const char *set, int go_left);	
 
 char *ft_strtrim(char const *s1, char const *set)
@@ -68,21 +68,6 @@ static char	*trimmer(const char *s1, const char *set, int go_left)
 			--s1;
 	}
 	return (save_pointer);
-}
-
-static int	ft_strrchr(const char *s, int c)
-{
-	if (!s)
-		return (FALSE);
-	if (c == 0)
-		return (TRUE);
-	while (*s != '\0')
-	{
-		if (*s == c)
-			return (TRUE);
-		++s;
-	}
-	return (FALSE);
 }
 
 int	main(int argc, char *argv[])

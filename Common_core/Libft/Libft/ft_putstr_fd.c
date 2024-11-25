@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 15:31:06 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 16:31:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:24:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <malloc.h>
-# include <string.h>
-# include <fcntl.h>
+#include <unistd.h>
+#include <malloc.h>
+#include <string.h>
+#include <fcntl.h>
+#include "libft.h"
 
 void ft_putstr_fd(char *s, int fd);
 

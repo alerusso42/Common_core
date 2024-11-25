@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:06:42 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 14:26:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:30:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
-
-static size_t ft_strlen(const char *s)
-{
-	size_t	strlen;
-
-	strlen = 0;
-	while ((*s++ != '\0'))
-		++strlen;
-	return (strlen);
-}
+#include "libft.h"
 
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
@@ -41,7 +32,7 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (s2);
 }
 
-static char	ft_toupper(unsigned int index, char c)
+static char	ft_uppercharacter(unsigned int index, char c)
 {
 	if (index)
 		++index;
@@ -55,7 +46,7 @@ int	main()
 	char	*s = "JolL7y";
 
 	printf("\nStringa iniziale: \"%s\"\n", s);
-	s = ft_strmapi(s, *ft_toupper);
+	s = ft_strmapi(s, *ft_uppercharacter);
 	printf("Risultato: \"%s\"\n", s);
 	free(s);
 	return (0);

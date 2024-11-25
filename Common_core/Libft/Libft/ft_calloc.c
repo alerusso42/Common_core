@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:05:17 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 17:11:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:21:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
+#include "libft.h"
 #define FULL_MEMORY 2
 
 void 		*ft_calloc(size_t nmemb, size_t size);

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:25:16 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/23 14:53:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:31:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
+#include "libft.h"
 #define UN_BOTTO 100
 
 void ft_striteri(char *s, void (*f)(unsigned int, char*));
-static size_t  ft_strlcpy(char *dst, const char *src, size_t size);
 
 void ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
@@ -30,32 +30,11 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 	s[i] = '\0';
 }
 
-void	ft_toupper(unsigned int index, char *c)
+void	ft_uppercharacter(unsigned int index, char *c)
 {
 	c += index;
     if ((*c >= 'a') && (*c <= 'z') && (*c != '\0'))
         *c -= 32;
-}
-
-static size_t  ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	int		i;
-	int		j;
-	int		src_len;
-
-	j = size;
-	i = -1;
-	src_len = 0;
-	while (src[++i])
-		++src_len;
-	i = -1;
-	while (src[++i] && i < j)
-	{
-		dst[i] = src[i];
-	}
-	if (i < j)
-		dst[i] = '\0';
-	return ((size_t)i);
 }
 
 int	main()
@@ -67,7 +46,7 @@ int	main()
 		return (2);
 	ft_strlcpy(s, "dslknsdlfbnwdljkfbwlfblsbf", UN_BOTTO);
 	printf("\nStringa iniziale: \"%s\"\n", s);
-	ft_striteri(s, *ft_toupper);
+	ft_striteri(s, *ft_uppercharacter);
 	printf("Risultato: \"%s\"\n", s);
 	free(s);
 	return (0);
