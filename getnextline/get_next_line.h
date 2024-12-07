@@ -6,12 +6,12 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:30:53 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/07 14:29:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:26:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 10
 #endif
 #define COUNTER 100000000
 #define FORCE_READ_ONE_TEXT 4
@@ -20,6 +20,7 @@
 #define REALLOC 2
 #define FREE 3
 #define FULL_MEMORY 0
+#define SUCCESS 1
 #define ALLOCATION_SUCCESS 1
 #define ERROR_READING_FILE -1
 #define END_OF_FILE -1

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:30:12 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/07 13:28:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:24:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -96,7 +96,7 @@ int	alloc_ft(void **content, void *new_content, size_t start, int mode)
 	if ((mode == FREE) && (*content))
 		free(*content);
 	*content = NULL;
-	return (ALLOCATION_SUCCESS);//allocation_success
+	return (-1);//allocation_success
 }
 
 void trim_readbytes(char *buffer) 

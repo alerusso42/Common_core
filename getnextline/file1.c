@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:48:33 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/07 14:51:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:27:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -117,7 +117,10 @@ char 	*get_next_line_main_function(int fd, char buffer[BUFFER_SIZE + 1])
 			return (NULL);
 		ft_memcpy(store_readbytes, buffer, check_newline);
 		if (go_read(fd, buffer, &new_line) == END_OR_CORRUPTION)
+		{
+			trim_readbytes(buffer);
 			return (store_readbytes);
+		}
 		new_line = ft_strjoin(store_readbytes, new_line);
 		if (!new_line)
 			return (NULL);
@@ -147,7 +150,7 @@ int	go_read(int fd, char buffer[BUFFER_SIZE + 1], char **new_line)
 		control_read = read(fd, *new_line + end, BUFFER_SIZE);
 		if ((control_read == -1) || ((control_read == 0) && (end == 0)))
 			return (alloc_ft((void **)new_line, 0, 0, FREE));
-		if ((control_read == 0) && ((*new_line[0]) == 0))
+		if (control_read == 0)
 			break ;
 		end += control_read;
 		if (end >= size)
@@ -161,12 +164,10 @@ int	go_read(int fd, char buffer[BUFFER_SIZE + 1], char **new_line)
 		if (find_end_line(&end, *new_line) == EOF_OR_NEWLINE_FOUND)
 			break ;
 	}
-	if (control_read == 0)
-		return (alloc_ft((void **)new_line, 0, 0, FREE));
 	ft_memcpy(buffer, *new_line + end + 1, control_read - end - 1);
 	if (alloc_ft((void **)new_line, (void *)*new_line, end, REALLOC) == FULL_MEMORY)
 		return (alloc_ft((void **)new_line, 0, 0, FREE));
-	return (0);
+	return (SUCCESS);
 }
 
 
