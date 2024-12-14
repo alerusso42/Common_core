@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: negambar <negambar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 16:14:13 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/12 11:12:10 by alerusso         ###   ########.fr       */
+/*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
+/*   Updated: 2024/12/14 11:49:02 by negambar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Memoria statica usata ---> BUFFER_SIZE * 4000
 // Define per il debug
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 22222222
+#  define BUFFER_SIZE 1
 # endif
-# define COUNTER 1
-# define FORCE_READ_ONE_TEXT 3
+# define COUNTER 100000000
+# define FORCE_READ_ONE_TEXT 0
 // Define usati nel programma
+# define FIND 1
+# define GET 2
+# define MOVE 3
+# define MIDWORDS_LEN 10
+# define RESET -2
 # define MALLOC 1
 # define REALLOC 2
 # define FREE 3
@@ -34,12 +39,19 @@
 # define END_OR_CORRUPTION -1
 // Librerie
 # include <unistd.h>
+# include <string.h>
+# include <stdarg.h>
+# include <stdlib.h>
 # include <stdio.h>
 # include <malloc.h>
 # include <fcntl.h>
 # include <limits.h>
+# include "../gioco.h"
 
-char	*get_next_line(int fd);
+char	*ft_itoa(int num);
+
+void	initiate_file(int fd, char *name);
+char	*get_next_line(int fd, int reset);
 char	*get_next_line_main_function(int fd, char buffer[BUFFER_SIZE + 1]);
 char	*get(char **store_bytes, char buffer[BUFFER_SIZE + 1], int nl, int fd);
 int		go_read(int fd, char buffer[BUFFER_SIZE + 1], char **new_line);
@@ -48,6 +60,6 @@ int		alloc_ft(void **content, void *new_content, size_t start, int mode);
 int		find_end_line(size_t *start, char *string);
 void	*calloc_memcpy(int size, void *dest, const void *src, int ft);
 void	trim_readbytes(char *buffer);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_custom(char *s1, char *s2);
 
 #endif

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 16:14:13 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/12 11:12:10 by alerusso         ###   ########.fr       */
+/*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
+/*   Updated: 2024/12/12 15:43:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Memoria statica usata ---> BUFFER_SIZE * 4000
 // Define per il debug
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 22222222
+#  define BUFFER_SIZE 1000
 # endif
-# define COUNTER 1
-# define FORCE_READ_ONE_TEXT 3
+# define COUNTER 100000000
+# define FORCE_READ_ONE_TEXT 0
 // Define usati nel programma
 # define MALLOC 1
 # define REALLOC 2
