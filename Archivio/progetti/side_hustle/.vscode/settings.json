@@ -2,6 +2,11 @@
 	"files.associations": {
 		"typeinfo": "c",
 		"get_next_line_bonus.h": "c",
-		"gnl.h": "c"
+		"gnl.h": "c",
+		"gioco.h": "c",
+		"limits.h": "c",
+		"struct.h": "c",
+		"stdio.h": "c",
+		"string.h": "c"
 	}
 }

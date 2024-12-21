@@ -1,0 +1,28 @@
+   
+   
+[thief_1]
+
+name = Ale_______,                                                                                
+age = 33________,   
+honor = 10________, 
+respect = 10________,     
+job = spazzino__,                                                                                                    
+race = Human_____,                                                                            
+class = Class_____,                                                                                              
+alignment = N-N_______,      
+_SHEET_
+strength = 10________,          
+constitution =           
+wisdom =           
+charisma = 
+proficiency =           
+ispiration =           
+speed =           
+armour_class =           
+initiative =            
+current_hitpoints = 
+attack_bonus =           
+weapons =                                                                                                     
+spell_list =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+_END_ENEMY]
+EOF

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:42 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/14 14:17:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:49:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct s_printdata
 	unsigned int	save_index_position;
 }					t_printdata;
 
-typedef unsigned long long int t_address;
+typedef unsigned long long int	t_address;
+typedef unsigned char			t_uchar;
 
 void	print_struct(t_printdata *data);
 int		ft_printf(const char *str, ...);
@@ -58,14 +59,16 @@ int		type_print(char type, va_list ptr, size_t *counter, t_printdata *data);
 void	ft_putnbr(int num);
 void	print(const char *str);
 void	write_flags(unsigned int size, size_t flag);
-size_t	print_char(char character, t_printdata *data);
-size_t	print_string(char *string, t_printdata *data);
+size_t	print_char(unsigned char character, t_printdata *data);
+size_t	print_string(unsigned char *string, t_printdata *data);
 size_t	print_signed_int(int num, t_printdata *data);
 size_t	print_lower_hex(unsigned int num, t_printdata *data);
 size_t	print_upper_hex(unsigned int num, t_printdata *data);
 size_t	print_unsigned_int(unsigned int num, t_printdata *data);
+size_t	print_address(void *address, t_printdata *data);
 int		is_specifier(char specifier);
 void	override_rules(t_printdata *data);
+size_t	precision_and_zero(int num, t_printdata *data);
 
 /* 	printf("%[flags][width][.precision][length]specifier", variable);
 	

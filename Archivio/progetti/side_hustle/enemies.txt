@@ -1,0 +1,93 @@
+
+   
+[thief_1]
+
+name = [thief_1]_,                                                                                         
+age = 33__,     
+honor = 10__,     
+respect = 10__,     
+job = spazzino__,                                                                                         
+race = Human_____,                                                                                         
+class = Class_____,                                                                                         
+alignment = N-N_,     
+_SHEET_
+strength = 10__,     
+dexterity = 10__,     
+constitution = 10__,     
+intelligence = 10__,     
+wisdom = 10__,     
+charisma = 10__,     
+proficiency = 10__,     
+ispiration = 10__,     
+speed = 12__,     
+armour_class = 10__,     
+initiative = 5___,     
+max_hitpoints = 15__,     
+current_hitpoints = 15__,     
+attack_bonus = 15__,     
+weapons = sword_____, bow_______,                                                                             
+spell_list = fireball__, Fly_______,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+_END_ENEMY]
+EOF
+   
+   
+[Marco]
+
+name = [Marco]___,                                                                                         
+age = 33__,     
+honor = 10__,     
+respect = 10__,     
+job = spazzino__,                                                                                         
+race = Human_____,                                                                                         
+class = Class_____,                                                                                         
+alignment = N-N_,     
+_SHEET_
+strength = 10__,     
+dexterity = 10__,     
+constitution = 10__,     
+intelligence = 10__,     
+wisdom = 10__,     
+charisma = 10__,     
+proficiency = 10__,     
+ispiration = 10__,     
+speed = 12__,     
+armour_class = 10__,     
+initiative = 5___,     
+max_hitpoints = 15__,     
+current_hitpoints = 15__,     
+attack_bonus = 15__,     
+weapons = sword_____, bow_______,                                                                             
+spell_list = fireball__, Fly_______,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+_END_ENEMY]
+EOF
+   
+   
+[Marco_2]
+
+name = [Marco_2]_,                                                                                         
+age = 33__,     
+honor = 10__,     
+respect = 10__,     
+job = spazzino__,                                                                                         
+race = Human_____,                                                                                         
+class = Class_____,                                                                                         
+alignment = N-N_,     
+_SHEET_
+strength = 10__,     
+dexterity = 10__,     
+constitution = 10__,     
+intelligence = 10__,     
+wisdom = 10__,     
+charisma = 10__,     
+proficiency = 10__,     
+ispiration = 10__,     
+speed = 12__,     
+armour_class = 10__,     
+initiative = 5___,     
+max_hitpoints = 15__,     
+current_hitpoints = 15__,     
+attack_bonus = 15__,     
+weapons = sword_____, bow_______,                                                                             
+spell_list = fireball__, Fly_______,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+_END_ENEMY]
+EOF

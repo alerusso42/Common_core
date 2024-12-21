@@ -6,18 +6,16 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:14:06 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/12 15:57:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:24:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
 int	main()
 {
 	char	*new_line;
 	int		fd;
-	int		max_fd;
 	size_t	counter;
 	size_t	initial_counter;
 
@@ -43,7 +41,7 @@ int	main()
 	}
 	printf("\n\n\\\\END OF READING\\\\\n\n");
 	close(fd);
-}*/
+}
 
 char	*get_next_line(int fd)
 {

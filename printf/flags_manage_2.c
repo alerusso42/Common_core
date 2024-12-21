@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:04:13 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/14 16:49:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:19:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ int	is_specifier(char specifier)
 	5)MR0:Min. width + 0	--->Ov. 4 
 	6) # :Alternative form	--->
 	7)   :Space				--->
-	8) + :Explicit sign		--->Ov. 7*/
+	8) + :Explicit sign		--->Ov. 7
+	
+	Print a memory address implies:
+	1) Force rule 6 on (0x)  
+	*/
 void	override_rules(t_printdata *data)
 {
 	if (data->is_minus_flag == 1)
@@ -58,11 +62,17 @@ void	override_rules(t_printdata *data)
 		data->is_width_zero = 0;
 	}
 	if (data->is_width_zero == 1)
+	{
 		data->is_width = 0;
+	}
 	if (data->is_expsign_flag == 1)
+	{
 		data->is_space_flag = 0;
+	}
 	if (data->print_address == 1)
+	{
 		data->is_alt_form = 1;
+	}
 }
 
 size_t	go_next(const char *str, size_t *index)
@@ -79,10 +89,19 @@ size_t	go_next(const char *str, size_t *index)
 		++(*index);
 		++counter;
 	}
-	if (str[*index])
-	{
-		write(1, &str[*index], 1);
-		++counter;
-	}
+	--counter;
+	--(*index);
 	return (counter);
+}
+
+size_t	precision_and_zero(int num, t_printdata *data)
+{
+	if (num != 0)
+		return (FALSE);
+	if (data->is_precision == 0)
+		return (FALSE);
+	if (data->precision_length == 0)
+		return (TRUE);
+	else
+		return (FALSE);
 }

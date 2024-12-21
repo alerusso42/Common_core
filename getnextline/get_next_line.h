@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:14:13 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/12 11:12:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:26:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 22222222
+#  define BUFFER_SIZE 222222
 # endif
-# define COUNTER 1
+# define COUNTER 3
 # define FORCE_READ_ONE_TEXT 3
 // Define usati nel programma
 # define MALLOC 1

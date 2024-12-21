@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:04:13 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/14 15:26:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:12:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 // 1) In caso di errore di malloc/struttura illegale, si torna ERROR.
 // 2) In ogni altro caso, si torna le informazioni sulla struttura.
 // Per il debug: print_struct(*data)
-int		validate_struct(const char *str, t_printdata **data, size_t *index)
+int	validate_struct(const char *str, t_printdata **data, size_t *index)
 {
 	size_t	save_index;
 
 	save_index = (*index)++;
 	if (reset_printdata(data) == ERROR)
-		return (ERROR);
+		return (0);
 	while ((str[*index]) && (is_flags(str[*index], (*data))))
 		++(*index);
 	if (is_width(str, index, (*data), save_index) == ERROR)
@@ -114,13 +114,19 @@ int	is_width(const char *str, size_t *i, t_printdata *data, size_t s_i)
 	return (0);
 }
 
-// Copy of the function is_width. Only the type of data change.
+// Copy of flags_manage. Changes:
+// 1) if after the . there is a specifiers, set the precision to zero;
+// 2) if precision is negative, return ERROR.
 int	precision(const char *str, size_t *i, t_printdata *data, size_t s_i)
 {
 	(*i) += 1;
-	if (!(str[*i]) || !((str[*i] >= '0') && (str[*i] <= '9')))
-		return (FALSE);
+	if (!(str[*i]) || (!((str[*i] >= '0') && (str[*i] <= '9')) && \
+	(is_specifier(str[*i]) == 1)))
+		return (ERROR);
 	data->is_precision = 1;
+	data->precision_length = 0;
+	if (is_specifier(str[*i]) == 0)
+		return (0);
 	data->precision_length = ft_atoi(&(str[*i]));
 	if (data->precision_length == 0)
 	{

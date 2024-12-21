@@ -3,28 +3,132 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: negambar <negambar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/14 15:35:12 by negambar         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:01:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "get_next_line_bonus.h"
 # include "../gioco.h"
 
+int		find_number_line(int fd, char *filename, int num_search, ...);
+int		move_cursor(int fd, char *filename, int line_num);
 char	*get_n_line(int fd, int n);
-int		write_fucking_line(int fd, int line_num, int position, char *string);
+int		write_fucking_line(int fd, char *filename, int line_num, int position, char *string);
 int		reset_fd(int fd, char *name);
-char	*find_line(int flag, ...);
+char	*find_line(int flag, int fd, int num_search, va_list list);
 void	initiate_file(int fd, char *num);
+int		write_short_line(int fd, char *filename, int line_num, int position, char *string);
 
-static void hold_space(int counter, int fd)
+// Deprecata (da me stesso).
+char	*line_fgm(int flag, int fd, int num_search, ...)
+{
+	char	*string;
+	char	*search;
+	int		counter;
+	va_list	list;
+
+	va_start(list, num_search);
+	counter = 1;
+	string = get_next_line(fd, 0);
+	if (!string)
+	{
+		va_end(list);
+		return (NULL);
+	}
+	search = va_arg(list, char *);
+	while ((search) && (string) && (num_search--))
+	{
+		while (strstr(string, search) == NULL)
+		{
+			free(string);
+			string = get_next_line(fd, 0);
+			if (!string)
+				break ;
+			++counter;
+		}
+		search = va_arg(list, char *);
+	}
+	va_end(list);
+	if (!string)
+		return (NULL);
+	free(string);
+	if (flag == FIND)
+		return (ft_itoa(counter));
+	if (flag == GET)
+		return (get_n_line(fd, counter));
+	if (flag == MOVE)
+		return (get_n_line(fd, counter - 1));
+	return ("Metti le flag ammodo, mongoloide");
+}
+
+
+/*
+Find_number_line riceve:
+1) fd;
+2) il nome del file come stringa;
+3) il numero di confronti da fare;
+4) un numero variadico di stringhe: le parole chiave che vuoi cercare nel file.
+	
+	le stringhe verranno cercate in ordine. Se, durante la ricerca, il cursore
+	arriva alla fine del testo senza aver trovato tutte le linee, la funzione
+	restituisce -1 (stessa cosa per errori di malloc).
+
+Ritorno:
+		Il numero della linea dove si trova la corrispondenza;
+		-1, se la ricerca fallisce oppure in caso di errori di malloc.
+		-2, se gli argomenti presi sono invalidi.
+*/
+int		find_number_line(int fd, char *filename, int num_search, ...)
+{
+	int		line_num;
+	char	*string;
+	va_list	ptr;
+
+	if ((fd == -1) || (!filename))
+		return (-2);
+	va_start(ptr, num_search);
+	reset_fd(fd, filename);
+	string = find_line(FIND, fd, num_search, ptr);
+	if (!string)
+	{
+		va_end(ptr);
+		return (-1);
+	}
+	line_num = atoi(string);
+	free(string);
+	va_end(ptr);
+	reset_fd(fd, filename);
+	return (line_num);
+}
+
+/*
+Hold_space riceve:
+1) Il numero di spazi da inserire;
+2) fd.
+	
+	Al termine, hold_space inserisce un carattere di nuova linea \n.
+
+	Hold space non torna niente.
+*/
+void hold_space(int counter, int fd)
 {
 	while (counter--)
 		write(fd, " ", 1);
 	write(fd, "\n", 1);
 }
+
+/*
+initiate_file riceve:
+1) fd;
+2) il nome del giocatore.
+	
+	initiate_file inizializza il file del giocatore.
+
+	initiate_file non torna niente.
+*/
 void	initiate_file(int fd, char *name)
 {
 	int	counter;
@@ -51,18 +155,124 @@ void	initiate_file(int fd, char *name)
 	write(fd, "EOF\n", 4);
 }
 
-int		write_fucking_line(int fd, int line_num, int position, char *string)
+/*
+write_short_line riceve:
+1) fd;
+2) il nome del file;
+3) il numero della linea;
+4) la posizione, nella linea, nel quale inserire la stringa;
+5) la stringa da inserire.
+	
+	Scrive una stringa all'interno del file, ad una data linea (line_num),
+	ad una certa posizione orizzontale (position).
+	Esempio:
+	write_fucking_line(3, "file. txt", 2, 2, "Rossi"); //Scrive alla linea 2, posizione 2.
+1. [NPC_list]
+2. Nome = Mario______, Rossi______, 
+
+Ritorno:
+		Il numero della linea dove si trova la corrispondenza;
+		-1, se la ricerca fallisce oppure in caso di errori di malloc.
+
+	Write_short_line scrive massimo 5 caratteri.
+*/
+int		write_short_line(int fd, char *filename, int line_num, int position, char *string)
 {
 	char	buffer[1];
 	int		counter;
 	char	*temp;
 
-	if ((fd == -1) || (!string))
+	if ((fd == -1) || (!string) || (position < 0) || (line_num < 0))
 		return (-1);
-	temp = get_n_line(fd, line_num - 1);
-	if (!temp)
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		temp = get_n_line(fd, line_num - 1);
+		if (!temp)
+			return (-1);
+		
+		free(temp);
+	}
+	if (read(fd, buffer, 1) <= 0)
 		return (-1);
-	free(temp);
+	while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
+	{
+		if (read(fd, buffer, 1) <= 0)
+			return (-1);
+	}
+	if ((buffer[0] == '\n') || (buffer[0] == '\0'))
+		return (-1);
+	while ((position--))
+	{
+		if (read(fd, buffer, 1) <= 0)
+			return (-1);
+		while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
+		{
+			if (read(fd, buffer, 1) <= 0)
+				return (-1);
+		}
+		if ((buffer[0] == '\n') || (buffer[0] == '\0'))
+			return (-1);
+	}
+	counter = 0;
+	while (counter != SHORTWORDS_LEN)
+	{
+		if (*string)
+		{
+			write(fd, string, 1);
+			string++;
+		}
+		else
+			write(fd, "_", 1);
+		++counter;
+	}
+	write (fd, ", ", 1);
+	while ((buffer[0] == '\n') || (buffer[0] == '\0'))
+	{
+		if (read(fd, buffer, 1) <= 0)
+			return (-1);
+	}
+	return (line_num);
+}
+
+/*
+write_fucking_line riceve:
+1) fd;
+2) il nome del file;
+3) il numero della linea;
+4) la posizione, nella linea, nel quale inserire la stringa;
+5) la stringa da inserire.
+	
+	Scrive una stringa all'interno del file, ad una data linea (line_num),
+	ad una certa posizione orizzontale (position).
+	Esempio:
+	write_fucking_line(3, "file.txt", 2, 2, "Rossi"); //Scrive alla linea 2, posizione 2.
+1. [NPC_list]
+2. Nome = Mario______, Rossi______, 
+
+Ritorno:
+		Il numero della linea dove si trova la corrispondenza;
+		-1, se la ricerca fallisce oppure in caso di errori di malloc.
+
+	Write_fucking_line scrive massimo 11 caratteri.
+*/
+int		write_fucking_line(int fd, char *filename, int line_num, int position, char *string)
+{
+	char	buffer[1];
+	int		counter;
+	char	*temp;
+
+	if ((fd == -1) || (!string) || (position < 0) || (line_num < 0))
+		return (-1);
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		temp = get_n_line(fd, line_num - 1);
+		if (!temp)
+			return (-1);
+		
+		free(temp);
+	}
 	if (read(fd, buffer, 1) <= 0)
 		return (-1);
 	while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
@@ -105,25 +315,67 @@ int		write_fucking_line(int fd, int line_num, int position, char *string)
 	return (line_num);
 }
 
-char	*find_line(int flag, ...)
+/*
+	move_cursor muove il cursore all'inizio della riga data come argomento.
+
+	Prende come argomento:
+	1) fd;
+	2) il nome del file;
+	3) il numero della linea.
+
+	Torna -1 se fallisce(file vuoto, malloc error, argomenti non validi).
+	Torna 0 se tutto va bene.
+*/
+int	move_cursor(int fd, char *filename, int line_num)
 {
-	va_list	list;
 	char	*string;
 	char	*search;
-	int		fd;
+
+	if ((fd == -1) || (!filename) || (line_num < 1))
+		return (-1);
+	reset_fd(fd, filename);
+	string = get_next_line(fd, 0);
+	if (!string)
+	{
+		return (-1);
+	}
+	free(string);
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		search = get_n_line(fd, line_num - 1);
+		if (search)
+			free(search);
+	}
+	return (0);
+}
+
+/*
+Flags list
+Find = 0 ---> finds where a line is located in a file text (in a string format)
+Get  = 1 ---> Finds and give back the content of a line
+Move = 2 ---> Moves the cursor to the line
+
+Example:
+find_line(GET, "[BEHOLDER]", "max_hp = ")
+
+In this way, find_line finds before the line "[BEHOLDER]", then "max_hp".
+If it finds both, it return the line of the last content, else return NULL.
+*/
+char	*find_line(int flag, int fd, int num_search, va_list list)
+{
+	char	*string;
+	char	*search;
 	int		counter;
 
-	va_start(list, flag);
-	fd = (int)va_arg(list, int);
 	counter = 1;
 	string = get_next_line(fd, 0);
 	if (!string)
 	{
-		va_end(list);
 		return (NULL);
 	}
 	search = va_arg(list, char *);
-	while ((search) && (string))
+	while ((search) && (string) && (num_search--))
 	{
 		while (strstr(string, search) == NULL)
 		{
@@ -135,7 +387,6 @@ char	*find_line(int flag, ...)
 		}
 		search = va_arg(list, char *);
 	}
-	va_end(list);
 	if (!string)
 		return (NULL);
 	free(string);
@@ -231,3 +482,24 @@ int	reset_fd(int fd, char *name)
 	return (0);
 }
  */
+/*
+int main()
+{
+	char	*filename = "enemies.txt";
+	int fd = open(filename, O_RDWR | O_CREAT, 0644);
+	if (fd == -1)
+		return (1);
+	int line_num = find_number_line(fd, "enemies.txt", 1, "name = ");
+	write_fucking_line(fd, filename, line_num++, 1, "Ale");//name
+	write_fucking_line(fd, filename, line_num++, 1, "33");//age
+	write_fucking_line(fd, filename, line_num++, 1, "10");//honor
+	write_fucking_line(fd, filename, line_num++, 1, "10");//respect
+	write_fucking_line(fd, filename, line_num++, 1, "spazzino");//job
+	write_fucking_line(fd, filename, line_num++, 1, "Human");//race
+	write_fucking_line(fd, filename, line_num++, 1, "Class");//class
+	write_fucking_line(fd, filename, line_num++, 1, "N-N");//alignment
+	write_fucking_line(fd, filename, line_num++, 1, "10");//strength
+	write_fucking_line(fd, filename, line_num++, 1, "10");//dexterity
+	close(fd);
+	return (0);
+}*/

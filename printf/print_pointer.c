@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:31:08 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/14 14:26:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:29:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	calc_size(char *string, t_printdata *data, size_t *size);
-static void		print_result(const char *string, t_printdata *data, size_t len);
+static size_t	calc_s(char *string, t_printdata *data, size_t *size, int l);
+static void		printresult(const char *string, t_printdata *data, size_t len);
 static char		*ft_hex_address(unsigned long long int num);
 static void		ft_rev_int_tab(char *tab, int size);
 
@@ -33,7 +33,7 @@ static void	ft_rev_int_tab(char *tab, int size)
 }
 
 // t_address = unsigned long long int
-static char		*ft_hex_address(t_address num)
+static char	*ft_hex_address(t_address num)
 {
 	char	*base;
 	char	*conv_num;
@@ -43,6 +43,8 @@ static char		*ft_hex_address(t_address num)
 	if (!base)
 		return (NULL);
 	conv_num = ft_calloc(50, 1);
+	if ((!conv_num) && (base))
+		free(base);
 	if (!conv_num)
 		return (NULL);
 	base = (char *)ft_memcpy((void *)base, (void *)"0123456789abcdef", 16);
@@ -60,69 +62,85 @@ static char		*ft_hex_address(t_address num)
 }
 
 // t_address = unsigned long long int
-size_t	print_address(t_address num, t_printdata *data)
+size_t	print_address(void *address, t_printdata *data)
 {
-	size_t	size;
-	size_t	len;
-	char	*string;
+	size_t		size;
+	size_t		len;
+	t_address	num;
+	char		*string;
 
-	if (num == 0)
-		return (print_string("(nil)", data));
+	if (!(address) && (data) && (data->is_precision) && \
+	(data->precision_length < 5))
+		data->precision_length = 0;
+	if (address == NULL)
+		return (print_string((t_uchar *)"(nil)", data));
 	size = 0;
+	num = (t_address)address;
 	string = ft_hex_address(num);
 	if (!string)
 		return (0);
-	len = calc_size(string, data, &size);
-	if ((data->is_minus_flag) && (len))
-		print_result(string, data, len);
-	if (data->is_width)
-		write_flags(data->width_value, SPACES);
-	if (data->is_zero_flag)
-		write_flags(data->width_value, ZEROS);
-	if (data->is_precision)
-		write_flags(data->precision_length, PRECISION);
-	if (!(data->is_minus_flag) && (len))
-		print_result(string, data, len);
+	if (!data)
+		return (ft_putstr_fd(string, 1), ft_strlen(string));
+	len = calc_s(string, data, &size, 0);
+	printresult(string, data, len);
 	free(string);
 	return (size);
 }
 
-static size_t	calc_size(char *string, t_printdata *data, size_t *size)
+static size_t	calc_s(char *string, t_printdata *data, size_t *size, int l)
 {
-	size_t	len;
-
-	len = ft_strlen(string);
-	*size = len;
-	if ((*string != '0') && (data->is_alt_form))
+	l = ft_strlen(string);
+	*size = l;
+	if (data->is_alt_form)
 		*size += 2;
 	if (((data->is_space_flag) || (data->is_expsign_flag)))
 		*size += 1;
 	if (data->is_precision)
 	{
-		if (data->precision_length > len)
+		if (data->precision_length > (size_t)l)
 		{
-			data->precision_length -= len;
+			data->precision_length -= l;
 			*size += data->precision_length;
 		}
-		else if (data->precision_length < len)
+		else
 			data->is_precision = 0;
 	}
-	if (((data->is_width_zero) && (data->width_value > *size)) || 
+	if (((data->is_width_zero) && (data->width_value > *size)) || \
 		((data->is_width) && (data->width_value > *size)))
-		{
-			data->width_value -= *size;
-			*size += data->width_value;
-		}
-	return (len);
+	{
+		data->width_value -= *size;
+		*size += data->width_value;
+	}
+	else
+		data->width_value = 0;
+	return ((size_t)l);
 }
 
-static void	print_result(const char *string, t_printdata *data, size_t len)
+static void	printresult(const char *string, t_printdata *data, size_t len)
 {
+	if ((data->is_minus_flag) && (len))
+	{
+		if (data->is_space_flag)
+			write(1, " ", 1);
+		if (data->is_expsign_flag)
+			write(1, "+", 1);
+		if ((data->is_minus_flag) && (len))
+			write(1, "0x", 2);
+		write(1, string, len);
+	}
+	if (data->is_width)
+		write_flags(data->width_value, SPACES);
+	if ((data->is_minus_flag) && (len))
+		return ;
 	if (data->is_space_flag)
 		write(1, " ", 1);
 	if (data->is_expsign_flag)
 		write(1, "+", 1);
-	if ((len) && (*string != '0'))
+	if (!(data->is_minus_flag) && (len))
 		write(1, "0x", 2);
+	if (data->is_zero_flag)
+		write_flags(data->width_value, ZEROS);
+	if (data->is_precision)
+		write_flags(data->precision_length, PRECISION);
 	write(1, string, len);
 }

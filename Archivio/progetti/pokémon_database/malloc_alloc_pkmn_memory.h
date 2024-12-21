@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_alloc_pkmn_memory.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/24 11:55:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:22:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	count_nums(int index, char *pokedex)
 	int	count;
 
 	count = 0;
-	while (pokedex[index] != '\n')
+	while ((*pokedex) && (pokedex[index] != '\n'))
 	{
 		if ((pokedex[index] >= '0') && (pokedex[index] <= '9'))
 		{
