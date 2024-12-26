@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:40:44 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/30 14:57:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/23 23:31:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 int	main(void)
 {
 	char	*data;
-	t_list	*node;
-	t_list	*node_pointer;
-	t_list	*new_pointer;
+	t_typelist	*node;
+	t_typelist	*node_pointer;
+	t_typelist	*new_pointer;
 	size_t	size_of_list;
 	size_t	counter;
 
@@ -68,9 +68,9 @@ int	main(void)
 	return (0);
 }*/
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_typelist **lst, void (*del)(void *))
 {
-	t_list	*node_pointer;
+	t_typelist	*node_pointer;
 
 	if (lst)
 	{

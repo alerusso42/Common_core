@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:14:09 by negambar          #+#    #+#             */
-/*   Updated: 2024/12/20 18:21:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/24 03:51:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_player
 	int				allignment:3;
 }	player;
 
+/*
 typedef struct s_skills
 {
 	;
@@ -56,9 +57,15 @@ typedef struct s_weapon
 	unsigned int	damage_type:3;
 	unsigned int	damage;
 	unsigned int	range:8;
-	
 }	weapon;
-
+*/
+typedef struct	s_temp_stats
+{
+	unsigned char	buff_stats[6];
+	unsigned int	cur_hitpoints;
+	unsigned int	initiative_score:7;
+	bool			death_saves[3];
+}				temp_stats;
 
 typedef struct s_sheet
 {
@@ -68,20 +75,17 @@ typedef struct s_sheet
 	unsigned int	intelligence:7;
 	unsigned int	wisdom:7;
 	unsigned int	charisma:7;
-	unsigned char	buff_stats[6];
 	unsigned int	proficiency:7;
 	unsigned int	ispiration:7;
 	unsigned int	speed:6;
 	unsigned int	armour_class:7;
 	unsigned int	initiative:6;
 	unsigned int	max_hitpoints;
-	unsigned int	cur_hitpoints;
-	skills			*skills;
-	bool			death_saves[3];
+	unsigned char	*skills;
 	unsigned int	attack_bonus:8;
-	weapon			*weapon;
+	unsigned char	**weapon;
 	unsigned char	**spell_list;//stringhe
-	// unsigned char	;
+	temp_stats		*temp_stats;
 }	sheet;
 
 typedef struct	s_random_encounter
@@ -95,8 +99,8 @@ typedef struct	s_random_encounter
 	char			*class;
 	int				allignment:3;
 	sheet			*sheet;
-	
-}	random_encounter;
+	temp_stats		t_stats;
+}				random_encounter;
 typedef struct	all_might
 {
 	player	*p;

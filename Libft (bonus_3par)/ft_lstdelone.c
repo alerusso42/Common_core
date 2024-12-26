@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:40:30 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/29 10:31:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/23 23:32:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #define UN_BOTTO 100
 
-void		ft_lstdelone(t_list *lst, void (*del)(void *));
+void		ft_lstdelone(t_typelist *lst, void (*del)(void *));
 
 /*
 static void	del(void *data)
@@ -30,9 +30,9 @@ static void	del(void *data)
 int	main(void)
 {
 	char	*data;
-	t_list	*node;
-	t_list	*node_pointer;
-	t_list	*new_pointer;
+	t_typelist	*node;
+	t_typelist	*node_pointer;
+	t_typelist	*new_pointer;
 	size_t	size_of_list;
 	size_t	counter;
 
@@ -87,11 +87,12 @@ int	main(void)
 }
 */
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_typelist *lst, void (*del)(void *))
 {
 	if (lst)
 	{
 		del(lst->content);
+		del(lst->type);
 		free(lst);
 	}
 }

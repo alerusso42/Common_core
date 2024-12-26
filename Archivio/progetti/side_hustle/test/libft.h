@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/30 15:21:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/23 23:49:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 # include <stdio.h>
 # include <unistd.h>
 
-typedef struct s_list
+typedef struct	s_typelist
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+	void	*content;
+	void	*type;
+	void	*next;
+}				t_typelist;
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -55,14 +56,14 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_typelist	*ft_lstnew(void *content, void *type);
+void	ft_lstadd_front(t_typelist **lst, t_typelist *new);
+int		ft_lstsize(t_typelist *lst);
+t_typelist	*ft_lstlast(t_typelist *lst);
+void	ft_lstadd_back(t_typelist **lst, t_typelist *new);
+void	ft_lstdelone(t_typelist *lst, void (*del)(void *));
+void	ft_lstclear(t_typelist **lst, void (*del)(void *));
+void	ft_lstiter(t_typelist *lst, void (*f)(void *));
+t_typelist	*ft_lstmap(t_typelist *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

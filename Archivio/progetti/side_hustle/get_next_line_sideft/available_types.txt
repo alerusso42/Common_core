@@ -1,0 +1,23 @@
+	Here's a list of the type that can be allocated and initiated.
+	If the program didn't find the type is searching for, it then
+	Searches for struct.
+	If it finds one, it recalls recursively obtain_list().
+	If it doesn't find it, it returns 2.
+
+[LIST]
+char
+unsigned char
+char*
+unsigned char*
+char**
+unsigned char**
+int
+unsigned int
+int*
+unsigned int*
+bool
+float
+float*
+void*
+[END]
+

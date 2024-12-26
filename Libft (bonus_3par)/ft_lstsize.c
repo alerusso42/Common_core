@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:27:41 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/28 17:44:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/23 23:32:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 int main()
 {
 	char	*data;
-	t_list	*node;
-	t_list	*node_pointer;
-	t_list	*new_pointer;
+	t_typelist	*node;
+	t_typelist	*node_pointer;
+	t_typelist	*new_pointer;
 	size_t	size_of_list;
 	size_t	counter;
 
@@ -91,7 +91,7 @@ int main()
 	return (0);
 }*/
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_typelist *lst)
 {
 	int	list_size;
 

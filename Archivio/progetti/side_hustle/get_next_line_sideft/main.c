@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/20 18:01:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/24 03:47:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,8 @@ initiate_file riceve:
 void	initiate_file(int fd, char *name)
 {
 	int	counter;
-	int	temp;
 	
 	counter = MIDWORDS_LEN * 10;
-	temp = MIDWORDS_LEN * 10;
 	write(fd, "[PLAYER_", 8);
 	write(fd, name, strlen(name));
 	free(name);
@@ -503,3 +501,14 @@ int main()
 	close(fd);
 	return (0);
 }*/
+/*
+int	main()
+{
+	int fd = open("available_types.txt", O_RDONLY);
+	int line_num = find_number_line(fd, "available_types.txt", 2, "[LIST]", "unsigned int");
+	if (line_num == -1)
+		printf("Male");
+	else
+		printf("\n%d", find_number_line(fd, "available_types.txt", 2, "[LIST]", "unsigned int"));
+}
+*/

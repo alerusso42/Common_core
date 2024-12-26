@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:41:03 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/29 12:54:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/23 23:32:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #define ONLY_HEAD 0
 #define EVERYTHING 1
 
-t_list		*free_newlist(t_list **lst, void (*del)(void *), int how_much);
-static void	ft_lstiter_custom(t_list *lst, void *(*f)(void *));
+t_typelist		*free_newlist(t_typelist **lst, void (*del)(void *), int how_much);
+static void	ft_lstiter_custom(t_typelist *lst, void *(*f)(void *));
 
 /*
 void	ft_toupper_custom1(void	*string)
@@ -59,10 +59,10 @@ int	main(void)
 	if ("test")
 		{
 			char	*data;
-			t_list	*node;
-			t_list	*lstmap_node;
-			t_list	*node_pointer;
-			t_list	*new_pointer;
+			t_typelist	*node;
+			t_typelist	*lstmap_node;
+			t_typelist	*node_pointer;
+			t_typelist	*new_pointer;
 			size_t	size_of_list;
 			size_t	counter;
 
@@ -139,10 +139,10 @@ int	main(void)
 		if ("test")
 		{
 			char	*data;
-			t_list	*node;
-			t_list	*lstmap_node;
-			t_list	*node_pointer;
-			t_list	*new_pointer;
+			t_typelist	*node;
+			t_typelist	*lstmap_node;
+			t_typelist	*node_pointer;
+			t_typelist	*new_pointer;
 			size_t	size_of_list;
 			size_t	counter;
 
@@ -210,10 +210,10 @@ int	main(void)
 		if ("test")
 		{
 			char	*data;
-			t_list	*node;
-			t_list	*lstmap_node;
-			t_list	*node_pointer;
-			t_list	*new_pointer;
+			t_typelist	*node;
+			t_typelist	*lstmap_node;
+			t_typelist	*node_pointer;
+			t_typelist	*new_pointer;
 			size_t	size_of_list;
 			size_t	counter;
 
@@ -285,10 +285,10 @@ int	main(void)
 		if ("test")
 		{
 			char	*data;
-			t_list	*node;
-			t_list	*lstmap_node;
-			t_list	*node_pointer;
-			t_list	*new_pointer;
+			t_typelist	*node;
+			t_typelist	*lstmap_node;
+			t_typelist	*node_pointer;
+			t_typelist	*new_pointer;
 			size_t	size_of_list;
 			size_t	counter;
 
@@ -362,15 +362,15 @@ int	main(void)
 }
 */
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_typelist	*ft_lstmap(t_typelist *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
-	t_list	*new_node;
+	t_typelist	*new_lst;
+	t_typelist	*new_node;
 
 	if (!lst)
 		return (NULL);
 	ft_lstiter_custom(lst, *f);
-	new_lst = ft_lstnew((void *)lst->content);
+	new_lst = ft_lstnew((void *)lst->content, lst->type);
 	if ((!lst) || (!new_lst))
 		return (free_newlist(&new_lst, *del, ONLY_HEAD));
 	if (lst->next)
@@ -379,7 +379,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		lst = lst->next;
 		while (lst)
 		{
-			new_node = ft_lstnew((void *)lst->content);
+			new_node = ft_lstnew((void *)lst->content, lst->type);
 			if (!new_node)
 				return (free_newlist(&new_lst, *del, EVERYTHING));
 			ft_lstadd_back(&new_lst, new_node);
@@ -390,7 +390,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	return (new_lst);
 }
 
-t_list	*free_newlist(t_list **lst, void (*del)(void *), int how_much)
+t_typelist	*free_newlist(t_typelist **lst, void (*del)(void *), int how_much)
 {
 	if (how_much == ONLY_HEAD)
 	{
@@ -405,7 +405,7 @@ t_list	*free_newlist(t_list **lst, void (*del)(void *), int how_much)
 	return (NULL);
 }
 
-static void	ft_lstiter_custom(t_list *lst, void *(*f)(void *))
+static void	ft_lstiter_custom(t_typelist *lst, void *(*f)(void *))
 {
 	if (lst)
 	{
@@ -413,9 +413,13 @@ static void	ft_lstiter_custom(t_list *lst, void *(*f)(void *))
 		{
 			if (lst->content)
 				lst->content = f(lst->content);
+			if (lst->type)
+				lst->type = f(lst->type);
 			lst = lst->next;
 		}
 		if (lst->content)
 			lst->content = f(lst->content);
+		if (lst->type)
+			lst->type = f(lst->type);
 	}
 }

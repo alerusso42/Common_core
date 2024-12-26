@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/21 15:36:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/23 23:32:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int main()
 {
 	char	*data;
-	t_list	*node;
+	t_typelist	*node;
 
 	data = (char *)malloc(UN_BOTTO);
 	if (!data)
@@ -59,15 +59,15 @@ int main()
 	return (0);
 }*/
 
-t_list	*ft_lstnew(void *content)
+t_typelist	*ft_lstnew(void *content, void *type)
 {
-	t_list	*new_node;
+	t_typelist	*new_node;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = (t_typelist *)malloc(sizeof(t_typelist));
 	if (!new_node)
 		return (NULL);
 	new_node->content = content;
 	new_node->next = NULL;
-	new_node->type = NULL;
+	new_node->type = type;
 	return (new_node);
 }
