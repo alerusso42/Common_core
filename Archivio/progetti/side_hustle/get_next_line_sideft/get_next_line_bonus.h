@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/20 18:01:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/31 14:18:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1000
 # endif
 # define COUNTER 100000000
 # define FORCE_READ_ONE_TEXT 0
@@ -74,5 +74,6 @@ void	trim_readbytes(char *buffer);
 char	*ft_strjoin_custom(char *s1, char *s2);
 int		write_short_line(int fd, char *filename, int line_num, int position, char *string);
 char	*line_fgm(int flag, int fd, int num_search, ...);
+char	*read_from_buffer(char buffer[BUFFER_SIZE + 1], int fd, int bytes);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/24 03:47:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2024/12/31 15:04:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ void	initiate_file(int fd, char *name)
 	counter = MIDWORDS_LEN * 10;
 	write(fd, "[PLAYER_", 8);
 	write(fd, name, strlen(name));
-	free(name);
 	write(fd, "]", 1);
 	write(fd, "\n\n", 2);
 	write(fd, "Name = ", 7);
@@ -176,7 +175,6 @@ Ritorno:
 */
 int		write_short_line(int fd, char *filename, int line_num, int position, char *string)
 {
-	char	buffer[1];
 	int		counter;
 	char	*temp;
 
@@ -185,32 +183,45 @@ int		write_short_line(int fd, char *filename, int line_num, int position, char *
 	reset_fd(fd, filename);
 	if (line_num != 1)
 	{
-		temp = get_n_line(fd, line_num - 1);
-		if (!temp)
-			return (-1);
-		
-		free(temp);
+		while ("move the cursor to the start of the line")
+		{
+			if (line_num == 1)
+				break ;
+			temp = get_next_line(fd, 1);
+			if (!temp)
+				return (-1);
+			if (*temp == '\n')
+				--line_num;
+			free(temp);
+		}
 	}
-	if (read(fd, buffer, 1) <= 0)
+	temp = get_next_line(fd, 1);
+	if (!temp)
 		return (-1);
-	while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
+	while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
 	{
-		if (read(fd, buffer, 1) <= 0)
-			return (-1);
-	}
-	if ((buffer[0] == '\n') || (buffer[0] == '\0'))
+		free(temp);
+		temp = get_next_line(fd, 1);
+	if (!temp)
 		return (-1);
+	}
+	if ((temp[0] == '\n') || (temp[0] == '\0'))
+		return (free(temp), -1);
 	while ((position--))
 	{
-		if (read(fd, buffer, 1) <= 0)
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
 			return (-1);
-		while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
+		while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
 		{
-			if (read(fd, buffer, 1) <= 0)
+			free(temp);
+			temp = get_next_line(fd, 1);
+			if (!temp)
 				return (-1);
 		}
-		if ((buffer[0] == '\n') || (buffer[0] == '\0'))
-			return (-1);
+		if ((temp[0] == '\n') || (temp[0] == '\0'))
+			return (free(temp), -1);
 	}
 	counter = 0;
 	while (counter != SHORTWORDS_LEN)
@@ -225,12 +236,15 @@ int		write_short_line(int fd, char *filename, int line_num, int position, char *
 		++counter;
 	}
 	write (fd, ", ", 1);
-	while ((buffer[0] == '\n') || (buffer[0] == '\0'))
+	while ((temp[0] == '\n') || (temp[0] == '\0'))
 	{
-		if (read(fd, buffer, 1) <= 0)
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
 			return (-1);
 	}
-	return (line_num);
+	free(temp);
+	return (0);
 }
 
 /*
@@ -256,7 +270,6 @@ Ritorno:
 */
 int		write_fucking_line(int fd, char *filename, int line_num, int position, char *string)
 {
-	char	buffer[1];
 	int		counter;
 	char	*temp;
 
@@ -265,32 +278,45 @@ int		write_fucking_line(int fd, char *filename, int line_num, int position, char
 	reset_fd(fd, filename);
 	if (line_num != 1)
 	{
-		temp = get_n_line(fd, line_num - 1);
-		if (!temp)
-			return (-1);
-		
-		free(temp);
+		while ("move the cursor to the start of the line")
+		{
+			if (line_num == 1)
+				break ;
+			temp = get_next_line(fd, 1);
+			if (!temp)
+				return (-1);
+			if (*temp == '\n')
+				--line_num;
+			free(temp);
+		}
 	}
-	if (read(fd, buffer, 1) <= 0)
+	temp = get_next_line(fd, 1);
+	if (!temp)
 		return (-1);
-	while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
+	while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
 	{
-		if (read(fd, buffer, 1) <= 0)
-			return (-1);
-	}
-	if ((buffer[0] == '\n') || (buffer[0] == '\0'))
+		free(temp);
+		temp = get_next_line(fd, 1);
+	if (!temp)
 		return (-1);
+	}
+	if ((temp[0] == '\n') || (temp[0] == '\0'))
+		return (free(temp), -1);
 	while ((position--))
 	{
-		if (read(fd, buffer, 1) <= 0)
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
 			return (-1);
-		while ((buffer[0] != ' ') && (buffer[0] != '\n') && (buffer[0] != '\0'))
+		while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
 		{
-			if (read(fd, buffer, 1) <= 0)
+			free(temp);
+			temp = get_next_line(fd, 1);
+			if (!temp)
 				return (-1);
 		}
-		if ((buffer[0] == '\n') || (buffer[0] == '\0'))
-			return (-1);
+		if ((temp[0] == '\n') || (temp[0] == '\0'))
+			return (free(temp), -1);
 	}
 	counter = 0;
 	while (counter != MIDWORDS_LEN)
@@ -305,12 +331,15 @@ int		write_fucking_line(int fd, char *filename, int line_num, int position, char
 		++counter;
 	}
 	write (fd, ", ", 1);
-	while ((buffer[0] == '\n') || (buffer[0] == '\0'))
+	while ((temp[0] == '\n') || (temp[0] == '\0'))
 	{
-		if (read(fd, buffer, 1) <= 0)
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
 			return (-1);
 	}
-	return (line_num);
+	free(temp);
+	return (0);
 }
 
 /*
@@ -480,14 +509,15 @@ int	reset_fd(int fd, char *name)
 	return (0);
 }
  */
-/*
+
 int main()
 {
 	char	*filename = "enemies.txt";
-	int fd = open(filename, O_RDWR | O_CREAT, 0644);
+	int fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		return (1);
-	int line_num = find_number_line(fd, "enemies.txt", 1, "name = ");
+	initiate_file(fd, "Rayquaza");
+	int line_num = find_number_line(fd, "enemies.txt", 1, "Name = ");
 	write_fucking_line(fd, filename, line_num++, 1, "Ale");//name
 	write_fucking_line(fd, filename, line_num++, 1, "33");//age
 	write_fucking_line(fd, filename, line_num++, 1, "10");//honor
@@ -500,7 +530,7 @@ int main()
 	write_fucking_line(fd, filename, line_num++, 1, "10");//dexterity
 	close(fd);
 	return (0);
-}*/
+}
 /*
 int	main()
 {

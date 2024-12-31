@@ -3,6 +3,7 @@ LIBFT = Libft/libft.a
 CP = cp
 SRC = 	get_next_line_bonus.c \
 		get_next_line_utils_bonus.c \
+		get_next_line_utils_bonus2.c \
 		ft_itoa.c \
 		ft_memset.c \
 		ft_memcmp.c \
@@ -31,10 +32,9 @@ fclean: clean
 
 re: fclean all
 
-main: re
-	$(COMP) -g main.c $(NAME) -o hello_world.out
-	rm -f $(OBJ) $(OBJ_BONUS)
-	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
+main:
+	$(COMP) -g $(SRC)
+	rm -f $(OBJ)
 
 gdb: 
 	cc -g main.c $(SRC) $(LIBFT)

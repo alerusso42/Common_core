@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: negambar <negambar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:11 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/14 11:31:39 by negambar         ###   ########.fr       */
+/*   Updated: 2024/12/31 14:25:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,27 +101,23 @@ char	*get_next_line(int fd, int reset)
 	size_t		index;
 	char		*string;
 
-	index = 0;
+	index = -1;
 	if (reset == RESET)
 	{
-		while (index != BUFFER_SIZE)
-		{
+		while (++index != BUFFER_SIZE)
 			buffer[fd][index] = 0;
-			++index;
-		}
 		return (NULL);
 	}
-	if (BUFFER_SIZE <= 0 || fd < 0)
-	{
+	if (BUFFER_SIZE <= 0 || fd < 0 || reset < 0)
 		return (NULL);
-	}
+	if (reset > 0)
+		return (read_from_buffer(buffer[fd], fd, reset));
 	string = get_next_line_main_function(fd, buffer[fd]);
 	if (!string)
 		return (NULL);
 	alloc_ft((void **)&string, (void *)string, strlen(string), REALLOC);
 	if (!string)
 		return (NULL);
-	//string[strlen(string)] = 0;
 	return (string);
 }
 

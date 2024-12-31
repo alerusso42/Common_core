@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "get_next_line_bonus.h"
-#define DEBUG_PRINT 0
+#define DEBUG_PRINT 1
 
 int	obtain_list(char *structure_name, t_typelist **list);
 
@@ -129,19 +129,73 @@ char	*ft_strtrim_one(char const *s1, char const set)
 	return (ft_substr(s1, start, len - start));
 }
 
-int	move_sign(char **type, char **name, char *sign)
+int	cut_string(char **string, size_t start, size_t end)
+{
+	unsigned int	temp;
+	unsigned int	string_len;
+
+	end++;
+	if (!(string) || !(*string) || (start > end))
+		return (1);
+	string_len = ft_strlen(*string);
+	temp = start;
+	while ((start != end) && ((*string)[start] != 0))
+		(*string)[start++] = 0;
+	end = start;
+	start = temp;
+	temp = 0;
+	while (end != string_len)
+	{
+		(*string)[start + temp] = (*string)[end + temp];
+		--string_len;
+		++temp;
+	}
+	if (alloc_ft((void **)string, (void *)*string, end, REALLOC) == 0)
+		return (1);
+	(*string)[end + 1] = 0;
+	return (0);
+}
+
+int	move_square_brackets(char **type, char **name)
+{
+	int		start;
+	int		end;
+	char	*square_string;
+
+	start = 0;
+	while (((*name)[start]) && ((*name)[start] != '['))
+		++start;
+	if ((*name)[start] == 0)
+		return (2);
+	end = start;
+	while (((*name)[end]) && ((*name)[end] != ']'))
+		++end;
+	square_string = ft_substr((*name), start, (end - start) + 1);
+	if (!square_string)
+		return (1);
+	(*type) = ft_strjoin_custom((*type), square_string);
+	if (!(*type))
+		return (1);
+	if (cut_string(name, start, end) == 1)
+		return (1);
+	if (move_square_brackets(type, name) == 1)
+		return (1);
+	return (0);
+}
+
+int	move_sign(char **type, char **name)
 {
 	unsigned int		count_sign;
 	char				*temp;
 
-	if ((!type) || (!name) || (!(*type)) || (!(*name)) || (!sign) || !(*sign))
+	if ((!type) || (!name) || (!(*type)) || (!(*name)))
 		return (1);
 	temp = (*name);
 	count_sign = 0;
-	while (*(*name) == *sign)
-		if ((*(*name)++) == *sign)
+	while (*(*name) == '*')
+		if ((*(*name)++) == '*')
 			count_sign++;
-	(*name) = ft_strtrim_one(temp, *sign);
+	(*name) = ft_strtrim_one(temp, '*');
 	free(temp);
 	if (!(*name))
 		return (1);
@@ -150,11 +204,10 @@ int	move_sign(char **type, char **name, char *sign)
 		return (1);
 	temp[count_sign] = 0;
 	while (count_sign--)
-		temp[count_sign] = *sign;
+		temp[count_sign] = '*';
 	(*type) = ft_strjoin_custom((*type), temp);
-	if (++sign)
-		if (move_sign(type, name, sign) == 1)
-			return (1);
+	if (!(*type) || (move_square_brackets(type, name) == 1))
+		return (1);
 	return (0);
 }
 
@@ -176,6 +229,53 @@ int	trim_only_right(char **line, char *trimset)
 	return (0);
 }
 
+int	add_sign_right(char **string, char sign)
+{
+	size_t	len;
+	char	*new_string;
+
+	if ((!string) || (!*string))
+		return (1);
+	len = ft_strlen(*string);
+	new_string = (char *)calloc(len + 2, sizeof(char));
+	if (!new_string)
+		return (1);
+	new_string[len] = sign;
+	new_string[len + 1] = 0;
+	strcpy(new_string, *string);
+	free(*string);
+	*string = new_string;
+	return (0);
+}
+
+int	format_search(char **search_struct)
+{
+	unsigned int	start;
+	unsigned int	end;
+
+	start = 0;
+	if (ft_strchr(*search_struct, '[') == NULL)
+		return (0);
+	while ("Loop: erase all [] :-)")
+	{
+		if ((*search_struct)[start] == 0)
+			break ;
+		if ((*search_struct)[start] == '[')
+		{
+			end = start;
+			while ((*search_struct)[end] != ']')
+				++end;
+			if (cut_string(search_struct, start, end) == 1)
+				return (1);
+			if (add_sign_right(search_struct, '*') == 1)
+				return (1);
+			start = 0;
+		}
+		start++;
+	}
+	return (0);
+}
+
 int	available_types(char **type, char **name, int fd, t_typelist **list)
 {
 	int			line_num;
@@ -185,14 +285,18 @@ int	available_types(char **type, char **name, int fd, t_typelist **list)
 	char		*temp;
 
 	search_struct = (*type);
-	line_num = find_number_line(fd, "available_types.txt", 2, "[LIST]", *type);
+	temp = ft_strdup(*type);
+	if ((!temp) || (format_search(&temp) == 1))
+		return (1);
+	line_num = find_number_line(fd, "available_types.txt", 2, "[LIST]", temp);
+	free(temp);
 	if (line_num == -1)
 	{
 		fd_2 = open("test.c", O_RDONLY);
 		if (fd_2 == -1)
 			return (1);
 		search_struct = ft_strtrim(search_struct, "*");
-		if (!search_struct)
+		if (search_struct == NULL)
 			return (1);
 		if (add_s_(search_struct, &temp) == 1)
 			return (free(search_struct), 1);
@@ -278,8 +382,8 @@ int	parse_struct_file(char *line, t_typelist **list)
 		return (free(matrix), free(type), printf("Error n_6"), 1);
 	name = matrix[1];
 	free(matrix);
-	trim_only_right(&name, "[]:;\n");
-	move_sign(&type, &name, "*");
+	trim_only_right(&name, ":;\n");
+	move_sign(&type, &name);
 	attach_to_list(&type, &name, list);
 	return (0);
 }
@@ -313,6 +417,7 @@ int	first_node(t_typelist **list)
 	(*list)->type = type;
 	ft_lstadd_back(list, new);
 	(*list) = (*list)->next;
+	return (0);
 }
 
 int	obtain_list(char *structure_name, t_typelist **list)
@@ -396,6 +501,7 @@ int	obtain_list(char *structure_name, t_typelist **list)
 		return (attach_to_list(&temp, &temp_2, list));
 	*list = save;
 	free(temp);
+	free(temp_2);
 	return (0);
 }
 
