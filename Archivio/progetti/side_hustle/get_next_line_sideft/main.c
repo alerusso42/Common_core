@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/31 15:04:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:05:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,129 @@ void	initiate_file(int fd, char *name)
 	hold_space(counter, fd);
 	write(fd, "_ENDPLAYER_1]\n", 14);
 	write(fd, "EOF\n", 4);
+}
+
+/*
+	set_maximum_word_len contiene il numero massimo di
+	caratteri che write_line può scrivere (che è anche
+	il minimo numero di caratteri, vedi "write_line").
+	Il valore è definito da un int statico.
+
+	Riceve come argomento un int.
+
+	Se è positivo o zero, modifica l'attuale limite
+	di caratteri di write_line, e lo restituisce.
+	
+	Altrimenti, ritorna il limite attuale senza fare
+	altro.
+*/
+int	set_maximum_word_len(int new_len)
+{
+	static int	maximum_word_len = MIDWORDS_LEN;
+
+	if (new_len < 0)
+		return (maximum_word_len);
+	maximum_word_len = new_len;
+	return (maximum_word_len); 
+}
+
+/*
+	write_short_line riceve:
+1) fd;
+2) il nome del file;
+3) il numero della linea;
+4) la posizione, nella linea, nel quale inserire la stringa;
+5) la stringa da inserire.
+	
+	Scrive una stringa all'interno del file, ad una data linea (line_num),
+	ad una certa posizione orizzontale (position).
+	Esempio:
+	write_fucking_line(3, "file. txt", 2, 2, "Rossi"); //Scrive alla linea 2, posizione 2.
+1. [NPC_list]
+2. Nome = Mario______, Rossi______, 
+
+Ritorno:
+		Il numero della linea dove si trova la corrispondenza;
+		-1, se la ricerca fallisce oppure in caso di errori di malloc.
+
+	Write_line ha un limite massimo di caratteri (10).
+	Può essere cambiato in fase di esecuzione, con la
+	funzione "set_maximum_word_len".
+*/
+int		write_line(int fd, char *filename, int line_num, int position, char *string)
+{
+	int		counter;
+	char	*temp;
+	int		maximum_word_len;
+
+	if ((fd == -1) || (!string) || (position < 0) || (line_num < 0))
+		return (-1);
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		while ("move the cursor to the start of the line")
+		{
+			if (line_num == 1)
+				break ;
+			temp = get_next_line(fd, 1);
+			if (!temp)
+				return (-1);
+			if (*temp == '\n')
+				--line_num;
+			free(temp);
+		}
+	}
+	temp = get_next_line(fd, 1);
+	if (!temp)
+		return (-1);
+	while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+	if (!temp)
+		return (-1);
+	}
+	if ((temp[0] == '\n') || (temp[0] == '\0'))
+		return (free(temp), -1);
+	while ((position--))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
+			return (-1);
+		while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
+		{
+			free(temp);
+			temp = get_next_line(fd, 1);
+			if (!temp)
+				return (-1);
+		}
+		if ((temp[0] == '\n') || (temp[0] == '\0'))
+			return (free(temp), -1);
+	}
+	counter = 0;
+	maximum_word_len = set_maximum_word_len(-1);
+	while (counter != maximum_word_len)
+	{
+		if (*string)
+		{
+			write(fd, string, 1);
+			string++;
+		}
+		else
+			write(fd, "_", 1);
+		++counter;
+	}
+	write (fd, ", ", 1);
+	while ((temp[0] == '\n') || (temp[0] == '\0'))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
+			return (-1);
+	}
+	free(temp);
+	return (0);
 }
 
 /*
@@ -510,6 +633,7 @@ int	reset_fd(int fd, char *name)
 }
  */
 
+/*
 int main()
 {
 	char	*filename = "enemies.txt";
@@ -531,6 +655,7 @@ int main()
 	close(fd);
 	return (0);
 }
+*/
 /*
 int	main()
 {

@@ -613,6 +613,7 @@ void	fill_list(t_typelist **list, char **matrix)
 }
 */
 
+/*
 int	main()
 {
 	printf("\n-------SECOND_TEST-------\n");
@@ -639,3 +640,4 @@ int	main()
 		free(list);
 	return (0);
 }//	0x55555555cd70
+*/
