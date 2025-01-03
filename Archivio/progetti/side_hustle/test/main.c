@@ -1,16 +1,11 @@
 #include "header.h"
 
-int	main()
+void	terminate_process(t_typelist **struct_list, char **struct_list_names)
 {
-	t_typelist	**struct_list;
-	char		**struct_list_names;
 	t_typelist	*list;
 	t_typelist	*temp;
 	int			counter;
 
-	struct_list = NULL;
-	if (get_struct_list(&struct_list, &struct_list_names) != 0)
-		return (printf("ERROR!\n"));
 	list = NULL;
 	temp = NULL;
 	del_pointer((void **)&struct_list, 1);
@@ -38,5 +33,24 @@ int	main()
 	}
 	del_pointer(NULL, 2);
 	del_pointer(NULL, 2);
+}
+
+int	main()
+{
+	t_typelist		**struct_list;
+	char			**struct_list_names;
+	unsigned int	index;
+
+	struct_list = NULL;
+	if (get_struct_list(&struct_list, &struct_list_names) != 0)
+		return (printf("ERROR!\n"));
+	index = 0;
+	while ((struct_list) && (struct_list[index]))
+	{
+		save_struct(struct_list_names[index], struct_list[index]);
+		++index;
+	}
+	//set_data();
+	terminate_process(struct_list, struct_list_names);
 	return (0);
 }

@@ -17,7 +17,7 @@ void hold_space(int counter, int fd)
 
 void	check_element_size(int *n_element_size, int counter)
 {
-	static unsigned int	check_multiple_of_ten = 10;
+	static int	check_multiple_of_ten = 10;
 
 	if (counter - 1 == check_multiple_of_ten)
 	{
@@ -65,7 +65,6 @@ int	save_struct(char *struct_name, t_typelist *list)
 	int			fd;
 	int			line_num;
 	char		*s;
-	t_typelist	*temp;
 
 	fd = open("struct_list.txt", O_CREAT | O_APPEND | O_RDWR, 0666);
 	if (fd < 0)
@@ -91,13 +90,13 @@ int	save_struct(char *struct_name, t_typelist *list)
 		{
 			write_line(fd, "struct_list.txt", line_num++, 1, s);
 		}
-		temp = list;
 		list = list->next;
 	}
 	write(fd, "\n\n", 2);
 	return (0);
 }
 
+/*
 int	main()
 {
 	t_typelist	*list;
@@ -125,3 +124,4 @@ int	main()
 		free(list);
 	return (0);
 }
+*/

@@ -1,0 +1,22 @@
+COMMENT:	for every available type (see available_types.txt),
+			this file shows the values every type is initiated
+			with.
+			The values can be changed.
+
+[LIST]
+char = F__________,
+unsigned char = &__________,
+char* = FRANCO_____,
+unsigned char* = u_c FRANCO_,
+char** = FRANCO_____, e__________, un_________, grande_____,
+unsigned char** = u_c FRANCO_, e__________, un_________, grande_____,
+int = 18___________,
+unsigned int = 18___________,
+int* = 1__________, -2_________, 3__________, -2147483648,
+unsigned int* = 1__________, 2__________, 3__________, 2147483649_,
+bool = 1__________,
+float = 3.14_______,
+float* = 3.14_______, 2__________, 7.5________,
+void* = 0__________,
+END_OF_SUBLIST = (null)_____,
+[END]

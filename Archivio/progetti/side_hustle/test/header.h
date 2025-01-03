@@ -9,7 +9,10 @@
 #include "get_next_line_bonus.h"
 #define DEBUG_PRINT 0
 
-int	obtain_list(char *structure_name, t_typelist **list);
-int	cut_string(char **string, size_t start, size_t end);
+int		obtain_list(char *structure_name, t_typelist **list);
+int		get_struct_list(t_typelist ***struct_list, char ***struct_list_names);
+int		cut_string(char **string, size_t start, size_t end);
+void	del_pointer(void **ptr, int mode);
+int		save_struct(char *struct_name, t_typelist *list);
 
 #endif
