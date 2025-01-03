@@ -5,11 +5,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "get_next_line_bonus.h"
-#define DEBUG_PRINT 1
+#define DEBUG_PRINT 0
 
 int	obtain_list(char *structure_name, t_typelist **list);
 
-typedef struct 	s_person
+typedef struct	s_person
 {
 	char			*name;
 	char			*surname;
@@ -24,7 +24,7 @@ typedef struct	s_tempp_stats
 	bool			death_saves[3];
 }				tempp_stats;
 
-typedef struct s_sheeet
+typedef struct	s_sheeet
 {
 	tempp_stats		*rayquaza;
 	float			***example;
@@ -46,7 +46,7 @@ typedef struct s_sheeet
 	unsigned char	**spell_list;//stringhe
 }	sheeet;
 
-typedef struct 	s_car
+typedef struct	s_car
 {
 	char			*name;
 	unsigned int	max_speed:10;
@@ -150,9 +150,11 @@ int	cut_string(char **string, size_t start, size_t end)
 		--string_len;
 		++temp;
 	}
+	if (temp != 0)
+		(*string)[temp] = 0;
+	end = ft_strlen(*string);
 	if (alloc_ft((void **)string, (void *)*string, end, REALLOC) == 0)
 		return (1);
-	(*string)[end + 1] = 0;
 	return (0);
 }
 
