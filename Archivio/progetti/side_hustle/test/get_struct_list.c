@@ -202,6 +202,7 @@ void	del_pointer(void **ptr, int mode)
 	count_saves = 0;
 }
 
+/*
 int	main()
 {
 	t_typelist	**struct_list;
@@ -242,3 +243,4 @@ int	main()
 	del_pointer(NULL, 2);
 	return (0);
 }
+*/

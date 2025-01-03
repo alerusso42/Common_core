@@ -24,16 +24,22 @@ fclean: clean
 re: fclean all
 
 main:
-	
+	$(COMP) main.c $(SRC) $(LIBFT)
+	clear
+	./a.out
 
 gdb: 
-	
+	$(COMP) main.c $(SRC) $(LIBFT)
+	clear
+	gdb ./a.out
 
 run:
 	
 
 valgrind:
-	
+	$(COMP) main.c $(SRC) $(LIBFT)
+	clear
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
 
 test.c : 
 	$(COMP) test.c $(LIBFT)
