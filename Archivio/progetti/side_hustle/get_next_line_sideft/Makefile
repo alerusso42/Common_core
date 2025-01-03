@@ -7,6 +7,7 @@ SRC = 	get_next_line_bonus.c \
 		ft_itoa.c \
 		ft_memset.c \
 		ft_memcmp.c \
+		ft_split.c \
 		main.c
 
 OBJ = $(SRC:.c=.o)

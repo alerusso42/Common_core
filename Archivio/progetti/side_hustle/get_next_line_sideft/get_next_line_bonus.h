@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/31 14:18:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:58:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_list
 }				t_list;
 
 char	*ft_itoa(int num);
+char	**ft_split(char const *s, char c);
 void	initiate_file(int fd, char *name);
 char	*get_next_line(int fd, int reset);
 int		find_number_line(int fd, char *filename, int num_search, ...);

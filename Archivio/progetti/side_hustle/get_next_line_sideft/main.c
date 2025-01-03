@@ -6,11 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/02 17:05:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:31:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "get_next_line_bonus.h"
+# include <string.h>
+# include <stdlib.h>
 # include "../gioco.h"
 
 int		find_number_line(int fd, char *filename, int num_search, ...);
@@ -21,6 +23,82 @@ int		reset_fd(int fd, char *name);
 char	*find_line(int flag, int fd, int num_search, va_list list);
 void	initiate_file(int fd, char *num);
 int		write_short_line(int fd, char *filename, int line_num, int position, char *string);
+
+static size_t	ft_strlen(const char *string)
+{
+	int	counter;
+
+	counter = 0;
+	while (string[counter])
+		++counter;
+	return (counter);
+}
+
+static char	*ft_strdup(const char *str)
+{
+	int		n;
+	char	*camillo;
+
+	if (!str)
+		return (NULL);
+	n = 0;
+	while (str[n] != '\0')
+		++n;
+	camillo = NULL;
+	n += 1;
+	camillo = (char *)calloc(n, sizeof(char));
+	if (camillo == NULL)
+		return (0);
+	n = 0;
+	while (str[n] != '\0')
+	{
+		camillo[n] = str[n];
+		++n;
+	}
+	return (camillo);
+}
+
+static int	ft_realloc(void **content, size_t nmemb, size_t size)
+{
+	void	*re_content;
+
+	re_content = calloc(nmemb, size);
+	if (!(re_content))
+		return (1);
+	memcpy(re_content, *content, nmemb - size);
+	free(*content);
+	*content = re_content;
+	return (0);
+}
+
+static int	cut_string(char **string, size_t start, size_t end)
+{
+	unsigned int	temp;
+	unsigned int	string_len;
+
+	end++;
+	if (!(string) || !(*string) || (start > end) || (start == strlen(*string)))
+		return (1);
+	string_len = strlen(*string);
+	temp = start;
+	while ((start != end) && ((*string)[start] != 0))
+		(*string)[start++] = 0;
+	end = start;
+	start = temp;
+	temp = 0;
+	while (end != string_len)
+	{
+		(*string)[start + temp] = (*string)[end + temp];
+		--string_len;
+		++temp;
+	}
+	if (temp != 0)
+		(*string)[temp] = 0;
+	end = strlen(*string);
+	if (ft_realloc((void **)string, end, sizeof(char)))
+		return (1);
+	return (0);
+}
 
 // Deprecata (da me stesso).
 char	*line_fgm(int flag, int fd, int num_search, ...)
@@ -174,6 +252,85 @@ int	set_maximum_word_len(int new_len)
 		return (maximum_word_len);
 	maximum_word_len = new_len;
 	return (maximum_word_len); 
+}
+
+static void	free_matrix(char **matrix)
+{
+	int	index;
+
+	index = 0;
+	if (!matrix)
+		return ;
+	while (matrix[index])
+	{
+		if (matrix[index])
+			free(matrix[index]);
+		matrix[index] = NULL;
+		++index;
+	}
+	if (matrix)
+		free(matrix);
+}
+
+char	*read_line(int fd, char *filename, int line_num, int position)
+{
+	int		counter;
+	char	*temp;
+	char	**matrix;
+
+	if ((fd == -1) || (position < 0) || (line_num < 0))
+		return (NULL);
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		move_cursor(fd, filename, line_num);
+	}
+	temp = get_next_line(fd, 0);
+	if (!temp)
+		return (NULL);
+	matrix = ft_split(temp, ',');// Splitta la linea ottenuta con ft_split
+	free(temp);
+	if ((!matrix) || !(*matrix))
+		return (NULL);
+	counter = 0;
+	while (counter != position)// Verifica che la posizione richiesta esista.
+	{
+		if (!(matrix[counter]))
+			return (free_matrix(matrix), NULL);
+		++counter;
+	}
+	if (position == 0)// Se position è zero, torna quello che c'è prima di '='
+	{
+		while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
+			++counter;
+		++counter;
+		cut_string(matrix, counter, strlen(matrix[0]));
+		temp = ft_strdup(matrix[0]);
+		return (free_matrix(matrix), temp);
+	}
+	if (position == 1)//Se position è uno, elimina quello che c'è prima di "= "
+	{
+		while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
+			++counter;
+		++counter;
+		cut_string(&(matrix[1]), 0, counter);
+		temp = ft_strdup(matrix[1]);
+		return (free_matrix(matrix), temp);
+	}
+	counter = 0;
+	while (matrix[position][counter])// Elimina ',' e '_' di troppo.
+		++counter;
+	if (counter == 0)
+		return (free_matrix(matrix), NULL);
+	--counter;
+	while (matrix[position][counter] == '_')
+		--counter;
+	++counter;
+	cut_string(&(matrix[position]), counter, ft_strlen(matrix[position]));
+	temp = ft_strdup(matrix[position]);
+	if (temp[0] == ' ')
+		cut_string(&temp, 0, 0);
+	return (free_matrix(matrix), temp);
 }
 
 /*
@@ -667,3 +824,38 @@ int	main()
 		printf("\n%d", find_number_line(fd, "available_types.txt", 2, "[LIST]", "unsigned int"));
 }
 */
+
+int	main()
+{
+	char	*line;
+	int		position;
+
+	int	fd = open("updated_pokedex.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+	int	line_num = find_number_line(fd, "updated_pokedex.txt", 2, "[RAYQUAZA]", "Moves =");
+	if (line_num == -1)
+		return (1);
+	position = 3;
+	line = read_line(fd, "updated_pokedex.txt", line_num, position);
+	if (line == NULL)
+		printf("sad\n");
+	else
+		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
+	free(line);
+		position = 1;
+	line = read_line(fd, "updated_pokedex.txt", line_num, position);
+	if (line == NULL)
+		printf("sad\n");
+	else
+		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
+	free(line);
+		position = 0;
+	line = read_line(fd, "updated_pokedex.txt", line_num, position);
+	if (line == NULL)
+		printf("sad\n");
+	else
+		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
+	free(line);
+	return (0);
+}
