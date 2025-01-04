@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/03 19:31:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/04 14:07:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	cut_string(char **string, size_t start, size_t end)
 	if (temp != 0)
 		(*string)[temp] = 0;
 	end = strlen(*string);
-	if (ft_realloc((void **)string, end, sizeof(char)))
+	if (ft_realloc((void **)string, end + 1, sizeof(char)))
 		return (1);
 	return (0);
 }
@@ -297,6 +297,14 @@ char	*read_line(int fd, char *filename, int line_num, int position)
 	{
 		if (!(matrix[counter]))
 			return (free_matrix(matrix), NULL);
+		if (counter == 0)
+		{
+			counter++;
+			if (!(matrix[counter]))
+				return (free_matrix(matrix), NULL);
+			if (counter == position)
+				break ;
+		}
 		++counter;
 	}
 	if (position == 0)// Se position è zero, torna quello che c'è prima di '='
@@ -313,11 +321,12 @@ char	*read_line(int fd, char *filename, int line_num, int position)
 		while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
 			++counter;
 		++counter;
-		cut_string(&(matrix[1]), 0, counter);
-		temp = ft_strdup(matrix[1]);
+		cut_string(&(matrix[0]), 0, counter);
+		temp = ft_strdup(matrix[0]);
 		return (free_matrix(matrix), temp);
 	}
 	counter = 0;
+	position--;
 	while (matrix[position][counter])// Elimina ',' e '_' di troppo.
 		++counter;
 	if (counter == 0)
@@ -829,29 +838,30 @@ int	main()
 {
 	char	*line;
 	int		position;
+	char	*filename = "default_values.txt";
 
-	int	fd = open("updated_pokedex.txt", O_RDONLY);
+	int	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (1);
-	int	line_num = find_number_line(fd, "updated_pokedex.txt", 2, "[RAYQUAZA]", "Moves =");
+	int	line_num = find_number_line(fd, filename, 2, "[LIST]", "char**");
 	if (line_num == -1)
 		return (1);
-	position = 3;
-	line = read_line(fd, "updated_pokedex.txt", line_num, position);
+	position = 7;
+	line = read_line(fd, filename, line_num, position);
 	if (line == NULL)
 		printf("sad\n");
 	else
 		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
 	free(line);
-		position = 1;
-	line = read_line(fd, "updated_pokedex.txt", line_num, position);
+		position = 2;
+	line = read_line(fd, filename, line_num, position);
 	if (line == NULL)
 		printf("sad\n");
 	else
 		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
 	free(line);
-		position = 0;
-	line = read_line(fd, "updated_pokedex.txt", line_num, position);
+		position = 330;
+	line = read_line(fd, filename, line_num, position);
 	if (line == NULL)
 		printf("sad\n");
 	else
