@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/03 18:58:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:24:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+int		set_maximum_word_len(int new_len);
 char	*ft_itoa(int num);
 char	**ft_split(char const *s, char c);
 void	initiate_file(int fd, char *name);
@@ -76,5 +77,7 @@ char	*ft_strjoin_custom(char *s1, char *s2);
 int		write_short_line(int fd, char *filename, int line_num, int position, char *string);
 char	*line_fgm(int flag, int fd, int num_search, ...);
 char	*read_from_buffer(char buffer[BUFFER_SIZE + 1], int fd, int bytes);
+char	*read_line(int fd, char *filename, int line_num, int position);
+int		write_line(int fd, char *filename, int line_num, int position, char *string);
 
 #endif

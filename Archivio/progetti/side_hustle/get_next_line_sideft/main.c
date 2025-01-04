@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/04 14:07:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:18:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -834,6 +834,7 @@ int	main()
 }
 */
 
+/*
 int	main()
 {
 	char	*line;
@@ -868,4 +869,4 @@ int	main()
 		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
 	free(line);
 	return (0);
-}
+}*/
