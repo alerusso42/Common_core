@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/04 17:18:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:47:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static int	cut_string(char **string, size_t start, size_t end)
 	unsigned int	temp;
 	unsigned int	string_len;
 
-	end++;
 	if (!(string) || !(*string) || (start > end) || (start == strlen(*string)))
 		return (1);
+	end++;
 	string_len = strlen(*string);
 	temp = start;
 	while ((start != end) && ((*string)[start] != 0))
@@ -272,6 +272,96 @@ static void	free_matrix(char **matrix)
 		free(matrix);
 }
 
+/*	read_line riceve:
+1) fd;
+2) il nome del file;
+3) il numero della linea.
+	
+	Legge le stringhe all'interno del file, salvandole in una  
+	matrice, ad una data linea (line_num).
+	Esempio:
+	read_all_line(3, "file.txt", 2); //Legge la linea 2.
+1. [NPC_list]
+2. Nome = Mario______, Rossi______,  // Legge e torna "Mario", "Rossi".
+
+Ritorno:
+		La matrice richiesta, senza , e _ finali;
+		NULL, se la ricerca fallisce oppure in caso di errori di malloc.
+*/
+char	**read_all_line(int fd, char *filename, int line_num)
+{
+	int		counter;
+	char	*temp;
+	char	**matrix;
+	int		position;
+
+	if ((fd == -1) || (line_num < 0))
+		return (NULL);
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		move_cursor(fd, filename, line_num);
+	}
+	temp = get_next_line(fd, 0);
+	if (!temp)
+		return (NULL);
+	matrix = ft_split(temp, ',');// Splitta la linea ottenuta con ft_split
+	free(temp);
+	if ((!matrix) || !(*matrix))
+		return (NULL);
+	counter = 0;
+	if (!matrix[1])// Verifica che la posizione richiesta esista.
+	{
+		return (free_matrix(matrix), NULL);
+	}
+	while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
+		++counter;
+	++counter;
+	cut_string(&(matrix[0]), 0, counter);
+	if (!matrix[0])
+		return (free_matrix(matrix), NULL);
+	position = 0;
+	while (matrix[position]) // sistema tutte le stringhe.
+	{
+		counter = 0;
+		while (matrix[position][counter])// Elimina ',' e '_' di troppo.
+			++counter;
+		if (counter == 0)
+			return (free_matrix(matrix), NULL);
+		counter -= 1;
+		while (matrix[position][counter] == '_')
+			--counter;
+		++counter;
+		cut_string(&(matrix[position]), counter, ft_strlen(matrix[position]));
+		if (matrix[position][0] == ' ')
+			cut_string(&(matrix[position]), 0, 0);
+		if (matrix[position][0] == '\n')
+		{
+			free(matrix[position]);
+			matrix[position] = NULL;
+		}
+		++position;
+	}
+	return (matrix);
+}
+
+/*	read_line riceve:
+1) fd;
+2) il nome del file;
+3) il numero della linea;
+4) la posizione, nella linea, nel quale inserire la stringa.
+	
+	Legge una stringa all'interno del file, ad una data linea (line_num),
+	ad una certa posizione orizzontale (position).
+	Esempio:
+	read_line(3, "file.txt", 2, 2); //Legge alla linea 2, posizione 2.
+1. [NPC_list]
+2. Nome = Mario______, Rossi______,  // Legge e torna "Rossi".
+
+Ritorno:
+		La stringa richiesta, senza , e _ finali;
+		NULL, se la ricerca fallisce oppure in caso di errori di malloc.
+*/
 char	*read_line(int fd, char *filename, int line_num, int position)
 {
 	int		counter;
@@ -644,25 +734,17 @@ int		write_fucking_line(int fd, char *filename, int line_num, int position, char
 */
 int	move_cursor(int fd, char *filename, int line_num)
 {
-	char	*string;
 	char	*search;
 
 	if ((fd == -1) || (!filename) || (line_num < 1))
 		return (-1);
 	reset_fd(fd, filename);
-	string = get_next_line(fd, 0);
-	if (!string)
-	{
-		return (-1);
-	}
-	free(string);
-	reset_fd(fd, filename);
-	if (line_num != 1)
-	{
-		search = get_n_line(fd, line_num - 1);
-		if (search)
-			free(search);
-	}
+	if (line_num == 1)
+		return (0);
+	search = get_n_line(fd, line_num - 1);
+	if (!search)
+		return (1);
+	free(search);
 	return (0);
 }
 
@@ -715,6 +797,12 @@ char	*find_line(int flag, int fd, int num_search, va_list list)
 	return ("Metti le flag ammodo, mongoloide");
 }
 
+/*
+	Richiama get_next_line n volte.
+	
+	Torna NULL se non trova la linea o se fallisce.
+	Altrimenti, torna la linea richiesta.
+*/
 char	*get_n_line(int fd, int n)
 {
 	char	*line;
@@ -731,6 +819,10 @@ char	*get_n_line(int fd, int n)
 	return (line);
 }
 
+/*
+	reset_fd reimposta read all'inizio del file, e contemporaneamente
+	resetta il buffer di get_next_line.
+*/
 int	reset_fd(int fd, char *name)
 {
 	get_next_line(fd, RESET);
@@ -838,6 +930,8 @@ int	main()
 int	main()
 {
 	char	*line;
+	void	*save;
+	char	**all_line;
 	int		position;
 	char	*filename = "default_values.txt";
 
@@ -868,5 +962,23 @@ int	main()
 	else
 		printf("\n Linea %d, dato numero %d: %s\n", line_num, position, line);
 	free(line);
+	all_line = read_all_line(fd, filename, line_num);
+	if (!all_line)
+		return (1);
+	save = (void *)all_line;
+	position = 0;
+	while (*all_line)
+	{
+		if (all_line == NULL)
+			printf("sad\n");
+		else
+			printf("\n Linea %d, dato numero %d: %s\n", line_num, position, *all_line);
+		position++;
+		free(*all_line);
+		++all_line;
+	}
+	printf("\n Linea %d, dato numero %d: %s\n", line_num, position, *all_line);
+	free(save);
 	return (0);
-}*/
+}
+*/

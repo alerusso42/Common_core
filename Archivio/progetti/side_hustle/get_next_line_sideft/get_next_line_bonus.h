@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/04 17:24:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:48:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		write_short_line(int fd, char *filename, int line_num, int position, char *
 char	*line_fgm(int flag, int fd, int num_search, ...);
 char	*read_from_buffer(char buffer[BUFFER_SIZE + 1], int fd, int bytes);
 char	*read_line(int fd, char *filename, int line_num, int position);
+char	**read_all_line(int fd, char *filename, int line_num);
 int		write_line(int fd, char *filename, int line_num, int position, char *string);
 
 #endif

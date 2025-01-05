@@ -47,8 +47,13 @@ run:
 	clear
 	./a.out
 
+vgdb:
+	$(COMP) -g $(SRC)
+	clear
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --vgdb=yes --vgdb-error=0 -s ./a.out
+
 valgrind:
-	cc -g main.c $(SRC) $(LIBFT)
+	$(COMP) -g $(SRC)
 	clear
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
 
