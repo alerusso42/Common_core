@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:41:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/05 12:47:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:21:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ int	set_maximum_word_len(int new_len)
 	return (maximum_word_len); 
 }
 
-static void	free_matrix(char **matrix)
+void	free_matrix(char **matrix)
 {
 	int	index;
 

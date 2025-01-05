@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/05 12:48:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:21:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_list
 int		set_maximum_word_len(int new_len);
 char	*ft_itoa(int num);
 char	**ft_split(char const *s, char c);
+void	free_matrix(char **matrix);
 void	initiate_file(int fd, char *name);
 char	*get_next_line(int fd, int reset);
 int		find_number_line(int fd, char *filename, int num_search, ...);

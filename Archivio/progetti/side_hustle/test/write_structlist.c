@@ -15,6 +15,105 @@ void hold_space(int counter, int fd)
 	write(fd, "\n", 1);
 }*/
 
+void	write_default_value(int fd, char *filename, char *type)
+{
+	int		line_num;
+	char	**matrix;
+	char	*line;
+	int		index;
+	int		fd_2;
+
+	fd_2 = open("default_values.txt", O_RDONLY);
+	line_num = find_number_line(fd_2, "default_values.txt", 2, "[LIST]", type);
+	if (line_num == -1)
+		return ;
+	if ((strstr(type, "int*")) || (strstr(type, "char**")))
+	{
+		matrix = read_all_line(fd_2, "default_values.txt", line_num);
+		if (!matrix)
+			return ;
+		index = 1;
+		while (matrix[index])
+		{
+			write_line(fd, filename, line_num, index, matrix[index]);
+		}
+		free_matrix(matrix);
+		return ;
+	}
+	line = read_line(fd_2, filename, line_num, 1);
+	if (!line)
+		return ;
+	write_line(fd, filename, line_num, 1, line);
+	free(line);
+}
+
+void	write_types_list(int fd, char *filename, t_typelist *list)
+{
+	int	counter;
+
+	if ((fd == -1) || (!filename) || (!list) || (!(list->next)))
+		return ;
+	counter = 120;
+	reset_fd(fd, filename);
+	close(fd);
+	open(filename, O_RDWR | O_APPEND);
+	list = list->next;
+	while ((list) && (list->next))
+	{
+		write(fd, (char *)list->type, ft_strlen((char *)list->type));
+		write(fd, " = ", 3);
+		write_default_value(fd, filename, list->type);
+		hold_space(counter, fd);
+		list = list->next;
+	}
+}
+
+void	print_default_data(int fd, char *filename, t_typelist *list)
+{
+	int		fd_2;
+	int		line_num;
+
+	if (fd == -1)
+		return ;
+	write(fd, "SPACE FOR STRUCT DATA.\nFEEL FREE TO CHANGE THE DATA.\n\n", 54);
+	write(fd, "[DEFAULT]\n", 10);
+	fd_2 = open("default_values.txt", O_RDONLY);
+	line_num = find_number_line(fd, "default_values.txt", 1, "[LIST]");
+	if (line_num == -1)
+		return ;
+	line_num++;
+	close(fd_2);
+	write_types_list(fd, filename, list);
+}
+
+void	register_struct_data(char *struct_name, t_typelist *list)
+{
+	char	*filename;
+	int		fd;
+	char	buffer[1];
+	char	*save;
+
+	filename = ft_strjoin(struct_name, ".txt");
+	save = filename;
+	filename = ft_strjoin("struct_data/", filename);
+	if (save)
+		free(save);
+	if (!filename)
+		return ;
+	fd = open(filename, O_CREAT | O_RDWR, 0666);
+	if (fd == -1)
+		return ;
+	if (read(fd, buffer, 1) < 0)
+		return ;
+	if (*buffer == 0)
+	{
+		print_default_data(fd, filename, list);
+		write(fd, "\n\n", 2);
+	}
+	free(filename);
+	close(fd);
+}
+
 void	check_element_size(int *n_element_size, int counter)
 {
 	static int	check_multiple_of_ten = 10;
@@ -65,7 +164,9 @@ int	save_struct(char *struct_name, t_typelist *list)
 	int			fd;
 	int			line_num;
 	char		*s;
+	t_typelist	*save;
 
+	save = list;
 	fd = open("struct_list.txt", O_CREAT | O_APPEND | O_RDWR, 0666);
 	if (fd < 0)
 		return (printf("1\n"));
@@ -93,6 +194,7 @@ int	save_struct(char *struct_name, t_typelist *list)
 		list = list->next;
 	}
 	write(fd, "\n\n", 2);
+	register_struct_data(struct_name, save);
 	return (0);
 }
 

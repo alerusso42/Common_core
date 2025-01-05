@@ -1,4 +1,6 @@
-COMMENT:	for every available type (see available_types.txt),
+
+
+MMENT:	for every available type (see available_types.txt),
 			this file shows the values every type is initiated
 			with.
 			The values can be changed.
