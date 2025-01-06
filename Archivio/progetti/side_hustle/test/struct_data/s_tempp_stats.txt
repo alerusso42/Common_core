@@ -1,0 +1,10 @@
+SPACE FOR STRUCT DATA.
+FEEL FREE TO CHANGE THE DATA.
+
+[DEFAULT]
+buff_stats =                                                                                                                         
+cur_hitpoints = 18__________________,                                                                                                                        
+initiative_score = 18__________________,                                                                                                                        
+death_saves =                                                                                                                         
+
+

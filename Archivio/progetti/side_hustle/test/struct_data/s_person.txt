@@ -1,0 +1,9 @@
+SPACE FOR STRUCT DATA.
+FEEL FREE TO CHANGE THE DATA.
+
+[DEFAULT]
+name = FRANCO______________,                                                                                                                        
+surname = FRANCO______________,                                                                                                                        
+age = 18__________________,                                                                                                                        
+
+

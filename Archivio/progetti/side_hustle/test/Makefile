@@ -26,7 +26,6 @@ re: fclean all
 main:
 	$(COMP) main.c $(SRC) $(LIBFT)
 	clear
-	./a.out
 
 gdb: 
 	$(COMP) main.c $(SRC) $(LIBFT)
@@ -34,6 +33,9 @@ gdb:
 	gdb ./a.out
 
 run:
+	$(COMP) main.c $(SRC) $(LIBFT)
+	clear
+	./a.out
 	
 
 valgrind:

@@ -68,3 +68,17 @@ type_22 = unsigned char**_____,
 Name_23 = spell_list__________,
 type_23 = unsigned char**_____,
 
+[s_car]
+Name_1 = START_______________,
+type_1 = START_______________,
+Name_2 = name________________,
+type_2 = char*_______________,
+Name_3 = max_speed___________,
+type_3 = unsigned int________,
+Name_4 = is_used_____________,
+type_4 = unsigned int________,
+Name_5 = how_much_luis_inside,
+type_5 = unsigned int________,
+Name_6 = displacement________,
+type_6 = unsigned int________,
+

@@ -1,10 +1,4 @@
-#include "stdio.h"
-#include "libft.h"
-#include <malloc.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "get_next_line_bonus.h"
+#include "header.h"
 
 int	obtain_list(char *structure_name, t_typelist **list);
 /*
@@ -15,15 +9,103 @@ void hold_space(int counter, int fd)
 	write(fd, "\n", 1);
 }*/
 
-void	write_default_value(int fd, char *filename, char *type)
+int		write_line_gdb(int fd, char *filename, int line_num, int position, char *string)
+{
+	int		counter;
+	char	*temp;
+	int		maximum_word_len;
+
+	if ((fd == -1) || (!string) || (position < 0) || (line_num < 0))
+		return (-1);
+	position -= 1;
+	reset_fd(fd, filename);
+	if (line_num != 1)
+	{
+		while ("move the cursor to the start of the line")
+		{
+			if (line_num == 1)
+				break ;
+			temp = get_next_line(fd, 1);
+			if (!temp)
+				return (-1);
+			if (*temp == '\n')
+				--line_num;
+			free(temp);
+		}
+	}
+	temp = get_next_line(fd, 1);
+	if (!temp)
+		return (-1);
+	while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+	if (!temp)
+		return (-1);
+	}
+	if ((temp[0] == '\n') || (temp[0] == '\0'))
+		return (free(temp), -1);
+	free(temp);
+	temp = get_next_line(fd, 1);
+	if (!temp)
+		return (-1);
+	while ((temp[0] != ' ') && (temp[0] != '\n') && (temp[0] != '\0'))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+	if (!temp)
+		return (-1);
+	}
+	if ((temp[0] == '\n') || (temp[0] == '\0'))//Scorre fino ad arrivare a "= "
+		return (free(temp), -1);
+	while ((position--))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
+			return (-1);
+		while ((temp[0] != ',') && (temp[0] != '\n') && (temp[0] != '\0'))
+		{
+			free(temp);
+			temp = get_next_line(fd, 1);
+			if (!temp)
+				return (-1);
+		}
+		if ((temp[0] == '\n') || (temp[0] == '\0'))
+			return (free(temp), -1);
+	}
+	counter = 0;
+	maximum_word_len = set_maximum_word_len(-1);
+	while (counter != maximum_word_len)
+	{
+		if (*string)
+		{
+			write(fd, string, 1);
+			string++;
+		}
+		else
+			write(fd, "_", 1);
+		++counter;
+	}
+	write (fd, ",", 1);
+	while ((temp[0] == '\n') || (temp[0] == '\0'))
+	{
+		free(temp);
+		temp = get_next_line(fd, 1);
+		if (!temp)
+			return (-1);
+	}
+	free(temp);
+	return (0);
+}
+
+void	write_default_value(int fd, char *filename, int line_to_write, int fd_2, char *type)
 {
 	int		line_num;
 	char	**matrix;
 	char	*line;
 	int		index;
-	int		fd_2;
 
-	fd_2 = open("default_values.txt", O_RDONLY);
 	line_num = find_number_line(fd_2, "default_values.txt", 2, "[LIST]", type);
 	if (line_num == -1)
 		return ;
@@ -32,58 +114,63 @@ void	write_default_value(int fd, char *filename, char *type)
 		matrix = read_all_line(fd_2, "default_values.txt", line_num);
 		if (!matrix)
 			return ;
-		index = 1;
+		index = 0;
 		while (matrix[index])
 		{
-			write_line(fd, filename, line_num, index, matrix[index]);
+			write_line_gdb(fd, filename, line_to_write, index + 1, matrix[index]);
+			++index;
 		}
 		free_matrix(matrix);
 		return ;
 	}
-	line = read_line(fd_2, filename, line_num, 1);
+	line = read_line(fd_2, "default_values.txt", line_num, 1);
 	if (!line)
 		return ;
-	write_line(fd, filename, line_num, 1, line);
+	write_line(fd, filename, line_to_write, 1, line);
 	free(line);
 }
 
-void	write_types_list(int fd, char *filename, t_typelist *list)
+void	write_types_list(int fd, char *filename, int fd_2, t_typelist *list)
 {
-	int	counter;
+	int		counter;
+	int		line_to_write;
 
-	if ((fd == -1) || (!filename) || (!list) || (!(list->next)))
+	if ((fd == -1) || (fd_2 == -1) || (!filename) || (!list) || !(list->next))
 		return ;
 	counter = 120;
-	reset_fd(fd, filename);
-	close(fd);
-	open(filename, O_RDWR | O_APPEND);
 	list = list->next;
+	line_to_write = 5;
 	while ((list) && (list->next))
 	{
-		write(fd, (char *)list->type, ft_strlen((char *)list->type));
+		write(fd, (char *)list->content, ft_strlen((char *)list->content));
 		write(fd, " = ", 3);
-		write_default_value(fd, filename, list->type);
+		write_default_value(fd, filename, line_to_write, fd_2, list->type);
 		hold_space(counter, fd);
 		list = list->next;
+		line_to_write++;
 	}
 }
 
-void	print_default_data(int fd, char *filename, t_typelist *list)
+void	print_data(int fd, char *filename, t_typelist *list, char *data_name)
 {
 	int		fd_2;
-	int		line_num;
 
 	if (fd == -1)
 		return ;
-	write(fd, "SPACE FOR STRUCT DATA.\nFEEL FREE TO CHANGE THE DATA.\n\n", 54);
-	write(fd, "[DEFAULT]\n", 10);
+	reset_fd(fd, filename);
+	close(fd);
+	open(filename, O_RDWR | O_APPEND);
+	write(fd, "[", 1);
+	write(fd, data_name, ft_strlen(data_name));
+	write(fd, "]\n", 2);
 	fd_2 = open("default_values.txt", O_RDONLY);
-	line_num = find_number_line(fd, "default_values.txt", 1, "[LIST]");
-	if (line_num == -1)
+	if (fd_2 == -1)
+	{
+		write(fd, "missing file default_values.txt\n", 32);
 		return ;
-	line_num++;
+	}
+	write_types_list(fd, filename, fd_2, list);
 	close(fd_2);
-	write_types_list(fd, filename, list);
 }
 
 void	register_struct_data(char *struct_name, t_typelist *list)
@@ -91,29 +178,36 @@ void	register_struct_data(char *struct_name, t_typelist *list)
 	char	*filename;
 	int		fd;
 	char	buffer[1];
-	char	*save;
 
 	filename = ft_strjoin(struct_name, ".txt");
-	save = filename;
+	del_pointer((void **)(&filename), 1);
 	filename = ft_strjoin("struct_data/", filename);
-	if (save)
-		free(save);
+	del_pointer((void **)(&filename), 1);
+	if (!filename)
+		del_pointer(NULL, 2);
 	if (!filename)
 		return ;
 	fd = open(filename, O_CREAT | O_RDWR, 0666);
 	if (fd == -1)
+		del_pointer(NULL, 2);
+	if (fd == -1)
 		return ;
 	if (read(fd, buffer, 1) < 0)
+	{
+		del_pointer(NULL, 2);
 		return ;
+	}
 	if (*buffer == 0)
 	{
-		print_default_data(fd, filename, list);
+		write(fd, "SPACE FOR STRUCT DATA.\nFEEL FREE TO CHANGE THE DATA.\n\n", 54);
+		print_data(fd, filename, list, "DEFAULT");
 		write(fd, "\n\n", 2);
 	}
-	free(filename);
+	del_pointer(NULL, 2);
 	close(fd);
 }
 
+/*Giu di qui tutto ok!*/
 void	check_element_size(int *n_element_size, int counter)
 {
 	static int	check_multiple_of_ten = 10;

@@ -1,0 +1,11 @@
+SPACE FOR STRUCT DATA.
+FEEL FREE TO CHANGE THE DATA.
+
+[DEFAULT]
+name = FRANCO______________,                                                                                                                        
+max_speed = 18__________________,                                                                                                                        
+is_used = 18__________________,                                                                                                                        
+how_much_luis_inside = 18__________________,                                                                                                                        
+displacement = 18__________________,                                                                                                                        
+
+
