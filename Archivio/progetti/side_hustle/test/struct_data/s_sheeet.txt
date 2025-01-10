@@ -2,12 +2,9 @@ SPACE FOR STRUCT DATA.
 FEEL FREE TO CHANGE THE DATA.
 
 [DEFAULT]
-rayquaza =                                                                                                                         
-buff_stats =                                                                                                                         
+buff_stats = u_c FRANCO__________,                                                                                                                        
 cur_hitpoints = 18__________________,                                                                                                                        
 initiative_score = 18__________________,                                                                                                                        
-death_saves =                                                                                                                         
-END_OF_SUBLIST = (null)______________,                                                                                                                        
 strength = 18__________________,                                                                                                                        
 dexterity = 18__________________,                                                                                                                        
 constitution = 18__________________,                                                                                                                        
@@ -24,5 +21,3 @@ skills = u_c FRANCO__________,
 attack_bonus = 18__________________,                                                                                                                        
 weapon = u_c FRANCO__________,e___________________,un__________________,grande______________,                                                                                                                        
 spell_list = u_c FRANCO__________,e___________________,un__________________,grande______________,                                                                                                                        
-
-

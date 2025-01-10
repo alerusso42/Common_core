@@ -1,5 +1,27 @@
 #include "header.h"
 
+/*
+	Questa funzione salva il nome dell'oggetto che 
+	andremo a cercare.
+	
+	Se flag == 0 salviamo un nuovo nome in una statica.
+	Se flag == 1, recuperiamo il valore della statica.
+*/
+char	*set_object_name(char *object_name, int flag)
+{
+	static char	*save;
+
+	if (flag == 0)
+	{
+		save = object_name;
+		return (NULL);
+	}
+	if (flag == 1)
+	{
+		return (save);
+	}
+}
+
 void	*get_struct_data(char *search_struct, char *temp)
 {
 	int	fd;
@@ -46,6 +68,7 @@ void	*analyze_data(char *temp, char *type, char *data_name, int fd, char *filena
 		return (get_float_1ptr(type, data_name, fd, filename));
 	if (ft_strncmp(temp, "void*", 10) == 0)
 		return (get_ptr(type, data_name, fd, filename));
+	return (NULL);
 }
 
 /*

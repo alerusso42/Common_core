@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/23 23:49:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/09 23:15:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdio.h>
 # include <unistd.h>
+# include <malloc.h>
 
 typedef struct	s_typelist
 {
@@ -65,5 +66,6 @@ void	ft_lstdelone(t_typelist *lst, void (*del)(void *));
 void	ft_lstclear(t_typelist **lst, void (*del)(void *));
 void	ft_lstiter(t_typelist *lst, void (*f)(void *));
 t_typelist	*ft_lstmap(t_typelist *lst, void *(*f)(void *), void (*del)(void *));
+int	ft_realloc(void **content, size_t nmemb, size_t size);
 
 #endif

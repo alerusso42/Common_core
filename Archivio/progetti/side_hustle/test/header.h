@@ -16,6 +16,10 @@ void	del_pointer(void **ptr, int mode);
 int		save_struct(char *struct_name, t_typelist *list);
 int		format_search(char **search_struct);
 int		move_square_brackets(char **type, char **name);
+int		move_square_br(char **old, char **new, short int flag);
 int		add_s_(char *string, char **new_string);
+int		cut_string(char **string, size_t start, size_t end);
+int		add_sign_right(char **string, char sign);
+char	*set_object_name(char *object_name, int flag);
 
 #endif

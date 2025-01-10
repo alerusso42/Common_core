@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "libft.h"
+#include "header.h"
 #include <malloc.h>
 #include <string.h>
 #include <unistd.h>
@@ -90,6 +91,63 @@ void	del(void *node)
 	(void)node;
 }
 
+int	add_sign_left(char **string, char sign)
+{
+	size_t	len;
+	char	*new_string;
+
+	if ((!string) || (!*string))
+		return (1);
+	len = strlen(*string);
+	new_string = (char *)calloc(len + 2, sizeof(char));
+	if (!new_string)
+		return (1);
+	new_string[0] = sign;
+	strcpy(new_string + 1, *string);
+	free(*string);
+	*string = new_string;
+	return (0);
+}
+
+int	move_square_br(char **old, char **new, short int flag)
+{
+	int		start;
+	int		end;
+	int		len;
+	char	*gen_new_string;
+
+	start = 0;
+	while (((*old)[start]) && ((*old)[start] != '['))
+		++start;
+	if ((*old)[start] == 0)
+		return (2);
+	end = start;
+	while (((*old)[end]) && ((*old)[end] != ']'))
+		++end;
+	len = ft_strlen(*old);
+	*new = ft_calloc(len + 1, sizeof(char));
+	if (!(*new))
+		return (1);
+	strcpy(*new, *old);
+	if (cut_string(new, start, end) == 1)
+		return (1);
+	if (add_sign_right(new, '*') == 1)
+		return (free(*new), 1);
+	if (flag == 1)
+		free(*old);
+	if (flag == 1)
+		*old = NULL;
+	gen_new_string = NULL;
+	if (move_square_br(new, &gen_new_string, 1) == 1)
+		return (free(*new), 1);
+	if (gen_new_string)
+	{
+		free(*new);
+		*new = gen_new_string;
+	}
+	return (0);
+}
+
 int	add_s_(char *string, char **new_string)
 {
 	size_t	len;
@@ -134,9 +192,9 @@ int	cut_string(char **string, size_t start, size_t end)
 	unsigned int	temp;
 	unsigned int	string_len;
 
-	end++;
-	if (!(string) || !(*string) || (start > end))
+	if (!(string) || !(*string) || !(**string) || (start > end))
 		return (1);
+	end++;
 	string_len = ft_strlen(*string);
 	temp = start;
 	while ((start != end) && ((*string)[start] != 0))
@@ -151,10 +209,9 @@ int	cut_string(char **string, size_t start, size_t end)
 		++temp;
 	}
 	if (temp != 0)
-		(*string)[temp] = 0;
+		(*string)[temp + start] = 0;
 	end = ft_strlen(*string);
-	if (alloc_ft((void **)string, (void *)*string, end, REALLOC) == 0)
-		return (1);
+	ft_realloc((void **)string, end + 2, sizeof(char));
 	return (0);
 }
 
@@ -239,12 +296,12 @@ int	add_sign_right(char **string, char sign)
 	if ((!string) || (!*string))
 		return (1);
 	len = ft_strlen(*string);
-	new_string = (char *)calloc(len + 2, sizeof(char));
+	new_string = (char *)calloc(len + 3, sizeof(char));
 	if (!new_string)
 		return (1);
-	new_string[len] = sign;
 	new_string[len + 1] = 0;
 	strcpy(new_string, *string);
+	new_string[len] = sign;
 	free(*string);
 	*string = new_string;
 	return (0);

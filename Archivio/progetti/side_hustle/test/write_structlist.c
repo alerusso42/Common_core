@@ -99,7 +99,59 @@ int		write_line_gdb(int fd, char *filename, int line_num, int position, char *st
 	return (0);
 }
 
-void	write_default_value(int fd, char *filename, int line_to_write, int fd_2, char *type)
+// Se flag è == 1, chiude il file, se esiste.
+int	check_type(char *type, int flag)
+{
+	static int		fd;
+	int				line;
+
+	if (flag == 1)
+	{
+		if (fd != 0)
+			close(fd);
+		return (0);
+	}
+	if (ft_strncmp(type, "END_", 4) == 0)
+		return (1);
+	if (fd == 0)
+		fd = open("available_types.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+	line = find_number_line(fd, "available_types.txt", 1, type);
+	if (line < 0)
+		return (1);
+	return (0);
+}
+
+// Se flag è == 1, libera no_brackets, se è stato allocato.
+int	check_brackets(char *type, char **no_brackets, int flag)
+{
+	int			manage_cases;
+	static void	*pointer;
+
+	if (flag == 1)
+	{
+		free(pointer);
+		pointer = NULL;
+		return (0);
+	}
+	manage_cases = move_square_br(&type, no_brackets, 0);
+	if (manage_cases == 2)
+	{
+		*no_brackets = type;
+		return (2);
+	}
+	if (manage_cases == 0)
+	{
+		pointer = *no_brackets;
+		return (0);
+	}
+	if (manage_cases == 1)
+		return (1);
+	return (3);
+}
+
+int	write_default_value(int fd, char *filename, int line_to_write, int fd_2, char *type)
 {
 	int		line_num;
 	char	**matrix;
@@ -108,12 +160,12 @@ void	write_default_value(int fd, char *filename, int line_to_write, int fd_2, ch
 
 	line_num = find_number_line(fd_2, "default_values.txt", 2, "[LIST]", type);
 	if (line_num == -1)
-		return ;
+		return (1);
 	if ((strstr(type, "int*")) || (strstr(type, "char**")))
 	{
 		matrix = read_all_line(fd_2, "default_values.txt", line_num);
 		if (!matrix)
-			return ;
+			return (1);
 		index = 0;
 		while (matrix[index])
 		{
@@ -121,19 +173,23 @@ void	write_default_value(int fd, char *filename, int line_to_write, int fd_2, ch
 			++index;
 		}
 		free_matrix(matrix);
-		return ;
 	}
-	line = read_line(fd_2, "default_values.txt", line_num, 1);
-	if (!line)
-		return ;
-	write_line(fd, filename, line_to_write, 1, line);
-	free(line);
+	else
+	{
+		line = read_line(fd_2, "default_values.txt", line_num, 1);
+		if (!line)
+			return (1);
+		write_line(fd, filename, line_to_write, 1, line);
+		free(line);
+	}
+	return (0);
 }
 
 void	write_types_list(int fd, char *filename, int fd_2, t_typelist *list)
 {
 	int		counter;
 	int		line_to_write;
+	char	*temp;
 
 	if ((fd == -1) || (fd_2 == -1) || (!filename) || (!list) || !(list->next))
 		return ;
@@ -142,13 +198,22 @@ void	write_types_list(int fd, char *filename, int fd_2, t_typelist *list)
 	line_to_write = 5;
 	while ((list) && (list->next))
 	{
-		write(fd, (char *)list->content, ft_strlen((char *)list->content));
-		write(fd, " = ", 3);
-		write_default_value(fd, filename, line_to_write, fd_2, list->type);
-		hold_space(counter, fd);
+		temp = NULL;
+		if (check_brackets((char *)list->type, &temp, 0) == 1)
+			break ;
+		if (check_type(temp, 0) == 0)
+		{
+			move_cursor(fd, filename, line_to_write);
+			write(fd, (char *)list->content, ft_strlen((char *)list->content));
+			write(fd, " = ", 3);
+			write_default_value(fd, filename, line_to_write, fd_2, temp);
+			hold_space(counter, fd);
+			line_to_write++;
+		}
+		check_brackets(NULL, NULL, 1);
 		list = list->next;
-		line_to_write++;
 	}
+	check_type(NULL, 1); //DEL
 }
 
 void	print_data(int fd, char *filename, t_typelist *list, char *data_name)
@@ -179,6 +244,7 @@ void	register_struct_data(char *struct_name, t_typelist *list)
 	int		fd;
 	char	buffer[1];
 
+	*buffer = 0;
 	filename = ft_strjoin(struct_name, ".txt");
 	del_pointer((void **)(&filename), 1);
 	filename = ft_strjoin("struct_data/", filename);
@@ -207,7 +273,6 @@ void	register_struct_data(char *struct_name, t_typelist *list)
 	close(fd);
 }
 
-/*Giu di qui tutto ok!*/
 void	check_element_size(int *n_element_size, int counter)
 {
 	static int	check_multiple_of_ten = 10;

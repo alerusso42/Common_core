@@ -1,4 +1,4 @@
-	Here's a list of the type that can be allocated and initiated.
+buff_stats = =   = he type that can be allocated and initiated.
 //	If the program didn't find the type is searching for, it then
 //	Searches for struct.
 //	If it finds one, it recalls recursively obtain_list().
@@ -22,3 +22,8 @@ void*
 END_OF_SUBLIST
 [END]
 
+                                                                                                                        
+buff_stats =                                                                                                                         
+cur_hitpoints =                                                                                                                         
+buff_stats =                                                                                                                         
+buff_stats =                                                                                                                         

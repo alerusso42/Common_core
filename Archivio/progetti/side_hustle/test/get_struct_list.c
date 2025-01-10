@@ -63,19 +63,6 @@ void	*ft_memcpy_aa(void *dest, const void *src, size_t n)
 	return (pointer);
 }
 
-int	ft_realloc(void **content, size_t size)
-{
-	void	*re_content;
-
-	re_content = ft_calloc(size, 1);
-	if (!(re_content))
-		return (1);
-	ft_memcpy_aa(re_content, *content, size - 8);
-	free(*content);
-	*content = re_content;
-	return (0);
-}
-
 int	take_line(char **line)
 {
 	int		start;
@@ -122,6 +109,19 @@ int	take_list(char *line, t_typelist **list)
 	return (0);
 }
 
+static int	frealloc(void **content, size_t nmemb, size_t size)
+{
+	void	*re_content;
+
+	re_content = ft_calloc(nmemb, size);
+	if (!(re_content))
+		return (1);
+	ft_memcpy(re_content, *content, (nmemb - 1) * size);
+	free(*content);
+	*content = re_content;
+	return (0);
+}
+
 int	get_struct_list(t_typelist ***struct_list, char ***struct_list_names)
 {
 	int		fd;
@@ -144,9 +144,9 @@ int	get_struct_list(t_typelist ***struct_list, char ***struct_list_names)
 		if (!line)
 			break ;
 		++counter;
-		if (ft_realloc((void **)struct_list_names, counter * 8) != 0)
+		if (frealloc((void **)struct_list_names, counter, sizeof(void *)) != 0)
 			return (free(*struct_list_names), free(*struct_list), 1);
-		if (ft_realloc((void **)struct_list, counter * 8) != 0)
+		if (frealloc((void **)struct_list, counter, sizeof(void *)) != 0)
 			return (free(*struct_list_names), free(*struct_list), 1);
 		take_line(&line);
 		(*struct_list)[counter - 2] = NULL;
