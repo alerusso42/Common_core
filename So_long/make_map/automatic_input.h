@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/11 20:18:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:45:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "random_numbers.h"
 # include "automatic_input2.h"
 # include "solve_game.h"
+# include <unistd.h>
+# include <fcntl.h>
 
 t_bool	automatic_input(int argc, char *argv[], int *game_size, int seed);
 t_bool	parsing(int argc, char *argv[], int **game_size, int *seed);
@@ -101,15 +103,13 @@ t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
 		else if (seed % 7 == 0)
 			twist_random3(&random);
 	}
-	fill_solution(solution, (*solution)->game_size);
+	fill_solution(solution, (*solution)->game_size_h,\
+	 (*solution)->game_size_w);
 	initialize_input(input);
-	cheat(input, solution, &random);
-	solve_game(input, solution, random);
 	switches(input, solution, &random);
 	variables(input, solution, &random);
-	fill_input(input, *solution);
-	fill_solution(solution, (*solution)->game_size);
-	return (error(ft_start(input, solution, random)));
+	print_solution(*input, *solution, 0, 0);
+	return (0);
 }
 
 int	initialize_input(t_input **input)
@@ -134,21 +134,6 @@ int	initialize_input(t_input **input)
 	(*input)->coldown.x[(game_size)] = 0;
 	(*input)->rowright.y[(game_size)] = 0;
 	(*input)->rowleft.y[(game_size)] = 0;
-	return (0);
-}
-
-t_bool	cheat(t_input **input, t_solution **solution, t_random **random)
-{
-	(*input)->switch_1_showuserinput = OFF;
-	(*input)->switch_2_ispossibletowin = OFF;
-	(*solution)->is_solved = NO;
-	(*solution)->is_correct = YES;
-	(*solution)->switch_1_showtries = OFF;
-	(*solution)->switch_2_showcycles = OFF;
-	(*solution)->switch_3_showblacklist = OFF;
-	(*random)->switch_1_showseed = OFF;
-	(*random)->switch_2_showrandomvalues = OFF;
-	(*random)->variable_2_randomizer = 1;
 	return (0);
 }
 

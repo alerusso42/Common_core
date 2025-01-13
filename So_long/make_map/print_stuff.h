@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/05 12:14:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:01:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,30 @@ void	print_blacklist(t_onebyte game_size, t_solution *solution, int i);
 */
 void	print_solution(t_input *input, t_solution *solution, int x, int y)
 {
-	t_onebyte	s;
+	int	w;
+	int	h;
 
 	x = -1;
 	y = -1;
-	s = input->game_size;
-	print_skyscrapers(s);
+	w = input->game_size_w;
+	h = input->game_size_h;
+	print_skyscrapers(w);
 	print_colgraphic(input, 0);
-	while (++x != s)
+	while (++x != w)
 		ft_printf(" <%d>", input->colup.x[x]);
 	print_colgraphic(input, 1);
-	while (++y != s)
+	while (++y != h)
 	{
-		ft_printf("\n     [%d] <%d>", s - y - 1, input->rowleft.y[s - y - 1]);
+		ft_printf("\n     [%d] <%d>", h - y - 1, input->rowleft.y[h - y - 1]);
 		x = -1;
-		while (++x != s)
-			ft_printf(" |%d|", solution->position[x][s - y - 1].value);
-		ft_printf(" <%d> [%d]", input->rowright.y[s - y - 1], s - y - 1);
+		while (++x != w)
+			ft_printf(" |%c|", solution->position[x][h - y - 1].value);
+		ft_printf(" <%d> [%d]", input->rowright.y[h - y - 1], h - y - 1);
 	}
 	print_colgraphic(input, 1);
 	ft_printf("            ");
 	x = -1;
-	while (++x != s)
+	while (++x != w)
 		ft_printf(" <%d>", input->coldown.x[x]);
 	print_colgraphic(input, 0);
 }
@@ -58,7 +60,7 @@ void	print_colgraphic(t_input *input, t_bool mode)
 	t_onebyte	game_size;
 
 	x = -1;
-	game_size = input->game_size;
+	game_size = input->game_size_w;
 	if (mode == 0)
 	{
 		ft_printf("\n");

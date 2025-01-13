@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/11 20:09:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:39:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ struct s_solution
 	int					variable_1_settriesnum;
 	t_onebyte			game_size;
 	int					game_size_w;
-	int					game_size_t;
+	int					game_size_h;
 	t_onebyte			g_u_score;
 	unsigned char		is_solved;
 	t_bool				is_correct:1;
