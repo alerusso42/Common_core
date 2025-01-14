@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 13:44:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:05:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ t_random	*fill_random(t_random **random, t_input *input)
 {
 	t_onebyte	store_variable;
 
-	(*random)->seed = input->rowleft.y[0] + input->rowright.y[0];
-	(*random)->seed += input->colup.x[0] + input->coldown.x[0];
+	(*random)->seed = input->col.x[0] + input->row.y[0];
 	store_variable = (*random)->seed;
 	get_randomlist(random, input->game_size);
 	(*random)->seed = store_variable;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 11:39:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:04:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "atoi.h"
 # include "types.h"
 # include "general_ft2.h"
+# include "reset_memory.h"
 
 int				copy_user_input(char *argv[], t_input **input);
 int				check_user_input(t_input *input);
@@ -54,17 +55,14 @@ int	alloc_user_input(t_input **input, int game_size[2])
 	(*input) = malloc(sizeof(t_input));
 	if ((*input) == NULL)
 		return (2);
-	size_width = (sizeof(int)) * ((game_size[0]) + 2);
-	size_heigth = (sizeof(int)) * ((game_size[1]) + 2);
-	(*input)->colup.x = (t_onebyte *)ft_calloc(size_heigth, 1);
-	(*input)->coldown.x = (t_onebyte *)ft_calloc(size_heigth, 1);
-	(*input)->rowright.y = (t_onebyte *)ft_calloc(size_width, 1);
-	(*input)->rowleft.y = (t_onebyte *)ft_calloc(size_width, 1);
+	size_width = (sizeof(int)) * ((game_size[0]) + 4);
+	size_heigth = (sizeof(int)) * ((game_size[1]) + 4);
+	(*input)->col.x = (t_onebyte *)ft_calloc(size_width, 1);
+	(*input)->row.y = (t_onebyte *)ft_calloc(size_heigth, 1);
 	(*input)->game_size = game_size[0] * game_size[1];
 	(*input)->game_size_w = game_size[0];
 	(*input)->game_size_h = game_size[1];
-	if (((*input)->colup.x == NULL) || ((*input)->coldown.x == NULL)
-		|| ((*input)->rowright.y == NULL) || ((*input)->rowleft.y == NULL))
+	if (((*input)->col.x == NULL) || ((*input)->row.y == NULL))
 	{
 		full_reset(1, input);
 		return (ERROR_FULL_MEMORY);

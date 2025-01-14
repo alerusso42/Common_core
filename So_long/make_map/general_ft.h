@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 11:13:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:24:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_swap(unsigned char *x, unsigned char *y)
 	*y = temp;
 }
 
-// Funzione inutilizzata.
 int	ft_memset(void *content, unsigned int size)
 {
 	int				index;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 13:44:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:07:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,12 @@ int	reset_memory_input(t_input **input)
 {
 	if ((*input) != NULL)
 	{
-		if ((*input)->colup.x != NULL)
-			free((*input)->colup.x);
-		if ((*input)->coldown.x != NULL)
-			free((*input)->coldown.x);
-		if ((*input)->rowright.y != NULL)
-			free((*input)->rowright.y);
-		if ((*input)->rowleft.y != NULL)
-			free((*input)->rowleft.y);
-		(*input)->colup.x = NULL;
-		(*input)->coldown.x = NULL;
-		(*input)->rowright.y = NULL;
-		(*input)->rowleft.y = NULL;
+		if ((*input)->col.x != NULL)
+			free((*input)->col.x);
+		if ((*input)->row.y != NULL)
+			free((*input)->row.y);
+		(*input)->col.x = NULL;
+		(*input)->row.y = NULL;
 		free((*input));
 		(*input) = NULL;
 	}

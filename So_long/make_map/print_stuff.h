@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 13:44:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:05:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,29 @@ void	print_solution(t_input *input, t_solution *solution, int x, int y)
 	h = input->game_size_h;
 	print_skyscrapers(w);
 	print_colgraphic(input, 0);
+	write(1, " ", 1);
 	while (++x != w)
-		ft_printf(" <%d>", input->colup.x[x]);
+		ft_printf("<%d>", input->col.x[x]);
 	print_colgraphic(input, 1);
 	while (++y != h)
 	{
-		ft_printf("\n     [%d] <%d>", h - y - 1, input->rowleft.y[h - y - 1]);
+		ft_printf("\n     [%d]", h - y - 1);
+		if ((h - y - 1) < 10)
+			write(1, " ", 1);
+		ft_printf("<%d>", input->row.y[h - y - 1]);
+		if ((h - y - 1) < 100)
+			write(1, " ", 1);
 		x = -1;
 		while (++x != w)
-			ft_printf(" |%c|", solution->position[x][h - y - 1].value);
-		ft_printf(" <%d> [%d]", input->rowright.y[h - y - 1], h - y - 1);
+			ft_printf("|%c|", solution->position[x][h - y - 1].value);
+		ft_printf("<%d> [%d]", input->row.y[h - y - 1], h - y - 1);
 	}
 	print_colgraphic(input, 1);
 	ft_printf("            ");
 	x = -1;
+	write(1, " ", 1);
 	while (++x != w)
-		ft_printf(" <%d>", input->coldown.x[x]);
+		ft_printf("<%d>", input->col.x[x]);
 	print_colgraphic(input, 0);
 }
 
@@ -66,8 +73,15 @@ void	print_colgraphic(t_input *input, t_bool mode)
 		ft_printf("\n");
 		ft_printf("            ");
 		x = -1;
+		write(1, " ", 1);
 		while (++x != game_size)
-			ft_printf(" [%d]", x);
+		{
+			if (x < 100)
+				write(1, "[", 1);
+			ft_printf("%d", x);
+			if (x < 10)
+				write(1, "]", 1);
+		}
 		ft_printf("\n");
 		ft_printf("            ");
 	}
@@ -92,13 +106,13 @@ void	print_skyscrapers(t_onebyte game_size)
 	ft_printf("\n");
 	count_padding = 0;
 	while (++count_padding != game_size)
-		ft_printf("--");
-	ft_printf("---- ");
-	ft_printf("S K Y S C R A P E R S");
-	ft_printf(" ----");
+		ft_printf("-");
+	ft_printf("--- ");
+	ft_printf("P   A   C - M   A   N");
+	ft_printf(" ---");
 	count_padding = 0;
 	while (++count_padding != game_size)
-		ft_printf("--");
+		ft_printf("-");
 	ft_printf("\n");
 }
 

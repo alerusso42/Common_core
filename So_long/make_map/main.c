@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 11:07:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:08:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,13 @@
 #include "switches.h"
 #include "variables.h"
 #include "error_message.h"
+#include "change_mod.h"
 #include "reset_memory.h"
 #include "alloc_t_input.h"
 #include "alloc_t_solution.h"
 #include "alloc_t_random.h"
-#include "is_possibletowin.h"
-#include "is_possibletowin2.h"
-#include "solve_game.h"
-#include "solve_logic.h"
-#include "solve_logic2.h"
-#include "solve_tries.h"
-#include "solve_tries2.h"
 #include "print_stuff.h"
-#include "change_mod.h"
 #include "automatic_input.h"
-#include "automatic_input2.h"
 #include "ft_printf.h"
 #include <malloc.h>
 #include <stdarg.h>

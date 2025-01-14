@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 13:44:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:54:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # include "alloc_t_solution.h"
 # include "alloc_t_random.h"
 # include "random_numbers.h"
-# include "automatic_input2.h"
-# include "solve_game.h"
+# include "print_stuff.h"
 # include <unistd.h>
 # include <fcntl.h>
 
@@ -31,7 +30,6 @@ t_bool	automatic_input(int argc, char *argv[], int *game_size, int seed);
 t_bool	parsing(int argc, char *argv[], int **game_size, int *seed);
 t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random);
 t_bool	cheat(t_input **input, t_solution **solution, t_random **random);
-int		initialize_input(t_input **input);
 int		ft_start(t_input **input, t_solution **solution, t_random *random);
 
 t_bool	automatic_input(int argc, char *argv[], int game_size[2], int seed)
@@ -88,6 +86,25 @@ t_bool	parsing(int argc, char *argv[], int *game_size[2], int *seed)
 	return (0);
 }
 
+void	temp_set_input(t_input **input)
+{
+	int	stop_row;
+	int	stop_col;
+
+	stop_row = 0;
+	stop_col = 0;
+	while (stop_row != (*input)->game_size_h + 2)
+	{
+		(*input)->row.y[stop_row] = 0;
+		++stop_row;
+	}
+	while (stop_col != (*input)->game_size_w + 2)
+	{
+		(*input)->col.x[stop_col] = 0;
+		++stop_col;
+	}
+}
+
 t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
 {
 	int	seed;
@@ -107,33 +124,9 @@ t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
 	 (*solution)->game_size_w);
 	switches(input, solution, &random);
 	variables(input, solution, &random);
-	//print_solution(*input, *solution, 0, 0);
+	temp_set_input(input);
+	print_solution(*input, *solution, 0, 0);
 	full_reset(3, input, solution, &random);
-	return (0);
-}
-
-int	initialize_input(t_input **input)
-{
-	int			in_index;
-	t_onebyte	game_size;
-
-	in_index = -1;
-	game_size = (*input)->game_size;
-	while (++in_index < game_size)
-		(*input)->colup.x[in_index] = 0;
-	in_index = -1;
-	while (++in_index < game_size)
-		(*input)->coldown.x[in_index] = 0;
-	in_index = -1;
-	while (++in_index < game_size)
-		(*input)->rowleft.y[in_index] = 0;
-	in_index = -1;
-	while (++in_index < game_size)
-		(*input)->rowright.y[in_index] = 0;
-	(*input)->colup.x[(game_size)] = 0;
-	(*input)->coldown.x[(game_size)] = 0;
-	(*input)->rowright.y[(game_size)] = 0;
-	(*input)->rowleft.y[(game_size)] = 0;
 	return (0);
 }
 

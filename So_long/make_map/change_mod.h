@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/11 18:31:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:57:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	change_mod(char *argv[], int argc)
 	game_size[0] = 0;
 	game_size[1] = 0;
 	seed = 0;
+	if (argc < 4)
+		return (error(ERROR_BAD_ARGC));
 	if (ft_strcmp(argv[1], "gen") == 0)
 		return (automatic_input(argc, argv, game_size, seed));
 	if (ft_strcmp(argv[1], "play") == 0)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 21:39:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:03:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,11 @@ is_correct:1 >	Booleano che indica quando una soluzione trovata è
  Si accede ai valori con nomestruct->seed/values[index].
  Ad esempio: random->values[index]
  */
-struct s_colup
+struct s_col
 {
 	t_onebyte	*x;
 };
-struct s_coldown
-{
-	t_onebyte	*x;
-};
-struct s_rowleft
-{
-	t_onebyte	*y;
-};
-struct s_rowright
+struct s_row
 {
 	t_onebyte	*y;
 };
@@ -114,10 +106,8 @@ struct s_input
 	t_onebyte			game_size;
 	int					game_size_w;
 	int					game_size_h;
-	struct s_colup		colup;
-	struct s_coldown	coldown;
-	struct s_rowleft	rowleft;
-	struct s_rowright	rowright;
+	struct s_col		col;
+	struct s_row		row;
 };
 struct s_position
 {
