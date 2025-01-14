@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/05 18:31:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:13:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "atoi.h"
 
 void	ft_swap(unsigned char *x, unsigned char *y);
-int		ft_memset(unsigned char *str, unsigned char size);
+int		ft_memset(void *str, unsigned int size);
 int		ft_strncpy(unsigned char *dest, unsigned char *src, unsigned char len);
 int		ft_pow(int base, int exponent);
 int		ft_strcmp(char *s1, char *s2);
@@ -37,17 +37,18 @@ void	ft_swap(unsigned char *x, unsigned char *y)
 }
 
 // Funzione inutilizzata.
-int	ft_memset(unsigned char *str, unsigned char size)
+int	ft_memset(void *content, unsigned int size)
 {
-	int	index;
+	int				index;
+	unsigned char	*str;
 
 	index = 0;
-	while (index < size - 1)
+	str = (unsigned char *)content;
+	while (index < size)
 	{
 		str[index] = 0;
 		++index;
 	}
-	str[index] = 0;
 	return (0);
 }
 

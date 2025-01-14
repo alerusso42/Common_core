@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 23:31:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:39:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define ERROR_FULL_MEMORY 3
 # include "atoi.h"
 # include "types.h"
+# include "general_ft2.h"
 
 int				copy_user_input(char *argv[], t_input **input);
 int				check_user_input(t_input *input);
@@ -45,7 +46,7 @@ int				check_user_input(t_input *input);
 // Ultima nota: portiamo in funzione un ** per sovrascrivere
 // il puntatore nel main senza usare il ritorno.
 // Allochiamo memoria anche per NULL.
-int	alloc_user_input(t_input **input, int *game_size)
+int	alloc_user_input(t_input **input, int game_size[2])
 {
 	int	size_heigth;
 	int	size_width;
@@ -53,12 +54,12 @@ int	alloc_user_input(t_input **input, int *game_size)
 	(*input) = malloc(sizeof(t_input));
 	if ((*input) == NULL)
 		return (2);
-	size_heigth = (sizeof(int)) * ((game_size[0]) + 2);
+	size_width = (sizeof(int)) * ((game_size[0]) + 2);
 	size_heigth = (sizeof(int)) * ((game_size[1]) + 2);
-	(*input)->colup.x = (t_onebyte *)malloc(size_heigth);
-	(*input)->coldown.x = (t_onebyte *)malloc(size_heigth);
-	(*input)->rowright.y = (t_onebyte *)malloc(size_width);
-	(*input)->rowleft.y = (t_onebyte *)malloc(size_width);
+	(*input)->colup.x = (t_onebyte *)ft_calloc(size_heigth, 1);
+	(*input)->coldown.x = (t_onebyte *)ft_calloc(size_heigth, 1);
+	(*input)->rowright.y = (t_onebyte *)ft_calloc(size_width, 1);
+	(*input)->rowleft.y = (t_onebyte *)ft_calloc(size_width, 1);
 	(*input)->game_size = game_size[0] * game_size[1];
 	(*input)->game_size_w = game_size[0];
 	(*input)->game_size_h = game_size[1];

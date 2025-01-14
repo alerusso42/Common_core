@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:34:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 23:38:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:44:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,20 @@ int	alloc_sol(t_input **input, t_solution **solution)
 	int	size_h;
 	int	size_w;
 
-	size_w = (((*input)->game_size_h) + 2) * (((*input)->game_size_w) + 2);
+	size_w = (((*input)->game_size_w) + 2);
 	size_h = ((*input)->game_size_h) + 2;
 	(*solution) = malloc(sizeof(t_solution));
 	if ((*solution) != NULL)
-		(*solution)->position = malloc(sizeof(t_solution *) * (size_w));
+		(*solution)->position = ft_calloc((size_w), sizeof(t_position));
 	if (((*solution) == NULL) || ((*solution)->position) == NULL)
 		return (full_reset(2, input, solution), 3);
 	index = -1;
 	while (++index != (*input)->game_size_w + 1)
 	{
-		(*solution)->position[index] = malloc(sizeof(t_position *) * (size_h));
+		(*solution)->position[index] = ft_calloc((size_h),\
+		 sizeof(char *) * 2);
 		if ((*solution)->position[index] == NULL)
-		{
-			full_reset(2, input, solution);
-			return (3);
-		}
+			return (full_reset(2, input, solution), 3);
 	}
 	(*solution)->game_size = (*input)->game_size;
 	(*solution)->game_size_w = (*input)->game_size_w;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 23:45:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:44:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	cheat(t_input **input, t_solution **solution, t_random **random);
 int		initialize_input(t_input **input);
 int		ft_start(t_input **input, t_solution **solution, t_random *random);
 
-t_bool	automatic_input(int argc, char *argv[], int *game_size, int seed)
+t_bool	automatic_input(int argc, char *argv[], int game_size[2], int seed)
 {
 	t_input		*input;
 	t_solution	*solution;
@@ -63,7 +63,7 @@ t_bool	automatic_input(int argc, char *argv[], int *game_size, int seed)
 	return (auto_input2(&input, &solution, random));
 }
 
-t_bool	parsing(int argc, char *argv[], int **game_size, int *seed)
+t_bool	parsing(int argc, char *argv[], int *game_size[2], int *seed)
 {
 	if ((argc == 3) || (argc > 5))
 		return (error(ERROR_BAD_ARGC));
@@ -105,10 +105,10 @@ t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
 	}
 	fill_solution(solution, (*solution)->game_size_h,\
 	 (*solution)->game_size_w);
-	initialize_input(input);
 	switches(input, solution, &random);
 	variables(input, solution, &random);
-	print_solution(*input, *solution, 0, 0);
+	//print_solution(*input, *solution, 0, 0);
+	full_reset(3, input, solution, &random);
 	return (0);
 }
 

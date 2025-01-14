@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/07 10:44:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:44:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int			full_reset(int struct_num, ...);
 int			reset_memory_input(t_input **input);
-int			reset_memory_sol(t_solution **solution, t_onebyte game_size);
-int			reset_memory_list(t_solution **solution, t_onebyte game_size);
+int			reset_memory_sol(t_solution **solution, int game_size[2]);
+int			reset_memory_list(t_solution **solution, int game_size[2]);
 int			reset_memory_randlist(t_random **random);
 
 /* 	La funzione variadica full_reset accetta come argomento il numero
@@ -33,11 +33,12 @@ int	full_reset(int struct_num, ...)
 	t_input		**input;
 	t_solution	**solution;
 	t_random	**random;
-	t_onebyte	game_size;
+	int			game_size[2];
 
 	va_start(ptr, struct_num);
 	input = va_arg(ptr, t_input **);
-	game_size = (*input)->game_size;
+	game_size[0] = (*input)->game_size_w;
+	game_size[1] = (*input)->game_size_h;
 	reset_memory_input(input);
 	if (struct_num < 2)
 		va_end(ptr);
@@ -78,7 +79,7 @@ int	reset_memory_input(t_input **input)
 	return (0);
 }
 
-int	reset_memory_list(t_solution **solution, t_onebyte game_size)
+int	reset_memory_list(t_solution **solution, int game_size[2])
 {
 	t_solution	*p;
 	int			col;
@@ -87,22 +88,24 @@ int	reset_memory_list(t_solution **solution, t_onebyte game_size)
 	p = (*solution);
 	col = -1;
 	row = -1;
-	while ((++row != game_size + 1))
+	while ((++row != game_size[0] + 1))
 	{
-		while ((++col != game_size + 1))
+		while ((++col != game_size[1] + 1))
 		{
-			if (p->position[col][row].black_list != NULL)
+			if (p->position[row][col].black_list != NULL)
 			{
-				free(p->position[col][row].black_list);
-				p->position[col][row].black_list = NULL;
+				free(p->position[row][col].black_list);
+				p->position[row][col].black_list = NULL;
 			}
+			else
+				return (0);
 		}
 		col = -1;
 	}
 	return (0);
 }
 
-int	reset_memory_sol(t_solution **solution, t_onebyte game_size)
+int	reset_memory_sol(t_solution **solution, int game_size[2])
 {
 	int			index;
 	t_solution	*p;
@@ -110,12 +113,13 @@ int	reset_memory_sol(t_solution **solution, t_onebyte game_size)
 	index = 0;
 	p = (*solution);
 	while ((p->position[index] != NULL)
-		&& (index <= ((game_size) + 1)))
+		&& (index <= ((game_size[0]) + 1)))
 	{
 		free(p->position[index]);
 		p->position[index] = NULL;
 		++index;
 	}
+	index = 0;
 	if (p->position != NULL)
 	{
 		free(p->position);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/05 18:33:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:44:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ int	alloc_randomlist(t_random **random)
 	(*random) = malloc(sizeof(t_random));
 	if (*random == NULL)
 	{
-		free(*random);
 		return (1);
 	}
-	(*random)->values = malloc(sizeof(t_onebyte) * size_memory);
+	(*random)->values = ft_calloc(size_memory, sizeof(t_onebyte));
 	if ((*random)->values == NULL)
 	{
-		free((*random)->values);
 		free(*random);
 		return (1);
 	}
