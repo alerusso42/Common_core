@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 19:05:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:06:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ft_printf.h"
 # include "random_numbers.h"
 
-int			alloc_randomlist(t_random **random);
+int			alloc_randomlist(t_random **random, int game_size);
 t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
 
@@ -26,17 +26,17 @@ void		show_random_values(t_random *random);
 // funziona nulla.
 // random prende valori casuali da 1 a game_size, e termina sempre col
 // carattere terminatore 103.
-int	alloc_randomlist(t_random **random)
+int	alloc_randomlist(t_random **random, int game_size)
 {
 	int	size_memory;
 
-	size_memory = 257;
+	size_memory = game_size + 3;
 	(*random) = malloc(sizeof(t_random));
 	if (*random == NULL)
 	{
 		return (1);
 	}
-	(*random)->values = ft_calloc(size_memory, sizeof(t_onebyte));
+	(*random)->values = ft_calloc(size_memory, sizeof(int));
 	if ((*random)->values == NULL)
 	{
 		free(*random);
@@ -49,7 +49,7 @@ t_random	*fill_random(t_random **random, t_input *input)
 {
 	t_onebyte	store_variable;
 
-	(*random)->seed = input->col.x[0] + input->row.y[0];
+	(*random)->seed = input->game_size_w + input->game_size_h;
 	store_variable = (*random)->seed;
 	get_randomlist(random, input->game_size);
 	(*random)->seed = store_variable;
@@ -65,8 +65,8 @@ void	show_random_values(t_random *random)
 	int	index;
 
 	index = 0;
-	ft_printf("List of 256 values:\n");
-	while (random->values[index] != 103)
+	ft_printf("List of x * y values:\n");
+	while (random->values[index] != -1)
 	{
 		ft_printf("%d: %d\n", index + 1, random->values[index]);
 		++index;

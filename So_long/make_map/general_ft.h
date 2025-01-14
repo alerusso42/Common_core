@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 18:24:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:06:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ft_printf.h"
 # include "atoi.h"
 
-void	ft_swap(unsigned char *x, unsigned char *y);
+void	ft_swap(int *x, int *y);
 int		ft_memset(void *str, unsigned int size);
 int		ft_strncpy(unsigned char *dest, unsigned char *src, unsigned char len);
 int		ft_pow(int base, int exponent);
@@ -27,10 +27,12 @@ int		ft_strcmp(char *s1, char *s2);
 	valori di t_random: usando il seed, vengono scambiati gli indici
 	degli array in modo pseudocasuale (in modo artigianale).
 */
-void	ft_swap(unsigned char *x, unsigned char *y)
+void	ft_swap(int *x, int *y)
 {
-	unsigned char	temp;
+	int	temp;
 
+	if ((*x == -1) || (*y == -1))
+		return ;
 	temp = *x;
 	*x = *y;
 	*y = temp;

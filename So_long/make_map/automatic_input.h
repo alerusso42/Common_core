@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 19:54:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:20:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "alloc_t_random.h"
 # include "random_numbers.h"
 # include "print_stuff.h"
+# include "edit_map.h"
+# include "check_map.h"
+# include "save_map.h"
 # include <unistd.h>
 # include <fcntl.h>
 
@@ -50,7 +53,7 @@ t_bool	automatic_input(int argc, char *argv[], int game_size[2], int seed)
 		full_reset(2, &input, &solution);
 		return (3);
 	}
-	if (alloc_randomlist(&random) != 0)
+	if (alloc_randomlist(&random, input->game_size) != 0)
 	{
 		full_reset(2, input, solution);
 		return (3);
@@ -114,18 +117,20 @@ t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
 	while (seed-- == 0)
 	{
 		if (seed % 2 == 0)
-			twist_random(&random);
+			twist_random(&random, (*input)->game_size);
 		else if (seed % 3 == 0)
-			twist_random2(&random);
+			twist_random2(&random, (*input)->game_size);
 		else if (seed % 7 == 0)
-			twist_random3(&random);
+			twist_random3(&random, (*input)->game_size);
 	}
 	fill_solution(solution, (*solution)->game_size_h,\
 	 (*solution)->game_size_w);
 	switches(input, solution, &random);
 	variables(input, solution, &random);
 	temp_set_input(input);
-	print_solution(*input, *solution, 0, 0);
+	edit_map(*solution, (*input)->game_size_w, (*input)->game_size_h, random);
+	//print_solution(*input, *solution, 0, 0);
+	save_map(*solution, (*input)->game_size_w, (*input)->game_size_h);
 	full_reset(3, input, solution, &random);
 	return (0);
 }

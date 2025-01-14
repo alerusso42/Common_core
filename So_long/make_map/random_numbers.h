@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/05 16:32:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:14:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "ft_printf.h"
 # include <stdio.h>
 
-void	twist_random(t_random **random);
-void	twist_random2(t_random **random);
-void	twist_random3(t_random **random);
+void	twist_random(t_random **random, int game_size);
+void	twist_random2(t_random **random, int game_size);
+void	twist_random3(t_random **random, int game_size);
 
 // In questa funzione faccio cose a caso per generare valori pseudocasuali.
 // Di base genero una lista di 256 elementi il cui valore varia da 1 a
@@ -44,12 +44,12 @@ void	twist_random3(t_random **random);
 // Ma non dirlo in giro.
 int	get_randomlist(t_random **random, t_onebyte game_size)
 {
-	int			index;
-	t_onebyte	crescent_numbers;
+	int	index;
+	int	crescent_numbers;
 
 	index = -1;
 	crescent_numbers = (*random)->seed;
-	while (++index != 256)
+	while (++index != game_size)
 	{
 		if (crescent_numbers > game_size)
 			crescent_numbers = 1;
@@ -58,17 +58,17 @@ int	get_randomlist(t_random **random, t_onebyte game_size)
 		(*random)->values[index] = crescent_numbers;
 		crescent_numbers += 1;
 	}
-	twist_random(random);
-	(*random)->values[256] = 103;
+	twist_random(random, game_size);
+	(*random)->values[game_size] = -1;
 	return (0);
 }
 
-void	twist_random(t_random **random)
+void	twist_random(t_random **random, int game_size)
 {
 	int			index;
 	int			caos_index;
 
-	index = 256;
+	index = game_size;
 	while (--index != 0)
 	{
 		(*random)->seed += (*random)->seed;
@@ -76,17 +76,17 @@ void	twist_random(t_random **random)
 			(*random)->seed *= index - (*random)->seed;
 		if ((*random)->seed % 7 == 0)
 			(*random)->seed = (*random)->values[(*random)->values[index % 7]];
-		caos_index = (*random)->seed;
+		caos_index = (*random)->seed % game_size;
 		ft_swap(&(*random)->values[index], &(*random)->values[caos_index]);
 	}
 }
 
-void	twist_random2(t_random **random)
+void	twist_random2(t_random **random, int game_size)
 {
 	int			index;
 	int			caos_index;
 
-	index = 256;
+	index = game_size;
 	while (--index != 0)
 	{
 		(*random)->seed += (*random)->seed;
@@ -96,17 +96,18 @@ void	twist_random2(t_random **random)
 			(*random)->seed = (*random)->values[index % caos_index];
 		if ((*random)->seed % 23 == 0)
 			index += 11;
-		caos_index = (*random)->seed;
+		caos_index = (*random)->seed % game_size;
+		index %= game_size;
 		ft_swap(&(*random)->values[index], &(*random)->values[caos_index]);
 	}
 }
 
-void	twist_random3(t_random **random)
+void	twist_random3(t_random **random, int game_size)
 {
 	int			index;
 	int			caos_index;
 
-	index = 256;
+	index = game_size;
 	while (--index != 0)
 	{
 		(*random)->seed += (*random)->seed;
@@ -114,7 +115,7 @@ void	twist_random3(t_random **random)
 			(*random)->seed *= index - (*random)->seed;
 		if ((*random)->seed % 4 == 0)
 			(*random)->seed = (*random)->values[(*random)->values[index]];
-		caos_index = (*random)->seed;
+		caos_index = (*random)->seed % game_size;
 		ft_swap(&(*random)->values[index], &(*random)->values[caos_index]);
 	}
 }

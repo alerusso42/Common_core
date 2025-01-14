@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 19:03:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/14 22:57:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ struct s_input
 	t_bool				switch_1_showuserinput:1;
 	t_bool				switch_2_ispossibletowin:1;
 	t_bool				variable_0_shutupcompiler:1;
-	t_onebyte			game_size;
+	int					game_size;
 	int					game_size_w;
 	int					game_size_h;
 	struct s_col		col;
@@ -122,7 +122,7 @@ struct s_solution
 	t_bool				switch_2_showcycles:1;
 	t_bool				switch_3_showblacklist:1;
 	int					variable_1_settriesnum;
-	t_onebyte			game_size;
+	int					game_size;
 	int					game_size_w;
 	int					game_size_h;
 	t_onebyte			g_u_score;
@@ -137,7 +137,7 @@ struct s_random
 	t_onebyte	variable_1_setseed;
 	t_onebyte	variable_2_randomizer:2;
 	t_onebyte	seed;
-	t_onebyte	*values;
+	int			*values;
 };
 
 #endif
