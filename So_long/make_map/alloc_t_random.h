@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_t_random.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 23:06:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:51:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

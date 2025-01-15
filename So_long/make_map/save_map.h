@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_map.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:51:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 21:47:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 10:14:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	save_map(t_solution *solution, int size_x, int size_y)
 		--y;
 	}
 	close(fd);
+	return (0);
 }
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_map.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 23:00:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:36:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,55 @@
 # define EDIT_MAP_H
 # include "types.h"
 # include "ft_printf.h"
+# include "edit_map2.h"
 
-void	third_step_player(t_solution *solution, int size_x, int size_y, \
-t_random *random)
+int	sort_coordinates(t_solution *solution, t_random *random, int *x, int *y)
 {
-	int	rand_index;
-	int	rand_value;
-	int	game_size;
-	int	x;
-	int	y;
+	static int	rand_index;
+	int			rand_value;
+	int			game_size;
 
-	rand_index = 0;
-	game_size = (size_y * size_x);
-	while ("Loop while you have placed a player in a non wall square")
+	if ((!solution) || (!random))
+	{
+		rand_index = 0;
+		return (0);
+	}
+	game_size = (solution->game_size_w) * (solution->game_size_h);
+	while ("Loop until you have found a free square")
 	{
 		rand_value = random->values[rand_index];
-		y = game_size / rand_value;
-		x = rand_value % size_x;
-		if (solution->position[x][y].value == '0')
+		*y = rand_value / (solution->game_size_w);
+		*x = rand_value % (solution->game_size_w);
+		if ((rand_value != -1) && (solution->position[*x][*y].value == '0'))
 			break ;
-		++rand_index;
 		if (rand_index == game_size)
-			return ;
+			return (1);
+		++rand_index;
 	}
+	twist_random(&random, game_size);
+	return (0);
+}
+
+void	fourt_step_exit(t_solution *solution, t_random *random)
+{
+	int	x;
+	int	y;
+	
+	if (sort_coordinates(solution, random, &x, &y) == 1)
+		return ;
+	solution->position[x][y].value = 'E';
+	sort_coordinates(NULL, NULL, NULL, NULL);
+}
+
+void	third_step_player(t_solution *solution, t_random *random)
+{
+	int	x;
+	int	y;
+	
+	if (sort_coordinates(solution, random, &x, &y) == 1)
+		return ;
 	solution->position[x][y].value = 'P';
+	sort_coordinates(NULL, NULL, NULL, NULL);
 }
 
 void	secon_step_fillwall(t_solution *solution, int size_x, int size_y)
@@ -63,10 +88,26 @@ void	secon_step_fillwall(t_solution *solution, int size_x, int size_y)
 
 int	edit_map(t_solution *solution, int size_x, int size_y, t_random *random)
 {
-	if ((size_x < 2) || (size_y < 2) || (size_x == size_y))
+	if ((size_x < 2) || (size_y < 2))
 		return (ft_printf("x e y devono essere diversi, e >= 3\n"), 1);
+	if ((solution->free_spaces < 0))
+		return (ft_printf\
+		("Una board di %d per %d ha %d spazi liberi: P, E, C non entrano", \
+		solution->game_size_w, solution->game_size_h, solution->free_spaces\
+		 + 3));
 	secon_step_fillwall(solution, size_x, size_y);
-	third_step_player(solution, size_x, size_y, random);
+	third_step_player(solution, random);
+	if (random->variable_3_enemy_num > solution->free_spaces)
+		return (ft_printf("Gli spazi liberi sono %d, i nemici inseriti %d\n", \
+		solution->free_spaces, random->variable_3_enemy_num));
+	fourt_step_exit(solution, random);
+	if (random->switch_3_choose_map_entities_num == ON)
+		if (solution->void_spaces < 0)
+			return (ft_printf("Non c'e abbastanza spazio per tutto.\n"));
+	fifth_step_enemy(solution, random);
+	sixth_step_colet(solution, random);
+	last_step_walls(solution, random);
+	return (0);
 }
 
 #endif

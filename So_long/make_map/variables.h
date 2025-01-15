@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/05 18:23:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:14:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,40 @@ void	update_var(t_solution **solution, t_random **random);
 t_bool	variables(t_input **input, t_solution **solution, t_random **random)
 {
 	(*input)->variable_0_shutupcompiler = ON;
-	(*solution)->variable_1_settriesnum = 0;
+	(*solution)->variable_1_player_num = 1;
 	(*random)->variable_1_setseed = 0;
 	(*random)->variable_2_randomizer = 1;
+	(*random)->variable_3_enemy_num = 2;
+	(*random)->variable_4_collectable_num = 3;
+	(*random)->variable_5_internal_wall_num = 0;
 	update_var(solution, random);
 	return (0);
 }
 
 void	update_var(t_solution **solution, t_random **random)
 {
-	if ((*solution)->variable_1_settriesnum == 0)
-		(*solution)->variable_1_settriesnum = 10000;
 	if ((*random)->variable_1_setseed != 0)
 		(*random)->seed = (*random)->variable_1_setseed;
+	(*solution)->wall_number = 2 * (*solution)->game_size_w + \
+	2 * ((*solution)->game_size_h - 2);
+	(*solution)->free_spaces = \
+	(*solution)->game_size - ((*solution)->wall_number + 3);
+	if ((*random)->switch_3_choose_map_entities_num == ON)
+	{
+		(*solution)->void_spaces = \
+		(*solution)->free_spaces - (*random)->variable_3_enemy_num - \
+		(*random)->variable_4_collectable_num - \
+		(*random)->variable_5_internal_wall_num;
+	}
+	else
+		(*solution)->void_spaces = 0;
+	if ((*random)->variable_5_internal_wall_num == 0)
+		(*random)->variable_5_internal_wall_num = (*solution)->void_spaces / 6;
+	(*solution)->variable_3_enemy_num = (*random)->variable_3_enemy_num;
+	(*solution)->variable_4_collectable_num = \
+	(*random)->variable_4_collectable_num;
+	(*solution)->variable_5_internal_wall_num = \
+	(*random)->variable_5_internal_wall_num;
 }
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automatic_input.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 23:20:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:12:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "random_numbers.h"
 # include "print_stuff.h"
 # include "edit_map.h"
-# include "check_map.h"
+//# include "check_map.h"
 # include "save_map.h"
 # include <unistd.h>
 # include <fcntl.h>
@@ -60,7 +60,6 @@ t_bool	automatic_input(int argc, char *argv[], int game_size[2], int seed)
 	}
 	random->seed = seed + switches(&input, &solution, &random);
 	variables(&input, &solution, &random);
-	solution->game_size = (t_onebyte)*game_size;
 	return (auto_input2(&input, &solution, random));
 }
 

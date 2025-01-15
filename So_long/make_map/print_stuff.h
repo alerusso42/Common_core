@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_stuff.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 19:05:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:59:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
 		}
 		x = -1;
 	}
-	ft_printf("\nG_Uncertain_score : %d\n", solution->g_u_score);
 }
 
 #endif

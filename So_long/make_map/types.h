@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 22:57:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:50:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,21 +121,29 @@ struct s_solution
 	t_bool				switch_1_showtries:1;
 	t_bool				switch_2_showcycles:1;
 	t_bool				switch_3_showblacklist:1;
-	int					variable_1_settriesnum;
+	int					variable_1_player_num;
+	t_onebyte			variable_3_enemy_num;
+	t_onebyte			variable_4_collectable_num;
+	int					variable_5_internal_wall_num;
 	int					game_size;
 	int					game_size_w;
 	int					game_size_h;
-	t_onebyte			g_u_score;
+	int					free_spaces;
+	int					void_spaces;
+	int					wall_number;
 	unsigned char		is_solved;
-	t_bool				is_correct:1;
 	struct s_position	**position;
 };
 struct s_random
 {
 	t_bool		switch_1_showseed:1;
 	t_bool		switch_2_showrandomvalues:1;
+	t_bool		switch_3_choose_map_entities_num:1;
 	t_onebyte	variable_1_setseed;
 	t_onebyte	variable_2_randomizer:2;
+	t_onebyte	variable_3_enemy_num;
+	t_onebyte	variable_4_collectable_num;
+	int			variable_5_internal_wall_num;
 	t_onebyte	seed;
 	int			*values;
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_ft.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 23:06:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 10:15:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "atoi.h"
 
 void	ft_swap(int *x, int *y);
-int		ft_memset(void *str, unsigned int size);
+int		ft_memset(void *str, int size);
 int		ft_strncpy(unsigned char *dest, unsigned char *src, unsigned char len);
 int		ft_pow(int base, int exponent);
 int		ft_strcmp(char *s1, char *s2);
@@ -38,7 +38,7 @@ void	ft_swap(int *x, int *y)
 	*y = temp;
 }
 
-int	ft_memset(void *content, unsigned int size)
+int	ft_memset(void *content, int size)
 {
 	int				index;
 	unsigned char	*str;

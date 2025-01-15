@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 19:08:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 10:15:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,8 @@ int	ft_start(t_input **input, t_solution **solution, t_random *random);
 */
 int	main(int argc, char *argv[])
 {
-	t_input		*input;
-	t_solution	*solution;
-	int			error_value;
-	t_onebyte	game_size;
-
 	if (argc == 1)
 		return (error(ERROR_BAD_ARGC));
-	game_size = (argc - 1) / 4;
 	if ((ft_strcmp(argv[1], "gen") == 0) || (ft_strcmp(argv[1], "play") == 0))
 		change_mod(argv, argc);
 	return (0);

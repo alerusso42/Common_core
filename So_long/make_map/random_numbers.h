@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   random_numbers.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 23:14:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:05:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	twist_random3(t_random **random, int game_size);
 //
 // Nota: alterare il seed ha un effetto sul risultato pari a zero.
 // Ma non dirlo in giro.
-int	get_randomlist(t_random **random, t_onebyte game_size)
+int	get_randomlist(t_random **random, int game_size)
 {
 	int	index;
 	int	crescent_numbers;
@@ -90,6 +90,8 @@ void	twist_random2(t_random **random, int game_size)
 	while (--index != 0)
 	{
 		(*random)->seed += (*random)->seed;
+		if (caos_index == 0)
+			caos_index = 1;
 		if (index % 3 == 0)
 			(*random)->seed *= index - (*random)->seed;
 		if ((*random)->seed % 2 == 0)
