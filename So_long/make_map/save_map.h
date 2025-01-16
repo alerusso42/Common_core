@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:51:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 10:14:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:24:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	save_map(t_solution *solution, int size_x, int size_y)
 	int	x;
 	int	y;
 
-	fd = open("map.txt", O_CREAT | O_TRUNC | O_RDWR, 0666);
+	fd = open("map.ber", O_CREAT | O_TRUNC | O_RDWR, 0666);
 	if (fd == -1)
 		return (1);
 	y = size_y - 1;

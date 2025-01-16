@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:48:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 17:25:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:04:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int	init_turtle(t_turtle **turtle, int screen_size_x, int screen_size_y,\
 	(*turtle)->y_pos = 0;
 	(*turtle)->penup = OFF;
 	(*turtle)->pensize = 1;
+	(*turtle)->pencolor = 0XFFFFFF;
 	(*turtle)->angle = 0;
 	(*turtle)->screen_size_x = screen_size_x;
-	(*turtle)->screen_size_y = screen_size_x;
+	(*turtle)->screen_size_y = screen_size_y;
 	(*turtle)->screen_center_x = screen_size_x / 2;
 	(*turtle)->screen_center_y = screen_size_y / 2;
 	(*turtle)->x_pos = screen_size_x / 2;

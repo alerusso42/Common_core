@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:48:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 18:06:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:06:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	ft_update_coordinates(t_turtle *turtle, int angle)
 
 static void	ft_print_pixel(t_turtle *turtle, int mode)
 {
-	//static int 	color = 0XFFFFFF;
+	static int 	color = 0XFFFFFF;
 	int			p;
 	int			x;
 	int			y;
@@ -87,16 +87,16 @@ static void	ft_print_pixel(t_turtle *turtle, int mode)
 	{
 		while (p--)
 		{
-			mlx_pixel_put(turtle->connection, turtle->window, x + p, y, 0XFFFFFF);
-			mlx_pixel_put(turtle->connection, turtle->window, x - p, y, 0XFFFFFF);
+			mlx_pixel_put(turtle->connection, turtle->window, x + p, y, color);
+			mlx_pixel_put(turtle->connection, turtle->window, x - p, y, color);
 		}
 	}
 	if ((turtle->angle == 90) || (turtle->angle == 270))
 	{
 		while (p--)
 		{
-			mlx_pixel_put(turtle->connection, turtle->window, x, y + p, 0XFFFFFF);
-			mlx_pixel_put(turtle->connection, turtle->window, x, y + p, 0XFFFFFF);
+			mlx_pixel_put(turtle->connection, turtle->window, x, y + p, color);
+			mlx_pixel_put(turtle->connection, turtle->window, x, y + p, color);
 		}
 	}
 	(void)mode;
@@ -121,7 +121,7 @@ static void	ft_move(int amount, t_turtle *turtle, int back_or_forward)
 
 // TEST_END
 
-// cc -g -Wall -Wextra -Werror main.c -Lminilibx -lmlx -lX11 -lXext -lm
+// cc -g -Wall -Wextra -Werror main.c minilogo/minilogo.a -Lminilibx -lmlx -lX11 -lXext -lm
 int	main()
 {
 	int			counter;
@@ -129,25 +129,19 @@ int	main()
 	t_minilibx	*libx;
 
 	turtle = NULL;
-	if (init_minilibx(&libx, SIZE_X_WINDOW, SIZE_X_WINDOW, "PAC_MAN") == 1)
+	if (init_minilibx(&libx, SIZE_X_WINDOW, SIZE_Y_WINDOW, "PAC_MAN") == 1)
 		return (2);
 	if (init_turtle(&turtle, SIZE_X_WINDOW, SIZE_Y_WINDOW, libx) == 1)
 		return (2);
-	ft_printf("Angolo iniziale: %d\n", turtle->angle);
-	right(380, turtle);
-	ft_printf("Gira di 380 gradi a destra: %d\n", turtle->angle);
-	left(380, turtle);
-	ft_printf("Gira di 380 gradi a sinistra: %d\n", turtle->angle);
 	pendown(turtle);
-	turtle->angle = 0;
 	counter = 4;
-	pensize(20, turtle);
+	pensize(1, turtle);
 	while (counter--)
 	{
 		ft_forward(50, turtle);
 		right(90, turtle);
 	}
-	//clearscreen(turtle);
+	clearscreen(turtle);
 	mlx_loop(libx->connection);
 	free(turtle);
 	free_minilibx(&libx);

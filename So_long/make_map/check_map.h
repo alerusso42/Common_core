@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 17:11:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:40:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define CHECK_MAP_H
 # include "types.h"
 # include "ft_printf.h"
+# include "check_map2.h"
+
+int	sixth_chk_colet(t_solution *solution, int size_x, int size_y);
+int	fifth_chk_enemy(t_solution *solution, int size_x, int size_y);
 
 int	count_stuff(t_solution *solution, t_onebyte character, \
 int size_x, int size_y)
@@ -24,10 +28,10 @@ int size_x, int size_y)
 
 	count = 0;
 	y = 0;
-	while (y != size_y - 1)
+	while (y != size_y)
 	{
 		x = 0;
-		while (x != size_x - 1)
+		while (x != size_x)
 		{
 			if (character == solution->position[x][y].value)
 				++count;
@@ -80,12 +84,18 @@ int	secon_chk_fillwall(t_solution *solution, int size_x, int size_y)
 
 int	check_map(t_solution *solution, int size_x, int size_y)
 {
-	if ((size_x < 2) || (size_y < 2) || (size_x == size_y))
-		return (ft_printf("x e y devono essere diversi, e >= 3\n"), 1);
+	if ((size_x < 2) || (size_y < 2))
+		return (ft_printf("x e y devono essere >= 3\n"), 1);
 	if (secon_chk_fillwall(solution, size_x, size_y) == 1)
-		return (ft_printf("GAME OVER\n"));
-	third_chk_player(solution, size_x, size_y);
-	
+		return (ft_printf("GAME OVER2\n"));
+	if (third_chk_player(solution, size_x, size_y) == 1)
+		return (ft_printf("GAME OVER3\n"));
+	if (fourt_chk_exit(solution, size_x, size_y) == 1)
+		return (ft_printf("GAME OVER4\n"));
+	if (fifth_chk_enemy(solution, size_x, size_y) == 1)
+		return (ft_printf("GAME OVER5\n"));
+	if (sixth_chk_colet(solution, size_x, size_y) == 1)
+		return (ft_printf("GAME OVER6\n"));
 	return (0);
 }
 

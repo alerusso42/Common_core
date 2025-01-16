@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:27:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 17:52:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:03:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_turtle
 	int		angle;
 	int		penup:1;
 	int		pensize;
+	int		pencolor;
 	int		screen_size_x;
 	int		screen_size_y;
 	int		screen_center_x;
@@ -62,5 +63,6 @@ void	setxy(int x, int y, t_turtle *turtle);
 void	home(t_turtle *turtle);
 void	clearscreen(t_turtle *turtle);
 void	pensize(int new_pensize, t_turtle *turtle);
+void	pencolor(int new_pencolor, t_turtle *turtle);
 
 #endif

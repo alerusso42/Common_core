@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 16:50:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:17:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define OFF 0
 # define NO 0
 # define NO_RANDOM 2
+# define CREATE 0
+# define READ 1
 
 typedef struct s_input		t_input;
 typedef struct s_solution	t_solution;
@@ -103,6 +105,7 @@ struct s_input
 	t_bool				switch_1_showuserinput:1;
 	t_bool				switch_2_ispossibletowin:1;
 	t_bool				variable_0_shutupcompiler:1;
+	t_bool				create_map:1;
 	int					game_size;
 	int					game_size_w;
 	int					game_size_h;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:28:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/13 18:14:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:05:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	update_coordinates(t_turtle *turtle, int angle)
 
 static void	print_pixel(t_turtle *turtle, int mode)
 {
-	static int 	color = 0XFF00FF;
 	int			p;
 	int			x;
 	int			y;

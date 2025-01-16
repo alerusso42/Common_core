@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 10:15:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:31:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ int	ft_pow(int base, int exponent)
 	return (base * ft_pow(base, exponent - 1));
 }
 
+/*
+	This strcmp is NOT case sensitive!
+*/
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 16:36:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:06:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ int	sort_coordinates(t_solution *solution, t_random *random, int *x, int *y)
 		rand_value = random->values[rand_index];
 		*y = rand_value / (solution->game_size_w);
 		*x = rand_value % (solution->game_size_w);
-		if ((rand_value != -1) && (solution->position[*x][*y].value == '0'))
+		if ((rand_value != -1) && (rand_value != game_size) \
+		&& (solution->position[*x][*y].value == '0'))
+		{
+			++rand_index;
 			break ;
-		if (rand_index == game_size)
+		}
+		if (rand_index++ == game_size)
 			return (1);
-		++rand_index;
 	}
-	twist_random(&random, game_size);
 	return (0);
 }
 
@@ -89,7 +91,7 @@ void	secon_step_fillwall(t_solution *solution, int size_x, int size_y)
 int	edit_map(t_solution *solution, int size_x, int size_y, t_random *random)
 {
 	if ((size_x < 2) || (size_y < 2))
-		return (ft_printf("x e y devono essere diversi, e >= 3\n"), 1);
+		return (ft_printf("x e y devono essere >= 3\n"), 1);
 	if ((solution->free_spaces < 0))
 		return (ft_printf\
 		("Una board di %d per %d ha %d spazi liberi: P, E, C non entrano", \

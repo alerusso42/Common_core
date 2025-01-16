@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_pen.c                                          :+:      :+:    :+:   */
+/*   read_map.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 15:39:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 10:03:04 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/16 15:11:24 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/16 15:17:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilogo.h"
+#ifndef READ_MAP_H
+# define READ_MAP_H
+# include "types.h"
+# include <unistd.h>
+# include <fcntl.h>
 
-void	penup(t_turtle *turtle)
-{
-	turtle->penup = ON;
-}
+void	
 
-void	pendown(t_turtle *turtle)
-{
-	turtle->penup = OFF;
-}
-
-void	pensize(int new_pensize, t_turtle *turtle)
-{
-	if (new_pensize < 0)
-		return ;
-	turtle->pensize = new_pensize;
-}
-
-void	pencolor(int new_pencolor, t_turtle *turtle)
-{
-	if (new_pencolor < 0)
-		return ;
-	turtle->pencolor = new_pencolor;
-}
+#endif

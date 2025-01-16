@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 10:15:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:38:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char *argv[])
 {
 	if (argc == 1)
 		return (error(ERROR_BAD_ARGC));
-	if ((ft_strcmp(argv[1], "gen") == 0) || (ft_strcmp(argv[1], "play") == 0))
-		change_mod(argv, argc);
+	if (change_mod(argv, argc) == 1)
+		return (1);
 	return (0);
 }
