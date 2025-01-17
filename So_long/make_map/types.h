@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 17:17:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:25:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ struct s_input
 struct s_position
 {
 	t_onebyte	value;
-	t_bool		is_sure:1;
-	t_onebyte	u_score;
-	t_onebyte	*black_list;
+	t_onebyte	*pointer;
 };
 struct s_solution
 {

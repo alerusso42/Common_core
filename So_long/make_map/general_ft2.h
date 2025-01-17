@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:33:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 16:35:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:09:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,18 @@ void	*ft_calloc(size_t nmemb, size_t size)
 }
 
 /*
-	What are we doing here?
-	1) Check the filename exists and the file can be open;
-	2) Check that the file has the same extension as a .ber file.
-	To do the second step:
-
-	- We go to the end of the file name (to the null terminator);
-	- We go back until we find the "." symbol (the start of extension);
-	- We make a strcmp.
+	This strlen stops when finds \n or \0.
 */
-int	check_extension_file(char *filename, char *extension)
+size_t	ft_strlen(char *string)
 {
-	int	fd;
-	int	file_index;
-	int	ext_index;
+	size_t	size;
 
-	fd = open(filename, O_RDONLY, 0666);
-	if (fd == -1)
-		return (1);
-	file_index = 0;
-	ext_index = 0;
-	while (filename[file_index] != '\0')
-		++file_index;
-	while ((filename[file_index] != extension[ext_index]) && (file_index != 0))
-		--file_index;
-	while ((filename[file_index]) && (extension[ext_index]))
-	{
-		if (filename[file_index] != extension[ext_index])
-			return (close(fd), 1);
-		++file_index;
-		++ext_index;
-	}
-	return (close(fd), 0);
+	if (!string)
+		return (0);
+	size = 0;
+	while ((string[size]) && (string[size] != '\n'))
+		++size;
+	return (size);
 }
 
 #endif

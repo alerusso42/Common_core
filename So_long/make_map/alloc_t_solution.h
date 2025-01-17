@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_t_solution.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:34:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 13:44:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:06:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "ft_printf.h"
 
 int		alloc_sol(t_input **input, t_solution **solution);
+int		full_reset(int struct_num, ...);
 int		alloc_bwlist(t_input **input, t_solution **solution);
 void	fill_solution(t_solution **solution, int row_n, int col_n);
 
@@ -71,8 +72,6 @@ void	fill_solution(t_solution **solution, int row_n, int col_n)
 		while ((++col != col_n + 1))
 		{
 			(*solution)->position[col][row].value = 48;
-			(*solution)->position[col][row].is_sure = 0;
-			(*solution)->position[col][row].u_score = 0;
 		}
 		col = -1;
 	}

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 16:38:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:03:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "alloc_t_solution.h"
 #include "alloc_t_random.h"
 #include "print_stuff.h"
-#include "automatic_input.h"
 #include "ft_printf.h"
 #include <malloc.h>
 #include <stdarg.h>

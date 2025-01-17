@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 11:59:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:05:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	print_skyscrapers(t_onebyte game_size)
 
 /* 	Print della blacklist.
 */
+/*
 void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
 {
 	int	x;
@@ -144,6 +145,6 @@ void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
 		}
 		x = -1;
 	}
-}
+}*/
 
 #endif

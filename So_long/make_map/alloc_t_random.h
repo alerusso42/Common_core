@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 12:51:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:06:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int			alloc_randomlist(t_random **random, int game_size);
 t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
+int			full_reset(int struct_num, ...);
 
 // Allochiamo 257 bytes perchè nella lista ci saranno 256 elementi
 // di tipo t_onebyte (che occupano 1 byte, vedi types.h).

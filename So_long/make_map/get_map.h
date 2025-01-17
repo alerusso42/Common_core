@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   automatic_input.h                                  :+:      :+:    :+:   */
+/*   get_map.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 17:25:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:17:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AUTOMATIC_INPUT_H
-# define AUTOMATIC_INPUT_H
+#ifndef GET_MAP_H
+# define GET_MAP_H
 # define MIN_INT_VALUE -2147483648
 # define MAX_INT_VALUE 2147483647
 # include "types.h"
+# include "switches.h"
+# include "variables.h"
 # include "general_ft.h"
 # include "atoi.h"
 # include "error_message.h"
@@ -26,25 +28,17 @@
 # include "edit_map.h"
 # include "check_map.h"
 # include "save_map.h"
+# include "get_map2.h"
 # include <unistd.h>
 # include <fcntl.h>
 
-t_bool	create_map(int argc, char *argv[], int *game_size, int seed);
-t_bool	parsing(int argc, char *argv[], int **game_size, int *seed);
-t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random);
+t_bool	alloc_data2(t_input **input, t_solution **solution, t_random *random);
 int		ft_start(t_input **input, t_solution **solution, t_random *random);
-t_bool	alloc_data(int game_size[2], int seed, int create_or_read);
+t_bool	alloc_data(int game_size[2], int seed, int create_or_read, char *fn);
+t_bool	create_map(t_input *input, t_solution *solution, t_random *random);
+t_bool	read_map(t_input *input, t_solution *solution, t_random *random);
 
-t_bool	create_map(int argc, char *argv[], int game_size[2], int seed)
-{
-	if (parsing(argc, argv, &game_size, &seed) != 0)
-		return (ERROR_BAD_ARGC);
-	if (alloc_data(game_size, seed, CREATE) == 1)
-		return (1);
-	return (0);
-}
-
-t_bool	alloc_data(int game_size[2], int seed, int create_or_read)
+t_bool	alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 {
 	t_input		*input;
 	t_solution	*solution;
@@ -65,35 +59,11 @@ t_bool	alloc_data(int game_size[2], int seed, int create_or_read)
 		full_reset(2, input, solution);
 		return (3);
 	}
+	(void)fn;
 	input->create_map = create_or_read;
 	random->seed = seed + switches(&input, &solution, &random);
 	variables(&input, &solution, &random);
-	return (auto_input2(&input, &solution, random));
-}
-
-t_bool	parsing(int argc, char *argv[], int *game_size[2], int *seed)
-{
-	if ((argc == 3) || (argc > 5))
-		return (error(ERROR_BAD_ARGC));
-	(*game_size)[0] = ft_atoi(argv[2]);
-	(*game_size)[1] = ft_atoi(argv[3]);
-	if (((*game_size)[0] < 1) || ((*game_size)[1] < 1) || \
-	((*game_size)[0] == (*game_size[1])))
-		return (error(ERROR_BAD_ARGC));
-	if (argv[4] != NULL)
-	{
-		*seed = (ft_atoi(argv[4]));
-		if (*seed < 0)
-			*seed *= -1;
-		else if (*seed == MIN_INT_VALUE)
-			*seed = MAX_INT_VALUE;
-		else if (*seed == 0)
-			*seed = 1;
-		*seed = (*seed % 100) + 1;
-	}
-	else
-		*seed = 1;
-	return (0);
+	return (alloc_data2(&input, &solution, random));
 }
 
 void	temp_set_input(t_input **input)
@@ -115,7 +85,7 @@ void	temp_set_input(t_input **input)
 	}
 }
 
-t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
+t_bool	alloc_data2(t_input **input, t_solution **solution, t_random *random)
 {
 	int	seed;
 
@@ -133,13 +103,21 @@ t_bool	auto_input2(t_input **input, t_solution **solution, t_random *random)
 	fill_solution(solution, (*solution)->game_size_h,\
 	 (*solution)->game_size_w);
 	temp_set_input(input);
-	edit_map(*solution, (*input)->game_size_w, (*input)->game_size_h, random);
+	if (((*input)->create_map == CREATE) && \
+	(create_map(*input, *solution, random) == 1))
+		return (1);
+	return (0);
+}
+
+t_bool	create_map(t_input *input, t_solution *solution, t_random *random)
+{
+	edit_map(solution, input->game_size_w, input->game_size_h, random);
 	//print_solution(*input, *solution, 0, 0);
-	/*if (check_map(*solution, (*solution)->game_size_w, \
-	(*solution)->game_size_h) == 1)
-		return (full_reset(3, input, solution, &random), 1);*/
-	save_map(*solution, (*input)->game_size_w, (*input)->game_size_h);
-	full_reset(3, input, solution, &random);
+	if (check_map(solution, solution->game_size_w, \
+	solution->game_size_h) == 1)
+		return (full_reset(3, &input, &solution, &random), 1);
+	save_map(solution, input->game_size_w, input->game_size_h);
+	full_reset(3, &input, &solution, &random);
 	return (0);
 }
 
