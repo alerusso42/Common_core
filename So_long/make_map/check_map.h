@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:10:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:44:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 # include "check_map2.h"
 
+int	check_map(t_input *input, t_solution *solution, int size_x, int size_y);
 int	sixth_chk_colet(t_solution *solution, int size_x, int size_y);
 int	fifth_chk_enemy(t_solution *solution, int size_x, int size_y);
 
@@ -82,10 +83,12 @@ int	secon_chk_fillwall(t_solution *solution, int size_x, int size_y)
 	return (0);
 }
 
-int	check_map(t_solution *solution, int size_x, int size_y)
+int	check_map(t_input *input, t_solution *solution, int size_x, int size_y)
 {
 	if ((size_x < 2) || (size_y < 2))
 		return (ft_printf("x e y devono essere >= 3\n"), 1);
+	if (first_chk_char(input, solution) == 1)
+		return (ft_printf("GAME OVER1\n"));
 	if (secon_chk_fillwall(solution, size_x, size_y) == 1)
 		return (ft_printf("GAME OVER2\n"));
 	if (third_chk_player(solution, size_x, size_y) == 1)
@@ -96,6 +99,8 @@ int	check_map(t_solution *solution, int size_x, int size_y)
 		return (ft_printf("GAME OVER5\n"));
 	if (sixth_chk_colet(solution, size_x, size_y) == 1)
 		return (ft_printf("GAME OVER6\n"));
+	if (last_chk_path(input, solution) == 1)
+		return (ft_printf("GAME OVER7\n"));
 	return (0);
 }
 

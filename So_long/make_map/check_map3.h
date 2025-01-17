@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.h                                         :+:      :+:    :+:   */
+/*   check_map3.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 15:11:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 15:17:41 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/17 18:34:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_MAP_H
-# define READ_MAP_H
+#ifndef CHECK_MAP3_H
+# define CHECK_MAP3_H
 # include "types.h"
-# include <unistd.h>
-# include <fcntl.h>
+# include "ft_printf.h"
+# include "check_map.h"
 
-void	
+
 
 #endif

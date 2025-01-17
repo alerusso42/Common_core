@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:33:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 12:09:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:00:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "general_ft.h"
 # include <unistd.h>
 # include <fcntl.h>
+
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -49,6 +52,49 @@ size_t	ft_strlen(char *string)
 	while ((string[size]) && (string[size] != '\n'))
 		++size;
 	return (size);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	src_len;
+
+	i = 0;
+	src_len = 0;
+	while (src[i++])
+		++src_len;
+	if (size == 0)
+	{
+		return (src_len);
+	}
+	i = 0;
+	while ((src[i]) && (i < (size - 1)))
+	{
+		dst[i] = src[i];
+		++i;
+	}
+	dst[i] = '\0';
+	return ((size_t)src_len);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	*stock_ptr;
+	unsigned char	casted_c;
+
+	stock_ptr = NULL;
+	casted_c = (unsigned char)c;
+	while (*s != '\0')
+	{
+		if (*s == casted_c)
+		{
+			stock_ptr = (unsigned char *)s;
+		}
+		++s;
+	}
+	if (casted_c == 0)
+		stock_ptr = (unsigned char *)s;
+	return ((char *)stock_ptr);
 }
 
 #endif

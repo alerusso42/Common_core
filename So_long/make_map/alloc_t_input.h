@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_t_input.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/14 19:04:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:39:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include "types.h"
 # include "general_ft2.h"
 # include "reset_memory.h"
-
-int				copy_user_input(char *argv[], t_input **input);
-int				check_user_input(t_input *input);
 
 // Cosa è game_size, variabile introdotta nel main?
 // è "(argc - 1) / 4) + 1".
@@ -68,6 +65,25 @@ int	alloc_user_input(t_input **input, int game_size[2])
 		return (ERROR_FULL_MEMORY);
 	}
 	return (0);
+}
+
+void	temp_set_input(t_input **input)
+{
+	int	stop_row;
+	int	stop_col;
+
+	stop_row = 0;
+	stop_col = 0;
+	while (stop_row != (*input)->game_size_h + 2)
+	{
+		(*input)->row.y[stop_row] = 0;
+		++stop_row;
+	}
+	while (stop_col != (*input)->game_size_w + 2)
+	{
+		(*input)->col.x[stop_col] = 0;
+		++stop_col;
+	}
 }
 
 #endif

@@ -6,13 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 13:14:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:45:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VARIABLES_H
 # define VARIABLES_H
 # include "general_ft.h"
+# include "general_ft2.h"
 # include "types.h"
 
 t_bool	variables(t_input **input, t_solution **solution, t_random **random);
@@ -30,6 +31,7 @@ void	update_var(t_solution **solution, t_random **random);
 t_bool	variables(t_input **input, t_solution **solution, t_random **random)
 {
 	(*input)->variable_0_shutupcompiler = ON;
+	ft_strlcpy((*input)->valid_signs, "$ECP01", 7);
 	(*solution)->variable_1_player_num = 1;
 	(*random)->variable_1_setseed = 0;
 	(*random)->variable_2_randomizer = 1;

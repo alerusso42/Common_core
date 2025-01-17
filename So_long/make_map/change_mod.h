@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 12:21:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:54:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed)
 		return (error(ERROR_BAD_ARGC));
 	game_size[0] = ft_atoi(argv[2]);
 	game_size[1] = ft_atoi(argv[3]);
-	if ((game_size[0] < 1) || (game_size[1] < 1) || \
-	(game_size[0] == game_size[1]))
+	if ((game_size[0] < 1) || (game_size[1] < 1))
 		return (error(ERROR_BAD_ARGC));
 	if (argv[4] != NULL)
 	{
@@ -140,7 +139,7 @@ t_bool	find_mapsize(char *filename, int game_size[2])
 			old_size_x = size_x;
 		++size_y;
 	}
-	game_size[0] = old_size_x + 1;
+	game_size[0] = old_size_x;
 	game_size[1] = size_y;
 	return (close(fd), 0);
 }
