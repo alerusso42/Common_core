@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/18 11:48:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:57:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static int	end_print(const char *s, t_printdata *data, va_list ptr, size_t c);
+static int	type_print(char type, va_list ptr, size_t *counter, \
+t_printdata *data);
+
 /*
 int	main(void)
 {
@@ -57,6 +60,7 @@ void	print_struct(t_printdata *data)
 	printf("PRECISION_LENGTH: %d\n\n", data->precision_length);
 }*/
 
+// with bonus!
 int	ft_printf(const char *str, ...)
 {
 	size_t			index;
@@ -96,7 +100,8 @@ static int	end_print(const char *s, t_printdata *data, va_list ptr, size_t c)
 	return (c);
 }
 
-int	type_print(char type, va_list ptr, size_t *counter, t_printdata *data)
+static int	type_print(char type, va_list ptr, size_t *counter, \
+t_printdata *data)
 {
 	if (type == 'c')
 		*counter += print_char((unsigned char)va_arg(ptr, int), data);
@@ -117,45 +122,4 @@ int	type_print(char type, va_list ptr, size_t *counter, t_printdata *data)
 	else
 		return (ERROR);
 	return (0);
-}
-
-void	ft_putnbr(int num)
-{
-	char	str[12];
-	int		temp_num;
-	int		index;
-
-	index = 0;
-	if (num < 0)
-		str[index++] = '-';
-	if (num == 0)
-		str[index] = '0';
-	temp_num = num;
-	while ((temp_num > 9) || (temp_num < -9))
-	{
-		index++;
-		temp_num /= 10;
-	}
-	str[index + 1] = '\0';
-	while (num != 0)
-	{
-		if (num < 0)
-			str[index--] = (((num % 10) * -1) + 48);
-		else
-			str[index--] = ((num % 10) + 48);
-		num /= 10;
-	}
-	print(str);
-}
-
-void	print(const char *str)
-{
-	int	index;
-
-	index = 0;
-	while (str[index] != '\0')
-	{
-		write(1, &str[index], 1);
-		++index;
-	}
 }

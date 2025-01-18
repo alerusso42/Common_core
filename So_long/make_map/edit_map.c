@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:43:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:02:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,21 @@ void	secon_step_fillwall(t_solution *solution, int size_x, int size_y)
 int	edit_map(t_solution *solution, int size_x, int size_y, t_random *random)
 {
 	if ((size_x < 2) || (size_y < 2))
-		return (ft_printf("x e y devono essere >= 3\n"), 1);
+		return (l_printf("x e y devono essere >= 3\n"), 1);
 	if ((solution->free_spaces < 0))
-		return (ft_printf\
+		return (l_printf\
 		("Una board di %d per %d ha %d spazi liberi: P, E, C non entrano", \
 		solution->game_size_w, solution->game_size_h, solution->free_spaces\
 		 + 3));
 	secon_step_fillwall(solution, size_x, size_y);
 	third_step_player(solution, random);
 	if (random->variable_3_enemy_num > solution->free_spaces)
-		return (ft_printf("Gli spazi liberi sono %d, i nemici inseriti %d\n", \
+		return (l_printf("Gli spazi liberi sono %d, i nemici inseriti %d\n", \
 		solution->free_spaces, random->variable_3_enemy_num));
 	fourt_step_exit(solution, random);
 	if (random->switch_3_choose_map_entities_num == ON)
 		if (solution->void_spaces < 0)
-			return (ft_printf("Non c'e abbastanza spazio per tutto.\n"));
+			return (l_printf("Non c'e abbastanza spazio per tutto.\n"));
 	fifth_step_enemy(solution, random);
 	sixth_step_colet(solution, random);
 	last_step_walls(solution, random);

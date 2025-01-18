@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:25:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:12:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ struct s_input
 struct s_position
 {
 	t_onebyte	value;
+	int			distance;
 	t_onebyte	*pointer;
 };
 struct s_solution
@@ -124,6 +125,7 @@ struct s_solution
 	t_bool				switch_1_showtries:1;
 	t_bool				switch_2_showcycles:1;
 	t_bool				switch_3_showblacklist:1;
+	t_bool				switch_4_printonterminal:1;
 	int					variable_1_player_num;
 	t_onebyte			variable_3_enemy_num;
 	t_onebyte			variable_4_collectable_num;

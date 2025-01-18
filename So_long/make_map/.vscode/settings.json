@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"automatic_input.h": "c"
+		"automatic_input.h": "c",
+		"algorithm": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:23:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:02:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,27 @@ void	print_solution(t_input *input, t_solution *solution, int x, int y)
 	print_colgraphic(input, 0);
 	write(1, " ", 1);
 	while (++x != w)
-		ft_printf("<%d>", input->col.x[x]);
+		l_printf("<%d>", input->col.x[x]);
 	print_colgraphic(input, 1);
 	while (++y != h)
 	{
-		ft_printf("\n     [%d]", h - y - 1);
+		l_printf("\n     [%d]", h - y - 1);
 		if ((h - y - 1) < 10)
 			write(1, " ", 1);
-		ft_printf("<%d>", input->row.y[h - y - 1]);
+		l_printf("<%d>", input->row.y[h - y - 1]);
 		if ((h - y - 1) < 100)
 			write(1, " ", 1);
 		x = -1;
 		while (++x != w)
-			ft_printf("|%c|", solution->position[x][h - y - 1].value);
-		ft_printf("<%d> [%d]", input->row.y[h - y - 1], h - y - 1);
+			l_printf("|%c|", solution->position[x][h - y - 1].value);
+		l_printf("<%d> [%d]", input->row.y[h - y - 1], h - y - 1);
 	}
 	print_colgraphic(input, 1);
-	ft_printf("            ");
+	l_printf("            ");
 	x = -1;
 	write(1, " ", 1);
 	while (++x != w)
-		ft_printf("<%d>", input->col.x[x]);
+		l_printf("<%d>", input->col.x[x]);
 	print_colgraphic(input, 0);
 }
 
@@ -68,29 +68,29 @@ void	print_colgraphic(t_input *input, t_bool mode)
 	game_size = input->game_size_w;
 	if (mode == 0)
 	{
-		ft_printf("\n");
-		ft_printf("            ");
+		l_printf("\n");
+		l_printf("            ");
 		x = -1;
 		write(1, " ", 1);
 		while (++x != game_size)
 		{
 			if (x < 100)
 				write(1, "[", 1);
-			ft_printf("%d", x);
+			l_printf("%d", x);
 			if (x < 10)
 				write(1, "]", 1);
 		}
-		ft_printf("\n");
-		ft_printf("            ");
+		l_printf("\n");
+		l_printf("            ");
 	}
 	if (mode == 1)
 	{
-		ft_printf("\n");
-		ft_printf("            ");
+		l_printf("\n");
+		l_printf("            ");
 		x = -1;
 		while (++x != game_size)
-			ft_printf("____");
-		ft_printf("\n");
+			l_printf("____");
+		l_printf("\n");
 	}
 }
 
@@ -101,17 +101,17 @@ void	print_skyscrapers(t_onebyte game_size)
 {
 	int	count_padding;
 
-	ft_printf("\n");
+	l_printf("\n");
 	count_padding = 0;
 	while (++count_padding != game_size)
-		ft_printf("-");
-	ft_printf("--- ");
-	ft_printf("P   A   C - M   A   N");
-	ft_printf(" ---");
+		l_printf("-");
+	l_printf("--- ");
+	l_printf("P   A   C - M   A   N");
+	l_printf(" ---");
 	count_padding = 0;
 	while (++count_padding != game_size)
-		ft_printf("-");
-	ft_printf("\n");
+		l_printf("-");
+	l_printf("\n");
 }
 
 /* 	Print della blacklist.
@@ -124,21 +124,21 @@ void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
 
 	x = -1;
 	y = -1;
-	ft_printf("\nELENCO DEI REGISTRI BLACKLIST PER OGNI POSIZIONE:");
+	l_printf("\nELENCO DEI REGISTRI BLACKLIST PER OGNI POSIZIONE:");
 	while (++y != game_size)
 	{
 		while (++x != game_size)
 		{
-			ft_printf("\n{%d}", solution->position[x][y].value);
-			ft_printf("\n V.S. solution->position[%d][%d]: ", x, y);
+			l_printf("\n{%d}", solution->position[x][y].value);
+			l_printf("\n V.S. solution->position[%d][%d]: ", x, y);
 			while (solution->position[x][y].black_list[++i] != 102)
-				ft_printf("%d, ", solution->position[x][y].black_list[i]);
-			ft_printf("102.\n V.T. solution->position[%d][%d]: 102, ", x, y);
+				l_printf("%d, ", solution->position[x][y].black_list[i]);
+			l_printf("102.\n V.T. solution->position[%d][%d]: 102, ", x, y);
 			while (solution->position[x][y].black_list[++i] != 103)
 				if (solution->position[x][y].black_list[i] != 102)
-					ft_printf("%d, ", solution->position[x][y].black_list[i]);
-			ft_printf("103.\nUncertain score: ");
-			ft_printf("%d\n---->", solution->position[x][y].u_score);
+					l_printf("%d, ", solution->position[x][y].black_list[i]);
+			l_printf("103.\nUncertain score: ");
+			l_printf("%d\n---->", solution->position[x][y].u_score);
 			i = -1;
 		}
 		x = -1;

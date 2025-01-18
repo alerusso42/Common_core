@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:12:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:59:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef struct s_printdata
 	unsigned int	is_zero_flag:1;
 	unsigned int	is_width:1;
 	unsigned int	is_width_zero:1;
-	unsigned int	width_value;
+	int				width_value;
 	unsigned int	is_precision:1;
-	unsigned int	precision_length;
+	int				precision_length;
 	unsigned int	print_address:1;
 	unsigned int	save_index_position;
 }					t_printdata;
@@ -55,9 +55,6 @@ int		is_flags(char c, t_printdata *data);
 int		is_width(const char *str, size_t *i, t_printdata *data, size_t s_i);
 int		precision(const char *str, size_t *i, t_printdata *data, size_t s_i);
 size_t	go_next(const char *str, size_t *index);
-int		type_print(char type, va_list ptr, size_t *counter, t_printdata *data);
-void	ft_putnbr(int num);
-void	print(const char *str);
 void	write_flags(unsigned int size, size_t flag);
 size_t	print_char(unsigned char character, t_printdata *data);
 size_t	print_string(unsigned char *string, t_printdata *data);

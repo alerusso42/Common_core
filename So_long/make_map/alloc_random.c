@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:27:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:01:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_random	*fill_random(t_random **random, t_input *input)
 	get_randomlist(random, input->game_size);
 	(*random)->seed = store_variable;
 	if ((*random)->switch_1_showseed == ON)
-		ft_printf("\nSeed used: %d\n", (*random)->seed);
+		l_printf("\nSeed used: %d\n", (*random)->seed);
 	if ((*random)->switch_2_showrandomvalues == ON)
 		show_random_values(*random);
 	return (*random);
@@ -62,12 +62,12 @@ void	show_random_values(t_random *random)
 	int	index;
 
 	index = 0;
-	ft_printf("List of x * y values:\n");
+	l_printf("List of x * y values:\n");
 	while (random->values[index] != -1)
 	{
-		ft_printf("%d: %d\n", index + 1, random->values[index]);
+		l_printf("%d: %d\n", index + 1, random->values[index]);
 		++index;
 	}
-	ft_printf("%d: %d\n", index + 1, random->values[index]);
-	ft_printf("END OF LIST\n");
+	l_printf("%d: %d\n", index + 1, random->values[index]);
+	l_printf("END OF LIST\n");
 }

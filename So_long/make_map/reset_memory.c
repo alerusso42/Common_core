@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:58:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:26:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static int	reset_memory_input(t_input **input)
 			free((*input)->row.y);
 		(*input)->col.x = NULL;
 		(*input)->row.y = NULL;
+		free((*input)->filename);
+		(*input)->filename = NULL;
 		free((*input));
 		(*input) = NULL;
 	}

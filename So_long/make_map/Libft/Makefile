@@ -20,7 +20,7 @@ all: $(NAME)
 bonus: $(OBJ) $(OBJ_BONUS)
 	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(OBJ_BONUS)
 	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS)
 
 %.o: %.c

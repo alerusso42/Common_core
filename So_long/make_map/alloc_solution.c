@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:34:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:27:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:48:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		alloc_sol(t_input **input, t_solution **solution);
 int		full_reset(int struct_num, ...);
 int		alloc_bwlist(t_input **input, t_solution **solution);
-void	fill_solution(t_solution **solution, int row_n, int col_n);
 
 /* 	Perchè allochiamo ((*input)->game_size) + 2)^2?
 	Se la scacchiera è grande 3x3, ci servono 9 quadretti, quindi

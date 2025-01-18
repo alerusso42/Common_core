@@ -3,8 +3,9 @@ LIBFT = Libft/libft.a
 LIBFTPRINTF = printf/libftprintf.a
 CP = cp
 SRC = 	alloc_input.c alloc_solution.c alloc_random.c \
+		bfs.c \
 		change_mod.c check_map.c check_map2.c check_map3.c \
-		edit_map.c edit_map2.c error_message.c ft_printf.c \
+		edit_map.c edit_map2.c error_message.c ft_light_printf.c \
 		general_ft.c general_ft2.c get_map.c get_map2.c \
 		get_next_line_bonus.c get_next_line_utils_bonus.c \
 		print_stuff.c random_numbers.c reset_memory.c \
@@ -21,8 +22,8 @@ all: $(NAME)
 	
 
 $(NAME) : $(LIBFT) $(PRINTF) $(OBJ)
-	cp $(LIBFT) $(PRINTF)
-	cp $(PRINTF) $(NAME)
+	cp $(LIBFT) $(LIBFTPRINTF)
+	cp $(LIBFTPRINTF) $(NAME)
 	ar rcs $(NAME) $(OBJ)
 
 $(LIBFT) : 
@@ -39,6 +40,9 @@ clean:
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 	$(MAKE) clean -C $(PRINTF_RELATIVE_PATH)
 
+folder_clean: 
+	rm -f $(OBJ) $(OBJ_BONUS) $(NAME)
+
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
@@ -46,35 +50,29 @@ fclean: clean
 
 re: fclean all
 
-main: re
-	$(COMP) -g main.c $(NAME) -o a.out
+main: 
+	$(COMP) -g main.c $(SRC) $(LIBFTPRINTF) -o a.out
 	rm -f $(OBJ) $(OBJ_BONUS)
-	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
-	$(MAKE) fclean -C $(PRINTF_RELATIVE_PATH)
-
-gdb: 
-	cc -g main.c $(SRC) $(LIBFT)
 	clear
-	gdb ./a.out
 
-run:
-	cc -g main.c $(SRC) $(LIBFT)
-	clear
-	./a.out
+gdb: main
+	gdb --args ./a.out $(ARGS)
 
-valgrind:
-	cc -g main.c $(SRC) $(LIBFT)
-	clear
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
+run: main
+	./a.out $(ARGS)
 
-val: re clean
-	$(COMP) main.c $(NAME)
-	clear
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
+val: main
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out $(ARGS)
 
 val_noflags: re clean
 	cc main.c $(NAME)
 	clear
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
+
+test_g_low: main
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out gen 4 9
+
+test_read: main
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out map.ber
 
 .PHONY: all clean fclean re main gdb run valgrind val val_noflags

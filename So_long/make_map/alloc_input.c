@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:39:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:33:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	alloc_user_input(t_input **input, int game_size[2])
 	int	size_heigth;
 	int	size_width;
 
-	(*input) = malloc(sizeof(t_input));
+	(*input) = ft_calloc(1, sizeof(t_input));
 	if ((*input) == NULL)
 		return (2);
 	size_width = (sizeof(int)) * ((game_size[0]) + 4);

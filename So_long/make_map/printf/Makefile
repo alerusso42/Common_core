@@ -12,7 +12,7 @@ SRC_BONUS = ft_printf_bonus.c flags_manage_bonus.c flags_manage_2_bonus.c \
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 COMP = cc -Wall -Werror -Wextra
-LIBFT_RELATIVE_PATH = Libft/
+LIBFT_RELATIVE_PATH = ../Libft/
 
 all: $(NAME)
 	
@@ -33,18 +33,15 @@ $(LIBFT) :
 
 clean: 
 	rm -f $(OBJ) $(OBJ_BONUS) *.out
-	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
 
 re: fclean all
 
 main: re
 	$(COMP) -g main.c $(NAME) -o hello_world.out
 	rm -f $(OBJ) $(OBJ_BONUS)
-	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 
 gdb: 
 	cc -g main.c $(SRC) $(LIBFT)

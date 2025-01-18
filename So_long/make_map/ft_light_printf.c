@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:25:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:48:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(void)
 /*
 	A lighter and faster version of my ft_printf project.
 */
-int	ft_printf(const char *str, ...)
+int	l_printf(const char *str, ...)
 {
 	int		index;
 	va_list	ptr;

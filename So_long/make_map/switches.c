@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:21:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:25:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_bool	switches(t_input *input, t_solution *solution, t_random *random)
 	solution->switch_1_showtries = ON;
 	solution->switch_2_showcycles = ON;
 	solution->switch_3_showblacklist = OFF;
+	solution->switch_4_printonterminal = ON;
 	random->switch_1_showseed = OFF;
 	random->switch_2_showrandomvalues = OFF;
 	random->switch_3_choose_map_entities_num = ON;

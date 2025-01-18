@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:40:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:20:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int			alloc_randomlist(t_random **random, int game_size);
 t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
 int			alloc_sol(t_input **input, t_solution **solution);
+void		fill_solution(t_solution **solution, int row_n, int col_n);
+void		bfs(t_solution *solution, int start[2], int end[2]);
+void		print_shortest_path(t_solution *solution, int end[2]);
 int			change_mod(char *argv[], int argc);
 int			check_extension_file(char *filename, char *extension);
 t_bool		find_mapsize(char *filename, int game_size[2]);
@@ -55,6 +58,8 @@ void		secon_step_fillwall(t_solution *solution, int size_x, int size_y);
 void		third_step_player(t_solution *solution, t_random *random);
 void		fourt_step_exit(t_solution *solution, t_random *random);
 void		fifth_step_enemy(t_solution *solution, t_random *random);
+void		sixth_step_colet(t_solution *solution, t_random *random);
+void		last_step_walls(t_solution *solution, t_random *random);
 int			error(int error);
 int			l_printf(const char *str, ...);
 void		ft_swap(int *x, int *y);
@@ -68,11 +73,13 @@ t_random *random);
 t_bool		create_map(t_input *input, t_solution *solution, t_random *random);
 t_bool		read_map(t_input *input, t_solution *solution);
 void		print_solution(t_input *input, t_solution *solution, int x, int y);
+int			get_randomlist(t_random **random, int game_size);
 void		twist_random(t_random **random, int game_size);
 void		twist_random2(t_random **random, int game_size);
 void		twist_random3(t_random **random, int game_size);
 int			full_reset(int struct_num, ...);
 int			save_map(t_solution *solution, int size_x, int size_y);
 t_bool		switches(t_input *input, t_solution *solution, t_random *random);
+t_bool		variables(t_input *input, t_solution *solution, t_random *random);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:23:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:02:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	change_mod(char *argv[], int argc)
 			return (1);
 		if (find_mapsize(argv[1], game_size) == 1)
 			return (1);
-		ft_printf("File valido!\n");
+		l_printf("File valido!\n");
 		return (alloc_data(game_size, seed, READ, argv[1]));
 	}
 	if (argc < 4)
