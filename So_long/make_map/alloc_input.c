@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_t_input.h                                    :+:      :+:    :+:   */
+/*   alloc_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 17:39:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:27:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALLOC_T_INPUT_H
-# define ALLOC_T_INPUT_H
 # define ERROR_INVALID_INPUT 2
 # define ERROR_FULL_MEMORY 3
 # include "atoi.h"
 # include "types.h"
-# include "general_ft2.h"
-# include "reset_memory.h"
 
 // Cosa è game_size, variabile introdotta nel main?
 // è "(argc - 1) / 4) + 1".
@@ -85,5 +81,3 @@ void	temp_set_input(t_input **input)
 		++stop_col;
 	}
 }
-
-#endif

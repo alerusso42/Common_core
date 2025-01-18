@@ -1,25 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_message.h                                    :+:      :+:    :+:   */
+/*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:10:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:37:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef ERROR_MESSAGE_H
-# define ERROR_MESSAGE_H
-# include "ft_printf.h"
-# define EZ 0
-# define ERROR_BAD_ARGC 1
-# define ERROR_INVALID_INPUT 2
-# define ERROR_FULL_MEMORY 3
-# define ERROR_BAD_BOARD 4
-# define ERROR_NO_SOLUTIONS 5
-# define ERROR_PLAY_NOT_IMPLEMENTED 6
 
 int	other_messages(int error);
 int	other_messages2(int error);
@@ -107,5 +96,3 @@ int	other_messages3(int error)
 	else
 		return (42);
 }
-
-#endif
