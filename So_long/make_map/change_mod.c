@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:28:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:23:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,12 @@ t_bool	find_mapsize(char *filename, int game_size[2])
 	if (fd == -1)
 		return (1);
 	line = get_next_line(fd);
-	old_size_x = ft_strlen(line);
+	old_size_x = ft_strlen_newline(line);
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
-		size_x = ft_strlen(line);
+		size_x = ft_strlen_newline(line);
 		if ((size_x != 0) && (old_size_x != size_x))
 			return (free(line), close(fd), 1);
 		if (size_x != 0)

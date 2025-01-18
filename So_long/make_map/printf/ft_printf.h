@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:42 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/18 09:49:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:12:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "Libft/libft.h"
+# include "../Libft/libft.h"
 // define usati nel programma
 # define ERROR 1
 # define MISSING 1

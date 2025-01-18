@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:20:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:27:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "z_function_list.h"
+#include "z_function_list.h"
 
 int			alloc_randomlist(t_random **random, int game_size);
 t_random	*fill_random(t_random **random, t_input *input);

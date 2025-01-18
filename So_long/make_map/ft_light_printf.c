@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_light_printf.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:37:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:25:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-int			ft_light_printf(const char *str, ...);
+int			l_printf(const char *str, ...);
 static int	type_print(char type, va_list ptr);
 static void	ft_putnbr(int num);
 static void	print(char *str);
@@ -34,6 +34,9 @@ int	main(void)
 }
 */
 
+/*
+	A lighter and faster version of my ft_printf project.
+*/
 int	ft_printf(const char *str, ...)
 {
 	int		index;
@@ -82,8 +85,6 @@ int	type_print(char type, va_list ptr)
 	return (0);
 }
 
-// Niente malloc: non sempre è concesso usarlo.
-// Se lo vuoi usare, usa size_num + 2 come dimensione.
 void	ft_putnbr(int num)
 {
 	char	str[12];
@@ -113,7 +114,6 @@ void	ft_putnbr(int num)
 	print(str);
 }
 
-// Printa una stringa con write.
 void	print(char *str)
 {
 	int	index;

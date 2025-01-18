@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:34:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:20:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:27:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "z_function_list.h"
+#include "z_function_list.h"
 
 int		alloc_sol(t_input **input, t_solution **solution);
 int		full_reset(int struct_num, ...);

@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.h                                        :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 18:44:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:26:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECK_MAP_H
-# define CHECK_MAP_H
-# include "types.h"
-# include "ft_printf.h"
-# include "check_map2.h"
+#include "z_function_list.h"
 
 int	check_map(t_input *input, t_solution *solution, int size_x, int size_y);
 int	sixth_chk_colet(t_solution *solution, int size_x, int size_y);
@@ -103,5 +99,3 @@ int	check_map(t_input *input, t_solution *solution, int size_x, int size_y)
 		return (ft_printf("GAME OVER7\n"));
 	return (0);
 }
-
-#endif

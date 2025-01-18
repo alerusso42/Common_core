@@ -6,12 +6,12 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:33:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:43:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:17:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
-
+/*
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
@@ -33,10 +33,11 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (pointer);
 }
 
-/*
-	This strlen stops when finds \n or \0.
+
+	
 */
-size_t	ft_strlen(char *string)
+// This strlen stops when finds \n or \0.
+size_t	ft_strlen_newline(char *string)
 {
 	size_t	size;
 
@@ -47,7 +48,7 @@ size_t	ft_strlen(char *string)
 		++size;
 	return (size);
 }
-
+/*
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
@@ -90,3 +91,4 @@ char	*ft_strchr(const char *s, int c)
 		stock_ptr = (unsigned char *)s;
 	return ((char *)stock_ptr);
 }
+*/

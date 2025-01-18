@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:43:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:58:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-int		full_reset(int struct_num, ...);
+int				full_reset(int struct_num, ...);
 static int		reset_memory_input(t_input **input);
 static int		reset_memory_sol(t_solution **solution, int game_size[2]);
 //int		reset_memory_list(t_solution **solution, int game_size[2]);

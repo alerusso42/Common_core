@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:11 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/12 15:58:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:38:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ char	*get(char **store_bytes, char buffer[BUFFER_SIZE + 1], int nl, int fd)
 			trim_readbytes(buffer);
 			return (*store_bytes);
 		}
-		new_line = ft_strjoin(*store_bytes, new_line);
+		new_line = ft_strjoin_free(*store_bytes, new_line);
 		if (!new_line)
 			return (NULL);
 	}

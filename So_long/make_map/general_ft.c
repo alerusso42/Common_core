@@ -13,8 +13,8 @@
 #include "z_function_list.h"
 
 void	ft_swap(int *x, int *y);
-int		ft_memset(void *str, int size);
-int		ft_strncpy(unsigned char *dest, unsigned char *src, unsigned char len);
+//int		ft_memset(void *str, int size);
+//int		ft_strncpy(unsigned char *dest, unsigned char *src, unsigned char len);
 int		ft_pow(int base, int exponent);
 int		ft_strcmp(char *s1, char *s2);
 
@@ -32,7 +32,7 @@ void	ft_swap(int *x, int *y)
 	*x = *y;
 	*y = temp;
 }
-
+/*
 int	ft_memset(void *content, int size)
 {
 	int				index;
@@ -61,7 +61,7 @@ int	ft_strncpy(unsigned char *dest, unsigned char *src, unsigned char len)
 	dest[index] = src[index];
 	return (0);
 }
-
+*/
 // Non funziona con esponenti negativi.
 int	ft_pow(int base, int exponent)
 {

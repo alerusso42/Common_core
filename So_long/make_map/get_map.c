@@ -6,12 +6,10 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:40:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:21:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define MIN_INT_VALUE -2147483648
-# define MAX_INT_VALUE 2147483647
 #include "z_function_list.h"
 
 t_bool	alloc_data2(t_input **input, t_solution **solution, t_random *random);

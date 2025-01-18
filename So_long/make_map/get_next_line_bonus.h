@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/09 16:13:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:38:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int		alloc_ft(void **content, void *new_content, size_t start, int mode);
 int		find_end_line(size_t *start, char *string);
 void	*calloc_memcpy(int size, void *dest, const void *src, int ft);
 void	trim_readbytes(char *buffer);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 #endif

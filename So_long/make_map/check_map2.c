@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map2.h                                       :+:      :+:    :+:   */
+/*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 18:56:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:26:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECK_MAP2_H
-# define CHECK_MAP2_H
-# include "types.h"
-# include "ft_printf.h"
-# include "check_map.h"
+#include "z_function_list.h"
 
 int	count_stuff(t_solution *solution, t_onebyte character, \
 int size_x, int size_y);
@@ -134,5 +130,3 @@ int	first_chk_char(t_input *input, t_solution *solution)
 	}
 	return (0);
 }
-
-#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:45 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/09 16:13:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:38:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,14 @@ void	trim_readbytes(char *buffer)
 	buffer[new_index] = '\0';
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
 	char	*stringona;
 	int		index;
 	int		size;
 
 	if ((!s1) || (!s2))
-		return (NULL);
+		return (free(s1), free(s2), NULL);
 	index = 0;
 	while (s1[index])
 		++index;
@@ -131,15 +131,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[index])
 		++index;
 	size += index;
-	if (alloc_ft((void **)(&stringona), NULL, size + 1, MALLOC) == FULL_MEMORY)
-		return (NULL);
+	stringona = (char *)malloc(size + 2);
+	if (!stringona)
+		return (free(s1), free(s2), NULL);
 	index = -1;
 	while (s1[++index])
 		stringona[index] = s1[index];
 	size = -1;
 	while (s2[++size])
 		stringona[index++] = s2[size];
-	free(s1);
-	free(s2);
-	return (stringona);
+	return (free(s1), free(s2), stringona);
 }
