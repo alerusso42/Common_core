@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_t_random.h                                   :+:      :+:    :+:   */
+/*   alloc_random.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:06:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:20:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALLOC_T_RANDOM_H
-# define ALLOC_T_RANDOM_H
-# include "types.h"
-# include "ft_printf.h"
-# include "random_numbers.h"
+# include "z_function_list.h"
 
 int			alloc_randomlist(t_random **random, int game_size);
 t_random	*fill_random(t_random **random, t_input *input);
@@ -75,5 +71,3 @@ void	show_random_values(t_random *random)
 	ft_printf("%d: %d\n", index + 1, random->values[index]);
 	ft_printf("END OF LIST\n");
 }
-
-#endif

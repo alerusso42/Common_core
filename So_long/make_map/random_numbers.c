@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random_numbers.h                                   :+:      :+:    :+:   */
+/*   random_numbers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 15:05:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:23:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RANDOM_NUMBERS_H
-# define RANDOM_NUMBERS_H
-# include "general_ft.h"
-# include "ft_printf.h"
-# include <stdio.h>
+#include "z_function_list.h"
 
 void	twist_random(t_random **random, int game_size);
 void	twist_random2(t_random **random, int game_size);
@@ -121,5 +117,3 @@ void	twist_random3(t_random **random, int game_size)
 		ft_swap(&(*random)->values[index], &(*random)->values[caos_index]);
 	}
 }
-
-#endif

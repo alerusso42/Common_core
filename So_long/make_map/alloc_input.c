@@ -6,14 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 09:27:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:23:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # define ERROR_INVALID_INPUT 2
 # define ERROR_FULL_MEMORY 3
-# include "atoi.h"
-# include "types.h"
+#include "z_function_list.h"
 
 // Cosa è game_size, variabile introdotta nel main?
 // è "(argc - 1) / 4) + 1".

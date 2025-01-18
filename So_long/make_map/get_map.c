@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.h                                          :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 19:23:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:40:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_MAP_H
-# define GET_MAP_H
 # define MIN_INT_VALUE -2147483648
 # define MAX_INT_VALUE 2147483647
-# include "types.h"
-# include "switches.h"
-# include "variables.h"
-# include "general_ft.h"
-# include "atoi.h"
-# include "error_message.h"
-# include "alloc_t_input.h"
-# include "alloc_t_solution.h"
-# include "alloc_t_random.h"
-# include "random_numbers.h"
-# include "print_stuff.h"
-# include "edit_map.h"
-# include "check_map.h"
-# include "save_map.h"
-# include "get_map2.h"
-# include <unistd.h>
-# include <fcntl.h>
+#include "z_function_list.h"
 
 t_bool	alloc_data2(t_input **input, t_solution **solution, t_random *random);
-int		ft_start(t_input **input, t_solution **solution, t_random *random);
 t_bool	alloc_data(int game_size[2], int seed, int create_or_read, char *fn);
 t_bool	create_map(t_input *input, t_solution *solution, t_random *random);
 t_bool	read_map(t_input *input, t_solution *solution);
@@ -108,5 +89,3 @@ t_bool	create_map(t_input *input, t_solution *solution, t_random *random)
 	save_map(solution, input->game_size_w, input->game_size_h);
 	return (0);
 }
-
-#endif

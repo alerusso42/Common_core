@@ -6,13 +6,15 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 09:37:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:36:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	other_messages(int error);
-int	other_messages2(int error);
-int	other_messages3(int error);
+#include "z_function_list.h"
+
+static int	other_messages(int error);
+static int	other_messages2(int error);
+static int	other_messages3(int error);
 
 int	error(int error)
 {
@@ -29,7 +31,7 @@ int	error(int error)
 		return (other_messages(error));
 }
 
-int	other_messages(int error)
+static int	other_messages(int error)
 {
 	if (error == ERROR_FULL_MEMORY)
 	{
@@ -55,7 +57,7 @@ int	other_messages(int error)
 		return (other_messages2(error));
 }
 
-int	other_messages2(int error)
+static int	other_messages2(int error)
 {
 	if (error == ERROR_PLAY_NOT_IMPLEMENTED)
 	{
@@ -70,7 +72,7 @@ int	other_messages2(int error)
 	return (error);
 }
 
-int	other_messages3(int error)
+static int	other_messages3(int error)
 {
 	if (error == ERROR_BAD_ARGC)
 	{

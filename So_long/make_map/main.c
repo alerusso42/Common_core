@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:03:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:23:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types.h"
-#include "switches.h"
-#include "variables.h"
-#include "error_message.h"
-#include "change_mod.h"
-#include "reset_memory.h"
-#include "alloc_t_input.h"
-#include "alloc_t_solution.h"
-#include "alloc_t_random.h"
-#include "print_stuff.h"
-#include "ft_printf.h"
-#include <malloc.h>
-#include <stdarg.h>
+#include "z_function_list.h"
 
 int	ft_settings(t_input **input, t_solution **solution);
 int	ft_start(t_input **input, t_solution **solution, t_random *random);

@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_map.h                                         :+:      :+:    :+:   */
+/*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:51:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 13:24:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:24:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAVE_MAP_H
-# define SAVE_MAP_H
-# include "types.h"
-# include <unistd.h>
-# include <fcntl.h>	
+#include "z_function_list.h"
 
 int	save_map(t_solution *solution, int size_x, int size_y)
 {
@@ -42,5 +38,3 @@ int	save_map(t_solution *solution, int size_x, int size_y)
 	close(fd);
 	return (0);
 }
-
-#endif

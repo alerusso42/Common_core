@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   edit_map2.h                                        :+:      :+:    :+:   */
+/*   edit_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:10:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:43:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EDIT_MAP2_H
-# define EDIT_MAP2_H
-# include "types.h"
-# include "ft_printf.h"
-# include "edit_map.h"
+#include "z_function_list.h"
 
 int	sort_coordinates(t_solution *solution, t_random *random, int *x, int *y);
 
@@ -76,5 +72,3 @@ void	fifth_step_enemy(t_solution *solution, t_random *random)
 	}
 	sort_coordinates(NULL, NULL, NULL, NULL);
 }
-
-#endif

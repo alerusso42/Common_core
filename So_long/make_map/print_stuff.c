@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stuff.h                                      :+:      :+:    :+:   */
+/*   print_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:05:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:23:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_STUFF_H
-# define PRINT_STUFF_H
-# include "ft_printf.h"
+#include "z_function_list.h"
 
 void	print_solution(t_input *input, t_solution *solution, int x, int y);
 void	print_colgraphic(t_input *input, t_bool mode);
@@ -146,5 +144,3 @@ void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
 		x = -1;
 	}
 }*/
-
-#endif

@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   edit_map.h                                         :+:      :+:    :+:   */
+/*   edit_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:10:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:43:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EDIT_MAP_H
-# define EDIT_MAP_H
-# include "types.h"
-# include "ft_printf.h"
-# include "edit_map2.h"
+#include "z_function_list.h"
 
 int	sort_coordinates(t_solution *solution, t_random *random, int *x, int *y)
 {
@@ -111,5 +107,3 @@ int	edit_map(t_solution *solution, int size_x, int size_y, t_random *random)
 	last_step_walls(solution, random);
 	return (0);
 }
-
-#endif

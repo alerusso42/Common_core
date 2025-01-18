@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 17:36:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:25:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ struct s_input
 	t_bool				switch_2_ispossibletowin:1;
 	t_bool				variable_0_shutupcompiler:1;
 	t_bool				create_map:1;
-	char				valid_signs[6];
+	char				valid_signs[7];
 	int					game_size;
 	int					game_size_w;
 	int					game_size_h;

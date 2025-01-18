@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:10:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:37:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <malloc.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdarg.h>
+#include "z_function_list.h"
 
-int		ft_printf(const char *str, ...);
-int		type_print(char type, va_list ptr);
-void	ft_putnbr(int num);
-void	print(char *str);
+int			ft_light_printf(const char *str, ...);
+static int	type_print(char type, va_list ptr);
+static void	ft_putnbr(int num);
+static void	print(char *str);
 
-// ISTRUZIONI:
-// Come printf. Per favore: non sbagliare gli specificatori
-// di formato. Il compilatore non verrà a salvarti.
-// Andrà tutto in segmentation fault. Fidati.
 /*
 int	main(void)
 {
@@ -134,5 +125,3 @@ void	print(char *str)
 		++index;
 	}
 }
-
-#endif

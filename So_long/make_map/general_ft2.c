@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general_ft2.h                                      :+:      :+:    :+:   */
+/*   general_ft2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:33:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 18:00:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:43:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_FT2_H
-# define GENERAL_FT2_H
-# include <stdio.h>
-# include <malloc.h>
-# include "general_ft.h"
-# include <unistd.h>
-# include <fcntl.h>
+#include "z_function_list.h"
 
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
@@ -96,5 +90,3 @@ char	*ft_strchr(const char *s, int c)
 		stock_ptr = (unsigned char *)s;
 	return ((char *)stock_ptr);
 }
-
-#endif

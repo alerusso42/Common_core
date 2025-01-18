@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_mod.h                                       :+:      :+:    :+:   */
+/*   change_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 16:54:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:28:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHANGE_MOD_H
-# define CHANGE_MOD_H
-# include "types.h"
-# include "general_ft.h"
-# include "error_message.h"
-# include "get_map.h"
-# include "get_next_line_bonus.h"
+#include "z_function_list.h"
 
 int		change_mod(char *argv[], int argc);
 t_bool	alloc_data(int game_size[2], int seed, int create_or_read, char *fn);
 int		check_extension_file(char *filename, char *extension);
-t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed);
+static t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed);
 t_bool	find_mapsize(char *filename, int game_size[2]);
 
 int	change_mod(char *argv[], int argc)
@@ -53,7 +47,7 @@ int	change_mod(char *argv[], int argc)
 	return (0);
 }
 
-t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed)
+static t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed)
 {
 	if ((argc == 3) || (argc > 5))
 		return (error(ERROR_BAD_ARGC));
@@ -143,7 +137,3 @@ t_bool	find_mapsize(char *filename, int game_size[2])
 	game_size[1] = size_y;
 	return (close(fd), 0);
 }
-
-
-
-#endif

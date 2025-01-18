@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   switches.h                                         :+:      :+:    :+:   */
+/*   switches.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/15 15:21:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:24:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SWITCHES_H
-# define SWITCHES_H
-# include "types.h"
+#include "z_function_list.h"
 
 t_bool	switches(t_input **input, t_solution **solution, t_random **random);
 
@@ -31,5 +29,3 @@ t_bool	switches(t_input **input, t_solution **solution, t_random **random)
 	(*random)->switch_3_choose_map_entities_num = ON;
 	return (0);
 }
-
-#endif

@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 09:32:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:24:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "types.h"
+#include "z_function_list.h"
 
 t_bool	variables(t_input **input, t_solution **solution, t_random **random);
 void	update_var(t_solution **solution, t_random **random);

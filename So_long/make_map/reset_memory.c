@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_memory.h                                     :+:      :+:    :+:   */
+/*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:10:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:43:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RESET_MEMORY_H
-# define RESET_MEMORY_H
-# include "types.h"
-# include <stdarg.h>
+#include "z_function_list.h"
 
 int		full_reset(int struct_num, ...);
-int		reset_memory_input(t_input **input);
-int		reset_memory_sol(t_solution **solution, int game_size[2]);
+static int		reset_memory_input(t_input **input);
+static int		reset_memory_sol(t_solution **solution, int game_size[2]);
 //int		reset_memory_list(t_solution **solution, int game_size[2]);
-int		reset_memory_randlist(t_random **random);
+static int		reset_memory_randlist(t_random **random);
 
 /* 	La funzione variadica full_reset accetta come argomento il numero
 	di strutture che vuoi liberare, e le strutture stesse.
@@ -57,7 +54,7 @@ int	full_reset(int struct_num, ...)
 	return (3);
 }
 
-int	reset_memory_input(t_input **input)
+static int	reset_memory_input(t_input **input)
 {
 	if ((*input) != NULL)
 	{
@@ -100,7 +97,7 @@ int	reset_memory_list(t_solution **solution, int game_size[2])
 	return (0);
 }*/
 
-int	reset_memory_sol(t_solution **solution, int game_size[2])
+static int	reset_memory_sol(t_solution **solution, int game_size[2])
 {
 	int			index;
 	t_solution	*p;
@@ -128,7 +125,7 @@ int	reset_memory_sol(t_solution **solution, int game_size[2])
 	return (0);
 }
 
-int	reset_memory_randlist(t_random **random)
+static int	reset_memory_randlist(t_random **random)
 {
 	if ((*random)->values != NULL)
 	{
@@ -142,5 +139,3 @@ int	reset_memory_randlist(t_random **random)
 	}
 	return (0);
 }
-
-#endif

@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_t_solution.h                                 :+:      :+:    :+:   */
+/*   alloc_solution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:34:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/17 10:06:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:20:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALLOC_T_SOLUTION_H
-# define ALLOC_T_SOLUTION_H
-# include "alloc_t_input.h"
-# include "types.h"
-# include "ft_printf.h"
+# include "z_function_list.h"
 
 int		alloc_sol(t_input **input, t_solution **solution);
 int		full_reset(int struct_num, ...);
@@ -76,5 +72,3 @@ void	fill_solution(t_solution **solution, int row_n, int col_n)
 		col = -1;
 	}
 }
-
-#endif

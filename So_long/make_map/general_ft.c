@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general_ft.h                                       :+:      :+:    :+:   */
+/*   general_ft.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 16:31:56 by alerusso         ###   ########.fr       */
+/*   Created: 2024/09/13 09:27:35 by alerusso          #+#   #+#            */
+/*   Updated: 2025/01/18 10:21:48 by alerusso         ###  ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_FT_H
-# define GENERAL_FT_H
-# include <unistd.h>
-# include "types.h"
-# include "ft_printf.h"
-# include "atoi.h"
+#include "z_function_list.h"
 
 void	ft_swap(int *x, int *y);
 int		ft_memset(void *str, int size);
@@ -112,5 +107,3 @@ int	ft_strcmp(char *s1, char *s2)
 		++diff;
 	return (diff);
 }
-
-#endif
