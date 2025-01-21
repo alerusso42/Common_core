@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 17:02:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:19:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_bool	variables(t_input *input, t_solution *solution, t_random *random)
 	solution->variable_1_player_num = 1;
 	random->variable_1_setseed = 0;
 	random->variable_2_randomizer = 1;
-	random->variable_3_enemy_num = 1;
-	random->variable_4_collectable_num = 3;
+	random->variable_3_enemy_num = 2;
+	random->variable_4_collectable_num = 5;
 	random->variable_5_internal_wall_num = 0;
 	update_var(solution, random);
 	return (0);

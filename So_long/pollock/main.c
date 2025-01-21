@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:48:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 13:06:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:08:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	main()
 		ft_forward(50, turtle);
 		right(90, turtle);
 	}
-	clearscreen(turtle);
+	//clearscreen(turtle);
 	mlx_loop(libx->connection);
 	free(turtle);
 	free_minilibx(&libx);

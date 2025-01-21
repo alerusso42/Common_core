@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 17:05:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:17:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_bool	alloc_data2(t_input **input, t_solution **solution, t_random *random)
 		return (1);
 	if (read_map(*input, *solution) == 1)
 		return (full_reset(3, input, solution, &random), 1);
-	int x1;
+	/*int x1;
 	int	y1;
 	int	x2;
 	int	y2;
@@ -85,7 +85,7 @@ t_bool	alloc_data2(t_input **input, t_solution **solution, t_random *random)
 	int start[2] = {x1, y1};
 	int end[2] = {x2, y2};
 	bfs(*solution, start, end);
-	print_shortest_path(*solution, end);
+	print_shortest_path(*solution, end);*/
 	full_reset(3, input, solution, &random);
 	return (0);
 }

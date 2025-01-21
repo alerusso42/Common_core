@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:27:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/16 10:03:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:27:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "minilibx/mlx.h"
 # define FORWARD 0
 # define BACK 1
-# define SIZE_X_WINDOW 500
-# define SIZE_Y_WINDOW 1500
+# define SIZE_X_WINDOW 700
+# define SIZE_Y_WINDOW 850
 # define ON 1
 # define OFF 0
 
