@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 09:17:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:43:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_all	*alloc_data2(t_input **input, t_map **map, t_random *random)
 	fill_random(&random, *input);
 	fill_map(map, (*map)->game_size_h,\
 	 (*map)->game_size_w);
+	copy_map(map, (*map)->game_size_h, (*map)->game_size_w);
 	temp_set_input(input);
 	if (((*input)->create_map == CREATE) && \
 	(create_map(*input, *map, random) == 1))

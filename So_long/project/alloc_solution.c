@@ -12,9 +12,8 @@
 
 #include "z_function_list.h"
 
-int		alloc_sol(t_input **input, t_map **map);
-int		full_reset(int struct_num, ...);
-int		alloc_bwlist(t_input **input, t_map **map);
+int			alloc_sol(t_input **input, t_map **map);
+static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h);
 
 /* 	Perchè allochiamo ((*input)->game_size) + 2)^2?
 	Se la scacchiera è grande 3x3, ci servono 9 quadretti, quindi
@@ -52,6 +51,24 @@ int	alloc_sol(t_input **input, t_map **map)
 	(*map)->game_size = (*input)->game_size;
 	(*map)->game_size_w = (*input)->game_size_w;
 	(*map)->game_size_h = (*input)->game_size_h;
+	return (alloc_copy(input, map, (*map)->game_size_w, (*map)->game_size_h));
+}
+
+static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h)
+{
+	int	index;
+
+	(*map)->old_pos = ft_calloc(size_w + 2, sizeof(t_position));
+	if (((*map)->old_pos) == NULL)
+		return (full_reset(2, input, map), 3);
+	index = -1;
+	while (++index != size_w + 1)
+	{
+		(*map)->old_pos[index] = ft_calloc(size_h + 2,\
+		 sizeof(char *) * 2);
+		if ((*map)->old_pos[index] == NULL)
+			return (full_reset(2, input, map), 3);
+	}
 	return (0);
 }
 
@@ -67,6 +84,23 @@ void	fill_map(t_map **map, int row_n, int col_n)
 		while ((++col != col_n + 1))
 		{
 			(*map)->position[col][row].value = 48;
+		}
+		col = -1;
+	}
+}
+
+void	copy_map(t_map **map, int row_n, int col_n)
+{
+	int			col;
+	int			row;
+
+	row = -1;
+	col = -1;
+	while ((++row != row_n + 1))
+	{
+		while ((++col != col_n + 1))
+		{
+			(*map)->old_pos[col][row].value = (*map)->position[col][row].value;
 		}
 		col = -1;
 	}

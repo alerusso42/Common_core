@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 12:59:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:43:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char *argv[])
 	all = get_data(GET, 0, 0, argv[1]);
 	if (!all)
 		return (1);
-	get_key_settings(all->mlx);
+	get_key_settings(all);
 	mlx_loop(all->mlx->con);
 	full_reset(4, &all->input, &all->map, &all->random, &all->mlx);
 	free(all);

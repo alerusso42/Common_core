@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 12:02:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:47:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				full_reset(int struct_num, ...);
 static int		reset_memory_input(t_input **input);
-static int		reset_memory_sol(t_map **map, int game_size[2]);
+static int		reset_memory_sol(t_map **map, int game_size[2], int index);
 static int		reset_memory_randlist(t_random **random);
 static int		reset_memory_mlx(t_mlx **mlx);
 
@@ -42,7 +42,7 @@ int	full_reset(int struct_num, ...)
 	if (struct_num < 2)
 		return (va_end(ptr), 1);
 	data_to_free = va_arg(ptr, t_map **);
-	reset_memory_sol((t_map **)data_to_free, game_size);
+	reset_memory_sol((t_map **)data_to_free, game_size, 0);
 	if (struct_num < 3)
 		return (va_end(ptr), 2);
 	data_to_free = va_arg(ptr, t_random **);
@@ -71,28 +71,29 @@ static int	reset_memory_input(t_input **input)
 	return (0);
 }
 
-static int	reset_memory_sol(t_map **map, int game_size[2])
+static int	reset_memory_sol(t_map **map, int game_size[2], int index)
 {
-	int		index;
 	t_map	*p;
 
 	index = 0;
 	p = (*map);
 	if (!p)
 		return (1);
-	while ((p->position[index] != NULL)
-		&& (index <= ((game_size[0]) + 1)))
+	while ((p->position) && (p->position[index]) && (index <= game_size[0]))
 	{
 		free(p->position[index]);
-		p->position[index] = NULL;
-		++index;
+		p->position[index++] = NULL;
 	}
 	index = 0;
-	if (p->position != NULL)
+	while ((p->old_pos) && (p->old_pos[index]) && (index <= game_size[0]))
 	{
-		free(p->position);
-		p->position = NULL;
+		free(p->old_pos[index]);
+		p->old_pos[index++] = NULL;
 	}
+	free(p->position);
+	p->position = NULL;
+	free(p->old_pos);
+	p->old_pos = NULL;
 	free(p);
 	p = NULL;
 	return (0);

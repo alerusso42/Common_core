@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 12:02:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:01:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ struct s_map
 	int					wall_number;
 	unsigned char		is_solved;
 	struct s_position	**position;
+	struct s_position	**old_pos;
 };
 struct s_random
 {

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 13:00:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:16:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include <malloc.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -41,6 +41,7 @@ int			get_mlx(t_mlx *mlx, int x, int y, char *dname);
 t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
 int			alloc_sol(t_input **input, t_map **map);
+void		copy_map(t_map **map, int row_n, int col_n);
 void		fill_map(t_map **map, int row_n, int col_n);
 void		bfs(t_map *map, int start[2], int end[2]);
 void		print_shortest_path(t_map *map, int end[2]);
@@ -90,7 +91,8 @@ void		twist_random3(t_random **random, int game_size);
 void		get_key_settings(t_all *all);
 int			full_reset(int struct_num, ...);
 int			reset_pic(t_mlx *mlx);
-void		end(t_all *all);
+int			end(int keycode);
+void		*storage_structs(t_all *update, int mode);
 int			save_map(t_map *map, int size_x, int size_y);
 t_bool		switches(t_input *input, t_map *map, t_random *random);
 t_bool		variables(t_input *input, t_map *map, t_random *random);

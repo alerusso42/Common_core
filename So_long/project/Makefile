@@ -13,6 +13,7 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 		print_stuff.c random_numbers.c reset_memory.c \
 		save_map.c \
 		add_pic.c check_pic.c reset_pic.c \
+		print_mlx.c \
 		mlx_key_setting.c \
 		reset_game.c \
 		switches.c variables.c main.c

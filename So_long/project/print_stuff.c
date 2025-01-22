@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 14:42:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:29:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_map(t_input *input, t_map *map, int x, int y);
 void	print_colgraphic(t_input *input, t_bool mode);
-void	print_skyscrapers(t_onebyte game_size);
 void	print_blacklist(t_onebyte game_size, t_map *map, int i);
+void	print_skyscrapers(t_onebyte game_size);
 
 // "s" sta per game_size.
 /*	Printa la scacchiera.
