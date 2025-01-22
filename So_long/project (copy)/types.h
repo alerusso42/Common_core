@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 14:12:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:02:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,23 @@
 # define OFF 0
 # define NO 0
 # define NO_RANDOM 2
-# define CREATE 0
-# define READ 1
+# define CREATE 1
+# define READ 0
+# define GET 2
+# define UPDATE 1
 
 typedef struct s_input		t_input;
-typedef struct s_solution	t_solution;
+typedef struct s_map		t_map;
 typedef struct s_position	t_position;
 typedef struct s_random		t_random;
+typedef struct s_mlx		t_mlx;
+typedef struct s_sprite		t_sprite;
+typedef struct s_all		t_all;
 typedef unsigned char		t_onebyte;
 typedef unsigned int		t_bool;
 
 /*
- Il codice ha come armi 3 strutture di dati: t_input, t_solution,
+ Il codice ha come armi 3 strutture di dati: t_input, t_map,
  t_random.
  Per la mole delle strutture allocate, ho preferito l'uso di unsigned
  char al posto di int, perchè un int consuma 4 byte e gli unsigned
@@ -63,10 +68,10 @@ typedef unsigned int		t_bool;
 					Da 102 a 103 c'è la lista di valori che vengono resettati
 					tra una iterazione e l'altra.
  				 	A 103 finisce l'array.
- Si accede ai valori di solution facendo: nomestruct->position[x][y].value.
- Ad esempio: solution->position[x][y].black_list[index].
+ Si accede ai valori di map facendo: nomestruct->position[x][y].value.
+ Ad esempio: map->position[x][y].black_list[index].
 
- t_solution contiene t_position.
+ t_map contiene t_position.
  Inoltre, contiene:
  g_u_score ---> Parametro che segna, tra tutti gli u_score, qual è
 				il più piccolo. Vengono escluse le caselle già
@@ -120,7 +125,7 @@ struct s_position
 	int			distance;
 	t_onebyte	*pointer;
 };
-struct s_solution
+struct s_map
 {
 	t_bool				switch_1_showtries:1;
 	t_bool				switch_2_showcycles:1;
@@ -130,6 +135,9 @@ struct s_solution
 	t_onebyte			variable_3_enemy_num;
 	t_onebyte			variable_4_collectable_num;
 	int					variable_5_internal_wall_num;
+	int					variable_6_window_width;
+	int					variable_7_window_heigth;
+	char				display_name[7];
 	int					game_size;
 	int					game_size_w;
 	int					game_size_h;
@@ -151,6 +159,72 @@ struct s_random
 	int			variable_5_internal_wall_num;
 	t_onebyte	seed;
 	int			*values;
+};
+struct s_sprite
+{
+	void	*blue;
+	void	*cian_down;
+	void	*cian_front;
+	void	*cian_left;
+	void	*cian_right;
+	void	*cian_up;
+	void	*close_exit;
+	void	*dead;
+	void	*dot;
+	void	*exit;
+	void	*floor;
+	void	*orange_down;
+	void	*orange_front;
+	void	*orange_left;
+	void	*orange_right;
+	void	*orange_up;
+	void	*pac_close_down;
+	void	*pac_close_left;
+	void	*pac_close_right;
+	void	*pac_close_up;
+	void	*pac_dead_1;
+	void	*pac_dead_2;
+	void	*pac_dead_3;
+	void	*pac_dead_4;
+	void	*pac_half_down;
+	void	*pac_half_left;
+	void	*pac_half_right;
+	void	*pac_half_up;
+	void	*pac_open_down;
+	void	*pac_open_left;
+	void	*pac_open_right;
+	void	*pac_open_up;
+	void	*purple_down;
+	void	*purple_front;
+	void	*purple_left;
+	void	*purple_right;
+	void	*purple_up;
+	void	*red_down;
+	void	*red_front;
+	void	*red_left;
+	void	*red_right;
+	void	*red_up;
+	void	*special_dot;
+	void	*wall_down;
+	void	*wall_left;
+	void	*wall_right;
+	void	*wall_total;
+	void	*wall_up;
+	
+};
+struct s_mlx
+{
+	void		*con;
+	void		*window;
+	t_sprite	*sprite;
+	int			variable_1_sprite_size;
+};
+struct s_all
+{
+	t_input		*input;
+	t_map		*map;
+	t_random	*random;
+	t_mlx		*mlx;
 };
 
 #endif

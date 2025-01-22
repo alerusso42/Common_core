@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_solution.c                                   :+:      :+:    :+:   */
+/*   alloc_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "z_function_list.h"
 
-int		alloc_sol(t_input **input, t_solution **solution);
+int		alloc_sol(t_input **input, t_map **map);
 int		full_reset(int struct_num, ...);
-int		alloc_bwlist(t_input **input, t_solution **solution);
+int		alloc_bwlist(t_input **input, t_map **map);
 
 /* 	Perchè allochiamo ((*input)->game_size) + 2)^2?
 	Se la scacchiera è grande 3x3, ci servono 9 quadretti, quindi
@@ -28,7 +28,7 @@ int		alloc_bwlist(t_input **input, t_solution **solution);
 	byte in più per sicurezza. Altrimenti, fa le bizze.
 	Provare per credere.
 */
-int	alloc_sol(t_input **input, t_solution **solution)
+int	alloc_sol(t_input **input, t_map **map)
 {
 	int	index;
 	int	size_h;
@@ -36,26 +36,26 @@ int	alloc_sol(t_input **input, t_solution **solution)
 
 	size_w = (((*input)->game_size_w) + 2);
 	size_h = ((*input)->game_size_h) + 2;
-	(*solution) = malloc(sizeof(t_solution));
-	if ((*solution) != NULL)
-		(*solution)->position = ft_calloc((size_w), sizeof(t_position));
-	if (((*solution) == NULL) || ((*solution)->position) == NULL)
-		return (full_reset(2, input, solution), 3);
+	(*map) = malloc(sizeof(t_map));
+	if ((*map) != NULL)
+		(*map)->position = ft_calloc((size_w), sizeof(t_position));
+	if (((*map) == NULL) || ((*map)->position) == NULL)
+		return (full_reset(2, input, map), 3);
 	index = -1;
 	while (++index != (*input)->game_size_w + 1)
 	{
-		(*solution)->position[index] = ft_calloc((size_h),\
+		(*map)->position[index] = ft_calloc((size_h),\
 		 sizeof(char *) * 2);
-		if ((*solution)->position[index] == NULL)
-			return (full_reset(2, input, solution), 3);
+		if ((*map)->position[index] == NULL)
+			return (full_reset(2, input, map), 3);
 	}
-	(*solution)->game_size = (*input)->game_size;
-	(*solution)->game_size_w = (*input)->game_size_w;
-	(*solution)->game_size_h = (*input)->game_size_h;
+	(*map)->game_size = (*input)->game_size;
+	(*map)->game_size_w = (*input)->game_size_w;
+	(*map)->game_size_h = (*input)->game_size_h;
 	return (0);
 }
 
-void	fill_solution(t_solution **solution, int row_n, int col_n)
+void	fill_map(t_map **map, int row_n, int col_n)
 {
 	int			col;
 	int			row;
@@ -66,7 +66,7 @@ void	fill_solution(t_solution **solution, int row_n, int col_n)
 	{
 		while ((++col != col_n + 1))
 		{
-			(*solution)->position[col][row].value = 48;
+			(*map)->position[col][row].value = 48;
 		}
 		col = -1;
 	}

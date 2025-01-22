@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   edit_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:43:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:41:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-int	sort_coordinates(t_solution *solution, t_random *random, int *x, int *y);
+int	sort_coordinates(t_map *map, t_random *random, int *x, int *y);
 
-void	last_step_walls(t_solution *solution, t_random *random)
+void	last_step_walls(t_map *map, t_random *random)
 {
 	int	x;
 	int	y;
@@ -22,14 +22,14 @@ void	last_step_walls(t_solution *solution, t_random *random)
 	int	game_size;
 	int	random_shuffle;
 
-	game_size = solution->game_size_w * solution->game_size_h;
+	game_size = map->game_size_w * map->game_size_h;
 	random_shuffle = 0;
 	internal_walls = random->variable_5_internal_wall_num;
 	while (internal_walls--)
 	{
-		if (sort_coordinates(solution, random, &x, &y) == 1)
+		if (sort_coordinates(map, random, &x, &y) == 1)
 			return ;
-		solution->position[x][y].value = '1';
+		map->position[x][y].value = '1';
 		++random_shuffle;
 		if (random_shuffle == 10)
 		{
@@ -41,7 +41,7 @@ void	last_step_walls(t_solution *solution, t_random *random)
 	sort_coordinates(NULL, NULL, NULL, NULL);
 }
 
-void	sixth_step_colet(t_solution *solution, t_random *random)
+void	sixth_step_colet(t_map *map, t_random *random)
 {
 	int	x;
 	int	y;
@@ -50,14 +50,14 @@ void	sixth_step_colet(t_solution *solution, t_random *random)
 	collectable_num = random->variable_4_collectable_num;
 	while (collectable_num--)
 	{
-		if (sort_coordinates(solution, random, &x, &y) == 1)
+		if (sort_coordinates(map, random, &x, &y) == 1)
 			return ;
-		solution->position[x][y].value = 'C';
+		map->position[x][y].value = 'C';
 	}
 	sort_coordinates(NULL, NULL, NULL, NULL);
 }
 
-void	fifth_step_enemy(t_solution *solution, t_random *random)
+void	fifth_step_enemy(t_map *map, t_random *random)
 {
 	int	x;
 	int	y;
@@ -66,9 +66,9 @@ void	fifth_step_enemy(t_solution *solution, t_random *random)
 	enemy_num = random->variable_3_enemy_num;
 	while (enemy_num--)
 	{
-		if (sort_coordinates(solution, random, &x, &y) == 1)
+		if (sort_coordinates(map, random, &x, &y) == 1)
 			return ;
-		solution->position[x][y].value = '$';
+		map->position[x][y].value = '$';
 	}
 	sort_coordinates(NULL, NULL, NULL, NULL);
 }

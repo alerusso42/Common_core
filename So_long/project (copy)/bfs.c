@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 17:55:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:39:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	search(t_position **position, int x, int y, int e[2], int distance)
 	search(position, x, y - 1, e, distance + 1);
 }
 
-void	bfs(t_solution *solution, int start[2], int end[2])
+void	bfs(t_map *map, int start[2], int end[2])
 {
-	search(solution->position, start[0], start[1], end, 0);
+	search(map->position, start[0], start[1], end, 0);
 	return ;
 }
 
@@ -73,8 +73,8 @@ void	print_path(t_position **position, int s_x, int s_y)
 	print_path(position, x, y);
 }
 
-void	print_shortest_path(t_solution *solution, int end[2])
+void	print_shortest_path(t_map *map, int end[2])
 {
 	l_printf("The shortest path between P and $ is:\n");
-	print_path(solution->position, end[0], end[1]);
+	print_path(map->position, end[0], end[1]);
 }

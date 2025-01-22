@@ -6,17 +6,17 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 14:43:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 08:28:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-static int	other_messages(int error);
-static int	other_messages2(int error);
-static int	other_messages3(int error);
+static void	*other_messages(int error);
+static void	*other_messages2(int error);
+static void	*other_messages3(int error);
 
-int	error(int error)
+void	*error(int error)
 {
 	if (error == ERROR_INVALID_INPUT)
 	{
@@ -25,54 +25,54 @@ int	error(int error)
 		l_printf("1 alla dimensione di ogni col e row.\n");
 		l_printf("Giocando con 16 quadranti, quindi, da 1 ");
 		l_printf("a 4. Ce la puoi fare.\n");
-		return (ERROR_INVALID_INPUT);
+		return (NULL);
 	}
 	else
 		return (other_messages(error));
 }
 
-static int	other_messages(int error)
+static void	*other_messages(int error)
 {
 	if (error == ERROR_FULL_MEMORY)
 	{
 		l_printf("Attenzione: il sistema non ha");
 		l_printf("memoria sufficiente per l'operazione ");
 		l_printf("richiesta.\n");
-		return (ERROR_FULL_MEMORY);
+		return (NULL);
 	}
 	else if (error == ERROR_BAD_BOARD)
 	{
 		l_printf("I numeri inseriti non hanno una soluzione.\n");
 		l_printf("Inserire una board valida.\n");
-		return (ERROR_BAD_BOARD);
+		return (NULL);
 	}
 	else if (error == ERROR_NO_SOLUTIONS)
 	{
 		l_printf("L'algoritmo non ha trovato nessuna ");
 		l_printf("soluzione per lo schema richiesto.\n");
 		l_printf("Unlucky.\n");
-		return (ERROR_NO_SOLUTIONS);
+		return (NULL);
 	}
 	else
 		return (other_messages2(error));
 }
 
-static int	other_messages2(int error)
+static void	*other_messages2(int error)
 {
 	if (error == ERROR_PLAY_NOT_IMPLEMENTED)
 	{
 		l_printf("Attenzione: il motore di gioco non è");
 		l_printf(" stato ancora implementato.\n");
-		return (ERROR_PLAY_NOT_IMPLEMENTED);
+		return (NULL);
 	}
 	else if (error == EZ)
 		l_printf("\nEZ.\n");
 	else
 		return (other_messages3(error));
-	return (error);
+	return (NULL);
 }
 
-static int	other_messages3(int error)
+static void	*other_messages3(int error)
 {
 	if (error == ERROR_BAD_ARGC)
 	{
@@ -93,8 +93,8 @@ static int	other_messages3(int error)
 		l_printf(" !Non è stato ancora implementato!\n");
 		l_printf("switches & variables: se vai nei file switches.h e ");
 		l_printf("variables.h, puoi modificare varie impostazioni.\n");
-		return (ERROR_BAD_ARGC);
+		return (NULL);
 	}
 	else
-		return (42);
+		return (NULL);
 }

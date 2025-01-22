@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 17:08:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:02:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ static int	reset_memory_input(t_input **input)
 
 static int	reset_memory_sol(t_map **map, int game_size[2])
 {
-	int			index;
+	int		index;
 	t_map	*p;
 
 	index = 0;
 	p = (*map);
+	if (!p)
+		return (1);
 	while ((p->position[index] != NULL)
 		&& (index <= ((game_size[0]) + 1)))
 	{
@@ -91,16 +93,15 @@ static int	reset_memory_sol(t_map **map, int game_size[2])
 		free(p->position);
 		p->position = NULL;
 	}
-	if (p != NULL)
-	{
-		free(p);
-		p = NULL;
-	}
+	free(p);
+	p = NULL;
 	return (0);
 }
 
 static int	reset_memory_randlist(t_random **random)
 {
+	if (!*random)
+		return (0);
 	if ((*random)->values != NULL)
 	{
 		free((*random)->values);
@@ -120,21 +121,22 @@ static int	reset_memory_mlx(t_mlx **mlx)
 		return (0);
 	if ((*mlx)->sprite)
 	{
+		reset_pic(*mlx);
 		free((*mlx)->sprite);
 		(*mlx)->sprite = NULL;
 	}
 	if ((*mlx)->window)
 	{
-		mlx_destroy_window((*mlx)->connection, (*mlx)->window);
-		//(*mlx)->window = NULL;
+		mlx_destroy_window((*mlx)->con, (*mlx)->window);
+		(*mlx)->window = NULL;
 	}
-	if ((*mlx)->connection)
+	if ((*mlx)->con)
 	{
-		mlx_destroy_display((*mlx)->connection);
-		free((*mlx)->connection);
-		//(*mlx)->connection = NULL;
+		mlx_destroy_display((*mlx)->con);
+		free((*mlx)->con);
+		(*mlx)->con = NULL;
 	}
 	free(*mlx);
-	//*mlx = NULL;
+	*mlx = NULL;
 	return (0);
 }

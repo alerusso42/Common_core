@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_map2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:23:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:42:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-t_bool	read_map(t_input *input, t_solution *solution)
+t_bool	read_map(t_input *input, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -29,7 +29,7 @@ t_bool	read_map(t_input *input, t_solution *solution)
 		x = 0;
 		while ((line[x]) && (line[x] != '\n'))
 		{
-			solution->position[x][y].value = line[x];
+			map->position[x][y].value = line[x];
 			++x;
 		}
 		y--;

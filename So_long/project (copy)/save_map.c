@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:51:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 11:23:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:42:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-int	save_map(t_solution *solution, int size_x, int size_y)
+int	save_map(t_map *map, int size_x, int size_y)
 {
 	int	fd;
 	int	x;
@@ -27,7 +27,7 @@ int	save_map(t_solution *solution, int size_x, int size_y)
 		x = 0;
 		while (x != size_x)
 		{
-			if (write(fd, &solution->position[x][y].value, 1) == -1)
+			if (write(fd, &map->position[x][y].value, 1) == -1)
 				return (close(fd), 1);
 			++x;
 		}

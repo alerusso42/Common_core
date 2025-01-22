@@ -1,7 +1,7 @@
 NAME = so_long.a
 LIBFT = Libft/libft.a
-PRINTF = printf/libftprintf.a
 MINILIBX = minilibx-linux/minilibx.a
+OBJ_DIR = obj_dir
 ALL = all.a
 CP = cp
 SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
@@ -12,9 +12,12 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 		get_next_line_bonus.c get_next_line_utils_bonus.c \
 		print_stuff.c random_numbers.c reset_memory.c \
 		save_map.c \
+		add_pic.c check_pic.c reset_pic.c \
+		mlx_key_setting.c \
+		reset_game.c \
 		switches.c variables.c main.c
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 #COMP = cc -g -Iminilibx -Lminilibx -lmlx -lX11 -lXext -lm -Lprintf -L$(MINILIBX_RELATIVE_PATH) -LLibft
 COMP = -g -Wall -Wextra -Werror -ILibft -Iprintf
 LIBX = -Lminilibx-linux -lX11 -lmlx -lXext -lft -lm -Lprintf -LLibft
@@ -24,12 +27,10 @@ MINILIBX_RELATIVE_PATH = minilibx-linux/
 
 all: $(NAME)
 	
-$(NAME) : $(LIBFT) $(PRINTF) $(MINILIBX) $(OBJ)
-	cp $(LIBFT) $(PRINTF)
-	$(MAKE) -C $(MINILIBX_RELATIVE_PATH)
-	cp $(MINILIBX) $(PRINTF)
+$(NAME) : $(LIBFT) $(MINILIBX) $(OBJ) $(OBJ_DIR)
+	cp $(LIBFT) $(MINILIBX)
 	touch $(ALL)
-	cp $(PRINTF) $(ALL) 
+	cp $(MINILIBX) $(ALL) 
 	cc $(COMP) $(OBJ) $(ALL) $(LIBX)
 
 #cp $(MINILIBX) $(NAME)
@@ -38,19 +39,18 @@ $(NAME) : $(LIBFT) $(PRINTF) $(MINILIBX) $(OBJ)
 $(LIBFT) : 
 	$(MAKE) -C $(LIBFT_RELATIVE_PATH)
 
-$(PRINTF) : 
-	$(MAKE) -C $(PRINTF_RELATIVE_PATH)
-
 $(MINILIBX) : 
 	$(MAKE) -C $(MINILIBX_RELATIVE_PATH)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	cc $(COMP) -c $< -o $@
+
+$(OBJ_DIR) : 
+	mkdir $(OBJ_DIR)
 
 clean: 
 	rm -f $(OBJ)
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
-	$(MAKE) clean -C $(PRINTF_RELATIVE_PATH)
 	$(MAKE) clean -C $(MINILIBX_RELATIVE_PATH)
 
 folder_clean: 
@@ -59,12 +59,11 @@ folder_clean:
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
-	$(MAKE) fclean -C $(PRINTF_RELATIVE_PATH)
 	$(MAKE) fclean -C $(MINILIBX_RELATIVE_PATH)
 
 re: fclean all
 
-main : $(LIBFT) $(PRINTF) $(MINILIBX)
+main : $(LIBFT) $(MINILIBX)
 	cp $(LIBFT) $(PRINTF)
 	$(MAKE) -C $(MINILIBX_RELATIVE_PATH)
 	cp $(MINILIBX) $(PRINTF)
@@ -77,11 +76,15 @@ main : $(LIBFT) $(PRINTF) $(MINILIBX)
 	$(MAKE) clean -C $(MINILIBX_RELATIVE_PATH)
 
 gdb: all
+	clear
 	gdb --args ./a.out $(ARGS)
 
 run: all
 	clear
 	./a.out $(ARGS)
+
+dir: 
+	mkdir dir
 
 val: all
 	clear

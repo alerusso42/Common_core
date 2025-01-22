@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 17:55:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:45:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ t_bool	variables(t_input *input, t_map *map, t_random *random)
 	map->variable_1_player_num = 1;
 	random->variable_1_setseed = 0;
 	random->variable_2_randomizer = 1;
-	random->variable_3_enemy_num = 0;
+	random->variable_3_enemy_num = 2;
 	random->variable_4_collectable_num = 10;
 	random->variable_5_internal_wall_num = 0;
 	map->variable_6_window_width = 700;
 	map->variable_7_window_heigth = 900;
 	ft_strlcpy(map->display_name, "PACMAN\0", 7);
 	update_var(map, random);
+	return (0);
+}
+
+t_bool	mlx_settings(t_mlx *mlx)
+{
+	mlx->variable_1_sprite_size = 25;
 	return (0);
 }
 

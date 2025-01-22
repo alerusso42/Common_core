@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 18:22:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:02:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # define OFF 0
 # define NO 0
 # define NO_RANDOM 2
-# define CREATE 0
-# define READ 1
+# define CREATE 1
+# define READ 0
+# define GET 2
+# define UPDATE 1
 
 typedef struct s_input		t_input;
 typedef struct s_map		t_map;
@@ -176,22 +178,22 @@ struct s_sprite
 	void	*orange_left;
 	void	*orange_right;
 	void	*orange_up;
-	void	*pacman_close_down;
-	void	*pacman_close_left;
-	void	*pacman_close_right;
-	void	*pacman_close_up;
-	void	*pacman_dead_1;
-	void	*pacman_dead_2;
-	void	*pacman_dead_3;
-	void	*pacman_dead_4;
-	void	*pacman_half_down;
-	void	*pacman_half_left;
-	void	*pacman_half_right;
-	void	*pacman_half_up;
-	void	*pacman_open_down;
-	void	*pacman_open_left;
-	void	*pacman_open_right;
-	void	*pacman_open_up;
+	void	*pac_close_down;
+	void	*pac_close_left;
+	void	*pac_close_right;
+	void	*pac_close_up;
+	void	*pac_dead_1;
+	void	*pac_dead_2;
+	void	*pac_dead_3;
+	void	*pac_dead_4;
+	void	*pac_half_down;
+	void	*pac_half_left;
+	void	*pac_half_right;
+	void	*pac_half_up;
+	void	*pac_open_down;
+	void	*pac_open_left;
+	void	*pac_open_right;
+	void	*pac_open_up;
 	void	*purple_down;
 	void	*purple_front;
 	void	*purple_left;
@@ -212,9 +214,10 @@ struct s_sprite
 };
 struct s_mlx
 {
-	void		*connection;
+	void		*con;
 	void		*window;
-	t_sprite	*sprite;	
+	t_sprite	*sprite;
+	int			variable_1_sprite_size;
 };
 struct s_all
 {

@@ -3,58 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   change_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 16:02:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 09:03:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
 int		change_mod(char *argv[], int argc);
-t_bool	alloc_data(int game_size[2], int seed, int create_or_read, char *fn);
 int		check_extension_file(char *filename, char *extension);
-static t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed);
-t_bool	find_mapsize(char *filename, int game_size[2]);
+static t_bool	parsing(int argc, char *argv[], int *seed);
 
 int	change_mod(char *argv[], int argc)
 {
-	int	game_size[2];
 	int	seed;
 
-	game_size[0] = 0;
-	game_size[1] = 0;
 	seed = 0;
 	if (argc == 2)
 	{
 		if (check_extension_file(argv[1], ".ber") == 1)
 			return (1);
-		if (find_mapsize(argv[1], game_size) == 1)
+		if (find_mapsize(argv[1]) == 1)
 			return (1);
 		l_printf("File valido!\n");
-		return (alloc_data(game_size, seed, READ, argv[1]));
+		return (0);
 	}
 	if (argc < 4)
-		return (error(ERROR_BAD_ARGC));
+		return (error(ERROR_BAD_ARGC), 1);
 	if (ft_strcmp(argv[1], "gen") == 0)
 	{
-		if (parsing(argc, argv, game_size, &seed) != 0)
+		if (parsing(argc, argv, &seed) != 0)
 			return (ERROR_BAD_ARGC);
-		if (alloc_data(game_size, seed, CREATE, NULL) == 1)
-			return (1);
 	}
 	return (0);
 }
 
-static t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed)
+static t_bool	parsing(int argc, char *argv[], int *seed)
 {
+	int	game_size[2];
+	
 	if ((argc == 3) || (argc > 5))
-		return (error(ERROR_BAD_ARGC));
+		return (error(ERROR_BAD_ARGC), 1);
 	game_size[0] = ft_atoi(argv[2]);
 	game_size[1] = ft_atoi(argv[3]);
 	if ((game_size[0] < 1) || (game_size[1] < 1))
-		return (error(ERROR_BAD_ARGC));
+		return (error(ERROR_BAD_ARGC), 1);
 	if (argv[4] != NULL)
 	{
 		*seed = (ft_atoi(argv[4]));
@@ -68,7 +63,7 @@ static t_bool	parsing(int argc, char *argv[], int game_size[2], int *seed)
 	}
 	else
 		*seed = 1;
-	return (0);
+	return (get_data(CREATE, game_size[0], game_size[1], NULL), 0);
 }
 
 /*
@@ -107,7 +102,7 @@ int	check_extension_file(char *filename, char *extension)
 	return (0);
 }
 
-t_bool	find_mapsize(char *filename, int game_size[2])
+t_bool	find_mapsize(char *filename)
 {
 	int		fd;
 	int		size_y;
@@ -133,7 +128,5 @@ t_bool	find_mapsize(char *filename, int game_size[2])
 			old_size_x = size_x;
 		++size_y;
 	}
-	game_size[0] = old_size_x;
-	game_size[1] = size_y;
-	return (close(fd), 0);
+	return (get_data(READ, old_size_x, size_y, NULL), close(fd), 0);
 }

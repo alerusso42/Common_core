@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   print_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 16:02:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:42:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "z_function_list.h"
 
-void	print_solution(t_input *input, t_solution *solution, int x, int y);
+void	print_map(t_input *input, t_map *map, int x, int y);
 void	print_colgraphic(t_input *input, t_bool mode);
 void	print_skyscrapers(t_onebyte game_size);
-void	print_blacklist(t_onebyte game_size, t_solution *solution, int i);
+void	print_blacklist(t_onebyte game_size, t_map *map, int i);
 
 // "s" sta per game_size.
 /*	Printa la scacchiera.
 	Questa funzione non la spiego, è molto più divertente collegare
 	i pezzi del codice con la scacchiera.
 */
-void	print_solution(t_input *input, t_solution *solution, int x, int y)
+void	print_map(t_input *input, t_map *map, int x, int y)
 {
 	int	w;
 	int	h;
@@ -47,7 +47,7 @@ void	print_solution(t_input *input, t_solution *solution, int x, int y)
 			write(1, " ", 1);
 		x = -1;
 		while (++x != w)
-			l_printf("|%c|", solution->position[x][h - y - 1].value);
+			l_printf("|%c|", map->position[x][h - y - 1].value);
 		l_printf("<%d> [%d]", input->row.y[h - y - 1], h - y - 1);
 	}
 	print_colgraphic(input, 1);
@@ -117,7 +117,7 @@ void	print_skyscrapers(t_onebyte game_size)
 /* 	Print della blacklist.
 */
 /*
-void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
+void	print_blacklist(t_onebyte game_size, t_map *map, int i)
 {
 	int	x;
 	int	y;
@@ -129,16 +129,16 @@ void	print_blacklist(t_onebyte game_size, t_solution *solution, int i)
 	{
 		while (++x != game_size)
 		{
-			l_printf("\n{%d}", solution->position[x][y].value);
-			l_printf("\n V.S. solution->position[%d][%d]: ", x, y);
-			while (solution->position[x][y].black_list[++i] != 102)
-				l_printf("%d, ", solution->position[x][y].black_list[i]);
-			l_printf("102.\n V.T. solution->position[%d][%d]: 102, ", x, y);
-			while (solution->position[x][y].black_list[++i] != 103)
-				if (solution->position[x][y].black_list[i] != 102)
-					l_printf("%d, ", solution->position[x][y].black_list[i]);
+			l_printf("\n{%d}", map->position[x][y].value);
+			l_printf("\n V.S. map->position[%d][%d]: ", x, y);
+			while (map->position[x][y].black_list[++i] != 102)
+				l_printf("%d, ", map->position[x][y].black_list[i]);
+			l_printf("102.\n V.T. map->position[%d][%d]: 102, ", x, y);
+			while (map->position[x][y].black_list[++i] != 103)
+				if (map->position[x][y].black_list[i] != 102)
+					l_printf("%d, ", map->position[x][y].black_list[i]);
 			l_printf("103.\nUncertain score: ");
-			l_printf("%d\n---->", solution->position[x][y].u_score);
+			l_printf("%d\n---->", map->position[x][y].u_score);
 			i = -1;
 		}
 		x = -1;

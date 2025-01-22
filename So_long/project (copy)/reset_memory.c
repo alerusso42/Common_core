@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 14:27:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:02:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int				full_reset(int struct_num, ...);
 static int		reset_memory_input(t_input **input);
-static int		reset_memory_sol(t_solution **solution, int game_size[2]);
-//int		reset_memory_list(t_solution **solution, int game_size[2]);
+static int		reset_memory_sol(t_map **map, int game_size[2]);
 static int		reset_memory_randlist(t_random **random);
+static int		reset_memory_mlx(t_mlx **mlx);
 
 /* 	La funzione variadica full_reset accetta come argomento il numero
 	di strutture che vuoi liberare, e le strutture stesse.
-	Resetta sempre nell'ordine input, solution, random:
+	Resetta sempre nell'ordine input, map, random, mlx:
 	Perciò se volessi modificare il programma, presta molta attenzione
 	a questo dettaglio, per evitare sgradite sorprese.
 */
@@ -41,13 +41,16 @@ int	full_reset(int struct_num, ...)
 	reset_memory_input(input);
 	if (struct_num < 2)
 		return (va_end(ptr), 1);
-	data_to_free = va_arg(ptr, t_solution **);
-	reset_memory_sol((t_solution **)data_to_free, game_size);
+	data_to_free = va_arg(ptr, t_map **);
+	reset_memory_sol((t_map **)data_to_free, game_size);
 	if (struct_num < 3)
 		return (va_end(ptr), 2);
 	data_to_free = va_arg(ptr, t_random **);
 	reset_memory_randlist((t_random **)data_to_free);
-	return (va_end(ptr), 3);
+	if (struct_num < 4)
+		return (va_end(ptr), 3);
+	data_to_free = va_arg(ptr, t_mlx **);
+	return (reset_memory_mlx((t_mlx **)data_to_free), va_end(ptr), 4);
 }
 
 static int	reset_memory_input(t_input **input)
@@ -68,40 +71,15 @@ static int	reset_memory_input(t_input **input)
 	return (0);
 }
 
-/*
-int	reset_memory_list(t_solution **solution, int game_size[2])
+static int	reset_memory_sol(t_map **map, int game_size[2])
 {
-	t_solution	*p;
-	int			col;
-	int			row;
-
-	p = (*solution);
-	col = -1;
-	row = -1;
-	while ((++row != game_size[0] + 1))
-	{
-		while ((++col != game_size[1] + 1))
-		{
-			if (p->position[row][col].black_list != NULL)
-			{
-				free(p->position[row][col].black_list);
-				p->position[row][col].black_list = NULL;
-			}
-			else
-				return (0);
-		}
-		col = -1;
-	}
-	return (0);
-}*/
-
-static int	reset_memory_sol(t_solution **solution, int game_size[2])
-{
-	int			index;
-	t_solution	*p;
+	int		index;
+	t_map	*p;
 
 	index = 0;
-	p = (*solution);
+	p = (*map);
+	if (!p)
+		return (1);
 	while ((p->position[index] != NULL)
 		&& (index <= ((game_size[0]) + 1)))
 	{
@@ -115,16 +93,15 @@ static int	reset_memory_sol(t_solution **solution, int game_size[2])
 		free(p->position);
 		p->position = NULL;
 	}
-	if (p != NULL)
-	{
-		free(p);
-		p = NULL;
-	}
+	free(p);
+	p = NULL;
 	return (0);
 }
 
 static int	reset_memory_randlist(t_random **random)
 {
+	if (!*random)
+		return (0);
 	if ((*random)->values != NULL)
 	{
 		free((*random)->values);
@@ -135,5 +112,31 @@ static int	reset_memory_randlist(t_random **random)
 		free(*random);
 		*random = NULL;
 	}
+	return (0);
+}
+
+static int	reset_memory_mlx(t_mlx **mlx)
+{
+	if (!*mlx)
+		return (0);
+	if ((*mlx)->sprite)
+	{
+		reset_pic(*mlx);
+		free((*mlx)->sprite);
+		(*mlx)->sprite = NULL;
+	}
+	if ((*mlx)->window)
+	{
+		mlx_destroy_window((*mlx)->con, (*mlx)->window);
+		(*mlx)->window = NULL;
+	}
+	if ((*mlx)->con)
+	{
+		mlx_destroy_display((*mlx)->con);
+		free((*mlx)->con);
+		(*mlx)->con = NULL;
+	}
+	free(*mlx);
+	*mlx = NULL;
 	return (0);
 }
