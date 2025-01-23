@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:28:28 by alerusso          #+#    #+#             */
-/*   Updated: 2024/12/18 11:58:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:46:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main()
 	return (0);
 }
 */
-/*
+
 int	main(void)
 {
 	char	c;
@@ -75,7 +75,7 @@ int	main(void)
 	ft_printf("%c\n", '!');
 	//ft_printf("Char:%c\n Int:%d\n Char *:%s\n", c, x, str);
 	return (0);
-}*/
+}
 
 	/*	unsigned int	is_minus_flag:1;
 	unsigned int	is_alt_form:1;
