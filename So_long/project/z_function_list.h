@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 14:16:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:52:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		twist_random(t_random **random, int game_size);
 void		twist_random2(t_random **random, int game_size);
 void		twist_random3(t_random **random, int game_size);
 void		get_key_settings(t_all *all);
+int			update_screen(void *param);
 int			full_reset(int struct_num, ...);
 int			reset_pic(t_mlx *mlx);
 int			end(int keycode);

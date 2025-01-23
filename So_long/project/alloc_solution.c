@@ -100,7 +100,7 @@ void	copy_map(t_map **map, int row_n, int col_n)
 	{
 		while ((++col != col_n + 1))
 		{
-			(*map)->old_pos[col][row].value = (*map)->position[col][row].value;
+			(*map)->old_pos[col][row].value = 0;
 		}
 		col = -1;
 	}
