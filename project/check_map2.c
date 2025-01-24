@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/21 14:41:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:46:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	fifth_chk_enemy(t_map *map, int size_x, int size_y)
 
 	enemy_num = map->variable_3_enemy_num;
 	if (count_stuff(map, '$', size_x, size_y) != enemy_num)
-		return (1);
+		return (l_printf("\nAAA\n"), 1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/23 16:03:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:36:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,8 @@ struct s_position
 };
 struct s_map
 {
-	t_bool				switch_1_showtries:1;
-	t_bool				switch_2_showcycles:1;
-	t_bool				switch_3_showblacklist:1;
-	t_bool				switch_4_printonterminal:1;
+	t_bool				switch_1_bonus:1;
+	t_bool				switch_2_printonterminal:1;
 	int					variable_1_player_num;
 	t_onebyte			variable_3_enemy_num;
 	int					variable_4_collectable_num;
@@ -164,6 +162,8 @@ struct s_random
 	t_onebyte	variable_3_enemy_num;
 	int			variable_4_collectable_num;
 	int			variable_5_internal_wall_num;
+	int			variable_6_internal_wall_proportion;
+	int			wden;
 	t_onebyte	seed;
 	int			*values;
 };

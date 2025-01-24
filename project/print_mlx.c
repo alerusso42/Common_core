@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/23 15:55:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/24 07:27:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,47 +51,6 @@ static int	update_one(t_all *all, int x, int y, int dialga)
 	y += (size * 3);
 	mlx_put_image_to_window(all->mlx->con, all->mlx->window, picture, x, y);
 	return (0);
-}
-
-static void	*which_pac_man(t_all *all, int dialga)
-{
-	if (all->map->p_dir == RIGHT)
-	{
-		if (dialga % 2400 <= 800)
-			return (all->mlx->sprite->pac_open_right);
-		if ((dialga % 2400 > 800) && (dialga % 2400 < 1600))
-			return (all->mlx->sprite->pac_half_right);
-		if (dialga % 2400 >= 1600)
-			return (all->mlx->sprite->pac_close_right);
-	}
-	if (all->map->p_dir == DOWN)
-	{
-		if (dialga % 2400 <= 800)
-			return (all->mlx->sprite->pac_open_down);
-		if ((dialga % 2400 > 800) && (dialga % 2400 < 1600))
-			return (all->mlx->sprite->pac_half_down);
-		if (dialga % 2400 >= 1600)
-			return (all->mlx->sprite->pac_close_down);
-	}
-	if (all->map->p_dir == LEFT)
-	{
-		if (dialga % 2400 <= 800)
-			return (all->mlx->sprite->pac_open_left);
-		if ((dialga % 2400 > 800) && (dialga % 2400 < 1600))
-			return (all->mlx->sprite->pac_half_left);
-		if (dialga % 2400 >= 1600)
-			return (all->mlx->sprite->pac_close_left);
-	}
-	if (all->map->p_dir == UP)
-	{
-		if (dialga % 2400 <= 800)
-			return (all->mlx->sprite->pac_open_up);
-		if ((dialga % 2400 > 800) && (dialga % 2400 < 1600))
-			return (all->mlx->sprite->pac_half_up);
-		if (dialga % 2400 >= 1600)
-			return (all->mlx->sprite->pac_close_up);
-	}
-	return (NULL);
 }
 
 void	*pic(t_all *all, int x, int y, int dialga)

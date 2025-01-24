@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/23 15:58:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:59:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char *argv[])
 		return (error(ERROR_BAD_ARGC), 1);
 	if (change_mod(argv, argc) == 1)
 		return (1);
-	all = get_data(GET, 0, 0, argv[1]);
+	all = get_data(GET, 0, 0, NULL);
 	if (!all)
 		return (1);
 	get_key_settings(all);
@@ -68,20 +68,24 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-void	*get_data(int change_mode, int width, int heigth, char fn[])
+void	*get_data(int change_mode, int width, int heigth, char *fn)
 {
 	static int	mode;
 	static int	game_size[2];
+	static char	*filename;
 
 	if (change_mode != GET)
 	{
 		game_size[0] = width;
 		game_size[1] = heigth;
+		filename = fn;
 		mode = change_mode;
 		return (NULL);
 	}
+	if (game_size[0] * game_size[1] == 0)
+		return (NULL);
 	if (mode == READ)
-		return (alloc_data(game_size, 0, READ, fn));
+		return (alloc_data(game_size, 0, READ, filename));
 	else if (mode == CREATE)
 		return (alloc_data(game_size, 0, CREATE, NULL));
 	else

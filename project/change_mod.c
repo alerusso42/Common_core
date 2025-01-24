@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 09:03:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:33:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static t_bool	parsing(int argc, char *argv[], int *seed);
 
 int	change_mod(char *argv[], int argc)
 {
-	int	seed;
+	int		seed;
+	char	*filename;	
 
 	seed = 0;
 	if (argc == 2)
 	{
-		if (check_extension_file(argv[1], ".ber") == 1)
+		if (check_file(argv[1], &filename) == 1)
 			return (1);
-		if (find_mapsize(argv[1]) == 1)
+		if (find_mapsize(filename) == 1)
 			return (1);
-		l_printf("File valido!\n");
 		return (0);
 	}
 	if (argc < 4)
@@ -66,42 +66,6 @@ static t_bool	parsing(int argc, char *argv[], int *seed)
 	return (get_data(CREATE, game_size[0], game_size[1], NULL), 0);
 }
 
-/*
-	What are we doing here?
-	1) Check the filename exists and the file can be open;
-	2) Check that the file has the same extension as a .ber file.
-	To do the second step:
-
-	- We go to the end of the file name (to the null terminator);
-	- We go back until we find the "." symbol (the start of extension);
-	- We make a strcmp.
-*/
-int	check_extension_file(char *filename, char *extension)
-{
-	int	fd;
-	int	file_index;
-	int	ext_index;
-
-	fd = open(filename, O_RDONLY, 0666);
-	if (fd == -1)
-		return (1);
-	close(fd);
-	file_index = 0;
-	ext_index = 0;
-	while (filename[file_index] != '\0')
-		++file_index;
-	while ((filename[file_index] != extension[ext_index]) && (file_index != 0))
-		--file_index;
-	while ((filename[file_index]) && (extension[ext_index]))
-	{
-		if (filename[file_index] != extension[ext_index])
-			return (1);
-		++file_index;
-		++ext_index;
-	}
-	return (0);
-}
-
 t_bool	find_mapsize(char *filename)
 {
 	int		fd;
@@ -128,5 +92,5 @@ t_bool	find_mapsize(char *filename)
 			old_size_x = size_x;
 		++size_y;
 	}
-	return (get_data(READ, old_size_x, size_y, NULL), close(fd), 0);
+	return (get_data(READ, old_size_x, size_y, filename), close(fd), 0);
 }

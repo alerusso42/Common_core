@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 14:43:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:56:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 	if (fn)
 		input->filename = ft_strdup(fn);
 	if (!fn)
-		input->filename = ft_strdup("map.ber");
+		input->filename = ft_strdup("maps/map.ber");
 	if (!input->filename)
 		return (full_reset(3, &input, &map, &random), error(ERROR_FULL_MEMORY));
 	input->create_map = create_or_read;
@@ -62,7 +62,7 @@ t_all	*alloc_data2(t_input **input, t_map **map, t_random *random)
 	if (((*input)->create_map == READ) && \
 	(read_map(*input, *map) == 1))
 		return (full_reset(3, input, map, &random), NULL);
-	if ((*map)->switch_4_printonterminal == ON)
+	if ((*map)->switch_2_printonterminal == ON)
 		print_map(*input, *map, 0, 0);
 	if (check_map(*input, *map, (*map)->game_size_w, \
 	(*map)->game_size_h) == 1)
