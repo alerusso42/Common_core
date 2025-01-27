@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 15:20:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:46:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
 int			alloc_sol(t_input **input, t_solution **solution);
 void		fill_solution(t_solution **solution, int row_n, int col_n);
-void		bfs(t_solution *solution, int start[2], int end[2]);
 void		print_shortest_path(t_solution *solution, int end[2]);
 int			change_mod(char *argv[], int argc);
 int			check_extension_file(char *filename, char *extension);
