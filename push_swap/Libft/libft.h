@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/27 14:47:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:58:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <malloc.h>
+# include <limits.h>
 
 typedef struct s_typelist
 {

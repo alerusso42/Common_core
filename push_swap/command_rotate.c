@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_structs.h                                     :+:      :+:    :+:   */
+/*   command_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 13:45:37 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/28 17:16:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
-
-typedef struct	s_stack
-{
-	int	*data;
-	int	first;
-	int	last;
-	int	size;
-	int	is_sort:1;
-}				t_stack;
-
+#if __has_include("push_swap.h")
+# include "push_swap.h"
+#else
+# include "push_swap_bonus.h"
 #endif

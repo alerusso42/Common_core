@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:37:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/27 12:02:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:10:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	error(int error_type)
 		l_printf("message and the other will be disabled due to subject.\n");
 		return (ER_BAD_ARGC);
 	}
-	else if (error_type == ER_ILLEGAL_CHAR)
-		return (l_printf("\nOne char is illegal, sir\n"), ER_ILLEGAL_CHAR);
+	else if (error_type == ER_BAD_CHAR)
+		return (l_printf("\nOne char is illegal, sir\n"), ER_BAD_CHAR);
 	else if (error_type == ER_MALLOC_ERROR)
 		return (l_printf("\nMalloc error, sir (LOL)\n"), ER_MALLOC_ERROR);
 	else if (error_type == ER_REPEATED_NUM)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:10:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/27 11:59:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:10:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,32 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+t_stack	*store_stacks(t_stack *stack, int mode)
+{
+	static t_stack	*a;
+	static t_stack	*b;
+
+	if (mode == FILL_A)
+	{
+		a = stack;
+		return (NULL);
+	}
+	if (mode == FILL_B)
+	{
+		b = stack;
+		return (NULL);
+	}
+	if (mode == GET_A)
+	{
+		return (a);
+	}
+	if (mode == GET_B)
+	{
+		return (b);
+	}
+	return (NULL);
+}
 
 /*
 	Alloc data for stack a and stack b.
@@ -32,18 +58,14 @@
 */
 int	alloc_data(t_stack **a, t_stack **b, int size)
 {
-	int	old_size;
-
-	old_size = size;
-	size = size * 3;
-	if (size / old_size != 3)
+	if (size == INT_MAX)
 		return (ER_SIZE_OVERFLOW);
 	if ((!a) || (!b))
 		return (ER_STACK_CORRUPTION);
 	*a = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (!*a)
 		return (ER_MALLOC_ERROR);
-	(*a)->data = (int *)ft_calloc(size, sizeof(int));
+	(*a)->data = (int *)ft_calloc(size + 1, sizeof(int));
 	if (!(*a)->data)
 		return (ER_MALLOC_ERROR);
 	*b = (t_stack *)ft_calloc(1, sizeof(t_stack));

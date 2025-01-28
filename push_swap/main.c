@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/27 14:29:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:12:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ int	main(int argc, char *argv[])
 		return (error(ER_BAD_ARGC));
 	a = NULL;
 	b = NULL;
-	error_type = get_data(argc, argv, &a, &b);
+	error_type = parsing(argc - 1, argv, &a, &b);
 	if (error_type != 0)
 		return (free_memory(&a, &b), error(error_type));
 	//ALGORYTM
+	print_stacks(a, b);
 	free_memory(&a, &b);
 	return (0);
 }
