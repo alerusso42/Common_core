@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 13:06:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:16:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ int	parsing(int argc, char *argv[], t_stack **a, t_stack **b)
 	free_three_d_matrix(matrix);
 	if (check_for_doubles(*a))
 		return (ER_REPEATED_NUM);
-	return (0);
+	return (find_biggest(*a), 0);
 }

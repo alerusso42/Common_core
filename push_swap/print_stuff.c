@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:07:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 11:16:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:59:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	print_stacks()
 	}
 	++print_num;
 	l_printf("\n----------------------------\nStack a\t\tStack b\n\nEND...\n");
+	a->moves_num += b->moves_num;
 }

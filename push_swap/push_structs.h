@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 12:12:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:06:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ typedef struct	s_stack
 	int	first;
 	int	last;
 	int	size;
+	int	max_num_len;
 	int	is_sort:1;
 	int	moves_num;
+	int	print_stuff:2;
 }				t_stack;
 
 typedef struct	s_settings

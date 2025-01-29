@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 12:07:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:13:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	rra(void)
 		a->data[index + 1] = a->data[index + 1] ^ temp;
 		++index;
 	}
+	a->moves_num += 1;
+	if (a->print_stuff == CORRECTION)
+		l_printf("Move number %d: rra;\n", a->moves_num);
+	else if (a->print_stuff == PRINT_MODIFICATIONS)
+		print_stacks();
 }
 
 void	rrb(void)
@@ -58,10 +63,24 @@ void	rrb(void)
 		b->data[index + 1] = b->data[index + 1] ^ temp;
 		++index;
 	}
+	b->moves_num += 1;
+	if (b->print_stuff == CORRECTION)
+		l_printf("Move number %d: rrb;\n", b->moves_num);
+	else if (b->print_stuff == PRINT_MODIFICATIONS)
+		print_stacks();
 }
 
 void	rrr(void)
 {
+	static t_stack	*b;
+
+	if (!b)
+		b = store_stacks(NULL, GET_B);
 	rra();
 	rrb();
+	b->moves_num -= 1;
+	if (b->print_stuff == CORRECTION)
+		l_printf("Move number %d: rrr;\n", b->moves_num);
+	else if (b->print_stuff == PRINT_MODIFICATIONS)
+		print_stacks();
 }

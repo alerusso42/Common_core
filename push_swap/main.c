@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 10:46:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:06:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ int	main(int argc, char *argv[])
 	error_type = parsing(argc - 1, argv, &a, &b);
 	if (error_type != 0)
 		return (free_memory(&a, &b), free(settings), error(error_type));
-	variables(settings);
+	variables(settings, a, b);
 	if (settings->variable_1_mode == PLAY)
 		play();
-	//ALGORYTM
-	print_stacks();
+	if (settings->variable_1_mode == PRINT_FINAL_RESULT)
+	{
+		algorythm();
+		print_stacks();
+	}
+	l_printf("\nMOVES NUM: %d\n\n", a->moves_num);
 	return (free_memory(&a, &b), free(settings), 0);
 }

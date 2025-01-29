@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 11:42:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:14:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	ra(void)
 		a->data[index - 1] = a->data[index - 1] ^ temp;
 		--index;
 	}
+	if (a->print_stuff == CORRECTION)
+		l_printf("Move number %d: ra;\n", a->moves_num);
+	else if (a->print_stuff == PRINT_MODIFICATIONS)
+		print_stacks();
 }
 
 void	rb(void)
@@ -58,10 +62,23 @@ void	rb(void)
 		b->data[index - 1] = b->data[index - 1] ^ temp;
 		--index;
 	}
+	if (b->print_stuff == CORRECTION)
+		l_printf("Move number %d: rb;\n", b->moves_num);
+	else if (b->print_stuff == PRINT_MODIFICATIONS)
+		print_stacks();
 }
 
 void	rr(void)
 {
+	static t_stack	*b;
+
+	if (!b)
+		b = store_stacks(NULL, GET_B);
 	ra();
 	rb();
+	b->moves_num -= 1;
+	if (b->print_stuff == CORRECTION)
+		l_printf("Move number %d: rr;\n", b->moves_num);
+	else if (b->print_stuff == PRINT_MODIFICATIONS)
+		print_stacks();
 }

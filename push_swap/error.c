@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:37:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 12:10:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:23:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	error(int error_type)
 		l_printf(" if you insert something different from a number or you ");
 		l_printf("repeat one or more numbers.\nIf everything goes well, the");
 		l_printf(" program prints out the moves it has taken to sort.\nThis ");
-		l_printf("message and the other will be disabled due to subject.\n");
+		l_printf("message and the other will be disabled due to subject.\n\n");
 		return (ER_BAD_ARGC);
 	}
 	else if (error_type == ER_BAD_CHAR)

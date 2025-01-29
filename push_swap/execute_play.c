@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 12:29:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:31:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static int	other_commands(char input[7])
 		ra();
 	else if (ft_strncmp(input, "rb", 2) == 0)
 		rb();
-	else if (ft_strncmp(input, "rr", 2) == 0)
-		rr();
 	else if (ft_strncmp(input, "rra", 3) == 0)
 		rra();
 	else if (ft_strncmp(input, "rrb", 3) == 0)
 		rrb();
 	else if (ft_strncmp(input, "rrr", 3) == 0)
 		rrr();
+	else if (ft_strncmp(input, "rr", 2) == 0)
+		rr();
 	else if (ft_strncmp(input, "help", 2) == 0)
 		help_message();
 	else

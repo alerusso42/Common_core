@@ -44,6 +44,11 @@ void	sb(void)
 
 void	ss(void)
 {
+	static t_stack	*b;
+
+	if (!b)
+		b = store_stacks(NULL, GET_B);
 	sa();
 	sb();
+	b->moves_num -= 1;
 }

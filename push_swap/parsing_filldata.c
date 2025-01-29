@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 12:14:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:39:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,40 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+static int	ft_abs(int num)
+{
+	if (num >= 0)
+		return (num);
+	if (num == INT_MIN)
+		return (INT_MAX);
+	return (num * -1);
+}
+
+void	find_biggest(t_stack *a)
+{
+	int	index;
+	int	count;
+	int	biggest;
+
+	biggest = ft_abs(a->data[a->first]);
+	index = 1;
+	while (index != a->size)
+	{
+		if (ft_abs(a->data[index]) > biggest)
+			biggest = a->data[index];
+		++index;
+	}
+	count = 0;
+	while (biggest)
+	{
+		biggest /= 2;
+		++count; 
+	}
+	a->max_num_len = count;
+	if (count == 0)
+		a->max_num_len = 1;
+}
 
 int	fill_stacks(t_stack *a, char ***matrix)
 {
@@ -52,6 +86,7 @@ int	get_data(int count_num, t_stack **a, t_stack **b)
 		return (error_type);
 	(*a)->last = count_num - 1;
 	(*a)->first = 0;
+	(*a)->size = count_num;
 	(*b)->last = count_num - 1;
 	(*b)->first = count_num;
 	(*b)->size = 0;

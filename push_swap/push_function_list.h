@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 12:27:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:06:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //	UTILITIES
 int		error(int error_type);
 int		l_printf(const char *str, ...);
-void	variables(t_settings *settings);
+void	variables(t_settings *settings, t_stack *a, t_stack *b);
 //	MEMORY
 int		alloc_data(t_stack **a, t_stack **b, int size);
 t_stack	*store_stacks(t_stack *stack, int mode);
@@ -26,6 +26,7 @@ void	free_three_d_matrix(char ***matrix);
 int		parsing(int argc, char *argv[], t_stack **a, t_stack **b);
 int		get_data(int argc, t_stack **a, t_stack **b);
 int		fill_stacks(t_stack *a, char ***matrix);
+void	find_biggest(t_stack *a);
 //	PRINT
 void	print_stacks(void);
 //	COMMANDS
@@ -42,6 +43,7 @@ void	rrb(void);
 void	rrr(void);
 //	EXECUTE
 void	play(void);
-int	checker(void);
+int		checker(void);
+void	algorythm(void);
 
 #endif
