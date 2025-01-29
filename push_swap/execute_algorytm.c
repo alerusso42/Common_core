@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_structs.h                                     :+:      :+:    :+:   */
+/*   execute_algorytm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 12:12:47 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/29 09:45:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
-
-typedef struct	s_stack
-{
-	int	*data;
-	int	first;
-	int	last;
-	int	size;
-	int	is_sort:1;
-	int	moves_num;
-}				t_stack;
-
-typedef struct	s_settings
-{
-	unsigned int	variable_1_mode:2;
-}				t_settings;
-
-
+#if __has_include("push_swap.h")
+# include "push_swap.h"
+#else
+# include "push_swap_bonus.h"
 #endif
+

@@ -10,6 +10,8 @@ SRC = 	ft_light_printf.c get_next_line_bonus.c get_next_line_utils_bonus.c \
 		alloc_memory.c free_memory.c \
 		parsing_checkdata.c parsing_filldata.c \
 		print_stuff.c \
+		command_push.c command_rotate.c command_reverse_rotate.c command_swap.c \
+		execute_play.c execute_checker.c \
 		error.c switches.c variables.c main.c \
 
 HEADER = 	get_next_line_bonus.h \

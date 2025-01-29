@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stuff.c                                      :+:      :+:    :+:   */
+/*   execute_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 13:07:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 11:16:39 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/29 12:34:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,23 @@
 # include "push_swap_bonus.h"
 #endif
 
-void	print_stacks()
+int	checker(void)
 {
-	static int				index;
-	static int		print_num;
-	static t_stack	*a;
-	static t_stack	*b;
-	static int		total_size;
+	static t_stack *a;
+	static int		index;
 
 	if (a == NULL)
 		a = store_stacks(NULL, GET_A);
-	if (b == NULL)
-		b = store_stacks(NULL, GET_B);
 	index = 0;
-	total_size = a->size + b->size;
-	l_printf("\nPrint number %d:\n\n", print_num + 1);
-	while (index != a->last + 1)
+	while (index != a->size - 1)
 	{
-		if ((a->data[index] <= 9999999) && (a->data[index] >= -999999))
-			l_printf("%d\t\t%d\n", a->data[index], b->data[index]);
-		else
-			l_printf("%d\t%d\n", a->data[index], b->data[index]);
+		if (a->data[index] > a->data[index + 1])
+		{
+			l_printf("\nYou still have to sort something... try harder.\n");
+			return (1);
+		}
 		++index;
 	}
-	++print_num;
-	l_printf("\n----------------------------\nStack a\t\tStack b\n\nEND...\n");
-}
+	l_printf("\nEverything sorted in %d moves, GG!\n", a->moves_num);
+	return (0);
+}	

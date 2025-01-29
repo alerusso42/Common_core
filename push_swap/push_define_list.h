@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:30:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 17:06:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:38:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@
 # define GET_B 2
 # define FILL_A 3
 # define FILL_B 4
+# define CORRECTION 0
+# define PRINT_MODIFICATIONS 1
+# define PLAY 3
 
 #endif

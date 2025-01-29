@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/27 11:35:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:36:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,3 +15,8 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+void	variables(t_settings *settings)
+{
+	settings->variable_1_mode = PLAY;
+}

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 17:12:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:14:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	fill_stacks(t_stack *a, char ***matrix)
 		string_index = 0;
 		while (matrix[matrix_index][string_index])
 		{
-			atoi_result = toi(matrix[matrix_index][string_index]);
+			atoi_result = ft_atoi(matrix[matrix_index][string_index]);
 			if ((atoi_result > INT_MAX) || (atoi_result < INT_MIN))
 				return (ER_ATOI);
 			a->data[count_nums] = atoi_result;
@@ -39,6 +39,7 @@ int	fill_stacks(t_stack *a, char ***matrix)
 		}
 		++matrix_index;
 	}
+	a->size = count_nums;
 	return (0);
 }
 
@@ -52,7 +53,9 @@ int	get_data(int count_num, t_stack **a, t_stack **b)
 	(*a)->last = count_num - 1;
 	(*a)->first = 0;
 	(*b)->last = count_num - 1;
-	(*b)->first = 0;
+	(*b)->first = count_num;
+	(*b)->size = 0;
+	(*a)->moves_num = 0;
 	store_stacks(*a, FILL_A);
 	store_stacks(*b, FILL_B);
 	return (0);

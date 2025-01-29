@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 17:23:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:27:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //	UTILITIES
 int		error(int error_type);
 int		l_printf(const char *str, ...);
+void	variables(t_settings *settings);
 //	MEMORY
 int		alloc_data(t_stack **a, t_stack **b, int size);
 t_stack	*store_stacks(t_stack *stack, int mode);
@@ -26,10 +27,21 @@ int		parsing(int argc, char *argv[], t_stack **a, t_stack **b);
 int		get_data(int argc, t_stack **a, t_stack **b);
 int		fill_stacks(t_stack *a, char ***matrix);
 //	PRINT
-void	print_stacks(t_stack *a, t_stack *b);
+void	print_stacks(void);
 //	COMMANDS
 void	sa(void);
 void	sb(void);
 void	ss(void);
+void	pa(void);
+void	pb(void);
+void	ra(void);
+void	rb(void);
+void	rr(void);
+void	rra(void);
+void	rrb(void);
+void	rrr(void);
+//	EXECUTE
+void	play(void);
+int	checker(void);
 
 #endif
