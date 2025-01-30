@@ -6,7 +6,9 @@ OBJ_BONUS_DIR = obj_bonus_dir
 BONUS_DIR = bonus_dir
 ALL = all.a
 CP = cp
-SRC = 	ft_light_printf.c get_next_line_bonus.c get_next_line_utils_bonus.c \
+SRC = 	ft_light_printf.c \
+		alloc_random.c random_numbers.c random_test.c \
+		general.c \
 		alloc_memory.c free_memory.c \
 		parsing_checkdata.c parsing_filldata.c \
 		print_stuff.c \
@@ -14,8 +16,7 @@ SRC = 	ft_light_printf.c get_next_line_bonus.c get_next_line_utils_bonus.c \
 		execute_play.c execute_checker.c execute_algorythm.c \
 		error.c switches.c variables.c main.c \
 
-HEADER = 	get_next_line_bonus.h \
-			push_define_list.h push_ext_libraries.h push_function_list.h \
+HEADER = 	push_define_list.h push_ext_libraries.h push_function_list.h \
 			push_structs.h push_swap.h
 
 SRC_BONUS = $(SRC:.c=_bonus.c)

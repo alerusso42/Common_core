@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 15:06:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:34:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //	UTILITIES
 int		error(int error_type);
 int		l_printf(const char *str, ...);
+void	switches(t_settings *settings, t_stack *a);
 void	variables(t_settings *settings, t_stack *a, t_stack *b);
 //	MEMORY
 int		alloc_data(t_stack **a, t_stack **b, int size);
@@ -29,6 +30,13 @@ int		fill_stacks(t_stack *a, char ***matrix);
 void	find_biggest(t_stack *a);
 //	PRINT
 void	print_stacks(void);
+//	COOL_STUFF
+int		random_test(char *argv[]);
+int		alloc_randomlist(t_random **random, int numbers_len);
+int		get_randomlist(t_random *random, int numbers_len);
+//	GENERAL
+char	*ft_binary(int num, char result[33], int mlen);
+int		ft_abs(int num);
 //	COMMANDS
 void	sa(void);
 void	sb(void);

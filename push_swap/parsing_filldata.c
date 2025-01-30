@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 15:39:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:21:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 #else
 # include "push_swap_bonus.h"
 #endif
-
-static int	ft_abs(int num)
-{
-	if (num >= 0)
-		return (num);
-	if (num == INT_MIN)
-		return (INT_MAX);
-	return (num * -1);
-}
 
 void	find_biggest(t_stack *a)
 {
@@ -40,6 +31,8 @@ void	find_biggest(t_stack *a)
 		++index;
 	}
 	count = 0;
+	if (biggest < 0)
+		count++;
 	while (biggest)
 	{
 		biggest /= 2;

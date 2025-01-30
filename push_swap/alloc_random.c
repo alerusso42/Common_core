@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   switches.c                                         :+:      :+:    :+:   */
+/*   alloc_random.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 11:05:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 09:39:04 by alerusso         ###   ########.fr       */
+/*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/30 14:02:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,24 @@
 # include "push_swap_bonus.h"
 #endif
 
-static void	apply_switches(t_settings *settings, t_stack *a);
-
-void	switches(t_settings *settings, t_stack *a)
+int	alloc_randomlist(t_random **random, int numbers_len)
 {
-	settings->switch_1_showbinary = ON;
-	apply_switches(settings, a);
-}
+	int	size_memory;
 
-static void	apply_switches(t_settings *settings, t_stack *a)
-{
-	if (settings->switch_1_showbinary == ON)
-		a->switch_1_showbinary = ON;
+	if (numbers_len < 2)
+		return (1);
+	size_memory = numbers_len + 3;
+	(*random) = malloc(sizeof(t_random));
+	if (*random == NULL)
+	{
+		return (1);
+	}
+	(*random)->values = ft_calloc(size_memory, sizeof(int));
+	if ((*random)->values == NULL)
+	{
+		free(*random);
+		return (1);
+	}
+	get_randomlist(*random, numbers_len);
+	return (0);
 }

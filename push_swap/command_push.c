@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:03:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 15:12:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:37:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	pa(void)
 	b->first += 1;
 	b->size -= 1;
 	a->moves_num += 1;
-	if (a->print_stuff == CORRECTION)
+	if (a->variable_1_mode == CORRECTION)
 		l_printf("Move number %d: pa;\n", a->moves_num);
-	else if (a->print_stuff == PRINT_MODIFICATIONS)
+	else if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 }
 
@@ -58,8 +58,8 @@ void	pb(void)
 	a->first += 1;
 	a->size -= 1;
 	a->moves_num += 1;
-	if (a->print_stuff == CORRECTION)
+	if (a->variable_1_mode == CORRECTION)
 		l_printf("Move number %d: pb;\n", a->moves_num);
-	else if (a->print_stuff == PRINT_MODIFICATIONS)
+	else if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 }

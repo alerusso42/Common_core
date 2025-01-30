@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   random_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 12:36:02 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/30 11:59:52 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/30 14:04:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,29 @@
 
 void	print_and_algorythm(t_settings *settings, t_stack *a);
 
-void	print_and_algorythm(t_settings *settings, t_stack *a)
+static void	free_random(t_random **random)
 {
-	if (settings->variable_1_mode == PLAY)
-		play();
-	if (settings->variable_1_mode == PRINT_FINAL_RESULT)
+	if ((!random) || (!*random))
+		return ;
+	if ((*random)->values)
 	{
-		algorythm();
-		print_stacks();
+		free((*random)->values);
+		(*random)->values = NULL;
 	}
-	l_printf("\nMOVES NUM: %d\n\n", a->moves_num);
+	free(*random);
+	*random = NULL;
+}
+
+static void	get_random_stack(t_stack *a, t_random *random)
+{
+	int	index;
+
+	index = 0;
+	while (index != a->size)
+	{
+		a->data[index] = random->values[index];
+		++index;
+	}
 }
 
 /*
@@ -39,25 +52,28 @@ void	print_and_algorythm(t_settings *settings, t_stack *a)
 	4)	print;
 	5)	release of memory alloc.
 */
-int	main(int argc, char *argv[])
+int	random_test(char *argv[])
 {
 	t_stack			*a;
 	t_stack			*b;
 	t_settings		*settings;
+	static t_random	*random;
 	int				error_type;
 
-	if (argc == 1)
-		return (error(ER_BAD_ARGC));
-	if ((ft_strncmp("test", argv[1], 4) == 0) && (argc == 3))
-		return(random_test(argv));
 	a = NULL;
 	b = NULL;
 	settings = (t_settings *)ft_calloc(1, sizeof(t_settings));
 	if (!settings)
 		return (error(ER_MALLOC_ERROR));
-	error_type = parsing(argc - 1, argv, &a, &b);
+	error_type = get_data((int)ft_atoi(argv[2]), &a, &b);
 	if (error_type != 0)
 		return (free_memory(&a, &b), free(settings), error(error_type));
+	if (alloc_randomlist(&random, (int)ft_atoi(argv[2])) != 0)
+		return (free_memory(&a, &b), free(settings), free_random(&random), \
+		ER_MALLOC_ERROR);
+	get_random_stack(a, random);
+	free_random(&random);
+	find_biggest(a);
 	switches(settings, a);
 	variables(settings, a, b);
 	print_and_algorythm(settings, a);
