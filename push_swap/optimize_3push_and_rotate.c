@@ -1,36 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_checker.c                                  :+:      :+:    :+:   */
+/*   optimize_3push_and_rotate.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:25:54 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/31 10:40:53 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/31 10:40:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#if __has_include("push_swap.h")
-# include "push_swap.h"
-#else
-# include "push_swap_bonus.h"
-#endif
-
-int	checker(void)
-{
-	static t_stack *a;
-	static int		index;
-
-	if (a == NULL)
-		a = store_stacks(NULL, GET_A);
-	index = 0;
-	while (index != a->size - 1)
-	{
-		if (a->data[index] > a->data[index + 1])
-		{
-			return (1);
-		}
-		++index;
-	}
-	return (0);
-}	

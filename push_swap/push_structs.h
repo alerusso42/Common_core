@@ -6,12 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 13:59:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:39:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef unsigned char	t_bool;	
 
 typedef struct	s_stack
 {
@@ -22,6 +24,13 @@ typedef struct	s_stack
 	int				max_num_len;
 	int				is_sort:1;
 	int				moves_num;
+	int				command_list_length;
+	int				command_list_size;
+	int				furthest_position;
+	int				nums_to_push;
+	unsigned int	order:2;
+	t_bool			*to_push;
+	char			*command_list;
 	unsigned int	switch_1_showbinary:1;
 	unsigned int	variable_1_mode:2;
 }				t_stack;

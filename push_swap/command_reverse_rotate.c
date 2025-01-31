@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 09:37:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:58:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	rra(void)
 		++index;
 	}
 	a->moves_num += 1;
+	command_counter(RRA);
 	if (a->variable_1_mode == CORRECTION)
 		l_printf("Move number %d: rra;\n", a->moves_num);
 	else if (a->variable_1_mode == PRINT_MODIFICATIONS)
@@ -64,6 +65,7 @@ void	rrb(void)
 		++index;
 	}
 	b->moves_num += 1;
+	command_counter(RRB);
 	if (b->variable_1_mode == CORRECTION)
 		l_printf("Move number %d: rrb;\n", b->moves_num);
 	else if (b->variable_1_mode == PRINT_MODIFICATIONS)
@@ -79,6 +81,7 @@ void	rrr(void)
 	rra();
 	rrb();
 	b->moves_num -= 1;
+	command_counter(RRR);
 	if (b->variable_1_mode == CORRECTION)
 		l_printf("Move number %d: rrr;\n", b->moves_num);
 	else if (b->variable_1_mode == PRINT_MODIFICATIONS)

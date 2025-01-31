@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 12:34:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:50:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,14 @@ void	rr(void);
 void	rra(void);
 void	rrb(void);
 void	rrr(void);
+void	command_counter(unsigned char command);
 //	EXECUTE
-void	play(void);
+int		play(void);
 int		checker(void);
-void	algorythm(void);
+void	algorythm(t_stack *a, t_stack *b);
+//	OPTIMIZE
+void	optimize(int binary);
+void	push_guard(int binary, t_stack *a);
+void	find_rotate_order(t_stack *a);
 
 #endif

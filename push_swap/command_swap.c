@@ -27,6 +27,7 @@ void	sa(void)
 	a->data[a->first] = a->data[a->first] ^ a->data[a->last];
 	a->data[a->last] = a->data[a->first] ^ a->data[a->last];
 	a->data[a->first] = a->data[a->first] ^ a->data[a->last];
+	command_counter(SA);
 }
 
 void	sb(void)
@@ -40,6 +41,7 @@ void	sb(void)
 	b->data[b->first] = b->data[b->first] ^ b->data[b->last];
 	b->data[b->last] = b->data[b->first] ^ b->data[b->last];
 	b->data[b->first] = b->data[b->first] ^ b->data[b->last];
+	command_counter(SB);
 }
 
 void	ss(void)
@@ -51,4 +53,5 @@ void	ss(void)
 	sa();
 	sb();
 	b->moves_num -= 1;
+	command_counter(SS);
 }

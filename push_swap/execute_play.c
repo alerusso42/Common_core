@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 13:31:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:07:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+int	victory_message(t_stack *a, t_stack *b, int mode)
+{
+	if (a->is_sort == NO)
+		return (-1);
+	a->moves_num += b->moves_num;
+	if (mode == PRINT)
+		l_printf("\nEverything sorted in %d moves, GG!\n", a->moves_num);
+	return (a->moves_num);
+}
 
 static void	help_message(void)
 {
@@ -63,7 +73,7 @@ static int	other_commands(char input[7])
 	return (0);
 }
 
-void	play(void)
+int	play(void)
 {
 	static t_stack	*a;
 	static t_stack	*b;
@@ -83,10 +93,11 @@ void	play(void)
 		else if (other_commands(input) == 0)
 			l_printf("");
 		else if ((ft_strncmp(input, "check", 5) == 0) && (checker() == 0))
-			return ;
+			return (victory_message(a, b, 1));
 		else if (ft_strncmp(input, "stop", 2) == 0)
-			return ;
+			return (0);
 		else if (ft_strncmp(input, "check", 5) != 0)
 			l_printf("\ninvalid user input!\n");
 	}
+	return (0);
 }

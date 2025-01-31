@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_checker.c                                  :+:      :+:    :+:   */
+/*   optimize_1push_guard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:25:54 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/31 10:39:22 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/31 12:30:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 # include "push_swap_bonus.h"
 #endif
 
-int	checker(void)
+void	push_guard(int binary, t_stack *a)
 {
-	static t_stack *a;
-	static int		index;
-
-	if (a == NULL)
-		a = store_stacks(NULL, GET_A);
-	index = 0;
-	while (index != a->size - 1)
+	int	index;
+	
+	index = a->first;
+	while ((index != a->last + 1) && ((a->data[index] & binary) != 0))
+		++index;
+	while ((index != a->last + 1) && ((a->data[index] & binary) != 1))
+		++index;
+	while (index != a->last + 1)
 	{
-		if (a->data[index] > a->data[index + 1])
+		if ((a->data[index] & binary) == 0)
 		{
-			return (1);
+			a->furthest_position = index;
+			a->nums_to_push += 1;
+			a->to_push[index] = 1;
 		}
 		++index;
 	}
-	return (0);
-}	
+}

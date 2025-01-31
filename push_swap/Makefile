@@ -13,6 +13,10 @@ SRC = 	ft_light_printf.c \
 		parsing_checkdata.c parsing_filldata.c \
 		print_stuff.c \
 		command_push.c command_rotate.c command_reverse_rotate.c command_swap.c \
+		command_counter.c \
+		optimize.c optimize_1push_guard.c optimize_2find_rotate_order.c \
+		optimize_3push_and_rotate.c optimize_4last_rotate.c \
+		optimize_5doctor_strange.c \
 		execute_play.c execute_checker.c execute_algorythm.c \
 		error.c switches.c variables.c main.c \
 

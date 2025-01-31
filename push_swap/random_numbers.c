@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 13:57:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:19:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	twist_random2(t_random *random, int numbers_len)
 		if (random->seed % 2 == 0)
 			random->seed = random->values[i % caos];
 		if (random->seed % 23 == 0)
-			i += 11;
+			i %= 11;
 		caos = random->seed % numbers_len;
 		i %= numbers_len;
 		if ((caos >= 0) && (caos < numbers_len - 3) && \

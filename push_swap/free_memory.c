@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:06:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 15:28:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:32:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+void	free_stack_b(t_stack **b)
+{
+	if ((b) && (*b))
+	{
+		if ((*b)->data)
+		{
+			free((*b)->data);
+			(*b)->data = NULL;
+		}
+		free(*b);
+		*b = NULL;
+	}
+}
 
 /*
 	Free everything, receiving the address of the structs.
@@ -30,19 +44,20 @@ void	free_memory(t_stack **a, t_stack **b)
 			free((*a)->data);
 			(*a)->data = NULL;
 		}
+		if ((*a)->command_list)
+		{
+			free((*a)->command_list);
+			(*a)->command_list = NULL;
+		}
+		if ((*a)->to_push)
+		{
+			free((*a)->to_push);
+			(*a)->to_push = NULL;
+		}
 		free(*a);
 		*a = NULL;
 	}
-		if ((b) && (*b))
-	{
-		if ((*b)->data)
-		{
-			free((*b)->data);
-			(*b)->data = NULL;
-		}
-		free(*b);
-		*b = NULL;
-	}
+	free_stack_b(b);
 }
 
 void	free_three_d_matrix(char ***matrix)

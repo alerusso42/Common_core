@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:10:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 17:10:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:30:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ int	alloc_data(t_stack **a, t_stack **b, int size)
 		return (ER_MALLOC_ERROR);
 	(*b)->data = (int *)ft_calloc(size, sizeof(int));
 	if (!(*b)->data)
+		return (ER_MALLOC_ERROR);
+	(*a)->command_list = (char *)ft_calloc(ENVISIONED_MOVES_NUM, sizeof(char));
+	if (!(*a)->command_list)
+		return (ER_MALLOC_ERROR);
+	(*a)->command_list_size = ENVISIONED_MOVES_NUM;
+	(*a)->command_list_length = 0;
+	(*a)->to_push = (t_bool *)ft_calloc(size, sizeof(t_bool));
+	if (!(*a)->to_push)
 		return (ER_MALLOC_ERROR);
 	return (0);
 }

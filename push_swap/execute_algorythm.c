@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:26:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:16:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,12 @@
 					5) Lastly, we refill pa with PA.
 					6) We iterate for every column.
 */
-void	algorythm(void)
+void	algorythm(t_stack *a, t_stack *b)
 {
-	static t_stack	*a;
-	static t_stack	*b;
 	static int		game_counter;
 	int				binary;
 	int				turn_counter;
 
-	if (!a)
-		a = store_stacks(NULL, GET_A);
-	if (!b)
-		b = store_stacks(NULL, GET_B);
 	binary = 1;
 	while (game_counter++ != a->max_num_len)
 	{
@@ -58,6 +52,28 @@ void	algorythm(void)
 				ra();
 			else
 				pb();
+			++turn_counter;
+			optimize(binary);
+		}
+		while (b->size != 0)
+			pa();
+		binary = binary << 1;
+	}
+}
+
+void	optimized_algorythm(t_stack *a, t_stack *b)
+{
+	static int		game_counter;
+	int				binary;
+	int				turn_counter;
+
+	binary = 1;
+	while (game_counter++ != a->max_num_len)
+	{
+		turn_counter = 0;
+		while (turn_counter != a->size + b->size)
+		{
+			//optimize()
 			++turn_counter;
 		}
 		while (b->size != 0)

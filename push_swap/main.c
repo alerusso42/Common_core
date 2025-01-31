@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 12:36:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:54:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 # include "push_swap_bonus.h"
 #endif
 
-void	print_and_algorythm(t_settings *settings, t_stack *a);
+void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b);
 
-void	print_and_algorythm(t_settings *settings, t_stack *a)
+void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 {
 	if (settings->variable_1_mode == PLAY)
 		play();
 	if (settings->variable_1_mode == PRINT_FINAL_RESULT)
 	{
-		algorythm();
+		algorythm(a, b);
 		print_stacks();
 	}
 	l_printf("\nMOVES NUM: %d\n\n", a->moves_num);
@@ -60,6 +60,6 @@ int	main(int argc, char *argv[])
 		return (free_memory(&a, &b), free(settings), error(error_type));
 	switches(settings, a);
 	variables(settings, a, b);
-	print_and_algorythm(settings, a);
+	print_and_algorythm(settings, a, b);
 	return (free_memory(&a, &b), free(settings), 0);
 }

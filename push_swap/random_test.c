@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:59:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:04:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:54:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "push_swap_bonus.h"
 #endif
 
-void	print_and_algorythm(t_settings *settings, t_stack *a);
+void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b);
 
 static void	free_random(t_random **random)
 {
@@ -76,6 +76,6 @@ int	random_test(char *argv[])
 	find_biggest(a);
 	switches(settings, a);
 	variables(settings, a, b);
-	print_and_algorythm(settings, a);
+	print_and_algorythm(settings, a, b);
 	return (free_memory(&a, &b), free(settings), 0);
 }

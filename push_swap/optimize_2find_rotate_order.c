@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_checker.c                                  :+:      :+:    :+:   */
+/*   optimize_2find_rotate_order.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:25:54 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/31 10:41:41 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/31 12:51:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@
 # include "push_swap_bonus.h"
 #endif
 
-int	checker(void)
+void	find_rotate_order(t_stack *a)
 {
-	static t_stack *a;
-	static int		index;
+	int	half;
 
-	if (a == NULL)
-		a = store_stacks(NULL, GET_A);
-	index = 0;
-	while (index != a->size - 1)
-	{
-		if (a->data[index] > a->data[index + 1])
-		{
-			return (1);
-		}
-		++index;
-	}
-	return (0);
-}	
+	half = a->size / 2;
+	if ((half != 0) && (half % 2 == 0))
+		half -= 1;
+	if (a->furthest_position >= half)
+		a->order = RRA;
+	else
+		a->order = RA;
+}
