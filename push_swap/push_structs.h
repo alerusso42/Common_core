@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 12:39:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:00:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,19 @@ typedef struct	s_stack
 	int				nums_to_push;
 	unsigned int	order:2;
 	t_bool			*to_push;
+	int				top_one;
+	int				bottom_one;
 	char			*command_list;
 	unsigned int	switch_1_showbinary:1;
 	unsigned int	variable_1_mode:2;
+	unsigned int	variable_2_which_algorythm:2;
 }				t_stack;
 
 typedef struct	s_settings
 {
 	unsigned int	switch_1_showbinary:1;
 	unsigned int	variable_1_mode:2;
+	unsigned int	variable_2_which_algorythm:2;
 	void			*ptr;
 }				t_settings;
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 10:54:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:12:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 		play();
 	if (settings->variable_1_mode == PRINT_FINAL_RESULT)
 	{
-		algorythm(a, b);
+		if (settings->variable_2_which_algorythm == NORMAL)
+			algorythm(a, b);
+		if (settings->variable_2_which_algorythm == OPTIMIZED)
+			optimized_algorythm(a, b);
 		print_stacks();
 	}
 	l_printf("\nMOVES NUM: %d\n\n", a->moves_num);

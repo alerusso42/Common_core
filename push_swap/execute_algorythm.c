@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 12:16:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:07:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	algorythm(t_stack *a, t_stack *b)
 			else
 				pb();
 			++turn_counter;
-			optimize(binary);
 		}
 		while (b->size != 0)
 			pa();
@@ -73,7 +72,7 @@ void	optimized_algorythm(t_stack *a, t_stack *b)
 		turn_counter = 0;
 		while (turn_counter != a->size + b->size)
 		{
-			//optimize()
+			optimize(binary);
 			++turn_counter;
 		}
 		while (b->size != 0)

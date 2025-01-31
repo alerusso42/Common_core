@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 14:21:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:10:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	find_biggest(t_stack *a)
 
 	biggest = ft_abs(a->data[a->first]);
 	index = 1;
+	count = 0;
 	while (index != a->size)
 	{
+		if ((count == 0) && (a->data[index] < 0))
+			++count;
 		if (ft_abs(a->data[index]) > biggest)
 			biggest = a->data[index];
 		++index;
 	}
-	count = 0;
-	if (biggest < 0)
-		count++;
 	while (biggest)
 	{
 		biggest /= 2;

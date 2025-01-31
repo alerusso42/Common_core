@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:30:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 12:39:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:02:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@
 # define RRR 11
 //	MALLOC_CHUNKS
 # define ENVISIONED_MOVES_NUM 8192
+//	WHICH_ALGORYTHM
+#define NORMAL 0
+#define OPTIMIZED 1
+#define GOD 2
 
 #endif
