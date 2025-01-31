@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 12:50:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:56:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	algorythm(t_stack *a, t_stack *b);
 void	optimize(int binary);
 void	push_guard(int binary, t_stack *a);
 void	find_rotate_order(t_stack *a);
+void	push_and_rotate(t_stack *a);
 
 #endif

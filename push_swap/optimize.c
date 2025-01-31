@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:49:23 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 12:51:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:57:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	optimize(int binary)
 		a = store_stacks(NULL, GET_A);
 	push_guard(binary, a);
 	find_rotate_order(a);
+	push_and_rotate(a);
 	index = 0;
 	while (index != (a->size + a->first) + 1)
 	{
