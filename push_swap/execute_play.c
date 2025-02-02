@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_play.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 10:07:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:28:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	victory_message(t_stack *a, t_stack *b, int mode)
 {
 	if (a->is_sort == NO)
 		return (-1);
-	a->moves_num += b->moves_num;
+	(void)b;
 	if (mode == PRINT)
 		l_printf("\nEverything sorted in %d moves, GG!\n", a->moves_num);
 	return (a->moves_num);
@@ -41,7 +41,21 @@ static void	help_message(void)
 	l_printf("rrr:\tboth rra and rrb;\n");
 	l_printf("help:\tY'a know;\n");
 	l_printf("stop:\tstop the program;\n");
+	l_printf("mv:\tprints out the total moves done for now;\n");
 	l_printf("check:\tchecks if you have won or not. If yes, stops.\n\n");
+}
+
+static int	other_commands2(char input[7])
+{
+	static t_stack	*a;
+
+	if (a == NULL)
+		a = store_stacks(NULL, GET_A);
+	if (ft_strncmp(input, "mv", 2) == 0)
+		l_printf("\n\nMOVES DONE FOR NOW: %d\n\n", a->moves_num);
+	else
+		return (1);
+	return (0);
 }
 
 static int	other_commands(char input[7])
@@ -66,10 +80,10 @@ static int	other_commands(char input[7])
 		rrr();
 	else if (ft_strncmp(input, "rr", 2) == 0)
 		rr();
-	else if (ft_strncmp(input, "help", 2) == 0)
+	else if (ft_strncmp(input, "help", 4) == 0)
 		help_message();
 	else
-		return (1);
+		return (other_commands2(input));
 	return (0);
 }
 

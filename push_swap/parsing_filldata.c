@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_filldata.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 17:10:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:23:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	find_biggest(t_stack *a)
 	int	count;
 	int	biggest;
 
-	biggest = ft_abs(a->data[a->first]);
+	biggest = ft_abs(a->data[a->first].n);
 	index = 1;
 	count = 0;
 	while (index != a->size)
 	{
-		if ((count == 0) && (a->data[index] < 0))
+		if ((count == 0) && (a->data[index].n < 0))
 			++count;
-		if (ft_abs(a->data[index]) > biggest)
-			biggest = a->data[index];
+		if (ft_abs(a->data[index].n) > biggest)
+			biggest = a->data[index].n;
 		++index;
 	}
 	while (biggest)
@@ -60,7 +60,7 @@ int	fill_stacks(t_stack *a, char ***matrix)
 			atoi_result = ft_atoi(matrix[matrix_index][string_index]);
 			if ((atoi_result > INT_MAX) || (atoi_result < INT_MIN))
 				return (ER_ATOI);
-			a->data[count_nums] = atoi_result;
+			a->data[count_nums].n = atoi_result;
 			++count_nums;
 			++string_index;
 		}

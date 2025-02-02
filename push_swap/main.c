@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 12:33:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 22:15:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 	int	mode;
 
 	mode = settings->variable_1_mode;
+	best_start(a);
+	move_unsorted_to_b(a);
 	if (mode == PLAY)
 		play();
 	if ((mode == CORRECTION) || (mode == PRINT_FINAL_RESULT))

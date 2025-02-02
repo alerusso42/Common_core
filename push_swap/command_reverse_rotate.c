@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/01 16:16:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:57:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	rra(void)
 {
 	static t_stack	*a;
 	static int		index;
-	static int		temp;
+	static t_data	save;
+	static t_data	temp;
 
 	if (!a)
 		a = store_stacks(NULL, GET_A);
 	if (a->size <= 1)
 		return ;
-	temp = a->data[a->first];
+	save = a->data[a->first];
 	a->data[a->first] = a->data[a->last];
-	index = a->first;
-	while (index != a->last)
+	index = a->first - 1;
+	while (++index != a->last)
 	{
-		a->data[index + 1] = a->data[index + 1] ^ temp;
-		temp = a->data[index + 1] ^ temp;
-		a->data[index + 1] = a->data[index + 1] ^ temp;
-		++index;
+		temp = a->data[index + 1];
+		a->data[index + 1] = save;
+		save = temp;
 	}
 	command_counter(RRA);
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
@@ -49,21 +49,21 @@ void	rrb(void)
 {
 	static t_stack	*b;
 	static int		index;
-	static int		temp;
+	static t_data	save;
+	static t_data	temp;
 
 	if (!b)
-		b = store_stacks(NULL, GET_B);
+		b = store_stacks(NULL, GET_A);
 	if (b->size <= 1)
 		return ;
-	temp = b->data[b->first];
+	save = b->data[b->first];
 	b->data[b->first] = b->data[b->last];
-	index = b->first;
-	while (index != b->last)
+	index = b->first - 1;
+	while (++index != b->last)
 	{
-		b->data[index + 1] = b->data[index + 1] ^ temp;
-		temp = b->data[index + 1] ^ temp;
-		b->data[index + 1] = b->data[index + 1] ^ temp;
-		++index;
+		temp = b->data[index + 1];
+		b->data[index + 1] = save;
+		save = temp;
 	}
 	b->moves_num += 1;
 	command_counter(RRB);
@@ -77,18 +77,18 @@ void	rrb(void)
 
 void	rrr(void)
 {
-	static t_stack	*b;
+	static t_stack	*a;
 
-	if (!b)
-		b = store_stacks(NULL, GET_B);
+	if (!a)
+		a = store_stacks(NULL, GET_B);
 	rra();
 	rrb();
-	b->moves_num -= 1;
+	a->moves_num -= 1;
 	command_counter(RRR);
-	if (b->variable_1_mode == PRINT_MODIFICATIONS)
-		l_printf("Move number %d: rrr;\n", b->moves_num);
-	if (b->variable_1_mode == PRINT_MODIFICATIONS)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
+		l_printf("Move number %d: rrr;\n", a->moves_num);
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
-	else if (b->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("Move number %d: rrr;\n", b->moves_num);
+	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("Move number %d: rrr;\n", a->moves_num);
 }

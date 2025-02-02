@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 10:26:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:33:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 
 typedef unsigned char	t_bool;	
 
+typedef struct	s_data
+{
+	int		n;
+	t_bool	to_push;
+	int		lowest_bigger;
+	int		cost;
+}				t_data;
+
+
 typedef struct	s_stack
 {
-	int				*data;
+	t_data			*data;
 	int				first;
 	int				last;
 	int				size;
@@ -29,7 +38,6 @@ typedef struct	s_stack
 	int				furthest_position;
 	int				nums_to_push;
 	unsigned int	order:2;
-	t_bool			*to_push;
 	int				top_one;
 	int				bottom_one;
 	char			*command_list;

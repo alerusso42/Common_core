@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_checkdata.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 14:16:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:29:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_for_doubles(t_stack *a)
 		control_to = control_from - 1;
 		while (control_to != a->first - 1)
 		{
-			if (a->data[control_from] == a->data[control_to])
+			if (a->data[control_from].n == a->data[control_to].n)
 				return (ER_REPEATED_NUM);
 			--control_to;
 		}

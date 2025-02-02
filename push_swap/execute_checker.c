@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:25:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:27:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	checker(void)
 	index = 0;
 	while (index != a->size - 1)
 	{
-		if (a->data[index] > a->data[index + 1])
+		if (a->data[index].n > a->data[index + 1].n)
 		{
 			return (1);
 		}

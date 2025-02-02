@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:10:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 11:30:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:33:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int	alloc_data(t_stack **a, t_stack **b, int size)
 	*a = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (!*a)
 		return (ER_MALLOC_ERROR);
-	(*a)->data = (int *)ft_calloc(size + 1, sizeof(int));
+	(*a)->data = (t_data *)ft_calloc(size + 1, sizeof(t_data));
 	if (!(*a)->data)
 		return (ER_MALLOC_ERROR);
 	*b = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (!*b)
 		return (ER_MALLOC_ERROR);
-	(*b)->data = (int *)ft_calloc(size, sizeof(int));
+	(*b)->data = (t_data *)ft_calloc(size, sizeof(t_data));
 	if (!(*b)->data)
 		return (ER_MALLOC_ERROR);
 	(*a)->command_list = (char *)ft_calloc(ENVISIONED_MOVES_NUM, sizeof(char));
@@ -79,8 +79,5 @@ int	alloc_data(t_stack **a, t_stack **b, int size)
 		return (ER_MALLOC_ERROR);
 	(*a)->command_list_size = ENVISIONED_MOVES_NUM;
 	(*a)->command_list_length = 0;
-	(*a)->to_push = (t_bool *)ft_calloc(size, sizeof(t_bool));
-	if (!(*a)->to_push)
-		return (ER_MALLOC_ERROR);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 12:34:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 22:36:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		get_randomlist(t_random *random, int numbers_len);
 //	GENERAL
 char	*ft_binary(int num, char result[33], int mlen);
 int		ft_abs(int num);
+void	switch_data(t_data *one, t_data *two);
 //	COMMANDS
 void	sa(void);
 void	sb(void);
@@ -55,15 +56,9 @@ void	command_counter(unsigned char command);
 int		play(void);
 int		checker(void);
 void	radix_sort(t_stack *a, t_stack *b);
-void	optimized_algorythm(t_stack *a, t_stack *b);
 //	OPTIMIZE
-void	optimize(int binary);
 void	doctor_strange(t_stack *a);
-int		count_one_bits(int binary, t_stack *a);
-int		count_zero_bits(int binary, t_stack *a);
-void	push_guard(int binary, t_stack *a);
-void	find_rotate_order(t_stack *a);
-void	push_and_rotate(t_stack *a);
-void	last_rotate(int binary, t_stack *a);
+void	best_start(t_stack *a);
+void	move_unsorted_to_b(t_stack *a);
 
 #endif

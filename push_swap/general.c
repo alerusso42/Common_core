@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 09:42:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 10:17:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 22:09:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ int	ft_abs(int num)
 	if (num == INT_MIN)
 		return (INT_MAX);
 	return (num * -1);
+}
+
+void	switch_data(t_data *one, t_data *two)
+{
+	static t_data	temp;
+
+	temp = *one;
+	*one = *two;
+	*two = temp;
 }
 
 void	ft_rev_string(char *string)

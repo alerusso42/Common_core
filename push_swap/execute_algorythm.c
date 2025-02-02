@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 12:38:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:27:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	radix_sort(t_stack *a, t_stack *b)
 		turn_counter = 0;
 		while (turn_counter != a->size + b->size)
 		{
-			if (binary & a->data[a->first])
+			if (binary & a->data[a->first].n)
 				ra();
 			else
 				pb();
@@ -62,5 +62,6 @@ void	radix_sort(t_stack *a, t_stack *b)
 
 void	insertion_sort(t_stack *a, t_stack *b)
 {
-	
+	(void)a;
+	(void)b;
 }

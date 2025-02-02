@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:03:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/01 16:18:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 22:02:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+static void	set_to_zero(t_data *data)
+{
+	data->cost = 0;
+	data->lowest_bigger = 0;
+	data->n = 0;
+	data->to_push = NO;
+}
 
 void	pa(void)
 {
@@ -30,7 +38,7 @@ void	pa(void)
 	a->first -= 1;
 	a->size += 1;
 	a->data[a->first] = b->data[b->first];
-	b->data[b->first] = 0;
+	set_to_zero(&b->data[b->first]);
 	b->first += 1;
 	b->size -= 1;
 	command_counter(PA);
@@ -56,7 +64,7 @@ void	pb(void)
 	b->first -= 1;
 	b->size += 1;
 	b->data[b->first] = a->data[a->first];
-	a->data[a->first] = 0;
+	set_to_zero(&a->data[a->first]);
 	a->first += 1;
 	a->size -= 1;
 	command_counter(PB);

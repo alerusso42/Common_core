@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   random_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:59:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 10:54:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:38:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	get_random_stack(t_stack *a, t_random *random)
 	index = 0;
 	while (index != a->size)
 	{
-		a->data[index] = random->values[index];
+		a->data[index].n = random->values[index];
 		++index;
 	}
 }

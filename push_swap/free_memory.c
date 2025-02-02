@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:06:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 11:32:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:34:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,6 @@ void	free_memory(t_stack **a, t_stack **b)
 		{
 			free((*a)->command_list);
 			(*a)->command_list = NULL;
-		}
-		if ((*a)->to_push)
-		{
-			free((*a)->to_push);
-			(*a)->to_push = NULL;
 		}
 		free(*a);
 		*a = NULL;
