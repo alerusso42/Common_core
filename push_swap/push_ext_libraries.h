@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ext_libraries.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:33 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 11:38:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:27:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <limits.h>
+# include <stdarg.h>
 # include "Libft/libft.h"
 
 #endif

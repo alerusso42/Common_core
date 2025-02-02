@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 17:12:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:33:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,25 @@ void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b);
 
 void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 {
-	if (settings->variable_1_mode == PLAY)
+	int	mode;
+
+	mode = settings->variable_1_mode;
+	if (mode == PLAY)
 		play();
-	if (settings->variable_1_mode == PRINT_FINAL_RESULT)
+	if ((mode == CORRECTION) || (mode == PRINT_FINAL_RESULT))
 	{
-		if (settings->variable_2_which_algorythm == NORMAL)
-			algorythm(a, b);
+		radix_sort(a, b);
 		if (settings->variable_2_which_algorythm == OPTIMIZED)
-			optimized_algorythm(a, b);
-		print_stacks();
+			doctor_strange(a);
 	}
-	l_printf("\nMOVES NUM: %d\n\n", a->moves_num);
+	//if (mode == PRINT_FINAL_RESULT)
+	print_stacks();
+	if (mode == CORRECTION)
+		print_moves();
+	//l_printf("\nMOVES NUM: %d\n\n", a->moves_num);
 }
 
+//	\007\001\001\006\001\007\007\006\006\001\007\001\006\001\007\007\006\006
 /*
 	Steps: 
 

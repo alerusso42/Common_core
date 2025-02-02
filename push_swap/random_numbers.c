@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   random_numbers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:19:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:24:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	twist_random2(t_random *random, int numbers_len)
 
 	i = numbers_len - 1;
 	caos = 0;
-	while (--i != 0)
+	while ((i) && (--i != 0))
 	{
 		if (caos == 0)
 			caos = 1;

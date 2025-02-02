@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:07:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 11:19:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:55:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,46 @@ void	print_stacks()
 		if (a->switch_1_showbinary == ON)
 			l_printf("\t%s", ft_binary(b->data[index], string, a->max_num_len));
 	}
-	a->moves_num += b->moves_num;
 	l_printf("\n--------------------------\n\nStack a\t\tStack b\n\nEND...\n");
+}
+
+static void	print_command(char command)
+{
+	static int	count_commands;
+
+	if (command == RA)
+		l_printf("Move number %d: ra;\n", count_commands++);
+	else if (command == RRA)
+		l_printf("Move number %d: rra;\n", count_commands++);
+	else if (command == PA)
+		l_printf("Move number %d: pa;\n", count_commands++);
+	else if (command == PB)
+		l_printf("Move number %d: pb;\n", count_commands++);
+	else if (command == RB)
+		l_printf("Move number %d: rb;\n", count_commands++);
+	else if (command == RRB)
+		l_printf("Move number %d: rrb;\n", count_commands++);
+	else if (command == RR)
+		l_printf("Move number %d: rr;\n", count_commands++);
+	else if (command == RRR)
+		l_printf("Move number %d: rrr;\n", count_commands++);
+	else if (command == SA)
+		l_printf("Move number %d: sa;\n", count_commands++);
+	else if (command == SB)
+		l_printf("Move number %d: sb;\n", count_commands++);
+}
+
+void	print_moves()
+{
+	static t_stack	*a;
+	int				index;
+
+	a = store_stacks(NULL, GET_A);
+	index = 0;
+	l_printf("\n");
+	while (a->command_list[index] != 0)
+	{
+		print_command(a->command_list[index]);
+		++index;
+	}
 }

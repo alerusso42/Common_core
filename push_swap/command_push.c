@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_push.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:03:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:58:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:18:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void	pa(void)
 	b->data[b->first] = 0;
 	b->first += 1;
 	b->size -= 1;
-	a->moves_num += 1;
 	command_counter(PA);
-	if (a->variable_1_mode == CORRECTION)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		l_printf("Move number %d: pa;\n", a->moves_num);
-	else if (a->variable_1_mode == PRINT_MODIFICATIONS)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
+	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("Move number %d: pa;\n", a->moves_num);
 }
 
 void	pb(void)
@@ -58,10 +59,11 @@ void	pb(void)
 	a->data[a->first] = 0;
 	a->first += 1;
 	a->size -= 1;
-	a->moves_num += 1;
 	command_counter(PB);
-	if (a->variable_1_mode == CORRECTION)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		l_printf("Move number %d: pb;\n", a->moves_num);
-	else if (a->variable_1_mode == PRINT_MODIFICATIONS)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
+	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("Move number %d: pb;\n", a->moves_num);
 }

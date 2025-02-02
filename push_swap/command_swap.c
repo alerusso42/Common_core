@@ -24,9 +24,9 @@ void	sa(void)
 		a = store_stacks(NULL, GET_A);
 	if (a->size <= 1)
 		return ;
-	a->data[a->first] = a->data[a->first] ^ a->data[a->last];
-	a->data[a->last] = a->data[a->first] ^ a->data[a->last];
-	a->data[a->first] = a->data[a->first] ^ a->data[a->last];
+	a->data[a->first] = a->data[a->first] ^ a->data[a->first + 1];
+	a->data[a->first + 1] = a->data[a->first] ^ a->data[a->first + 1];
+	a->data[a->first] = a->data[a->first] ^ a->data[a->first + 1];
 	command_counter(SA);
 }
 
@@ -38,9 +38,9 @@ void	sb(void)
 		b = store_stacks(NULL, GET_B);
 	if (b->size <= 1)
 		return ;
-	b->data[b->first] = b->data[b->first] ^ b->data[b->last];
-	b->data[b->last] = b->data[b->first] ^ b->data[b->last];
-	b->data[b->first] = b->data[b->first] ^ b->data[b->last];
+	b->data[b->first] = b->data[b->first] ^ b->data[b->first + 1];
+	b->data[b->last] = b->data[b->first] ^ b->data[b->first + 1];
+	b->data[b->first] = b->data[b->first] ^ b->data[b->first + 1];
 	command_counter(SB);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 09:58:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:18:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	ra(void)
 		--index;
 	}
 	command_counter(RA);
-	if (a->variable_1_mode == CORRECTION)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		l_printf("Move number %d: ra;\n", a->moves_num);
-	else if (a->variable_1_mode == PRINT_MODIFICATIONS)
+	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
+	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("Move number %d: ra;\n", a->moves_num);
 }
 
 void	rb(void)
@@ -64,10 +66,12 @@ void	rb(void)
 		--index;
 	}
 	command_counter(RB);
-	if (b->variable_1_mode == CORRECTION)
+	if (b->variable_1_mode == PRINT_MODIFICATIONS)
 		l_printf("Move number %d: rb;\n", b->moves_num);
-	else if (b->variable_1_mode == PRINT_MODIFICATIONS)
+	if (b->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
+	else if (b->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("Move number %d: rb;\n", b->moves_num);
 }
 
 void	rr(void)
@@ -80,8 +84,10 @@ void	rr(void)
 	rb();
 	b->moves_num -= 1;
 	command_counter(RR);
-	if (b->variable_1_mode == CORRECTION)
+	if (b->variable_1_mode == PRINT_MODIFICATIONS)
 		l_printf("Move number %d: rr;\n", b->moves_num);
-	else if (b->variable_1_mode == PRINT_MODIFICATIONS)
+	if (b->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
+	else if (b->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("Move number %d: rr;\n", b->moves_num);
 }

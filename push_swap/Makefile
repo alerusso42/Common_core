@@ -27,7 +27,7 @@ SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC_BONUS:.c=.o))
 #COMP = cc -g -Iminilibx -Lminilibx -lmlx -lX11 -lXext -lm -Lprintf -L$(MINILIBX_RELATIVE_PATH) -LLibft
-COMP = -g -Wall -Wextra -Werror -ILibft 
+COMP = -g -Wall -Wextra -Werror -ILibft -no-pie
 LIBFT_RELATIVE_PATH = Libft/
 
 all: $(NAME)
@@ -35,7 +35,7 @@ all: $(NAME)
 $(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(HEADER) $(OBJ_DIR)/dont_switch_to_bonus.o
 	touch $(ALL)
 	cp $(LIBFT) $(ALL)
-	cc $(COMP) $(OBJ) $(OBJ_DIR)/dont_switch_to_bonus.o $(ALL) $(LIBX) -o $(NAME)
+	cc $(COMP) $(OBJ) $(OBJ_DIR)/dont_switch_to_bonus.o $(ALL) -o $(NAME)
 	@echo "\nall done!!"
 
 #cp $(MINILIBX) $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   optimize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:49:23 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 17:04:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:29:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,38 @@
 #else
 # include "push_swap_bonus.h"
 #endif
+
+int	count_zero_bits(int binary, t_stack *a)
+{
+	int	index;
+	int	count;
+
+	index = a->first;
+	count = 0;
+	while (index != a->last + 1)
+	{
+		if (!(a->data[index] & binary))
+			count++;
+		++index;
+	}
+	return (count);
+}
+
+int	count_one_bits(int binary, t_stack *a)
+{
+	int	index;
+	int	count;
+
+	index = a->first;
+	count = 0;
+	while (index != a->last + 1)
+	{
+		if (a->data[index] & binary)
+			count++;
+		++index;
+	}
+	return (count);
+}
 
 void	optimize(int binary)
 {

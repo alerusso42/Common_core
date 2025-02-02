@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 09:42:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 11:23:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:17:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_rev_string(char *string)
 
 char	*ft_binary(int num, char result[33], int mlen)
 {
-	int		minun;
 	int		index;
 
 	index = 0;
@@ -53,9 +52,6 @@ char	*ft_binary(int num, char result[33], int mlen)
 	index = 0;
 	while (index < mlen)
 		result[++index] = 48;
-	minun = 0;
-	if (num < 0)
-		minun = 1;
 	num = ft_abs(num);
 	index = -1;
 	while (num != 0)

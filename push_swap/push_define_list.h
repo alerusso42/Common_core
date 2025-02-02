@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_define_list.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:30:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/31 17:02:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:01:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define RR 9
 # define RRB 10
 # define RRR 11
+# define DELETE 12
 //	MALLOC_CHUNKS
 # define ENVISIONED_MOVES_NUM 8192
 //	WHICH_ALGORYTHM
