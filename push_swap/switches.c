@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 11:28:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:32:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	switches(t_settings *settings, t_stack *a)
 {
 	settings->switch_1_showbinary = ON;
 	settings->switch_2_indexation = ON;
+	settings->switch_3_doctorstrange = ON;
+	settings->switch_4_choose_beststart_in_insertion = ON;
 	apply_switches(settings, a);
 }
 

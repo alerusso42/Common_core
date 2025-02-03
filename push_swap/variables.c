@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 18:29:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 22:29:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	apply_variables(t_settings *settings, t_stack *a, t_stack *b);
 
 void	variables(t_settings *settings, t_stack *a, t_stack *b)
 {
-	settings->variable_1_mode = PLAY;
-	settings->variable_2_which_algorythm = OPTIMIZED;
+	settings->variable_1_mode = CORRECTION;
+	settings->variable_2_which_algorythm = INSERTION_SORT;
 	apply_variables(settings, a, b);
 }
 
@@ -42,7 +42,6 @@ static void	apply_variables(t_settings *settings, t_stack *a, t_stack *b)
 		a->variable_1_mode = CORRECTION;
 		b->variable_1_mode = CORRECTION;
 	}
-
 	a->variable_2_which_algorythm = settings->variable_2_which_algorythm;
 	b->variable_2_which_algorythm = settings->variable_2_which_algorythm;
 }

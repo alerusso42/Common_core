@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 18:25:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 21:55:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		checker(void);
 void	radix_sort(t_stack *a, t_stack *b);
 void	insertion_sort(t_stack *a, t_stack *b);
 //	ALGORYTHM TOOLS
+void	assure_left_stack(t_stack *a, t_stack *b);
 void	set_data_to_zero(t_stack *a, t_stack *b);
 void	find_smallest_bigger(t_stack *a, t_stack *b);
 void	update_cost(t_stack *a, t_stack *b);

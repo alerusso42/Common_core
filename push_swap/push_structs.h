@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 17:56:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 22:30:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_stack
 	char		*command_list;
 	t_bool		switch_1_showbinary:1;
 	t_bool		switch_2_indexation:1;
+	t_bool		switch_4_choose_beststart_in_insertion:1;
 	t_variable	variable_1_mode:2;
 	t_variable	variable_2_which_algorythm:2;
 }				t_stack;
@@ -55,6 +56,8 @@ typedef struct	s_settings
 {
 	t_bool		switch_1_showbinary:1;
 	t_bool		switch_2_indexation:1;
+	t_bool		switch_3_doctorstrange:1;
+	t_bool		switch_4_choose_beststart_in_insertion:1;
 	t_variable	variable_1_mode:2;
 	t_variable	variable_2_which_algorythm:2;
 }				t_settings;

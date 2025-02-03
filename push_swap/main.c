@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 10:57:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 22:15:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,21 @@ void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 	int	mode;
 
 	mode = settings->variable_1_mode;
-	insertion_sort(a, b);
 	if (mode == PLAY)
 		play();
 	if ((mode == CORRECTION) || (mode == PRINT_FINAL_RESULT))
 	{
-		radix_sort(a, b);
-		if (settings->variable_2_which_algorythm == OPTIMIZED)
+		if (settings->variable_2_which_algorythm == RADIX_SORT)
+			radix_sort(a, b);
+		else if (settings->variable_2_which_algorythm == INSERTION_SORT)
+			insertion_sort(a, b);
+		if (settings->switch_3_doctorstrange == ON)
 			doctor_strange(a);
 	}
-	//if (mode == PRINT_FINAL_RESULT)
-	print_stacks();
+	if (mode == PRINT_FINAL_RESULT)
+		print_stacks();
 	if (mode == CORRECTION)
 		print_moves();
-	//l_printf("\nMOVES NUM: %d\n\n", a->moves_num);
 }
 
 //	\007\001\001\006\001\007\007\006\006\001\007\001\006\001\007\007\006\006

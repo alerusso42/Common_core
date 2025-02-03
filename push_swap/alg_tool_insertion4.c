@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:52:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 19:37:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 21:43:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	find_next_rotation_a(t_stack *a)
 {
 	if (a->target_to_search == INT_MAX)
 	{
-		if (a->data[a->first].n == a->biggest_num)
+		if (a->data[a->last].n == a->biggest_num)
 			return (NO);
 	}
 	if (a->data[a->first].n == a->target_to_search)
@@ -45,7 +45,7 @@ static int	ready_to_push(t_stack *a, t_stack *b)
 		return (NO);
 	if (b->data[b->first].lowest_bigger == INT_MAX)
 	{
-		if (a->data[a->first].n == a->biggest_num)
+		if (a->data[a->last].n == a->biggest_num)
 			return (YES);
 		return (NO);
 	}

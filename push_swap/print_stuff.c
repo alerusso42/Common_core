@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:07:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 18:30:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:21:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_stacks()
 
 static void	print_command(char command)
 {
-	static int	count_commands;
+	static int	count_commands = 1;
 
 	if (command == RA)
 		l_printf("Move number %d: ra;\n", count_commands++);

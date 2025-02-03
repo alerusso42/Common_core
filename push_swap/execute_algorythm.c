@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 18:23:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:33:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,12 @@ void	insertion_sort(t_stack *a, t_stack *b)
 	if (checker() == 0)
 		return ;
 	indexation(a);
-	best_start(a);
-	move_unsorted_to_b(a);
+	if (a->switch_4_choose_beststart_in_insertion == ON)
+	{
+		best_start(a);
+		move_unsorted_to_b(a);
+	}
+	assure_left_stack(a, b);
 	set_data_to_zero(a, b);
 	while ("Insertion loop!")
 	{
