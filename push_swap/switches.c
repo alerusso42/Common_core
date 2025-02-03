@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switches.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/30 09:39:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:28:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	apply_switches(t_settings *settings, t_stack *a);
 void	switches(t_settings *settings, t_stack *a)
 {
 	settings->switch_1_showbinary = ON;
+	settings->switch_2_indexation = ON;
 	apply_switches(settings, a);
 }
 
@@ -28,4 +29,6 @@ static void	apply_switches(t_settings *settings, t_stack *a)
 {
 	if (settings->switch_1_showbinary == ON)
 		a->switch_1_showbinary = ON;
+	if (settings->switch_2_indexation == ON)
+		a->switch_2_indexation = ON;
 }

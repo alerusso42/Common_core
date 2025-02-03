@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_checker.c                                  :+:      :+:    :+:   */
+/*   general2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 15:45:41 by alerusso         ###   ########.fr       */
+/*   Created: 2025/02/03 18:11:23 by alerusso          #+#    #+#             */
+/*   Updated: 2025/02/03 18:15:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,20 @@
 # include "push_swap_bonus.h"
 #endif
 
-int	checker(void)
+void	set_data_to_zero(t_stack *a, t_stack *b)
 {
-	static t_stack	*a;
-	static t_stack	*b;
-	static int		index;
+	int	index;
 
-	if (a == NULL)
-		a = store_stacks(NULL, GET_A);
-	if (b == NULL)
-		b = store_stacks(NULL, GET_B);
-	if (b->size != 0)
-		return (1);
-	index = 0;
-	while (index != a->size - 1)
+	index = a->first;
+	while (index != a->last + 1)
 	{
-		if (a->data[index].n > a->data[index + 1].n)
-		{
-			return (1);
-		}
+		a->data[index].to_push = NO;
 		++index;
 	}
-	return (0);
-}	
+	index = b->first;
+	while (index != b->last + 1)
+	{
+		b->data[index].to_push = NO;
+		++index;
+	}
+}

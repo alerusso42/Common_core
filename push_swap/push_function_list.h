@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 22:36:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:25:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		get_randomlist(t_random *random, int numbers_len);
 //	GENERAL
 char	*ft_binary(int num, char result[33], int mlen);
 int		ft_abs(int num);
+void	find_half(t_stack *a, t_stack *b);
 void	switch_data(t_data *one, t_data *two);
 //	COMMANDS
 void	sa(void);
@@ -56,8 +57,17 @@ void	command_counter(unsigned char command);
 int		play(void);
 int		checker(void);
 void	radix_sort(t_stack *a, t_stack *b);
+void	insertion_sort(t_stack *a, t_stack *b);
+//	ALGORYTHM TOOLS
+void	set_data_to_zero(t_stack *a, t_stack *b);
+void	find_smallest_bigger(t_stack *a, t_stack *b);
+void	update_cost(t_stack *a, t_stack *b);
+void	choose_cheepest(t_stack *a, t_stack *b);
+void	push_one(t_stack *a, t_stack *b);
+void	final_rotation(t_stack *a);
 //	OPTIMIZE
 void	doctor_strange(t_stack *a);
+void	indexation(t_stack *a);
 void	best_start(t_stack *a);
 void	move_unsorted_to_b(t_stack *a);
 

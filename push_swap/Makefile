@@ -8,13 +8,15 @@ ALL = all.a
 CP = cp
 SRC = 	ft_light_printf.c \
 		alloc_random.c random_numbers.c random_test.c \
-		general.c \
+		general.c general2.c \
 		alloc_memory.c free_memory.c \
 		parsing_checkdata.c parsing_filldata.c \
 		print_stuff.c \
 		command_push.c command_rotate.c command_reverse_rotate.c command_swap.c \
 		command_counter.c \
-		optimize_1doctor_strange.c optimize_2best_start.c \
+		alg_tool_insertion1.c alg_tool_insertion2.c alg_tool_insertion3.c \
+		alg_tool_insertion4.c alg_tool_insertion5.c \
+		optimize_1doctor_strange.c optimize_2best_start.c optimize_3indexation.c \
 		execute_play.c execute_checker.c execute_algorythm.c \
 		error.c switches.c variables.c main.c \
 
@@ -130,6 +132,9 @@ bonus_run: bonus
 bonus_val: bonus
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME_BONUS) $(ARGS)
 
+clear : 
+	clear
 
-.PHONY: all clean fclean re main gdb run copy_lib
+
+.PHONY: all clean fclean re main gdb run copy_lib clear
 .SILENT:

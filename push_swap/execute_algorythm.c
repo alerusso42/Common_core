@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 18:27:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:23:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,25 @@ void	radix_sort(t_stack *a, t_stack *b)
 
 void	insertion_sort(t_stack *a, t_stack *b)
 {
-	(void)a;
-	(void)b;
+	if (checker() == 0)
+		return ;
+	indexation(a);
+	best_start(a);
+	move_unsorted_to_b(a);
+	set_data_to_zero(a, b);
+	while ("Insertion loop!")
+	{
+		if (b->size == 0)
+			final_rotation(a);
+		else
+		{
+			find_smallest_bigger(a, b);
+			find_half(a, b);
+			update_cost(a, b);
+			choose_cheepest(a, b);
+			push_one(a, b);
+		}
+		if ((b->size == 0) && (checker() == 0))
+			break ;
+	}
 }

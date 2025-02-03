@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 22:13:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:42:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	rb(void)
 	static t_data	temp;
 
 	if (!b)
-		b = store_stacks(NULL, GET_A);
+		b = store_stacks(NULL, GET_B);
 	if (b->size <= 1)
 		return ;
 	save = b->data[b->last];
