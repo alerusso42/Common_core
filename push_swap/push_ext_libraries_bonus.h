@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dont_switch_to_bonus.c                             :+:      :+:    :+:   */
+/*   push_ext_libraries_bonus.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 11:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 12:45:14 by alerusso         ###   ########.fr       */
+/*   Created: 2025/01/27 10:42:33 by alerusso          #+#    #+#             */
+/*   Updated: 2025/02/04 10:13:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#if __has_include("push_swap.h")
-# include "push_swap.h"
-#else
-# include "push_swap_bonus.h"
-#endif
+#ifndef PUSH_EXT_LIBRARIES_BONUS_H
+# define PUSH_EXT_LIBRARIES_BONUS_H
 
-void	switch_to_bonus(t_settings *settings, t_stack *a)
-{
-	//settings->variable_1_mode = CHECKER;
-	(void)settings;
-	(void)a;
-}
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include <limits.h>
+# include <stdarg.h>
+# include "Libft/libft.h"
+
+#endif

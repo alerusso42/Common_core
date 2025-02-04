@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_function_list.h                               :+:      :+:    :+:   */
+/*   push_function_list_bonus.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 12:45:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:13:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_FUNCTION_LIST_H
-# define PUSH_FUNCTION_LIST_H
+#ifndef PUSH_FUNCTION_LIST_BONUS_H
+# define PUSH_FUNCTION_LIST_BONUS_H
 
 //	UTILITIES
 int		error(int error_type);
 int		l_printf(const char *str, ...);
 void	switches(t_settings *settings, t_stack *a);
 void	variables(t_settings *settings, t_stack *a, t_stack *b);
-void	switch_to_bonus(t_settings *settings, t_stack *a);
 //	MEMORY
 int		alloc_data(t_stack **a, t_stack **b, int size);
 t_stack	*store_stacks(t_stack *stack, int mode);

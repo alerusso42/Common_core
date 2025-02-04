@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 22:15:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:45:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int argc, char *argv[])
 		return (free_memory(&a, &b), free(settings), error(error_type));
 	switches(settings, a);
 	variables(settings, a, b);
+	switch_to_bonus(settings, a);
 	print_and_algorythm(settings, a, b);
 	return (free_memory(&a, &b), free(settings), 0);
 }

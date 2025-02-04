@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switches.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 23:32:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:17:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	apply_switches(t_settings *settings, t_stack *a);
 void	switches(t_settings *settings, t_stack *a)
 {
 	settings->switch_1_showbinary = ON;
-	settings->switch_2_indexation = ON;
+	settings->switch_2_indexation = OFF;
 	settings->switch_3_doctorstrange = ON;
 	settings->switch_4_choose_beststart_in_insertion = ON;
 	apply_switches(settings, a);
@@ -33,4 +33,7 @@ static void	apply_switches(t_settings *settings, t_stack *a)
 		a->switch_1_showbinary = ON;
 	if (settings->switch_2_indexation == ON)
 		a->switch_2_indexation = ON;
+	if (settings->switch_4_choose_beststart_in_insertion == ON)
+		a->switch_4_choose_beststart_in_insertion = ON;
+	
 }

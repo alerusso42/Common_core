@@ -27,7 +27,7 @@ SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC_BONUS:.c=.o))
 #COMP = cc -g -Iminilibx -Lminilibx -lmlx -lX11 -lXext -lm -Lprintf -L$(MINILIBX_RELATIVE_PATH) -LLibft
-COMP = -g -Wall -Wextra -Werror -ILibft -no-pie
+COMP = -g -Wall -Wextra -Werror -ILibft
 LIBFT_RELATIVE_PATH = Libft/
 
 all: $(NAME)
@@ -73,7 +73,6 @@ $(BONUS_DIR) :
 	mkdir -p $(BONUS_DIR)
 
 copy_lib: $(BONUS_DIR)
-	cp -r $(MINILIBX_RELATIVE_PATH) $(BONUS_DIR)
 	cp -r $(LIBFT_RELATIVE_PATH) $(BONUS_DIR)
 
 $(SRC_BONUS) : 
@@ -89,7 +88,7 @@ $(SRC_BONUS) :
 
 bonus: $(LIBFT) $(BONUS_DIR) copy_lib $(OBJ_BONUS_DIR) $(SRC_BONUS) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/dont_switch_to_bonus.o $(HEADER)
 	touch $(ALL)
-	cp $(LIBF) $(ALL) 
+	cp $(LIBFT) $(ALL) 
 	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(ALL) -o $(NAME_BONUS)
 	@echo "\nall done!!"
 

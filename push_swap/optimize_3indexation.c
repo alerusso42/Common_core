@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   optimize_3indexation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:01:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 11:24:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:06:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,45 @@
 #endif
 
 static void	override_nums_with_position_index(t_stack *a);
-static void	bubble_sort_one(int current, t_stack *a);
 
-void	indexation(t_stack *a)
+static void	assign(t_stack *a, int biggest, int to_assign)
 {
 	int	index;
 
-	index = 0;
-	while (index != a->size)
+	index = a->first;
+	while (index != a->last + 1)
 	{
-		a->data[index].pos = index + 1;
-		++index;
-	}
-	index = 0;
-	while (index != a->size)
-	{
-		bubble_sort_one(index, a);
-		++index;
-	}
-	if (a->switch_2_indexation == ON)
-		override_nums_with_position_index(a);
-}
-
-static void	bubble_sort_one(int current, t_stack *a)
-{
-	int	index;
-
-	index = current + 1;
-	while (index != a->size)
-	{
-		if (a->data[current].n > a->data[index].n)
+		if (biggest == a->data[index].n)
 		{
-			a->data[current].pos ^= a->data[index].pos;
-			a->data[index].pos ^= a->data[current].pos;
-			a->data[current].pos ^= a->data[index].pos;
+			a->data[index].pos = to_assign;
+			return ;
 		}
 		++index;
 	}
+}
+
+void	indexation(t_stack *a)
+{
+	int	biggest;
+	int	current_number_to_assign;
+	int	index;
+
+	current_number_to_assign = a->size;
+	while (current_number_to_assign != 0)
+	{
+		index = a->first;
+		biggest = INT_MIN;
+		while (index != a->last + 1)
+		{
+			if ((a->data[index].n > biggest) && (a->data[index].pos == 0))
+				biggest = a->data[index].n;
+			++index;
+		}
+		assign(a, biggest, current_number_to_assign);
+		current_number_to_assign--;
+	}
+	if (a->switch_2_indexation == ON)
+		override_nums_with_position_index(a);
 }
 
 static void	override_nums_with_position_index(t_stack *a)

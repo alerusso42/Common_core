@@ -87,3 +87,18 @@ p b->data[b->first + 44]
 p b->data[b->first + 45]
 p b->data[b->first + 46]
 end
+
+
+
+define c5
+display a->data[a->first].pos
+display a->data[a->first + 1].pos
+display a->data[a->first + 2].pos
+display a->data[a->first + 3].pos
+display a->data[a->first + 4].pos
+display a->data[a->first].n
+display a->data[a->first + 1].n
+display a->data[a->first + 2].n
+display a->data[a->first + 3].n
+display a->data[a->first + 4].n
+end
