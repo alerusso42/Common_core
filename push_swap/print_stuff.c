@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:07:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 23:21:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:51:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "push_swap_bonus.h"
 #endif
 
-void	print_stacks()
+void	print_stacks(void)
 {
 	static int		index;
 	static int		print_num;
@@ -37,9 +37,9 @@ void	print_stacks()
 		else if ((a->data[index].n != 0) && (b->data[index].n) != 0)
 			l_printf("\n%d\t%d", a->data[index].n, b->data[index].n);
 		if (a->switch_1_showbinary == ON)
-			l_printf("\t%s", ft_binary(a->data[index].n, string, a->max_num_len));
-		if (a->switch_1_showbinary == ON)
-			l_printf("\t%s", ft_binary(b->data[index].n, string, a->max_num_len));
+			l_printf("\t%s\t%s", ft_binary(a->data[index].n, string, \
+			a->max_num_len), ft_binary(b->data[index].n, string, \
+			a->max_num_len));
 	}
 	l_printf("\n--------------------------\n\nStack a\t\tStack b\n\nEND...\n");
 }
@@ -70,17 +70,52 @@ static void	print_command(char command)
 		l_printf("Move number %d: sb;\n", count_commands++);
 }
 
-void	print_moves()
+static void	only_print_command(char command)
+{
+	if (command == RA)
+		l_printf("ra\n");
+	else if (command == RRA)
+		l_printf("rra\n");
+	else if (command == PA)
+		l_printf("pa\n");
+	else if (command == PB)
+		l_printf("pb\n");
+	else if (command == RB)
+		l_printf("rb\n");
+	else if (command == RRB)
+		l_printf("rrb\n");
+	else if (command == RR)
+		l_printf("rr\n");
+	else if (command == RRR)
+		l_printf("rrr\n");
+	else if (command == SA)
+		l_printf("sa\n");
+	else if (command == SB)
+		l_printf("sb\n");
+}
+
+void	print_moves(void)
 {
 	static t_stack	*a;
 	int				index;
 
 	a = store_stacks(NULL, GET_A);
 	index = 0;
-	l_printf("\n");
-	while (a->command_list[index] != 0)
+	if (a->variable_1_mode != CORRECTION)
 	{
-		print_command(a->command_list[index]);
-		++index;
+		l_printf("\n");
+		while (a->command_list[index] != 0)
+		{
+			print_command(a->command_list[index]);
+			++index;
+		}
+	}
+	else
+	{
+		while (a->command_list[index] != 0)
+		{
+			only_print_command(a->command_list[index]);
+			++index;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:37:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/29 13:23:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:53:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 	read "push_define_list.h" for the complete list.
 	During the correction, all strings except one will be muted.
 */
+/*
 int	error(int error_type)
 {
 	if (error_type == ER_BAD_ARGC)
@@ -47,4 +48,10 @@ int	error(int error_type)
 		return (l_printf("\nStack corruption, sir\n"), ER_STACK_CORRUPTION);
 	else
 		return (l_printf("Error\n"), 1);
+}
+*/
+
+int	error(int error_type)
+{
+	return (write(2, "Error\n", 6);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:33 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 10:13:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:00:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <stdarg.h>
+# include "get_next_line_bonus.h"
 # include "Libft/libft.h"
 
 #endif

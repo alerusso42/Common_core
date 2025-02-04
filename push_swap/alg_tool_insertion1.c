@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alg_tool_insertion1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:29:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 18:09:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:42:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

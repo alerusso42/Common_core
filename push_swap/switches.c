@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 12:17:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:45:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ static void	apply_switches(t_settings *settings, t_stack *a)
 		a->switch_2_indexation = ON;
 	if (settings->switch_4_choose_beststart_in_insertion == ON)
 		a->switch_4_choose_beststart_in_insertion = ON;
-	
+	switch_to_bonus(settings, a);
 }

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_ext_libraries.h                               :+:      :+:    :+:   */
+/*   execute_read_terminal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 10:42:33 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 14:50:51 by alerusso         ###   ########.fr       */
+/*   Created: 2025/02/04 14:40:27 by alerusso          #+#    #+#             */
+/*   Updated: 2025/02/04 16:43:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_EXT_LIBRARIES_H
-# define PUSH_EXT_LIBRARIES_H
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include <limits.h>
-# include <stdarg.h>
-# include "get_next_line.h"
-# include "Libft/libft.h"
-
+#if __has_include("push_swap.h")
+# include "push_swap.h"
+#else
+# include "push_swap_bonus.h"
 #endif
+
+int	read_terminal(t_stack *a)
+{
+	char	*line;
+
+	line = get_next_line(1);
+	if (!line)
+		return (ER_MALLOC_ERROR);
+	while (line)
+	{
+		l_printf("linea: %s\n", line);
+		free(line);
+		line = get_next_line(0);
+	}
+	(void)a;
+	return (0);
+}

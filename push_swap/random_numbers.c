@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   random_numbers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/01 16:24:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:58:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ int	get_randomlist(t_random *random, int numbers_len)
 		random->values[i] = crescent_numbers;
 		crescent_numbers += 1;
 	}
-	//twist_random(random, numbers_len);
 	twist_random2(random, numbers_len);
-	//twist_random3(random, numbers_len);
 	random->values[numbers_len] = INT_MAX;
 	return (0);
 }

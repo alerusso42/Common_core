@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_define_list.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:30:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 22:11:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:56:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 //	MALLOC_CHUNKS
 # define ENVISIONED_MOVES_NUM 8192
 //	WHICH_ALGORYTHM
-#define RADIX_SORT 0
-#define INSERTION_SORT 1
+# define RADIX_SORT 0
+# define INSERTION_SORT 1
 
 #endif

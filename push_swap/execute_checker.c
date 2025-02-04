@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 15:45:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:00:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,44 @@ int	checker(void)
 		++index;
 	}
 	return (0);
-}	
+}
+
+static void	commands(t_stack *a, int index)
+{
+	if (a->command_list[index] == SA)
+		sa();
+	else if (a->command_list[index] == SB)
+		sb();
+	else if (a->command_list[index] == PA)
+		pa();
+	else if (a->command_list[index] == PB)
+		pb();
+	else if (a->command_list[index] == RA)
+		ra();
+	else if (a->command_list[index] == RB)
+		rb();
+	else if (a->command_list[index] == RR)
+		rr();
+	else if (a->command_list[index] == RRA)
+		rra();
+	else if (a->command_list[index] == RRB)
+		rrb();
+	else
+		rrr();
+}
+
+void	test(t_stack *a)
+{
+	int	index;
+
+	index = 0;
+	while (a->command_list[index] != 0)
+	{
+		commands(a, index);
+		++index;
+	}
+	if (checker() == 0)
+		l_printf("OK\n");
+	else
+		l_printf("OK\n");
+}

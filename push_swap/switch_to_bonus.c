@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:30:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 12:42:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:45:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 void	switch_to_bonus(t_settings *settings, t_stack *a)
 {
-	//settings->variable_1_mode = CHECKER;
-	(void)settings;
+	settings->switch_5_bonus = ON;
 	(void)a;
 }

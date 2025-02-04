@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alg_tool_insertion2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:32:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 17:48:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:59:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #endif
 
 static void	from_to(t_stack *from, t_stack *to);
-void	find_one(t_stack *from, t_stack *to, int current, int curr_distance);
+static void	find_one(t_stack *from, t_stack *to, int current, int c_distance);
 
 void	update_cost(t_stack *a, t_stack *b)
 {
@@ -44,7 +44,7 @@ static void	from_to(t_stack *from, t_stack *to)
 	}
 }
 
-void	find_one(t_stack *from, t_stack *to, int current, int curr_distance)
+void	find_one(t_stack *from, t_stack *to, int current, int c_distance)
 {
 	int	index;
 
@@ -67,5 +67,5 @@ void	find_one(t_stack *from, t_stack *to, int current, int curr_distance)
 		index = (to->last - index) + 1;
 	else
 		index -= to->first;
-	from->data[current].cost = index + curr_distance + 1;
+	from->data[current].cost = index + c_distance + 1;
 }

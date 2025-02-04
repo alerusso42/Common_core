@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 12:45:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:57:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		return (error(ER_BAD_ARGC));
 	if ((ft_strncmp("test", argv[1], 4) == 0) && (argc == 3))
-		return(random_test(argv));
+		return (random_test(argv));
 	a = NULL;
 	b = NULL;
 	settings = (t_settings *)ft_calloc(1, sizeof(t_settings));
@@ -72,6 +72,9 @@ int	main(int argc, char *argv[])
 	switches(settings, a);
 	variables(settings, a, b);
 	switch_to_bonus(settings, a);
-	print_and_algorythm(settings, a, b);
+	if (settings->switch_5_bonus == YES)
+		read_terminal(a);
+	else
+		print_and_algorythm(settings, a, b);
 	return (free_memory(&a, &b), free(settings), 0);
 }

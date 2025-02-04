@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_counter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:42:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 16:34:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:42:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

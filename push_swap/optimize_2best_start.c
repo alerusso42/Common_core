@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   optimize_2best_start.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:23:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/02 22:35:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:47:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	find_rotation_order(t_stack *stack)
 			}
 			else if (cost * 2 < half - (index - half))
 			{
-				cost =  half - (index - half);
+				cost = half - (index - half);
 				stack->furthest_position = index;
 				stack->order = RRA;
 			}
@@ -53,7 +53,7 @@ static void	find_rotation_order(t_stack *stack)
 */
 void	move_unsorted_to_b(t_stack *a)
 {
-	if (a->size < 3)//AGGIUNGERE CONTROLLO SU ORDINE
+	if (a->size < 3)
 		return ;
 	while (a->nums_to_push)
 	{

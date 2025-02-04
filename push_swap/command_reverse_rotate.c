@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_reverse_rotate.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/03 18:18:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:07:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	rrb(void)
 	}
 	b->moves_num += 1;
 	command_counter(RRB);
-	if (b->variable_1_mode == PRINT_MODIFICATIONS)
-		l_printf("Move number %d: rrb;\n", b->moves_num);
 	if (b->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 	else if (b->variable_1_mode == PRINT_FINAL_RESULT)

@@ -7,6 +7,7 @@ BONUS_DIR = bonus_dir
 ALL = all.a
 CP = cp
 SRC = 	ft_light_printf.c \
+		get_next_line.c get_next_line_utils.c \
 		alloc_random.c random_numbers.c random_test.c \
 		general.c general2.c \
 		alloc_memory.c free_memory.c \
@@ -17,11 +18,14 @@ SRC = 	ft_light_printf.c \
 		alg_tool_insertion1.c alg_tool_insertion2.c alg_tool_insertion3.c \
 		alg_tool_insertion4.c alg_tool_insertion5.c alg_tool_insertion6.c \
 		optimize_1doctor_strange.c optimize_2best_start.c optimize_3indexation.c \
-		execute_play.c execute_checker.c execute_algorythm.c \
+		execute_play.c execute_checker.c execute_algorythm.c execute_read_terminal.c \
 		error.c switches.c variables.c main.c \
 
 HEADER = 	push_define_list.h push_ext_libraries.h push_function_list.h \
-			push_structs.h push_swap.h
+			push_structs.h push_swap.h get_next_line.h
+
+BONUS_HEADER = 	push_define_list_bonus.h push_ext_libraries_bonus.h push_function_list_bonus.h \
+				push_structs_bonus.h push_swap_bonus.h get_next_line_bonus.h
 
 SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -57,10 +61,13 @@ $(OBJ_BONUS_DIR)/%.o: $(BONUS_DIR)/%.c | $(OBJ_BONUS_DIR)
 $(HEADER):
 	@echo "Missing header!"
 
+$(BONUS_HEADER) : 
+	@echo "Missing header!"
+
 $(OBJ_DIR)/dont_switch_to_bonus.o: $(OBJ_DIR) $(SRC)
 	cc $(COMP) -c dont_switch_to_bonus.c -o $(OBJ_DIR)/dont_switch_to_bonus.o
 
-$(OBJ_BONUS_DIR)/dont_switch_to_bonus.o: $(OBJ_BONUS_DIR) $(SRC_BONUS)
+$(OBJ_BONUS_DIR)/switch_to_bonus.o: $(OBJ_BONUS_DIR) $(SRC_BONUS)
 	cc $(COMP) -c $(BONUS_DIR)/switch_to_bonus.c -o $(OBJ_BONUS_DIR)/switch_to_bonus.o
 
 $(OBJ_DIR) : 
@@ -76,19 +83,19 @@ copy_lib: $(BONUS_DIR)
 	cp -r $(LIBFT_RELATIVE_PATH) $(BONUS_DIR)
 
 $(SRC_BONUS) : 
-	@echo "I am creating the bonus files! P-e-f-forza"
+	@echo "I am creating the bonus files! P-e-r-forza"
 	@for file in $(SRC); do \
 		cp $$file $(BONUS_DIR)/$${file%.c}_bonus.c; \
 	done
-	@for file in $(HEADER); do \
-		cp $$file $(BONUS_DIR)/$$file; \
+	@for file in $(BONUS_HEADER); do \
+		cp $$file $(BONUS_DIR)/$${file%.h}.h; \
 	done
 	cp switch_to_bonus.c $(BONUS_DIR)
 
 
-bonus: $(LIBFT) $(BONUS_DIR) copy_lib $(OBJ_BONUS_DIR) $(SRC_BONUS) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/dont_switch_to_bonus.o $(HEADER)
+bonus: $(LIBFT) $(BONUS_DIR) copy_lib $(OBJ_BONUS_DIR) $(SRC_BONUS) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(BONUS_HEADER)
 	touch $(ALL)
-	cp $(LIBFT) $(ALL) 
+	cp $(LIBFT) $(ALL)
 	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(ALL) -o $(NAME_BONUS)
 	@echo "\nall done!!"
 
@@ -135,5 +142,5 @@ clear :
 	clear
 
 
-.PHONY: all clean fclean re main gdb run copy_lib clear
+.PHONY: all clean fclean re main gdb run copy_lib clear copy_files
 .SILENT:

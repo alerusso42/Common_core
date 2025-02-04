@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 12:45:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:59:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		fill_stacks(t_stack *a, char ***matrix);
 void	find_biggest(t_stack *a);
 //	PRINT
 void	print_stacks(void);
-void	print_moves();
+void	print_moves(void);
 //	COOL_STUFF
 int		random_test(char *argv[]);
 int		alloc_randomlist(t_random **random, int numbers_len);
@@ -72,5 +72,8 @@ void	doctor_strange(t_stack *a);
 void	indexation(t_stack *a);
 void	best_start(t_stack *a);
 void	move_unsorted_to_b(t_stack *a);
+//	BONUS: CHECKER
+int		read_terminal(t_stack *a);
+void	test(t_stack *a);
 
 #endif
