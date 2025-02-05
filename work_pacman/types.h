@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/24 16:22:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:22:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,19 @@ is_correct:1 >	Booleano che indica quando una soluzione trovata è
  Si accede ai valori con nomestruct->seed/values[index].
  Ad esempio: random->values[index]
  */
+
+typedef struct s_bfs
+{
+	int			en_x;
+	int			en_y;
+	int			p_x;
+	int			p_y;
+	int			x;
+	int			y;
+	t_position	**position;
+	int			distance;
+}				t_bfs;
+
 struct s_col
 {
 	t_onebyte	*x;

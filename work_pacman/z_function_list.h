@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/24 14:33:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:51:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		show_random_values(t_random *random);
 int			alloc_sol(t_input **input, t_map **map);
 void		copy_map(t_map **map, int row_n, int col_n);
 void		fill_map(t_map **map, int row_n, int col_n);
-void		bfs(t_map *map, int start[2], int end[2]);
+void		bfs(t_bfs *bfs);
 void		print_shortest_path(t_map *map, int end[2]);
 int			change_mod(char *argv[], int argc);
 int			check_file(char *argv, char **filename);
