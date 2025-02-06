@@ -1,0 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   z_flags.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 09:22:11 by alerusso          #+#    #+#             */
+/*   Updated: 2025/01/24 07:36:14 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef Z_FLAGS_H
+# define Z_FLAGS_H
+# define RIGHT 0
+# define DOWN 1
+# define LEFT 2
+# define UP 3
+# define A_LOT 4
+# define LABIRYTH 3
+# define SOME 5
+# define FEW 6
+# define OPEN 1
+# define HALF 2
+# define CLOSE 3
+
+#endif
