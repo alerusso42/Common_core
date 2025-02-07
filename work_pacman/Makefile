@@ -28,6 +28,11 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 HEADER = 	get_next_line.h types.h z_error_list.h z_flags.h \
 			z_event_list.h z_function_list.h so_long.h
 
+HEADER_BONUS = 	get_next_line_bonus.h types_bonus.h \
+			z_error_list_bonus.h z_flags_bonus.h \
+			z_event_list_bonus.h z_function_list_bonus.h \
+			so_long_bonus.h
+
 #COMP = cc -g -Iminilibx -Lminilibx -lmlx -lX11 -lXext -lm -Lprintf -Lminilibx-linux/ -LLibft
 # I file bonus vengono generati rinominando i file sorgente con il suffisso _bonus
 SRC_BONUS = $(SRC:.c=_bonus.c)
@@ -84,22 +89,20 @@ copy_lib: $(BONUS_DIR)
 	@cp -r $(LIBFT_RELATIVE_PATH) $(BONUS_DIR)
 
 # Genera i file bonus solo se non sono già presenti (cioe se BONUS_MARK non esiste)
-ifndef $(BONUS_MARK)
 gen_bonus: $(BONUS_DIR) $(HEADER)
 	@if [ ! -f $(BONUS_MARK) ]; then \
 		echo "Generating bonus files..."; \
 		for file in $(SRC); do \
 			cp $$file $(BONUS_DIR)/$${file%.c}_bonus.c; \
 		done; \
-		for file in $(HEADER); do \
-			cp $$file $(BONUS_DIR)/$${file%.h}_bonus.h; \
+		for file in $(HEADER_BONUS); do \
+			cp $$file $(BONUS_DIR)/$${file}; \
 		done; \
 		cp switch_to_bonus.c $(BONUS_DIR); \
 		touch $(BONUS_MARK); \
 	else \
 		echo "Bonus files already generated."; \
 	fi
-endif
 
 
 bonus: $(LIBFT) $(MINILIBX) copy_lib $(OBJ_BONUS_DIR) $(BONUS_OBJ) $(HEADER) $(OBJ_BONUS_DIR)/switch_to_bonus.o

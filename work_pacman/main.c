@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:12:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:10:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	game_loop(void *param)
 	if (all == NULL)
 		all = storage_structs(NULL, GET);
 	update_screen(all, dialga);
+	move_enemies(all, dialga);
 	animations(all, dialga);
 	++dialga;
 	return (0);

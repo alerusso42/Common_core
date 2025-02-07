@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   z_function_list.h                                  :+:      :+:    :+:   */
+/*   z_function_list_bonus.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 11:21:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:59:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Z_FUNCTION_LIST_H
-# define Z_FUNCTION_LIST_H
+#ifndef Z_FUNCTION_LIST_BONUS_H
+# define Z_FUNCTION_LIST_BONUS_H
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <X11/keysym.h>
