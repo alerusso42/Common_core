@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 12:40:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:39:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,26 @@ static int	check_current_frame(int dialga)
 	return (NO);
 }
 
-static void	change_enemy_position(t_map *map, int x, int y)
+static int	change_enemy_position(t_map *map, int x, int y)
 {
 	if (map->position[x][y].value == '1')
-		return ;
+		return (NO);
 	if (map->position[x][y].value == 'E')
 	{
-		return ;
+		return (NO);
 	}
 	if (map->position[x][y].value == '$')
-		return ;
+		return (NO);
+	if (map->position[x][y].value == 'P')
+		end(0);
 	else
-		swap(x, y, map->p_x, map->p_y);
-	map->p_x = x;
-	map->p_y = y;
-	return ;
+	{
+		swap(x, y, map->e_x, map->e_y);
+		swap_bfs(x, y, map->e_x, map->e_y);
+	}
+	map->e_x = x;
+	map->e_y = y;
+	return (YES);
 }
 
 static void	move_enemy(t_map *map, int en_x, int en_y)
@@ -62,27 +67,40 @@ static void	move_enemy(t_map *map, int en_x, int en_y)
 		change_enemy_position(map, en_x, en_y + 1);
 }
 
-static void	move_random(t_map *map, int en_x, int en_y)
+static void	move_random(t_all *all, int en_x, int en_y, int dialga)
 {
-	
+	int	random;
+	int	can_move;
+
+	random = dialga % all->map->game_size;
+	random = all->random->values[random];
+	can_move = YES;
+	if (random % 4 == LEFT)
+		can_move = change_enemy_position(all->map, en_x - 1, en_y);
+	if ((can_move == NO) || (random % 4 == RIGHT))
+		can_move = change_enemy_position(all->map, en_x + 1, en_y);
+	if ((can_move == NO) || (random % 4 == DOWN))
+		can_move = change_enemy_position(all->map, en_x, en_y - 1);
+	if ((can_move == NO) || (random % 4 == UP))
+		can_move = change_enemy_position(all->map, en_x, en_y + 1);
 }
 
 void	move_enemies(t_all *all, int dialga)
 {
 	static int	trigger;
 
-	if ((trigger == 0) && (triggered() == YES))
+	if ((trigger == 0) && (triggered(all, all->map->e_x, all->map->e_y) == YES))
 	{
 		trigger = 1;
 	}
 	if (trigger == 1)
 	{
-		if (check_current_frame(dialga) == YES)
-		{
+		if (all->map->p_mov == YES)
 			get_best_path(all->map);
+		if (check_current_frame(dialga) == YES)
 			move_enemy(all->map, all->map->e_x, all->map->e_y);
-		}
+		print_bfs(all->map);
 	}
 	else if (check_current_frame(dialga) == YES)
-		move_random(all->map, all->map->e_x, all->map->e_y);
+		move_random(all, all->map->e_x, all->map->e_y, dialga);
 }

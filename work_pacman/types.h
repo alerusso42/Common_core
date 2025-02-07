@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 11:57:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:20:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ struct s_map
 	int					p_x;
 	int					p_y;
 	int					p_dir;
+	int					p_mov;
 	int					p_frame;
 	struct s_position	**position;
 	struct s_position	**old_pos;

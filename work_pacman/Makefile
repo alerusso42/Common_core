@@ -10,7 +10,7 @@ ALL = all.a
 CP = cp
 
 SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
-		bfs_algorythm.c bfs_draw_map.c bfs_utils.c \
+		bfs_algorythm.c bfs_draw_map.c bfs_utils.c triggered.c \
 		change_mod.c change_mod2.c check_map.c check_map2.c check_map3.c \
 		edit_map.c edit_map2.c error_message.c ft_light_printf.c \
 		general_ft.c general_ft2.c get_map.c get_map2.c \
@@ -21,9 +21,10 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 		print_mlx.c \
 		mlx_key_setting.c \
 		get_positions.c \
-		move_player.c which_pacman.c \
+		move_player.c which_pacman.c move_enemy.c move_functions.c \
 		reset_game.c \
-		switches.c variables.c main.c
+		switches.c variables.c main.c \
+		test.c
 
 HEADER = 	get_next_line.h types.h z_error_list.h z_flags.h \
 			z_event_list.h z_function_list.h so_long.h

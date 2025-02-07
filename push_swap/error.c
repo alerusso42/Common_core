@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:37:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:53:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:15:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	error(int error_type)
 
 int	error(int error_type)
 {
-	return (write(2, "Error\n", 6);
+	(void)error_type;
+	return (write(2, "Error\n", 6));
 }

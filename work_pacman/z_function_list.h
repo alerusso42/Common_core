@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 11:21:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:08:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void		show_random_values(t_random *random);
 int			alloc_sol(t_input **input, t_map **map);
 void		copy_map(t_map **map, int row_n, int col_n);
 void		fill_map(t_map **map, int row_n, int col_n);
-//			BFS_ALGORYTHM
+//			AI:
+//				BFS_ALGORYTHM
 int			get_best_path(t_map *map);
 int			draw_path(t_bfs *bfs);
 void		del_free(void *ptr);
 t_typelist	*store_list(t_typelist *list, int mode);
+//				TRIGGER_ENEMIES
+int			triggered(t_all *all, int en_x, int en_y);
 //
 int			change_mod(char *argv[], int argc);
 int			check_file(char *argv, char **filename);
@@ -103,9 +106,13 @@ void		*which_pac_man(t_all *all, int dialga);
 void		animations(t_all *all, int dialga);
 int			full_reset(int struct_num, ...);
 int			reset_pic(t_mlx *mlx);
+//			MOVE_TOOL
 void		move_player(t_map *map, int direction);
+void		move_enemies(t_all *all, int dialga);
 void		swap(int x1, int y1, int x2, int y2);
 void		replace(int dest_x, int dest_y, int src_x, int src_y);
+void		swap_bfs(int x1, int y1, int x2, int y2);
+//			
 int			end(int keycode);
 void		*storage_structs(t_all *update, int mode);
 int			save_map(t_map *map, int size_x, int size_y);
@@ -113,5 +120,7 @@ t_bool		switches(t_input *input, t_map *map, t_random *random);
 t_bool		variables(t_input *input, t_map *map, t_random *random);
 t_bool		mlx_settings(t_mlx *mlx);
 int			switch_to_bonus(t_input *input, t_map *map, t_random *random);
+//			DEBUG_TOOLS
+void		print_bfs(t_map *map);
 
 #endif
