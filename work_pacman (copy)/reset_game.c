@@ -6,11 +6,15 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:55:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/24 16:14:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:11:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 void	*storage_structs(t_all *update, int mode)
 {

@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 int			alloc_sol(t_input **input, t_map **map);
 static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h);

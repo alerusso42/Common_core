@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   random_numbers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 10:23:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:11:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 void	twist_random(t_random **random, int game_size);
 void	twist_random2(t_random **random, int game_size);

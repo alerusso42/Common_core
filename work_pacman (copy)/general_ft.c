@@ -10,11 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 void	ft_swap(int *x, int *y);
 int		ft_pow(int base, int exponent);
 int		ft_strcmp(char *s1, char *s2);
+
+/*
+	Return the absolute value of a number.
+*/
+int	ft_abs(int num)
+{
+	if (num >= 0)
+		return (num);
+	if (num == INT_MIN)
+		return (INT_MAX);
+	return (num * -1);
+}
 
 /* 	ft_swap svolge un ruolo fondamentale nel processo di twist dei
 	valori di t_random: usando il seed, vengono scambiati gli indici

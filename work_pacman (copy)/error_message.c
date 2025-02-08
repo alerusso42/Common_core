@@ -6,11 +6,15 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/23 08:35:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:13:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 static void	*other_messages(int error);
 static void	*other_messages2(int error);

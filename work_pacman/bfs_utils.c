@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:51:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:37:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,22 @@ t_typelist	*store_list(t_typelist *list, int mode)
 		return (NULL);
 	}
 	return (store_list);
+}
+
+void	clean_bfs(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y != map->game_size_h)
+	{
+		x = 0;
+		while (x != map->game_size_w)
+		{
+			map->position[x][y].distance = 0;
+			++x;
+		}
+		++y;
+	}
 }

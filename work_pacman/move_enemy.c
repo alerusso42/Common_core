@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 17:39:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 12:04:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	change_enemy_position(t_map *map, int x, int y)
 	else
 	{
 		swap(x, y, map->e_x, map->e_y);
-		swap_bfs(x, y, map->e_x, map->e_y);
+		replace_bfs(x, y, map->e_x, map->e_y);
 	}
 	map->e_x = x;
 	map->e_y = y;
@@ -96,10 +96,12 @@ void	move_enemies(t_all *all, int dialga)
 	if (trigger == 1)
 	{
 		if (all->map->p_mov == YES)
+		{
 			get_best_path(all->map);
+			print_bfs(all->map);
+		}
 		if (check_current_frame(dialga) == YES)
 			move_enemy(all->map, all->map->e_x, all->map->e_y);
-		print_bfs(all->map);
 	}
 	else if (check_current_frame(dialga) == YES)
 		move_random(all, all->map->e_x, all->map->e_y, dialga);

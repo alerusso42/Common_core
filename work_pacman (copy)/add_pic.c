@@ -6,11 +6,15 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 07:28:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/22 12:24:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:14:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 static void	get_images2(t_mlx *mlx, int *s, void *i);
 static void	get_images3(t_mlx *mlx, int *s, void *i);

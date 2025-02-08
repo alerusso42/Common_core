@@ -6,18 +6,12 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 08:26:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:08:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef Z_FUNCTION_LIST_H
 # define Z_FUNCTION_LIST_H
-# include "types.h"
-# include "z_error_list.h"
-# include "z_event_list.h"
-# include "z_flags.h"
-# include "get_next_line_bonus.h"
-# include "z_error_list.h"
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <X11/keysym.h>
@@ -29,6 +23,12 @@
 # include <math.h>
 # define MIN_INT_VALUE -2147483648
 # define MAX_INT_VALUE 2147483647
+//
+# if __has_include("so_long.h")
+#  include "so_long.h"
+# else
+# include "so_long_bonus.h"
+# endif
 
 // cc -g -Wall -Wextra -Werror main.c -Lminilibx -lmlx -lX11 -lXext -lm
 //
@@ -44,11 +44,14 @@ void		show_random_values(t_random *random);
 int			alloc_sol(t_input **input, t_map **map);
 void		copy_map(t_map **map, int row_n, int col_n);
 void		fill_map(t_map **map, int row_n, int col_n);
-//			BFS_ALGORYTHM
+//			AI:
+//				BFS_ALGORYTHM
 int			get_best_path(t_map *map);
 int			draw_path(t_bfs *bfs);
 void		del_free(void *ptr);
 t_typelist	*store_list(t_typelist *list, int mode);
+//				TRIGGER_ENEMIES
+int			triggered(t_all *all, int en_x, int en_y);
 //
 int			change_mod(char *argv[], int argc);
 int			check_file(char *argv, char **filename);
@@ -79,6 +82,8 @@ void		sixth_step_colet(t_map *map, t_random *random);
 void		last_step_walls(t_map *map, t_random *random);
 void		*error(int error);
 int			l_printf(const char *str, ...);
+//			GENERAL_UTILITIES
+int			ft_abs(int num);
 void		ft_swap(int *x, int *y);
 int			ft_pow(int base, int exponent);
 int			ft_strcmp(char *s1, char *s2);
@@ -101,9 +106,13 @@ void		*which_pac_man(t_all *all, int dialga);
 void		animations(t_all *all, int dialga);
 int			full_reset(int struct_num, ...);
 int			reset_pic(t_mlx *mlx);
+//			MOVE_TOOL
 void		move_player(t_map *map, int direction);
+void		move_enemies(t_all *all, int dialga);
 void		swap(int x1, int y1, int x2, int y2);
 void		replace(int dest_x, int dest_y, int src_x, int src_y);
+void		swap_bfs(int x1, int y1, int x2, int y2);
+//			
 int			end(int keycode);
 void		*storage_structs(t_all *update, int mode);
 int			save_map(t_map *map, int size_x, int size_y);
@@ -111,5 +120,7 @@ t_bool		switches(t_input *input, t_map *map, t_random *random);
 t_bool		variables(t_input *input, t_map *map, t_random *random);
 t_bool		mlx_settings(t_mlx *mlx);
 int			switch_to_bonus(t_input *input, t_map *map, t_random *random);
+//			DEBUG_TOOLS
+void		print_bfs(t_map *map);
 
 #endif

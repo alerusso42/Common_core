@@ -6,11 +6,15 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/24 16:41:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:21:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 void	print_map(t_input *input, t_map *map, int x, int y);
 void	print_colgraphic(t_input *input, t_bool mode);

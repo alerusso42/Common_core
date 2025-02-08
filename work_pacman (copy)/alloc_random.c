@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_random.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/18 16:01:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:14:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 int			alloc_randomlist(t_random **random, int game_size);
 t_random	*fill_random(t_random **random, t_input *input);

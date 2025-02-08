@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 16:09:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:36:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			get_best_path(t_map *map);
 int			draw_path(t_bfs *bfs);
 void		del_free(void *ptr);
 t_typelist	*store_list(t_typelist *list, int mode);
+void		clean_bfs(t_map *map);
 //				TRIGGER_ENEMIES
 int			triggered(t_all *all, int en_x, int en_y);
 //

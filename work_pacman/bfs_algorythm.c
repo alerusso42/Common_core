@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:36:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	get_best_path(t_map *map)
 	t_bfs	bfs_stuff;
 	int		is_valid_path;
 
+	clean_bfs(map);
 	bfs_stuff.en_x = map->e_x;
 	bfs_stuff.en_y = map->e_y;
 	bfs_stuff.p_x = map->p_x;

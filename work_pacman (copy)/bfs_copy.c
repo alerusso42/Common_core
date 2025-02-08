@@ -6,19 +6,23 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 08:18:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:52:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
-PER COMPILARE: cc bfs_copy.c Libft/libft.a
+//PER COMPILARE: cc bfs_copy.c Libft/libft.a
 
 #define MAP_X 25
 #define MAP_Y 25
 
-#define PRINT 1
+#define PRINT 4
 #define WALL 6
 
 

@@ -6,11 +6,15 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:55:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/24 16:30:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:11:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "z_function_list.h"
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
 
 static int	reset_pic2(t_mlx *mlx);
 static int	reset_pic3(t_mlx *mlx);
