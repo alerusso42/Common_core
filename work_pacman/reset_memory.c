@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:11:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:10:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int				full_reset(int struct_num, ...);
 static int		reset_memory_input(t_input **input);
-static int		reset_memory_sol(t_map **map, int game_size[2], int index);
+static void		reset_memory_sol(t_map **map, int game_size[2], int index);
 static int		reset_memory_randlist(t_random **random);
 static int		reset_memory_mlx(t_mlx **mlx);
 
@@ -75,16 +75,30 @@ static int	reset_memory_input(t_input **input)
 	return (0);
 }
 
-static int	reset_memory_sol(t_map **map, int game_size[2], int index)
+static void	reset_enemies(t_map *map, int index, int y_size)
+{
+	int	y;
+
+	y = 0;
+	while (y != y_size)
+	{
+		free(map->position[index][y].distance);
+		map->position[index][y].distance = NULL;
+		++y;
+	}
+}
+
+static void	reset_memory_sol(t_map **map, int game_size[2], int index)
 {
 	t_map	*p;
 
 	index = 0;
 	p = (*map);
 	if (!p)
-		return (1);
+		return ;
 	while ((p->position) && (p->position[index]) && (index <= game_size[0]))
 	{
+		reset_enemies(p, index, game_size[1]);
 		free(p->position[index]);
 		p->position[index++] = NULL;
 	}
@@ -100,7 +114,6 @@ static int	reset_memory_sol(t_map **map, int game_size[2], int index)
 	p->old_pos = NULL;
 	free(p);
 	p = NULL;
-	return (0);
 }
 
 static int	reset_memory_randlist(t_random **random)

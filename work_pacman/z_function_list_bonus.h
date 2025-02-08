@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 11:36:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:03:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ void		move_enemies(t_all *all, int dialga);
 void		swap(int x1, int y1, int x2, int y2);
 void		replace(int dest_x, int dest_y, int src_x, int src_y);
 void		swap_bfs(int x1, int y1, int x2, int y2);
+int			speed_one(int dialga);
+int			speed_two(int dialga);
+int			speed_three(int dialga);
+int			speed_four(int dialga);
+int			speed_five(int dialga);
 //			
 int			end(int keycode);
 void		*storage_structs(t_all *update, int mode);

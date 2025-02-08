@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 14:48:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 13:52:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct s_input
 	t_bool				variable_0_shutupcompiler:1;
 	t_bool				create_map:1;
 	char				valid_signs[7];
+	unsigned int		en_speed:4;
 	int					game_size;
 	int					game_size_w;
 	int					game_size_h;

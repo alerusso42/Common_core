@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 16:20:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:49:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_position	t_position;
 typedef struct s_random		t_random;
 typedef struct s_mlx		t_mlx;
 typedef struct s_sprite		t_sprite;
+typedef struct s_enemy		t_enemy;
 typedef struct s_all		t_all;
 typedef unsigned char		t_onebyte;
 typedef unsigned int		t_bool;
@@ -59,9 +60,9 @@ struct s_row
 struct s_input
 {
 	t_bool				switch_1_bonus:1;
-	t_bool				variable_0_shutupcompiler:1;
 	t_bool				create_map:1;
 	char				valid_signs[7];
+	unsigned int		en_speed:4;
 	int					game_size;
 	int					game_size_w;
 	int					game_size_h;
@@ -74,6 +75,15 @@ struct s_position
 	t_onebyte	value;
 	int			distance;
 	t_onebyte	*pointer;
+};
+struct s_enemy
+{
+	int				en_x;
+	int				en_y;
+	int				en_x_start;
+	int				en_y_start;
+	unsigned int	en_color:2;
+	unsigned int	en_dir:2;
 };
 struct s_map
 {
@@ -97,8 +107,11 @@ struct s_map
 	unsigned char		is_solved:1;
 	int					e_x;
 	int					e_y;
+	t_enemy				*enemy;
 	int					p_x;
 	int					p_y;
+	int					p_x_start;
+	int					p_y_start;
 	int					p_dir;
 	int					p_mov;
 	int					p_frame;

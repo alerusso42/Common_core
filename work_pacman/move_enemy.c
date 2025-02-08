@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 12:04:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:30:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,20 @@
 #include "so_long_bonus.h"
 #endif
 
-static int	check_current_frame(int dialga)
+static int	check_current_frame(t_all *all, int dialga)
 {
-	if (dialga % 24030 == 0)
-		return (YES);
+	(void)all;
+	if (all->input->en_speed == 1)
+		return (speed_one(dialga));
+	if (all->input->en_speed == 2)
+		return (speed_two(dialga));
+	if (all->input->en_speed == 3)
+		return (speed_three(dialga));
+	if (all->input->en_speed == 4)
+		return (speed_four(dialga));
+	if (all->input->en_speed == 5)
+		return (speed_five(dialga));
+/*
 	if (dialga % 24030 == 4005)
 		return (YES);
 	if (dialga % 24030 == 8010)
@@ -30,6 +40,7 @@ static int	check_current_frame(int dialga)
 		return (YES);
 	if (dialga % 24030 == 20025)
 		return (YES);
+*/
 	return (NO);
 }
 
@@ -55,8 +66,13 @@ static int	change_enemy_position(t_map *map, int x, int y)
 	return (YES);
 }
 
-static void	move_enemy(t_map *map, int en_x, int en_y)
+static void	move_enemy(t_map *map, int n)
 {
+	int	en_x;
+	int	en_y;
+
+	en_x = map->enemy[n].x;
+	en_y = map->enemy[n].y;
 	if (map->position[en_x - 1][en_y].distance != 0)
 		change_enemy_position(map, en_x - 1, en_y);
 	else if (map->position[en_x + 1][en_y].distance != 0)
@@ -67,13 +83,17 @@ static void	move_enemy(t_map *map, int en_x, int en_y)
 		change_enemy_position(map, en_x, en_y + 1);
 }
 
-static void	move_random(t_all *all, int en_x, int en_y, int dialga)
+static void	move_random(t_all *all, int dialga, int n)
 {
 	int	random;
 	int	can_move;
+	int	en_x;
+	int	en_y;
 
 	random = dialga % all->map->game_size;
 	random = all->random->values[random];
+	en_x = all->map->enemy[n].x;
+	en_y = all->map->enemy[n].y;
 	can_move = YES;
 	if (random % 4 == LEFT)
 		can_move = change_enemy_position(all->map, en_x - 1, en_y);
@@ -88,21 +108,27 @@ static void	move_random(t_all *all, int en_x, int en_y, int dialga)
 void	move_enemies(t_all *all, int dialga)
 {
 	static int	trigger;
+	int			n;
 
-	if ((trigger == 0) && (triggered(all, all->map->e_x, all->map->e_y) == YES))
+	n = -1;
+	while (++n != all->map->variable_3_enemy_num)
 	{
-		trigger = 1;
-	}
-	if (trigger == 1)
-	{
-		if (all->map->p_mov == YES)
+		if ((trigger == 0) && \
+		(triggered(all, all->map->enemy[n].x, all->map->enemy[n].x) == YES))
 		{
-			get_best_path(all->map);
-			print_bfs(all->map);
+			trigger = 1;
 		}
-		if (check_current_frame(dialga) == YES)
-			move_enemy(all->map, all->map->e_x, all->map->e_y);
+		if (trigger == 1)
+		{
+			if (all->map->p_mov == YES)
+			{
+				get_best_path(all->map, n);
+				print_bfs(all->map, n);
+			}
+			if (check_current_frame(all, dialga) == YES)
+				move_enemy(all->map, n);
+		}
+		else if (check_current_frame(all, dialga) == YES)
+			move_random(all, dialga, n);
 	}
-	else if (check_current_frame(dialga) == YES)
-		move_random(all, all->map->e_x, all->map->e_y, dialga);
 }

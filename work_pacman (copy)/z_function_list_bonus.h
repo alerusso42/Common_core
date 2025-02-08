@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 16:09:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:03:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			get_best_path(t_map *map);
 int			draw_path(t_bfs *bfs);
 void		del_free(void *ptr);
 t_typelist	*store_list(t_typelist *list, int mode);
+void		clean_bfs(t_map *map);
 //				TRIGGER_ENEMIES
 int			triggered(t_all *all, int en_x, int en_y);
 //
@@ -112,6 +113,11 @@ void		move_enemies(t_all *all, int dialga);
 void		swap(int x1, int y1, int x2, int y2);
 void		replace(int dest_x, int dest_y, int src_x, int src_y);
 void		swap_bfs(int x1, int y1, int x2, int y2);
+int			speed_one(int dialga);
+int			speed_two(int dialga);
+int			speed_three(int dialga);
+int			speed_four(int dialga);
+int			speed_five(int dialga);
 //			
 int			end(int keycode);
 void		*storage_structs(t_all *update, int mode);

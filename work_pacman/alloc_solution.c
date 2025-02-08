@@ -19,18 +19,6 @@
 int			alloc_sol(t_input **input, t_map **map);
 static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h);
 
-/* 	Perchè allochiamo ((*input)->game_size) + 2)^2?
-	Se la scacchiera è grande 3x3, ci servono 9 quadretti, quindi
-	solo game_size^2.
-	Ho deciso di allocare un byte in più per inserire 0 come valore
-	di fine stringa al termine di ogni riga e di ogni colonna, per
-	poter segnalare, in caso, la fine di una riga con uno zero,
-	per evitare il segmentation fault.
-	Quindi game_size + 1 alla seconda.
-	Ma allora perchè game_size + 2? Perchè il compilatore vuole un
-	byte in più per sicurezza. Altrimenti, fa le bizze.
-	Provare per credere.
-*/
 int	alloc_sol(t_input **input, t_map **map)
 {
 	int	index;
@@ -72,6 +60,33 @@ static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h)
 		sizeof(char *) * 2);
 		if ((*map)->old_pos[index] == NULL)
 			return (full_reset(2, input, map), 3);
+	}
+	return (0);
+}
+
+int	alloc_enemies(t_map *map)
+{
+	int	en_num;
+	int	x;
+	int	y;
+
+	en_num = map->variable_3_enemy_num;
+	map->enemy = (t_enemy *)ft_calloc(en_num + 1, sizeof(t_enemy));
+	if (!map->enemy)
+		return (1);
+	y = 0;
+	while (y != map->game_size_h)
+	{
+		x = 0;
+		while (x != map->game_size_w)
+		{
+			map->position[x][y].distance = \
+			(char *)ft_calloc(en_num + 1, sizeof(char));
+			if (map->position[x][y].distance == NULL)
+				return (1);
+			++x;
+		}
+		++y;
 	}
 	return (0);
 }

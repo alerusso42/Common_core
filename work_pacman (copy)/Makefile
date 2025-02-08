@@ -22,6 +22,7 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 		mlx_key_setting.c \
 		get_positions.c \
 		move_player.c which_pacman.c move_enemy.c move_functions.c \
+		move_speed.c \
 		reset_game.c \
 		switches.c variables.c main.c \
 		test.c

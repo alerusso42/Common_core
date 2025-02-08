@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 11:36:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:21:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	bfs_loop(t_bfs *bfs, t_typelist *list)
 		y = (int *)list->type;
 		bfs->x = *x;
 		bfs->y = *y;
-		bfs->distance = bfs->position[bfs->x][bfs->y].distance;
+		bfs->distance = bfs->position[bfs->x][bfs->y].distance[bfs->n];
 		if (bfs->distance == -1)
 			bfs->distance = 0;
 		if (process_one(bfs) != 0)
@@ -94,7 +94,7 @@ static void	bfs(t_bfs *bfs)
 	int				*x;
 	int				*y;
 
-	bfs->position[bfs->en_x][bfs->en_y].distance = -1;
+	bfs->position[bfs->en_x][bfs->en_y].distance[bfs->n] = -1;
 	x = ft_calloc(1, sizeof(int));
 	if (!x)
 		return ;
@@ -114,19 +114,20 @@ static void	bfs(t_bfs *bfs)
 	ft_lstclear(&tail, del_free);
 }
 
-int	get_best_path(t_map *map)
+int	get_best_path(t_map *map, int enemy_num)
 {
 	t_bfs	bfs_stuff;
 	int		is_valid_path;
 
 	clean_bfs(map);
-	bfs_stuff.en_x = map->e_x;
-	bfs_stuff.en_y = map->e_y;
+	bfs_stuff.en_x = map->enemy[enemy_num].x;
+	bfs_stuff.en_y = map->enemy[enemy_num].y;
 	bfs_stuff.p_x = map->p_x;
 	bfs_stuff.p_y = map->p_y;
 	bfs_stuff.position = map->position;
 	bfs_stuff.map_x = map->game_size_w;
 	bfs_stuff.map_y = map->game_size_h;
+	bfs_stuff.n = enemy_num;
 	bfs(&bfs_stuff);
 	is_valid_path = draw_path(&bfs_stuff);
 	if (is_valid_path == NO)

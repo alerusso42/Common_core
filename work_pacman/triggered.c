@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:05:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 15:18:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:22:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	triggered(t_all *all, int en_x, int en_y)
 	return (NO);
 }
 
-static int	block_eye_contact(char value)
+static int	eye(char value)
 {
 	if (value == 'E')
 		return (YES);
@@ -66,21 +66,21 @@ static int	x_eye_contact(t_map *map, int en_x, int en_y)
 	{
 		if (en_x > map->p_x)
 			en_x--;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->e_x + en_x][map->e_y + en_y].value) == YES)
 			return (NO);
 		if (en_y > map->p_y)
 			en_y--;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
 		if (en_x < map->p_x)
 			en_x++;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
 		if (en_y < map->p_y)
 			en_y++;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
-		if (map->position[en_x][en_y].value == 'P')
+		if (map->position[map->p_x + en_x][map->p_y + en_y].value == 'P')
 			return (YES);
 	}
 }
@@ -95,21 +95,21 @@ static int	y_eye_contact(t_map *map, int en_x, int en_y)
 	{
 		if (en_y > map->p_y)
 			en_y--;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
 		if (en_x > map->p_x)
 			en_x--;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
 		if (en_y < map->p_y)
 			en_y++;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
 		if (en_x < map->p_x)
 			en_x++;
-		if (block_eye_contact(map->position[en_x][en_y].value) == YES)
+		if (eye(map->position[map->p_x + en_x][map->p_y + en_y].value) == YES)
 			return (NO);
-		if (map->position[en_x][en_y].value == 'P')
+		if (map->position[map->p_x + en_x][map->p_y + en_y].value == 'P')
 			return (YES);
 	}
 }
