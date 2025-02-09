@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:05:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:33:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:30:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	triggered(t_all *all, int en_x, int en_y)
 	delta_y = all->map->p_y - en_y;
 	if (ft_abs(delta_x) > ft_abs(delta_y))
 	{
-		if (x_eye_contact(all->map, delta_x, delta_y) == YES)
+		if (x_eye_contact(all->map, en_x, en_y) == YES)
 			return (YES);
 	}
 	else if (ft_abs(delta_x) < ft_abs(delta_y))
