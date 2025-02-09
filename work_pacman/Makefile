@@ -15,7 +15,8 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 		edit_map.c edit_map2.c error_message.c ft_light_printf.c \
 		general_ft.c general_ft2.c get_map.c get_map2.c \
 		get_next_line.c get_next_line_utils.c \
-		print_stuff.c random_numbers.c reset_memory.c \
+		random_numbers.c randomizer.c \
+		print_stuff.c reset_memory.c \
 		save_map.c \
 		add_pic.c check_pic.c reset_pic.c \
 		print_mlx.c \
@@ -42,7 +43,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC:.c=_bonus.o))
 
 COMP = -g -Wall -Wextra -Werror -ILibft -Iprintf
-LIBX = -Lminilibx-linux -lX11 -lmlx -lXext -lft -lm -Lprintf -LLibft
+LIBX = -Lminilibx-linux -lmlx -lX11 -lXext -lft -lm -Lprintf -LLibft
 LIBFT_RELATIVE_PATH = Libft/
 PRINTF_RELATIVE_PATH = printf/
 MINILIBX_RELATIVE_PATH = minilibx-linux/

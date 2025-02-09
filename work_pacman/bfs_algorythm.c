@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_algorythm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 17:21:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:48:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@
 #endif
 #define PRINT_BFS 0
 
-static int	find_distance(t_position **position, int x, int y, int distance);
+static int	find_distance(t_bfs *bfs, int x, int y, int distance);
 static int	process_one(t_bfs *bfs);
 static int	bfs_loop(t_bfs *bfs, t_typelist *list);
 static void	bfs(t_bfs *bfs);
 
-static int	find_distance(t_position **position, int x, int y, int distance)
+static int	find_distance(t_bfs *bfs, int x, int y, int distance)
 {
 	t_typelist	*new;
 	t_typelist	*list;
 	int			*x_alloc;
 	int			*y_alloc;
 	
-	if ((position[x][y].value == '1') || (position[x][y].distance != 0))
+	if ((bfs->position[x][y].value == '1') || \
+	(bfs->position[x][y].distance[bfs->n] != 0))
 		return (2);
 	x_alloc = ft_calloc(1, sizeof(int));
 	if (!x_alloc)
@@ -43,8 +44,8 @@ static int	find_distance(t_position **position, int x, int y, int distance)
 	if (!new)
 		return (free(x_alloc), free(y_alloc), 1);
 	list = store_list(NULL, 1);
-	if (position[x][y].distance != -1)
-		position[x][y].distance = distance + 1;
+	if (bfs->position[x][y].distance[bfs->n] != -1)
+		bfs->position[x][y].distance[bfs->n] = distance + 1;
 	ft_lstadd_back(&list, new);
 	return (0);
 }
@@ -55,13 +56,13 @@ static int	process_one(t_bfs *bfs)
 	{
 		return (2);
 	}
-	if (find_distance(bfs->position, bfs->x + 1, bfs->y, bfs->distance) == 1)
+	if (find_distance(bfs, bfs->x + 1, bfs->y, bfs->distance) == 1)
 		return (1);
-	if (find_distance(bfs->position, bfs->x - 1, bfs->y, bfs->distance) == 1)
+	if (find_distance(bfs, bfs->x - 1, bfs->y, bfs->distance) == 1)
 		return (1);
-	if (find_distance(bfs->position, bfs->x, bfs->y + 1, bfs->distance) == 1)
+	if (find_distance(bfs, bfs->x, bfs->y + 1, bfs->distance) == 1)
 		return (1);
-	if (find_distance(bfs->position, bfs->x, bfs->y - 1, bfs->distance) == 1)
+	if (find_distance(bfs, bfs->x, bfs->y - 1, bfs->distance) == 1)
 		return (1);
 	return (0);
 }
@@ -119,7 +120,7 @@ int	get_best_path(t_map *map, int enemy_num)
 	t_bfs	bfs_stuff;
 	int		is_valid_path;
 
-	clean_bfs(map);
+	clean_bfs(map, enemy_num);
 	bfs_stuff.en_x = map->enemy[enemy_num].x;
 	bfs_stuff.en_y = map->enemy[enemy_num].y;
 	bfs_stuff.p_x = map->p_x;
@@ -128,6 +129,7 @@ int	get_best_path(t_map *map, int enemy_num)
 	bfs_stuff.map_x = map->game_size_w;
 	bfs_stuff.map_y = map->game_size_h;
 	bfs_stuff.n = enemy_num;
+	bfs_stuff.mark = (enemy_num + 1) * -1;
 	bfs(&bfs_stuff);
 	is_valid_path = draw_path(&bfs_stuff);
 	if (is_valid_path == NO)

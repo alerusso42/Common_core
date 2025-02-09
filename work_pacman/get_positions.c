@@ -3,19 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   get_positions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:52:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/23 09:03:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:23:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-int	get_position(char search, int *x, int *y)
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
+
+static void	get_one(t_map *map, int x, int y, int enemy_num);
+
+int	get_enemies_position(t_map *map, char search)
 {
 	int	x;
 	int	y;
+	int	enemy_num;
 
 	y = 0;
-	while ()
-}*/
+	enemy_num = 0;
+	while (y != map->game_size_h)
+	{
+		x = 0;
+		while (x != map->game_size_w)
+		{
+			if (map->position[x][y].value == search)
+			{
+				get_one(map, x, y, enemy_num);
+				enemy_num++;
+			}
+			++x;
+		}
+		++y;
+	}
+	return (0);
+}
+
+static void	get_one(t_map *map, int x, int y, int enemy_num)
+{
+	map->enemy[enemy_num].x = x;
+	map->enemy[enemy_num].y = y;
+	map->enemy[enemy_num].x_start = x;
+	map->enemy[enemy_num].y_start = y;
+	map->enemy[enemy_num].color = randomize_color(x, y, enemy_num);
+	map->enemy[enemy_num].dir = FRONT;
+}

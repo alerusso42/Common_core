@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 16:10:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:52:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static void	reset_enemies(t_map *map, int index, int y_size)
 		map->position[index][y].distance = NULL;
 		++y;
 	}
+	free(map->enemy);
+	map->enemy = NULL;
 }
 
 static void	reset_memory_sol(t_map **map, int game_size[2], int index)

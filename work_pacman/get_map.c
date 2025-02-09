@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:12:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 
 t_all	*alloc_data2(t_input **input, t_map **map, t_random *random)
 {
-	int	seed;
-
-	seed = random->seed;
 	fill_random(&random, *input);
 	fill_map(map, (*map)->game_size_h, \
 	(*map)->game_size_w);
@@ -90,6 +87,8 @@ t_all	*alloc_data3(t_input *input, t_map *map, t_random *random)
 		return (full_reset(4, &input, &map, &random, &mlx), NULL);
 	if (get_mlx(mlx, map->variable_6_window_width, \
 	map->variable_7_window_heigth, map->display_name) == 1)
+		return (full_reset(4, &input, &map, &random, &mlx), NULL);
+	if (alloc_enemies(map) != 0)
 		return (full_reset(4, &input, &map, &random, &mlx), NULL);
 	all->input = input;
 	all->map = map;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 16:33:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:06:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef unsigned int		t_bool;
 typedef struct s_bfs
 {
 	int			n;
+	int			mark;
 	int			en_x;
 	int			en_y;
 	int			p_x;
@@ -78,7 +79,7 @@ struct s_input
 struct s_position
 {
 	t_onebyte	value;
-	t_onebyte	*distance;
+	char		*distance;
 };
 struct s_enemy
 {
@@ -87,7 +88,7 @@ struct s_enemy
 	int				x_start;
 	int				y_start;
 	unsigned int	color:2;
-	unsigned int	dir:2;
+	unsigned int	dir:3;
 };
 struct s_map
 {
