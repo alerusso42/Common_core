@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:41:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int	check_file(char *argv, char **filename)
 	if (!filename)
 		return (1);
 	if (check_extension_file(*filename, ".ber") == 1)
-		return (free(*filename), 1);
+	{
+		free(*filename);
+		*filename = NULL;
+		return (1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 12:15:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:44:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	animations(t_all *all, int dialga)
 	size = all->mlx->variable_1_sprite_size;
 	if (all->map->is_solved == YES)
 	{
-		x = (all->map->e_x * size);
-		y = (all->map->e_y * size) + size * 3;
+		x = (all->map->e_x - all->mlx->start_x) * size;
+		y = (all->map->e_y - all->mlx->start_y) * size + (size * 3);
 		mlx_put_image_to_window(all->mlx->con, all->mlx->window, \
 		all->mlx->sprite->exit, x, y);
 	}
-	x = (all->map->p_x * size);
-	y = (all->map->p_y * size) + size * 3;
+	x = (all->map->p_x - all->mlx->start_x) * size;
+	y = ((all->map->p_y - all->mlx->start_y) * size) + (size * 3);
 	p = pic(all, all->map->p_x, all->map->p_y, dialga);
 	mlx_put_image_to_window(all->mlx->con, all->mlx->window, p, x, y);
 }
@@ -46,12 +46,14 @@ int	game_loop(void *param)
 	(void)param;
 	if (all == NULL)
 		all = storage_structs(NULL, GET);
+	if ((all->input->switch_2_rechargemap == ON) && (all->map->p_mov == YES))
+		clear_screen(all);
 	update_screen(all, dialga);
 	if (all->input->switch_1_bonus == ON)
 		move_enemies(all, dialga);
 	animations(all, dialga);
 	++dialga;
-	all->map->p_mov = 0;
+	all->map->p_mov = NO;
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_algorythm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 11:48:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:05:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	find_distance(t_bfs *bfs, int x, int y, int distance)
 
 static int	process_one(t_bfs *bfs)
 {
+	if (bfs->distance >= 40)
+		return (0);
 	if ((bfs->x == bfs->p_x) && (bfs->y == bfs->p_y))
 	{
 		return (2);
@@ -133,6 +135,6 @@ int	get_best_path(t_map *map, int enemy_num)
 	bfs(&bfs_stuff);
 	is_valid_path = draw_path(&bfs_stuff);
 	if (is_valid_path == NO)
-		return (2);
-	return (0);
+		return (OFF);
+	return (ON);
 }

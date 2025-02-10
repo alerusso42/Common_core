@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_function_list.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:11:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:28:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,17 @@ void		twist_random2(t_random **random, int game_size);
 void		twist_random3(t_random **random, int game_size);
 int			randomize_color(int seed_1, int seed_2, int seed_3);
 int			get_enemies_position(t_map *map, char search);
+int			id_enemy(t_map *map, int x, int y);
 void		get_key_settings(t_all *all);
 void		update_screen(t_all *all, int dialga);
 void		*pic(t_all *all, int x, int y, int dialga);
 void		*which_pac_man(t_all *all, int dialga);
+void		*which_enemy(t_all *all, int x, int y);
 void		animations(t_all *all, int dialga);
 int			full_reset(int struct_num, ...);
 int			reset_pic(t_mlx *mlx);
 //			MOVE_TOOL
-void		move_player(t_map *map, int direction);
+int			move_player(t_map *map, int direction);
 void		move_enemies(t_all *all, int dialga);
 void		swap(int x1, int y1, int x2, int y2);
 void		replace(int dest_x, int dest_y, int src_x, int src_y);

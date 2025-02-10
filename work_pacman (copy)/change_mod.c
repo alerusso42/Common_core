@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:46:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	change_mod(char *argv[], int argc)
 		if (check_file(argv[1], &filename) == 1)
 			return (1);
 		if (find_mapsize(filename) == 1)
-			return (1);
+			return (free(filename), 1);
 		return (0);
 	}
 	if (argc < 4)

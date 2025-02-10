@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 12:28:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:53:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@
 #endif
 
 static int	update_one(t_all *all, int x, int y, int dialga);
+static void	get_visible_screen(t_all *all);
 void		*pic(t_all *all, int x, int y, int dialga);
 
 void	update_screen(t_all *all, int dialga)
 {
-	int				x;
-	int				y;
+	int	x;
+	int	y;
 
-	y = all->map->game_size_h;
-	while (y != -1)
+	get_visible_screen(all);
+	y = all->mlx->start_y;
+	while ((y != all->map->game_size_h) && (y - all->mlx->start_y < 29))
 	{
-		x = 0;
-		while (x != all->map->game_size_w)
+		x = all->mlx->start_x;
+		while ((x != all->map->game_size_w) && (x - all->mlx->start_x < 29))
 		{
 			if (all->map->position[x][y].value != \
 			all->map->old_pos[x][y].value)
@@ -37,8 +39,20 @@ void	update_screen(t_all *all, int dialga)
 			}
 			++x;
 		}
-		--y;
+		++y;
 	}
+}
+
+static void	get_visible_screen(t_all *all)
+{
+	if ((all->mlx->start_x != 0) || (all->mlx->start_y != 0))
+		return ;
+	all->mlx->start_x = all->map->p_x - 15;
+	if (all->mlx->start_x < 0)
+		all->mlx->start_x = 0;
+	all->mlx->start_y = all->map->p_y - 15;
+	if (all->mlx->start_y < 0)
+		all->mlx->start_y = 0;
 }
 
 static int	update_one(t_all *all, int x, int y, int dialga)
@@ -50,8 +64,8 @@ static int	update_one(t_all *all, int x, int y, int dialga)
 		size = all->mlx->variable_1_sprite_size;
 	picture = pic(all, x, y, dialga);
 	all->map->old_pos[x][y].value = all->map->position[x][y].value;
-	x *= size;
-	y *= size;
+	x = (x - all->mlx->start_x) * size;
+	y = (y - all->mlx->start_y) * size;
 	y += (size * 3);
 	mlx_put_image_to_window(all->mlx->con, all->mlx->window, picture, x, y);
 	return (0);
@@ -72,6 +86,33 @@ void	*pic(t_all *all, int x, int y, int dialga)
 	if (all->map->position[x][y].value == 'E')
 		return (all->mlx->sprite->close_exit);
 	if (all->map->position[x][y].value == '$')
+	{
 		return (which_enemy(all, x, y));
+	}
 	return (NULL);
+}
+
+void	clear_screen(t_all *all)
+{
+	int				x;
+	int				y;
+	static int		size;
+	void			*p;
+
+	if (size == 0)
+		size = all->mlx->variable_1_sprite_size;
+	y = 0;
+	p = all->mlx->sprite->floor;
+	while (y != all->map->game_size_h)
+	{
+		x = 0;
+		while (x != all->map->game_size_w)
+		{
+			all->map->old_pos[x][y].value = -1;
+			++x;
+		}
+		++y;
+	}
+	all->mlx->start_x = 0;
+	all->mlx->start_y = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 11:09:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:18:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ int	check_floodfill_result(t_input *input, t_map *map)
 
 void	floodfill(t_map *map, int x, int y)
 {
+	if (map->position[x][y].value == 'E')
+	{
+		map->position[x][y].value = 'X';
+		return ;
+	}
 	if ((map->position[x][y].value == '1') || \
 	(map->position[x][y].value == 'X') || \
-	((map->position[x][y].value == 'E') && (map->collectable_left != 0)) || \
 	(map->position[x][y].value == '$'))
 		return ;
 	if (map->position[x][y].value == 'C')
@@ -65,7 +69,7 @@ int	last_chk_path(t_input *input, t_map *map)
 	map->collectable_left = map->collectable_num;
 	find_stuff(map, 'P', &x, &y);
 	floodfill(map, x, y);
-	if (map->collectable_left != 0)
+	if ((input->create_map == CREATE) && (map->collectable_left != 0))
 		return (1);
 	if (check_floodfill_result(input, map) == 1)
 		return (1);

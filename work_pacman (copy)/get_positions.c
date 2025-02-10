@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_positions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:52:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:23:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:47:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,18 @@ static void	get_one(t_map *map, int x, int y, int enemy_num)
 	map->enemy[enemy_num].y_start = y;
 	map->enemy[enemy_num].color = randomize_color(x, y, enemy_num);
 	map->enemy[enemy_num].dir = FRONT;
+}
+
+int	id_enemy(t_map *map, int x, int y)
+{
+	int	n;
+
+	n = 0;
+	while (n != map->variable_3_enemy_num)
+	{
+		if ((map->enemy[n].x == x) && (map->enemy[n].y == y))
+			return (n);
+		++n;
+	}
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:06:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	check_map(t_input *input, t_map *map, int size_x, int size_y)
 		return (l_printf("GAME OVER3\n"));
 	if (fourt_chk_exit(map, size_x, size_y) == 1)
 		return (l_printf("GAME OVER4\n"));
-	if (fifth_chk_enemy(map, size_x, size_y) == 1)
-		return (l_printf("GAME OVER5\n"));
+	// if (fifth_chk_enemy(map, size_x, size_y) == 1)
+		// return (l_printf("GAME OVER5\n"));
 	if (sixth_chk_colet(map, size_x, size_y) == 1)
 		return (l_printf("GAME OVER6\n"));
 	if (last_chk_path(input, map) == 1)

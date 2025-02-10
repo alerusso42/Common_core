@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:30:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 10:36:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:02:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ int	commands(int keycode)
 	static int		counter;
 	int				valid_move;
 
-	valid_move = NO;
 	if (keycode == XK_Escape)
 		end(0);
 	if (all == NULL)
 		all = storage_structs(NULL, GET);
+	if ((keycode == XK_u) || (keycode == XK_U))
+		return (clear_screen(all), 0);
+	valid_move = NO;
 	if ((keycode == XK_Right) || (keycode == XK_d) || (keycode == XK_D))
 		valid_move = move_player(all->map, RIGHT);
 	else if ((keycode == XK_Down) || (keycode == XK_s) || (keycode == XK_S))

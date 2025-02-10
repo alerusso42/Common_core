@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 10:27:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:40:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ struct s_row
 struct s_input
 {
 	t_bool				switch_1_bonus:1;
+	t_bool				switch_2_rechargemap:1;
 	t_bool				create_map:1;
 	char				valid_signs[7];
 	unsigned int		en_speed:4;
@@ -196,6 +197,8 @@ struct s_mlx
 	void		*con;
 	void		*window;
 	t_sprite	*sprite;
+	int			start_x;
+	int			start_y;
 	int			variable_1_sprite_size;
 };
 struct s_all
