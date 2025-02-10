@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:51:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 11:37:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 10:50:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_typelist	*store_list(t_typelist *list, int mode)
 	return (store_list);
 }
 
-void	clean_bfs(t_map *map)
+/*
+	Clear the path of the enemy.
+*/
+void	clean_bfs(t_map *map, int enemy_num)
 {
 	int	x;
 	int	y;
@@ -49,7 +52,7 @@ void	clean_bfs(t_map *map)
 		x = 0;
 		while (x != map->game_size_w)
 		{
-			map->position[x][y].distance = 0;
+			map->position[x][y].distance[enemy_num] = 0;
 			++x;
 		}
 		++y;

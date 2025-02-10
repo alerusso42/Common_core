@@ -3,19 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_copy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 13:52:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 09:40:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-#if __has_include("so_long.h")
-# include "so_long.h"
-#else
-#include "so_long_bonus.h"
-#endif
+# include "Libft/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <math.h>
+
+typedef struct s_bfs
+{
+	int			n;
+	int			en_x;
+	int			en_y;
+	int			p_x;
+	int			p_y;
+	int			x;
+	int			y;
+	int			map_x;
+	int			map_y;
+	t_position	**position;
+	int			distance;
+}				t_bfs;
+
+typedef struct s_position
+{
+	t_onebyte	value;
+	int			distance;
+	t_onebyte	*pointer;
+}				t_position;
 
 //PER COMPILARE: cc bfs_copy.c Libft/libft.a
 
@@ -25,6 +48,8 @@
 #define PRINT 4
 #define WALL 6
 
+#define NO 0
+#define YES 1
 
 int	en_x;
 int	en_y;

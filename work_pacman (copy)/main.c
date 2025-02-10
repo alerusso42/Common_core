@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 17:28:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:28:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	get_key_settings(all);
 	mlx_loop_hook(all->mlx->con, game_loop, NULL);
-	//TEST
-	find_stuff(all->map, '$', &all->map->e_x, &all->map->e_y);
-	//END_TEST
+	get_enemies_position(all->map, '$');
 	mlx_loop(all->mlx->con);
 	full_reset(4, &all->input, &all->map, &all->random, &all->mlx);
 	free(all);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_flags.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:22:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 11:19:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:56:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define CLOSE 3
 //
 # define RED 0
-# define YELLOW 1
+# define CIAN 1
 # define ORANGE 2
-# define PINK 3
+# define PURPLE 3
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:12:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:28:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	*pic(t_all *all, int x, int y, int dialga)
 	if (all->map->position[x][y].value == 'E')
 		return (all->mlx->sprite->close_exit);
 	if (all->map->position[x][y].value == '$')
-		return (all->mlx->sprite->red_front);
+		return (which_enemy(all, x, y));
 	return (NULL);
 }

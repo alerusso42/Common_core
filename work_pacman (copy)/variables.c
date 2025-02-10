@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 14:30:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:16:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	update_var(t_map *map, t_random *random);
 // in genere, il programma è più efficace ed efficiente con randomizer == 1.
 t_bool	variables(t_input *input, t_map *map, t_random *random)
 {
-	input->en_speed = 2;
+	input->en_speed = 3;
 	ft_strlcpy(input->valid_signs, "$ECP01\0", 7);
 	map->variable_1_player_num = 1;
 	random->variable_1_setseed = 0;

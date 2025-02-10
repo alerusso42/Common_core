@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:59:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:27:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "so_long_bonus.h"
 #endif
 
-static void	update_var(t_map *map, t_random *random);
+static void	update_var(t_input *input, t_map *map, t_random *random);
+static void	others(t_input *input, t_map *map, t_random *random);
 
 // Siccome importiamo anche input,
 // impostiamo una switch inutile per
@@ -29,7 +30,7 @@ static void	update_var(t_map *map, t_random *random);
 // in genere, il programma è più efficace ed efficiente con randomizer == 1.
 t_bool	variables(t_input *input, t_map *map, t_random *random)
 {
-	input->en_speed = 4;
+	input->en_speed = 1;
 	ft_strlcpy(input->valid_signs, "$ECP01\0", 7);
 	map->variable_1_player_num = 1;
 	random->variable_1_setseed = 0;
@@ -41,7 +42,7 @@ t_bool	variables(t_input *input, t_map *map, t_random *random)
 	map->variable_6_window_width = 700;
 	map->variable_7_window_heigth = 900;
 	ft_strlcpy(map->display_name, "PACMAN\0", 7);
-	update_var(map, random);
+	update_var(input, map, random);
 	if (map->switch_1_bonus == NO)
 	{
 		map->variable_3_enemy_num = 0;
@@ -56,7 +57,7 @@ t_bool	mlx_settings(t_mlx *mlx)
 	return (0);
 }
 
-static void	update_var(t_map *map, t_random *random)
+static void	update_var(t_input *input, t_map *map, t_random *random)
 {
 	random->wden = random->variable_6_internal_wall_proportion;
 	if (random->variable_1_setseed != 0)
@@ -82,4 +83,14 @@ static void	update_var(t_map *map, t_random *random)
 	map->variable_5_internal_wall_num = \
 	random->variable_5_internal_wall_num;
 	map->collectable_num = map->variable_4_collectable_num;
+	others(input, map, random);
+}
+
+static void	others(t_input *input, t_map *map, t_random *random)
+{
+	if (input->create_map == CREATE)
+	{
+		map->collectable_num = random->variable_4_collectable_num;
+		map->collectable_left = map->collectable_num;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:45:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 12:13:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:34:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,32 @@
 #include "so_long_bonus.h"
 #endif
 
-static void	change_player_position(t_map *map, int x, int y);
+static int	change_player_position(t_map *map, int x, int y);
 
-void	move_player(t_map *map, int direction)
+int	move_player(t_map *map, int direction)
 {
 	map->p_mov = YES;
 	map->p_dir = direction;
 	if (direction == RIGHT)
-		change_player_position(map, map->p_x + 1, map->p_y);
+		return (change_player_position(map, map->p_x + 1, map->p_y));
 	if (direction == DOWN)
-		change_player_position(map, map->p_x, map->p_y + 1);
+		return (change_player_position(map, map->p_x, map->p_y + 1));
 	if (direction == LEFT)
-		change_player_position(map, map->p_x - 1, map->p_y);
+		return (change_player_position(map, map->p_x - 1, map->p_y));
 	if (direction == UP)
-		change_player_position(map, map->p_x, map->p_y - 1);
+		return (change_player_position(map, map->p_x, map->p_y - 1));
+	return (NO);
 }
 
-static void	change_player_position(t_map *map, int x, int y)
+static int	change_player_position(t_map *map, int x, int y)
 {
 	if (map->position[x][y].value == '1')
-		return ;
+		return (NO);
 	if (map->position[x][y].value == 'E')
 	{
 		if (map->is_solved == YES)
 			end(0);
-		return ;
+		return (NO);
 	}
 	if (map->position[x][y].value == '$')
 		end(0);
@@ -55,5 +56,5 @@ static void	change_player_position(t_map *map, int x, int y)
 		swap(x, y, map->p_x, map->p_y);
 	map->p_x = x;
 	map->p_y = y;
-	return ;
+	return (YES);
 }

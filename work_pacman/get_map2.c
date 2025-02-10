@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:12:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:44:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ t_bool	read_map(t_input *input, t_map *map)
 	int		x;
 	int		y;
 
-	y = input->game_size_h - 1;
+	y = 0;
 	fd = open(input->filename, O_RDONLY, 0666);
 	if (fd == -1)
 		return (1);
 	line = get_next_line(fd);
-	while ((line) && (y != -1))
+	while ((line) && (y != input->game_size_h))
 	{
 		x = 0;
 		while ((x != input->game_size_w) && (line[x]) && (line[x] != '\n'))
@@ -52,7 +52,7 @@ t_bool	read_map(t_input *input, t_map *map)
 				get_start_position(map, x, y, line[x]);
 			++x;
 		}
-		y--;
+		y++;
 		free(line);
 		line = get_next_line(fd);
 	}

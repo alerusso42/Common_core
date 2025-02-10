@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 11:06:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:27:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ struct s_enemy
 	int				y_start;
 	unsigned int	color:2;
 	unsigned int	dir:3;
+	t_bool			triggered:1;
 };
 struct s_map
 {
@@ -109,7 +110,8 @@ struct s_map
 	int					wall_number;
 	int					collectable_num;
 	int					collectable_left;
-	unsigned char		is_solved:1;
+	t_bool				is_solved:1;
+	t_bool				player_first_move:1;
 	int					e_x;
 	int					e_y;
 	t_enemy				*enemy;

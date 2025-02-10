@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_enemy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:58:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:49:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ static int	change_enemy_position(t_map *map, int x, int y, int n)
 	if (map->position[x][y].value == '1')
 		return (NO);
 	if (map->position[x][y].value == 'E')
-	{
 		return (NO);
-	}
 	if (map->position[x][y].value == '$')
 		return (NO);
 	if (map->position[x][y].value == 'P')
@@ -83,13 +81,25 @@ static void	move_enemy(t_map *map, int n)
 	en_x = map->enemy[n].x;
 	en_y = map->enemy[n].y;
 	if (map->position[en_x - 1][en_y].distance[n] != 0)
+	{
 		change_enemy_position(map, en_x - 1, en_y, n);
+		map->enemy[n].dir = LEFT;
+	}
 	else if (map->position[en_x + 1][en_y].distance[n] != 0)
+	{
 		change_enemy_position(map, en_x + 1, en_y, n);
+		map->enemy[n].dir = RIGHT;
+	}
 	else if (map->position[en_x][en_y - 1].distance[n] != 0)
+	{
 		change_enemy_position(map, en_x, en_y - 1, n);
+		map->enemy[n].dir = UP;
+	}
 	else if (map->position[en_x][en_y + 1].distance[n] != 0)
+	{
 		change_enemy_position(map, en_x, en_y + 1, n);
+		map->enemy[n].dir = DOWN;
+	}
 }
 
 /*
@@ -106,35 +116,36 @@ static void	move_random(t_all *all, int dialga, int n)
 	int	en_x;
 	int	en_y;
 
-	random = dialga % all->map->game_size;
-	random = all->random->values[random];
+	random = all->random->values[dialga % all->map->game_size];
 	en_x = all->map->enemy[n].x;
 	en_y = all->map->enemy[n].y;
 	can_move = YES;
 	if (random % 4 == LEFT)
-		can_move = change_enemy_position(all->map, en_x - 1, en_y, n);
+		can_move = change_enemy_position(all->map, en_x - 1, en_y, n) * 3;
+	if ((can_move == NO) || (random % 4 == DOWN))
+		can_move = change_enemy_position(all->map, en_x, en_y - 1, n) * 2;
 	if ((can_move == NO) || (random % 4 == RIGHT))
 		can_move = change_enemy_position(all->map, en_x + 1, en_y, n);
-	if ((can_move == NO) || (random % 4 == DOWN))
-		can_move = change_enemy_position(all->map, en_x, en_y - 1, n);
 	if ((can_move == NO) || (random % 4 == UP))
-		can_move = change_enemy_position(all->map, en_x, en_y + 1, n);
+		can_move = change_enemy_position(all->map, en_x, en_y + 1, n) * 4;
+	all->map->enemy[n].dir = can_move /= 4;
 }
 
 void	move_enemies(t_all *all, int dialga)
 {
-	static int	trigger;
 	int			n;
 
+	if (all->map->player_first_move == OFF)
+		return ;
 	n = -1;
 	while (++n != all->map->variable_3_enemy_num)
 	{
-		if ((trigger == 0) && \
+		if ((all->map->enemy[n].triggered == 0) && \
 		(triggered(all, all->map->enemy[n].x, all->map->enemy[n].y) == YES))
 		{
-			trigger = 1;
+			all->map->enemy[n].triggered = 1;
 		}
-		if (trigger == 1)
+		if (all->map->enemy[n].triggered == 1)
 		{
 			if (all->map->p_mov == YES)
 			{

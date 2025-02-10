@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:30:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 16:44:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:36:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static int	moves_number_printer(t_all *all, int counter)
 	str = ft_itoa(counter);
 	if (!str)
 		return (1);
+	if (all->map->player_first_move == OFF)
+	all->map->player_first_move = ON;
 	if (all->input->switch_1_bonus == ON)
 	{
 		if (first_print == 0)
@@ -57,18 +59,22 @@ int	commands(int keycode)
 {
 	static t_all	*all;
 	static int		counter;
+	int				valid_move;
 
+	valid_move = NO;
 	if (keycode == XK_Escape)
 		end(0);
 	if (all == NULL)
 		all = storage_structs(NULL, GET);
 	if ((keycode == XK_Right) || (keycode == XK_d) || (keycode == XK_D))
-		move_player(all->map, RIGHT);
+		valid_move = move_player(all->map, RIGHT);
 	else if ((keycode == XK_Down) || (keycode == XK_s) || (keycode == XK_S))
-		move_player(all->map, DOWN);
+		valid_move = move_player(all->map, DOWN);
 	else if ((keycode == XK_Left) || (keycode == XK_a) || (keycode == XK_A))
-		move_player(all->map, LEFT);
+		valid_move = move_player(all->map, LEFT);
 	else if ((keycode == XK_Up) || (keycode == XK_w) || (keycode == XK_W))
-		move_player(all->map, UP);
+		valid_move = move_player(all->map, UP);
+	if (valid_move == NO)
+		return (0);
 	return (moves_number_printer(all, ++counter));
 }

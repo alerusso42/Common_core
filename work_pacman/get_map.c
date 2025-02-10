@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:12:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:50:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 	if (alloc_randomlist(&random, input->game_size) != 0)
 		return (full_reset(3, &input, &map, &random), error(ERROR_FULL_MEMORY));
 	if (fn)
-		input->filename = ft_strdup(fn);
+		input->filename = fn;
 	if (!fn)
 		input->filename = ft_strdup("maps/map.ber");
 	if (!input->filename)
@@ -67,7 +67,7 @@ t_all	*alloc_data2(t_input **input, t_map **map, t_random *random)
 		print_map(*input, *map, 0, 0);
 	if (check_map(*input, *map, (*map)->game_size_w, \
 	(*map)->game_size_h) == 1)
-		return (NULL);
+		return (full_reset(3, input, map, &random), NULL);
 	if (read_map(*input, *map) == 1)
 		return (full_reset(3, input, map, &random), NULL);
 	return (alloc_data3(*input, *map, random));

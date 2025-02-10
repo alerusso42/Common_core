@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   randomizer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 11:08:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 11:21:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:57:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	randomize_color(int seed_1, int seed_2, int seed_3)
 	if (seed % 4 == 0)
 		return (RED);
 	if (seed % 4 == 1)
-		return (YELLOW);
+		return (CIAN);
 	if (seed % 4 == 2)
 		return (ORANGE);
 	if (seed % 4 == 3)
-		return (PINK);
+		return (PURPLE);
 	return (RED);
 }

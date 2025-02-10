@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 15:49:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:20:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,16 @@ typedef struct s_all		t_all;
 typedef unsigned char		t_onebyte;
 typedef unsigned int		t_bool;
 
-//	SPIEGAZIONE
-
+//	EXPLAINATION OF DATA STRUCTS
+/*
+	n:		the n_enemy
+	en_x:	the x position of the enemy
+	en_y:	the y position of the enemy
+*/
 typedef struct s_bfs
 {
+	int			n;
+	int			mark;
 	int			en_x;
 	int			en_y;
 	int			p_x;
@@ -73,17 +79,17 @@ struct s_input
 struct s_position
 {
 	t_onebyte	value;
-	int			distance;
-	t_onebyte	*pointer;
+	char		*distance;
 };
 struct s_enemy
 {
-	int				en_x;
-	int				en_y;
-	int				en_x_start;
-	int				en_y_start;
-	unsigned int	en_color:2;
-	unsigned int	en_dir:2;
+	int				x;
+	int				y;
+	int				x_start;
+	int				y_start;
+	unsigned int	color:2;
+	unsigned int	dir:3;
+	t_bool			triggered:1;
 };
 struct s_map
 {
