@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:45:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 10:34:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:13:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int	change_player_position(t_map *map, int x, int y)
 	if (map->position[x][y].value == 'E')
 	{
 		if (map->is_solved == YES)
-			end(0);
+			end();
 		return (NO);
 	}
 	if (map->position[x][y].value == '$')
-		end(0);
+		kill_pac();
 	if (map->position[x][y].value == 'C')
 	{
 		map->collectable_num--;

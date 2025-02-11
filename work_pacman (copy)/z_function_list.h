@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 12:28:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:00:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int			get_enemies_position(t_map *map, char search);
 int			id_enemy(t_map *map, int x, int y);
 void		get_key_settings(t_all *all);
 void		update_screen(t_all *all, int dialga);
+void		clear_screen(t_all *all);
 void		*pic(t_all *all, int x, int y, int dialga);
 void		*which_pac_man(t_all *all, int dialga);
 void		*which_enemy(t_all *all, int x, int y);

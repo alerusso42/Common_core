@@ -18,7 +18,7 @@ SRC = 	ft_light_printf.c \
 		alg_tool_insertion1.c alg_tool_insertion2.c alg_tool_insertion3.c \
 		alg_tool_insertion4.c alg_tool_insertion5.c alg_tool_insertion6.c \
 		optimize_1doctor_strange.c optimize_2best_start.c optimize_3indexation.c \
-		execute_play.c execute_checker.c execute_algorythm.c execute_read_terminal.c \
+		execute_play.c execute_checker.c execute_algorythm.c execute_result.c \
 		error.c switches.c variables.c main.c \
 
 HEADER = 	push_define_list.h push_ext_libraries.h push_function_list.h \
@@ -101,7 +101,7 @@ bonus: $(LIBFT) $(BONUS_DIR) copy_lib $(OBJ_BONUS_DIR) $(SRC_BONUS) $(BONUS_OBJ)
 
 
 clean: 
-	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out
+	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.txt
 	rm -rf $(OBJ_DIR) $(BONUS_DIR) $(OBJ_BONUS_DIR)
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 	rm -f $(MINILIBX)

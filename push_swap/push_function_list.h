@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:59:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:21:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	command_counter(unsigned char command);
 //	EXECUTE
 int		play(void);
 int		checker(void);
+int		execute_result(void);
+void	save_result(t_stack *a);
 void	radix_sort(t_stack *a, t_stack *b);
 void	insertion_sort(t_stack *a, t_stack *b);
 //	ALGORYTHM TOOLS

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:43:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:03:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ void	ra(void)
 		a->data[index - 1] = save;
 		save = temp;
 	}
+	if (a->block_print == ON)
+		return ;
 	command_counter(RA);
-	if (a->variable_1_mode == PRINT_MODIFICATIONS)
-		l_printf("Move number %d: ra;\n", a->moves_num);
-	if (a->variable_1_mode == PRINT_MODIFICATIONS)
-		print_stacks();
-	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("Move number %d: ra;\n", a->moves_num);
+	if (a->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("ra\n");
+	//l_printf("ra\n");
 }
 
 void	rb(void)
@@ -65,23 +64,28 @@ void	rb(void)
 		b->data[index - 1] = save;
 		save = temp;
 	}
+	if (b->block_print == ON)
+		return ;
 	command_counter(RB);
-	if (b->variable_1_mode == PRINT_MODIFICATIONS)
-		l_printf("Move number %d: rb;\n", b->moves_num);
-	if (b->variable_1_mode == PRINT_MODIFICATIONS)
-		print_stacks();
-	else if (b->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("Move number %d: rb;\n", b->moves_num);
+	if (b->variable_1_mode == PRINT_FINAL_RESULT)
+		l_printf("rb\n");
 }
 
 void	rr(void)
 {
 	static t_stack	*a;
+	static t_stack	*b;
 
 	if (!a)
 		a = store_stacks(NULL, GET_A);
+	if (!b)
+		b = store_stacks(NULL, GET_B);
+	a->block_print = ON;
+	b->block_print = ON;
 	ra();
 	rb();
+	a->block_print = OFF;
+	b->block_print = OFF;
 	a->moves_num -= 2;
 	command_counter(RR);
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
@@ -89,5 +93,6 @@ void	rr(void)
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("Move number %d: rr;\n", a->moves_num);
+		l_printf("rr\n");
+	//l_printf("rr\n");
 }

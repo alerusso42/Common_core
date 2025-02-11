@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:03:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:43:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:50:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	pa(void)
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("Move number %d: pa;\n", a->moves_num);
+		l_printf("pa\n");;
+	//l_printf("pa\n");
 }
 
 void	pb(void)
@@ -73,5 +74,6 @@ void	pb(void)
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("Move number %d: pb;\n", a->moves_num);
+		l_printf("pb\n");
+	//l_printf("pb\n");
 }

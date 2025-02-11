@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 12:27:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:12:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void	others(t_input *input, t_map *map, t_random *random);
 // in genere, il programma è più efficace ed efficiente con randomizer == 1.
 t_bool	variables(t_input *input, t_map *map, t_random *random)
 {
-	input->en_speed = 1;
+	input->en_speed = 2;
 	ft_strlcpy(input->valid_signs, "$ECP01\0", 7);
 	map->variable_1_player_num = 1;
 	random->variable_1_setseed = 0;
 	random->variable_2_randomizer = 1;
-	random->variable_3_enemy_num = 2;
+	random->variable_3_enemy_num = 3;
 	random->variable_4_collectable_num = 10;
 	random->variable_5_internal_wall_num = 0;
 	random->variable_6_internal_wall_proportion = A_LOT;

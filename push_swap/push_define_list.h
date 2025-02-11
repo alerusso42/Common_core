@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:30:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:56:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:33:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define PRINT_MODIFICATIONS 1
 # define PRINT_FINAL_RESULT 2
 # define PLAY 3
+# define EXECUTE 4
 //	SWITCH BOOLEANS
 # define OFF 0
 # define ON 1

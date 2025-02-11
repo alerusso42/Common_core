@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:22:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 11:56:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:23:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@
 # define CIAN 1
 # define ORANGE 2
 # define PURPLE 3
+//
+# define NODATA -12
 
 #endif

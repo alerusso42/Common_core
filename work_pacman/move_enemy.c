@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 17:07:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:12:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	change_enemy_position(t_map *map, int x, int y, int n)
 	if (map->position[x][y].value == '$')
 		return (NO);
 	if (map->position[x][y].value == 'P')
-		end(0);
+		kill_pac();
 	else
 	{
 		swap(x, y, map->enemy[n].x, map->enemy[n].y);

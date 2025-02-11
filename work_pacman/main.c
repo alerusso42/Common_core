@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 16:44:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:48:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	game_loop(void *param)
 	(void)param;
 	if (all == NULL)
 		all = storage_structs(NULL, GET);
+	if (all->input->freeze == ON)
+		return (0);
 	if ((all->input->switch_2_rechargemap == ON) && (all->map->p_mov == YES))
 		clear_screen(all);
 	update_screen(all, dialga);

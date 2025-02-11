@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:57:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:21:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 {
 	int	mode;
 
+	//print_stacks();
 	mode = settings->variable_1_mode;
 	if (mode == PLAY)
 		play();
@@ -34,10 +35,19 @@ void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 		if (settings->switch_3_doctorstrange == ON)
 			doctor_strange(a);
 	}
-	if (mode == PRINT_FINAL_RESULT)
+	if (mode == EXECUTE)
+	{
 		print_stacks();
-	if (mode == CORRECTION)
-		print_moves();
+		execute_result();
+		print_stacks();
+	}
+	if (settings->switch_5_save_result == ON)
+		save_result(a);
+	/*if (mode == PRINT_FINAL_RESULT)
+		print_stacks();*/
+	/*if (mode == CORRECTION)
+		print_moves();*/
+	//print_stacks();
 }
 
 //	\007\001\001\006\001\007\007\006\006\001\007\001\006\001\007\007\006\006
@@ -72,9 +82,8 @@ int	main(int argc, char *argv[])
 	switches(settings, a);
 	variables(settings, a, b);
 	switch_to_bonus(settings, a);
-	if (settings->switch_5_bonus == YES)
-		read_terminal(a);
-	else
-		print_and_algorythm(settings, a, b);
+	print_and_algorythm(settings, a, b);
+	//l_printf("\nMoves: %d", a->moves_num);
+	//print_stacks();
 	return (free_memory(&a, &b), free(settings), 0);
 }

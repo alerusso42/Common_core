@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:57:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:57:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:49:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	sa(void)
 	if (a->size <= 1)
 		return ;
 	switch_data(&a->data[a->first], &a->data[a->first + 1]);
+	if (a->block_print == ON)
+		return ;
 	command_counter(SA);
+	l_printf("sa\n");
 }
 
 void	sb(void)
@@ -37,17 +40,28 @@ void	sb(void)
 	if (b->size <= 1)
 		return ;
 	switch_data(&b->data[b->first], &b->data[b->first + 1]);
+	if (b->block_print == ON)
+		return ;
 	command_counter(SB);
+	l_printf("sb\n");
 }
 
 void	ss(void)
 {
 	static t_stack	*a;
+	static t_stack	*b;
 
 	if (!a)
-		a = store_stacks(NULL, GET_B);
+		a = store_stacks(NULL, GET_A);
+	if (!b)
+		b = store_stacks(NULL, GET_B);
+	a->block_print = ON;
+	b->block_print = ON;
 	sa();
 	sb();
+	a->block_print = OFF;
+	b->block_print = OFF;
 	a->moves_num -= 2;
 	command_counter(SS);
+	l_printf("ss\n");
 }

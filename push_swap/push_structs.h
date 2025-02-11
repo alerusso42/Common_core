@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:55:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:04:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ typedef struct s_stack
 	int			target_to_search;
 	t_bool		order:4;
 	char		*command_list;
+	t_bool		block_print:1;
 	t_bool		switch_1_showbinary:1;
 	t_bool		switch_2_indexation:1;
 	t_bool		switch_4_choose_beststart_in_insertion:1;
-	t_variable	variable_1_mode:2;
+	t_variable	variable_1_mode:3;
 	t_variable	variable_2_which_algorythm:2;
 }				t_stack;
 
@@ -58,7 +59,8 @@ typedef struct s_settings
 	t_bool		switch_3_doctorstrange:1;
 	t_bool		switch_4_choose_beststart_in_insertion:1;
 	t_bool		switch_5_bonus:1;
-	t_variable	variable_1_mode:2;
+	t_bool		switch_5_save_result:1;
+	t_variable	variable_1_mode:3;
 	t_variable	variable_2_which_algorythm:2;
 }				t_settings;
 
