@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_flags_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:22:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 11:59:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:14:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define DOWN 1
 # define LEFT 2
 # define UP 3
+# define FRONT 4
 # define A_LOT 4
 # define LABIRYTH 3
 # define SOME 5
@@ -23,5 +24,14 @@
 # define OPEN 1
 # define HALF 2
 # define CLOSE 3
+//
+# define RED 0
+# define CIAN 1
+# define ORANGE 2
+# define PURPLE 3
+//
+# define NODATA -12
+//
+# define ALL 2
 
 #endif

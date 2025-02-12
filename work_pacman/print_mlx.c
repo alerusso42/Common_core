@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 16:53:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:15:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,10 @@ void	clear_screen(t_all *all)
 	int				x;
 	int				y;
 	static int		size;
-	void			*p;
 
 	if (size == 0)
 		size = all->mlx->variable_1_sprite_size;
 	y = 0;
-	p = all->mlx->sprite->floor;
 	while (y != all->map->game_size_h)
 	{
 		x = 0;

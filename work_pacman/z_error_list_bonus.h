@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_error_list_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:36:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 11:58:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:13:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

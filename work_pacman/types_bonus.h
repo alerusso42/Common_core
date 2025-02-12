@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/08 13:52:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:13:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,21 @@ typedef struct s_position	t_position;
 typedef struct s_random		t_random;
 typedef struct s_mlx		t_mlx;
 typedef struct s_sprite		t_sprite;
+typedef struct s_enemy		t_enemy;
 typedef struct s_all		t_all;
 typedef unsigned char		t_onebyte;
 typedef unsigned int		t_bool;
 
-//	SPIEGAZIONE
-
+//	EXPLAINATION OF DATA STRUCTS
+/*
+	n:		the n_enemy
+	en_x:	the x position of the enemy
+	en_y:	the y position of the enemy
+*/
 typedef struct s_bfs
 {
+	int			n;
+	int			mark;
 	int			en_x;
 	int			en_y;
 	int			p_x;
@@ -59,8 +66,12 @@ struct s_row
 struct s_input
 {
 	t_bool				switch_1_bonus:1;
-	t_bool				variable_0_shutupcompiler:1;
+	t_bool				switch_2_rechargemap:1;
+	t_bool				switch_3_confirm_before_exit;
 	t_bool				create_map:1;
+	t_bool				freeze:1;
+	t_bool				kill_pac:1;
+	t_bool				quit_process:1;
 	char				valid_signs[7];
 	unsigned int		en_speed:4;
 	int					game_size;
@@ -73,14 +84,24 @@ struct s_input
 struct s_position
 {
 	t_onebyte	value;
-	int			distance;
-	t_onebyte	*pointer;
+	char		*distance;
+};
+struct s_enemy
+{
+	int				x;
+	int				y;
+	int				x_start;
+	int				y_start;
+	unsigned int	color:2;
+	unsigned int	dir:3;
+	t_bool			triggered:1;
 };
 struct s_map
 {
 	t_bool				switch_1_bonus:1;
 	t_bool				switch_2_printonterminal:1;
 	int					variable_1_player_num;
+	unsigned int		variable_2_printdata:2;
 	t_onebyte			variable_3_enemy_num;
 	int					variable_4_collectable_num;
 	int					variable_5_internal_wall_num;
@@ -95,12 +116,17 @@ struct s_map
 	int					wall_number;
 	int					collectable_num;
 	int					collectable_left;
-	unsigned char		is_solved:1;
+	t_bool				is_solved:1;
+	t_bool				player_first_move:1;
 	int					e_x;
 	int					e_y;
+	t_enemy				*enemy;
 	int					p_x;
 	int					p_y;
+	int					p_x_start;
+	int					p_y_start;
 	int					p_dir;
+	int					p_mov;
 	int					p_frame;
 	struct s_position	**position;
 	struct s_position	**old_pos;
@@ -176,6 +202,8 @@ struct s_mlx
 	void		*con;
 	void		*window;
 	t_sprite	*sprite;
+	int			start_x;
+	int			start_y;
 	int			variable_1_sprite_size;
 };
 struct s_all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 10:52:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:18:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	others(t_input *input, t_map *map, t_random *random);
 // in genere, il programma è più efficace ed efficiente con randomizer == 1.
 t_bool	variables(t_input *input, t_map *map, t_random *random)
 {
-	input->en_speed = 2;
+	input->en_speed = 4;
 	ft_strlcpy(input->valid_signs, "$ECP01\0", 7);
 	map->variable_1_player_num = 1;
 	map->variable_2_printdata = ALL;
