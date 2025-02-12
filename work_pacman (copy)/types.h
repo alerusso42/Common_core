@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 16:40:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:14:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ struct s_input
 {
 	t_bool				switch_1_bonus:1;
 	t_bool				switch_2_rechargemap:1;
+	t_bool				switch_3_confirm_before_exit;
 	t_bool				create_map:1;
+	t_bool				freeze:1;
+	t_bool				quit_process:1;
 	char				valid_signs[7];
 	unsigned int		en_speed:4;
 	int					game_size;

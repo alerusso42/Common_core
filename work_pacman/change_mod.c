@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 11:46:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:47:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,26 @@ int				change_mod(char *argv[], int argc);
 int				check_extension_file(char *filename, char *extension);
 static t_bool	parsing(int argc, char *argv[], int *seed);
 
+/*
+	My so_long has two modes:
+	1)	Gen x y: generate a new map, calling it map.ber and
+		placing it on the maps folder;
+	2)	namemap: you give a map, and you play.
+		you can give the name of the map without specifing
+		to search it on the maps folder.
+		If you do, it finds it anyway.
+	
+	For every mode, we save the result of the parsing in get_data.
+	get_data save the data as static variables, and it'll use
+	them later on.
+	-	Mode one (CREATE) has the parsing function to parse.
+	-	Mode two (READ) has the check_file and find_mapsize
+		functions to parse.
+		check_file checks if there is a valid extension;
+		find_mapsize checks if the map:
+		1)	can be read and opened;
+		2)	it's size values.
+*/
 int	change_mod(char *argv[], int argc)
 {
 	int		seed;
@@ -44,6 +64,9 @@ int	change_mod(char *argv[], int argc)
 	return (0);
 }
 
+/*
+	parsing for CREATE mod.
+*/
 static t_bool	parsing(int argc, char *argv[], int *seed)
 {
 	int	game_size[2];
@@ -70,6 +93,9 @@ static t_bool	parsing(int argc, char *argv[], int *seed)
 	return (get_data(CREATE, game_size[0], game_size[1], NULL), 0);
 }
 
+/*
+	parsing for READ mode.
+*/
 t_bool	find_mapsize(char *filename)
 {
 	int		fd;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:00:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 #include "so_long_bonus.h"
 #endif
 
+/*
+	Does some random operations to find a free position ('0').
+	
+	To resets to zero random index, we pass NULL pointers.
+	This is because, to fill multiple coordinates (for enemies,
+	for collectables, ecc.) we call multiple times this ft.
+	And we don't want to use the same coordinates!
+	So, rand index is reset only at the end. 
+*/
 int	sort_coordinates(t_map *map, t_random *random, int *x, int *y)
 {
 	static int	rand_index;
@@ -92,6 +101,10 @@ void	secon_step_fillwall(t_map *map, int size_x, int size_y)
 	}
 }
 
+/*
+	After we have created the map, we edit it.
+	Cool, right?
+*/
 int	edit_map(t_map *map, int size_x, int size_y, t_random *random)
 {
 	if ((size_x < 2) || (size_y < 2))

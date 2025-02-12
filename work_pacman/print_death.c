@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:52:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 17:20:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:47:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,25 @@ static void	death_frame(t_all *all, int frame)
 
 void	kill_pac()
 {
-	t_all	*all;
-	int		fun_loop;	
+	t_all			*all;
+	static int		fun_loop;	
 
 	all = storage_structs(NULL, GET);
-	fun_loop = 0;
-	while (fun_loop != 2403000 * 6)
-	{
-		if (fun_loop == 2403000 * 1)
-			death_frame(all, 1);
-		if (fun_loop == 2403000 * 2)
-			death_frame(all, 2);
-		if (fun_loop == 2403000 * 3)
-			death_frame(all, 3);
-		if (fun_loop == 2403000 * 4)
-			death_frame(all, 4);
-		if (fun_loop == 2403000 * 5)
-			death_frame(all, 5);
-		++fun_loop;
-	}
-	end();
+	all->input->freeze = ON;
+	all->input->kill_pac = ON;
+	if (fun_loop == 0)
+		print_str_win(20, 0XFFFF00, "GAME OVER!", NODATA);
+	if (fun_loop == 24030 * 1)
+		death_frame(all, 1);
+	if (fun_loop == 24030 * 2)
+		death_frame(all, 2);
+	if (fun_loop == 24030 * 3)
+		death_frame(all, 3);
+	if (fun_loop == 24030 * 4)
+		death_frame(all, 4);
+	if (fun_loop == 24030 * 5)
+		death_frame(all, 5);
+	if (fun_loop == 24030 * 6)
+		end();
+	++fun_loop;
 }

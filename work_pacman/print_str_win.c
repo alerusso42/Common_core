@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:24:39 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 16:46:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:29:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,23 @@ void	print_str_win(int layer, int color, char *str, int data)
 	t_all	*all;
 
 	all = storage_structs(NULL, GET);
-	if (!str)
-		return ;
-	if (find_print_location(layer, &x, &y) == 1)
+	if ((!str) || (find_print_location(layer, &x, &y) == 1))
 		return ;
 	clean_one(all, x, y);
 	if (data != NODATA)
 	{
 		temp_str = ft_strjoin_free(ft_strdup(str), ft_itoa(data));
-		//temp_str = ft_itoa(data);
 		if (!str)
 			return ;
 		mlx_string_put(all->mlx->con, all->mlx->window, x, y, color, temp_str);
+		if (all->map->switch_2_printonterminal == ON)
+			ft_putendl_fd(temp_str, 1);
 		free(temp_str);
 		return ;
 	}
 	mlx_string_put(all->mlx->con, all->mlx->window, x, y, color, str);
+	if (all->map->switch_2_printonterminal == ON)
+		ft_putendl_fd(str, 1);
 }
 
 /*
@@ -72,7 +73,7 @@ void	print_str_win(int layer, int color, char *str, int data)
 
 	Every x is 180 pixel distant;
 	Upper and lower y are 50 pixel distant.
-	From the two y layer there is the game screen DISTANT???
+	From the two y layer there is the game screen (750 pixel)
 */
 int		find_print_location(int layer, int *x, int *y)
 {

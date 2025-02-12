@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 09:53:33 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:11:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:34:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "so_long_bonus.h"
 #endif
 
+/*
+	Turn on every switch and variable related to bonus.
+*/
 int	switch_to_bonus(t_input *input, t_map *map, t_random *random)
 {
 	(void)input;

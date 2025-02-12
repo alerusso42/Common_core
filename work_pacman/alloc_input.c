@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:58:08 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:40:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,9 @@
 #include "so_long_bonus.h"
 #endif
 
-// Cosa è game_size, variabile introdotta nel main?
-// è "(argc - 1) / 4) + 1".
-// Cosa è "(argc - 1) / 4) + 1"?
-// Dato che gli argomenti sono multipli di 4,
-// argc - 1 (il nome del programma) %4 si ottiene sempre 0.
-// Facendo invece (argc - 1) / 4, trovo quante volte devo
-// moltiplicare 4 per trovare il numero degli argomenti.
-// A che ci serve? Il progetto vuole che allochiamo colup,
-// coldown, rowleft e rowright assegnando ad ognuno un
-// numero di argomenti di argv pari a (argc - 1) / 4;
-// pertanto con questo conto, che salviamo in 
-// game_size, capiamo quanti numeri ci servono.
-// Allochiamo, oltre a (argc - 1) / 4), un byte in più
-// per un carattere terminatore (0), e un altro byte
-// in più perchè.. sennò non va. O meglio, succede casino
-// nel free a fine programma.
-// 
-// Allochiamo memoria prima per la struttura s_input,
-// che contiene i 4 array di int(input->colup.x, 
-// input->coldown.x, ecc.).
-// Nel programma chiamo la struttura "t_input": vai a
-// "types.h" per ulteriori info sui tipi usati.
-// Ultima nota: portiamo in funzione un ** per sovrascrivere
-// il puntatore nel main senza usare il ritorno.
-// Allochiamo memoria anche per NULL.
+/*
+	Allocation for the input struct.
+*/
 int	alloc_user_input(t_input **input, int game_size[2])
 {
 	int	size_heigth;
@@ -63,6 +41,10 @@ int	alloc_user_input(t_input **input, int game_size[2])
 	return (0);
 }
 
+/*
+	Over the map, there are two ivisible layer of values.
+	They are not used in this implementation.
+*/
 void	temp_set_input(t_input **input)
 {
 	int	stop_row;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 17:12:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:15:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,13 +144,13 @@ void	move_enemies(t_all *all, int dialga)
 		(triggered(all, all->map->enemy[n].x, all->map->enemy[n].y) == YES))
 		{
 			all->map->enemy[n].triggered = ON;
+			p_event_triggered(all->map, n);
 		}
 		if (all->map->enemy[n].triggered == ON)
 		{
 			if (all->map->p_mov == YES)
 			{
 				all->map->enemy[n].triggered = get_best_path(all->map, n);
-				//print_bfs(all->map, n);
 			}
 			if (check_current_frame(all, dialga) == YES)
 				move_enemy(all->map, n);

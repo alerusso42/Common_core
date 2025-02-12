@@ -1,0 +1,67 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_death.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 16:52:53 by alerusso          #+#    #+#             */
+/*   Updated: 2025/02/11 17:20:06 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#if __has_include("so_long.h")
+# include "so_long.h"
+#else
+#include "so_long_bonus.h"
+#endif
+
+static void	death_frame(t_all *all, int frame)
+{
+	void	*pic;
+	int		x;
+	int		y;
+	int		size;
+
+	if (frame == 1)
+		pic = all->mlx->sprite->pac_dead_1;
+	else if (frame == 2)
+		pic = all->mlx->sprite->pac_dead_2;
+	else if (frame == 3)
+		pic = all->mlx->sprite->pac_dead_3;
+	else if (frame == 4)
+		pic = all->mlx->sprite->pac_dead_4;
+	else if (frame == 5)
+		pic = all->mlx->sprite->floor;
+	else
+		return ;
+	size = all->mlx->variable_1_sprite_size;
+	x = (all->map->p_x - all->mlx->start_x) * size;
+	y = (all->map->p_y - all->mlx->start_y) * size;
+	y += (size * 3);
+	mlx_put_image_to_window(all->mlx->con, all->mlx->window, pic, x, y);
+}
+
+void	kill_pac()
+{
+	t_all	*all;
+	int		fun_loop;	
+
+	all = storage_structs(NULL, GET);
+	fun_loop = 0;
+	while (fun_loop != 2403000 * 6)
+	{
+		if (fun_loop == 2403000 * 1)
+			death_frame(all, 1);
+		if (fun_loop == 2403000 * 2)
+			death_frame(all, 2);
+		if (fun_loop == 2403000 * 3)
+			death_frame(all, 3);
+		if (fun_loop == 2403000 * 4)
+			death_frame(all, 4);
+		if (fun_loop == 2403000 * 5)
+			death_frame(all, 5);
+		++fun_loop;
+	}
+	end();
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_copy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 09:40:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:39:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
+
+typedef struct s_position
+{
+	char	value;
+	char	distance;
+}				t_position;
 
 typedef struct s_bfs
 {
@@ -33,19 +39,12 @@ typedef struct s_bfs
 	int			distance;
 }				t_bfs;
 
-typedef struct s_position
-{
-	t_onebyte	value;
-	int			distance;
-	t_onebyte	*pointer;
-}				t_position;
-
 //PER COMPILARE: cc bfs_copy.c Libft/libft.a
 
-#define MAP_X 25
-#define MAP_Y 25
+#define MAP_X 20
+#define MAP_Y 20
 
-#define PRINT 4
+#define PRINT 1
 #define WALL 6
 
 #define NO 0
@@ -554,5 +553,4 @@ int	main()
 		printf("\n\nNessun path valido!\n");
 	free_test_map(&position);
 	exit(0);
-}
-*/
+}*/

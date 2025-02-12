@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 08:57:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
 int			full_reset(int struct_num, ...);
 
-// Allochiamo 257 bytes perchè nella lista ci saranno 256 elementi
-// di tipo t_onebyte (che occupano 1 byte, vedi types.h).
-// L'ultimo byte allocato è di sicurezza, perchè spesso senza non
-// funziona nulla.
-// random prende valori casuali da 1 a game_size, e termina sempre col
-// carattere terminatore 103.
+/*
+	Allocation for the random struct.
+	Really useful to randomize stuff.
+	Rand can be used, but I didn't know it at the start, lol
+*/
 int	alloc_randomlist(t_random **random, int game_size)
 {
 	int	size_memory;
@@ -46,6 +45,16 @@ int	alloc_randomlist(t_random **random, int game_size)
 	return (0);
 }
 
+/*
+	My intention was to randomize through 3 values:
+
+	x size of map;
+	y size of map;
+	a random seed given by the user (optional).
+
+	Actually, I failed on the last part.
+	So, the seed is useless.
+*/
 t_random	*fill_random(t_random **random, t_input *input)
 {
 	t_onebyte	store_variable;
@@ -61,6 +70,9 @@ t_random	*fill_random(t_random **random, t_input *input)
 	return (*random);
 }
 
+/*
+	This function only work when switch showrandomvalues is ON.
+*/
 void	show_random_values(t_random *random)
 {
 	int	index;

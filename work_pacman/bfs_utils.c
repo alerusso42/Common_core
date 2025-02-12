@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:51:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 10:50:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:40:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #endif
 
 //
+/*
+	Delete the nodes with lstclear.
+*/
 void	del_free(void *ptr)
 {
 	free(ptr);
@@ -25,7 +28,9 @@ void	del_free(void *ptr)
 
 //////////////////////////////////////////////
 
-//
+/*
+	A store to the list used for bfs.
+*/
 t_typelist	*store_list(t_typelist *list, int mode)
 {
 	static t_typelist	*store_list;
@@ -40,6 +45,7 @@ t_typelist	*store_list(t_typelist *list, int mode)
 
 /*
 	Clear the path of the enemy.
+	Very important to call before using bfs.
 */
 void	clean_bfs(t_map *map, int enemy_num)
 {

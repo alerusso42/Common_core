@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:55:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 16:52:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:18:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	quit(int keycode, t_all *all)
 		if (start_quit_process == ON)
 			return ;
 		write(1, "\nARE YOU SURE TO EXIT?[y][any else]", 37);
-		print_str_win(22, 0XFF00FF, "ARE YOU SURE TO EXIT?[y]", NODATA);
+		print_str_win(23, 0XFFFF00, "ARE YOU SURE TO EXIT?[y]", NODATA);
 		start_quit_process = ON;
 		all->input->freeze = ON;
 		all->input->quit_process = ON;

@@ -47,7 +47,7 @@ void	ft_swap(int *x, int *y)
 	*y = temp;
 }
 
-// Non funziona con esponenti negativi.
+// Doesn't work with negative numbers.
 int	ft_pow(int base, int exponent)
 {
 	if (base == 0)

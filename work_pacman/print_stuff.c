@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:21:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 08:53:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include "so_long_bonus.h"
 #endif
 
-void	print_map(t_input *input, t_map *map, int x, int y);
-void	print_colgraphic(t_input *input, t_bool mode);
+void	print_map(t_map *map);
+void	print_colgraphic(t_map *map, t_bool mode);
 void	print_blacklist(t_onebyte game_size, t_map *map, int i);
 void	print_skyscrapers(t_onebyte game_size);
 
+/*
 void	print_map(t_input *input, t_map *map, int x, int y)
 {
 	(void)input;
@@ -28,54 +29,51 @@ void	print_map(t_input *input, t_map *map, int x, int y)
 	(void)x;
 	(void)y;
 	l_printf("Print on the terminal removed due to norminette\n\n");
-}
+}*/
 
-// "s" sta per game_size.
-/*	Printa la scacchiera.
-void	print_map(t_input *input, t_map *map, int x, int y)
+// "s" sta per game_size. Printa la scacchiera.
+	
+void	print_map(t_map *map)
 {
 	int	w;
 	int	h;
+	int	x;
+	int	y;
 
 	x = -1;
 	y = -1;
-	w = input->game_size_w;
-	h = input->game_size_h;
+	w = map->game_size_w;
+	h = map->game_size_h;
 	print_skyscrapers(w);
-	print_colgraphic(input, 0);
+	print_colgraphic(map, 0);
 	write(1, " ", 1);
-	while (++x != w)
-		l_printf("<%d>", input->col.x[x]);
-	print_colgraphic(input, 1);
+	print_colgraphic(map, 1);
 	while (++y != h)
 	{
 		l_printf("\n     [%d]", h - y - 1);
 		if ((h - y - 1) < 10)
 			write(1, " ", 1);
-		l_printf("<%d>", input->row.y[h - y - 1]);
 		if ((h - y - 1) < 100)
 			write(1, " ", 1);
 		x = -1;
 		while (++x != w)
 			l_printf("|%c|", map->position[x][h - y - 1].value);
-		l_printf("<%d> [%d]", input->row.y[h - y - 1], h - y - 1);
+		l_printf(" [%d]", h - y - 1);
 	}
-	print_colgraphic(input, 1);
+	print_colgraphic(map, 1);
 	l_printf("            ");
 	x = -1;
 	write(1, " ", 1);
-	while (++x != w)
-		l_printf("<%d>", input->col.x[x]);
-	print_colgraphic(input, 0);
+	print_colgraphic(map, 0);
 }
 
-void	print_colgraphic(t_input *input, t_bool mode)
+void	print_colgraphic(t_map *map, t_bool mode)
 {
 	int			x;
 	t_onebyte	game_size;
 
 	x = -1;
-	game_size = input->game_size_w;
+	game_size = map->game_size_w;
 	if (mode == 0)
 	{
 		l_printf("\n");
@@ -122,32 +120,3 @@ void	print_skyscrapers(t_onebyte game_size)
 		l_printf("-");
 	l_printf("\n");
 }
-
-// 	Print della blacklist.
-void	print_blacklist(t_onebyte game_size, t_map *map, int i)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	y = -1;
-	l_printf("\nELENCO DEI REGISTRI BLACKLIST PER OGNI POSIZIONE:");
-	while (++y != game_size)
-	{
-		while (++x != game_size)
-		{
-			l_printf("\n{%d}", map->position[x][y].value);
-			l_printf("\n V.S. map->position[%d][%d]: ", x, y);
-			while (map->position[x][y].black_list[++i] != 102)
-				l_printf("%d, ", map->position[x][y].black_list[i]);
-			l_printf("102.\n V.T. map->position[%d][%d]: 102, ", x, y);
-			while (map->position[x][y].black_list[++i] != 103)
-				if (map->position[x][y].black_list[i] != 102)
-					l_printf("%d, ", map->position[x][y].black_list[i]);
-			l_printf("103.\nUncertain score: ");
-			l_printf("%d\n---->", map->position[x][y].u_score);
-			i = -1;
-		}
-		x = -1;
-	}
-}*/

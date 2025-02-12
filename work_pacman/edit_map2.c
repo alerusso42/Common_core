@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:21:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:44:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 int	sort_coordinates(t_map *map, t_random *random, int *x, int *y);
 
+/*
+	For this, we twists the number, to randomize better the
+	walls.
+*/
 void	last_step_walls(t_map *map, t_random *random)
 {
 	int	x;

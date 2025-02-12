@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:40:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "so_long_bonus.h"
 #endif
 
+/*
+	Allocation for the mlx struct.
+*/
 int	alloc_mlx(t_mlx **mlx)
 {
 	*mlx = (t_mlx *)ft_calloc(1, sizeof(t_mlx));
@@ -27,6 +30,9 @@ int	alloc_mlx(t_mlx **mlx)
 	return (0);
 }
 
+/*
+	mlx settings sets the size of the sprites.
+*/
 int	get_mlx(t_mlx *mlx, int x, int y, char *dname)
 {
 	mlx->con = mlx_init();

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:33:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 #define HEIGHT 5
 #define WIDTH 5
 
+/*
+	-	The first implementation of the pathfinding algorythm.
+	-	Very slow, inefficient and resource draining.
+	-	It follows the floodfill logic (dfs).
+*/
 static void	search(t_position **position, int x, int y, int e[2], int distance)
 {
 	if (((position[x][y].distance < distance) && \

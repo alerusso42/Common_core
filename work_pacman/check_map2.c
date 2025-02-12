@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:28:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	first_chk_char(t_input *input, t_map *map);
 int	find_stuff(t_map *map, t_onebyte c, int *x, int *y);
 int	last_chk_path(t_input *input, t_map *map);
 
+/*
+	We found where something is on the map.
+*/
 int	find_stuff(t_map *map, t_onebyte c, int *x, int *y)
 {
 	int	size_x;
@@ -44,23 +47,33 @@ int	find_stuff(t_map *map, t_onebyte c, int *x, int *y)
 	return (1);
 }
 
+/*
+	If there are not enough collectables, CRACK.
+*/
 int	sixth_chk_colet(t_map *map, int size_x, int size_y)
 {
-	if (count_stuff(map, 'E', size_x, size_y) < 1)
+	if (count_stuff(map, 'C', size_x, size_y) < 1)
 		return (1);
 	return (0);
 }
 
+/*
+	If the number of enemy is wrong, CRACK.
+	In NON bonus so_long, this number is forced to zero.
+*/
 int	fifth_chk_enemy(t_map *map, int size_x, int size_y)
 {
 	int	enemy_num;
 
 	enemy_num = map->variable_3_enemy_num;
 	if (count_stuff(map, '$', size_x, size_y) != enemy_num)
-		return (l_printf("\nAAA\n"), 1);
+		return (1);
 	return (0);
 }
 
+/*
+	If there is an invalid sign (see variables.c file), CRACK.
+*/
 int	first_chk_char(t_input *input, t_map *map)
 {
 	int	x;

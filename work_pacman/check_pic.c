@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:23:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:31:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static int	check_pic2(t_mlx *mlx);
 static int	check_pic3(t_mlx *mlx);
 static int	check_pic4(t_mlx *mlx);
 
+/*
+	If some picture are missing, we print it.
+	This file helped me a lot during the first configuration.
+*/
 int	check_pic(t_mlx *mlx)
 {
 	if (!mlx->sprite->blue)

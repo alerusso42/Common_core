@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 11:50:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:08:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ t_all	*alloc_data3(t_input *input, t_map *map, t_random *random);
 t_all	*alloc_data2(t_input **input, t_map **map, t_random *random);
 t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn);
 t_bool	create_map(t_input *input, t_map *map, t_random *random);
-t_bool	read_map(t_input *input, t_map *map);
 void	temp_set_input(t_input **input);
 
+/*
+	In the first phase of allocation:
+
+	1)	We alloc data for the struct input, map, random;
+	2)	We save the name of the map, or we give it a standard name;
+	3)	We assign a value to the switches and variables used.
+*/
 t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 {
 	t_input		*input;
@@ -34,7 +40,7 @@ t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 	random = NULL;
 	if (alloc_user_input(&input, game_size) != 0)
 		return (full_reset(1, &input), error(ERROR_FULL_MEMORY), NULL);
-	if (alloc_sol(&input, &map) != 0)
+	if (alloc_map(&input, &map) != 0)
 		return (full_reset(2, &input, &map), error(ERROR_FULL_MEMORY));
 	if (alloc_randomlist(&random, input->game_size) != 0)
 		return (full_reset(3, &input, &map, &random), error(ERROR_FULL_MEMORY));
@@ -50,6 +56,14 @@ t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn)
 	return (alloc_data2(&input, &map, random));
 }
 
+/*
+	In this phase:
+
+	1)	Now we assign the data. We create or read the map, 
+		basing on the mode;
+	2)	We check if the map is valid. Lastly, we read it, to
+		restore it after floodfill.
+*/
 t_all	*alloc_data2(t_input **input, t_map **map, t_random *random)
 {
 	fill_random(&random, *input);
@@ -64,15 +78,19 @@ t_all	*alloc_data2(t_input **input, t_map **map, t_random *random)
 	(read_map(*input, *map) == 1))
 		return (full_reset(3, input, map, &random), NULL);
 	if ((*map)->switch_2_printonterminal == ON)
-		print_map(*input, *map, 0, 0);
+		print_map(*map);
 	if (check_map(*input, *map, (*map)->game_size_w, \
 	(*map)->game_size_h) == 1)
 		return (full_reset(3, input, map, &random), NULL);
 	if (read_map(*input, *map) == 1)
 		return (full_reset(3, input, map, &random), NULL);
+	random->variable_3_enemy_num = (*map)->variable_3_enemy_num;
 	return (alloc_data3(*input, *map, random));
 }
 
+/*
+	Lastly, we alloc and assign data to the mlx connection.
+*/
 t_all	*alloc_data3(t_input *input, t_map *map, t_random *random)
 {
 	t_all	*all;

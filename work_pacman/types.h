@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 11:14:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:43:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ struct s_input
 	t_bool				switch_3_confirm_before_exit;
 	t_bool				create_map:1;
 	t_bool				freeze:1;
+	t_bool				kill_pac:1;
 	t_bool				quit_process:1;
 	char				valid_signs[7];
 	unsigned int		en_speed:4;
@@ -100,6 +101,7 @@ struct s_map
 	t_bool				switch_1_bonus:1;
 	t_bool				switch_2_printonterminal:1;
 	int					variable_1_player_num;
+	unsigned int		variable_2_printdata:2;
 	t_onebyte			variable_3_enemy_num;
 	int					variable_4_collectable_num;
 	int					variable_5_internal_wall_num;

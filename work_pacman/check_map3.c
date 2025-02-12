@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 12:18:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:31:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "so_long_bonus.h"
 #endif
 
+/*
+	If, on the map, there is something different than
+	X01$, it means something is not reachable.
+	Therefore, the map is invalid.
+*/
 int	check_floodfill_result(t_input *input, t_map *map)
 {
 	int	x;
@@ -41,6 +46,10 @@ int	check_floodfill_result(t_input *input, t_map *map)
 	return (0);
 }
 
+/*
+	We place X all around the map, starting from player.
+	We don't place an X if we found another X, $, or 1.
+*/
 void	floodfill(t_map *map, int x, int y)
 {
 	if (map->position[x][y].value == 'E')
@@ -61,6 +70,10 @@ void	floodfill(t_map *map, int x, int y)
 	floodfill(map, x, y - 1);
 }
 
+/*
+	If the exit or a collectable are not reachable, CRACK.
+	We use floodfill for this task.
+*/
 int	last_chk_path(t_input *input, t_map *map)
 {
 	int	x;

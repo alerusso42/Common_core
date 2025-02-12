@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:30:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 15:02:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:22:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	commands(int keycode)
 	static int		counter;
 	int				valid_move;
 
-	if (keycode == XK_Escape)
-		end(0);
 	if (all == NULL)
 		all = storage_structs(NULL, GET);
+	if ((keycode == XK_Escape) || (all->input->quit_process == ON))
+		quit(keycode, all);
 	if ((keycode == XK_u) || (keycode == XK_U))
 		return (clear_screen(all), 0);
 	valid_move = NO;

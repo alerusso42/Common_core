@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 17:13:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:44:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			alloc_mlx(t_mlx **mlx);
 int			get_mlx(t_mlx *mlx, int x, int y, char *dname);
 t_random	*fill_random(t_random **random, t_input *input);
 void		show_random_values(t_random *random);
-int			alloc_sol(t_input **input, t_map **map);
+int			alloc_map(t_input **input, t_map **map);
 int			alloc_enemies(t_map *map);
 void		copy_map(t_map **map, int row_n, int col_n);
 void		fill_map(t_map **map, int row_n, int col_n);
@@ -97,7 +97,7 @@ t_all		*alloc_data2(t_input **input, t_map **map, t_random *random);
 t_all		*alloc_data3(t_input *input, t_map *map, t_random *random);
 t_bool		create_map(t_input *input, t_map *map, t_random *random);
 t_bool		read_map(t_input *input, t_map *map);
-void		print_map(t_input *input, t_map *map, int x, int y);
+void		print_map(t_map *map);
 int			get_randomlist(t_random **random, int game_size);
 void		twist_random(t_random **random, int game_size);
 void		twist_random2(t_random **random, int game_size);
@@ -108,6 +108,9 @@ int			id_enemy(t_map *map, int x, int y);
 //			PRINTS
 void		get_key_settings(t_all *all);
 void		print_str_win(int layer, int color, char *str, int data);
+void		p_event_triggered(t_map *map, int enemy_num);
+void		p_event_lost(t_map *map, int enemy_num);
+void		p_event_collectables_left(t_all *all);
 void		update_screen(t_all *all, int dialga);
 void		clear_screen(t_all *all);
 void		*pic(t_all *all, int x, int y, int dialga);

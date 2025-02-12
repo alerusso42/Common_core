@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:12:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:42:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	while (s2[index])
 		++index;
 	size += index;
-	stringona = (char *)malloc(size + 2);
+	stringona = (char *)ft_calloc(size + 2, sizeof(char));
 	if (!stringona)
 		return (free(s1), free(s2), NULL);
 	index = -1;

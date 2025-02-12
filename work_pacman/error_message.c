@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:13:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:03:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ static void	*other_messages(int error);
 static void	*other_messages2(int error);
 static void	*other_messages3(int error);
 
+/*
+	Pretty unused in this project.
+*/
 void	*error(int error)
 {
 	if (error == ERROR_INVALID_INPUT)
 	{
-		l_printf("Inserisci dei numeri validi.\n");
-		l_printf("Ricorda: i numeri validi vanno da ");
-		l_printf("1 alla dimensione di ogni col e row.\n");
-		l_printf("Giocando con 16 quadranti, quindi, da 1 ");
-		l_printf("a 4. Ce la puoi fare.\n");
+		l_printf("Inserisci dei valori validi.\n");
+		l_printf("MODE CREATE: \"gen\" \"x\" \"y\"\n");
+		l_printf("MODE READ: \"maps/map.ber\", or");
+		l_printf("MODE READ: \"map.ber\"\n");
 		return (NULL);
 	}
 	else
@@ -63,13 +65,7 @@ static void	*other_messages(int error)
 
 static void	*other_messages2(int error)
 {
-	if (error == ERROR_PLAY_NOT_IMPLEMENTED)
-	{
-		l_printf("Attenzione: il motore di gioco non è");
-		l_printf(" stato ancora implementato.\n");
-		return (NULL);
-	}
-	else if (error == EZ)
+	if (error == EZ)
 		l_printf("\nEZ.\n");
 	else
 		return (other_messages3(error));

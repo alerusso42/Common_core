@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 15:00:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:13:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ void		twist_random3(t_random **random, int game_size);
 int			randomize_color(int seed_1, int seed_2, int seed_3);
 int			get_enemies_position(t_map *map, char search);
 int			id_enemy(t_map *map, int x, int y);
+//			PRINTS
 void		get_key_settings(t_all *all);
+void		print_str_win(int layer, int color, char *str, int data);
 void		update_screen(t_all *all, int dialga);
 void		clear_screen(t_all *all);
 void		*pic(t_all *all, int x, int y, int dialga);
@@ -126,7 +128,9 @@ int			speed_three(int dialga);
 int			speed_four(int dialga);
 int			speed_five(int dialga);
 //			
-int			end(int keycode);
+void		kill_pac();
+int			end();
+void		quit(int keycode, t_all *all);
 void		*storage_structs(t_all *update, int mode);
 int			save_map(t_map *map, int size_x, int size_y);
 t_bool		switches(t_input *input, t_map *map, t_random *random);

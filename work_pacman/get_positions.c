@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:52:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 10:47:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:14:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 static void	get_one(t_map *map, int x, int y, int enemy_num);
 
+/*
+	To save the position of every enemy, and assign to every one
+	of them a unique value.
+*/
 int	get_enemies_position(t_map *map, char search)
 {
 	int	x;
@@ -43,6 +47,9 @@ int	get_enemies_position(t_map *map, char search)
 	return (0);
 }
 
+/*
+	Simple to understand.
+*/
 static void	get_one(t_map *map, int x, int y, int enemy_num)
 {
 	map->enemy[enemy_num].x = x;
@@ -53,6 +60,9 @@ static void	get_one(t_map *map, int x, int y, int enemy_num)
 	map->enemy[enemy_num].dir = FRONT;
 }
 
+/*
+	Given a coordinate, it finds what enemy there is (its id).
+*/
 int	id_enemy(t_map *map, int x, int y)
 {
 	int	n;

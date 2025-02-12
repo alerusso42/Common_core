@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 16:34:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:41:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_bool	switches(t_input *input, t_map *map, t_random *random)
 	map->is_solved = NO;
 	input->switch_1_bonus = switch_to_bonus(input, map, random);
 	input->switch_2_rechargemap = ON;
+	input->switch_3_confirm_before_exit = ON;
 	map->switch_2_printonterminal = OFF;
 	random->switch_1_showseed = OFF;
 	random->switch_2_showrandomvalues = OFF;

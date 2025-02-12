@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:45:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 17:13:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:38:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,23 @@ int	move_player(t_map *map, int direction)
 	return (NO);
 }
 
+static void	decrease_coll(int x, int y)
+{
+	t_all	*all;
+
+	all = storage_structs(NULL, GET);
+	all->input->col.x[x] -= 1;
+	all->input->row.y[y] -= 1;
+}
+
 static int	change_player_position(t_map *map, int x, int y)
 {
 	if (map->position[x][y].value == '1')
 		return (NO);
 	if (map->position[x][y].value == 'E')
 	{
+		if ((map->is_solved == YES) && (map->variable_2_printdata == ON))
+			print_str_win(20, 0XFFFF00, "YOU WIN!", NODATA);
 		if (map->is_solved == YES)
 			end();
 		return (NO);
@@ -48,6 +59,7 @@ static int	change_player_position(t_map *map, int x, int y)
 	if (map->position[x][y].value == 'C')
 	{
 		map->collectable_num--;
+		decrease_coll(x, y);
 		if (map->collectable_num == 0)
 			map->is_solved = 1;
 		replace(x, y, map->p_x, map->p_y);

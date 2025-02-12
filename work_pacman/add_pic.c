@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 07:28:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:14:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:38:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static void	get_images2(t_mlx *mlx, int *s, void *i);
 static void	get_images3(t_mlx *mlx, int *s, void *i);
 static void	get_images4(t_mlx *mlx, int *s, void *i);
 
+/*
+	We upload the images.
+	
+	s represents sprite both sprite size.
+*/
 int	get_images(t_mlx *mlx, int *s, void *i)
 {
 	i = mlx_xpm_file_to_image(mlx->con, "textures/Blue.xpm", s, s);

@@ -19,7 +19,7 @@ SRC = 	alloc_input.c alloc_solution.c alloc_random.c alloc_mlx.c \
 		print_stuff.c reset_memory.c \
 		save_map.c \
 		add_pic.c check_pic.c reset_pic.c \
-		print_mlx.c \
+		print_mlx.c print_str_win.c print_death.c \
 		mlx_key_setting.c \
 		get_positions.c \
 		move_player.c which_pacman.c which_enemy.c move_enemy.c move_functions.c \

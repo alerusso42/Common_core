@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/10 11:41:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:52:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "so_long_bonus.h"
 #endif
 
+/*
+	parsing for READ mode.
+	-	before it searches the file, and save it.
+	-	If it fails, it tries to add the suffix maps/.
+*/
 int	check_file(char *argv, char **filename)
 {
 	if (check_extension_file(argv, ".ber") == 0)

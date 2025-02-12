@@ -16,10 +16,14 @@
 #include "so_long_bonus.h"
 #endif
 
-int			alloc_sol(t_input **input, t_map **map);
 static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h);
 
-int	alloc_sol(t_input **input, t_map **map)
+/*
+	Allocation for the map struct.
+	We allocate it two times, to print it on the screen.
+	See print_mlx.
+*/
+int	alloc_map(t_input **input, t_map **map)
 {
 	int	index;
 	int	size_h;
@@ -64,6 +68,9 @@ static int	alloc_copy(t_input **input, t_map **map, int size_w, int size_h)
 	return (0);
 }
 
+/*
+	A game without enemies is not a game (Minecraft pacifist :-( )
+*/
 int	alloc_enemies(t_map *map)
 {
 	int	en_num;
@@ -91,6 +98,9 @@ int	alloc_enemies(t_map *map)
 	return (0);
 }
 
+/*
+	When we create a new map, we initialize it with zeros (in ASCII).
+*/
 void	fill_map(t_map **map, int row_n, int col_n)
 {
 	int			col;
@@ -108,6 +118,9 @@ void	fill_map(t_map **map, int row_n, int col_n)
 	}
 }
 
+/*
+	Copy of the map.
+*/
 void	copy_map(t_map **map, int row_n, int col_n)
 {
 	int			col;
