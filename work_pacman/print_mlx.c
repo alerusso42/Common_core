@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 19:15:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static int	update_one(t_all *all, int x, int y, int dialga);
@@ -84,7 +84,11 @@ void	*pic(t_all *all, int x, int y, int dialga)
 	if (all->map->position[x][y].value == 'C')
 		return (all->mlx->sprite->dot);
 	if (all->map->position[x][y].value == 'E')
+	{
+		if (all->map->is_solved == YES)
+			return (all->mlx->sprite->exit);
 		return (all->mlx->sprite->close_exit);
+	}
 	if (all->map->position[x][y].value == '$')
 	{
 		return (which_enemy(all, x, y));

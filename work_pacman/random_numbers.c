@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/06 16:11:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 void	twist_random(t_random **random, int game_size);

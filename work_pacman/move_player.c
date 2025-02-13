@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:45:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 13:38:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static int	change_player_position(t_map *map, int x, int y);

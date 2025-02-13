@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:22:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:45:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:55:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 void	print_bfs(t_map *map, int enemy_num)

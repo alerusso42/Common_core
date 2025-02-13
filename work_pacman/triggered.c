@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   triggered.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:05:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 14:30:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:55:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static int	x_eye_contact(t_map *map, int en_x, int en_y);

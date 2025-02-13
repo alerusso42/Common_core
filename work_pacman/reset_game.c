@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   reset_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:55:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 19:16:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 void	*storage_structs(t_all *update, int mode)
@@ -53,7 +53,7 @@ void	quit(int keycode, t_all *all)
 		else
 			end();
 	}
-	print_str_win(20, 0XFF00FF, "", NODATA);
+	print_str_win(23, 0XFF00FF, "", NODATA);
 	all->input->freeze = OFF;
 	start_quit_process = OFF;
 }

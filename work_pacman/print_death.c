@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:52:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 11:47:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static void	death_frame(t_all *all, int frame)

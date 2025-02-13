@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 16:33:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:50:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
+/*
 #define HEIGHT 5
 #define WIDTH 5
 
-/*
+
 	-	The first implementation of the pathfinding algorythm.
 	-	Very slow, inefficient and resource draining.
 	-	It follows the floodfill logic (dfs).
 */
+/*
 static void	search(t_position **position, int x, int y, int e[2], int distance)
 {
 	if (((position[x][y].distance < distance) && \
@@ -88,5 +90,4 @@ void	print_shortest_path(t_map *map, int end[2])
 	l_printf("The shortest path between P and $ is:\n");
 	print_path(map->position, end[0], end[1]);
 }
-
-
+*/

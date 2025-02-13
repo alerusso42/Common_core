@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   bfs_draw_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:40:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:49:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 /*

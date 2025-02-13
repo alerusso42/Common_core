@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 15:52:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:49:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 /*
@@ -27,12 +27,12 @@ int	check_file(char *argv, char **filename)
 	{
 		*filename = ft_strdup(argv);
 		if (!(*filename))
-			return (1);
+			return (l_printf("MALLOC FAILED IN check file!\n"), 1);
 		return (0);
 	}
 	*filename = ft_strjoin("maps/", argv);
 	if (!filename)
-		return (1);
+		return (l_printf("MALLOC FAILED IN check file!\n"), 1);
 	if (check_extension_file(*filename, ".ber") == 1)
 	{
 		free(*filename);
@@ -71,7 +71,7 @@ int	check_extension_file(char *filename, char *extension)
 	while ((filename[file_index]) && (extension[ext_index]))
 	{
 		if (filename[file_index] != extension[ext_index])
-			return (1);
+			return (l_printf("BAD EXTENSION FILE\n"), 1);
 		++file_index;
 		++ext_index;
 	}

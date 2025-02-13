@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:00:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 11:15:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:51:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static int	check_current_frame(t_all *all, int dialga)

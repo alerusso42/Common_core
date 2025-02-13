@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 19:18:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:55:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static void	update_var(t_input *input, t_map *map, t_random *random);
@@ -30,7 +30,7 @@ static void	others(t_input *input, t_map *map, t_random *random);
 // in genere, il programma è più efficace ed efficiente con randomizer == 1.
 t_bool	variables(t_input *input, t_map *map, t_random *random)
 {
-	input->en_speed = 4;
+	input->en_speed = 1;
 	ft_strlcpy(input->valid_signs, "$ECP01\0", 7);
 	map->variable_1_player_num = 1;
 	map->variable_2_printdata = ALL;

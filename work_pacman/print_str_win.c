@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:24:39 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 13:29:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 int		find_print_location(int layer, int *x, int *y);

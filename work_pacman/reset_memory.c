@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/09 12:52:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:52:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 int				full_reset(int struct_num, ...);

@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 10:51:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:55:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 // Forzando is_solved e is_correct, si fa terminare i tentativi

@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:52:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/12 17:14:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:51:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if __has_include("so_long.h")
 # include "so_long.h"
 #else
-#include "so_long_bonus.h"
+# include "so_long_bonus.h"
 #endif
 
 static void	get_one(t_map *map, int x, int y, int enemy_num);
