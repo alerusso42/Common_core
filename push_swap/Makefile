@@ -4,6 +4,8 @@ LIBFT = Libft/libft.a
 OBJ_DIR = obj_dir
 OBJ_BONUS_DIR = obj_bonus_dir
 BONUS_DIR = bonus_dir
+BONUS_MARK = $(BONUS_DIR)/.bonus_done
+DEBUG_FILE = g.gdb
 ALL = all.a
 CP = cp
 SRC = 	ft_light_printf.c \
@@ -27,48 +29,43 @@ HEADER = 	push_define_list.h push_ext_libraries.h push_function_list.h \
 BONUS_HEADER = 	push_define_list_bonus.h push_ext_libraries_bonus.h push_function_list_bonus.h \
 				push_structs_bonus.h push_swap_bonus.h get_next_line_bonus.h
 
+
+#COMP = cc -g -Iminilibx -Lminilibx -lmlx -lX11 -lXext -lm -Lprintf -Lminilibx-linux/ -LLibft
+# I file bonus vengono generati rinominando i file sorgente con il suffisso _bonus
 SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC_BONUS:.c=.o))
-#COMP = cc -g -Iminilibx -Lminilibx -lmlx -lX11 -lXext -lm -Lprintf -L$(MINILIBX_RELATIVE_PATH) -LLibft
-COMP = -g -Wall -Wextra -Werror -ILibft
+BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC:.c=_bonus.o))
+
+COMP = -g -Wall -Wextra -Werror -ILibft -Iprintf -fPIE
 LIBFT_RELATIVE_PATH = Libft/
+PRINTF_RELATIVE_PATH = printf/
+MINILIBX_RELATIVE_PATH = minilibx-linux/
 
 all: $(NAME)
 	
-$(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(HEADER) $(OBJ_DIR)/dont_switch_to_bonus.o
+$(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(HEADER)
 	touch $(ALL)
 	cp $(LIBFT) $(ALL)
 	cc $(COMP) $(OBJ) $(OBJ_DIR)/dont_switch_to_bonus.o $(ALL) -o $(NAME)
 	@echo "\nall done!!"
 
-#cp $(MINILIBX) $(NAME)
-#ar rcs $(NAME) $(OBJ)
-#$(MAKE) -C $(MINILIBX_RELATIVE_PATH)
-
 $(LIBFT) : 
 	$(MAKE) -C $(LIBFT_RELATIVE_PATH)
 
-$(MINILIBX) : 
-	$(MAKE) -C $(MINILIBX_RELATIVE_PATH)
-
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	cc $(COMP) -c $< -o $@
+	cc $(COMP) -c dont_switch_to_bonus.c -o $(OBJ_DIR)/dont_switch_to_bonus.o
 
-$(OBJ_BONUS_DIR)/%.o: $(BONUS_DIR)/%.c | $(OBJ_BONUS_DIR)
+# Regola per compilare gli oggetti bonus (escluso switch_to_bonus)
+$(OBJ_BONUS_DIR)/%_bonus.o: $(BONUS_DIR)/%_bonus.c | $(OBJ_BONUS_DIR) $(BONUS_MARK)
+	cc $(COMP) -c $< -o $@
+
+# Regola separata per switch_to_bonus.o: per evitare relink
+$(OBJ_BONUS_DIR)/switch_to_bonus.o: $(BONUS_DIR)/switch_to_bonus.c | $(OBJ_BONUS_DIR) $(BONUS_MARK)
 	cc $(COMP) -c $< -o $@
 
 $(HEADER):
 	@echo "Missing header!"
-
-$(BONUS_HEADER) : 
-	@echo "Missing header!"
-
-$(OBJ_DIR)/dont_switch_to_bonus.o: $(OBJ_DIR) $(SRC)
-	cc $(COMP) -c dont_switch_to_bonus.c -o $(OBJ_DIR)/dont_switch_to_bonus.o
-
-$(OBJ_BONUS_DIR)/switch_to_bonus.o: $(OBJ_BONUS_DIR) $(SRC_BONUS)
-	cc $(COMP) -c $(BONUS_DIR)/switch_to_bonus.c -o $(OBJ_BONUS_DIR)/switch_to_bonus.o
 
 $(OBJ_DIR) : 
 	mkdir -p $(OBJ_DIR)
@@ -80,31 +77,35 @@ $(BONUS_DIR) :
 	mkdir -p $(BONUS_DIR)
 
 copy_lib: $(BONUS_DIR)
-	cp -r $(LIBFT_RELATIVE_PATH) $(BONUS_DIR)
+	@cp -r $(LIBFT_RELATIVE_PATH) $(BONUS_DIR)
 
-$(SRC_BONUS) : 
-	@echo "I am creating the bonus files! P-e-r-forza"
-	@for file in $(SRC); do \
-		cp $$file $(BONUS_DIR)/$${file%.c}_bonus.c; \
-	done
-	@for file in $(BONUS_HEADER); do \
-		cp $$file $(BONUS_DIR)/$${file%.h}.h; \
-	done
-	cp switch_to_bonus.c $(BONUS_DIR)
+# Genera i file bonus solo se non sono già presenti (cioe se BONUS_MARK non esiste)
+gen_bonus: $(BONUS_DIR) $(HEADER)
+	@if [ ! -f $(BONUS_MARK) ]; then \
+		echo "Generating bonus files..."; \
+		for file in $(SRC); do \
+			cp $$file $(BONUS_DIR)/$${file%.c}_bonus.c; \
+		done; \
+		for file in $(HEADER_BONUS); do \
+			cp $$file $(BONUS_DIR)/$${file}; \
+		done; \
+		cp switch_to_bonus.c $(BONUS_DIR); \
+		touch $(BONUS_MARK); \
+	else \
+		echo "Bonus files already generated."; \
+	fi
 
 
-bonus: $(LIBFT) $(BONUS_DIR) copy_lib $(OBJ_BONUS_DIR) $(SRC_BONUS) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(BONUS_HEADER)
+bonus: $(LIBFT) copy_lib $(OBJ_BONUS_DIR) $(BONUS_OBJ) $(HEADER) $(OBJ_BONUS_DIR)/switch_to_bonus.o
 	touch $(ALL)
 	cp $(LIBFT) $(ALL)
 	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(ALL) -o $(NAME_BONUS)
 	@echo "\nall done!!"
 
-
 clean: 
-	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.txt
+	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb *.txt
 	rm -rf $(OBJ_DIR) $(BONUS_DIR) $(OBJ_BONUS_DIR)
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
-	rm -f $(MINILIBX)
 
 folder_clean: 
 	rm -f $(OBJ) $(NAME)
@@ -115,32 +116,28 @@ fclean: clean
 
 re: fclean all
 
-gdb: all
-	clear
-	gdb --args ./$(NAME) $(ARGS)
+debug: 
+	@if [ ! -f $(DEBUG_FILE) ]; then \
+		touch g.gdb; \
+		echo "define a\
+		\n\tset \$$i = 0\
+		\n\twhile (\$$i < a->size)\
+		\n\t\tp a->data[a->first + \$$i]\
+		\n\t\tset \$$i = \$$i + 1\
+		\n\tend\
+		\n\tp a->size\
+		\nend\
+		\n\ndefine b\
+		\n\tset \$$i = 0\
+		\n\twhile (\$$i < b->size)\
+		\n\t\tp b->data[b->first + \$$i]\
+		\n\t\tset \$$i = \$$i + 1\
+		\n\tend\
+		\n\tp b->size\nend" > $(DEBUG_FILE); \
+		echo "$(DEBUG_FILE) created."; \
+	else \
+		echo "Debug file already generated."; \
+	fi
 
-run: all
-	clear
-	./$(NAME) $(ARGS)
-
-val: all
-	clear
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) $(ARGS)
-
-bonus_gdb: bonus
-	clear
-	gdb --args ./$(NAME_BONUS) $(ARGS)
-
-bonus_run: bonus
-	clear
-	./$(NAME_BONUS) $(ARGS)
-
-bonus_val: bonus
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME_BONUS) $(ARGS)
-
-clear : 
-	clear
-
-
-.PHONY: all clean fclean re main gdb run copy_lib clear copy_files
+.PHONY: all clean fclean re main gdb run val copy_lib gen_bonus debug
 .SILENT:

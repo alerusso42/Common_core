@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 15:04:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:06:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_stack
 	int			furthest_position;
 	int			nums_to_push;
 	int			target_to_search;
+	int			temp;
 	t_bool		order:4;
 	char		*command_list;
 	t_bool		block_print:1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alg_tool_insertion2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:32:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:59:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:13:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,21 @@ static void	from_to(t_stack *from, t_stack *to)
 	while (current != from->last + 1)
 	{
 		if (current < from->half)
+		{
 			current_distance = current - from->first;
+			from->order = RB;
+		}
 		else
+		{
 			current_distance = (from->last - current) + 1;
+			from->order = RRB;
+		}
 		find_one(from, to, current, current_distance);
 		++current;
 	}
 }
+
+void	consider_rr(t_stack *from, t_stack *to, int current, int c_distance);
 
 void	find_one(t_stack *from, t_stack *to, int current, int c_distance)
 {
@@ -67,5 +75,25 @@ void	find_one(t_stack *from, t_stack *to, int current, int c_distance)
 		index = (to->last - index) + 1;
 	else
 		index -= to->first;
-	from->data[current].cost = index + c_distance + 1;
+	to->temp = index;
+	consider_rr(from, to, current, c_distance);
+}
+
+void	consider_rr(t_stack *from, t_stack *to, int current, int c_distance)
+{
+	int	index;
+
+	index = to->temp;
+	if ((index >= to->half && from->order == RRB) || \
+	(index < to->half && from->order == RB))
+	{
+		if (index > c_distance)
+			from->data[current].cost = c_distance + (index - c_distance) + 1;
+		else if (index < c_distance)
+			from->data[current].cost = index + (c_distance - index) + 1;
+		else
+			from->data[current].cost = index + c_distance + 1;
+	}
+	else
+		from->data[current].cost = index + c_distance + 1;
 }
