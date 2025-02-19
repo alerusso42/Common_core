@@ -1,0 +1,35 @@
+/* XPM */
+static char *Close_exit[] = {
+/* columns rows colors chars-per-pixel */
+"25 25 4 1 ",
+"  c black",
+". c #413F3F",
+"X c gray60",
+"o c white",
+/* pixels */
+"                         ",
+"  XXX X   XX XX  X       ",
+"  X   X   X  X  X X      ",
+"  XXX X   XX XX XX       ",
+"    X X   X  X  X        ",
+"  XXX XXX XX XX X X X X  ",
+"                         ",
+"  . .... .               ",
+" .o.oooo.o.       .      ",
+" .oooooooo.      .o.     ",
+" .ooooooooo.     .o.     ",
+".oo  oo  ooo.    .o.     ",
+".oooooooooooo..  .o.     ",
+".oooo  oooooooo...o.     ",
+".oo o oo oooooooooo.     ",
+".ooo    ooooooooooo.     ",
+".oooooooooooooooooo.     ",
+".oooooooooooooooooo.     ",
+"..ooooooooooooooooo.     ",
+" .oo..oooooooooooo..     ",
+" .o. .oo....oooooo.      ",
+" ..  .oo.  .oo..oo.      ",
+"     .o.   .oo..o.       ",
+"     ..    .o.  .        ",
+"            .            "
+};
