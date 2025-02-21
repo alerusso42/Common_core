@@ -9,10 +9,11 @@ BONUS_MARK = $(BONUS_DIR)/.bonus_done
 ALL = all.a
 CP = cp
 
-SRC = 	alloc_memory.c reset_memory.c \
+SRC = 	alloc_memory.c reset_memory.c storage.c \
 		error_message.c \
 		general_ft.c \
 		print_stuff.c  \
+		parsing.c \
 		switches.c variables.c main.c \
 
 HEADER = z_function_list.h z_data.h z_header.h 

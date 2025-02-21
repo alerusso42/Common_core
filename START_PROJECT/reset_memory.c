@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:06:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:35:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,3 +15,8 @@
 #else
 # include "z_header_bonus.h"
 #endif
+
+void	reset_memory(void *ptr)
+{
+	(void)ptr;
+}

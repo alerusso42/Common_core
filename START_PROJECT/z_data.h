@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:02:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:29:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ enum e_error
 {
 	ER_BAD_ARGC = 1,
 	ER_MALLOC = 2,
+	ER_PARSING = 3,
 };
 
 typedef struct s_settings
