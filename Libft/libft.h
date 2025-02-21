@@ -18,10 +18,6 @@
 # include <limits.h>
 # include <fcntl.h>
 # include "structs.h"
-# define YES 1
-# define NO 0
-# define ON 1
-# define OFF 0
 
 typedef struct s_typelist
 {
@@ -37,6 +33,14 @@ enum e_charsets
 	LOWER_ALPHA,
 	DIGIT,
 	ALPHANUM,
+};
+
+enum e_bool
+{
+	ON = 1,
+	YES = 1,
+	OFF = 0,
+	NO = 0,
 };
 
 int			ft_atoi(const char *nptr);
