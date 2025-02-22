@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   storage.c                                          :+:      :+:    :+:   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 15:27:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/22 09:55:43 by alerusso         ###   ########.fr       */
+/*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
+/*   Updated: 2025/02/22 15:35:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,25 @@
 # include "z_header_bonus.h"
 #endif
 
-/*
-	mode == 0---->	GIVE ptr
-	mode == 1---->	TAKE ptr
-*/
-void	*storage(void *ptr, int mode)
+int	get_options(t_pipex *pipex)
 {
-	static void	*stock;
+	int	index;
 
-	if (mode == 0)
-		stock = ptr;
-	else if (mode == 1)
-		return (stock);
-	return (NULL);
+	index = 0;
+	while (pipex->commands[index])
+	{
+		pipex->options[index] = ft_split(pipex->commands[index], ' ');
+		if (pipex->options[index] == NULL)
+			return (ER_MALLOC);
+		++index;
+	}
+	return (0);
+}
+
+int	get_commands_bonus(char *argv[], t_pipex *pipex, t_settings *set)
+{
+	(void)argv;
+	(void)pipex;
+	(void)set;
+	return (9);	
 }

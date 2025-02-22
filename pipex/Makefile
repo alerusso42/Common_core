@@ -1,4 +1,4 @@
-NAME = PROJECT_NAME
+NAME = pipex
 NAME_BONUS = BONUS
 LIBFT = Libft/libft.a
 MINILIBX = minilibx-linux/minilibx.a
@@ -13,7 +13,8 @@ SRC = 	alloc_memory.c reset_memory.c storage.c \
 		error_message.c \
 		general_ft.c \
 		print_stuff.c  \
-		parsing.c \
+		parsing.c parsing2.c \
+		execute_pipe.c \
 		switches.c variables.c main.c \
 
 HEADER = z_function_list.h z_data.h z_header.h 
@@ -72,7 +73,7 @@ $(BONUS_DIR) :
 	mkdir -p $(BONUS_DIR)
 
 # Genera i file bonus solo se non sono già presenti (cioe se BONUS_MARK non esiste)
-gen: $(BONUS_DIR) $(HEADER)
+gen: $(BONUS_DIR) $(HEADER_BONUS)
 	@if [ ! -f $(BONUS_MARK) ]; then \
 		echo "Generating bonus files..."; \
 		for file in $(SRC); do \
@@ -110,7 +111,7 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
 
-re: fclean all
+re: fclean $(NAME)
 
 gdb: all
 	clear

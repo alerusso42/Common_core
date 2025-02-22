@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:26:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:25:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,24 @@
 
 int	main(int argc, char *argv[], char **env)
 {
-	(void)argc;
-	(void)argv;
+	t_pipex		*pipex;
+	t_settings	settings;
+	int			err;
+
+	switches(&settings);
+	variables(&settings);
+	if ((settings.switch_1_bonus == OFF) && (argc != 5))
+		return (error(ER_BAD_ARGC));
+	alloc_main_struct(&pipex);
+	err = alloc_cmd(pipex, argc);
+	if (err != 0)
+		return (error(err));
+	err = parsing(argv, env, pipex, &settings);
+	if (err != 0)
+		return (error(err));
+	err = execute_pipe(pipex, &settings);
+	if (err != 0)
+		return (error(err));
+	reset_memory();
 	return (0);
 }

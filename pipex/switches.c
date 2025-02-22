@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switches.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:05:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:07:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	others(t_settings *settings);
 */
 int	switches(t_settings *settings)
 {
+	*settings = (t_settings){0};
 	settings->switch_1_bonus = switch_to_bonus(settings);
 	others(settings);
 	update_var(settings);
