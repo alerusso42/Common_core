@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:35:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 10:42:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:10:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,32 @@ int	main()
 	int		fd;
 	char	*string;
 	char	**matrix;
+	int		line;
 
-	fd = open("test.txt", O_RDWR | O_CREAT, 0777);
+	fd = open("test.txt", O_RDWR | O_TRUNC | O_CREAT, 0777);
 	if (fd < 0)
 		return (l_printf("1"));
+//	Salvo i dati del file
 	if (give_filedata(fd, "test.txt") != 0)
 		return (l_printf("2"));
-	matrix = ft_split("Nome,Cognome,Stato_mentale,Punti_ferita,Rayquaza,\
-	Numero_di_peni_preso", ',');
+//	Registro in una matrice i dati che voglio inserire (\t è opzionale)
+	matrix = ft_split("\tNome,\tCognome,\tStato_mentale,\tPunti_ferita,\
+	\tRayquaza,\tNumero_di_peni_preso", ',');
+//	Setto il numero massimo di parole e caratteri. Il loro prodotto è il
+//	numero di spazi inseriti.
 	set_maximum_word_len(10);
 	set_maximum_words(10);
+//	Inizializzo il file con la matrice.
 	initiate_file(fd, "TEST", matrix);
-	free_matrix(matrix);
-	if (write_line(3, 1, "ciao!") != 0)
+	matrix = free_matrix(matrix);
+//	Rifaccio tutto per mostrare come viene formattato.
+	matrix = ft_split("\tNome,\tCognome,\tStato_mentale,\tPunti_ferita,\
+\tRayquaza,\tNumero_di_peni_preso", ',');
+	initiate_file(fd, "TEST_2", matrix);
+	matrix = free_matrix(matrix);
+//	Prima di chiamare read_line e write_line, chiama num_line
+	line = num_line(2, "[TEST1], Nome");	
+	if (write_line(line, 1, "ciao!") != 0)
 		return (l_printf("3"));
 	if (write_line(4, 1, "eeee!") != 0)
 		return (l_printf("3"));
@@ -68,5 +81,4 @@ int	main()
 		return (l_printf("5"));
 	free(string);
 	return (l_printf("TEST OK!"));
-}
-	*/
+}*/

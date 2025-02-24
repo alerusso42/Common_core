@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/22 15:57:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:54:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,30 @@ static int	other_messages2(int error)
 		fd_printf(2, "Error\nExecve failed.\n");
 		return (ER_EXECVE_FAILED);
 	}
+	if (error == ER_OPEN_FAILED)
+	{
+		fd_printf(2, "Error\nOpen failed.\n");
+		return (ER_OPEN_FAILED);
+	}
+	if (error == ER_DUP_FAILED)
+	{
+		fd_printf(2, "Error\nDup failed.\n");
+		return (ER_DUP_FAILED);
+	}
+	if (error == ER_WAIT_FAILED)
+	{
+		fd_printf(2, "Error\nWait failed.\n");
+		return (ER_WAIT_FAILED);
+	}
 	return (other_messages3(error));
 }
 
 static int	other_messages3(int error)
 {
+	if (error == ER_PIPE_FAILED)
+	{
+		fd_printf(2, "Error\nPipe failed.\n");
+		return (ER_PIPE_FAILED);
+	}
 	return (fd_printf(2, "Generic error %d\n", error));
 }

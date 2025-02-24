@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_read_all_line.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:30:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 10:41:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:24:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	skip_separators(char **matrix, int counter)
 	while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
 		++counter;
 	++counter;
-	cut_string(&(matrix[0]), 0, counter);
+	cut_string((matrix[0]), 0, counter);
 	if (!matrix[0])
 		return (free_matrix(matrix), 1);
 	return (0);
@@ -85,9 +85,9 @@ static char	**make_matrix_beautiful(char **matrix, int counter)
 		while (matrix[position][counter] == '_')
 			--counter;
 		++counter;
-		cut_string(&(matrix[position]), counter, ft_strlen(matrix[position]));
+		cut_string((matrix[position]), counter, ft_strlen(matrix[position]));
 		if (matrix[position][0] == ' ')
-			cut_string(&(matrix[position]), 0, 0);
+			cut_string((matrix[position]), 0, 0);
 		if (matrix[position][0] == '\n')
 		{
 			free(matrix[position]);

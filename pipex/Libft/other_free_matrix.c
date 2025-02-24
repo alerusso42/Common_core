@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   other_free_matrix.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:14:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/20 14:11:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:23:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "other.h"
 
-void	free_matrix(char **matrix)
+/*
+	Always return NULL
+*/
+void	*free_matrix(char **matrix)
 {
 	int	index;
 
 	index = 0;
 	if (!matrix)
-		return ;
+		return (NULL);
 	while (matrix[index])
 	{
 		if (matrix[index])
@@ -28,16 +31,20 @@ void	free_matrix(char **matrix)
 	}
 	if (matrix)
 		free(matrix);
+	return (NULL);
 }
 
-void	free_three_d_matrix(char ***matrix)
+/*
+	Always return NULL
+*/
+void	*free_three_d_matrix(char ***matrix)
 {
 	int	index_one;
 	int	index_two;
 
 	index_one = 0;
 	if (!matrix)
-		return ;
+		return (NULL);
 	while (matrix[index_one])
 	{
 		index_two = 0;
@@ -52,4 +59,5 @@ void	free_three_d_matrix(char ***matrix)
 		++index_one;
 	}
 	free(matrix);
+	return (NULL);
 }

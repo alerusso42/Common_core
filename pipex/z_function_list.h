@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/22 15:36:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:05:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdio.h>
 # include <math.h>
 # include <limits.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # if __has_include("z_header.h")
 #  include "z_header.h"
@@ -35,15 +37,18 @@ int		switches(t_settings *settings);
 int		variables(t_settings *settings);
 //		ALLOC_MAIN_STRUCT
 
-int	alloc_main_struct(t_pipex **pipex);
-int	alloc_cmd(t_pipex *pipex, int max_cmd);
+int		alloc_main_struct(t_pipex **pipex);
+int		alloc_cmd(t_pipex *pipex, int max_cmd);
 
 //		PARSING
 
-int	parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set);
-int	get_options(t_pipex *pipex);
-int	get_commands_bonus(char *argv[], t_pipex *pipex, t_settings *set);
+int		parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set);
+int		get_options(t_pipex *pipex);
+int		get_commands_bonus(char *argv[], t_pipex *pipex, t_settings *set);
 //		EXECUTE
 
-int	execute_pipe(t_pipex *pipex, t_settings *settings);
+int		dup_fds(t_pipex *pipex, t_settings *settings);
+int		set_input_file(int infile_fd);
+int		set_output_file(int outfile_fd);
+int		execute_pipe(t_pipex *pipex, t_settings *settings);
 #endif

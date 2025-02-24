@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_initiate_file.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:58:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 11:25:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:46:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ initiate_file riceve:
 1) fd;
 2) il nome del tipo di dati;
 3) la matrice con tutte le linee da inizializzare.
+
+MOLTO IMPORTANTE: le stringhe della matrice non devono
+avere ' ' e '='.
 */
 void	initiate_file(int fd, char *name, char **matrix)
 {
@@ -56,10 +59,9 @@ void	initiate_file(int fd, char *name, char **matrix)
 	char	*temp;
 
 	counter = set_maximum_word_len(-1) * set_maximum_words(-1);
-	write(fd, "[TYPE_", 6);
+	write(fd, "[", 1);
 	write(fd, name, ft_strlen(name));
-	write(fd, "]", 1);
-	write(fd, "\n\n", 2);
+	write(fd, "]\n", 2);
 	while ((matrix) && (*matrix))
 	{
 		temp = ft_strjoin(*matrix, " = ");
@@ -71,6 +73,5 @@ void	initiate_file(int fd, char *name, char **matrix)
 		hold_space(counter, fd);
 		++matrix;
 	}
-	write(fd, "[END]\n", 6);
-	write(fd, "EOF\n", 4);
+	write(fd, "[END]\n\n", 7);
 }

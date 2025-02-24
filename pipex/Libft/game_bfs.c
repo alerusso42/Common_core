@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bfs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 10:44:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:16:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ void	bfs(t_bfs *bfs)
 			like value, but a string of char.
 		
 */
+//	EXCHANGE DATA FROM YOUR STRUCT TO bfs_stuff
 /*
 int	get_best_path(t_map *map, int enemy_num)
 {

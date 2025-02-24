@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 11:49:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:11:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,15 @@ void	print(char *str, int fd)
 {
 	int	index;
 
+	if (!str)
+	{
+		write(fd, "(NULL)", 6);
+		return ;
+	}
 	index = 0;
 	while (str[index] != '\0')
 	{
-		write(1, &str[index], 1);
+		write(fd, &str[index], 1);
 		++index;
 	}
 }

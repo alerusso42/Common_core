@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/22 15:20:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:02:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # else
 #  include "z_header_bonus.h"
 # endif
+# include <fcntl.h>
 
 enum e_error
 {
@@ -27,10 +28,23 @@ enum e_error
 	ER_CMD_NOTFOUND = 5,
 	ER_FORK_FAILED = 6,
 	ER_EXECVE_FAILED = 7,
+	ER_OPEN_FAILED = 8,
+	ER_GENERIC = 9,
+	ER_DUP_FAILED = 10,
+	ER_WAIT_FAILED = 11,
+	ER_PIPE_FAILED = 12,
+};
+
+enum e_fileflags
+{
+	INFILE = O_CREAT | O_RDONLY,
+	OUTFILE = O_CREAT | O_TRUNC | O_WRONLY,
 };
 
 typedef struct s_pipex
 {
+	char	*infile;
+	char	*outfile;
 	char	**commands;
 	char	**path;
 	int		*fds;

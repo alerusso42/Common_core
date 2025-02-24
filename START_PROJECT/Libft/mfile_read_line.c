@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_read_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:30:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 11:35:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:26:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,18 @@ static char	*case_position_zero(char **matrix, int counter, char *temp)
 	while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
 		++counter;
 	++counter;
-	cut_string(matrix, counter, ft_strlen(matrix[0]));
+	cut_string(matrix[0], counter, ft_strlen(matrix[0]));
 	temp = ft_strdup(matrix[0]);
 	return (free_matrix(matrix), temp);
 }
 
 static char	*case_position_one(char **matrix, int counter, char *temp)
 {
-	while ((matrix[0][counter] != '=') || (matrix[0][counter + 1] != ' '))
+	while ((matrix[1][counter] != '=') || (matrix[1][counter + 1] != ' '))
 		++counter;
 	++counter;
-	cut_string(&(matrix[0]), 0, counter);
-	temp = ft_strdup(matrix[0]);
+	cut_string((matrix[1]), 0, counter);
+	temp = ft_strdup(matrix[1]);
 	return (free_matrix(matrix), temp);
 }
 
@@ -122,9 +122,9 @@ static char	*case_others_position(char **matrix, int counter, int position)
 	while (matrix[position][counter] == '_')
 		--counter;
 	++counter;
-	cut_string(&(matrix[position]), counter, ft_strlen(matrix[position]));
+	cut_string((matrix[position]), counter, ft_strlen(matrix[position]));
 	temp = ft_strdup(matrix[position]);
 	if (temp[0] == ' ')
-		cut_string(&temp, 0, 0);
+		cut_string(temp, 0, 0);
 	return (free_matrix(matrix), temp);
 }
