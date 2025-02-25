@@ -20,6 +20,7 @@ SRC = 	ft_light_printf.c \
 		alg_tool_insertion1.c alg_tool_insertion2.c alg_tool_insertion3.c \
 		alg_tool_insertion4.c alg_tool_insertion5.c alg_tool_insertion6.c \
 		optimize_1doctor_strange.c optimize_2best_start.c optimize_3indexation.c \
+		optimize_4medium.c \
 		execute_play.c execute_checker.c execute_algorythm.c execute_result.c \
 		error.c switches.c variables.c main.c \
 

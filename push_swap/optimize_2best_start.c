@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:23:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:47:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:25:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,22 @@ static void	find_rotation_order(t_stack *stack)
 	}
 }
 
-/*
-
-*/
 void	move_unsorted_to_b(t_stack *a)
 {
+	int	num;
+
 	if (a->size < 3)
 		return ;
 	while (a->nums_to_push)
 	{
 		if (a->data[a->first].to_push == YES)
 		{
+			num = a->data[a->first].n;
 			pb();
 			a->nums_to_push--;
 			if ((a->order == RRA) && (a->nums_to_push != 0))
 				rra();
+			choose_medium_area(a, num);
 		}
 		else if (a->order == RRA)
 			rra();

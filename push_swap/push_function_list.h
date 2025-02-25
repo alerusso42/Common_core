@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 15:21:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:15:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	doctor_strange(t_stack *a);
 void	indexation(t_stack *a);
 void	best_start(t_stack *a);
 void	move_unsorted_to_b(t_stack *a);
+void	choose_medium_area(t_stack *a, int num);
 //	BONUS: CHECKER
 int		read_terminal(t_stack *a);
 void	test(t_stack *a);

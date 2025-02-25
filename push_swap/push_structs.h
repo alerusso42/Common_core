@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:08:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/15 15:06:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:01:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_STRUCTS_H
 
 typedef unsigned char	t_bool;
-
+typedef long long int	t_very_long;
 typedef unsigned char	t_variable;
 
 typedef struct s_data
@@ -43,6 +43,7 @@ typedef struct s_stack
 	int			nums_to_push;
 	int			target_to_search;
 	int			temp;
+	t_very_long	medium;
 	t_bool		order:4;
 	char		*command_list;
 	t_bool		block_print:1;
