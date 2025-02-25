@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 15:31:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:36:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #endif
 
 static int	get_env_path(char *env[], t_pipex *pipex);
-static int	get_commands(char *argv[], t_pipex *pipex);
 static int	check_one(char **command, t_pipex *pipex);
 static int	get_filenames(char *argv[], t_pipex *pipex, t_settings *set);
 
@@ -38,7 +37,7 @@ int	parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set)
 	if (set->switch_1_bonus == OFF)
 		err = get_commands(argv, pipex);
 	else
-		err = get_commands_bonus(argv, pipex, set);
+		err = get_commands_bonus(argv, pipex);
 	pipex->path = temp_path;
 	pipex->commands = temp_cmd;
 	if (err != 0)
@@ -114,7 +113,7 @@ int	get_commands(char *argv[], t_pipex *pipex)
 		if (check_one(pipex->commands, pipex) == 0)
 		{
 			pipex->path = start_path;
-			if (++i == 4)
+			if (++i == pipex->cmd_num + 2)
 				return (0);
 			pipex->commands++;
 		}

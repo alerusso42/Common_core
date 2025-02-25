@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 14:34:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 19:27:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:22:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "z_header_bonus.h"
 #endif
 
-int	change_files(t_pipex *pipex, int *pipe_fds, int i, int prev);
+int			change_files(t_pipex *pipex, int *pipe_fds, int i, int prev);
+static void	close_all(t_pipex *pipex, int *pipe_fds, int prev);
 
 int	execute_pipe(t_pipex *pipex, t_settings *settings)
 {
@@ -37,7 +38,8 @@ int	execute_pipe(t_pipex *pipex, t_settings *settings)
 			return (error(ER_FORK_FAILED));
 		else if (pid == 0)
 		{
-			change_files(pipex, pipe_fds, i, prev);
+			if (change_files(pipex, pipe_fds, i, prev) != 0)
+				return (error(ER_DUP_FAILED));
 			execve(pipex->options[i][0], pipex->options[i], pipex->options[i]);
 			return (error(ER_EXECVE_FAILED));
 		}
@@ -49,8 +51,7 @@ int	execute_pipe(t_pipex *pipex, t_settings *settings)
 		close(pipe_fds[1]);
 		++i;
 	}
-	close(pipe_fds[0]);
-	return (0);
+	return (close(pipe_fds[0]), 0);
 }
 
 /*	CONDITION		|||	COMMAND_ORDER	|||	INFILE		|||	OUTFILE	
@@ -84,28 +85,51 @@ IMPROVE THIS BEFORE CORRECTION.
 */
 int	change_files(t_pipex *pipex, int *pipe_fds, int i, int prev)
 {
+	int	err;
+
+	err = 0;
 	if (i == 0)
 	{
 		if (set_input_file(pipex->fds[0]) != 0)
-			return (ER_DUP_FAILED);
+			err = ER_DUP_FAILED;
 		if (set_output_file(pipe_fds[1]) != 0)
-			return (ER_DUP_FAILED);
+			err = ER_DUP_FAILED;
 	}
 	else if (pipex->commands[i + 1] != NULL)
 	{
 		if (set_input_file(prev) != 0)
-			return (ER_DUP_FAILED);
+			err = ER_DUP_FAILED;
 		if (set_output_file(pipe_fds[1]) != 0)
-			return (ER_DUP_FAILED);
+			err = ER_DUP_FAILED;
 	}
 	else
 	{
 		if (set_input_file(prev) != 0)
-			return (ER_DUP_FAILED);
+			err = ER_DUP_FAILED;
 		if (set_output_file(pipex->fds[1]) != 0)
-			return (ER_DUP_FAILED);
+			err = ER_DUP_FAILED;
 	}
+	return (close_all(pipex, pipe_fds, prev), err);
+}
+
+static void	close_all(t_pipex *pipex, int *pipe_fds, int prev)
+{
 	close(pipe_fds[0]);
 	close(pipe_fds[1]);
-	return (0);
+	pipe_fds[0] = -1;
+	pipe_fds[1] = -1;
+	close(pipex->fds[0]);
+	close(pipex->fds[1]);
+	if (prev != 0)
+		close(prev);
+	else
+		close(0);
 }
+
+/*
+static void	close_one(int *fd)
+{
+	if (*fd != -1)
+		close(*fd);
+	*fd = -1;
+}*/

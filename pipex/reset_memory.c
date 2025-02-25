@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 16:08:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:51:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ static void	close_files(int *fds)
 	{
 		if (fds[i] == INT_MAX)
 			close(0);
-		else
+		else if (fds[i] != -1)
 			close(fds[i]);
+		fds[i] = -1;
 		++i;
 	}
 }

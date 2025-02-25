@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 17:54:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:09:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ static int	other_messages3(int error)
 	{
 		fd_printf(2, "Error\nPipe failed.\n");
 		return (ER_PIPE_FAILED);
+	}
+	if (error == ER_NO_CODED)
+	{
+		fd_printf(2, "Error\nMissing part of code.\n");
+		return (ER_NO_CODED);
 	}
 	return (fd_printf(2, "Generic error %d\n", error));
 }

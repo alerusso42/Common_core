@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_function_list.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 17:05:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:19:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		alloc_cmd(t_pipex *pipex, int max_cmd);
 
 int		parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set);
 int		get_options(t_pipex *pipex);
-int		get_commands_bonus(char *argv[], t_pipex *pipex, t_settings *set);
+int		get_commands(char *argv[], t_pipex *pipex);
+int		get_commands_bonus(char *argv[], t_pipex *pipex);
 //		EXECUTE
 
 int		dup_fds(t_pipex *pipex, t_settings *settings);

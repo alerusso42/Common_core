@@ -1,5 +1,5 @@
 NAME = pipex
-NAME_BONUS = BONUS
+NAME_BONUS = bonus
 LIBFT = Libft/libft.a
 MINILIBX = minilibx-linux/minilibx.a
 OBJ_DIR = obj_dir
@@ -8,6 +8,7 @@ BONUS_DIR = bonus_dir
 BONUS_MARK = $(BONUS_DIR)/.bonus_done
 ALL = all.a
 CP = cp
+
 
 SRC = 	alloc_memory.c reset_memory.c storage.c \
 		error_message.c \
@@ -103,7 +104,7 @@ new_process: $(LIBFT) $(OBJ_BONUS_DIR) $(BONUS_OBJ) $(HEADER) $(OBJ_BONUS_DIR)/s
 		@echo "\nall done!!"
 
 clean: 
-	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb
+	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb *.txt
 	rm -rf $(OBJ_DIR) $(BONUS_DIR) $(OBJ_BONUS_DIR)
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 
@@ -113,9 +114,12 @@ fclean: clean
 
 re: fclean $(NAME)
 
+#set follow-fork-mode child
+#set detach-on-fork off
+
 gdb: all
 	clear
-	gdb --args ./$(NAME) $(ARGS)
+	gdb --args ./bonus a.txt "ls -l" "grep \.c" "wc -w" b.txt
 
 run: all
 	clear
@@ -123,7 +127,7 @@ run: all
 
 val: all
 	clear
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) $(ARGS)
+	valgrind --track-fds=yes --trace-children=yes --suppressions=supp.supp ./bonus a.txt "ls -l" "grep \.c" "wc -w" b.txt
 
 bonus_gdb: bonus
 	clear
@@ -137,4 +141,3 @@ bonus_val: bonus
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME_BONUS) $(ARGS)
 
 .PHONY: all clean fclean re main gdb run val copy_lib gen
-.SILENT:

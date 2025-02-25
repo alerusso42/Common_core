@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 16:27:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:30:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int	alloc_cmd(t_pipex *pipex, int max_cmd)
 	pipex->options = (char ***)ft_calloc(max_cmd, sizeof(char **));
 	if (!pipex->options)
 		return (ER_MALLOC);
+	pipex->cmd_num = max_cmd - 3;
 	return (0);
 }

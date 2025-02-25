@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 19:02:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:26:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ enum e_error
 	ER_FORK_FAILED = 6,
 	ER_EXECVE_FAILED = 7,
 	ER_OPEN_FAILED = 8,
-	ER_GENERIC = 9,
+	ER_NO_CODED = 9,
 	ER_DUP_FAILED = 10,
 	ER_WAIT_FAILED = 11,
 	ER_PIPE_FAILED = 12,
@@ -43,6 +43,7 @@ enum e_fileflags
 
 typedef struct s_pipex
 {
+	int		cmd_num;
 	char	*infile;
 	char	*outfile;
 	char	**commands;

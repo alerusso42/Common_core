@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 15:21:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:35:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char *argv[], char **env)
 	variables(&settings);
 	if ((settings.switch_1_bonus == OFF) && (argc != 5))
 		return (error(ER_BAD_ARGC));
+	if ((settings.switch_1_bonus == ON) && ((argc < 5) || (argc > 1000)))
+		return (error(ER_BAD_ARGC));	
 	alloc_main_struct(&pipex);
 	err = alloc_cmd(pipex, argc);
 	if (err != 0)

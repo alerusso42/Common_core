@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/22 15:35:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:19:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int	get_options(t_pipex *pipex)
 	return (0);
 }
 
-int	get_commands_bonus(char *argv[], t_pipex *pipex, t_settings *set)
+int	get_commands_bonus(char *argv[], t_pipex *pipex)
 {
-	(void)argv;
-	(void)pipex;
-	(void)set;
-	return (9);	
+	int		err;
+
+	err = get_commands(argv, pipex);
+	if (err != 0)
+		return (err);
+	return (0);	
 }
