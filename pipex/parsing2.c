@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 10:19:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:13:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "z_header_bonus.h"
 #endif
 
+/*
+	Just a split of every command.
+	Super simple.
+*/
 int	get_options(t_pipex *pipex)
 {
 	int	index;
@@ -31,12 +35,66 @@ int	get_options(t_pipex *pipex)
 	return (0);
 }
 
-int	get_commands_bonus(char *argv[], t_pipex *pipex)
+/*
+	The outfile is always the last argument.
+*/
+int	get_second_filename(char *argv[], t_pipex *pipex)
 {
-	int		err;
+	int	i;
+	int	len;
 
-	err = get_commands(argv, pipex);
-	if (err != 0)
-		return (err);
-	return (0);	
+	i = 0;
+	while (argv[i] != NULL)
+		++i;
+	--i;
+	len = ft_strlen(argv[i]) + 1;
+	pipex->outfile = (char *)ft_calloc(len, sizeof(char));
+	if (!pipex->outfile)
+		return (ER_MALLOC);
+	ft_strlcpy(pipex->outfile, argv[i], len);
+	return (0);
+}
+
+/*
+	here doc is a temp file that must be erase (with unlink) at the end
+	of the execition.
+
+	It needs a warning string ("here_doc") and a LIMITER.
+
+	1)	We save the limiter len;
+	2)	We try to open the here_doc file, with OUTFILE permissions because we
+		need to write on it.
+		Later in execution we'll open it with INFILE permissions;
+	3)	We trigger the here_doc bool on, since we have succeded on opening it;
+	4)	We print a message for the user;
+	5)	We call get next line for every line the user asks us;
+	6)	We close the file when the user print the LIMITER.
+*/
+int	get_here_doc_file(char *argv[], t_pipex *pipex)
+{
+	char	*line;
+	int		fd;
+	int		limiter_len;
+
+	limiter_len = ft_strlen(argv[2]);
+	fd = open("here_doc", OUTFILE, 0666);
+	if (fd < 0)
+		return (ER_OPEN_FAILED);
+	pipex->here_doc_bool = YES;
+	pipex->infile = ft_strdup("here_doc");
+	if (!pipex->infile)
+		return (close(fd), ER_MALLOC);
+	l_printf("\nInsert the input file contents, line per line.\n");
+	l_printf("Press enter to submit. Insert the limiter to stop.\n\n");
+	line = gnl(0);
+	while ((line) && (ft_strncmp(line, argv[2], limiter_len) != 0))
+	{
+		ft_putstr_fd(line, fd);
+		free(line);
+		line = gnl(0);
+	}
+	if (!line)
+		return (close(fd), ER_MALLOC);
+	free(line);
+	return (close(fd));
 }

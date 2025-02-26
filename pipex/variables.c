@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:05:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:38:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static void	others(t_settings *settings);
 
 /*
 	Variables to make the program more flexible.
+
+	In this project is useless, lol
+
+	Very useful in so_long btw
 */
 int	variables(t_settings *settings)
 {

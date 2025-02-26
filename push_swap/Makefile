@@ -1,5 +1,5 @@
 NAME = push_swap
-NAME_BONUS = push_swap_bonus
+NAME_BONUS = checker
 LIBFT = Libft/libft.a
 OBJ_DIR = obj_dir
 OBJ_BONUS_DIR = obj_bonus_dir
@@ -42,7 +42,7 @@ LIBFT_RELATIVE_PATH = Libft/
 PRINTF_RELATIVE_PATH = printf/
 MINILIBX_RELATIVE_PATH = minilibx-linux/
 
-all: $(NAME)
+all: $(NAME) bonus
 	
 $(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(HEADER)
 	touch $(ALL)
@@ -87,7 +87,7 @@ gen_bonus: $(BONUS_DIR) $(HEADER)
 		for file in $(SRC); do \
 			cp $$file $(BONUS_DIR)/$${file%.c}_bonus.c; \
 		done; \
-		for file in $(HEADER_BONUS); do \
+		for file in $(BONUS_HEADER); do \
 			cp $$file $(BONUS_DIR)/$${file}; \
 		done; \
 		cp switch_to_bonus.c $(BONUS_DIR); \
@@ -97,7 +97,10 @@ gen_bonus: $(BONUS_DIR) $(HEADER)
 	fi
 
 
-bonus: $(LIBFT) copy_lib $(OBJ_BONUS_DIR) $(BONUS_OBJ) $(HEADER) $(OBJ_BONUS_DIR)/switch_to_bonus.o
+bonus: gen_bonus $(LIBFT) copy_lib $(OBJ_BONUS_DIR)
+	/bin/bash -c "make BASH"
+
+BASH: $(BONUS_OBJ) $(BONUS_HEADER) $(OBJ_BONUS_DIR)/switch_to_bonus.o
 	touch $(ALL)
 	cp $(LIBFT) $(ALL)
 	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(ALL) -o $(NAME_BONUS)
@@ -140,5 +143,4 @@ debug:
 		echo "Debug file already generated."; \
 	fi
 
-.PHONY: all clean fclean re main gdb run val copy_lib gen_bonus debug
-.SILENT:
+.PHONY: all clean fclean re main gdb run val copy_lib gen_bonus debug BASH

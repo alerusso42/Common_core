@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_dup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:39:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 17:11:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:17:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include "z_header_bonus.h"
 #endif
 
+/*
+	1)	Open files;
+	2)	We try to put stuff with dup2 on fd 0 and 1.
+		Just to test if there are errors;
+	3)	If there aren't we save in our fds array:
+		-fd 0;
+		-fd 1;
+		-fd infile;
+		-fd outfile.
+		fd 0 is saved as INT_MAX as placeholder.
+		Everyone will be closed in reset_memory(). 
+*/
 int	dup_fds(t_pipex *pipex, t_settings *settings)
 {
 	int	fd_infile;
@@ -33,7 +45,7 @@ int	dup_fds(t_pipex *pipex, t_settings *settings)
 	if (dup2(fd_infile, 0) == -1)
 		return (ER_DUP_FAILED);
 	pipex->fds[2] = 1;
-	if (dup2(fd_infile, 0) == -1)
+	if (dup2(fd_outfile, 1) == -1)
 		return (ER_DUP_FAILED);
 	pipex->fds[3] = INT_MAX;
 	return (0);

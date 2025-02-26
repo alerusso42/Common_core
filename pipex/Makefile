@@ -1,11 +1,11 @@
 NAME = pipex
 NAME_BONUS = bonus
 LIBFT = Libft/libft.a
-MINILIBX = minilibx-linux/minilibx.a
 OBJ_DIR = obj_dir
 OBJ_BONUS_DIR = obj_bonus_dir
 BONUS_DIR = bonus_dir
 BONUS_MARK = $(BONUS_DIR)/.bonus_done
+SUPPRESSION_FILE = supp.supp
 ALL = all.a
 CP = cp
 
@@ -104,7 +104,7 @@ new_process: $(LIBFT) $(OBJ_BONUS_DIR) $(BONUS_OBJ) $(HEADER) $(OBJ_BONUS_DIR)/s
 		@echo "\nall done!!"
 
 clean: 
-	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb *.txt
+	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb *.txt *.supp
 	rm -rf $(OBJ_DIR) $(BONUS_DIR) $(OBJ_BONUS_DIR)
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 
@@ -127,17 +127,38 @@ run: all
 
 val: all
 	clear
-	valgrind --track-fds=yes --trace-children=yes --suppressions=supp.supp ./bonus a.txt "ls -l" "grep \.c" "wc -w" b.txt
+	valgrind --track-fds=yes --trace-children=yes --suppressions=supp.supp --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./bonus a.txt "ls -l" "grep \.c" "wc -l" "xargs -I {} echo Number of .c files in working folder: {}" b.txt
+	@echo "\n\n\n\n\nTEST 1 FINISHED!!\n\n\n\n\n\n"
+	valgrind --track-fds=yes --trace-children=yes --suppressions=supp.supp --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./bonus here_doc LIMITER "grep \.c" "wc -l" "xargs -I {} echo Number of .c files in working folder: {}" b.txt
 
-bonus_gdb: bonus
-	clear
-	gdb --args ./$(NAME_BONUS) $(ARGS)
-
-bonus_run: bonus
-	clear
-	./$(NAME_BONUS) $(ARGS)
-
-bonus_val: bonus
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME_BONUS) $(ARGS)
+supp:
+	@if [ ! -f $(SUPPRESSION_FILE) ]; then \
+		touch $(SUPPRESSION_FILE); \
+		echo "# IGNORE OTHER EXECUTABLES' LEAKS\
+		\n{\
+		\n\tMALLOC FAILURE OF /usr/bin/*\
+		\n\tMemcheck:Leak\
+		\n\tfun:malloc\
+		\n\t...\
+		\n\tobj:/usr/bin/*\
+		\n}\
+		\n{\
+		\n\tCALLOC FAILURE of /usr/bin/*\
+		\n\tMemcheck:Leak\
+		\n\tfun:calloc\
+		\n\t...\
+		\n\tobj:/usr/bin/*\
+		\n}\
+		\n{\
+		\n\tREALLOC FAILURE of /usr/bin/*\
+		\n\tMemcheck:Leak\
+		\n\tfun:realloc\
+		\n\t...\
+		\n\tobj:/usr/bin/*\
+		\n}" > $(SUPPRESSION_FILE); \
+		echo "$(SUPPRESSION_FILE) created."; \
+	else \
+		echo "Suppression file already generated."; \
+	fi
 
 .PHONY: all clean fclean re main gdb run val copy_lib gen

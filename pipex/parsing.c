@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 10:36:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:07:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ static int	get_env_path(char *env[], t_pipex *pipex);
 static int	check_one(char **command, t_pipex *pipex);
 static int	get_filenames(char *argv[], t_pipex *pipex, t_settings *set);
 
+/*
+	List of stuff to do:
+
+	1)	get the filenames, and consider here_doc if BONUS is ON;
+	2)	get the path from the environment matrix env;
+	3)	get the commands: it means modifying argv and check if is a valid path.
+		If even ONE command does not exist, everything is aborted;
+	4)	get the options of every command.
+*/
 int	parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set)
 {
 	int		err;
@@ -34,10 +43,7 @@ int	parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set)
 		return (err);
 	temp_path = pipex->path;
 	temp_cmd = pipex->commands;
-	if (set->switch_1_bonus == OFF)
-		err = get_commands(argv, pipex);
-	else
-		err = get_commands_bonus(argv, pipex);
+	err = get_commands(argv, pipex);
 	pipex->path = temp_path;
 	pipex->commands = temp_cmd;
 	if (err != 0)
@@ -48,15 +54,21 @@ int	parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set)
 	return (0);
 }
 
+/*
+	ft_strlen has a + 1 because of \0.
+*/
 static int	get_filenames(char *argv[], t_pipex *pipex, t_settings *set)
 {
-	int	i;
 	int	len;
+	int	err;
 
-	i = 1;
 	if ((set->switch_1_bonus == ON) && \
 	(ft_strncmp(argv[1], "here_doc", 8) == 0))
-		l_printf("\nNot implemented!\n");	
+	{
+		err = get_here_doc_file(argv, pipex);
+		if (err != 0)
+			return (err);
+	}
 	else
 	{
 		len = ft_strlen(argv[1]) + 1;
@@ -65,17 +77,15 @@ static int	get_filenames(char *argv[], t_pipex *pipex, t_settings *set)
 			return (ER_MALLOC);
 		ft_strlcpy(pipex->infile, argv[1], len);
 	}
-	while (argv[i] != NULL)
-		++i;
-	--i;
-	len = ft_strlen(argv[i]) + 1;
-	pipex->outfile = (char *)ft_calloc(len, sizeof(char));
-	if (!pipex->outfile)
+	if (get_second_filename(argv, pipex) != 0)
 		return (ER_MALLOC);
-	ft_strlcpy(pipex->outfile, argv[i], len);
 	return (0);
 }
 
+/*
+	1)	Find the PATH if exists;
+	2)	Split it with :;
+*/
 int	get_env_path(char *env[], t_pipex *pipex)
 {
 	int	i;
@@ -93,12 +103,28 @@ int	get_env_path(char *env[], t_pipex *pipex)
 	return (0);
 }
 
+/*
+	This is more complicated.
+
+	1)	Starting from index 2 (argv[0] = pipex, argv[1] = infile), or from
+		index 3 if there is the here_doc file;
+	WHILE LOOP:
+
+		2)	if the current path ha not a '/', add it. else, strdup it;
+		3)	If we strjoin a path (ex: /usr/bin/) and add the command (ex: grep)
+			we get /usr/bin/grep, the final program path;
+		4)	If check one finds that the program in the path exists, it 
+			reset the pipex->path matrix, increase the command index, and
+			the current command we are actually saving.
+			If index, after the increase, happens to be equal to the
+			start value of index (2 + here_doc_bool), stop.
+*/
 int	get_commands(char *argv[], t_pipex *pipex)
 {
 	int		i;
 	char	**start_path;
 
-	i = 2;
+	i = 2 + pipex->here_doc_bool;
 	start_path = pipex->path;
 	while (*pipex->path)
 	{
@@ -113,7 +139,7 @@ int	get_commands(char *argv[], t_pipex *pipex)
 		if (check_one(pipex->commands, pipex) == 0)
 		{
 			pipex->path = start_path;
-			if (++i == pipex->cmd_num + 2)
+			if (++i == pipex->cmd_num + 2 + pipex->here_doc_bool)
 				return (0);
 			pipex->commands++;
 		}
@@ -123,19 +149,13 @@ int	get_commands(char *argv[], t_pipex *pipex)
 }
 
 /*
-int	check_one(char **command, t_pipex *pipex)
-{
-	free(pipex->temp);
-	pipex->temp = NULL;
-	if (access(*command, F_OK) == 0)
-		return (0);
-	free(*command);
-	*command = NULL;
-	return (1);
-}*/
+	1)	We calculate the strlen of the command until we find a SPACE:
+		because we have to consider the options (ex: wc -l);
+	2)	We save a temp copy of the command, until we found \0 or SPACE;
+	3)	We access the file. If it exists, we return 0, else 1.
 
-/*
-	We ignore the flags.
+	If a malloc fails here, we go on. 
+	Get_commands will fail anyway soon, and will abort the execution.
 */
 int	check_one(char **command, t_pipex *pipex)
 {

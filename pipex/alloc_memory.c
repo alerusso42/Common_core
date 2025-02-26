@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 10:30:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:43:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ int	alloc_main_struct(t_pipex **pipex)
 	return (0);
 }
 
+/*
+	max_cmd is argc.
+	We'll never had more commands than argc.
+*/
 int	alloc_cmd(t_pipex *pipex, int max_cmd)
 {
 	if ((!pipex))
@@ -40,6 +44,9 @@ int	alloc_cmd(t_pipex *pipex, int max_cmd)
 		return (ER_MALLOC);
 	pipex->options = (char ***)ft_calloc(max_cmd, sizeof(char **));
 	if (!pipex->options)
+		return (ER_MALLOC);
+	pipex->pid_list = (int *)ft_calloc(max_cmd, sizeof(int));
+	if (!pipex->pid_list)
 		return (ER_MALLOC);
 	pipex->cmd_num = max_cmd - 3;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 10:09:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:34:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static int	other_messages(int error);
 static int	other_messages2(int error);
 static int	other_messages3(int error);
 
+/*
+	Error messages are definied in z_data.h, in enum e_error.
+
+	Error ER_BAD_ARGC shows a part of the original project text.
+*/
 int	error(int error)
 {
 	reset_memory();

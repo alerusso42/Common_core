@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 10:27:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:51:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ enum e_fileflags
 
 typedef struct s_pipex
 {
-	int		cmd_num;
-	char	*infile;
-	char	*outfile;
-	char	**commands;
-	char	**path;
-	int		*fds;
-	char	*temp;
-	char	***options;
+	unsigned int	here_doc_bool:1;
+	int				cmd_num;
+	int				*pid_list;
+	char			*infile;
+	char			*outfile;
+	char			**commands;
+	char			**path;
+	int				*fds;
+	char			*temp;
+	char			***options;
 }				t_pipex;
 
 typedef struct s_settings

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 13:51:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:43:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@
 static void	reset_memory2(t_pipex *pipex);
 static void	close_files(int *fds);
 
+/*
+	Free to call even if we do not allocate anything.
+
+	List of free calls:
+
+	1)	pipex->commands;
+	2)	pipex->path;
+	3)	pipex->pid_list;
+	4)	pipex->infile;
+
+		4.1)	If the infile is here_doc, unlink it.
+	
+	5)	pipex->outfile;
+	6)	pipex->fds;
+
+		6.1)	Close every saved fd.
+				If in the list there is INT_MAX, free fd 0.
+*/
 void	reset_memory(void)
 {
 	t_pipex	*pipex;
@@ -38,6 +56,11 @@ void	reset_memory(void)
 	{
 		pipex->options = free_three_d_matrix(pipex->options);
 	}
+	if (pipex->pid_list)
+	{
+		free(pipex->pid_list);
+		pipex->pid_list = NULL;
+	}
 	reset_memory2(pipex);
 	free(pipex);
 	storage(NULL, 0);
@@ -47,13 +70,13 @@ static void	reset_memory2(t_pipex *pipex)
 {
 	if (pipex->infile)
 	{
-		//unlink(pipex->infile);
+		if (ft_strncmp(pipex->infile, "here_doc", 8) == 0)
+			unlink("here_doc");
 		free(pipex->infile);
 		pipex->infile = NULL;
 	}
 	if (pipex->outfile)
 	{
-		//unlink(pipex->outfile);
 		free(pipex->outfile);
 		pipex->outfile = NULL;
 	}

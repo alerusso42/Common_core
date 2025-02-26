@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switches.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/22 11:07:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:40:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static void	update_var(t_settings *settings);
 static void	others(t_settings *settings);
 
 /*
-	Save the result of switch_to_bonus in a variable, or just use settings.
+	Useful to understand whether we are in bonus or not.
+
+	In pipex bonus we'll compile switch_to_bonus.c;
+	else we compile dont_switch_to_bonus.c
 */
 int	switches(t_settings *settings)
 {
