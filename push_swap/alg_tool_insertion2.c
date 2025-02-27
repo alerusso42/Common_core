@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alg_tool_insertion2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:32:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/15 15:13:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:03:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 static void	from_to(t_stack *from, t_stack *to);
 static void	find_one(t_stack *from, t_stack *to, int current, int c_distance);
+void		consider_rr(t_stack *from, t_stack *to, int current, \
+	int c_distance);
 
 void	update_cost(t_stack *a, t_stack *b)
 {
@@ -49,8 +51,6 @@ static void	from_to(t_stack *from, t_stack *to)
 		++current;
 	}
 }
-
-void	consider_rr(t_stack *from, t_stack *to, int current, int c_distance);
 
 void	find_one(t_stack *from, t_stack *to, int current, int c_distance)
 {

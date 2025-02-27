@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 16:11:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:29:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "push_swap_bonus.h"
 #endif
 
+/*
+	Checks if everything is bigger than its previous.
+*/
 int	checker(void)
 {
 	static t_stack	*a;
@@ -64,6 +67,10 @@ static void	commands(t_stack *a, int index)
 		rrr();
 }
 
+/*
+	Execute the command list.
+	Then calls checker.
+*/
 int	test(t_stack *a)
 {
 	int	index;

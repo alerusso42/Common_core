@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 15:03:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:53:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 # include "push_swap_bonus.h"
 #endif
 
+/*REVIEW - 
+	We shift every member of the array left.
+
+	Example:
+
+	2 3 5 77 1
+
+	1)	We exchange last and first;
+	2)	We start from 1 (last), with save equal to 1 (last);
+	3)	We save in temp 77;
+	4)	We put 1(last) in 77 (last - 1);
+	5)	We put in save temp.
+	
+	So, we have:
+
+	2 3 5 1 1	(TEMP: 77) (SAVE: 77)
+
+	5)	Now, we go to left, and we go on until the end of the array.
+
+*/
 void	ra(void)
 {
 	static t_stack	*a;
@@ -41,9 +61,28 @@ void	ra(void)
 	command_counter(RA);
 	if (a->variable_1_mode == PRINT_FINAL_RESULT)
 		l_printf("ra\n");
-	//l_printf("ra\n");
 }
 
+/*REVIEW - 
+	We shift every member of the array left.
+
+	Example:
+
+	2 3 5 77 1
+
+	1)	We exchange last and first;
+	2)	We start from 1 (last), with save equal to 1 (last);
+	3)	We save in temp 77;
+	4)	We put 1(last) in 77 (last - 1);
+	5)	We put in save temp.
+	
+	So, we have:
+
+	2 3 5 1 1	(TEMP: 77) (SAVE: 77)
+
+	5)	Now, we go to left, and we go on until the end of the array.
+
+*/
 void	rb(void)
 {
 	static t_stack	*b;
@@ -94,5 +133,4 @@ void	rr(void)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
 		l_printf("rr\n");
-	//l_printf("rr\n");
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:57:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 14:49:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:43:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ss(void)
 	sb();
 	a->block_print = OFF;
 	b->block_print = OFF;
-	a->moves_num -= 2;
 	command_counter(SS);
 	l_printf("ss\n");
 }

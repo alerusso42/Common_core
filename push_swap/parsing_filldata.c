@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:58:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:12:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "push_swap_bonus.h"
 #endif
 
+/*
+	1)	Find the biggest;
+	2)	Once found, calculates its binary lenght (for radix sort).
+*/
 void	find_biggest(t_stack *a)
 {
 	int	index;
@@ -43,6 +47,12 @@ void	find_biggest(t_stack *a)
 		a->max_num_len = 1;
 }
 
+/*
+	This atoi returns a long long int for errors.
+	More specifically, the LONG_LONG_INT_MAX.
+
+	Pretty crazy: double while for every matrix (is a 3D matrix).
+*/
 int	fill_stacks(t_stack *a, char ***matrix)
 {
 	int				matrix_index;
@@ -70,6 +80,9 @@ int	fill_stacks(t_stack *a, char ***matrix)
 	return (0);
 }
 
+/*
+	Store_stacks save the struct pointer data.
+*/
 int	get_data(int count_num, t_stack **a, t_stack **b)
 {
 	int	error_type;

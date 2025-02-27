@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:44:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:07:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 static int	check_for_doubles(t_stack *a);
 static bool	count_strings(char **matrix, int *counter);
 
+/*
+	For every num, check if every other one is different.
+*/
 static int	check_for_doubles(t_stack *a)
 {
 	int	control_from;
@@ -41,6 +44,10 @@ static int	check_for_doubles(t_stack *a)
 	return (0);
 }
 
+/*
+	1)	If something is NULL, return MALLOC_ERROR;
+	2)	Calculate the number of numbers (lol).
+*/
 static bool	count_strings(char **matrix, int *counter)
 {
 	if ((!matrix) || (!matrix[0]))
@@ -53,6 +60,16 @@ static bool	count_strings(char **matrix, int *counter)
 	return (0);
 }
 
+/*
+	1)	Alloc 3D matrix (for multiple strings in argument, like
+		"3 5 6" "1 -2 7" "0");
+	2)	For every argc, split every number;
+	3)	Alloc the data for the stacks structs;
+	4)	Fill the stacks with the matrix values;
+	5)	Free the matrix;
+	6)	Check repeated num;
+	7)	Find the biggest number in a.
+*/
 int	parsing(int argc, char *argv[], t_stack **a, t_stack **b)
 {
 	char		***matrix;

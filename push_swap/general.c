@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 09:42:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/15 12:59:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:21:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void	find_half(t_stack *a, t_stack *b)
 	}
 }
 
+/*
+	Who knows what it does.
+*/
 void	switch_data(t_data *one, t_data *two)
 {
 	static t_data	temp;
@@ -69,6 +72,9 @@ void	switch_data(t_data *one, t_data *two)
 	*two = temp;
 }
 
+/*
+	Who knows what it does.
+*/
 void	ft_rev_string(char *string)
 {
 	int	i;
@@ -86,6 +92,11 @@ void	ft_rev_string(char *string)
 	}
 }
 
+/*
+	Given an int, an empty array of char and a max len of binary numbers,
+	
+	Returns the array of char with the binary representation.
+*/
 char	*ft_binary(int num, char result[33], int mlen)
 {
 	int		index;

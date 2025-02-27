@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:01:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:44:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:20:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 static void	override_nums_with_position_index(t_stack *a);
 
+/*
+	Assign "current_num_to_assign" to the current biggest num.
+*/
 static void	assign(t_stack *a, int biggest, int to_assign)
 {
 	int	index;
@@ -34,6 +37,36 @@ static void	assign(t_stack *a, int biggest, int to_assign)
 	}
 }
 
+/*
+	What is indexation?
+
+	Override every number with its position in the
+	ordened stack.
+	Example:
+	50	--->	3
+	30	--->	2
+	20	--->	1	
+	70	--->	4
+
+	Very helpful for a lot of things.
+
+	If switch indexation is ON, the function
+	"override_nums_with_position_index(a)" replace
+	every number of the stack with its position in 
+	the ordened stack.
+	Otherwise, the indexation value will be saved
+	in a variable called .pos, saved in the data of
+	every member of the array.
+
+	Procedure:
+
+	1)	Find the size of the stack a, and save it in "current_num_to_assign";
+	2)	Find the biggest number of the stack a;
+	3)	Assign "current_num_to_assign" to the biggest number of stack a;
+	4)	Decrease one "current_num_to_assign";
+	5)	Do this process for every num NOT already assigned;
+	6)	If switch indexation is ON, apply the indexation to numbers.
+*/
 void	indexation(t_stack *a)
 {
 	int	biggest;
@@ -58,6 +91,11 @@ void	indexation(t_stack *a)
 		override_nums_with_position_index(a);
 }
 
+/*
+	For every data.n, assign its data.pos
+
+	ez
+*/
 static void	override_nums_with_position_index(t_stack *a)
 {
 	int	index;

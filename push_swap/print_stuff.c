@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:07:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:51:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:15:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "push_swap_bonus.h"
 #endif
 
+/*
+	Why show binary? For radix sort.
+*/
 void	print_stacks(void)
 {
 	static int		index;
@@ -44,6 +47,9 @@ void	print_stacks(void)
 	l_printf("\n--------------------------\n\nStack a\t\tStack b\n\nEND...\n");
 }
 
+/*
+	To print command on screen in a long detailed format.
+*/
 static void	print_command(char command)
 {
 	static int	count_commands = 1;
@@ -70,6 +76,9 @@ static void	print_command(char command)
 		l_printf("Move number %d: sb;\n", count_commands++);
 }
 
+/*
+	To print command on screen in a minimalistic format.
+*/
 static void	only_print_command(char command)
 {
 	if (command == RA)
@@ -94,6 +103,10 @@ static void	only_print_command(char command)
 		l_printf("sb\n");
 }
 
+/*
+	If we are in correction, uses only_print_command.
+	Else, print_command.
+*/
 void	print_moves(void)
 {
 	static t_stack	*a;

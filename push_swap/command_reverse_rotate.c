@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 14:50:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:53:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,34 @@
 # include "push_swap_bonus.h"
 #endif
 
+/*REVIEW - 
+	We shift every member of the array right.
+
+	Example:
+
+	2 3 5 77 1
+
+	1)	We exchange last and first;
+	2)	We start from 1 (last), with save equal to 1 (last);
+	3)	We save in temp 77;
+	4)	We put 1(last) in 77 (last - 1);
+	5)	We put in save temp.
+	
+	So, we have:
+
+	2 3 5 1 1	(TEMP: 77) (SAVE: 77)
+
+	5)	Now, we go to right, and we go on until the end of the array.
+
+*/
 void	rra(void)
 {
-	static t_stack	*a;
+	t_stack			*a;
 	static int		index;
 	static t_data	save;
 	static t_data	temp;
 
-	if (!a)
-		a = store_stacks(NULL, GET_A);
+	a = store_stacks(NULL, GET_A);
 	if (a->size <= 1)
 		return ;
 	save = a->data[a->first];
@@ -45,18 +64,36 @@ void	rra(void)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
 		l_printf("rra\n");
-	//l_printf("rra\n");
 }
 
+/*REVIEW - 
+	We shift every member of the array right.
+
+	Example:
+
+	2 3 5 77 1
+
+	1)	We exchange last and first;
+	2)	We start from 1 (last), with save equal to 1 (last);
+	3)	We save in temp 77;
+	4)	We put 1(last) in 77 (last - 1);
+	5)	We put in save temp.
+	
+	So, we have:
+
+	2 3 5 1 1	(TEMP: 77) (SAVE: 77)
+
+	5)	Now, we go to right, and we go on until the end of the array.
+
+*/
 void	rrb(void)
 {
-	static t_stack	*b;
+	t_stack			*b;
 	static int		index;
 	static t_data	save;
 	static t_data	temp;
 
-	if (!b)
-		b = store_stacks(NULL, GET_B);
+	b = store_stacks(NULL, GET_B);
 	if (b->size <= 1)
 		return ;
 	save = b->data[b->first];
@@ -76,7 +113,6 @@ void	rrb(void)
 		print_stacks();
 	else if (b->variable_1_mode == PRINT_FINAL_RESULT)
 		l_printf("rrb\n");
-	//l_printf("rrb\n");
 }
 
 void	rrr(void)
@@ -102,5 +138,4 @@ void	rrr(void)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
 		l_printf("rrr\n");
-	//l_printf("rrr\n");
 }

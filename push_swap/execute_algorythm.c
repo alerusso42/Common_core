@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/13 15:01:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:41:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "push_swap_bonus.h"
 #endif
 
-/*
+/*REVIEW - 
 	RADIX SORT
 	
 	The radix sort checks the binary value of a number.
@@ -60,6 +60,21 @@ void	radix_sort(t_stack *a, t_stack *b)
 	}
 }
 
+/*REVIEW - 
+	1)	If its already solved, stop;
+	2)	Find the right order. Index the number if switch_indexation is
+		ON;
+	3)	If switch_choose_beststart_in_insertion is ON, perform an
+		optimization in the first push to b;
+	4)	Assure that stack a has not more than three elements.
+		Hedge against limit cases (2 number stack and other weird 
+		stuff);
+	5)	Set the data to zero;
+	6)	If the size of b is zero, perform a final rotation to order
+		stack a, if needed;
+	7)	INSERTION_LOOP
+	8)	Check if the stack a is ordened.
+*/
 void	insertion_sort(t_stack *a, t_stack *b)
 {
 	if (checker() == 0)

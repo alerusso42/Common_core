@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 16:09:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:18:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 
 void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b);
 
+/*
+	PLAY:							allows to play with your algorythm;
+	CORRECTION/PRINT_FINAL_RESULT:	perform an algorythm;
+	EXECUTE:						execute tester.txt;
+	switch_5_save_result:			save the result of algorythm on
+									tester.txt.
+*/
 void	print_and_algorythm(t_settings *settings, t_stack *a, t_stack *b)
 {
 	int	mode;

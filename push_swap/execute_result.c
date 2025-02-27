@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:40:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 15:20:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:25:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ static int	get_command(char *input)
 	return (0);
 }
 
-int	execute_result()
+/*
+	1)	If exists, open tester.txt;
+	2)	Gnl loop. 
+*/
+int	execute_result(void)
 {
 	char	*line;
 	int		fd;
@@ -98,6 +102,10 @@ static int	write_command(char output, int fd)
 	return (0);
 }
 
+/*
+	1)	Open "tester.txt";
+	2)	Writes all commands on it.
+*/
 void	save_result(t_stack *a)
 {
 	int		fd;

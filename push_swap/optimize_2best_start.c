@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:23:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/25 16:25:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:50:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 static void	mark_best_start(t_stack *a, int current);
 static int	check_one(t_stack *a, int current);
 
+/*
+	1)	Finds the half of the size of the stack;
+	2)	If a number has to be pushed:
+
+	-	If it's below half, its cost is the current index, order RA;
+	-	If it's above half, its cost is index - half, order RRA.
+*/
 static void	find_rotation_order(t_stack *stack)
 {
 	int	half;
@@ -48,6 +55,15 @@ static void	find_rotation_order(t_stack *stack)
 	}
 }
 
+/*
+	While there are numbers to push:
+
+	1)	If you DON't have to push the number, do a RA or a RRA;
+	2)	If you have to push, save the number, push the data, decrease
+		the counter of numbers to push;
+	3)	For every num, choose if it must be put below or above the
+		medium area. See "choose medium area".
+*/
 void	move_unsorted_to_b(t_stack *a)
 {
 	int	num;
@@ -72,6 +88,42 @@ void	move_unsorted_to_b(t_stack *a)
 	}
 }
 
+/*
+	Best start finds:
+
+	1)	The biggest sequence of crescent numbers in stack a;
+	2)	The arithmetic medium of all numbers in stack a.
+
+	It left on stack a the biggest sequence of already ordened number;
+	while, in the stack b, push down the numbers above the medium,
+	and puts top the numbers below the medium.
+	Example:
+	A			B
+	8
+	1
+	3
+	5
+	4
+	7
+	6
+	9
+	2
+
+	BIGGEST_SEQUENCE: 1 3 4 6 9
+	MEDIUM: 45 / 9 = 5
+	RESULT:
+	A			B
+	1			2
+	3			5
+	4			8
+	6			7
+	9			
+
+	1)	For every num, we save in current_score the sequence length;
+	2)	We save in current the num we are checking;
+	3)	We save in record the highest score, in best its number;
+	4)	In the end, we ma
+*/
 void	best_start(t_stack *a)
 {
 	int	best;
@@ -79,7 +131,7 @@ void	best_start(t_stack *a)
 	int	record;
 	int	current_score;
 
-	current = 0;
+	current = a->first;
 	best = 0;
 	record = 0;
 	while (current != a->last + 1)
@@ -95,6 +147,9 @@ void	best_start(t_stack *a)
 	mark_best_start(a, best);
 }
 
+/*
+	Counts how many bigger numbers there are after current.
+*/
 static int	check_one(t_stack *a, int current)
 {
 	int	index;
@@ -116,6 +171,14 @@ static int	check_one(t_stack *a, int current)
 	return (counter);
 }
 
+/*
+	1)	We set to_push of every data to YES;
+	2)	We set to_push of best to NO, and reduce the nbr
+		of numbers to push;
+	3)	For every number after best, if they are bigger,
+		mark that they don't have to be pushed;
+	4)	Find the best rotation order;
+*/
 static void	mark_best_start(t_stack *a, int current)
 {
 	int	index;

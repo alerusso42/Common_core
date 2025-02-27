@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:43:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:26:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ static int	other_commands(char input[7])
 	return (0);
 }
 
+/*
+	Is it mandatory? No.
+	Is it has been fun to program? Fuck yes.
+	Is it cool? YES IT IS.
+*/
 int	play(void)
 {
 	static t_stack	*a;

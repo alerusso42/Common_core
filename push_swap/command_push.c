@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:03:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/11 14:50:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:58:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ static void	set_to_zero(t_data *data)
 	data->to_push = NO;
 }
 
+/*REVIEW - 
+
+	1)	If the size of the b stack is 0, stop;
+	2)	Decrease the first member of a to one;
+	3)	Increase the size of a to one;
+	4)	Copy the top of b in the NEW top of a;
+	5)	Erase the top of b;
+	6)	Increase the first member of a to one;
+	7)	Decrease the size of a to one;
+*/
 void	pa(void)
 {
 	static t_stack	*a;
@@ -47,8 +57,7 @@ void	pa(void)
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
-		l_printf("pa\n");;
-	//l_printf("pa\n");
+		l_printf("pa\n");
 }
 
 void	pb(void)
@@ -75,5 +84,4 @@ void	pb(void)
 		print_stacks();
 	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
 		l_printf("pb\n");
-	//l_printf("pb\n");
 }
