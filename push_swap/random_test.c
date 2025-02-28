@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:59:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:45:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:00:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ int	random_test(char *argv[])
 	b = NULL;
 	settings = (t_settings *)ft_calloc(1, sizeof(t_settings));
 	if (!settings)
-		return (error(ER_MALLOC_ERROR));
+		return (error(ER_MALLOC_ERROR, argv[0]));
 	error_type = get_data((int)ft_atoi(argv[2]), &a, &b);
 	if (error_type != 0)
-		return (free_memory(&a, &b), free(settings), error(error_type));
+		return (free_memory(&a, &b), free(settings), error(error_type, \
+			argv[0]));
 	if (alloc_randomlist(&random, (int)ft_atoi(argv[2])) != 0)
 		return (free_memory(&a, &b), free(settings), free_random(&random), \
 		ER_MALLOC_ERROR);

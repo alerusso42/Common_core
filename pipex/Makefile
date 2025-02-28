@@ -112,7 +112,7 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
 
-re: fclean $(NAME)
+re: fclean all
 
 #set follow-fork-mode child
 #set detach-on-fork off

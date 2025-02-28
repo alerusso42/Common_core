@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:37:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/07 15:15:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:59:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,23 @@ int	error(int error_type)
 }
 */
 
-int	error(int error_type)
+/*REVIEW - 
+	If the program is checker, return 1.
+	Else, print error followed by \n.
+*/
+int	error(int error_type, char *program)
 {
+	int	i;
+
 	(void)error_type;
+	i = 0;
+	while (program[i])
+		++i;
+	while ((i != 0) && (program[i] != '/'))
+		--i;
+	if (program[i] == '/')
+		++i;
+	if (ft_strncmp(program, "checker", 7) == 0)
+		return (1);
 	return (write(2, "Error\n", 6));
 }

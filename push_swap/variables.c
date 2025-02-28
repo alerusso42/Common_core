@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:05:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/15 11:30:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:06:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	apply_variables(t_settings *settings, t_stack *a, t_stack *b);
 
 void	variables(t_settings *settings, t_stack *a, t_stack *b)
 {
-	settings->variable_1_mode = PRINT_FINAL_RESULT;
+	settings->variable_1_mode = CORRECTION;
 	settings->variable_2_which_algorythm = INSERTION_SORT;
 	apply_variables(settings, a, b);
 }

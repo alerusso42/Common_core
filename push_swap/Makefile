@@ -42,13 +42,14 @@ LIBFT_RELATIVE_PATH = Libft/
 PRINTF_RELATIVE_PATH = printf/
 MINILIBX_RELATIVE_PATH = minilibx-linux/
 
-all: $(NAME) bonus
-	
 $(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(HEADER)
 	touch $(ALL)
 	cp $(LIBFT) $(ALL)
 	cc $(COMP) $(OBJ) $(OBJ_DIR)/dont_switch_to_bonus.o $(ALL) -o $(NAME)
 	@echo "\nall done!!"
+
+all: $(NAME) bonus
+
 
 $(LIBFT) : 
 	$(MAKE) -C $(LIBFT_RELATIVE_PATH)
@@ -101,8 +102,6 @@ bonus: gen_bonus $(LIBFT) copy_lib $(OBJ_BONUS_DIR)
 	/bin/bash -c "make BASH"
 
 BASH: $(BONUS_OBJ) $(BONUS_HEADER) $(OBJ_BONUS_DIR)/switch_to_bonus.o
-	touch $(ALL)
-	cp $(LIBFT) $(ALL)
 	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(ALL) -o $(NAME_BONUS)
 	@echo "\nall done!!"
 

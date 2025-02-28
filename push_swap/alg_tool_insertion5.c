@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:24:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:36:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ int	find_shortest_value(t_stack *a)
 	return (shortest_index);
 }
 
+/*REVIEW - 
+	1)	We find the shortest index;
+	2)	We update the half;
+	3)	We rotate until in the first position there is the 
+		shortest number: to push is a recycled bool (very ugly).
+*/
 void	final_rotation(t_stack *a)
 {
 	int	shortest;

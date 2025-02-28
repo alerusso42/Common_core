@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:05:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 12:29:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:59:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	checker(void)
 	return (0);
 }
 
+/*
 static void	commands(t_stack *a, int index)
 {
 	if (a->command_list[index] == SA)
@@ -65,21 +66,18 @@ static void	commands(t_stack *a, int index)
 		rrb();
 	else
 		rrr();
-}
+}*/
 
-/*
-	Execute the command list.
-	Then calls checker.
-*/
-int	test(t_stack *a)
+int	test(void)
 {
-	int	index;
+	char	*command;
 
-	index = 0;
-	while (a->command_list[index] != 0)
+	command = get_next_line(0);
+	while (command)
 	{
-		commands(a, index);
-		++index;
+		get_command(command);
+		free(command);
+		command = get_next_line(0);
 	}
 	if (checker() == 0)
 		return (l_printf("OK\n"), 0);

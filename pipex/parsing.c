@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 15:07:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:24:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 static int	get_env_path(char *env[], t_pipex *pipex);
 static int	check_one(char **command, t_pipex *pipex);
 static int	get_filenames(char *argv[], t_pipex *pipex, t_settings *set);
+int			get_commands_recursion(char *argv[], t_pipex *pipex, int i);
 
 /*
 	List of stuff to do:
@@ -32,18 +33,22 @@ static int	get_filenames(char *argv[], t_pipex *pipex, t_settings *set);
 int	parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set)
 {
 	int		err;
+	int		i;
 	char	**temp_path;
 	char	**temp_cmd;
 
 	err = get_filenames(argv, pipex, set);
 	if (err != 0)
 		return (err);
+	if (pipex->here_doc_bool == YES)
+		pipex->cmd_num -= 1;
 	err = get_env_path(env, pipex);
 	if (err != 0)
 		return (err);
 	temp_path = pipex->path;
 	temp_cmd = pipex->commands;
-	err = get_commands(argv, pipex);
+	i = 2 + pipex->here_doc_bool;
+	err = get_commands(argv, pipex, i);
 	pipex->path = temp_path;
 	pipex->commands = temp_cmd;
 	if (err != 0)
@@ -118,13 +123,15 @@ int	get_env_path(char *env[], t_pipex *pipex)
 			the current command we are actually saving.
 			If index, after the increase, happens to be equal to the
 			start value of index (2 + here_doc_bool), stop.
+		
+		If, after have seen the entire path, it does not have found
+		any program, it perform a strdup of "error!", increase i,
+		reset the path and recall recursively get_commands.
 */
-int	get_commands(char *argv[], t_pipex *pipex)
+int	get_commands(char *argv[], t_pipex *pipex, int i)
 {
-	int		i;
 	char	**start_path;
 
-	i = 2 + pipex->here_doc_bool;
 	start_path = pipex->path;
 	while (*pipex->path)
 	{
@@ -145,7 +152,9 @@ int	get_commands(char *argv[], t_pipex *pipex)
 		}
 		pipex->path++;
 	}
-	return (ER_CMD_NOTFOUND);
+	pipex->path = start_path;
+	*pipex->commands = ft_strdup("error!");
+	return (get_commands_recursion(argv, pipex, ++i));
 }
 
 /*

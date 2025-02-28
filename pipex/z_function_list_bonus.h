@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:05:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 10:38:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 09:40:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		alloc_cmd(t_pipex *pipex, int max_cmd);
 
 int		parsing(char *argv[], char *env[], t_pipex *pipex, t_settings *set);
 int		get_options(t_pipex *pipex);
-int		get_commands(char *argv[], t_pipex *pipex);
+int		get_commands(char *argv[], t_pipex *pipex, int i);
 int		get_second_filename(char *argv[], t_pipex *pipex);
 int		get_here_doc_file(char *argv[], t_pipex *pipex);
 //		EXECUTE

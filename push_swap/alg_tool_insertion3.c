@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:19:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:29:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 void	find_best_rotations(t_stack *a, t_stack *b, int lowest_index);
 
+/*REVIEW - 
+	1)	Find the lowest cost;
+	2)	Find best rotation for both stacks.
+*/
 void	choose_cheepest(t_stack *a, t_stack *b)
 {
 	int	lowest_cost;
@@ -42,6 +46,13 @@ void	choose_cheepest(t_stack *a, t_stack *b)
 	find_best_rotations(a, b, lowest_index);
 }
 
+/*REVIEW - 
+	We want to see if the lowest bigger (or INT_MAX, if there are none)
+	is below or above half.
+
+	If its above, we RA.
+	Else, we RRA.
+*/
 void	find_best_rotations(t_stack *a, t_stack *b, int lowest_index)
 {
 	int	target_i;

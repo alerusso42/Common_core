@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 15:13:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:50:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 # include "z_header_bonus.h"
 #endif
 
+static int	compare_input(char *line, char *limiter);
+
 /*
 	Just a split of every command.
 	Super simple.
+
+	If the command does not exits, we put an empty 
+	matrix of options.
 */
 int	get_options(t_pipex *pipex)
 {
@@ -27,6 +32,15 @@ int	get_options(t_pipex *pipex)
 	index = 0;
 	while (pipex->commands[index])
 	{
+		if (ft_strncmp(pipex->commands[index], "error!", 6) == 0)
+		{
+			pipex->cmd_num -= 1;
+			pipex->options[index] = ft_split("err", '!');
+			if (pipex->options[index] == NULL)
+				return (ER_MALLOC);
+			++index;
+			continue ;
+		}
 		pipex->options[index] = ft_split(pipex->commands[index], ' ');
 		if (pipex->options[index] == NULL)
 			return (ER_MALLOC);
@@ -74,9 +88,7 @@ int	get_here_doc_file(char *argv[], t_pipex *pipex)
 {
 	char	*line;
 	int		fd;
-	int		limiter_len;
 
-	limiter_len = ft_strlen(argv[2]);
 	fd = open("here_doc", OUTFILE, 0666);
 	if (fd < 0)
 		return (ER_OPEN_FAILED);
@@ -87,7 +99,7 @@ int	get_here_doc_file(char *argv[], t_pipex *pipex)
 	l_printf("\nInsert the input file contents, line per line.\n");
 	l_printf("Press enter to submit. Insert the limiter to stop.\n\n");
 	line = gnl(0);
-	while ((line) && (ft_strncmp(line, argv[2], limiter_len) != 0))
+	while ((line) && (compare_input(line, argv[2])) != 2)
 	{
 		ft_putstr_fd(line, fd);
 		free(line);
@@ -97,4 +109,29 @@ int	get_here_doc_file(char *argv[], t_pipex *pipex)
 		return (close(fd), ER_MALLOC);
 	free(line);
 	return (close(fd));
+}
+
+static int	compare_input(char *line, char *limiter)
+{
+	int			double_equality;
+	static int	limiter_len = -1;
+
+	double_equality = 0;
+	if (limiter_len == -1)
+		limiter_len = ft_strlen(limiter);
+	if (ft_strncmp(line, limiter, ft_strlen(line) - 1) == 0)
+		double_equality += 1;
+	if (ft_strncmp(line, limiter, limiter_len) == 0)
+		double_equality += 1;
+	return (double_equality);
+}
+
+int	get_commands_recursion(char *argv[], t_pipex *pipex, int i)
+{
+	if (i == pipex->cmd_num)
+		return (0);
+	else if (pipex->commands == NULL)
+		return (ER_MALLOC);
+	pipex->commands++;
+	return (get_commands(argv, pipex, i));
 }

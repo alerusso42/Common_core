@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:52:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:32:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ static void	separate_rotation(char a_order, char b_order)
 	}
 }
 
+/*REVIEW - 
+	1)	We check next rotation of both stacks.
+		But we don't do it, for now;
+	2)	If the number is ready to be pushed (no rotation required),
+		we push it in a;
+	3)	Else, we do a rotation based on the combination of
+		a_order and b_order.
+*/
 void	push_one(t_stack *a, t_stack *b)
 {
 	char	a_order;

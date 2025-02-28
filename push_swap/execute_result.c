@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:40:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 12:25:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:08:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "push_swap_bonus.h"
 #endif
 
-static int	get_command(char *input)
+int	get_command(char *input)
 {
 	if (ft_strncmp(input, "sa", 2) == 0)
 		sa();
@@ -111,7 +111,7 @@ void	save_result(t_stack *a)
 	int		fd;
 	int		n;
 
-	fd = open("tester.txt", O_RDWR | O_CREAT | O_TRUNC, 777);
+	fd = open("tester.txt", O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (fd < 3)
 		return ;
 	n = 0;

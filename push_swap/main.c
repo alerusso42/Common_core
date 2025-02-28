@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 12:18:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:07:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,22 @@ int	main(int argc, char *argv[])
 	int				error_type;
 
 	if (argc == 1)
-		return (error(ER_BAD_ARGC));
+		return (error(ER_BAD_ARGC, *argv));
 	if ((ft_strncmp("test", argv[1], 4) == 0) && (argc == 3))
 		return (random_test(argv));
 	a = NULL;
 	b = NULL;
 	settings = (t_settings *)ft_calloc(1, sizeof(t_settings));
 	if (!settings)
-		return (error(ER_MALLOC_ERROR));
+		return (error(ER_MALLOC_ERROR, *argv));
 	error_type = parsing(argc - 1, argv, &a, &b);
 	if (error_type != 0)
-		return (free_memory(&a, &b), free(settings), error(error_type));
+		return (free_memory(&a, &b), free(settings), error(error_type, *argv));
 	switches(settings, a);
 	variables(settings, a, b);
 	switch_to_bonus(settings, a);
 	if (settings->switch_5_bonus == ON)
-		return (test(a), 0);
+		return (test(), 0);
 	print_and_algorythm(settings, a, b);
 	return (free_memory(&a, &b), free(settings), 0);
 }

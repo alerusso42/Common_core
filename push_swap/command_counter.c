@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:42:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:39:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "push_swap_bonus.h"
 #endif
 
+/*REVIEW - 
+	Update the command list array. Expand it with realloc, if
+	necessary.
+*/
 void	command_counter(unsigned char command)
 {
 	static t_stack	*a;

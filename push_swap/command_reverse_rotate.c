@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 12:53:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:05:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ void	rra(void)
 	command_counter(RRA);
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		l_printf("Move number %d: rra;\n", a->moves_num);
-	if (a->variable_1_mode == PRINT_MODIFICATIONS)
-		print_stacks();
-	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+	else if (a->variable_1_mode == CORRECTION)
 		l_printf("rra\n");
 }
 
@@ -111,7 +109,7 @@ void	rrb(void)
 	command_counter(RRB);
 	if (b->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
-	else if (b->variable_1_mode == PRINT_FINAL_RESULT)
+	else if (b->variable_1_mode == CORRECTION)
 		l_printf("rrb\n");
 }
 
@@ -136,6 +134,6 @@ void	rrr(void)
 		l_printf("Move number %d: rrr;\n", a->moves_num);
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
-	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+	else if (a->variable_1_mode == CORRECTION)
 		l_printf("rrr\n");
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 14:34:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 15:42:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 10:19:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ static int	wait_all(t_pipex *pipex);
 */
 int	execute_pipe(t_pipex *pipex, t_settings *settings)
 {
-	int		err;
-	int		i;
-	int		pipe_fds[2];
-	int		prev;
+	int				err;
+	int				i;
+	static int		pipe_fds[2];
+	int				prev;
 
 	(void)settings;
 	i = 0;
@@ -91,7 +91,7 @@ static int	execute_fork(t_pipex *pipex, int *pipe_fds, int i, int prev)
 		if (change_files(pipex, pipe_fds, i, prev) != 0)
 			return (error(ER_DUP_FAILED));
 		execve(pipex->options[i][0], pipex->options[i], pipex->options[i]);
-		return (error(ER_EXECVE_FAILED));
+		return (reset_memory(), exit(1), error(ER_EXECVE_FAILED));
 	}
 	pipex->pid_list[i] = pid;
 	return (0);
@@ -131,14 +131,14 @@ int	change_files(t_pipex *pipex, int *pipe_fds, int i, int prev)
 	int	err;
 
 	err = 0;
-	if (i == 0)
+	if ((i == 0) && (pipex->cmd_num != 0))
 	{
 		if (set_input_file(pipex->fds[0]) != 0)
 			err = ER_DUP_FAILED;
 		if (set_output_file(pipe_fds[1]) != 0)
 			err = ER_DUP_FAILED;
 	}
-	else if (pipex->commands[i + 1] != NULL)
+	else if ((pipex->commands[i + 1] != NULL) && (pipex->cmd_num != 0))
 	{
 		if (set_input_file(prev) != 0)
 			err = ER_DUP_FAILED;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:15:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 12:53:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:05:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ra(void)
 	if (a->block_print == ON)
 		return ;
 	command_counter(RA);
-	if (a->variable_1_mode == PRINT_FINAL_RESULT)
+	if (a->variable_1_mode == CORRECTION)
 		l_printf("ra\n");
 }
 
@@ -106,7 +106,7 @@ void	rb(void)
 	if (b->block_print == ON)
 		return ;
 	command_counter(RB);
-	if (b->variable_1_mode == PRINT_FINAL_RESULT)
+	if (b->variable_1_mode == CORRECTION)
 		l_printf("rb\n");
 }
 
@@ -131,6 +131,6 @@ void	rr(void)
 		l_printf("Move number %d: rr;\n", a->moves_num);
 	if (a->variable_1_mode == PRINT_MODIFICATIONS)
 		print_stacks();
-	else if (a->variable_1_mode == PRINT_FINAL_RESULT)
+	else if (a->variable_1_mode == CORRECTION)
 		l_printf("rr\n");
 }

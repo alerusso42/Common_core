@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:42:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 16:10:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:47:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_FUNCTION_LIST_H
 
 //	UTILITIES
-int		error(int error_type);
+int		error(int error_type, char *program);
 int		l_printf(const char *str, ...);
 void	switches(t_settings *settings, t_stack *a);
 void	variables(t_settings *settings, t_stack *a, t_stack *b);
@@ -76,7 +76,7 @@ void	best_start(t_stack *a);
 void	move_unsorted_to_b(t_stack *a);
 void	choose_medium_area(t_stack *a, int num);
 //	BONUS: CHECKER
-int		read_terminal(t_stack *a);
-int		test(t_stack *a);
+int		test(void);
+int		get_command(char *input);
 
 #endif
