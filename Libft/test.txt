@@ -1,0 +1,18 @@
+[TEST]
+	Nome = ciao!_____,                                                                                         
+	Cognome =  aaaa!_____, oooo!_____,                                                                            
+	Stato_mentale = eeee!_____,                                                                                         
+	Punti_ferita =                                                                                                     
+		Rayquaza =                                                                                                     
+	Numero_di_peni_preso =                                                                                                     
+[END]
+
+[TEST_2]
+	Nome =                                                                                                     
+	Cognome =                                                                                                     
+	Stato_mentale =                                                                                                     
+	Punti_ferita =                                                                                                     
+	Rayquaza =                                                                                                     
+	Numero_di_peni_preso =                                                                                                     
+[END]
+

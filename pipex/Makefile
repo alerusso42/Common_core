@@ -1,5 +1,4 @@
 NAME = pipex
-NAME_BONUS = bonus
 LIBFT = Libft/libft.a
 OBJ_DIR = obj_dir
 OBJ_BONUS_DIR = obj_bonus_dir
@@ -98,13 +97,11 @@ bonus: gen BASH
 
 ##	the rule bonus continue in a new process.
 new_process: $(LIBFT) $(OBJ_BONUS_DIR) $(BONUS_OBJ) $(HEADER) $(OBJ_BONUS_DIR)/switch_to_bonus.o
-		touch $(ALL)
-		cp $(LIBFT) $(ALL)
-		cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(ALL) -o $(NAME_BONUS)
-		@echo "\nall done!!"
+	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(LIBFT) -o $(NAME)
+	@echo "\nall done!!"
 
 clean: 
-	rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb *.txt *.supp
+	rm -f $(OBJ) $(ALL) $(NAME) $(NAME) *.out *.gdb *.txt *.supp
 	rm -rf $(OBJ_DIR) $(BONUS_DIR) $(OBJ_BONUS_DIR)
 	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 
@@ -162,3 +159,4 @@ supp:
 	fi
 
 .PHONY: all clean fclean re main gdb run val copy_lib gen
+.SILENT: 

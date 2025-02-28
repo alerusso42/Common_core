@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:44:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 12:41:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:51:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	insertion_sort(t_stack *a, t_stack *b)
 	if (checker() == 0)
 		return ;
 	indexation(a);
-	if (a->switch_4_choose_beststart_in_insertion == ON)
+	if ((a->switch_4_choose_beststart_in_insertion == ON) && (a->size > 5))
 	{
 		best_start(a);
 		move_unsorted_to_b(a);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:53:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/28 12:15:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:51:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "push_swap_bonus.h"
 #endif
 
-static void	order_four_five(t_stack *a);
 static void	order_three(t_stack *a);
 
 /*
@@ -47,8 +46,6 @@ void	assure_left_stack(t_stack *a, t_stack *b)
 		sa();
 		return ;
 	}
-	if ((a->size == 4) || (a->size == 5))
-		return (order_four_five(a));
 	while (a->size > 3)
 		pb();
 	order_three(a);
@@ -80,54 +77,4 @@ static void	order_three(t_stack *a)
 	&& (a->data[a->first].n < a->data[a->first + 1].n))
 		return ;
 	sa();
-}
-
-static int	find_littlest(t_stack *a)
-{
-	int	littlest;
-	int	index;
-	int	lit_index;
-
-	littlest = INT_MAX;
-	index = a->first;
-	while (index != a->size)
-	{
-		littlest = a->data[index].n * (a->data[index].n < littlest);
-		lit_index = index * (a->data[index].n < littlest);
-		++index;
-	}
-	return (lit_index);
-}
-
-/*REVIEW - 
-	1)	The littlest number (for index) are sent to
-		b, in the best order;
-	2)	Lastly, I order the a stack.
-*/
-static void	order_four_five(t_stack *a)
-{
-	int	littlest;
-
-	while (a->size != 3)
-	{
-		littlest = find_littlest(a);
-		a->data[littlest].to_push = YES;
-		find_half(a, a);
-		while (littlest != 0 && littlest != a->size)
-		{
-			if (littlest > a->half)
-			{
-				++littlest;
-				rra();
-			}
-			else
-			{
-				--littlest;
-				ra();
-			}
-			pb();
-			set_data_to_zero(a, a);
-		}
-	}
-	order_three(a);
 }

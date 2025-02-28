@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/01/28 15:32:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:06:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #define TOO_MUCH_SIGNS 0
 #define TRUE 1
 
-static int	ft_isspace(const char str);
-static int	ft_size(const char *str, long long int *i);
-static int	ft_issign(const char *str, long long int *i);
+static int				ft_isspace(const char str);
+static long long int	ft_size(const char *str, long long int *i);
+static int				ft_issign(const char *str, long long int *i);
 /*
 int main()
 {
@@ -39,10 +39,10 @@ int main()
 */
 long long int	ft_atoi(const char *nptr)
 {
-	static long long int	i;
+	long long int			i;
 	int						sign;
-	static long long int	number;
-	int						size_numb;
+	long long int			number;
+	long long int			size_numb;
 
 	i = 0;
 	sign = 1;
@@ -96,11 +96,11 @@ static int	ft_issign(const char *str, long long int *i)
 }
 // ft_size gives a multiple of 10.
 
-static int	ft_size(const char *str, long long int *i)
+static long long int	ft_size(const char *str, long long int *i)
 {
-	int	size_numb;
-	int	make_power;
-	int	local_i;
+	long long int	size_numb;
+	long long int	make_power;
+	long long int	local_i;
 
 	make_power = 0;
 	while (str[*i] == '0')

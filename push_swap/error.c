@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:37:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 16:59:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:33:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ int	error(int error_type)
 */
 
 /*REVIEW - 
-	If the program is checker, return 1.
+	If the program is checker, return 1, and
+	read from the STDIN everything that gets given
+	by push_swap program.
+
 	Else, print error followed by \n.
 */
 int	error(int error_type, char *program)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	(void)error_type;
 	i = 0;
@@ -67,7 +71,15 @@ int	error(int error_type, char *program)
 		--i;
 	if (program[i] == '/')
 		++i;
-	if (ft_strncmp(program, "checker", 7) == 0)
+	if (ft_strncmp(program + i, "checker", 7) == 0)
+	{
+		line = get_next_line(0);
+		while (line)
+		{
+			free(line);
+			line = get_next_line(0);
+		}
 		return (1);
+	}
 	return (write(2, "Error\n", 6));
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:24:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/27 14:36:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:54:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	final_rotation(t_stack *a)
 {
 	int	shortest;
 
+	if (checker() == 0)
+		return ;
 	shortest = find_shortest_value(a);
 	find_half(a, NULL);
 	if (shortest < a->half)

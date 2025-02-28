@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 11:34:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:08:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	get_filedata(int *fd, char **filename)
 */
 int	give_filedata(int fd, char *filename)
 {
-	return (manage_fds(&fd, &filename, 0, 0));
+	char	*dup_filename;
+
+	dup_filename = ft_strdup(filename);
+	return (manage_fds(&fd, &dup_filename, 0, 0));
 }
 
 /*
@@ -49,7 +52,7 @@ int	give_filedata(int fd, char *filename)
 */
 int	del_filedata(void)
 {
-	return (manage_fds(NULL, NULL, 0, 0));
+	return (manage_fds(NULL, NULL, 0, 2));
 }
 
 /*
@@ -57,7 +60,7 @@ int	del_filedata(void)
 */
 int	switch_filedata(int fd)
 {
-	return (manage_fds(NULL, NULL, fd, 0));
+	return (manage_fds(NULL, NULL, fd, 1));
 }
 
 /*

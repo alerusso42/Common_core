@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_read_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:30:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 11:26:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:12:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ static char	*case_position_one(char **matrix, int counter, char *temp);
 static char	*case_others_position(char **matrix, int counter, int position);
 
 /*	read_line riceve:
-1) fd;
-2) il nome del file;
-3) il numero della linea;
-4) la posizione, nella linea, nel quale inserire la stringa.
+1) il numero della linea;
+2) la posizione, nella linea, nel quale inserire la stringa.
 	
 	Legge una stringa all'interno del file, ad una data linea (line_num),
 	ad una certa posizione orizzontale (position).
