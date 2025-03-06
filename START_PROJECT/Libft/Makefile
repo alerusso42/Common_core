@@ -30,7 +30,7 @@ SRC_PISCINE =	piscine_capitalize.c piscine_conver_base1.c \
 				piscine_isprime.c piscine_is_upper.c piscine_power.c \
 				piscine_rev_tab.c piscine_sort_int_tab.c piscine_sqrt.c \
 				piscine_strlowcase.c
-SRC_PRINTF =	printf_light.c
+SRC_PRINTF =	printf_light.c printf_fd.c
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
 OBJ_GAME = $(addprefix $(OBJ_DIR)/, $(SRC_GAME:.c=.o))

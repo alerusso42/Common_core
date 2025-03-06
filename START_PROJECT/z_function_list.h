@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:37:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:35:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@
 int		switch_to_bonus(t_settings *settings);
 void	*storage(void *ptr, int mode);
 void	reset_memory(void *ptr);
+int		switches(t_settings *settings);
+int		variables(t_settings *settings);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_read_all_line.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:30:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 11:24:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:13:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static int	skip_separators(char **matrix, int counter);
 static char	**make_matrix_beautiful(char **matrix, int counter);
 
 /*	read_line riceve:
-1) fd;
-2) il nome del file;
-3) il numero della linea.
+1) il numero della linea.
 	
 	Legge le stringhe all'interno del file, salvandole in una  
 	matrice, ad una data linea (line_num).

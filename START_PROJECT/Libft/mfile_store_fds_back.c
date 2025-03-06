@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 11:24:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:09:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static int	del_files(t_manage_fds *stock)
 	while (index < stock->file_num)
 	{
 		close(stock->fds[index]);
+		free(stock->filenames[index]);
 		++index;
 	}
 	*stock = (t_manage_fds){0};

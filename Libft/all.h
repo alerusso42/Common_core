@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:36:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 11:23:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:59:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void		copy_customset(char *dest, char *charset);
 int			sub_strlen(char *s, char *charset, int mode);
 int			sub_strcpy(char *dest, char *src, char *charset, int mode);
 int			trim_only_right(char **line, char *trimset);
+char		*ft_strjoin_var(char *which_del, int strings, ...);
 
 //	--MFILE
 

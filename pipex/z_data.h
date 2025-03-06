@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/26 13:50:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/06 09:18:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum e_error
 
 enum e_fileflags
 {
-	INFILE = O_CREAT | O_RDONLY,
+	INFILE = O_RDONLY,
 	OUTFILE = O_CREAT | O_TRUNC | O_WRONLY,
 };
 

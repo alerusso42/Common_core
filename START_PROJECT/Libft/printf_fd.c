@@ -59,7 +59,7 @@ int	fd_printf(int fd, const char *str, ...)
 				print("/UNKNOWN SPECIFIER/", fd);
 		}
 		else
-			write(1, &str[index], 1);
+			write(fd, &str[index], 1);
 		++index;
 	}
 	va_end(ptr);

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   other.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:26:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 11:23:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:58:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OTHER_H
 # define OTHER_H
 # include "libft.h"
+# include <stdarg.h>
 
 int			add_sign_left(char **string, char sign);
 int			add_sign_right(char **string, char sign);
@@ -29,5 +30,6 @@ void		copy_customset(char *dest, char *charset);
 int			sub_strlen(char *s, char *charset, int mode);
 int			sub_strcpy(char *dest, char *src, char *charset, int mode);
 int			trim_only_right(char **line, char *trimset);
+char		*ft_strjoin_var(char *which_del, int strings, ...);
 
 #endif
