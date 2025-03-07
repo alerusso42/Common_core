@@ -23,6 +23,7 @@ OBJ_BONUS_DIR = obj_bonus_dir
 BONUS_DIR = bonus_dir
 BONUS_MARK = $(BONUS_DIR)/.bonus_done
 DEBUG_FILE = g.gdb
+SUPPRESSION_FILE = s.supp
 ALL = all.a
 CP = cp
 SRC = 	ft_light_printf.c \
@@ -104,7 +105,7 @@ copy_lib: $(BONUS_DIR)
 	@cp -r $(LIBFT_RELATIVE_PATH) $(BONUS_DIR)
 
 # Genera i file bonus solo se non sono già presenti (cioe se BONUS_MARK non esiste)
-gen_bonus: $(BONUS_DIR) $(HEADER)
+gen_bonus: $(BONUS_DIR) $(BONUS_HEADER)
 	@if [ ! -f $(BONUS_MARK) ]; then \
 		echo "Generating bonus files..."; \
 		for file in $(SRC); do \
@@ -167,4 +168,34 @@ debug:
 		echo "Debug file already generated."; \
 	fi
 
-.PHONY: all clean fclean re main gdb run val debug BONUS
+supp: 
+	@if [ ! -f $(SUPPRESSION_FILE) ]; then \
+		touch $(SUPPRESSION_FILE); \
+		echo "# IGNORE OTHER EXECUTABLES' LEAKS\
+		\n{\
+		\n\tMALLOC FAILURE OF /usr/bin/*\
+		\n\tMemcheck:Leak\
+		\n\tfun:malloc\
+		\n\t...\
+		\n\tobj:/usr/bin/*\
+		\n}\
+		\n{\
+		\n\tCALLOC FAILURE of /usr/bin/*\
+		\n\tMemcheck:Leak\
+		\n\tfun:calloc\
+		\n\t...\
+		\n\tobj:/usr/bin/*\
+		\n}\
+		\n{\
+		\n\tREALLOC FAILURE of /usr/bin/*\
+		\n\tMemcheck:Leak\
+		\n\tfun:realloc\
+		\n\t...\
+		\n\tobj:/usr/bin/*\
+		\n}" > $(SUPPRESSION_FILE); \
+		echo "$(SUPPRESSION_FILE) created."; \
+	else \
+		echo "Suppression file already generated."; \
+	fi
+
+.PHONY: all clean fclean re bonus BONUS debug supp
