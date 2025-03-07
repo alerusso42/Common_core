@@ -142,7 +142,6 @@ fclean: clean
 	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
 
 re: fclean all
-	
 
 debug: 
 	@if [ ! -f $(DEBUG_FILE) ]; then \

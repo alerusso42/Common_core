@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   optimize_2best_start.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:23:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/07 11:25:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:50:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,14 @@ void	move_unsorted_to_b(t_stack *a)
 	9
 	2
 
-	BIGGEST_SEQUENCE: 1 3 4 7 9
-	MEDIUM: 46 / 9 = 5
+	BIGGEST_SEQUENCE: 1 3 4 6 9
+	MEDIUM: 45 / 9 = 5
 	RESULT:
 	A			B
 	1			2
 	3			5
 	4			8
-	7			6
+	6			7
 	9			
 
 	1)	For every num, we save in current_score the sequence length;
