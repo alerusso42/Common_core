@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:02:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:34:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ int	alloc_memory(long long int philo_num)
 	data->philo[num] = (t_philo){0};
 	data->forks = (unsigned char *)ft_calloc(num + 1, sizeof(t_philo));
 	if (!data->forks)
+		return (ER_MALLOC);
+	data->threads = (pthread_t *)\
+	ft_calloc(num + 1, sizeof(pthread_t));
+	if (!data->threads)
+		return (ER_MALLOC);
+	data->mutex = (pthread_mutex_t *)\
+	ft_calloc(num + 1, sizeof(pthread_mutex_t));
+	if (!data->threads)
 		return (ER_MALLOC);
 	return (0);
 }

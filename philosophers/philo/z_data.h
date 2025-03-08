@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:29:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:01:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # else
 #  include "z_header_bonus.h"
 # endif
+# include <pthread.h>
 
 enum e_error
 {
@@ -24,6 +25,15 @@ enum e_error
 	ER_MALLOC = 2,
 	ER_PARSING = 3,
 	ER_ATOI = 4,
+	ER_GETTIMEOFDAY = 5,
+	ER_USLEEP = 6,
+};
+
+enum e_time
+{
+	MSECONDS = 1000,
+	SECONDS = 1000000,
+	MINUTES = 6000000
 };
 
 enum e_philo_state
@@ -40,6 +50,27 @@ enum e_fork_state
 	UNLOCK = 'U',
 };
 
+enum e_color
+{
+	RESET       = 0,
+	BLACK       = 30,
+	RED         = 31,
+	GREEN       = 32,
+	YELLOW      = 33,
+	BLUE        = 34,
+	MAGENTA     = 35,
+	CYAN        = 36,
+	WHITE       = 37,
+	BOLD_BLACK  = 90,
+	BOLD_RED    = 91,
+	BOLD_GREEN  = 92,
+	BOLD_YELLOW = 93,
+	BOLD_BLUE   = 94,
+	BOLD_MAGENTA= 95,
+	BOLD_CYAN   = 96,
+	BOLD_WHITE  = 97,
+};
+
 typedef struct s_settings
 {
 	unsigned char	switch_1_bonus:1;
@@ -52,6 +83,8 @@ struct s_data
 {
 	t_settings		*settings;
 	t_philo			*philo;
+	pthread_t		*threads;
+	pthread_mutex_t	*mutex;
 	unsigned char	*forks;
 	long long int	philo_num;
 	long long int	time_to_die;
@@ -60,6 +93,8 @@ struct s_data
 	long long int	time;
 	long long int	number_of_times_each_philosopher_must_eat;
 	int				meals_eaten;
+	int				current;
+	unsigned char	is_talking:1;
 };
 
 struct s_philo
@@ -73,6 +108,8 @@ struct s_philo
 	int				id;
 	int				left_fork;
 	int				right_fork;
+	pthread_mutex_t	mutex;
+	
 	unsigned char	state:2;
 };
 

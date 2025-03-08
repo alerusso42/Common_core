@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:26:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:03:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include "z_header_bonus.h"
 #endif
 
+/*
+	ISSUES: every philo needs a global mutex (to write)
+			and a mutex for every fork.
+			Change the data struct, the allocation and
+			remove the forks string.
+*/
 int	main(int argc, char *argv[], char **env)
 {
 	int			err_type;
@@ -27,6 +33,7 @@ int	main(int argc, char *argv[], char **env)
 	if (err_type != 0)
 		return (error(err_type));
 	(void)env;
+	start_threads();
 	reset_memory();
 	return (0);
 }

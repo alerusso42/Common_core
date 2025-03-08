@@ -30,6 +30,8 @@ SRC = 	alloc_memory.c reset_memory.c storage.c \
 		print_stuff.c  \
 		parsing.c \
 		switches.c variables.c main.c \
+		item_time.c \
+		init_thread.c 
 
 HEADER = z_function_list.h z_data.h z_header.h 
 
@@ -43,7 +45,7 @@ SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC_BONUS:.c=.o))
 
-COMP = -g -Wall -Wextra -Werror -ILibft -fPIE
+COMP = -g -Wall -Wextra -Werror -ILibft -fPIE -lpthread
 LIBFT_RELATIVE_PATH = Libft/
 
 

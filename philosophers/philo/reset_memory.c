@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:35:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:24:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #else
 # include "z_header_bonus.h"
 #endif
+
+static void	reset_memory2(t_data *data);
 
 void	reset_memory()
 {
@@ -33,7 +35,22 @@ void	reset_memory()
 		free(data->forks);
 		data->forks = NULL;
 	}
+	if (data->threads)
+	{
+		free(data->threads);
+		data->threads = NULL;
+	}
+	reset_memory2(data);
 	free(data);
 	data = NULL;
 	storage(NULL, 0);
+}
+
+static void	reset_memory2(t_data *data)
+{
+	if (data->mutex)
+	{
+		free(data->mutex);
+		data->mutex = NULL;
+	}
 }

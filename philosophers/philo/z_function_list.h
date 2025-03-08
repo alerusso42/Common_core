@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_function_list.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/06 15:35:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:12:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdio.h>
 # include <math.h>
 # include <limits.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 # if __has_include("z_header.h")
 #  include "z_header.h"
@@ -34,6 +36,15 @@ int		switches(t_settings *settings);
 int		variables(t_settings *settings);
 int		error(int error);
 
+//	DEBUG
+
+int		time_delay_test(void);
+int		brute_wait(long long int micros);
+
+//	PRINT
+
+int	p_color(int color, char *s);
+
 //	PARSING
 
 int		parsing(int argc, char *argv[], t_settings *settings);
@@ -41,5 +52,13 @@ int		parsing(int argc, char *argv[], t_settings *settings);
 //	ALLOC MEMORY
 
 int		alloc_memory(long long int philo_num);
+
+//	ITEMS
+
+int		wait(long long int pause);
+
+//	INIT
+
+int		start_threads(void);
 
 #endif
