@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alloc_memory.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
+/*   Updated: 2025/03/08 18:34:59 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#if __has_include("z_header.h")
+# include "z_header.h"
+#else
+# include "z_header_bonus.h"
+#endif
+
+int	alloc_memory(long long int philo_num)
+{
+	t_data			*data;
+	int				num;
+
+	num = (int)philo_num;
+	data = (t_data *)ft_calloc(1, sizeof(t_data));
+	if (!data)
+		return (ER_MALLOC);
+	storage((void *)data, 0);
+	data->philo = (t_philo *)ft_calloc(num + 1, sizeof(t_philo));
+	if (!data->philo)
+		return (ER_MALLOC);
+	data->philo[num] = (t_philo){0};
+	data->forks = (unsigned char *)ft_calloc(num + 1, sizeof(t_philo));
+	if (!data->forks)
+		return (ER_MALLOC);
+	data->threads = (pthread_t *)\
+	ft_calloc(num + 1, sizeof(pthread_t));
+	if (!data->threads)
+		return (ER_MALLOC);
+	data->mutex = (pthread_mutex_t *)\
+	ft_calloc(num + 1, sizeof(pthread_mutex_t));
+	if (!data->threads)
+		return (ER_MALLOC);
+	return (0);
+}
