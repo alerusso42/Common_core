@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/08 18:24:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:34:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	reset_memory()
 	data = storage(NULL, 1);
 	if (!data)
 		return ;
+	reset_memory2(data);
 	if (data->philo)
 	{
 		free(data->philo);
@@ -40,7 +41,6 @@ void	reset_memory()
 		free(data->threads);
 		data->threads = NULL;
 	}
-	reset_memory2(data);
 	free(data);
 	data = NULL;
 	storage(NULL, 0);
@@ -48,9 +48,13 @@ void	reset_memory()
 
 static void	reset_memory2(t_data *data)
 {
-	if (data->mutex)
+	int	i;
+
+	i = 0;
+	while (data->philo[i].forks)
 	{
-		free(data->mutex);
-		data->mutex = NULL;
+		free(data->philo[i].forks);
+		data->philo[i].forks = NULL;
+		++i;
 	}
 }

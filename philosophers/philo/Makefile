@@ -45,12 +45,13 @@ SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC_BONUS:.c=.o))
 
-COMP = -g -Wall -Wextra -Werror -ILibft -fPIE -lpthread
+COMP = cc -g -Wall -Wextra -Werror -ILibft -fPIE
+LFLAGS = -lpthread
 LIBFT_RELATIVE_PATH = Libft/
 
 
 $(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(OBJ_DIR)/dont_switch_to_bonus.o $(HEADER)
-	cc $(COMP) $(OBJ) $(OBJ_DIR)/dont_switch_to_bonus.o $(LIBFT) -o $(NAME)
+	$(COMP) $(OBJ) $(OBJ_DIR)/dont_switch_to_bonus.o $(LIBFT) -o $(NAME) $(LFLAGS)
 	@echo "\n$(NAME) done!!"
 
 all: $(NAME) bonus
@@ -60,19 +61,19 @@ $(LIBFT) :
 	$(MAKE) -C $(LIBFT_RELATIVE_PATH)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	cc $(COMP) -c $< -o $@
+	$(COMP) -c $< -o $@
 
 # Regola per compilare gli oggetti bonus (escluso switch_to_bonus)
 $(OBJ_BONUS_DIR)/%_bonus.o: $(BONUS_DIR)/%_bonus.c | $(OBJ_BONUS_DIR) $(BONUS_MARK)
-	cc $(COMP) -c $< -o $@
+	$(COMP) -c $< -o $@
 
 # Regola separata per switch_to_bonus.o: per evitare relink
 $(OBJ_BONUS_DIR)/switch_to_bonus.o: $(BONUS_DIR)/switch_to_bonus.c | $(OBJ_BONUS_DIR) $(BONUS_MARK)
-	cc $(COMP) -c $< -o $@
+	$(COMP) -c $< -o $@
 
 # Regola separata per dont_switch_to_bonus.o: per evitare relink
 $(OBJ_DIR)/dont_switch_to_bonus.o: dont_switch_to_bonus.c | $(OBJ_DIR)
-	cc $(COMP) -c $< -o $@
+	$(COMP) -c $< -o $@
 
 
 $(HEADER):
@@ -110,7 +111,7 @@ gen_bonus: $(BONUS_DIR) $(HEADER_BONUS)
 	fi
 
 $(NAME_BONUS): $(OBJ_BONUS_DIR)/switch_to_bonus.o $(BONUS_OBJ) $(BONUS_HEADER)
-	cc $(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(LIBFT) -o $(NAME_BONUS)
+	$(COMP) $(BONUS_OBJ) $(OBJ_BONUS_DIR)/switch_to_bonus.o $(LIBFT) -o $(NAME_BONUS) $(LFLAGS)
 	@echo "\n$(NAME_BONUS) done!!"
 
 bonus: gen_bonus $(LIBFT) copy_lib $(OBJ_BONUS_DIR)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/08 19:01:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:29:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ enum e_philo_state
 	DEAD = 3
 };
 
-enum e_fork_state
-{
-	LOCK = 'L',
-	UNLOCK = 'U',
-};
-
 enum e_color
 {
 	RESET       = 0,
@@ -84,17 +78,16 @@ struct s_data
 	t_settings		*settings;
 	t_philo			*philo;
 	pthread_t		*threads;
-	pthread_mutex_t	*mutex;
-	unsigned char	*forks;
+	pthread_mutex_t	*forks;
 	long long int	philo_num;
 	long long int	time_to_die;
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
 	long long int	time;
 	long long int	number_of_times_each_philosopher_must_eat;
+	pthread_mutex_t	write_mutex;
 	int				meals_eaten;
 	int				current;
-	unsigned char	is_talking:1;
 };
 
 struct s_philo
@@ -103,13 +96,13 @@ struct s_philo
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
 	long long int	time;
+	pthread_mutex_t	*forks;
 	int				number_of_times_each_philosopher_must_eat;
 	int				meals_eaten;
 	int				id;
 	int				left_fork;
 	int				right_fork;
-	pthread_mutex_t	mutex;
-	
+	pthread_mutex_t	write_mutex;
 	unsigned char	state:2;
 };
 

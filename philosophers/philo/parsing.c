@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:35:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:39:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ static void	give_philosophers_informations(t_data *data)
 		data->philo[i].left_fork = i - 1;
 		data->philo[i].right_fork = i + 1;
 		data->philo[i].state = THINK;
-		data->forks[i] = UNLOCK;
 		++i;
 	}
 	i -= 1;
