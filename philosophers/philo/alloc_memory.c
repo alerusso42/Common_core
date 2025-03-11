@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/10 16:57:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:21:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	alloc_fork_copy(t_data *data, int num)
 	i = 0;
 	while (i != num)
 	{
-		data->philo[i].forks = (pthread_mutex_t *)\
-		ft_calloc(num + 1, sizeof(pthread_mutex_t));
+		data->philo[i].forks = (pthread_mutex_t **)\
+		ft_calloc(num + 1, sizeof(pthread_mutex_t *));
 		if (!data->philo[i].forks)
 			return (ER_MALLOC);
 		++i;

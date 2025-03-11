@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/10 15:29:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:27:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@
 #  include "z_header_bonus.h"
 # endif
 # include <pthread.h>
+# include <sys/time.h>
 
 enum e_error
 {
+	CAZZI = 0,
 	ER_BAD_ARGC = 1,
 	ER_MALLOC = 2,
 	ER_PARSING = 3,
 	ER_ATOI = 4,
 	ER_GETTIMEOFDAY = 5,
 	ER_USLEEP = 6,
+	ER_MUTEX_INIT = 7,
+	ER_PTHREAD_CREATE = 8,
 };
 
 enum e_time
@@ -41,7 +45,8 @@ enum e_philo_state
 	THINK = 0,
 	EAT = 1,
 	SLEEP = 2,
-	DEAD = 3
+	FORK = 3,
+	DEAD = 4,
 };
 
 enum e_color
@@ -75,6 +80,7 @@ typedef struct s_philo t_philo;
 
 struct s_data
 {
+	struct timeval	time;
 	t_settings		*settings;
 	t_philo			*philo;
 	pthread_t		*threads;
@@ -83,7 +89,6 @@ struct s_data
 	long long int	time_to_die;
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
-	long long int	time;
 	long long int	number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	write_mutex;
 	int				meals_eaten;
@@ -92,18 +97,19 @@ struct s_data
 
 struct s_philo
 {
+	struct timeval	time;
 	long long int	time_to_die;
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
-	long long int	time;
-	pthread_mutex_t	*forks;
+	long long int	current_time;
+	pthread_mutex_t	**forks;
+	pthread_mutex_t	*write_mutex;
 	int				number_of_times_each_philosopher_must_eat;
 	int				meals_eaten;
 	int				id;
 	int				left_fork;
 	int				right_fork;
-	pthread_mutex_t	write_mutex;
-	unsigned char	state:2;
+	unsigned char	state:3;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/10 14:05:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:56:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ int		alloc_memory(long long int philo_num);
 //	ITEMS
 
 int		wait(long long int pause);
+int		get_current_time(struct timeval *start, long long int *current);
 
-//	INIT
+//	THREADS
 
 int		start_threads(void);
+int		quit_threads(void);
 
 #endif

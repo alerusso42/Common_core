@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/10 15:29:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:28:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ int	time_delay_test(void)
 int	p_color(int color, char *s)
 {
 	return (l_printf("\033[%dm%s\033[0m", color, s));
+}
+
+int	p_state(t_philo *philo, int state)
+{
+	philo->state = state;
+	if (state == THINK)
+		return (0);
+	else if (state == EAT)
+		return (0);
+	return (0);
 }

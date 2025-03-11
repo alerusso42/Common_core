@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 11:39:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/08 17:30:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:56:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 #else
 # include "z_header_bonus.h"
 #endif
+
+int	get_current_time(struct timeval *start, long long int *current)
+{
+	struct timeval	curr;
+
+	if ((start) && !(start->tv_sec) && !(start->tv_usec))
+	{
+		if (gettimeofday(start, NULL) != 0)
+			return (ER_GETTIMEOFDAY);
+		return (0);
+	}
+	if (gettimeofday(&curr, NULL) != 0)
+		return (ER_GETTIMEOFDAY);
+	*current = ((curr.tv_sec - start->tv_sec) * SECONDS)\
+		+ (curr.tv_usec - start->tv_usec);
+	return (0);
+}
 
 /*
 	VERSION 2.0 (idea taken from Oceano)

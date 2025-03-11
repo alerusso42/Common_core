@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/08 19:03:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:55:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ int	main(int argc, char *argv[], char **env)
 	if (err_type != 0)
 		return (error(err_type));
 	(void)env;
-	start_threads();
+	err_type = start_threads();
+	if (err_type != 0)
+		return (error(err_type));
+	err_type = quit_threads();
+	if (err_type != 0)
+		return (error(err_type));
 	reset_memory();
 	return (0);
 }
