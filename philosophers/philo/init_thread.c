@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/11 14:40:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:27:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@
 void	*routine(void *ptr)
 {
 	t_philo	*philo;
+	int		test_count = -1;
 
 	philo = (t_philo *)ptr;
 	if (get_current_time(&philo->time, &philo->current_time) != 0)
 		return (NULL);
-	pthread_mutex_lock(philo->write_mutex);
-	l_printf("\n%d %d:\tEccoci!\n", philo->current_time / MSECONDS, philo->id);
-	pthread_mutex_unlock(philo->write_mutex);
-	wait(1 * SECONDS);                                                                                                      
+	while ("test" && ++test_count != 5)
+	{
+		if (philo->turn_to_eat == philo->id % 2)
+			eat(philo);
+		else
+			p_state(philo, SLEEP);
+		philo->turn_to_eat++;
+		wait(1 * MSECONDS);
+	}                                                                                 
 	return (NULL);
 }
 
@@ -71,7 +77,7 @@ int	init_loop(t_data *data)
 			return (ER_MUTEX_INIT);
 		j = -1;
 		while (++j != data->philo_num)
-			data->philo[j].forks[i] = &data->forks[i];
+			data->philo[i].forks[j] = &data->forks[j];
 		data->philo[i].time = data->time;
 		if (pthread_create(&data->threads[i], NULL, routine, \
 			(void *)&data->philo[i]) != 0)
@@ -79,7 +85,6 @@ int	init_loop(t_data *data)
 		err = wait(3 * MSECONDS);
 		if (err != 0)
 			return (err);
-		(void)err;
 		++i;
 	}
 	return (0);
@@ -95,7 +100,13 @@ int	quit_threads(void)
 	while (i != data->philo_num)
 	{
 		pthread_join(data->threads[i], NULL);
-		pthread_mutex_destroy(&data->forks[i]);
+		++i;
+	}
+	i = 0;
+	while (i != data->philo_num)
+	{
+		if (pthread_mutex_destroy(&data->forks[i]) != 0)
+			p_color(RED, "\nWARNING! Trying to destroy a lock mutex!\n");
 		++i;
 	}
 	pthread_mutex_destroy(&data->write_mutex);

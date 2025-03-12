@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/11 13:56:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:23:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int		brute_wait(long long int micros);
 
 //	PRINT
 
-int	p_color(int color, char *s);
+int		p_color(int color, char *s);
+int		p_state(t_philo *philo, int state);
 
 //	PARSING
 
@@ -62,5 +63,9 @@ int		get_current_time(struct timeval *start, long long int *current);
 
 int		start_threads(void);
 int		quit_threads(void);
+
+//	PHILOSOPHERS ROUTINE
+
+int		eat(t_philo *philo);
 
 #endif

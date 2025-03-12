@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/11 15:28:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:16:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,24 @@ int	p_color(int color, char *s)
 int	p_state(t_philo *philo, int state)
 {
 	philo->state = state;
+	if (pthread_mutex_lock(philo->write_mutex) != 0)
+		return (ER_MUTEX_LOCK);
+	if (get_current_time(&philo->time, &philo->current_time) != 0)
+		return (ER_GETTIMEOFDAY);
 	if (state == THINK)
-		return (0);
+		l_printf("%d %d is thinking\n", philo->current_time, philo->id);
 	else if (state == EAT)
-		return (0);
+		l_printf("%d %d is eating\n", philo->current_time, philo->id);
+	else if (state == SLEEP)
+		l_printf("%d %d is sleeping\n", philo->current_time, philo->id);
+	else if (state == FORK)
+		l_printf("%d %d has taken a fork\n", philo->current_time, philo->id);
+	else if (state == DEAD)
+	{
+		l_printf("%d %d ", philo->current_time, philo->id);
+		p_color(RED, "died\n");
+	}
+	if (pthread_mutex_unlock(philo->write_mutex) != 0)
+		return (ER_MUTEX_LOCK);
 	return (0);
 }

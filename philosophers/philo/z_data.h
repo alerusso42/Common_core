@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/11 15:27:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:24:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum e_error
 	ER_USLEEP = 6,
 	ER_MUTEX_INIT = 7,
 	ER_PTHREAD_CREATE = 8,
+	ER_MUTEX_LOCK = 9,
 };
 
 enum e_time
@@ -47,6 +48,14 @@ enum e_philo_state
 	SLEEP = 2,
 	FORK = 3,
 	DEAD = 4,
+};
+
+enum e_forks
+{
+	LEFT = 0,
+	RIGHT = 1,
+	BOTH = 2,
+	NONE = 3,
 };
 
 enum e_color
@@ -110,6 +119,7 @@ struct s_philo
 	int				left_fork;
 	int				right_fork;
 	unsigned char	state:3;
+	unsigned char	turn_to_eat:2;
 };
 
 #endif

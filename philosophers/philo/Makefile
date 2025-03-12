@@ -31,7 +31,8 @@ SRC = 	alloc_memory.c reset_memory.c storage.c \
 		parsing.c \
 		switches.c variables.c main.c \
 		item_time.c \
-		init_thread.c 
+		init_thread.c \
+		execute_eat.c
 
 HEADER = z_function_list.h z_data.h z_header.h 
 
@@ -132,7 +133,7 @@ fclean: clean
 	@rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
 
-re: fclean all
+re: fclean $(NAME)
 	
 
 debug: 
