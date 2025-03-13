@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/12 16:16:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:53:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ int	p_color(int color, char *s)
 
 int	p_state(t_philo *philo, int state)
 {
-	philo->state = state;
 	if (pthread_mutex_lock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
+	if (someone_died(philo, DONTLOCK) == YES)
+		return (pthread_mutex_unlock(philo->write_mutex), DEAD);
 	if (get_current_time(&philo->time, &philo->current_time) != 0)
 		return (ER_GETTIMEOFDAY);
+	if (philo->current_time > philo->last_meal_time + (philo->time_to_die * MSECONDS))
+		state = DEAD;
 	if (state == THINK)
 		l_printf("%d %d is thinking\n", philo->current_time, philo->id);
 	else if (state == EAT)
@@ -69,6 +72,7 @@ int	p_state(t_philo *philo, int state)
 	{
 		l_printf("%d %d ", philo->current_time, philo->id);
 		p_color(RED, "died\n");
+		philo->state = DEAD;
 	}
 	if (pthread_mutex_unlock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);

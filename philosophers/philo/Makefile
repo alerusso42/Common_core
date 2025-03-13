@@ -32,7 +32,7 @@ SRC = 	alloc_memory.c reset_memory.c storage.c \
 		switches.c variables.c main.c \
 		item_time.c \
 		init_thread.c \
-		execute_eat.c
+		execute_eat.c execute_death.c
 
 HEADER = z_function_list.h z_data.h z_header.h 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 14:54:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:10:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ enum e_color
 	BOLD_WHITE  = 97,
 };
 
+enum e_lock
+{
+	LOCK = 1,
+	DONTLOCK = 0,
+};
+
 typedef struct s_settings
 {
 	unsigned char	switch_1_bonus:1;
@@ -100,6 +106,7 @@ struct s_data
 	long long int	time_to_sleep;
 	long long int	number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	death_mutex;
 	int				meals_eaten;
 	int				current;
 };
@@ -111,15 +118,17 @@ struct s_philo
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
 	long long int	current_time;
+	long long int	last_meal_time;
 	pthread_mutex_t	**forks;
 	pthread_mutex_t	*write_mutex;
+	pthread_mutex_t	*death_mutex;
 	int				number_of_times_each_philosopher_must_eat;
 	int				meals_eaten;
 	int				id;
 	int				left_fork;
 	int				right_fork;
 	unsigned char	state:3;
-	unsigned char	turn_to_eat:2;
+	unsigned char	turn_to_eat:1;
 };
 
 #endif

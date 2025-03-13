@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 15:43:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/13 22:21:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,28 @@
 void	*routine(void *ptr)
 {
 	t_philo	*philo;
-	int		test_count = -1;
+	int		meals = 0;
+	int		max;
 
 	philo = (t_philo *)ptr;
-	if (get_current_time(&philo->time, &philo->current_time) != 0)
+	max = philo->number_of_times_each_philosopher_must_eat;
+	if (get_current_time(&philo->time, &philo->last_meal_time) != 0)
 		return (NULL);
-	while ("test" && ++test_count != 5)
+	while (meals != max && someone_died(philo, LOCK) == NO)
 	{
 		if (philo->turn_to_eat == philo->id % 2)
 		{
 			eat(philo);
+			if (get_current_time(&philo->time, &philo->last_meal_time) != 0)
+				return (NULL);
+			wait(philo->time_to_eat * MSECONDS);
+			++meals;
+			p_state(philo, SLEEP);
+			wait(philo->time_to_sleep * MSECONDS);
 		}
 		else
-			p_state(philo, SLEEP);
+			p_state(philo, THINK);
 		philo->turn_to_eat++;
-		wait(1 * MSECONDS);
 	}                                                                                 
 	return (NULL);
 }
@@ -55,10 +62,13 @@ int	start_threads(void)
 		return (err);
 	if (pthread_mutex_init(&data->write_mutex, NULL) != 0)
 		return (ER_MUTEX_INIT);
+	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
+		return (ER_MUTEX_INIT);
 	i = 0;
 	while (i != data->philo_num)
 	{
 		data->philo[i].write_mutex = &data->write_mutex;
+		data->philo[i].death_mutex = &data->death_mutex;
 		++i;
 	}
 	err = init_loop(data);

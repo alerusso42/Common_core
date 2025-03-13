@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_eat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:41:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 15:40:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/13 22:02:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static int	unlock_forks(t_philo *philo, int which_fork);
 */
 int	eat(t_philo *philo)
 {
-	if (block_fork(philo, (philo->id % 2 == 0)) != 0)
+	if (block_fork(philo, (philo->right_fork > philo->left_fork)) != 0)
 		return (ER_MUTEX_LOCK);
-	if (block_fork(philo, !(philo->id % 2 == 0)) != 0)
-		return (unlock_forks(philo, (philo->id % 2 == 0)), ER_MUTEX_LOCK);
+	if (block_fork(philo, !(philo->right_fork > philo->left_fork)) != 0)
+		return (unlock_forks(philo, (philo->right_fork > philo->left_fork)), ER_MUTEX_LOCK);
 	if (p_state(philo, EAT) != 0)
 		return (unlock_forks(philo, BOTH), 1);
 	if (unlock_forks(philo, BOTH) != 0)
