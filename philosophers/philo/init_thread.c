@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 22:21:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:35:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,6 @@
 #else
 # include "z_header_bonus.h"
 #endif
-
-void	*routine(void *ptr)
-{
-	t_philo	*philo;
-	int		meals = 0;
-	int		max;
-
-	philo = (t_philo *)ptr;
-	max = philo->number_of_times_each_philosopher_must_eat;
-	if (get_current_time(&philo->time, &philo->last_meal_time) != 0)
-		return (NULL);
-	while (meals != max && someone_died(philo, LOCK) == NO)
-	{
-		if (philo->turn_to_eat == philo->id % 2)
-		{
-			eat(philo);
-			if (get_current_time(&philo->time, &philo->last_meal_time) != 0)
-				return (NULL);
-			wait(philo->time_to_eat * MSECONDS);
-			++meals;
-			p_state(philo, SLEEP);
-			wait(philo->time_to_sleep * MSECONDS);
-		}
-		else
-			p_state(philo, THINK);
-		philo->turn_to_eat++;
-	}                                                                                 
-	return (NULL);
-}
 
 int	init_loop(t_data *data);
 int	init_mutex(t_data *data);

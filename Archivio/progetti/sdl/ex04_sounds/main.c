@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:56:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/19 21:37:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:52:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	game_loop(t_sdl *sdl)
 	SDL_TimerID	timer_id;
 
 	sdl->run = 1;
+	Mix_PlayMusic(sdl->mix.music, -1);
+	Mix_PlayChannel(-1, sdl->mix.sound[0], -1);
 	timer_id = SDL_AddTimer(150, timer, (void *)sdl);
 	while (sdl->run)
 	{

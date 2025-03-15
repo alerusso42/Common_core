@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:54:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 21:11:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:21:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	someone_died(t_philo *philo, int lock)
 {
 	int	state;
 
+	if (philo->state == DEAD)
+		return (YES);
+	return (NO);
 	if (lock && pthread_mutex_lock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
 	state = philo->state;

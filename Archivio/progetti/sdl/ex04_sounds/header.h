@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:56:39 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/19 21:31:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/15 14:48:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,46 @@
 # define W 500
 # define H 700
 # define FRAME 16
+# define BANANA "banana"
+/*# define S_MUSIC (t_sounds){"../mus/Feeling-Resolute.ogg"}
+# define S_BEGIN (t_sounds){"../mus/pacman_beginning.wav"}
+# define S_CHOMP (t_sounds){"../mus/pacman_chomp.wav"}
+# define S_DEATH (t_sounds){"../mus/pacman_death.wav"}
+# define S_EATFRUIT (t_sounds){"../mus/pacman_eatfruit.wav"}
+# define S_EATGHOST (t_sounds){"../mus/pacman_eatghost.wav"}
+# define S_EXTRAPAC (t_sounds){"../mus/pacman_extrapac.wav"}
+# define S_INTERMISSION (t_sounds){"../mus/pacman_intermission.wav"} 
+*/
+# define S_MUSIC "../mus/Feeling-Resolute.ogg"
+# define S_BEGIN "../mus/pacman_beginning.wav"
+# define S_CHOMP "../mus/pacman_chomp.wav"
+# define S_DEATH "../mus/pacman_death.wav"
+# define S_EATFRUIT "../mus/pacman_eatfruit.wav"
+# define S_EATGHOST "../mus/pacman_eatghost.wav"
+# define S_EXTRAPAC "../mus/pacman_extrapac.wav"
+# define S_INTERMISSION "../mus/pacman_intermission.wav" 
 # include "../../../../SDL2/include/SDL.h"
 # include "../../../../SDL2/include/SDL_image.h"
-
+# include "../../../../SDL2/include/SDL_audio.h"
+# include <SDL2/SDL_mixer.h>
 # include <stdio.h>
+# include <stdarg.h>
 
 typedef struct s_img
 {
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 }				t_img;
+
+typedef struct s_mix
+{
+	Mix_Music		*music;
+	Mix_Chunk		*sound[10];
+	int				frequency;
+	int				channels;
+	int				chunksize;
+	Uint16			format;
+}				t_mix;
 
 /*
 	Why FRAME 16?
@@ -66,6 +96,7 @@ typedef struct s_sdl
 	void			*render;
 	SDL_Rect		rect;
 	t_img			img[3];
+	t_mix			mix;
 }				t_sdl;
 
 enum e_valid_files
@@ -78,10 +109,16 @@ enum e_event
 	UPDATE_SCREEN = (SDL_USEREVENT + 1),
 };
 
+typedef struct s_sounds
+{
+	const char	*s;
+}				t_sounds;
+
 int		test(void);
 void	game_loop(t_sdl *sdl);
 int		update_screen(t_sdl *sdl, int *which);
 int		get_images(t_sdl *sdl);
+int		get_sounds(t_sdl *sdl);
 int		dialga(unsigned int ms);
 
 #endif

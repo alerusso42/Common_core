@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:17:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/28 22:05:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:48:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void	quit_sdl(t_sdl *sdl)
 		SDL_DestroyRenderer(sdl->render);
 	if (sdl->win)
 		SDL_DestroyWindow(sdl->win);
+	if (sdl->mix.music)
+		Mix_FreeMusic(sdl->mix.music);
+	index = 0;
+	while (sdl->mix.sound[index])
+		Mix_FreeChunk(sdl->mix.sound[index++]);
+	SDL_CloseAudio();
 	*sdl = (t_sdl){0};
 }
 
@@ -64,6 +70,11 @@ int	test(void)
 	t_sdl		sdl;
 
 	sdl = (t_sdl){0};
+	int num_drivers = SDL_GetNumAudioDrivers();
+for (int i = 0; i < num_drivers; i++)
+    printf("Audio Driver %d: %s\n", i, SDL_GetAudioDriver(i));
+
+	SDL_setenv("SDL_AUDIODRIVER", "disk", 1);
 	error = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
 	if (error != 0)
 		return (quit_sdl(&sdl), 1);
