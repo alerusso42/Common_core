@@ -70,11 +70,18 @@ typedef struct s_mix
 */
 //	 cc main.c -o main $(sdl2-config --cflags --libs)
 
-//	NEW:
+//	2.0:
 
-/*	PKG_CONFIG_PATH=./Common_core/SDL2/pkgconfig gcc 
--I./Common_core/SDL2/include -L./Common_core/SDL2/lib 
+/*	PKG_CONFIG_PATH=./Common_core/SDL2/pkgconfig gcc \
+-I./Common_core/SDL2/include -L./Common_core/SDL2/lib \
 -o exe main.c -lSDL2 -lSDL2_image
+*/
+
+/*
+	CURRENT:
+
+	gcc main.c animations.c sounds.c  -o exe  $(sdl2-config\
+	 --cflags --libs) -lSDL2_image -lSDL2_mixer -lSDL2_ttf -g
 */
 
 /*

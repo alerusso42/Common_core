@@ -14,12 +14,11 @@
 
 int	load_wav(t_sdl *sdl, int num, ...);
 
-int	get_sound(t_sdl *sdl)
+int	get_sounds(t_sdl *sdl)
 {
 	int	error;
 
-	if (Mix_OpenAudio(sdl->mix.frequency, sdl->mix.format, \
-		sdl->mix.channels, sdl->mix.chunksize) != 0)
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != 0)
 		return (10);
 	sdl->mix.music = Mix_LoadMUS(S_MUSIC);
 	if (sdl->mix.music == NULL)	
@@ -37,7 +36,7 @@ int	load_wav(t_sdl *sdl, int num, ...)
 
 	i = 0;
 	va_start(ptr, num);
-	while (num > 0)
+	while (i < num)
 	{
 		s = (char *)va_arg(ptr, char *);
 		sdl->mix.sound[i] = Mix_LoadWAV(s);

@@ -83,7 +83,7 @@ void	game_loop(t_sdl *sdl)
 
 	sdl->run = 1;
 	Mix_PlayMusic(sdl->mix.music, -1);
-	Mix_PlayChannel(-1, sdl->mix.sound[0], -1);
+	Mix_PlayChannel(-1, sdl->mix.sound[0], 1);
 	timer_id = SDL_AddTimer(150, timer, (void *)sdl);
 	while (sdl->run)
 	{

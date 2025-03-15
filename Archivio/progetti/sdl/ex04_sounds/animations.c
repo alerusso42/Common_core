@@ -74,7 +74,7 @@ int	test(void)
 for (int i = 0; i < num_drivers; i++)
     printf("Audio Driver %d: %s\n", i, SDL_GetAudioDriver(i));
 
-	SDL_setenv("SDL_AUDIODRIVER", "disk", 1);
+	SDL_setenv("SDL_AUDIODRIVER", "pulseaudio", 1);
 	error = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
 	if (error != 0)
 		return (quit_sdl(&sdl), 1);
@@ -85,6 +85,9 @@ for (int i = 0; i < num_drivers; i++)
 	if (!sdl.render)
 		return (quit_sdl(&sdl), 3);
 	error = get_images(&sdl);
+	if (error != 0)
+		return (quit_sdl(&sdl), error);
+	error = get_sounds(&sdl);
 	if (error != 0)
 		return (quit_sdl(&sdl), error);
 	game_loop(&sdl);
