@@ -54,11 +54,15 @@ int	screen_animations(t_sdl *sdl, int animator)
 unsigned int	timer(unsigned int interval, void *param)
 {
 	static int	animator;
+	int			frame_start;
 
 	screen_animations((t_sdl *)param, animator);
 	++animator;
+	usleep(1800);
 	return (interval);
 }
+
+void	get_commands(SDL_Event *event, t_sdl *sdl);
 
 /*
 	SDL_PollEvent manages unput taken from keyboard and
@@ -78,28 +82,46 @@ unsigned int	timer(unsigned int interval, void *param)
 */
 void	game_loop(t_sdl *sdl)
 {
+	int			frame_start;
+	int			last_tick;
+	const int timer_interval = 150;
+	int			now;
 	SDL_Event	event;
-	SDL_TimerID	timer_id;
 
 	sdl->run = 1;
 	Mix_PlayMusic(sdl->mix.music, -1);
 	Mix_PlayChannel(-1, sdl->mix.sound[0], 1);
-	timer_id = SDL_AddTimer(150, timer, (void *)sdl);
+	last_tick = SDL_GetTicks();
 	while (sdl->run)
 	{
-		while (SDL_PollEvent(&event))
+		frame_start = SDL_GetTicks();
+		get_commands(&event, sdl);
+		now = SDL_GetTicks();
+		if (now - last_tick >= timer_interval)
 		{
-			sdl->frame_start = SDL_GetTicks64();
-			if ((event.type == SDL_QUIT) || ((event.type == SDL_KEYDOWN) && \
-			(event.key.keysym.sym == 27)))
-				sdl->run = 0;
-			else if (event.type == UPDATE_SCREEN)
-				if (update_screen(sdl, (int *)event.user.data1) != 0)
-					return ;
-			sdl->runtime = SDL_GetTicks64() - sdl->frame_start;
-			if (sdl->runtime < FRAME)
-				SDL_Delay(FRAME - sdl->runtime);
+			sdl->curr_img = dialga(now / timer_interval);
+			update_screen(sdl, &sdl->curr_img);
+			last_tick += timer_interval;
 		}
 	}
-	SDL_RemoveTimer(timer_id);
+}
+
+void	get_commands(SDL_Event *event, t_sdl *sdl)
+{
+	while (SDL_PollEvent(event))
+	{
+		if ((event->type == SDL_QUIT) ||
+			(event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_ESCAPE))
+			sdl->run = 0;
+		else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == 'z')
+			Mix_PlayChannel(-1, sdl->mix.sound[1], 0);
+		else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == 'x')
+			Mix_PlayChannel(-1, sdl->mix.sound[2], 0);
+		else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == 'c')
+			Mix_PlayChannel(-1, sdl->mix.sound[3], 0);
+		else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == 'v')
+			Mix_PlayChannel(-1, sdl->mix.sound[4], 0);
+		else if (event->type == SDL_KEYDOWN && event->key.keysym.sym == 'b')
+			Mix_PlayChannel(-1, sdl->mix.sound[5], 0);
+	}
 }

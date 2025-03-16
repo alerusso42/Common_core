@@ -1,0 +1,170 @@
+# ====================================================
+# SDL2, SDL2_image, SDL2_mixer, and SDL2_ttf Valgrind Suppressions
+# These suppressions target known (but benign) memory issues
+# in the SDL libraries. Adjust as needed for your environment.
+# ====================================================
+
+{
+   <sdl2_thread_creation>
+   Memcheck:Leak
+   fun:SDL_CreateThread
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_thread_exit>
+   Memcheck:Leak
+   fun:SDL_WaitThread
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_timer_add>
+   Memcheck:Leak
+   fun:SDL_AddTimer
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_timer_remove>
+   Memcheck:Leak
+   fun:SDL_RemoveTimer
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_quit>
+   Memcheck:Leak
+   fun:SDL_Quit
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_malloc>
+   Memcheck:Leak
+   fun:SDL_malloc
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_free>
+   Memcheck:Leak
+   fun:SDL_free
+   obj:*libSDL2*.so*
+}
+
+{
+   <sdl2_image_load>
+   Memcheck:Leak
+   fun:IMG_Load
+   obj:*libSDL2_image*.so*
+}
+
+{
+   <sdl2_image_init>
+   Memcheck:Leak
+   fun:IMG_Init
+   obj:*libSDL2_image*.so*
+}
+
+{
+   <sdl2_mixer_openaudio>
+   Memcheck:Leak
+   fun:Mix_OpenAudio
+   obj:*libSDL2_mixer*.so*
+}
+
+{
+   <sdl2_mixer_music_load>
+   Memcheck:Leak
+   fun:Mix_LoadMUS
+   obj:*libSDL2_mixer*.so*
+}
+
+{
+   <sdl2_mixer_wav_load>
+   Memcheck:Leak
+   fun:Mix_LoadWAV
+   obj:*libSDL2_mixer*.so*
+}
+
+{
+   <sdl2_mixer_closeaudio>
+   Memcheck:Leak
+   fun:Mix_CloseAudio
+   obj:*libSDL2_mixer*.so*
+}
+
+{
+   <sdl2_ttf_openfont>
+   Memcheck:Leak
+   fun:TTF_OpenFont
+   obj:*libSDL2_ttf*.so*
+}
+
+{
+   <sdl2_ttf_closefont>
+   Memcheck:Leak
+   fun:TTF_CloseFont
+   obj:*libSDL2_ttf*.so*
+}
+
+{
+   suppression_wsl_graphics
+   Memcheck:Addr4
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_*/libigd12um64kbl.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-*.so
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/wsl/lib/libdxcore.so
+   obj:/usr/lib/wsl/lib/libdxcore.so
+   obj:/usr/lib/wsl/lib/libdxcore.so
+   obj:/usr/lib/wsl/lib/libdxcore.so
+   fun:DXCoreCreateAdapterFactory
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+   obj:/usr/lib/x86_64-linux-gnu/libgallium-24.2.8-1ubuntu1~24.04.1.so
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTQueryAdapterInfo
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_1e426c8ad6959cb5/libigd12umd64.so
+   fun:OpenAdapter12
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libdxcore.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_1e426c8ad6959cb5/libigd12um64kbl.so
+   fun:OpenAdapter12
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}

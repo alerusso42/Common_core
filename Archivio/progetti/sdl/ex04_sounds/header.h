@@ -35,12 +35,12 @@
 # define S_EATGHOST "../mus/pacman_eatghost.wav"
 # define S_EXTRAPAC "../mus/pacman_extrapac.wav"
 # define S_INTERMISSION "../mus/pacman_intermission.wav" 
-# include "../../../../SDL2/include/SDL.h"
-# include "../../../../SDL2/include/SDL_image.h"
-# include "../../../../SDL2/include/SDL_audio.h"
 # include <SDL2/SDL_mixer.h>
+# include <SDL2/SDL_image.h>
+# include <SDL2/SDL.h>
 # include <stdio.h>
 # include <stdarg.h>
+# include <unistd.h>
 
 typedef struct s_img
 {
