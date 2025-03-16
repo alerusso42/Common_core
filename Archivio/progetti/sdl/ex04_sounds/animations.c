@@ -49,6 +49,8 @@ void	quit_sdl(t_sdl *sdl)
 	index = 0;
 	while (sdl->mix.sound[index])
 		Mix_FreeChunk(sdl->mix.sound[index++]);
+	Mix_HaltMusic();
+	Mix_HaltChannel(-1);
 	SDL_CloseAudio();
 	*sdl = (t_sdl){0};
 }
