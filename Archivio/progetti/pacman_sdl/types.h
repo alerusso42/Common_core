@@ -27,7 +27,6 @@ typedef struct s_map		t_map;
 typedef struct s_position	t_position;
 typedef struct s_random		t_random;
 typedef struct s_sdl		t_sdl;
-typedef struct s_sprite		t_sprite;
 typedef struct s_enemy		t_enemy;
 typedef struct s_all		t_all;
 typedef unsigned char		t_onebyte;
@@ -146,57 +145,6 @@ struct s_random
 	t_onebyte	seed;
 	int			*values;
 };
-struct s_sprite
-{
-	void	*blue;
-	void	*cian_down;
-	void	*cian_front;
-	void	*cian_left;
-	void	*cian_right;
-	void	*cian_up;
-	void	*close_exit;
-	void	*dead;
-	void	*dot;
-	void	*exit;
-	void	*floor;
-	void	*orange_down;
-	void	*orange_front;
-	void	*orange_left;
-	void	*orange_right;
-	void	*orange_up;
-	void	*pac_close_down;
-	void	*pac_close_left;
-	void	*pac_close_right;
-	void	*pac_close_up;
-	void	*pac_dead_1;
-	void	*pac_dead_2;
-	void	*pac_dead_3;
-	void	*pac_dead_4;
-	void	*pac_half_down;
-	void	*pac_half_left;
-	void	*pac_half_right;
-	void	*pac_half_up;
-	void	*pac_open_down;
-	void	*pac_open_left;
-	void	*pac_open_right;
-	void	*pac_open_up;
-	void	*purple_down;
-	void	*purple_front;
-	void	*purple_left;
-	void	*purple_right;
-	void	*purple_up;
-	void	*red_down;
-	void	*red_front;
-	void	*red_left;
-	void	*red_right;
-	void	*red_up;
-	void	*special_dot;
-	void	*wall_down;
-	void	*wall_left;
-	void	*wall_right;
-	void	*wall_total;
-	void	*wall_up;
-};
 typedef struct s_mix
 {
 	Mix_Music		*music;
@@ -206,6 +154,11 @@ typedef struct s_mix
 	int				chunksize;
 	Uint16			format;
 }				t_mix;
+typedef struct s_img
+{
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
+}				t_img;
 struct s_sdl
 {
 	char			run;
@@ -216,10 +169,11 @@ struct s_sdl
 	void			*win;
 	void			*render;
 	t_mix			mix;
-	t_sprite	*sprite;
-	int			start_x;
-	int			start_y;
-	int			variable_1_sprite_size;
+	t_sprite		*sprite;
+	t_img			*img;
+	int				start_x;
+	int				start_y;
+	int				variable_1_sprite_size;
 };
 struct s_all
 {
@@ -228,5 +182,63 @@ struct s_all
 	t_random	*random;
 	t_sdl		*sdl;
 };
+
+enum e_valid_files
+{
+	VALID_FILES = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF | IMG_INIT_WEBP,
+};
+
+typedef enum e_game_files
+{
+    BLUE,
+    CIAN_DOWN,
+    CIAN_FRONT,
+    CIAN_LEFT,
+    CIAN_RIGHT,
+    CIAN_UP,
+    CLOSE_EXIT,
+    DEAD,
+    DOT,
+    EXIT,
+    FLOOR,
+    ORANGE_DOWN,
+    ORANGE_FRONT,
+    ORANGE_LEFT,
+    ORANGE_RIGHT,
+    ORANGE_UP,
+    PAC_CLOSE_DOWN,
+    PAC_CLOSE_LEFT,
+    PAC_CLOSE_RIGHT,
+    PAC_CLOSE_UP,
+    PAC_DEAD_1,
+    PAC_DEAD_2,
+    PAC_DEAD_3,
+    PAC_DEAD_4,
+    PAC_HALF_DOWN,
+    PAC_HALF_LEFT,
+    PAC_HALF_RIGHT,
+    PAC_HALF_UP,
+    PAC_OPEN_DOWN,
+    PAC_OPEN_LEFT,
+    PAC_OPEN_RIGHT,
+    PAC_OPEN_UP,
+    PURPLE_DOWN,
+    PURPLE_FRONT,
+    PURPLE_LEFT,
+    PURPLE_RIGHT,
+    PURPLE_UP,
+    RED_DOWN,
+    RED_FRONT,
+    RED_LEFT,
+    RED_RIGHT,
+    RED_UP,
+    SPECIAL_DOT,
+    WALL_DOWN,
+    WALL_LEFT,
+    WALL_RIGHT,
+    WALL_TOTAL,
+    WALL_UP,
+    GAME_FILES_COUNT,
+} t_game_files;
 
 #endif
