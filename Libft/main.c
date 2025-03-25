@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:35:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/28 15:35:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:59:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ int	error(int error_type)
 		in cui magari liberi la memoria delle tue
 		strutture.
 
-
+*/
+/*
 int	main()
 {
 	int		fd;
@@ -147,4 +148,4 @@ int	main()
 	free(string);
 	return (error(0));
 }
-	*/
+*/
