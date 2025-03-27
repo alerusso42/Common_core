@@ -169,7 +169,6 @@ struct s_sdl
 	void			*win;
 	void			*render;
 	t_mix			mix;
-	t_sprite		*sprite;
 	t_img			*img;
 	int				start_x;
 	int				start_y;
@@ -238,7 +237,7 @@ typedef enum e_game_files
     WALL_RIGHT,
     WALL_TOTAL,
     WALL_UP,
-    GAME_FILES_COUNT,
+    TEXTURES_COUNT,
 } t_game_files;
 
 #endif

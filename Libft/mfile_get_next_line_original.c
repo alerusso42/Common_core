@@ -127,3 +127,10 @@ char	*gnl_original_main_function(int fd, char buffer[BUFFER_SIZE + 1])
 	}
 	return (new_line);
 }
+
+//	Temporanea: serve per fare Minishell con Francesco.
+//	Eliminare in futuro.
+char	*get_next_line_bonus(int fd)
+{
+	return (gnl(fd));
+}

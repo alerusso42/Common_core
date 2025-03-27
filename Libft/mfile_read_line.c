@@ -49,6 +49,7 @@ char	*read_line(int line_num, int position)
 	temp = get_next_line(fd, 0);
 	matrix = ft_split(temp, ',');
 	free(temp);
+	temp = NULL;
 	if ((!matrix) || !(*matrix))
 		return (NULL);
 	if (verify_line(matrix, &counter, position) != 0)

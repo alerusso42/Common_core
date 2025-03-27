@@ -4,6 +4,7 @@
 		"algorithm": "c",
 		"so_long.h": "c",
 		"so_long_bonus.h": "c",
-		"z_function_list.h": "c"
+		"z_function_list.h": "c",
+		"sdl_image.h": "c"
 	}
 }

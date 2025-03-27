@@ -12,7 +12,7 @@
 
 #ifndef Z_FUNCTION_LIST_H
 # define Z_FUNCTION_LIST_H
-# include "Libft/libft.h"
+# include "Libft/all.h"
 # include <SDL2/SDL_mixer.h>
 # include <SDL2/SDL_image.h>
 # include <SDL2/SDL.h>
