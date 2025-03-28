@@ -12,57 +12,93 @@ types:
  || = 9;
  *  = 10;
 
-Row are: token_content // token_id // type // priority
+Row are: token_content // type // priority
 
-case: ls | grep -v .c >file1.txt > file2.txt > file3.txt <file1.txt | grep -v .h <file5.txt >file4.txt
-[Test0, 17 token]
-Token0 = ls, 0, 0, 0,
-Token1 = |, 1, 7, 0,
-Token2 = grep, 2, 0, 0,
-Token3 = -v, 3, 1, 0,
-Token4 = .c, 4, 1, 0,
-Token5 = file1.txt, 5, 3, 0,
-Token6 = file2.txt, 6, 3, 0,
-Token7 = file3.txt, 7, 3, 0,
-Token8 = file1.txt, 8, 4, 0,
-Token9 = |, 9, 7, 0,
-Token10 = grep, 10, 0, 0,
-Token11 = -v, 11, 1, 0,
-Token12 = .h, 12, 1, 0,
-Token13 = file1.txt, 13, 4, 0,
-Token14 = file2.txt, 14, 3, 0,
-Token15 = file5.txt, 15, 4, 0,
-Token16 = file4.txt, 16, 3, 0,
+Complete bash test:
+make frm ; \
+ls  >>file6.txt | grep -v .c >file7.txt > file8.txt > file5.txt <file6.txt | grep -v .h >file5.txt >file4.txt ; \
+grep -v .c <(ls | grep -v .h) ; \
+cat <<EOF ; \
+ls -a --author | grep .c -v | grep .h -v ; \
+cat file4.txt >> file4.txt | grep "error" < file3.txt >> file2.txt
+
+case: make frm
+[Test0, 2 token]
+	Token = make, 0, 0,
+	Token = frm, 1, 0,
+	[END]
+	
+
+case: ls  file6.txt | grep -v .c file7.txt file8.txt file5.txt file6.txt | grep -v .h file5.txt file4.txt
+[Test1, 16 token]
+		Token = ls, 0, 0,
+		Token = file6.txt, 3, 0,
+		Token = |, 7, 0,
+		Token = grep, 0, 0,
+		Token = -v, 1, 0,
+		Token = .c, 1, 0,
+		Token = file7.txt, 3, 0,
+		Token = file8.txt, 3, 0,
+		Token = file5.txt, 3, 0,
+		Token = file6.txt, 4, 0,
+		Token = |, 7, 0,
+		Token = grep, 0, 0,
+		Token = -v, 1, 0,
+		Token = .h, 1, 0,
+		Token = file5.txt, 4, 0,
+		Token = file4.txt, 3, 0,
+		[END]
+		
+
+case: grep -v .c (ls | grep -v .h)
+[Test2, 10 token]
+Token = grep, 0, 0,
+Token = -v, 1, 0,
+Token = .c, 1, 0,
+Token = (, 6, 0,
+Token = ls, 0, 0,
+Token = |, 7, 0,
+Token = grep, 0, 0,
+Token = -v, 1, 0,
+Token = .h, 1, 0,
+Token = ), 6, 0,
 [END]
 
-case: grep -v .c <(ls | grep -v .h)
-[Test1, 9 token]
-	Token0 = grep,         0,  0, 0,
-	Token1 = -v,           1,  1, 0,
-	Token2 = .c,           2,  1, 0,
-	Token3 = (,            3,  4, 0,
-	Token4 = ls,           4,  0, 1,
-	Token5 = |,            5,  7, 1,
-	Token6 = grep,         6,  0, 1,
-	Token7 = -v,           7,  1, 1,
-	Token8 = .c,           8,  1, 1,
+
+case: cat EOF ;
+[Test3, 2 token]
+Token = cat, 0, 0,
+Token = EOF, 6, 0,
 [END]
 
-case: cat <<EOF
-[Test2, 4 token]
-Token0 = cat, 0, 0, 0,
-Token1 = EOF, 1, 6, 0,
+
+case: ls -a --author | grep .c -v | grep .h -v
+[Test4, 11 token]
+Token = ls, 0, 0,
+Token = -a, 1, 0,
+Token = --author, 2, 0,
+Token = |, 7, 0,
+Token = grep, 0, 0,
+Token = .c, 1, 0,
+Token = -v, 1, 0,
+Token = |, 7, 0,
+Token = grep, 0, 0,
+Token = .h, 1, 0,
+Token = -v, 1, 0,
 [END]
 
-case: ls -a --author | grep .c -v
-[Test3, 7 token]
-Token0 = ls, 0, 0, 0,
-Token1 = -a, 1, 1, 0,
-Token2 = --author, 2, 1, 0,
-Token3 = |, 3, 7, 0,
-Token4 = grep, 4, 0, 0,
-Token5 = .c, 5, 1, 0,
-Token6 = -v, 6, 1, 0,
+
+case: cat file4.txt file4.txt | grep "error" file3.txt file2.txt
+[Test5, 8 token]
+Token = cat, 0, 0,
+Token = file4.txt, 1, 0,
+Token = file4.txt, 5, 0,
+Token = |, 7, 0,
+Token = grep, 0, 0,
+Token = "error", 1, 0,
+Token = file3.txt, 4, 0,
+Token = file2.txt, 3, 0,
 [END]
+
 
 

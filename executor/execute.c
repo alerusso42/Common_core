@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 12:33:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:15:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void	goto_next_command_block(t_exec *exec, t_token **tokens);
+static int	goto_next_command_block(t_exec *exec, t_token **tokens);
 static int	invoke_programs(t_exec *exec, int i, void *data, int debug);
 static int	wait_everyone(t_exec *exec);
 
@@ -33,7 +33,8 @@ int	execute(t_token *tokens, void *data, int debug)
 	{
 		get_file_data(exec, tokens);
 		invoke_programs(exec, exec->cmd_num, data, debug);
-		goto_next_command_block(exec, &tokens);
+		if (goto_next_command_block(exec, &tokens) != 0)
+			break ;
 		exec->cmd_num++;
 	}
 	wait_everyone(exec);
@@ -41,11 +42,18 @@ int	execute(t_token *tokens, void *data, int debug)
 	return (0);
 }
 
-static void	goto_next_command_block(t_exec *exec, t_token **tokens)
+static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 {
 	while ((*tokens)->content && is_exec_sep((*tokens)->type) == _NO)
 	{
 		++(*tokens);
+	}
+	if ((*tokens)->type == AND || (*tokens)->type == OR)
+	{
+		if (((*tokens)->type == AND && exec->exit_status != 0) || \
+		((*tokens)->type == OR && exec->exit_status == 0))
+			return (1);
+		wait_everyone(exec);
 	}
 	if (exec->pipe_fds[0])
 	{
@@ -56,6 +64,7 @@ static void	goto_next_command_block(t_exec *exec, t_token **tokens)
 	}
 	if ((*tokens)->content)
 		++(*tokens);
+	return (0);
 }
 
 static int	invoke_programs(t_exec *exec, int i, void *data, int debug)
@@ -67,7 +76,7 @@ static int	invoke_programs(t_exec *exec, int i, void *data, int debug)
 		return (E_FORK);
 	else if (pid == 0)
 	{
-		execve(exec->commands[i][0], exec->commands[i], __environ);
+		execve(exec->commands[i][0], exec->commands[i], exec->env);
 		if (debug == _YES)
 			data = free_debug_data((t_debug_data *)data);
 		else

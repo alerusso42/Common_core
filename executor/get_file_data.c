@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 12:08:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:30:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	get_file_data(t_exec *exec, t_token *token)
 		dup2(exec->stdin_fd, 0);
 	if (exec->last_out == -1 && token->type != PIPE && token->content)
 		dup2(exec->stdout_fd, 1);
-	if (token->type == PIPE)
+	if (exec->last_out == -1 && token->type == PIPE)
 	{
 		pipe(exec->pipe_fds);
 		dup2(exec->pipe_fds[1], 1);
@@ -68,9 +68,9 @@ static int	add_one(t_exec *exec, t_token *token)
 	else if (token->type == HERE_DOC)
 		fd = open("here_doc", INFILE_DOC);
 	else if (token->type == RED_OUT)
-		fd = open(token->content, OUTFILE_TRUNC);
+		fd = open(token->content, OUTFILE_TRUNC, 0666);
 	else
-		fd = open(token->content, OUTFILE_APPEND);
+		fd = open(token->content, OUTFILE_APPEND, 0666);
 	if (fd == -1)
 		return (bash_message(E_OPEN, token->content));
 	if (token->type == HERE_DOC)

@@ -42,6 +42,6 @@ re: fclean all
 
 #frm = file remove
 frm: 
-	rm *.txt
+	rm -f *.txt
 
 .PHONY: fclean re clean deb all

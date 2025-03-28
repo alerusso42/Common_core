@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 11:27:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:22:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	*free_debug_data(t_debug_data *data)
 //REVIEW - Alloc for t_exec
 int	alloc_memory(t_exec **exec, int cmd_num)
 {
+	extern char	**environ;
+
 	if (!exec)
 		return (2);
 	*exec = (t_exec *)ft_calloc(1, sizeof(t_exec));
@@ -64,6 +66,7 @@ int	alloc_memory(t_exec **exec, int cmd_num)
 	if (!(*exec)->builtins)
 		return (E_MALLOC);
 	(*exec)->cmd_num = cmd_num;
+	(*exec)->env = environ;
 	return (0);
 }
 

@@ -1,4 +1,4 @@
-#include "debug.h"
+#include <stdio.h>
 
 /*
 int	main()
@@ -39,3 +39,33 @@ int	main()
 		printf("ptr for string %s:\t%p. Address: %p\n", *ptr, *ptr, ptr);
 	}
 }*/
+
+int	main(void)
+{
+	int			i;
+	extern char	**environ;	
+
+	i = 0;
+	printf("\n\033[33mEnv:\033[0m\n");
+	while (environ[i])
+	{
+		printf("\t%s\n", environ[i]);
+		++i;
+	}
+	unsetenv("USER");
+	printf("\n\n\033[31mUnsetted user...\033[0m\n\n");
+	i = 0;
+	while (environ[i])
+	{
+		printf("\t%s\n", environ[i]);
+		++i;
+	}
+	setenv("USER", "new user", 1);
+	printf("\n\n\033[32mAdded user...\033[0m\n");
+	i = 0;
+	while (environ[i])
+	{
+		printf("\t%s\n", environ[i]);
+		++i;
+	}
+}

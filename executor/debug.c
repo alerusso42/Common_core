@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/03/28 11:00:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:19:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ int	read_tokens(char ***matrix, t_token *exec, int line_num)
 		matrix[token_num] = read_all_line(line_num + token_num);
 		if (!matrix[token_num])
 			break ;
+		exec[token_num].id = token_num;
 		exec[token_num].content = matrix[token_num][0];
-		exec[token_num].id = ft_atoi(matrix[token_num][1]);
-		exec[token_num].type = ft_atoi(matrix[token_num][2]);
-		exec[token_num].prior = ft_atoi(matrix[token_num][3]);
+		exec[token_num].type = ft_atoi(matrix[token_num][1]);
+		exec[token_num].prior = ft_atoi(matrix[token_num][2]);
 		++token_num;
 	}
 	if (matrix[0] == NULL)
