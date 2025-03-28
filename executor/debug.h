@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:49:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/21 16:56:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 10:03:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@
 #define BOLD_MAGENTA "\033[95m"
 #define BOLD_CYAN    "\033[96m"
 #define BOLD_WHITE   "\033[97m"
-
 
 #endif

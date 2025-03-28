@@ -20,3 +20,22 @@ int	main()
 	return (printf("\nEtero"));
 }
 */
+
+/*
+int	main()
+{
+	char	*s = calloc(15, 1);
+	strcpy(s, "Test");
+	char	**ptr;
+	pid_t	pid;
+
+	ptr = &s;
+	pid = fork();
+	if (pid < 0)
+		return (1);
+	else if (pid == 0)
+	{
+		printf("Ptr for string %s:\t%p. Address: %p\n", s, s, &s);
+		printf("ptr for string %s:\t%p. Address: %p\n", *ptr, *ptr, ptr);
+	}
+}*/

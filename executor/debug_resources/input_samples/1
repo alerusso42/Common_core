@@ -14,8 +14,8 @@ types:
 
 Row are: token_content // token_id // type // priority
 
-case: ls -a --author | grep .c -v
-[Test0, 7 token]
+case: ls -a --author | grep .c -v | grep .h -v
+[Test0, 11 token]
 Token0 = ls, 0, 0, 0,
 Token1 = -a, 1, 1, 0,
 Token2 = --author, 2, 1, 0,
@@ -23,4 +23,8 @@ Token3 = |, 3, 7, 0,
 Token4 = grep, 4, 0, 0,
 Token5 = .c, 5, 1, 0,
 Token6 = -v, 6, 1, 0,
+Token7 = |, 7, 7, 0,
+Token8 = grep, 8, 0, 0,
+Token9 = .h, 9, 1, 0,
+Token10 = -v, 9, 1, 0,
 [END]

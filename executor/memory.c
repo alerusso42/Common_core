@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/26 15:11:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:27:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ t_exec	*storage(t_exec *update, int mode)
 	return (stack);
 }
 
+void	*free_debug_data(t_debug_data *data)
+{
+	data->matrix = _free_three_d_matrix(data->matrix);
+	free(data->temp);
+	data->temp = NULL;
+	free(data->filename1);
+	free(data->filename2);
+	data->filename1 = NULL;
+	data->filename2 = NULL;
+	close(data->fd_to_close);
+	free(data->tokens);
+	data->tokens = NULL;
+	return (NULL);
+}
+
 //REVIEW - Alloc for t_exec
 int	alloc_memory(t_exec **exec, int cmd_num)
 {
@@ -39,14 +54,14 @@ int	alloc_memory(t_exec **exec, int cmd_num)
 	storage(*exec, STORE);
 	(*exec)->stdin_fd = dup(0);
 	(*exec)->stdout_fd = dup(1);
-	(*exec)->fds = (int *)ft_calloc(cmd_num * 2, sizeof(int));
-	if (!(*exec)->fds)
-		return (E_MALLOC);
 	(*exec)->commands = (char ***)ft_calloc(cmd_num + 1, sizeof(char **));
 	if (!(*exec)->commands)
 		return (E_MALLOC);
 	(*exec)->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!(*exec)->pid_list)
+		return (E_MALLOC);
+	(*exec)->builtins = (void **)ft_calloc(BUILTIN_NUM + 1, sizeof(void *));
+	if (!(*exec)->builtins)
 		return (E_MALLOC);
 	(*exec)->cmd_num = cmd_num;
 	return (0);
@@ -59,18 +74,17 @@ void	free_memory(void)
 
 	exec = storage(NULL, RECEIVE);
 	if (!exec)
-	return ;
+		return ;
 	dup2(exec->stdin_fd, 0);
 	dup2(exec->stdout_fd, 1);
 	close(exec->stdin_fd);
 	close(exec->stdout_fd);
 	exec->commands = _free_three_d_matrix(exec->commands);
 	exec->path = _free_matrix(exec->path);
-	if (exec->pid_list)
-	{
-		free(exec->pid_list);
-		exec->pid_list = NULL;
-	}
+	free(exec->pid_list);
+	exec->pid_list = NULL;
+	free(exec->builtins);
+	exec->builtins = NULL;
 	free_memory2(exec);
 	free(exec);
 	storage(NULL, STORE);
@@ -89,13 +103,8 @@ static void	free_memory2(t_exec *exec)
 			unlink(exec->files_to_trash[i]);
 	}
 	exec->files_to_trash = _free_matrix(exec->files_to_trash);
-	if (exec->fds)
-	{
-		if (exec->fds[0] != 0)
-			close(exec->fds[0]);
-		if (exec->fds[1] != 0)
-			close(exec->fds[1]);
-		free(exec->fds);
-		exec->fds = NULL;
-	}
+	if (exec->pipe_fds[0])
+		close(exec->pipe_fds[0]);
+	if (exec->pipe_fds[1])
+		close(exec->pipe_fds[1]);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/26 17:22:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:08:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,23 @@ int	get_file_data(t_exec *exec, t_token *token)
 	while (token->content)
 	{
 		if (is_exec_sep(token->type))
-		{
-			exec->pipe = _YES;
 			break ;
-		}
 		else if (is_red_sign(token->type))
 			if (add_one(exec, token) != 0)
 				return (1);
 		++token;
 	}
-	if (exec->last_in == -1)
+	if (exec->last_in == -1 && token->type != PIPE && token->content)
 		dup2(exec->stdin_fd, 0);
-	if (exec->last_out == -1)
+	if (exec->last_out == -1 && token->type != PIPE && token->content)
 		dup2(exec->stdout_fd, 1);
+	if (token->type == PIPE)
+	{
+		pipe(exec->pipe_fds);
+		dup2(exec->pipe_fds[1], 1);
+		close(exec->pipe_fds[1]);
+		exec->pipe_fds[1] = 0;
+	}
 	return (0);
 }
 

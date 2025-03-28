@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/25 15:32:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/27 21:28:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,17 @@ int	count_commands(t_token *tokens)
 		++tokens;
 	}
 	return (cmd_num);
+}
+
+int	_ft_realloc(void **content, size_t nmemb, size_t size)
+{
+	void	*re_content;
+
+	re_content = ft_calloc(nmemb, sizeof(void *));
+	if (!(re_content))
+		return (1);
+	ft_memcpy(re_content, *content, nmemb * size);
+	free(*content);
+	*content = re_content;
+	return (0);
 }

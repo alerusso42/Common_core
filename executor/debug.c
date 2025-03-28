@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/03/26 12:00:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:00:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 # include "executor.h"
 # include "debug_resources/all.h"
 
-int	testing(int test_num, int fd);
-int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec);
+int	testing(int test_num, int fd, t_debug_data *deb);
+int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec, \
+	t_debug_data *deb);
 int	read_tokens(char ***matrix, t_token *exec, int line_num);
-int	start_test_session(t_token *exec);
+int	start_test_session(t_token *exec, t_debug_data *deb);
 
 int	main(int argc, char **argv)
 {
-	int		fd;
-	char	*filename;
-	int		i;
+	int				fd;
+	char			*filename;
+	int				i;
+	t_debug_data	deb;
 
 	if (argc != 2 || argv[1][0] == '\0')
 		return (fd_printf(2, "\nInsert a file num.\n"));
@@ -38,16 +40,16 @@ int	main(int argc, char **argv)
 	i = 0;
 	while ("LOOP: while there are tests to do")
 	{
-		if (testing(i, fd) != 0)
+		deb = (t_debug_data){0};
+		deb.filename2 = filename;
+		if (testing(i++, fd, &deb) != 0)
 			break ;
 		l_printf("\n\033[1;33mStop.\033[0m\n");
-		++i;
 	}
-	del_filedata();
-	free(filename);
+	return (del_filedata(), free(filename), 0);
 }
 
-int	testing(int test_num, int fd)
+int	testing(int test_num, int fd, t_debug_data *deb)
 {
 	char	***matrix;
 	char	*test;
@@ -56,8 +58,6 @@ int	testing(int test_num, int fd)
 	t_token	*exec;
 
 	temp = ft_itoa(test_num);
-	if (!temp)
-		return (1);
 	test = ft_strjoin("[Test", temp);
 	free(temp);
 	if (!test)
@@ -67,16 +67,18 @@ int	testing(int test_num, int fd)
 	test = get_n_line(fd, num);
 	if (!test)
 		return (2);
-	if (alloc_memory_for_test(test, &matrix, &exec) != 0)
+	deb->temp = test;
+	if (alloc_memory_for_test(test, &matrix, &exec, deb) != 0)
 		return (free_three_d_matrix(matrix), free(test), free(exec), 3);
 	if (read_tokens(matrix, exec, num + 1) != 0)
 		return (free_three_d_matrix(matrix), free(test), free(exec), 4);
-	if (start_test_session(exec) != 0)
+	if (start_test_session(exec, deb) != 0)
 		return (free_three_d_matrix(matrix), free(test), free(exec), 5);
 	return (free_three_d_matrix(matrix), free(test), free(exec), 0);
 }
 
-int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec)
+int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec, \
+	t_debug_data *deb)
 {
 	int	tokens;
 
@@ -97,6 +99,9 @@ int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec)
 	*exec = (t_token *)ft_calloc(tokens + 1, sizeof(t_token));
 	if (!(*exec))
 		return (1);
+	get_filedata(&deb->fd_to_close, &deb->filename1);
+	deb->matrix = *matrix;
+	deb->tokens = *exec;
 	return (0);
 }
 
@@ -121,7 +126,7 @@ int	read_tokens(char ***matrix, t_token *exec, int line_num)
 	return (0);
 }
 
-int	start_test_session(t_token *exec)
+int	start_test_session(t_token *exec, t_debug_data *deb)
 {
 	t_token	*head;
 
@@ -145,5 +150,6 @@ int	start_test_session(t_token *exec)
 		++exec;
 	}
 	exec = head;
-	return (l_printf("\n\033[1;32mExecution:\033[0m\n"), execute(exec));
+	l_printf("\n\033[1;32mExecution:\033[0m\n");
+	return (execute(exec, (void *)deb, _YES));
 }
