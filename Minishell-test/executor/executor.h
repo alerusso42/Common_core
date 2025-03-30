@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 11:26:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/30 15:09:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 # include "../Ssj_libft/libft.h"
 # include <sys/wait.h>
 
+typedef int (*t_builtin)(char **, t_exec *);
+
 typedef struct s_token
 {
 	char			*content;
 	int				id;
 	int				prior;
 	unsigned int	type:4;
-	unsigned int	which_cmd:3;
 }t_token;
 
 typedef struct s_exec
@@ -37,6 +38,7 @@ typedef struct s_exec
 	int				last_in;
 	int				last_out;
 	int				cmd_num;
+	unsigned int	which_cmd:3;
 	int				last_cmd_done;
 	int				stdin_fd;
 	int				stdout_fd;
@@ -150,5 +152,15 @@ int		get_file_data(t_exec *exec, t_token *token);
 int		error(int error_type);
 int		bash_message(int message, char *file);
 int		_fd_printf(int fd, const char *str, ...);
+
+//SECTION - Builtin
+
+int		ft_echo(char **);
+int		ft_cd(char **, t_exec *);
+int		ft_pwd(char **, t_exec *);
+int		ft_export(char **, t_exec *);
+int		ft_unset(char **, t_exec *);
+int		ft_env(t_exec *);
+int		ft_exit(t_exec *);
 
 #endif

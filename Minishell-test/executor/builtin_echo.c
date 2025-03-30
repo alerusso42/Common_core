@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:44:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/27 19:46:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/30 14:41:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	echo(char **args);
 
+/*
 int	main()
 {
 	char	*args1[] = {"/bin/echo", "Assurdo", "Impossibile", "Tremendo", NULL};
@@ -32,6 +33,7 @@ int	main()
 	echo(args6);
 	echo(args7);
 }
+*/
 
 int	is_flag(char *s)
 {

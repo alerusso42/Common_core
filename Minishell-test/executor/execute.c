@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 17:15:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/30 15:06:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ static int	invoke_programs(t_exec *exec, int i, void *data, int debug)
 		return (E_FORK);
 	else if (pid == 0)
 	{
-		execve(exec->commands[i][0], exec->commands[i], exec->env);
+		if (exec->which_cmd != 0)
+			return ((((int (*)(char **, t_exec *))exec->builtins[exec->which_cmd] )(exec->commands[i], exec)));
+		else
+			execve(exec->commands[i][0], exec->commands[i], exec->env);
 		if (debug == _YES)
 			data = free_debug_data((t_debug_data *)data);
 		else

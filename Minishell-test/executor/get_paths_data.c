@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 11:12:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/30 15:05:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	get_paths_data(t_exec *exec, t_token *token)
 	cmd_index = 0;
 	while (exec->commands[cmd_index])
 	{
-		token->which_cmd = is_a_builtin_cmd(exec->commands[cmd_index][0]);
-		if (token->which_cmd == _NO && access(token->content, X_OK))
+		exec->which_cmd = is_a_builtin_cmd(exec->commands[cmd_index][0]);
+		if (exec->which_cmd == _NO && access(token->content, X_OK))
 		{
 			if (get_one(exec->commands[cmd_index], exec->path) == E_MALLOC)
 				return (E_MALLOC);

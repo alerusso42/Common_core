@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   get_commands_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/26 17:11:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/30 14:56:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	get_one(t_exec *exec, t_token **token, int cmd_num);
-int	count_arguments(t_token *token);
+int			get_one(t_exec *exec, t_token **token, int cmd_num);
+int			count_arguments(t_token *token);
+static void	get_builtin_functions(t_exec *exec);
 
 int	get_commands_data(t_exec *exec, t_token *token)
 {
 	int	cmd_num;
 
+	get_builtin_functions(exec);
 	cmd_num = 0;
 	while (token->content)
 	{
@@ -71,4 +73,15 @@ int	count_arguments(t_token *token)
 		++token;
 	}
 	return (counter);
+}
+
+static void	get_builtin_functions(t_exec *exec)
+{
+	exec->builtins[B_ECHO] = &ft_echo;
+	exec->builtins[B_CD] = &ft_cd;
+	exec->builtins[B_PWD] = &ft_pwd;
+	exec->builtins[B_EXPORT] = &ft_export;
+	exec->builtins[B_UNSET] = &ft_unset;
+	exec->builtins[B_ENV] = &ft_env;
+	exec->builtins[B_EXIT] = &ft_exit;
 }

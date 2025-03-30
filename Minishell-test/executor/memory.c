@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 14:22:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/30 14:38:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	alloc_memory(t_exec **exec, int cmd_num)
 	(*exec)->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!(*exec)->pid_list)
 		return (E_MALLOC);
-	(*exec)->builtins = (void **)ft_calloc(BUILTIN_NUM + 1, sizeof(void *));
+	(*exec)->builtins = (void **)ft_calloc(BUILTIN_NUM + 2, sizeof(void *));
 	if (!(*exec)->builtins)
 		return (E_MALLOC);
 	(*exec)->cmd_num = cmd_num;
