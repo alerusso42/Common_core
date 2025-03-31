@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 /*
 int	main()
@@ -39,7 +40,7 @@ int	main()
 		printf("ptr for string %s:\t%p. Address: %p\n", *ptr, *ptr, ptr);
 	}
 }*/
-
+/*
 int	main(void)
 {
 	int			i;
@@ -68,4 +69,9 @@ int	main(void)
 		printf("\t%s\n", environ[i]);
 		++i;
 	}
+}*/
+
+int	main()
+{
+	return 0;
 }

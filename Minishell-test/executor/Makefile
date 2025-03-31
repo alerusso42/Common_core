@@ -1,6 +1,8 @@
 NAME = executor
 
-SRC = 	bash_messages.c error_message.c execute.c general.c general2.c \
+SRC = 	builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c builtin_export.c \
+		builtin_pwd.c builtin_unset.c \
+		error_message.c execute.c general.c general2.c \
 		get_commands_data.c get_paths_data.c get_file_data.c memory.c \
 		printf_fd.c
 
@@ -11,7 +13,7 @@ OBJ_DIR = obj_executor
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ_DEBUG = $(addprefix $(OBJ_DIR)/, $(SRC_DEBUG:.c=.o))
 
-FLAGS = -Wall -Werror -Wextra -lreadline -lhistory -g -no-pie
+FLAGS = -Wall -Werror -Wextra -lreadline -lhistory -g
 
 LIBFT = ../Ssj_libft/libft.a
 DEBUG_LIBFT = debug_resources/libft.a

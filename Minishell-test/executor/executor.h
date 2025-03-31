@@ -6,18 +6,17 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/30 15:09:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:33:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
-# define BUILTIN_NUM 7
 # include "../Ssj_libft/libft.h"
 # include <sys/wait.h>
 
+typedef struct s_exec t_exec;
 typedef int (*t_builtin)(char **, t_exec *);
-
 typedef struct s_token
 {
 	char			*content;
@@ -25,25 +24,26 @@ typedef struct s_token
 	int				prior;
 	unsigned int	type:4;
 }t_token;
-
-typedef struct s_exec
+struct s_exec
 {
+	t_builtin		*builtins;
 	int				*pid_list;
 	char			***commands;
 	char			**env;
 	char			**path;
 	char			**files_to_trash;
-	void			**builtins;
+	char			*which_cmd;
+	void			*main_struct_pointer;
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;
 	int				cmd_num;
-	unsigned int	which_cmd:3;
 	int				last_cmd_done;
 	int				stdin_fd;
 	int				stdout_fd;
 	int				exit_status;
-}				t_exec;
+	int				debug:1;
+};
 
 typedef struct s_debug_data
 {
@@ -79,6 +79,7 @@ enum e_builtin
 	B_UNSET = 5,
 	B_ENV = 6,
 	B_EXIT = 7,
+	BUILT_N = 8,
 };
 
 enum e_permissions
@@ -155,12 +156,12 @@ int		_fd_printf(int fd, const char *str, ...);
 
 //SECTION - Builtin
 
-int		ft_echo(char **);
-int		ft_cd(char **, t_exec *);
-int		ft_pwd(char **, t_exec *);
-int		ft_export(char **, t_exec *);
-int		ft_unset(char **, t_exec *);
-int		ft_env(t_exec *);
-int		ft_exit(t_exec *);
+int		ft_echo(char **args, t_exec *exec);
+int		ft_cd(char **args, t_exec *exec);
+int		ft_pwd(char **args, t_exec *exec);
+int		ft_export(char **args, t_exec *exec);
+int		ft_unset(char **args, t_exec *exec);
+int		ft_env(char **args, t_exec *exec);
+int		ft_exit(char **args, t_exec *exec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/30 14:38:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:24:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ int	alloc_memory(t_exec **exec, int cmd_num)
 	(*exec)->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!(*exec)->pid_list)
 		return (E_MALLOC);
-	(*exec)->builtins = (void **)ft_calloc(BUILTIN_NUM + 2, sizeof(void *));
+	(*exec)->builtins = (t_builtin *)ft_calloc(BUILT_N, sizeof(t_builtin));
 	if (!(*exec)->builtins)
 		return (E_MALLOC);
+	(*exec)->which_cmd = (char *)ft_calloc(cmd_num + 1, sizeof(char));
 	(*exec)->cmd_num = cmd_num;
 	(*exec)->env = environ;
 	return (0);
@@ -88,6 +89,8 @@ void	free_memory(void)
 	exec->pid_list = NULL;
 	free(exec->builtins);
 	exec->builtins = NULL;
+	free(exec->which_cmd);
+	exec->which_cmd = NULL;
 	free_memory2(exec);
 	free(exec);
 	storage(NULL, STORE);

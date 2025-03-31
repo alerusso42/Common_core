@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/30 15:06:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:37:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static int	goto_next_command_block(t_exec *exec, t_token **tokens);
-static int	invoke_programs(t_exec *exec, int i, void *data, int debug);
+static int	invoke_programs(t_exec *exec, int i, int debug);
 static int	wait_everyone(t_exec *exec);
 
 int	execute(t_token *tokens, void *data, int debug)
@@ -24,6 +24,8 @@ int	execute(t_token *tokens, void *data, int debug)
 		error(E_ARGS);
 	if (alloc_memory(&exec, count_commands(tokens)) != 0)
 		return (error(E_MALLOC));
+	exec->main_struct_pointer = data;
+	exec->debug = debug;
 	if (get_commands_data(exec, tokens) != 0)
 		return (error(E_MALLOC));
 	if (get_paths_data(exec, tokens) != 0)
@@ -31,8 +33,8 @@ int	execute(t_token *tokens, void *data, int debug)
 	exec->cmd_num = 0;
 	while (tokens->content)
 	{
-		get_file_data(exec, tokens);
-		invoke_programs(exec, exec->cmd_num, data, debug);
+		if (get_file_data(exec, tokens) == 0)
+			invoke_programs(exec, exec->cmd_num, debug);
 		if (goto_next_command_block(exec, &tokens) != 0)
 			break ;
 		exec->cmd_num++;
@@ -67,23 +69,24 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	return (0);
 }
 
-static int	invoke_programs(t_exec *exec, int i, void *data, int debug)
+static int	invoke_programs(t_exec *exec, int i, int debug)
 {
 	pid_t	pid;
 
+	if (exec->which_cmd[i] != 0)
+		return ((exec->builtins[(int)exec->which_cmd[i]])\
+		(exec->commands[i], exec));
 	pid = fork();
 	if (pid < 0)
 		return (E_FORK);
 	else if (pid == 0)
 	{
-		if (exec->which_cmd != 0)
-			return ((((int (*)(char **, t_exec *))exec->builtins[exec->which_cmd] )(exec->commands[i], exec)));
-		else
-			execve(exec->commands[i][0], exec->commands[i], exec->env);
+		execve(exec->commands[i][0], exec->commands[i], exec->env);
 		if (debug == _YES)
-			data = free_debug_data((t_debug_data *)data);
+			exec->main_struct_pointer = \
+			free_debug_data((t_debug_data *)exec->main_struct_pointer);
 		else
-			(void)data;//	Qui france mettiamo la tua funzione che freea tutto
+			(void)pid;//	Qui france mettiamo la tua funzione che freea tutto
 		return (storage(exec, STORE), free_memory(), exit(1), 1);
 	}
 	else

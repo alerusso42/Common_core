@@ -1,26 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 18:46:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 16:22:10 by alerusso         ###   ########.fr       */
+/*   Created: 2025/03/31 16:18:32 by alerusso          #+#    #+#             */
+/*   Updated: 2025/03/31 16:18:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-
-int	ft_env(char **args, t_exec *exec)
-{
-	int	i;
-
-	(void)args;
-	i = 0;
-	if (!exec->env)
-		return (0);
-	while (exec->env[i])
-		_fd_printf(1, "%s\n", exec->env[i++]);
-	return (0);
-}

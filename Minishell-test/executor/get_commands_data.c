@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/30 14:56:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:21:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	get_commands_data(t_exec *exec, t_token *token)
 		{
 			if (get_one(exec, &token, cmd_num) != 0)
 				return (E_MALLOC);
+			exec->which_cmd[cmd_num] = \
+			is_a_builtin_cmd(exec->commands[cmd_num][0]);
 			++cmd_num;
 		}
 		else
@@ -77,11 +79,12 @@ int	count_arguments(t_token *token)
 
 static void	get_builtin_functions(t_exec *exec)
 {
-	exec->builtins[B_ECHO] = &ft_echo;
-	exec->builtins[B_CD] = &ft_cd;
-	exec->builtins[B_PWD] = &ft_pwd;
-	exec->builtins[B_EXPORT] = &ft_export;
-	exec->builtins[B_UNSET] = &ft_unset;
-	exec->builtins[B_ENV] = &ft_env;
-	exec->builtins[B_EXIT] = &ft_exit;
+	(void)exec;
+	exec->builtins[B_ECHO] = ft_echo;
+	exec->builtins[B_CD] = ft_cd;
+	exec->builtins[B_PWD] = ft_pwd;
+	exec->builtins[B_EXPORT] = ft_export;
+	exec->builtins[B_UNSET] = ft_unset;
+	exec->builtins[B_ENV] = ft_env;
+	exec->builtins[B_EXIT] = ft_exit;
 }

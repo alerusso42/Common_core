@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/26 18:55:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:19:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_pwd(char **args, t_exec *exec)
 {
-	(void)argc, (void)argv, (void)env;
+	printf("OK!");
+	(void)args, (void)exec;
+	return (0);
 }

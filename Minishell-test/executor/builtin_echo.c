@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:44:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/30 14:41:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:36:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-void	echo(char **args);
+int	ft_echo(char **args, t_exec *exec);
 
 /*
 int	main()
@@ -47,12 +47,13 @@ int	is_flag(char *s)
 	return (response);
 }
 
-void	echo(char **args)
+int	ft_echo(char **args, t_exec *exec)
 {
 	int	i;
 	int	j;
 	int	stop;
 
+	(void)exec;
 	i = 1;
 	stop = 1;
 	while (args[i])
@@ -71,4 +72,5 @@ void	echo(char **args)
 		}
 		++i;
 	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:10:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/26 19:08:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:43:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,22 @@ int	is_exec_sep(int sign)
 
 int	is_a_builtin_cmd(char *cmd)
 {
-	if (!ft_strncmp(cmd, "echo", 4))
+	int	len;
+
+	len = ft_strlen(cmd);
+	if (!ft_strncmp(cmd, "echo", 4) && !ft_strncmp(cmd, "echo", len))
 		return (B_ECHO);
-	else if (!ft_strncmp(cmd, "cd", 2))
+	else if (!ft_strncmp(cmd, "cd", 2) && !ft_strncmp(cmd, "cd", len))
 		return (B_CD);
-	else if (!ft_strncmp(cmd, "pwd", 3))
+	else if (!ft_strncmp(cmd, "pwd", 3) && !ft_strncmp(cmd, "pwd", len))
 		return (B_PWD);
-	else if (!ft_strncmp(cmd, "export", 6))
+	else if (!ft_strncmp(cmd, "export", 6) && !ft_strncmp(cmd, "export", len))
 		return (B_EXPORT);
-	else if (!ft_strncmp(cmd, "unset", 5))
+	else if (!ft_strncmp(cmd, "unset", 5) && !ft_strncmp(cmd, "unset", len))
 		return (B_UNSET);
-	else if (!ft_strncmp(cmd, "env", 3))
+	else if (!ft_strncmp(cmd, "env", 3) && !ft_strncmp(cmd, "env", len))
 		return (B_ENV);
-	else if (!ft_strncmp(cmd, "exit", 4))
+	else if (!ft_strncmp(cmd, "exit", 4) && !ft_strncmp(cmd, "exit", len))
 		return (B_EXIT);
 	return (_NO);
 }

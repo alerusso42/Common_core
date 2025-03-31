@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/28 15:30:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:45:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	get_file_data(t_exec *exec, t_token *token)
 				return (1);
 		++token;
 	}
-	if (exec->last_in == -1 && token->type != PIPE && token->content)
+	if (exec->last_in == -1 && token->type != PIPE)
 		dup2(exec->stdin_fd, 0);
-	if (exec->last_out == -1 && token->type != PIPE && token->content)
+	if (exec->last_out == -1 && token->type != PIPE)
 		dup2(exec->stdout_fd, 1);
 	if (exec->last_out == -1 && token->type == PIPE)
 	{
@@ -83,8 +83,7 @@ static int	add_one(t_exec *exec, t_token *token)
 	}
 	else if (token->type == HERE_DOC)
 		unlink("here_doc");
-	close(fd);
-	return (0);
+	return (close(fd), 0);
 }
 
 static int	get_here_doc_file(int fd, char *limiter)

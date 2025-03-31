@@ -20,20 +20,12 @@ case: make frm
 	Token = frm, 1, 0,
 	[END]
 
-case: touch file1.txt file2.txt | cat file1.txt file2.txt > output.txt && echo "Done!" >> output.txt
-[Test1, 12 token]
-Token = touch, 0, 0,
-Token = file1.txt, 1, 0,
-Token = file2.txt, 1, 0,
-Token = |, 7, 0,
-Token = cat, 0, 0,
-Token = file1.txt, 1, 0,
-Token = file2.txt, 1, 0,
-Token = output.txt, 3, 0,
-Token = &&, 8, 0,
-Token = /bin/echo, 0, 0,
-Token = "Done!", 1, 0,
-Token = output.txt, 5, 0,
+case: touch file.txt | echo "test" > file.txt
+[Test1, 7 token]
+Token = env, 0, 0,
+Token = "test", 1, 0,
+Token = file.txt, 3, 0,
 [END]
+
 
 

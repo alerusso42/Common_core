@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/25 13:46:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:37:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,18 @@ int	error(int err)
 	else if (err == E_MALLOC)
 		return (ft_putstr_fd("Malloc error\n", 2), err);
 	return (ft_putstr_fd("UNKNOWN error\n", 2), err);
+}
+
+int	bash_message(int message, char *file)
+{
+	if (message == E_OPEN)
+	{
+		_fd_printf(2, "bash: %s: No such file or directory\n", file);
+		return (1);
+	}
+	if (message == E_MALLOC)
+	{
+		_fd_printf(2, "bash: fork: Cannot allocate memory\n");
+	}
+	return (0);
 }
