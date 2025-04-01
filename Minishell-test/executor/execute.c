@@ -6,12 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 16:37:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:39:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
+static int	execute_loop(t_token *token, t_exec *exec);
 static int	goto_next_command_block(t_exec *exec, t_token **tokens);
 static int	invoke_programs(t_exec *exec, int i, int debug);
 static int	wait_everyone(t_exec *exec);
@@ -22,25 +23,33 @@ int	execute(t_token *tokens, void *data, int debug)
 
 	if (!tokens)
 		error(E_ARGS);
+	
 	if (alloc_memory(&exec, count_commands(tokens)) != 0)
 		return (error(E_MALLOC));
+	get_main_struct_data(exec, data, debug);
 	exec->main_struct_pointer = data;
 	exec->debug = debug;
 	if (get_commands_data(exec, tokens) != 0)
 		return (error(E_MALLOC));
 	if (get_paths_data(exec, tokens) != 0)
 		return (E_MALLOC);
+	execute_loop(tokens, exec);
+	free_memory();
+	return (0);
+}
+
+static int	execute_loop(t_token *token, t_exec *exec)
+{
 	exec->cmd_num = 0;
-	while (tokens->content)
+	while (token->content)
 	{
-		if (get_file_data(exec, tokens) == 0)
-			invoke_programs(exec, exec->cmd_num, debug);
-		if (goto_next_command_block(exec, &tokens) != 0)
+		if (get_file_data(exec, token) == 0)
+			invoke_programs(exec, exec->cmd_num, exec->debug);
+		if (goto_next_command_block(exec, &token) != 0)
 			break ;
 		exec->cmd_num++;
 	}
 	wait_everyone(exec);
-	free_memory();
 	return (0);
 }
 
@@ -81,7 +90,7 @@ static int	invoke_programs(t_exec *exec, int i, int debug)
 		return (E_FORK);
 	else if (pid == 0)
 	{
-		execve(exec->commands[i][0], exec->commands[i], exec->env);
+		execve(exec->commands[i][0], exec->commands[i], *exec->env);
 		if (debug == _YES)
 			exec->main_struct_pointer = \
 			free_debug_data((t_debug_data *)exec->main_struct_pointer);

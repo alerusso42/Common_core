@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 16:33:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:35:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ struct s_exec
 	t_builtin		*builtins;
 	int				*pid_list;
 	char			***commands;
-	char			**env;
+	char			***env;
+	int				*env_size;
+	int				*last_env;
 	char			**path;
 	char			**files_to_trash;
 	char			*which_cmd;
@@ -51,7 +53,10 @@ typedef struct s_debug_data
 	char	*temp;
 	char	*filename1;
 	char	*filename2;
+	char	**env;
 	t_token	*tokens;
+	int		last_env;
+	int		env_size;
 	int		fd_to_close;
 }t_debug_data;
 
@@ -104,6 +109,7 @@ enum e_exec_errors
 	E_MALLOC,
 	E_OPEN,
 	E_FORK,
+	E_NOENV,
 };
 
 enum e_sub_strlen
@@ -128,6 +134,7 @@ t_exec	*storage(t_exec *update, int mode);
 int		alloc_memory(t_exec **exec, int cmd_num);
 void	free_memory(void);
 void	*free_debug_data(t_debug_data *data);
+void	get_main_struct_data(t_exec *exec, void *data, int debug);
 
 //SECTION - General
 
@@ -141,6 +148,13 @@ int		is_exec_sep(int sign);
 int		is_red_input_sign(int sign);
 int		is_red_output_sign(int sign);
 int		is_a_builtin_cmd(char *cmd);
+
+//SECTION - Environment management
+
+int		copy_env\
+(char **stack_env, char ***heap_env, int *env_size, int *last_env);
+char	*ft_getenv(char **env, char *search);
+
 
 //SECTION Preparing data: env path, files, commands' path
 

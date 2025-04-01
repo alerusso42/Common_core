@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   memory2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/01 14:07:18 by alerusso         ###   ########.fr       */
+/*   Created: 2025/04/01 15:17:40 by alerusso          #+#    #+#             */
+/*   Updated: 2025/04/01 15:37:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	ft_exit(char **args, t_exec *exec)
+void	get_main_struct_data(t_exec *exec, void *data, int debug)
 {
-	(void)args;
-	if (exec->debug)
-		free_debug_data((t_debug_data *)exec->main_struct_pointer);
-	//Qui si libera memoria di france
-	exec->main_struct_pointer = NULL;
-	free_memory();
-	return (exit(0), 0);
+	t_debug_data	*debug_data;
+	t_debug_data	*dati_da_france;
+
+	if (debug)
+	{
+		debug_data = (t_debug_data *)data;
+		exec->env = &debug_data->env;
+		exec->env_size = &debug_data->env_size;
+		exec->last_env = &debug_data->last_env;
+	}
+	(void)dati_da_france;
 }

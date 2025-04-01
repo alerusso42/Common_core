@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/03/28 15:19:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:37:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,29 @@ int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec, \
 int	read_tokens(char ***matrix, t_token *exec, int line_num);
 int	start_test_session(t_token *exec, t_debug_data *deb);
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
-	int				fd;
-	char			*filename;
-	int				i;
-	t_debug_data	deb;
+	int					fd;
+	static char			*filename;
+	static int			i = 0;
+	static t_debug_data	deb;
 
 	if (argc != 2 || argv[1][0] == '\0')
 		return (fd_printf(2, "\nInsert a file num.\n"));
 	filename = ft_strjoin("debug_resources/input_samples/", argv[1]);
-	if (!filename)
-		return (fd_printf(2, "\nMalloc failed\n"));
 	fd = open(filename, O_RDWR, 0666);
-	if (fd == -1)
-		return (fd_printf(2, "Failed to open file |%s|", filename),\
-		 free(filename), 1);
+	if (fd == -1 || !filename)
+		return (l_printf("Err: |%s|", filename), free(filename), close(fd), 1);
+	copy_env(env, &deb.env, &deb.env_size, &deb.last_env);
 	give_filedata(fd, filename);
-	i = 0;
 	while ("LOOP: while there are tests to do")
 	{
-		deb = (t_debug_data){0};
 		deb.filename2 = filename;
 		if (testing(i++, fd, &deb) != 0)
 			break ;
 		l_printf("\n\033[1;33mStop.\033[0m\n");
 	}
-	return (del_filedata(), free(filename), 0);
+	return (del_filedata(), free(filename), free_matrix(deb.env), 0);
 }
 
 int	testing(int test_num, int fd, t_debug_data *deb)
@@ -99,10 +95,9 @@ int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec, \
 	*exec = (t_token *)ft_calloc(tokens + 1, sizeof(t_token));
 	if (!(*exec))
 		return (1);
-	get_filedata(&deb->fd_to_close, &deb->filename1);
 	deb->matrix = *matrix;
 	deb->tokens = *exec;
-	return (0);
+	return (get_filedata(&deb->fd_to_close, &deb->filename1), 0);
 }
 
 int	read_tokens(char ***matrix, t_token *exec, int line_num)

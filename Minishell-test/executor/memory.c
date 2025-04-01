@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 11:24:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:20:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	*free_debug_data(t_debug_data *data)
 	data->filename1 = NULL;
 	data->filename2 = NULL;
 	close(data->fd_to_close);
+	data->fd_to_close = 0;
 	free(data->tokens);
 	data->tokens = NULL;
 	return (NULL);
@@ -46,8 +47,6 @@ void	*free_debug_data(t_debug_data *data)
 //REVIEW - Alloc for t_exec
 int	alloc_memory(t_exec **exec, int cmd_num)
 {
-	extern char	**environ;
-
 	if (!exec)
 		return (2);
 	*exec = (t_exec *)ft_calloc(1, sizeof(t_exec));
@@ -67,7 +66,6 @@ int	alloc_memory(t_exec **exec, int cmd_num)
 		return (E_MALLOC);
 	(*exec)->which_cmd = (char *)ft_calloc(cmd_num + 1, sizeof(char));
 	(*exec)->cmd_num = cmd_num;
-	(*exec)->env = environ;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 11:28:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:38:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_paths_data(t_exec *exec, t_token *token)
 	char	*path;
 	int		cmd_index;
 
-	path = getenv("PATH");
+	path = ft_getenv(*exec->env, "PATH");
 	if (!path)
 		return (0);
 	exec->path = ft_split(path, ':');
@@ -36,7 +36,6 @@ int	get_paths_data(t_exec *exec, t_token *token)
 		}
 		++cmd_index;
 	}
-	
 	return (0);
 }
 
