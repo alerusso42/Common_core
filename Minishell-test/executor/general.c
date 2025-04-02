@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 12:19:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:58:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,37 +62,6 @@ void	*_free_three_d_matrix(char ***matrix)
 	return (NULL);
 }
 
-/*
-	Count until the char is in the charset.
-	TWO MODES:
-
-	INCL: Count until the char is INCLUDED in the charset.
-	EXCL: Count until the char is NOT INCLUDED in the charset.
-*/
-int	_sub_strlen(char *s, char *charset, int mode)
-{
-	int	i;
-
-	i = 0;
-	if (mode == INCL)
-	{
-		while (((s[i] != '\0')) && \
-		(ft_strchr(charset, s[i])))
-		{
-			++i;
-		}
-	}
-	else if (mode == EXCL)
-	{
-		while (((s[i] != '\0')) && \
-		!(ft_strchr(charset, s[i])))
-		{
-			++i;
-		}
-	}
-	return (i);
-}
-
 int	count_commands(t_token *tokens)
 {
 	int	cmd_num;
@@ -106,15 +75,50 @@ int	count_commands(t_token *tokens)
 	return (cmd_num);
 }
 
-int	_ft_realloc(void **content, size_t nmemb, size_t size)
+int	_ft_realloc(void **content, int nmemb, int old_nmemb, size_t sizeof_)
 {
 	void	*re_content;
+	size_t	copy_len;
+	int		old_size;
+	int		new_size;
 
-	re_content = ft_calloc(nmemb, sizeof(void *));
+	re_content = ft_calloc(nmemb, sizeof_);
 	if (!(re_content))
 		return (1);
-	ft_memcpy(re_content, *content, nmemb * size);
+	old_size = old_nmemb * sizeof_;
+	new_size = nmemb * sizeof_;
+	copy_len = (size_t)(old_size * old_size < new_size);
+	copy_len += (size_t)(new_size * old_size > new_size);
+	ft_memcpy(re_content, *content, copy_len);
 	free(*content);
 	*content = re_content;
 	return (0);
+}
+
+char	*_ft_strjoin_free(char *s1, char *s2)
+{
+	char	*new_str;
+	int		index;
+	int		size;
+
+	if ((!s1) || (!s2))
+		return (free(s1), free(s2), NULL);
+	index = 0;
+	while (s1[index])
+		++index;
+	size = index;
+	index = 0;
+	while (s2[index])
+		++index;
+	size += index;
+	new_str = (char *)ft_calloc(size + 2, sizeof(char));
+	if (!new_str)
+		return (free(s1), free(s2), NULL);
+	index = -1;
+	while (s1[++index])
+		new_str[index] = s1[index];
+	size = -1;
+	while (s2[++size])
+		new_str[index++] = s2[size];
+	return (free(s1), free(s2), new_str);
 }

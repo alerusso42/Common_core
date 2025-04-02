@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/01 16:16:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:00:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 int	ft_env(char **args, t_exec *exec)
 {
-	int		i;
-	char	**env;
-
 	(void)args;
-	i = 0;
-	env = *exec->env;
-	if (!env)
-		return (0);
-	while (env[i])
-		_fd_printf(1, "%s\n", env[i++]);
+	print_env(*exec->env, _NO);
 	return (0);
 }

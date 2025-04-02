@@ -20,12 +20,24 @@ case: make frm
 	Token = frm, 1, 0,
 	[END]
 
-case: touch file.txt | echo "test" > file.txt
-[Test1, 7 token]
-Token = env, 0, 0,
-Token = "test", 1, 0,
-Token = file.txt, 3, 0,
+case: unset USER
+[Test1, 2 token]
+Token = unset, 0, 0,
+Token = USER, 1, 0,
 [END]
 
+case: export USER USER=ale USER+=russo USER+=42 I_AM_SHYY
+[Test2, 6 token]
+Token = export,			0, 0,
+Token = USER, 			1, 0,
+Token = USER=ale,		1, 0,
+Token = USER+=russo,	1, 0,
+Token = USER+=42,		1, 0,
+Token = I_AM_SHYY,		1, 0,
+[END]
 
-
+case: env
+[Test3, 2 Token]
+T = env, 0, 0,
+T = file.txt, 3, 0,
+[END]

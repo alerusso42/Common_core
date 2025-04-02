@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/01 15:35:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:57:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,21 @@ enum e_exec_errors
 	E_OPEN,
 	E_FORK,
 	E_NOENV,
+	E_ENV_PARSING,
 };
 
 enum e_sub_strlen
 {
 	INCL,
 	EXCL,
+};
+
+enum e_environment
+{
+	ENV_NO_EQ_PLUS = 0,
+	ENV_NAME_SIZE = 1,
+	ENV_CONT_SIZE = 2,
+	ENV_WHICH_VAL = 3,
 };
 
 enum e_bools
@@ -140,21 +149,25 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug);
 
 void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
-int		_sub_strlen(char *s, char *charset, int mode);
+char	*_ft_strjoin_free(char *s1, char *s2);
 int		count_commands(t_token *tokens);
-int		_ft_realloc(void **content, size_t nmemb, size_t size);
+int		_ft_realloc(void **content, int nmemb, int old_nmemb, size_t sizeof_);
 int		is_red_sign(int sign);
 int		is_exec_sep(int sign);
 int		is_red_input_sign(int sign);
 int		is_red_output_sign(int sign);
 int		is_a_builtin_cmd(char *cmd);
+int		_sub_strlen(char *s, char *charset, int mode);
+int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
 
 //SECTION - Environment management
 
 int		copy_env\
 (char **stack_env, char ***heap_env, int *env_size, int *last_env);
-char	*ft_getenv(char **env, char *search);
-
+int		expand_env(char ***env, int *env_size);
+char	*ft_getenv(char **env, char *search, int *where);
+int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
+void	print_env(char **env, int print_init);
 
 //SECTION Preparing data: env path, files, commands' path
 

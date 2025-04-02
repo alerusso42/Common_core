@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/01 16:21:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:02:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 int	error(int err)
 {
-	free_memory();
+	t_exec	*exec;
+
+	exec = storage(NULL, RECEIVE);
 	if (err == NONE)
+	{
 		return (ft_putstr_fd("Please insert an error.\n", 2), err);
+	}
 	else if (err == E_ARGS)
-		return (ft_putstr_fd("France non mi hai passato nulla lol\n", err), 1);
+	{
+		return (ft_putstr_fd("France non mi hai passato nulla lol\n", 2), err);
+	}
 	else if (err == E_MALLOC)
-		return (ft_putstr_fd("Malloc error\n", 2), err);
-	return (ft_putstr_fd("UNKNOWN error\n", 2), err);
+	{
+		return (ft_putstr_fd("bash: fork: Cannot allocate memory\n", 2), err);
+	}
+	return (ft_putstr_fd("UNKNOWN error\n", 2),  ft_exit(NULL, exec));
 }
 
 int	bash_message(int message, char *file)
@@ -31,9 +39,13 @@ int	bash_message(int message, char *file)
 		_fd_printf(2, "bash: %s: No such file or directory\n", file);
 		return (1);
 	}
-	if (message == E_MALLOC)
+	else if (message == E_MALLOC)
 	{
 		_fd_printf(2, "bash: fork: Cannot allocate memory\n");
 	}
-	return (0);
+	else if (message == E_ENV_PARSING)
+	{
+		_fd_printf(2, "bash: export: `%s': not a valid identifier", file);
+	}
+	return (_fd_printf(2, "UNKNOWN message\n"));
 }
