@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:17:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/01 15:37:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:47:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 	t_debug_data	*debug_data;
 	t_debug_data	*dati_da_france;
 
+	exec->main_struct_pointer = data;
+	exec->debug = debug;
 	if (debug)
 	{
 		debug_data = (t_debug_data *)data;
@@ -25,4 +27,11 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 		exec->last_env = &debug_data->last_env;
 	}
 	(void)dati_da_france;
+}
+
+void	close_and_reset(int *fd)
+{
+	if (*fd >= 3)
+		close(*fd);
+	*fd = 0;
 }

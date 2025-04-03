@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commands_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 15:21:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:27:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_commands_data(t_exec *exec, t_token *token)
 		if (token->type == COMMAND)
 		{
 			if (get_one(exec, &token, cmd_num) != 0)
-				return (E_MALLOC);
+				error(E_MALLOC);
 			exec->which_cmd[cmd_num] = \
 			is_a_builtin_cmd(exec->commands[cmd_num][0]);
 			++cmd_num;
@@ -46,13 +46,13 @@ int	get_one(t_exec *exec, t_token **token, int cmd_num)
 	command_argc = count_arguments(*token);
 	exec->commands[cmd_num] = (char **)ft_calloc(command_argc + 1, sizeof(char *));
 	if (!exec->commands[cmd_num])
-		return (E_MALLOC);
+		error(E_MALLOC);
 	i = 0;
 	while (i != command_argc)
 	{
 		exec->commands[cmd_num][i] = ft_strdup((*token)->content);
 		if (!exec->commands[cmd_num][i])
-			return (E_MALLOC);
+			error(E_MALLOC);
 		++i;
 		++(*token);
 	}
@@ -79,7 +79,6 @@ int	count_arguments(t_token *token)
 
 static void	get_builtin_functions(t_exec *exec)
 {
-	(void)exec;
 	exec->builtins[B_ECHO] = ft_echo;
 	exec->builtins[B_CD] = ft_cd;
 	exec->builtins[B_PWD] = ft_pwd;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:39:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 12:42:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:26:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,13 @@ int	_sub_strcpy(char *dest, char *src, char *charset, int mode)
 	}
 	dest[i] = 0;
 	return (i);
+}
+
+int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
+{
+	if (ft_strncmp(s1, s2, ft_strlen(s2) - ignore_n_char))
+		return (1);
+	if (ft_strncmp(s1, s2, s1_len))
+		return (1);
+	return (0);
 }

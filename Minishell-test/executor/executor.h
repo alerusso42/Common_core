@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 18:57:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:00:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ struct s_exec
 	int				*env_size;
 	int				*last_env;
 	char			**path;
-	char			**files_to_trash;
 	char			*which_cmd;
 	void			*main_struct_pointer;
+	int				*here_doc_fds;
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;
@@ -90,7 +90,7 @@ enum e_builtin
 enum e_permissions
 {
 	INFILE = O_RDONLY,
-	INFILE_DOC = O_RDWR | O_CREAT | O_TRUNC,
+	INFILE_DOC = O_RDWR | O_CREAT,
 	OUTFILE_TRUNC = O_RDWR | O_CREAT | O_TRUNC,
 	OUTFILE_APPEND = O_RDWR | O_CREAT | O_APPEND,
 };
@@ -140,10 +140,11 @@ int	execute(t_token *tokens, void *data, int debug);
 //SECTION Memory management
 
 t_exec	*storage(t_exec *update, int mode);
-int		alloc_memory(t_exec **exec, int cmd_num);
+int		alloc_memory(t_exec *exec, int cmd_num);
 void	free_memory(void);
 void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
+void	close_and_reset(int *fd);
 
 //SECTION - General
 
@@ -159,11 +160,11 @@ int		is_red_output_sign(int sign);
 int		is_a_builtin_cmd(char *cmd);
 int		_sub_strlen(char *s, char *charset, int mode);
 int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
+int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
 
 //SECTION - Environment management
 
-int		copy_env\
-(char **stack_env, char ***heap_env, int *env_size, int *last_env);
+int		cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env);
 int		expand_env(char ***env, int *env_size);
 char	*ft_getenv(char **env, char *search, int *where);
 int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
@@ -171,11 +172,12 @@ void	print_env(char **env, int print_init);
 
 //SECTION Preparing data: env path, files, commands' path
 
+void	prepare_here_docs(t_exec *exec, t_token *token);
 int		get_commands_data(t_exec *exec, t_token *token);
 int		get_paths_data(t_exec *exec, t_token *token);
 int		get_file_data(t_exec *exec, t_token *token);
 
-//SECTION Error prints
+//SECTION Error and prints
 
 int		error(int error_type);
 int		bash_message(int message, char *file);

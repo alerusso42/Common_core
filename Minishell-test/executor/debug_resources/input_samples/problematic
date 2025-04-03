@@ -14,3 +14,32 @@ Token = /bin/echo, 0, 0,
 Token = "Done!", 1, 0,
 Token = output.txt, 5, 0,
 [END]
+
+#!FIXME - sort fa andare in freeze l'esecuzione. bash non freeza.
+case: cat << START | grep "error" << MID <<END | tee log.txt >> final_log.txt | sort | uniq > result.txt && echo "Processing complete" >> result.txt || echo "An error occurred" > error.log
+[Test1, 25 token]
+Token = cat, 0, 0,
+Token = START, 6, 0,
+Token = |, 7, 0,
+Token = grep, 0, 0,
+Token = "error", 1, 0,
+Token = MID, 6, 0,
+Token = END, 6, 0,
+Token = |, 7, 0,
+Token = tee, 0, 0,
+Token = log.txt, 1, 0,
+Token = final_log.txt, 5, 0,
+Token = |, 7, 0,
+Token = sort, 0, 0,
+Token = |, 7, 0,
+Token = uniq, 0, 0,
+Token = result.txt, 3, 0,
+Token = &&, 8, 0,
+Token = echo, 0, 0,
+Token = "Processing complete", 1, 0,
+Token = result.txt, 5, 0,
+Token = ||, 9, 0,
+Token = echo, 0, 0,
+Token = "An error occurred", 1, 0,
+Token = error.log, 3, 0,
+[END]

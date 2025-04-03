@@ -41,11 +41,18 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME).a
+	rm -f debug_resources/libft.a
 
 re: fclean all
 
 #frm = file remove
 frm: 
 	rm -f *.txt
+	rm -f debug_resources/bash_tests/*.txt
+
+debug_libft: 
+	$(MAKE) all -C ../../Libft/
+	cp ../../Libft/libft.a debug_resources/
+	$(MAKE) fclean -C ../../Libft/
 
 .PHONY: fclean re clean deb all

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/wait.h>
 
 /*
 int	main()
@@ -73,5 +75,15 @@ int	main(void)
 
 int	main()
 {
-	return 0;
+	char	line[12];
+
+	int	fd = open("a.txt", O_RDWR | O_CREAT | O_TRUNC, 0666);
+	write(fd, "Broly\n", 6);
+	close(fd);
+	fd = open("a.txt", O_RDWR | O_CREAT, 0666);
+	read(fd, line, 1);
+	unlink("a.txt");
+	read(fd, line + 1, 4);
+	line[5] = 0;
+	write(1, line, 5);
 }

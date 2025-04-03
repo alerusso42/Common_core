@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 12:32:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:58:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 static int	execute_loop(t_token *token, t_exec *exec);
 static int	goto_next_command_block(t_exec *exec, t_token **tokens);
-static int	invoke_programs(t_exec *exec, int i, int debug);
+static int	invoke_programs(t_exec *exec, int i);
 static int	wait_everyone(t_exec *exec);
 
 int	execute(t_token *tokens, void *data, int debug)
 {
-	t_exec		*exec;
+	t_exec	exec;
 
+	exec = (t_exec){0};
+	get_main_struct_data(&exec, data, debug);
 	if (!tokens)
 		error(E_ARGS);
-	
-	if (alloc_memory(&exec, count_commands(tokens)) != 0)
-		return (error(E_MALLOC));
-	get_main_struct_data(exec, data, debug);
-	exec->main_struct_pointer = data;
-	exec->debug = debug;
-	if (get_commands_data(exec, tokens) != 0)
-		return (error(E_MALLOC));
-	if (get_paths_data(exec, tokens) != 0)
-		return (E_MALLOC);
-	execute_loop(tokens, exec);
+	alloc_memory(&exec, count_commands(tokens));
+	prepare_here_docs(&exec, tokens);
+	get_commands_data(&exec, tokens);
+	get_paths_data(&exec, tokens);
+	execute_loop(tokens, &exec);
 	free_memory();
 	return (0);
 }
@@ -43,8 +39,10 @@ static int	execute_loop(t_token *token, t_exec *exec)
 	exec->cmd_num = 0;
 	while (token->content)
 	{
+		exec->exit_status = 0;
 		if (get_file_data(exec, token) == 0)
-			invoke_programs(exec, exec->cmd_num, exec->debug);
+			invoke_programs(exec, exec->cmd_num);
+		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
 		if (goto_next_command_block(exec, &token) != 0)
 			break ;
 		exec->cmd_num++;
@@ -78,7 +76,7 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	return (0);
 }
 
-static int	invoke_programs(t_exec *exec, int i, int debug)
+static int	invoke_programs(t_exec *exec, int i)
 {
 	pid_t	pid;
 
@@ -87,16 +85,11 @@ static int	invoke_programs(t_exec *exec, int i, int debug)
 		(exec->commands[i], exec));
 	pid = fork();
 	if (pid < 0)
-		return (E_FORK);
+		error(E_FORK);
 	else if (pid == 0)
 	{
 		execve(exec->commands[i][0], exec->commands[i], *exec->env);
-		if (debug == _YES)
-			exec->main_struct_pointer = \
-			free_debug_data((t_debug_data *)exec->main_struct_pointer);
-		else
-			(void)pid;//	Qui france mettiamo la tua funzione che freea tutto
-		return (storage(exec, STORE), free_memory(), exit(1), 1);
+		return (ft_exit(NULL, exec), 1);
 	}
 	else
 	{

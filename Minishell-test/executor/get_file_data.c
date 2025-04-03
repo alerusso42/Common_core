@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 13:45:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 19:00:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void	find_last_file(t_exec *exec, t_token *token);
 static int	add_one(t_exec *exec, t_token *token);
-static int	get_here_doc_file(int fd, char *limiter);
-static int	compare_input(char *line, char *limiter, int limiter_len);
+static int	get_here_doc_file(char *limiter);
 
 int	get_file_data(t_exec *exec, t_token *token)
 {
@@ -29,8 +28,6 @@ int	get_file_data(t_exec *exec, t_token *token)
 				return (1);
 		++token;
 	}
-	if (exec->last_in == -1 && token->type != PIPE)
-		dup2(exec->stdin_fd, 0);
 	if (exec->last_out == -1 && token->type != PIPE)
 		dup2(exec->stdout_fd, 1);
 	if (exec->last_out == -1 && token->type == PIPE)
@@ -66,55 +63,69 @@ static int	add_one(t_exec *exec, t_token *token)
 	if (token->type == RED_IN)
 		fd = open(token->content, INFILE);
 	else if (token->type == HERE_DOC)
-		fd = open("here_doc", INFILE_DOC);
+		fd = exec->here_doc_fds[exec->cmd_num];
 	else if (token->type == RED_OUT)
 		fd = open(token->content, OUTFILE_TRUNC, 0666);
 	else
 		fd = open(token->content, OUTFILE_APPEND, 0666);
 	if (fd == -1)
 		return (bash_message(E_OPEN, token->content));
-	if (token->type == HERE_DOC)
-		if (get_here_doc_file(fd, token->content) != 0)
-			return (E_MALLOC);
 	if ((token->id == exec->last_in && is_red_input_sign(token->type)) || \
 		(token->id == exec->last_out && is_red_output_sign(token->type)))
 	{
 		dup2(fd, is_red_output_sign(token->type));
 	}
-	else if (token->type == HERE_DOC)
-		unlink("here_doc");
+	if (token->type == HERE_DOC)
+		return (0);
 	return (close(fd), 0);
 }
 
-static int	get_here_doc_file(int fd, char *limiter)
+static int	get_here_doc_file(char *limiter)
 {
+	int		fd;
 	char	*line;
 	int		limiter_len;
 
+	fd = open("here_doc", INFILE_DOC, 0666);
+	if (fd < 0)
+		error(E_OPEN);
 	ft_putstr_fd("> ", 2);
 	line = get_next_line_bonus(0);
 	limiter_len = ft_strlen(limiter);
-	while ((line) && (compare_input(line, limiter, limiter_len)) != 2)
+	while ((line) && (double_cmp(limiter, line, limiter_len, 1)) != 0)
 	{
 		ft_putstr_fd("> ", 2);
 		ft_putstr_fd(line, fd);
 		free(line);
 		line = get_next_line_bonus(0);
 	}
+	close(fd);
+	open("here_doc", INFILE_DOC, 0666);
+	if (fd < 0)
+		return (free(line), unlink("here_doc"), error(E_OPEN));
 	if (!line)
-		return (close(fd), E_MALLOC);
-	free(line);
-	return (0);
+		return (close(fd), unlink("here_doc"), error(E_MALLOC));
+	return (free(line), unlink("here_doc"), fd);
 }
 
-static int	compare_input(char *line, char *limiter, int limiter_len)
+void	prepare_here_docs(t_exec *exec, t_token *token)
 {
-	int			double_equality;
+	int	i;
 
-	double_equality = 0;
-	if (ft_strncmp(line, limiter, ft_strlen(line) - 1) == 0)
-		double_equality += 1;
-	if (ft_strncmp(line, limiter, limiter_len) == 0)
-		double_equality += 1;
-	return (double_equality);
+	i = 0;
+	while (token->content)
+	{
+		find_last_file(exec, token);
+		while (token->content && !is_exec_sep(token->type))
+		{
+			if (token->type == HERE_DOC)
+				exec->here_doc_fds[i] = get_here_doc_file(token->content);
+			if (token->id != exec->last_in && exec->here_doc_fds[i])
+				close_and_reset(&exec->here_doc_fds[i]);
+			++token;
+		}
+		if (token->content)
+			++token;
+		++i;
+	}
 }

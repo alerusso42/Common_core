@@ -6,31 +6,31 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 19:02:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:20:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	copy_env(char **stack_env, char ***heap_env, int *env_size, int *last_env)
+int	cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env)
 {
 	int	i;
 
-	if (!stack_env)
+	if (!old_env)
 		return (E_NOENV);
 	i = 0;
-	while (stack_env[i])
+	while (old_env[i])
 		++i;
-	*heap_env = ft_calloc(i + *env_size + 1, sizeof(char *));
-	if (!*heap_env)
+	*new_env = ft_calloc(i + *env_size + 1, sizeof(char *));
+	if (!*new_env)
 		return (E_MALLOC);
 	i = 0;
-	while (stack_env[i])
+	while (old_env[i])
 	{
-		(*heap_env)[i] = ft_strdup(stack_env[i]);
-		if (!(*heap_env)[i])
+		(*new_env)[i] = ft_strdup(old_env[i]);
+		if (!(*new_env)[i])
 		{
-			*heap_env = _free_matrix(*heap_env);
+			*new_env = _free_matrix(*new_env);
 			return (E_MALLOC);
 		}
 		++i;
@@ -46,7 +46,7 @@ int	expand_env(char ***env, int *env_size)
 	char	**new_env;
 	int		temp;
 
-	if (copy_env(*env, &new_env, env_size, &temp) == E_MALLOC)
+	if (cpy_env(*env, &new_env, env_size, &temp) == E_MALLOC)
 		error(E_MALLOC);
 	*env_size *= 2;
 	_free_matrix(*env);

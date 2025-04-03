@@ -1,27 +1,5 @@
-types:
-
-COMMAND = 0;
-ARGUMENT = 1;
-FILE = 2;
-> = 3;
-< = 4;
->> = 5;
-<< = 6;
-| = 7;
-&& = 8;
-|| = 9;
-*  = 10;
-
-Row are: token_content // type // priority
-
-case: make frm
-	[Test0, 2 token]
-	Token = make, 0, 0,
-	Token = frm, 1, 0,
-	[END]
-
 	case: cat << START | grep error << MID <<END | cat >> final_log.txt | sort <final_log.txt && echo "Processing complete" >> result.txt || echo "An error occurred" > error.log
-	[Test1, 25 token]
+	[Test0, 25 token]
 	Token = cat, 0, 0,
 	Token = START, 6, 0,
 	Token = |, 7, 0,
@@ -41,4 +19,3 @@ case: make frm
 	Token = "An error occurred", 1, 0,
 	Token = error.log, 3, 0,
 	[END]
-

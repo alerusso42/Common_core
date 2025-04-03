@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/04/01 15:37:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:43:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **env)
 	fd = open(filename, O_RDWR, 0666);
 	if (fd == -1 || !filename)
 		return (l_printf("Err: |%s|", filename), free(filename), close(fd), 1);
-	copy_env(env, &deb.env, &deb.env_size, &deb.last_env);
+	cpy_env(env, &deb.env, &deb.env_size, &deb.last_env);
 	give_filedata(fd, filename);
 	while ("LOOP: while there are tests to do")
 	{
