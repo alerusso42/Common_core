@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 19:00:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:12:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ enum e_exec_errors
 	E_FORK,
 	E_NOENV,
 	E_ENV_PARSING,
+	E_CD_ARGS,
+	E_CD_PATH,
 };
 
 enum e_sub_strlen

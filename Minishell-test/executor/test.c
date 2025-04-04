@@ -2,7 +2,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 
+//SECTION - Opening multiple fds on the same file
+//NOTE - 	Test OK!
 /*
 int	main()
 {
@@ -23,7 +26,8 @@ int	main()
 	return (printf("\nEtero"));
 }
 */
-
+//SECTION - Address of the same strings in different process
+//NOTE - 	Test OK! Same addresses
 /*
 int	main()
 {
@@ -42,6 +46,8 @@ int	main()
 		printf("ptr for string %s:\t%p. Address: %p\n", *ptr, *ptr, ptr);
 	}
 }*/
+//SECTION - The environ global variable
+//NOTE - 	Test OK! But useless
 /*
 int	main(void)
 {
@@ -72,7 +78,9 @@ int	main(void)
 		++i;
 	}
 }*/
-
+//SECTION - Opening a file, closing it then using its fd
+//NOTE - 	Test OK! you can do it. Files are saved
+/*
 int	main()
 {
 	char	line[12];
@@ -86,4 +94,18 @@ int	main()
 	read(fd, line + 1, 4);
 	line[5] = 0;
 	write(1, line, 5);
+}
+*/
+
+int	main()
+{
+	int		len;
+	char	*pwd;
+	int		exit_status;
+
+	exit_status = chdir("///././bin/././");
+	if (exit_status == -1)
+		return (printf("sono un fallito che gioca a fortnite"));
+	pwd = getcwd(NULL, 0);
+	printf("EXIT STATUS: %d;\nbash:%s\n", exit_status, pwd);
 }

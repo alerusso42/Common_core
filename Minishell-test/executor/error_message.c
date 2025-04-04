@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 15:52:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:36:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int	bash_message(int message, char *file)
 	else if (message == E_ENV_PARSING)
 	{
 		_fd_printf(2, "bash: export: `%s': not a valid identifier", file);
+	}
+	else if (message == E_CD_ARGS)
+	{
+		_fd_printf(2, "bash: cd: too many arguments");
 	}
 	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:44:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 13:36:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:56:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	ft_echo(char **args, t_exec *exec);
+static int	is_flag(char *s);
 
 /*
 int	main()
@@ -34,18 +34,6 @@ int	main()
 	echo(args7);
 }
 */
-
-int	is_flag(char *s)
-{
-	int	response;
-
-	if (s[0] == '-' && s[1] == 'n' && (s[2] == ' ' || s[2] == '\0'))
-		response = 1;
-	else
-		response = 0;
-	s += 2;
-	return (response);
-}
 
 int	ft_echo(char **args, t_exec *exec)
 {
@@ -73,4 +61,16 @@ int	ft_echo(char **args, t_exec *exec)
 		++i;
 	}
 	return (0);
+}
+
+static int	is_flag(char *s)
+{
+	int	response;
+
+	if (s[0] == '-' && s[1] == 'n' && (s[2] == ' ' || s[2] == '\0'))
+		response = 1;
+	else
+		response = 0;
+	s += 2;
+	return (response);
 }
