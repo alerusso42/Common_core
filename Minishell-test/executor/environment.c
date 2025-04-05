@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 17:20:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:39:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_getenv(char **env, char *search, int *where)
 
 	search_len = ft_strlen(search);
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		item_len = _sub_strlen(env[i], "=", EXCL);
 		if (!ft_strncmp(search, env[i], search_len) && \
@@ -73,6 +73,30 @@ char	*ft_getenv(char **env, char *search, int *where)
 	if (where)
 		*where = (i * (env[i] != NULL)) + (-1 * (env[i] == NULL));
 	return (env[i]);
+}
+
+char	*get_pwd_address(char **env)
+{
+	char	*pwd;
+	char	*home;
+	int		home_len;
+
+	pwd = ft_getenv(env, "PWD", NULL);
+	home = ft_getenv(env, "HOME", NULL);
+	if (!pwd && !home)
+		return (ft_strdup(getcwd(NULL, 0)));
+	else if (pwd && !home)
+	{
+		return (ft_strdup(pwd));
+	}
+	else if (pwd && home)
+	{
+		home_len = ft_strlen(home);
+		if (ft_strncmp(pwd, home, home_len))
+			return (ft_strdup(pwd));
+		return (_ft_strjoin_free(ft_strdup("~"), ft_strdup(pwd + home_len)));
+	}
+	return (NULL);
 }
 
 int	env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size)
@@ -96,21 +120,4 @@ int	env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size)
 		++i;
 	*cont_size = i - *no_eq_plus - *name_size;
 	return (0);
-}
-
-void	print_env(char **env, int print_init)
-{
-	int	i;
-
-	i = 0;
-	if (!env)
-		return ;
-	while (env[i])
-	{
-		if (print_init)
-			_fd_printf(1, "declare -x ");
-		if (print_init || ft_strchr(env[i], '='))
-			_fd_printf(1, "%s\n", env[i]);
-		++i;
-	}
 }

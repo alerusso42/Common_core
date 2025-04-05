@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/05 14:16:00 by alerusso          #+#    #+#             */
+/*   Updated: 2025/04/05 14:16:12 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -97,6 +109,9 @@ int	main()
 }
 */
 
+//SECTION - cd e getcwd gestiscono da soli i casi limite?
+//NOTE - 	Test OK!
+/*
 int	main()
 {
 	int		len;
@@ -108,4 +123,4 @@ int	main()
 		return (printf("sono un fallito che gioca a fortnite"));
 	pwd = getcwd(NULL, 0);
 	printf("EXIT STATUS: %d;\nbash:%s\n", exit_status, pwd);
-}
+}*/

@@ -3,34 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 12:49:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:20:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static int	erase_one(char *item, char ***env, t_exec *exec);
+static void	erase_one(char *item, char ***env, t_exec *exec);
 
 int	ft_unset(char **args, t_exec *exec)
 {
 	int		i;
 
 	i = 1;
+	exec->exit_status = 0;
 	while (args[i])
 	{
 		if (!env_pars(args[i], NULL, NULL, NULL))
-			erase_one(args[i], exec->env, exec);
+		{
+			if (exec->at_least_one_pipe == _NO)
+				erase_one(args[i], exec->env, exec);
+		}
 		else
+		{
 			bash_message(E_ENV_PARSING, args[i]);
+			exec->exit_status = 1;
+		}
 		++i;
 	}
 	return (0);
 }
 
-static int	erase_one(char *item, char ***env, t_exec *exec)
+static void	erase_one(char *item, char ***env, t_exec *exec)
 {
 	int	i;
 	int	j;
@@ -38,7 +45,7 @@ static int	erase_one(char *item, char ***env, t_exec *exec)
 	int	env_len;
 
 	if (!(*env)[0])
-		return (0);
+		return ;
 	i = -1;
 	item_len = ft_strlen(item);
 	while ((*env)[++i])
@@ -49,7 +56,7 @@ static int	erase_one(char *item, char ***env, t_exec *exec)
 			break ;
 	}
 	if (!(*env)[i])
-		return (0);
+		return ;
 	free((*env)[i]);
 	(*env)[i] = NULL;
 	j = i;
@@ -57,5 +64,4 @@ static int	erase_one(char *item, char ***env, t_exec *exec)
 		(*env)[i++] = (*env)[j];
 	(*env)[i] = NULL;
 	*exec->last_env -= 1;
-	return (0);
 }

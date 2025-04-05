@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 19:00:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:25:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4]);
 static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4]);
+static void	print_export(char **env);
 
 int	ft_export(char **args, t_exec *exec)
 {
@@ -21,14 +22,21 @@ int	ft_export(char **args, t_exec *exec)
 	int		pars_data[4];	
 
 	i = 1;
+	exec->exit_status = 0;
 	if (!args[1])
-		return (print_env(*exec->env, _YES), 0);
+		return (print_export(*exec->env), 0);
 	while (args[i])
 	{
 		if (!env_pars(args[i], &pars_data[0], &pars_data[1], &pars_data[2]))
-			add_one(args[i], exec->env, exec, pars_data);
+		{
+			if (exec->at_least_one_pipe == _NO)
+				add_one(args[i], exec->env, exec, pars_data);
+		}
 		else
+		{
 			bash_message(E_ENV_PARSING, args[i]);
+			exec->exit_status = 1;
+		}
 		++i;
 	}
 	return (0);
@@ -82,9 +90,37 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	_sub_strcpy(cont, item + skip_until_content, "", EXCL);
 	if (pars_data[ENV_NO_EQ_PLUS] == 0 || pars_data[ENV_NO_EQ_PLUS] == 1)
 	{
-		(*env)[where][skip_until_content] = 0; 
+		(*env)[where][skip_until_content] = 0;
 	}
 	(*env)[where] = _ft_strjoin_free((*env)[where], cont);
 	if (!(*env)[where])
 		error(E_MALLOC);
+}
+
+static void	print_export(char **env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!env)
+		return ;
+	while (env[i])
+	{
+		write(1, "declare -x ", 11);
+		j = 0;
+		while (env[i][j] && env[i][j] != '=')
+			write(1, &env[i][j++], 1);
+		if (!env[i][j])
+		{
+			write(1, "\n", 1);
+			++i;
+			continue ;
+		}
+		write(1, "\"", 1);
+		while (env[i][j])
+			write(1, &env[i][j++], 1);
+		write(1, "\"\n", 2);
+		++i;
+	}
 }

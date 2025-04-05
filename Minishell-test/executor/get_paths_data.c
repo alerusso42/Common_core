@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 12:31:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:15:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static int	get_one(char **command, char **path)
 		free(temp);
 		i++;
 	}
-	
 	return (0);
 }
 

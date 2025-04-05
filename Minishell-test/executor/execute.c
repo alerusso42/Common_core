@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 16:58:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:08:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	execute(t_token *tokens, void *data, int debug)
 	get_main_struct_data(&exec, data, debug);
 	if (!tokens)
 		error(E_ARGS);
-	alloc_memory(&exec, count_commands(tokens));
+	alloc_memory(&exec, count_commands(&exec, tokens));
 	prepare_here_docs(&exec, tokens);
 	get_commands_data(&exec, tokens);
 	get_paths_data(&exec, tokens);
@@ -81,7 +81,7 @@ static int	invoke_programs(t_exec *exec, int i)
 	pid_t	pid;
 
 	if (exec->which_cmd[i] != 0)
-		return ((exec->builtins[(int)exec->which_cmd[i]])\
+		return ((exec->builtins[(int)exec->which_cmd[i]]) \
 		(exec->commands[i], exec));
 	pid = fork();
 	if (pid < 0)

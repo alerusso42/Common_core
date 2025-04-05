@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:06:58 by ftersill          #+#    #+#             */
-/*   Updated: 2025/03/19 14:47:59 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:17:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../minishell.h"
-
-
 
 #endif

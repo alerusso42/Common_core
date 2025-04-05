@@ -15,7 +15,7 @@ OBJ_DIR = obj_executor
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ_DEBUG = $(addprefix $(OBJ_DIR)/, $(SRC_DEBUG:.c=.o))
 
-FLAGS = -Wall -Werror -Wextra -lreadline -lhistory -g --no-pie
+FLAGS = -Wall -Werror -Wextra -lreadline -lhistory -g
 
 LIBFT = ../Ssj_libft/libft.a
 DEBUG_LIBFT = debug_resources/libft.a

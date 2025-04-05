@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commands_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 16:27:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:17:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	get_one(t_exec *exec, t_token **token, int cmd_num)
 	int	i;
 
 	command_argc = count_arguments(*token);
-	exec->commands[cmd_num] = (char **)ft_calloc(command_argc + 1, sizeof(char *));
+	exec->commands[cmd_num] = \
+	(char **)ft_calloc(command_argc + 1, sizeof(char *));
 	if (!exec->commands[cmd_num])
 		error(E_MALLOC);
 	i = 0;

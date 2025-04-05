@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/02 16:58:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:08:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void	*_free_three_d_matrix(char ***matrix)
 	return (NULL);
 }
 
-int	count_commands(t_token *tokens)
+int	count_commands(t_exec *exec, t_token *tokens)
 {
 	int	cmd_num;
 
 	cmd_num = 0;
 	while (tokens->content != NULL)
 	{
+		exec->at_least_one_pipe = (tokens->type == PIPE);
 		cmd_num += (tokens->type == COMMAND);
 		++tokens;
 	}

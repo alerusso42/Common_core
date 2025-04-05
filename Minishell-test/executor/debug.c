@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/04/03 12:43:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:28:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "debug.h"
-# include "executor.h"
-# include "debug_resources/all.h"
+#include "debug.h"
+#include "executor.h"
+#include "debug_resources/all.h"
 
 int	testing(int test_num, int fd, t_debug_data *deb);
 int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec, \

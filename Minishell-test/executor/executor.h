@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/04 16:12:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:08:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 # include "../Ssj_libft/libft.h"
 # include <sys/wait.h>
 
-typedef struct s_exec t_exec;
-typedef int (*t_builtin)(char **, t_exec *);
+typedef struct s_exec	t_exec;
+typedef int				(*t_builtin)(char **, t_exec *);
+
 typedef struct s_token
 {
 	char			*content;
 	int				id;
 	int				prior;
 	unsigned int	type:4;
-}t_token;
+}	t_token;
+
 struct s_exec
 {
 	t_builtin		*builtins;
@@ -44,6 +46,7 @@ struct s_exec
 	int				stdin_fd;
 	int				stdout_fd;
 	int				exit_status;
+	int				at_least_one_pipe:1;
 	int				debug:1;
 };
 
@@ -58,7 +61,7 @@ typedef struct s_debug_data
 	int		last_env;
 	int		env_size;
 	int		fd_to_close;
-}t_debug_data;
+}	t_debug_data;
 
 enum e_types
 {
@@ -137,7 +140,7 @@ enum e_bools
 
 //SECTION - Main function
 
-int	execute(t_token *tokens, void *data, int debug);
+int		execute(t_token *tokens, void *data, int debug);
 
 //SECTION Memory management
 
@@ -153,7 +156,7 @@ void	close_and_reset(int *fd);
 void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
 char	*_ft_strjoin_free(char *s1, char *s2);
-int		count_commands(t_token *tokens);
+int		count_commands(t_exec *exec, t_token *tokens);
 int		_ft_realloc(void **content, int nmemb, int old_nmemb, size_t sizeof_);
 int		is_red_sign(int sign);
 int		is_exec_sep(int sign);
@@ -170,7 +173,7 @@ int		cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env);
 int		expand_env(char ***env, int *env_size);
 char	*ft_getenv(char **env, char *search, int *where);
 int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
-void	print_env(char **env, int print_init);
+char	*get_pwd_address(char **env);
 
 //SECTION Preparing data: env path, files, commands' path
 

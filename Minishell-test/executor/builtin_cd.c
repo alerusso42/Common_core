@@ -6,23 +6,26 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/04 17:17:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:25:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec);
+static int	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec);
 
 int	ft_cd(char **args, t_exec *exec)
 {
-	int		len;
 	char	*old_pwd;
 	char	*pwd;
 	char	**pwd_update;
 
-	if (!args[1] && args[2])
+	exec->exit_status = 0;
+	if (args[1] && args[2])
+	{
+		exec->exit_status = 1;
 		return (bash_message(E_CD_ARGS, NULL), 0);
+	}
 	if (!args[1])
 		return (0);
 	old_pwd = getcwd(NULL, 0);
@@ -40,11 +43,11 @@ int	ft_cd(char **args, t_exec *exec)
 	return (0);
 }
 
-static void	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec)
+static int	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec)
 {
 	char	*str;
 
-	str = ft_strjoin("PWD=", old_pwd);
+	str = ft_strjoin("PWD=", pwd);
 	if (!str)
 		return (free(update), error(E_MALLOC));
 	update[1] = str;
@@ -57,4 +60,5 @@ static void	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec)
 	ft_export(update, exec);
 	free(str);
 	free(update);
+	return (0);
 }
