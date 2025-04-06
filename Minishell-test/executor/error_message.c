@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/04 16:36:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:56:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	error(int err)
 	t_exec	*exec;
 
 	exec = storage(NULL, RECEIVE);
+	exec->exit_status = 1;
 	if (err == NONE)
 	{
 		ft_putstr_fd("Please insert an error.\n", 2);

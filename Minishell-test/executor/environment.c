@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 14:39:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:00:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,6 @@ int	cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env)
 	return (0);
 }
 
-int	expand_env(char ***env, int *env_size)
-{
-	char	**new_env;
-	int		temp;
-
-	if (cpy_env(*env, &new_env, env_size, &temp) == E_MALLOC)
-		error(E_MALLOC);
-	*env_size *= 2;
-	_free_matrix(*env);
-	*env = new_env;
-	return (0);
-}
-
 char	*ft_getenv(char **env, char *search, int *where)
 {
 	int		search_len;
@@ -84,19 +71,32 @@ char	*get_pwd_address(char **env)
 	pwd = ft_getenv(env, "PWD", NULL);
 	home = ft_getenv(env, "HOME", NULL);
 	if (!pwd && !home)
-		return (ft_strdup(getcwd(NULL, 0)));
+		return (getcwd(NULL, 0));
 	else if (pwd && !home)
 	{
-		return (ft_strdup(pwd));
+		return (_cut_string(ft_strdup(pwd), 0, 3));
 	}
 	else if (pwd && home)
 	{
 		home_len = ft_strlen(home);
-		if (ft_strncmp(pwd, home, home_len))
-			return (ft_strdup(pwd));
-		return (_ft_strjoin_free(ft_strdup("~"), ft_strdup(pwd + home_len)));
+		if (ft_strncmp(pwd + 4, home + 5, home_len - 5))
+			return (_cut_string(ft_strdup(pwd), 0, 3));
+		return (_ft_strjoin_free(ft_strdup("~/"), ft_strdup(pwd + home_len)));
 	}
 	return (NULL);
+}
+
+int	expand_env(char ***env, int *env_size)
+{
+	char	**new_env;
+	int		temp;
+
+	if (cpy_env(*env, &new_env, env_size, &temp) == E_MALLOC)
+		error(E_MALLOC);
+	*env_size *= 2;
+	_free_matrix(*env);
+	*env = new_env;
+	return (0);
 }
 
 int	env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size)

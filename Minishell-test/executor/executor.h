@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 15:08:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/06 14:53:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ int		is_a_builtin_cmd(char *cmd);
 int		_sub_strlen(char *s, char *charset, int mode);
 int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
 int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
+char	*_cut_string(char *string, size_t start, size_t end);
+int		set_exit_status(t_exec *exec, int exit_status);
 
 //SECTION - Environment management
 

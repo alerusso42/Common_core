@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 15:21:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:54:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@ static void	print_env(char **env);
 
 int	ft_env(char **args, t_exec *exec)
 {
-	(void)args;
+	if (args[1])
+		return (set_exit_status(exec, 1));
 	exec->exit_status = 0;
 	print_env(*exec->env);
 	return (0);
 }
 
+/*
+//REVIEW - print_env
+
+//		For every characters of the environment, if they have '=',
+		we print them.
+*/
 static void	print_env(char **env)
 {
 	int	i;

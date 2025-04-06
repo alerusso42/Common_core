@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 15:25:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/06 12:53:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,34 @@ static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4]);
 static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4]);
 static void	print_export(char **env);
 
+/*
+//REVIEW - ft_export
+
+//		Export can take any number of arguments.
+		If there are no arguments, it prints all the environment, including
+		no initialized values (see below print_export).
+
+//		Export argument may be valid or invalid. There is a parsing for it.
+		Valid arguments examples are:
+		"MAN=carlo";	"MAN=";  "MAN";	"_MAN";	 "___M_A_N+=";	"MAN=2c$ar=lo*"
+		Invalid arguments examples are:
+		"2MAN=conti";	"*MAN="; "M2AN"; "_MAN("; "___M_A_N-=";	"M@N+=conti"
+		To valid them, see env_pars function in environment.c.
+
+//		If one argument is not valid, we do the following, but the ES will be
+		set to 1.
+		If there are pipes in the command line, the export will not be done,
+		but env_pars will still be done anyway.
+
+//		Operations:
+		1)	If there are no arguments, we print the environment, including
+			no initialized data;
+		2)	For every argument in args, we loop using index i;
+		3)	If the parsing succeds, and if there are no pipe, we add the new
+			value in the environment (see below add_one).
+			Else if the parsing fails, we print an error message and set ES to
+			1.
+*/
 int	ft_export(char **args, t_exec *exec)
 {
 	int		i;
@@ -42,6 +70,21 @@ int	ft_export(char **args, t_exec *exec)
 	return (0);
 }
 
+/*
+//REVIEW - add_one
+
+//		So, we need to manage three cases:
+			1)	export MAN
+			2)	export MAN=Carlo
+			3)	export MAN+=Conti
+
+//		In the env_pars, we have saved three data in a int array (pars_data):
+		pars_data[0] --> ENV_NO_EQ_PLUS: 0 means case 1), 1 case 2), 2 3);
+		pars_data[1] --> ENV_NAME_SIZE:  The len of the env title (MAN);
+		pars_data[2] --> ENV_CONT_SIZE:  The len of the env cont (Carlo c.);
+
+//		For item, we mean the arg we are currently managing.
+*/
 static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4])
 {
 	int		where;
@@ -97,6 +140,25 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 		error(E_MALLOC);
 }
 
+/*
+//REVIEW - print_export
+
+//		This is how the print must look like:
+		declare -x ___M_A_N
+		declare -x MAN="Carlo Conti"
+		...
+
+//		Operations:
+		1)	If the environment is NULL, we return;
+		2)	For every argument in args, we loop using index i;
+		3)	We print "declare -x ";
+		4)	While the arg has characters, and they are different than '=',
+			print them;
+		5)	If there are no more characters, we print \n and continue;
+		6)	Else, we print the following characters, preceeded by a " and
+			followed by "\n.
+			So, they'll look like MAN="Carlo Conti"\n.
+*/
 static void	print_export(char **env)
 {
 	int	i;
