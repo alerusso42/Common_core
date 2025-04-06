@@ -12,6 +12,13 @@
 
 #include "executor.h"
 
+/*
+//REVIEW - ft_pwd
+
+//		Operations:
+		1)	We print getcwd string;
+		2)	We free it.
+*/
 int	ft_pwd(char **args, t_exec *exec)
 {
 	char	*pwd;

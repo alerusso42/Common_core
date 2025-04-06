@@ -25,7 +25,7 @@ static void	print_export(char **env);
 
 //		Export argument may be valid or invalid. There is a parsing for it.
 		Valid arguments examples are:
-		"MAN=carlo";	"MAN=";  "MAN";	"_MAN";	 "___M_A_N+=";	"MAN=2c$ar=lo*"
+		"MAN=carlo";	"MAN=";  "MAN";	"_MAN2"; "___M_A_N+=";	"MAN=2c$ar=lo*"
 		Invalid arguments examples are:
 		"2MAN=conti";	"*MAN="; "M2AN"; "_MAN("; "___M_A_N-=";	"M@N+=conti"
 		To valid them, see env_pars function in environment.c.
@@ -42,7 +42,7 @@ static void	print_export(char **env);
 		3)	If the parsing succeds, and if there are no pipe, we add the new
 			value in the environment (see below add_one).
 			Else if the parsing fails, we print an error message and set ES to
-			1.
+			1, and we go to the next argument.
 */
 int	ft_export(char **args, t_exec *exec)
 {
@@ -84,6 +84,22 @@ int	ft_export(char **args, t_exec *exec)
 		pars_data[2] --> ENV_CONT_SIZE:  The len of the env cont (Carlo c.);
 
 //		For item, we mean the arg we are currently managing.
+
+//		Operations:
+		1)	If the size of env is not enough to get a new element,
+			we realloc it, doubling its size;
+		2)	We alloc for the name of the item to update/add;
+		3)	We copy the content of the item into name, until \0, +, =.
+			We now have, for example, "OLDPWD";
+		4)	If the operation is not a plus (pars_data[ENV_NO_EQ_PLUS] != 2)
+			and the item already exists, free it and decrease the number of
+			elements in the env matrix. ft_getenv sets where to the index
+			of the item.
+			Else, if the operation is a plus or the item does not exists,
+			we set the where variable to the index of the last member in env;
+		5)	We save where in pars_data[3] --> pars_data[ENV_WHICH_VAL].
+		6)	We insert the value in the env matrix, in the where position.
+			See below the insert function.
 */
 static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4])
 {
@@ -111,6 +127,18 @@ static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4])
 	insert(item, env, exec, pars_data);
 }
 
+/*
+//REVIEW - insert
+
+//		Operations:
+		1)	If the element of env in index does not exists, we simply add it.
+			This happens when the item does not exist yet;
+		2)	Else, we calculate the length of the item, excluding the content
+			(USER+=48) -->	NAME_SIZE + ENV_NO_EQ_PLUS (ENEP can be 0,1,2);
+		3)	If we do not have to add the content (ENV_NO_EQ_PLUS == 0,1)
+			We put a \0 in the index of the first character of content;
+		4)	We strjoin the current element with the new content.
+*/
 static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 {
 	int		where;
@@ -118,7 +146,6 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	char	*cont;
 
 	where = pars_data[ENV_WHICH_VAL];
-	skip_until_content = pars_data[ENV_NAME_SIZE] + pars_data[ENV_NO_EQ_PLUS];
 	if (!(*env)[where])
 	{
 		(*env)[where] = ft_strdup(item);
@@ -130,6 +157,7 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	cont = (char *)ft_calloc(pars_data[ENV_CONT_SIZE] + 2, sizeof(char));
 	if (!cont)
 		error(E_MALLOC);
+	skip_until_content = pars_data[ENV_NAME_SIZE] + pars_data[ENV_NO_EQ_PLUS];
 	_sub_strcpy(cont, item + skip_until_content, "", EXCL);
 	if (pars_data[ENV_NO_EQ_PLUS] == 0 || pars_data[ENV_NO_EQ_PLUS] == 1)
 	{

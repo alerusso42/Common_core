@@ -14,6 +14,11 @@
 
 static void	print_env(char **env);
 
+/*
+//REVIEW - print_env
+
+//		If there are no arguments, calls print_env.
+*/
 int	ft_env(char **args, t_exec *exec)
 {
 	if (args[1])

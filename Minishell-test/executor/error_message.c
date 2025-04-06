@@ -12,6 +12,13 @@
 
 #include "executor.h"
 
+/*
+//REVIEW - error
+
+//	error prints the errore type, then free all the memory, including parsing
+	part memory, and exit the whole program.
+	It is called for serious problem, like malloc errors.
+*/
 int	error(int err)
 {
 	t_exec	*exec;
@@ -37,15 +44,18 @@ int	error(int err)
 	return (ft_exit(NULL, exec));
 }
 
+/*
+//REVIEW - error
+
+//	bash_message prints the error type, showing, in some cases,
+	what file cause the error.
+	It just prints the error, though: it does not kill the process.
+*/
 int	bash_message(int message, char *file)
 {
 	if (message == E_OPEN)
 	{
 		_fd_printf(2, "bash: %s: No such file or directory\n", file);
-	}
-	else if (message == E_MALLOC)
-	{
-		_fd_printf(2, "bash: fork: Cannot allocate memory\n");
 	}
 	else if (message == E_ENV_PARSING)
 	{

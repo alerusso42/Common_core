@@ -12,7 +12,7 @@
 
 #include "executor.h"
 
-//NOTE - Linea 26 SI LIBERA MEMORIA DI FRANCI
+//NOTE - Linea 35 SI LIBERA MEMORIA DI FRANCI
 /*
 //REVIEW - ft_exit
 
