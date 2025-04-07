@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 15:08:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:09:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	execute_loop(t_token *token, t_exec *exec)
 	exec->cmd_num = 0;
 	while (token->content)
 	{
-		exec->exit_status = 0;
+		*exec->exit_status = 0;
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
 		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
@@ -59,8 +59,8 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	}
 	if ((*tokens)->type == AND || (*tokens)->type == OR)
 	{
-		if (((*tokens)->type == AND && exec->exit_status != 0) || \
-		((*tokens)->type == OR && exec->exit_status == 0))
+		if (((*tokens)->type == AND && *exec->exit_status != 0) || \
+		((*tokens)->type == OR && *exec->exit_status == 0))
 			return (1);
 		wait_everyone(exec);
 	}
@@ -80,6 +80,8 @@ static int	invoke_programs(t_exec *exec, int i)
 {
 	pid_t	pid;
 
+	if (is_a_valid_executable(exec, i) == _NO)
+		return (0);
 	if (exec->which_cmd[i] != 0)
 		return ((exec->builtins[(int)exec->which_cmd[i]]) \
 		(exec->commands[i], exec));
@@ -106,7 +108,7 @@ static int	wait_everyone(t_exec *exec)
 	i = exec->last_cmd_done;
 	while (exec->pid_list[i])
 	{
-		waitpid(exec->pid_list[i], &exec->exit_status, 0);
+		waitpid(exec->pid_list[i], &*exec->exit_status, 0);
 		++i;
 	}
 	exec->last_cmd_done = i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 14:16:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:01:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_cd(char **args, t_exec *exec)
 	char	*pwd;
 	char	**pwd_update;
 
-	exec->exit_status = 0;
+	*exec->exit_status = 0;
 	if (args[1] && args[2])
 		return (bash_message(E_CD_ARGS, NULL), set_exit_status(exec, 1));
 	if (!args[1])

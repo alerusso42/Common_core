@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 14:17:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:53:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ int	get_one(t_exec *exec, t_token **token, int cmd_num)
 	if (!exec->commands[cmd_num])
 		error(E_MALLOC);
 	i = 0;
-	while (i != command_argc)
+	while ((i != command_argc))
 	{
-		exec->commands[cmd_num][i] = ft_strdup((*token)->content);
-		if (!exec->commands[cmd_num][i])
-			error(E_MALLOC);
-		++i;
+		if ((*token)->type == COMMAND || (*token)->type == ARGUMENT)
+		{
+			exec->commands[cmd_num][i] = ft_strdup((*token)->content);
+			if (!exec->commands[cmd_num][i])
+				error(E_MALLOC);
+			++i;
+		}
 		++(*token);
 	}
 	return (0);
@@ -68,11 +71,12 @@ int	count_arguments(t_token *token)
 	++token;
 	while ("LOOP: counts every argument, considering parenthesis")
 	{
-		if (token->type != ARGUMENT)
+		if (is_exec_sep(token->type) == _YES || !token->content)
 			break ;
-		if (token->prior != (token + 1)->prior)
+		else if (token->content && token->prior != (token + 1)->prior)
 			break ;
-		counter++;
+		else if (token->type == COMMAND || token->type == ARGUMENT)
+			counter++;
 		++token;
 	}
 	return (counter);

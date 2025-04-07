@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 14:53:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:07:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define EXECUTOR_H
 # include "../Ssj_libft/libft.h"
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
@@ -38,6 +40,7 @@ struct s_exec
 	char			*which_cmd;
 	void			*main_struct_pointer;
 	int				*here_doc_fds;
+	int				*exit_status;
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;
@@ -45,7 +48,6 @@ struct s_exec
 	int				last_cmd_done;
 	int				stdin_fd;
 	int				stdout_fd;
-	int				exit_status;
 	int				at_least_one_pipe:1;
 	int				debug:1;
 };
@@ -58,6 +60,7 @@ typedef struct s_debug_data
 	char	*filename2;
 	char	**env;
 	t_token	*tokens;
+	int		exit_status;
 	int		last_env;
 	int		env_size;
 	int		fd_to_close;
@@ -116,6 +119,8 @@ enum e_exec_errors
 	E_ENV_PARSING,
 	E_CD_ARGS,
 	E_CD_PATH,
+	E_CMD_NOTFOUND,
+	E_IS_DIRECTORY,
 };
 
 enum e_sub_strlen
@@ -188,6 +193,7 @@ int		get_file_data(t_exec *exec, t_token *token);
 
 int		error(int error_type);
 int		bash_message(int message, char *file);
+int		is_a_valid_executable(t_exec *exec, int i);
 int		_fd_printf(int fd, const char *str, ...);
 
 //SECTION - Builtin

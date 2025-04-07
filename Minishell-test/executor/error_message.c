@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 10:56:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:02:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	error(int err)
 	t_exec	*exec;
 
 	exec = storage(NULL, RECEIVE);
-	exec->exit_status = 1;
+	*exec->exit_status = 1;
 	if (err == NONE)
 	{
 		ft_putstr_fd("Please insert an error.\n", 2);
@@ -59,11 +59,40 @@ int	bash_message(int message, char *file)
 	}
 	else if (message == E_ENV_PARSING)
 	{
-		_fd_printf(2, "bash: export: `%s': not a valid identifier", file);
+		_fd_printf(2, "bash: export: `%s': not a valid identifier\n", file);
 	}
 	else if (message == E_CD_ARGS)
 	{
-		_fd_printf(2, "bash: cd: too many arguments");
+		_fd_printf(2, "bash: cd: too many arguments\n");
+	}
+	else if (message == E_CMD_NOTFOUND)
+	{
+		_fd_printf(2, "%s: command not found\n");
+	}
+	else if (message == E_IS_DIRECTORY)
+	{
+		_fd_printf(2, "bash: %s: Is a directory\n");
 	}
 	return (1);
+}
+
+int	is_a_valid_executable(t_exec *exec, int i)
+{
+	DIR	*dir;
+
+	if (exec->which_cmd[i] != 0)
+		return (_NO);
+	dir = opendir(exec->commands[i][0]);
+	if (dir)
+	{
+		bash_message(E_IS_DIRECTORY, exec->commands[i][0]);
+		closedir(dir);
+		return (_NO);
+	}
+	else if (access(exec->commands[i][0], F_OK | X_OK) != 0)
+	{
+		bash_message(E_CMD_NOTFOUND, exec->commands[i][0]);
+		return (_NO);
+	}
+	return (_YES);
 }

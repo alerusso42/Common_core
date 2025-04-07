@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:39:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 14:53:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:02:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ char	*_cut_string(char *string, size_t start, size_t end)
 
 int	set_exit_status(t_exec *exec, int exit_status)
 {
-	exec->exit_status = exit_status;
+	*exec->exit_status = exit_status;
 	return (exit_status);
 }

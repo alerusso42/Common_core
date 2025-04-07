@@ -43,3 +43,14 @@ Token = echo, 0, 0,
 Token = "An error occurred", 1, 0,
 Token = error.log, 3, 0,
 [END]
+
+#Niente errore per 2
+case: caio cat | belin che bello
+[Test1, 8 token]
+Token = caio, 4, 0,
+Token = cat, 0, 0,
+Token = |,	7, 0,
+Token = belin, 0, 0,
+Token = che, 1, 0,
+Token = bello, 1, 0,
+[END]

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:16:00 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 14:09:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:24:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	main()
 //SECTION - cd e getcwd gestiscono da soli i casi limite?
 //NOTE - 	Test OK!
 
-int	main()
+int	main(void)
 {
 	int		len;
 	char	*pwd;

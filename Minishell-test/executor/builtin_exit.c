@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 12:15:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:02:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_exit(char **args, t_exec *exec)
 	int	exit_status;
 
 	(void)args;
-	exit_status = exec->exit_status;
+	exit_status = *exec->exit_status;
 	storage(exec, STORE);
 	if (exec->debug)
 		free_debug_data((t_debug_data *)exec->main_struct_pointer);

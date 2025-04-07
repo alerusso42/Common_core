@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:56:39 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/19 18:30:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:48:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../../../../SDL2/include/SDL.h"
 # include <stdio.h>
 
-//	 cc main.c -o main $(sdl2-config --cflags --libs)
-//	PKG_CONFIG_PATH=./Common_core/SDL2/pkgconfig gcc \
+//	 cc main.c -o main $(sdl2-config --cflags --libs) \
+	PKG_CONFIG_PATH=./Common_core/SDL2/pkgconfig gcc \
 -I./Common_core/SDL2/include -L./Common_core/SDL2/lib \
 -o exe main.c -lSDL2 -lSDL2_image
 

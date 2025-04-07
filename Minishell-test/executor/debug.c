@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/04/05 14:28:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:13:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ int	start_test_session(t_token *exec, t_debug_data *deb)
 	}
 	exec = head;
 	l_printf("\n\033[1;32mExecution:\033[0m\n");
-	return (execute(exec, (void *)deb, _YES));
+	execute(exec, (void *)deb, _YES);
+	return (l_printf("\n\033[1;33mExit code:\033[0m %d", deb->exit_status));
 }

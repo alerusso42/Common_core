@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:17:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 14:28:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:07:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 		exec->env = &debug_data->env;
 		exec->env_size = &debug_data->env_size;
 		exec->last_env = &debug_data->last_env;
+		exec->exit_status = &debug_data->exit_status;
+		*exec->exit_status = 0;
 	}
 	(void)dati_da_france;
 }

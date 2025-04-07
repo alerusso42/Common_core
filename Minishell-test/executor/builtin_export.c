@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 12:53:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:01:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4]);
 static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4]);
+static char	*remove_plus(char *str);
 static void	print_export(char **env);
 
 /*
@@ -50,7 +51,7 @@ int	ft_export(char **args, t_exec *exec)
 	int		pars_data[4];	
 
 	i = 1;
-	exec->exit_status = 0;
+	*exec->exit_status = 0;
 	if (!args[1])
 		return (print_export(*exec->env), 0);
 	while (args[i])
@@ -63,7 +64,7 @@ int	ft_export(char **args, t_exec *exec)
 		else
 		{
 			bash_message(E_ENV_PARSING, args[i]);
-			exec->exit_status = 1;
+			*exec->exit_status = 1;
 		}
 		++i;
 	}
@@ -148,7 +149,7 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	where = pars_data[ENV_WHICH_VAL];
 	if (!(*env)[where])
 	{
-		(*env)[where] = ft_strdup(item);
+		(*env)[where] = remove_plus(ft_strdup(item));
 		if (!(*env)[where])
 			error(E_MALLOC);
 		*exec->last_env += 1;
@@ -166,6 +167,20 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	(*env)[where] = _ft_strjoin_free((*env)[where], cont);
 	if (!(*env)[where])
 		error(E_MALLOC);
+}
+
+static char	*remove_plus(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '+')
+		++i;
+	if (str[i] == '+')
+		_cut_string(str + i, 0, 0);
+	return (str);
 }
 
 /*
@@ -207,9 +222,9 @@ static void	print_export(char **env)
 			++i;
 			continue ;
 		}
-		write(1, "\"", 1);
-		while (env[i][j])
-			write(1, &env[i][j++], 1);
+		write(1, "=\"", 2);
+		while (env[i][++j])
+			write(1, &env[i][j], 1);
 		write(1, "\"\n", 2);
 		++i;
 	}
