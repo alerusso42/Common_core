@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:55:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/13 16:45:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:39:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-
+//NOTE SDL!!!
 /*
 	With a static, it storage the all struct.
 */

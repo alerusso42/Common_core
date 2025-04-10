@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:56:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/13 16:36:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:37:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-
+//NOTE SDL!!!
 static int	update_one(t_all *all, int x, int y, int dialga);
 static void	get_visible_screen(t_all *all);
 void		*pic(t_all *all, int x, int y, int dialga);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_pic.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:55:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/13 15:53:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:39:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-
+//NOTE SDL!!!
 static int	reset_pic2(t_mlx *mlx);
 static int	reset_pic3(t_mlx *mlx);
 static int	reset_pic4(t_mlx *mlx);
