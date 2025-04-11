@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   which_enemy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:52:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/10 19:41:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:55:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-//NOTE SDL!!!
+
 static void	*get_red(t_all *all, int n);
 static void	*get_cian(t_all *all, int n);
 static void	*get_orange(t_all *all, int n);

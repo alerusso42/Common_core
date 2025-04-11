@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:07:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:34:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,8 @@ int		execute(t_token *tokens, void *data, int debug);
 
 //SECTION Memory management
 
-t_exec	*storage(t_exec *update, int mode);
 int		alloc_memory(t_exec *exec, int cmd_num);
-void	free_memory(void);
+void	free_memory(t_exec *memory);
 void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
 void	close_and_reset(int *fd);
@@ -177,7 +176,7 @@ int		set_exit_status(t_exec *exec, int exit_status);
 //SECTION - Environment management
 
 int		cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env);
-int		expand_env(char ***env, int *env_size);
+int		expand_env(char ***env, int *env_size, t_exec *exec);
 char	*ft_getenv(char **env, char *search, int *where);
 int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
 char	*get_pwd_address(char **env);
@@ -191,7 +190,7 @@ int		get_file_data(t_exec *exec, t_token *token);
 
 //SECTION Error and prints
 
-int		error(int error_type);
+int		error(int error_type, t_exec *memory);
 int		bash_message(int message, char *file);
 int		is_a_valid_executable(t_exec *exec, int i);
 int		_fd_printf(int fd, const char *str, ...);

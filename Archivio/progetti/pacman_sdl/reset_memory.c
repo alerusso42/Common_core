@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/10 19:39:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:45:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-//NOTE SDL!!!
+
 int				full_reset(int struct_num, ...);
 static int		reset_memory_input(t_input **input);
 static void		reset_memory_sol(t_map **map, int game_size[2], int index);

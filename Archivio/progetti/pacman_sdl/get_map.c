@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:18:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/10 19:36:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:51:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-//NOTE SDL!!!
+
 t_all	*alloc_data3(t_input *input, t_map *map, t_random *random);
 t_all	*alloc_data2(t_input **input, t_map **map, t_random *random);
 t_all	*alloc_data(int game_size[2], int seed, int create_or_read, char *fn);

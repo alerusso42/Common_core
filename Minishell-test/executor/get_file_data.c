@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 12:22:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:29:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	find_last_file(t_exec *exec, t_token *token);
 static int	add_one(t_exec *exec, t_token *token);
-static int	get_here_doc_file(char *limiter);
+static int	get_here_doc_file(char *limiter, t_exec *exec);
 
 int	get_file_data(t_exec *exec, t_token *token)
 {
@@ -80,7 +80,7 @@ static int	add_one(t_exec *exec, t_token *token)
 	return (close(fd), 0);
 }
 
-static int	get_here_doc_file(char *limiter)
+static int	get_here_doc_file(char *limiter, t_exec *exec)
 {
 	int		fd;
 	char	*line;
@@ -88,7 +88,7 @@ static int	get_here_doc_file(char *limiter)
 
 	fd = open("here_doc", INFILE_DOC, 0666);
 	if (fd < 0)
-		error(E_OPEN);
+		error(E_OPEN, exec);
 	ft_putstr_fd("> ", 2);
 	line = get_next_line_bonus(0);
 	limiter_len = ft_strlen(limiter);
@@ -102,9 +102,9 @@ static int	get_here_doc_file(char *limiter)
 	close(fd);
 	open("here_doc", INFILE_DOC, 0666);
 	if (fd < 0)
-		return (free(line), unlink("here_doc"), error(E_OPEN));
+		return (free(line), unlink("here_doc"), error(E_OPEN, exec));
 	if (!line)
-		return (close(fd), unlink("here_doc"), error(E_MALLOC));
+		return (close(fd), unlink("here_doc"), error(E_MALLOC, exec));
 	return (free(line), unlink("here_doc"), fd);
 }
 
@@ -119,7 +119,7 @@ void	prepare_here_docs(t_exec *exec, t_token *token)
 		while (token->content && !is_exec_sep(token->type))
 		{
 			if (token->type == HERE_DOC)
-				exec->here_doc_fds[i] = get_here_doc_file(token->content);
+				exec->here_doc_fds[i] = get_here_doc_file(token->content, exec);
 			if (token->id != exec->last_in && exec->here_doc_fds[i])
 				close_and_reset(&exec->here_doc_fds[i]);
 			++token;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:02:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:16:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	ft_exit(char **args, t_exec *exec)
 	else
 		(void)args;
 	exec->main_struct_pointer = NULL;
-	free_memory();
+	free_memory(exec);
 	return (exit(exit_status), 0);
 }

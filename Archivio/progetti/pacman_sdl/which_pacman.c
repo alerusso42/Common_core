@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   which_pacman.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 07:27:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/10 19:42:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:55:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-//NOTE SDL!!!
+
 static void	*right_left(t_all *all, int dialga);
 static void	*up_down(t_all *all, int dialga);
 static int	register_frame_from_dialga(int dialga);

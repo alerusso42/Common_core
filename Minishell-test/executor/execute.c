@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:09:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:27:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	execute(t_token *tokens, void *data, int debug)
 	exec = (t_exec){0};
 	get_main_struct_data(&exec, data, debug);
 	if (!tokens)
-		error(E_ARGS);
+		error(E_ARGS, &exec);
 	alloc_memory(&exec, count_commands(&exec, tokens));
 	prepare_here_docs(&exec, tokens);
 	get_commands_data(&exec, tokens);
 	get_paths_data(&exec, tokens);
 	execute_loop(tokens, &exec);
-	free_memory();
+	free_memory(&exec);
 	return (0);
 }
 
@@ -87,7 +87,7 @@ static int	invoke_programs(t_exec *exec, int i)
 		(exec->commands[i], exec));
 	pid = fork();
 	if (pid < 0)
-		error(E_FORK);
+		error(E_FORK, exec);
 	else if (pid == 0)
 	{
 		execve(exec->commands[i][0], exec->commands[i], *exec->env);

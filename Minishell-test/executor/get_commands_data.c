@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 16:53:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:28:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_commands_data(t_exec *exec, t_token *token)
 		if (token->type == COMMAND)
 		{
 			if (get_one(exec, &token, cmd_num) != 0)
-				error(E_MALLOC);
+				error(E_MALLOC, exec);
 			exec->which_cmd[cmd_num] = \
 			is_a_builtin_cmd(exec->commands[cmd_num][0]);
 			++cmd_num;
@@ -47,7 +47,7 @@ int	get_one(t_exec *exec, t_token **token, int cmd_num)
 	exec->commands[cmd_num] = \
 	(char **)ft_calloc(command_argc + 1, sizeof(char *));
 	if (!exec->commands[cmd_num])
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	i = 0;
 	while ((i != command_argc))
 	{
@@ -55,7 +55,7 @@ int	get_one(t_exec *exec, t_token **token, int cmd_num)
 		{
 			exec->commands[cmd_num][i] = ft_strdup((*token)->content);
 			if (!exec->commands[cmd_num][i])
-				error(E_MALLOC);
+				error(E_MALLOC, exec);
 			++i;
 		}
 		++(*token);

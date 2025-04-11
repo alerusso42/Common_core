@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:02:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:17:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_pwd(char **args, t_exec *exec)
 	*exec->exit_status = 0;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	_fd_printf(1, "%s", pwd);
 	free(pwd);
 	return (0);

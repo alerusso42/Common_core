@@ -6,13 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:44:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:02:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 12:13:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static void	is_flag(char *s, char *print_slash_n, int *j, char *stop_check);
+static int	is_n(char *s, int *j);
 
 /*
 //REVIEW - ft_echo
@@ -54,7 +55,7 @@ int	ft_echo(char **args, t_exec *exec)
 	i = 1;
 	print_slash_n = _YES;
 	stop_check = _NO;
-	*exec->exit_status = 0;
+	//*exec->exit_status = 0;
 	while (args[i])
 	{
 		j = 0;
@@ -66,6 +67,8 @@ int	ft_echo(char **args, t_exec *exec)
 				write(1, &args[i][j], 1);
 			++j;
 		}
+		if (args[i + 1])
+			write(1, " ", 1);
 		++i;
 	}
 	return (write(1, "\n", (int)print_slash_n));
@@ -93,12 +96,10 @@ int	ft_echo(char **args, t_exec *exec)
 static void	is_flag(char *s, char *print_slash_n, int *j, char *stop_check)
 {
 	if ((*j == 0 || s[-1] == ' ') && \
-	s[0] == '-' && s[1] == 'n' && (s[2] == ' ' || s[2] == '\0'))
+	s[0] == '-' && s[1] == 'n' && (is_n(s, j) || s[2] == '\0'))
 	{
-		*j += 2;
+		*j += 1;
 		*print_slash_n = _NO;
-		if (s[0] && s[1] && !s[2])
-			*j -= 1;
 	}
 	else
 	{
@@ -107,45 +108,60 @@ static void	is_flag(char *s, char *print_slash_n, int *j, char *stop_check)
 	}
 }
 
-/*
+static int	is_n(char *s, int *j)
+{
+	if (s[2] != 'n')
+		return (_NO);
+	++(*j);
+	while (s[*j] == 'n' && s[*j + 1] == 'n')
+		++(*j);
+	return (_YES);
+}
+
 int	main()
 {
 	char	*args1[] = {"/bin/echo", "Assurdo", "Impossibile", "Tremendo", \
 	NULL};
 	char	*args2[] = {"/bin/echo", "-n", " Impossibile", " Tremendo", NULL};
 	char	*args3[] = {"/bin/echo", " -n", "Impossibile", " -n", NULL};
-	char	*args4[] = {"/bin/echo", "-n- n- n- n- n- n- n", "Impossibile", \
+	char	*args4[] = {"/bin/echo", "-n-", "n-", "-n", "n- n- n- n", \
+		"Impossibile", \
 	"Tremendo", NULL};
-	char	*args5[] = {"/bin/echo", "-n -n -n -n -n -na", "Impossibile", \
+	char	*args5[] = {"/bin/echo", "-nnnnn", "-na", "Impossibile", \
 	"Tremendo", NULL};
 	char	*args6[] = {"/bin/echo", "    -n -n -n -n -n -na", "Impossibile",\
 	 "Tremendo", NULL};
 	char	*args7[] = {NULL};
 	char	*args8[] = {"/bin/echo", "|", "",\
 		"   |", NULL};
+	char	*args9[] = {"/bin/echo", "-nnnnn -n -nnn -nmn -n  ", "yis",\
+		"   |", NULL};
 	
-	write(1, "TEst 1: normal print with SLASH N\n\n", 35);
+	write(1, "TEst 1: |Assurdo Impossibile Tremendo\n|\n\t|", 43);
 	ft_echo(args1, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 2: Print with NO SLASH N\n\n", 31);
+	write(1, "|\n", 2);
+	write(1, "TEst 2: |  Impossibile  Tremendo|\n\t|", 36);
 	ft_echo(args2, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 3: Print with NO SLASH N\n\n", 31);
+	write(1, "|\n", 2);
+	write(1, "TEst 3: | -n Impossibile  -n\n|\n\t|", 34);
 	ft_echo(args3, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 4: Print with NO SLASH N\n\n", 31);
+	write(1, "|\n", 2);
+	write(1, "TEst 4: |-n- n- -n n- n- n- n Impossibile Tremendo\n|\n\t|", 56);
 	ft_echo(args4, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 5: Print with NO SLASH N\n\n", 31);
+	write(1, "|\n", 2);
+	write(1, "TEst 5: |-na Impossibile Tremendo|\n\t|", 37);
 	ft_echo(args5, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 6: Print with NO SLASH N\n\n", 31);
+	write(1, "|\n", 2);
+	write(1, "TEst 6: |    -n -n -n -n -n -na Impossibile Tremendo\n|\n\t|", 58);
 	ft_echo(args6, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 7: Print with NO SLASH N\n\n", 31);
+	write(1, "|\n", 2);
+	write(1, "TEst 7: |\n|\n\t|", 15);
 	ft_echo(args7, NULL);
-	write(1, "\n", 1);
-	write(1, "TEst 8: Test bastardo\n\n", 18);
+	write(1, "|\n", 2);
+	write(1, "TEst 8: ||     |\n|\n\t|", 22);
 	ft_echo(args8, NULL);
-	write(1, "\n", 1);
-}*/
+	write(1, "|\n", 2);
+	write(1, "TEst 9: |-nnnnn -n -nnn -nmn -n   yis    |\n|\n\t|", 48);
+	ft_echo(args9, NULL);
+	write(1, "|\n", 2);
+}

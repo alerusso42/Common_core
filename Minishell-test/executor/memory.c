@@ -3,30 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/03 19:07:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:40:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static void	free_memory2(t_exec *exec);
-
-//REVIEW -
-/*
-	To update storage:	storage(data, STORE)
-	TO receive storage:	storage(data, RECEIVE)
-*/
-t_exec	*storage(t_exec *update, int mode)
-{
-	static t_exec	*stack;
-
-	if (mode == STORE)
-		stack = update;
-	return (stack);
-}
 
 void	*free_debug_data(t_debug_data *data)
 {
@@ -47,34 +33,30 @@ void	*free_debug_data(t_debug_data *data)
 //REVIEW - Alloc for t_exec
 int	alloc_memory(t_exec *exec, int cmd_num)
 {
-	storage(exec, STORE);
 	exec->stdin_fd = dup(0);
 	exec->stdout_fd = dup(1);
 	exec->cmd_num = cmd_num;
 	exec->commands = (char ***)ft_calloc(cmd_num + 2, sizeof(char **));
 	if (!exec->commands)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	exec->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!exec->pid_list)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	exec->builtins = (t_builtin *)ft_calloc(BUILT_N, sizeof(t_builtin));
 	if (!exec->builtins)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	exec->which_cmd = (char *)ft_calloc(cmd_num + 1, sizeof(char));
 	if (!exec->which_cmd)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	exec->here_doc_fds = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!exec->here_doc_fds)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	return (0);
 }
 
 //REVIEW - Release memory of t_exec
-void	free_memory(void)
+void	free_memory(t_exec *exec)
 {
-	t_exec	*exec;
-
-	exec = storage(NULL, RECEIVE);
 	if (!exec)
 		return ;
 	dup2(exec->stdin_fd, 0);
@@ -90,7 +72,6 @@ void	free_memory(void)
 	free(exec->which_cmd);
 	exec->which_cmd = NULL;
 	free_memory2(exec);
-	storage(NULL, STORE);
 }
 
 static void	free_memory2(t_exec *exec)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_str_win.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:24:39 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/10 19:38:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:39:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-//NOTE SDL!!!
+
 int		find_print_location(int layer, int *x, int *y);
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_death.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:52:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/10 19:37:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:31:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #else
 # include "so_long_bonus.h"
 #endif
-//NOTE SDL!!!
+
 /*
 	Slowly shows player death.
 */

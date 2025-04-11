@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:01:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:16:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int	ft_cd(char **args, t_exec *exec)
 		return (0);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	if (chdir(args[1]) != 0)
 		return (free(old_pwd), set_exit_status(exec, 1));
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (free(old_pwd), error(E_MALLOC));
+		return (free(old_pwd), error(E_MALLOC, exec));
 	pwd_update = (char **)ft_calloc(3, sizeof(char *));
 	if (!pwd_update)
-		return (free(old_pwd), free(pwd), error(E_MALLOC));
+		return (free(old_pwd), free(pwd), error(E_MALLOC, exec));
 	pwd_update[0] = NULL;
 	up_env(pwd_update, old_pwd, pwd, exec);
 	return (0);
@@ -77,13 +77,13 @@ static int	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec)
 
 	str = ft_strjoin("PWD=", pwd);
 	if (!str)
-		return (free(old_pwd), free(pwd), free(update), error(E_MALLOC));
+		return (free(old_pwd), free(pwd), free(update), error(E_MALLOC, exec));
 	update[1] = str;
 	ft_export(update, exec);
 	free(str);
 	str = ft_strjoin("OLDPWD=", old_pwd);
 	if (!str)
-		return (free(old_pwd), free(pwd), free(update), error(E_MALLOC));
+		return (free(old_pwd), free(pwd), free(update), error(E_MALLOC, exec));
 	update[1] = str;
 	ft_export(update, exec);
 	free(str);

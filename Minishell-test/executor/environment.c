@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/06 15:00:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:18:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ char	*get_pwd_address(char **env)
 //		Doubles the size of the environment.
 		Save the new size in the env_size variable.
 */
-int	expand_env(char ***env, int *env_size)
+int	expand_env(char ***env, int *env_size, t_exec *exec)
 {
 	char	**new_env;
 	int		temp;
 
 	if (cpy_env(*env, &new_env, env_size, &temp) == E_MALLOC)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	*env_size *= 2;
 	_free_matrix(*env);
 	*env = new_env;

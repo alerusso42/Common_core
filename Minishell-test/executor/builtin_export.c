@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:01:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:33:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4])
 	char	*name;
 
 	if (*exec->env_size <= *exec->last_env + 1)
-		if (expand_env(exec->env, exec->env_size) == E_MALLOC)
-			error(E_MALLOC);
+		if (expand_env(exec->env, exec->env_size, exec) == E_MALLOC)
+			error(E_MALLOC, exec);
 	name = (char *)ft_calloc(pars_data[ENV_NAME_SIZE] + 2, sizeof(char));
 	if (!name)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	_sub_strcpy(name, item, "+=", EXCL);
 	if (ft_getenv(*env, name, &where) && pars_data[ENV_NO_EQ_PLUS] != 2)
 	{
@@ -151,13 +151,13 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	{
 		(*env)[where] = remove_plus(ft_strdup(item));
 		if (!(*env)[where])
-			error(E_MALLOC);
+			error(E_MALLOC, exec);
 		*exec->last_env += 1;
 		return ;
 	}
 	cont = (char *)ft_calloc(pars_data[ENV_CONT_SIZE] + 2, sizeof(char));
 	if (!cont)
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 	skip_until_content = pars_data[ENV_NAME_SIZE] + pars_data[ENV_NO_EQ_PLUS];
 	_sub_strcpy(cont, item + skip_until_content, "", EXCL);
 	if (pars_data[ENV_NO_EQ_PLUS] == 0 || pars_data[ENV_NO_EQ_PLUS] == 1)
@@ -166,7 +166,7 @@ static void	insert(char *item, char ***env, t_exec *exec, int pars_data[4])
 	}
 	(*env)[where] = _ft_strjoin_free((*env)[where], cont);
 	if (!(*env)[where])
-		error(E_MALLOC);
+		error(E_MALLOC, exec);
 }
 
 static char	*remove_plus(char *str)

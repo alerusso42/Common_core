@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:02:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:26:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@
 	part memory, and exit the whole program.
 	It is called for serious problem, like malloc errors.
 */
-int	error(int err)
+int		error(int err, t_exec *memory)
 {
-	t_exec	*exec;
-
-	exec = storage(NULL, RECEIVE);
-	*exec->exit_status = 1;
+	*memory->exit_status = 1;
 	if (err == NONE)
 	{
 		ft_putstr_fd("Please insert an error.\n", 2);
@@ -41,7 +38,7 @@ int	error(int err)
 	{
 		ft_putstr_fd("Open critical error\n", 2);
 	}
-	return (ft_exit(NULL, exec));
+	return (ft_exit(NULL, memory));
 }
 
 /*
