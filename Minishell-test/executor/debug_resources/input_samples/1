@@ -20,26 +20,17 @@ case: make frm
 	Token = frm, 1, 0,
 	[END]
 
-case: unset USER
-[Test1, 2 token]
-Token = unset, 0, 0,
-Token = USER, 1, 0,
+case: export ciao=pippo | echo ciao
+[Test1, 5 Token]
+T = export,		0, 0,
+T = ciao=pippo,	1, 0,
+T = |, 			7, 0,
+T = echo, 		0, 0,
+T = ciao,		1, 0,
 [END]
 
-case: export USER USER=ale USER+=russo USER+=42 I_AM_SHYY
-[Test2, 6 token]
-Token = export,			0, 0,
-Token = USER, 			1, 0,
-Token = USER=ale,		1, 0,
-Token = USER+=russo,	1, 0,
-Token = USER+=42,		1, 0,
-Token = I_AM_SHYY,		1, 0,
-[END]
-
-case: env
-[Test3, 2 Token]
-T = env, 0, 0,
-T = file.txt, 3, 0,
+[Test2, 1 Token]
+T = export, 0, 0,
 [END]
 
 

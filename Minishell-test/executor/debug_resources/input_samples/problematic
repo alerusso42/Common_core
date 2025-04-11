@@ -54,3 +54,32 @@ Token = belin, 0, 0,
 Token = che, 1, 0,
 Token = bello, 1, 0,
 [END]
+
+
+case: export 2a=ciao pippo=f p
+[Test1, 3 Token]
+T = export,		0, 0,
+T = 2a=ciao,	1, 0,
+T = pippo=f, 	1, 0,
+T = p, 			1, 0,
+[END]
+
+[Test2, 1 Token]
+T = export, 0, 0,
+[END]
+
+case: export ciao=pippo | echo ciao
+[Test1, 5 Token]
+T = export,		0, 0,
+T = ciao=pippo,	1, 0,
+T = |, 			7, 0,
+T = echo, 		0, 0,
+T = ciao,		1, 0,
+[END]
+
+
+
+[Test2, 1 Token]
+T = export, 0, 0,
+[END]
+
