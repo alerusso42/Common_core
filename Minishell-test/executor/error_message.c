@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 09:26:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:50:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	is_a_valid_executable(t_exec *exec, int i)
 	DIR	*dir;
 
 	if (exec->which_cmd[i] != 0)
-		return (_NO);
+		return (_YES);
 	dir = opendir(exec->commands[i][0]);
 	if (dir)
 	{

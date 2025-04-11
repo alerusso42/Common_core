@@ -15,11 +15,31 @@ FILE = 2;
 Row are: token_content // type // priority
 
 case: make frm
-[Test0, 2 Token]
-t = make,	0, 0,
-t = frm,	1, 0,
+	[Test0, 2 token]
+	Token = make, 0, 0,
+	Token = frm, 1, 0,
+	[END]
+
+case: unset USER
+[Test1, 2 token]
+Token = unset, 0, 0,
+Token = USER, 1, 0,
 [END]
 
+case: export USER USER=ale USER+=russo USER+=42 I_AM_SHYY
+[Test2, 6 token]
+Token = export,			0, 0,
+Token = USER, 			1, 0,
+Token = USER=ale,		1, 0,
+Token = USER+=russo,	1, 0,
+Token = USER+=42,		1, 0,
+Token = I_AM_SHYY,		1, 0,
+[END]
 
+case: env
+[Test3, 2 Token]
+T = env, 0, 0,
+T = file.txt, 3, 0,
+[END]
 
 

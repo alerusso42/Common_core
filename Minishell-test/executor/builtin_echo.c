@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:44:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 12:13:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:57:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_echo(char **args, t_exec *exec)
 	i = 1;
 	print_slash_n = _YES;
 	stop_check = _NO;
-	//*exec->exit_status = 0;
+	*exec->exit_status = 0;
 	while (args[i])
 	{
 		j = 0;
@@ -95,10 +95,8 @@ int	ft_echo(char **args, t_exec *exec)
 */
 static void	is_flag(char *s, char *print_slash_n, int *j, char *stop_check)
 {
-	if ((*j == 0 || s[-1] == ' ') && \
-	s[0] == '-' && s[1] == 'n' && (is_n(s, j) || s[2] == '\0'))
+	if (s[0] == '-' && is_n(s, j))
 	{
-		*j += 1;
 		*print_slash_n = _NO;
 	}
 	else
@@ -110,14 +108,18 @@ static void	is_flag(char *s, char *print_slash_n, int *j, char *stop_check)
 
 static int	is_n(char *s, int *j)
 {
-	if (s[2] != 'n')
+	int	i;
+
+	i = 1;
+	while (s[i] == 'n')
+		++i;
+	if (s[i])
 		return (_NO);
-	++(*j);
-	while (s[*j] == 'n' && s[*j + 1] == 'n')
-		++(*j);
+	*j = i - 1;
 	return (_YES);
 }
 
+/*
 int	main()
 {
 	char	*args1[] = {"/bin/echo", "Assurdo", "Impossibile", "Tremendo", \
@@ -131,7 +133,7 @@ int	main()
 	"Tremendo", NULL};
 	char	*args6[] = {"/bin/echo", "    -n -n -n -n -n -na", "Impossibile",\
 	 "Tremendo", NULL};
-	char	*args7[] = {NULL};
+	char	*args7[] = {"/bin/echo", NULL};
 	char	*args8[] = {"/bin/echo", "|", "",\
 		"   |", NULL};
 	char	*args9[] = {"/bin/echo", "-nnnnn -n -nnn -nmn -n  ", "yis",\
@@ -146,22 +148,23 @@ int	main()
 	write(1, "TEst 3: | -n Impossibile  -n\n|\n\t|", 34);
 	ft_echo(args3, NULL);
 	write(1, "|\n", 2);
-	write(1, "TEst 4: |-n- n- -n n- n- n- n Impossibile Tremendo\n|\n\t|", 56);
+	write(1, "TEst 4: |-n- n- -n n- n- n- n Impossibile Tremendo\n|\n\t|", 55);
 	ft_echo(args4, NULL);
 	write(1, "|\n", 2);
-	write(1, "TEst 5: |-na Impossibile Tremendo|\n\t|", 37);
+	write(1, "TEst 5: | -na Impossibile Tremendo|\n\t|", 38);
 	ft_echo(args5, NULL);
 	write(1, "|\n", 2);
-	write(1, "TEst 6: |    -n -n -n -n -n -na Impossibile Tremendo\n|\n\t|", 58);
+	write(1, "TEst 6: |    -n -n -n -n -n -na Impossibile Tremendo\n|\n\t|", 57);
 	ft_echo(args6, NULL);
 	write(1, "|\n", 2);
-	write(1, "TEst 7: |\n|\n\t|", 15);
+	write(1, "TEst 7: |\n|\n\t|", 14);
 	ft_echo(args7, NULL);
 	write(1, "|\n", 2);
-	write(1, "TEst 8: ||     |\n|\n\t|", 22);
+	write(1, "TEst 8: ||     |\n|\n\t|", 21);
 	ft_echo(args8, NULL);
 	write(1, "|\n", 2);
-	write(1, "TEst 9: |-nnnnn -n -nnn -nmn -n   yis    |\n|\n\t|", 48);
+	write(1, "TEst 9: |-nnnnn -n -nnn -nmn -n   yis    |\n|\n\t|", 47);
 	ft_echo(args9, NULL);
 	write(1, "|\n", 2);
 }
+*/

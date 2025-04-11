@@ -1,5 +1,8 @@
 NAME = executor
 
+COMMON_CORE = ../../
+EXECUTOR = Minishell-test/executor
+
 SRC = 	builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c builtin_export.c \
 		builtin_pwd.c builtin_unset.c \
 		environment.c \
@@ -54,5 +57,12 @@ debug_libft:
 	$(MAKE) all -C ../../Libft/
 	cp ../../Libft/libft.a debug_resources/
 	$(MAKE) fclean -C ../../Libft/
+
+git: 
+	cd $(COMMON_CORE)
+	git add .
+	git commit -m "$(MSG)"
+	git push
+	cd $(EXECUTOR)
 
 .PHONY: fclean re clean deb all

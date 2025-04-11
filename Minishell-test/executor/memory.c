@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 09:40:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:03:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	*free_debug_data(t_debug_data *data)
 	data->fd_to_close = 0;
 	free(data->tokens);
 	data->tokens = NULL;
+	data->env = _free_matrix(data->env);
 	return (NULL);
 }
 
