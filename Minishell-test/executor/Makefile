@@ -35,7 +35,7 @@ $(OBJ_DIR):
 
 deb: $(OBJ_DIR) $(OBJ) $(OBJ_DEBUG)
 	mkdir -p $(OBJ_DIR)
-	cc -D DEBUG=1 $(FLAGS) $(OBJ_DEBUG) $(OBJ) $(DEBUG_LIBFT) -o exe.out
+	cc -D DEBUG=1 $(FLAGS) -fPIE $(OBJ_DEBUG) $(OBJ) $(DEBUG_LIBFT) -o exe.out
 
 clean:
 	rm -rf obj_executor/*.o *.out *.txt
@@ -57,7 +57,7 @@ debug_libft:
 	cp ../../Libft/libft.a debug_resources/
 	$(MAKE) fclean -C ../../Libft/
 
-git: 
+git: fclean frm
 	cd $(COMMON_CORE)
 	git add .
 	git commit -m "$(MSG)"

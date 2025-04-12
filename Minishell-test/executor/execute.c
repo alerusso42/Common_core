@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 16:46:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:43:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens);
 static int	invoke_programs(t_exec *exec, int i);
 static int	wait_everyone(t_exec *exec);
 
-//NOTE  Manda il puntatore al primo token, t_data (castato void *), 0.
+//NOTE - Il main della parte di esecuzione.
+//		Utilizzo:
+//		Manda il puntatore al primo token, t_data (castato void *), 0.
 //		execute(token, (void *)t_data, 0);
 //		execute torna sempre 0.
 //		QUANDO CHIAMI EXECUTE OGNI FILE APERTO/MEMORIA ALLOCATA DEVE ESSERE
@@ -60,7 +62,7 @@ int	execute(t_token *tokens, void *data, int debug)
 	return (0);
 }
 
-/*REVIEW - execute
+/*REVIEW - execute_loop
 
 //	1)	We iterate while there are token with a valid content;
 	2)	We set the exit status at 0;
@@ -89,13 +91,10 @@ static int	execute_loop(t_token *token, t_exec *exec)
 
 /*REVIEW - execute
 
-//	1)	We iterate while there are token with a valid content;
-	2)	We set the exit status at 0;
-	3)	We alter STDIN and STDOUT, if we do not fail to get filedatas;
-	4)		We invoke the program in a child;
-	5)	If there is a here_doc opened, we close it;
-	6)	We go to the next command block;
-	7)	We wait every children.
+//FIXME - 	Questa funzione è in work in progress, necessita pesanti modifiche
+//	per poter gestire la parte bonus del progetto, in particolare le ().
+//	In breve, passa al blocco di comandi successivo: 
+//	se il separatore è '||' o '&&', attende prima che tutti i figli finiscano.
 */
 static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 {
@@ -122,6 +121,19 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	return (0);
 }
 
+/*REVIEW - invoke_programs
+
+//	1)	If the executable is not a builtin and is invalid, we stop;
+	2)	If it is a builtin, we do it without fork.
+		exec->builtins is an array of functions;
+	3)	We fork.
+	3.1)If pid is invalid, we kill the process;
+	3.2)If pid == 0, we are in the child. We launch execve. If fails, we
+		clean the memory;
+	3.3)Else, we are in main process, and we continue;
+	4)	We save the pid in a array of pids;
+	5)	If we have printed on a pipe STDOUT, we dup the pipe STDIN.
+*/
 static int	invoke_programs(t_exec *exec, int i)
 {
 	pid_t	pid;
@@ -150,6 +162,13 @@ static int	invoke_programs(t_exec *exec, int i)
 	return (0);
 }
 
+/*REVIEW - wait_everyone
+
+//FIXME - This function does not respect bonus () priority. Binary tree(?)
+//	1)	We set an index to the last command done index;
+	2)	We wait all pids we have saved;
+	3)	We set last_command_done to i.
+*/
 static int	wait_everyone(t_exec *exec)
 {
 	int	i;
@@ -157,7 +176,7 @@ static int	wait_everyone(t_exec *exec)
 	i = exec->last_cmd_done;
 	while (exec->pid_list[i])
 	{
-		waitpid(exec->pid_list[i], &*exec->exit_status, 0);
+		waitpid(exec->pid_list[i], exec->exit_status, 0);
 		++i;
 	}
 	exec->last_cmd_done = i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:10:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/31 11:43:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 17:12:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ int	is_red_sign(int sign)
 	is_redirector_input_sign searches for:	
 										{<}
 										{<<}
+	
+	Returns 1 (_YES) on success;
+	Returns 0 (_NO) on failure.
 */
 int	is_red_input_sign(int sign)
 {
@@ -50,6 +53,9 @@ int	is_red_input_sign(int sign)
 	is_redirector_output_sign searches for:	
 										{>}
 										{>>}
+	
+	Returns 1 (_YES) on success;
+	Returns 0 (_NO) on failure.
 */
 int	is_red_output_sign(int sign)
 {
@@ -65,6 +71,9 @@ int	is_red_output_sign(int sign)
 											{|}
 											{&&}
 											{||}
+	
+	Returns 1 (_YES) on success;
+	Returns 0 (_NO) on failure.
 */
 int	is_exec_sep(int sign)
 {
@@ -77,6 +86,11 @@ int	is_exec_sep(int sign)
 	return (_NO);
 }
 
+/*REVIEW - is_a_builtin_cmd
+//
+		1)	Takes the command len;
+		2)	Searches for every builtin command.
+*/
 int	is_a_builtin_cmd(char *cmd)
 {
 	int	len;

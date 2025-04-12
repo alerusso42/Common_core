@@ -3,18 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/05 14:15:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 18:25:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static int	get_one(char **command, char **path);
+static int	get_one(t_exec *exec, char **command, char **path);
 static int	_add_sign_left(char **string, char sign);
 
+/*REVIEW - get_paths_data
+
+//		1)	We get PATH from the environment, with ft_getenv;
+		2)	If the PATH does not exits, some moron has unsetted it.
+			Bash, in this case, just run the command as it is.
+			So, for example, if there is a command named "ls" in our working
+			directory, bash will still be able to execute it.
+			So, we do the same: we just pretend anything happened, and that
+			everything is fine.
+			Live like bash. You'll live better;
+		3)	We split the PATH with ft_split, using ':' as parameter;
+		4)	We iterate throught every command stored in the matrix of argv;
+		5)	If the file is NOT a builtin and is not already a valid executable
+			(/bin/grep is already a valid executable), get it. 
+*/
 int	get_paths_data(t_exec *exec, t_token *token)
 {
 	char	*path;
@@ -25,36 +40,44 @@ int	get_paths_data(t_exec *exec, t_token *token)
 		return (0);
 	exec->path = ft_split(path, ':');
 	if (!exec->path)
-		return (E_MALLOC);
+		error(E_MALLOC, exec);
 	cmd_index = 0;
 	while (exec->commands[cmd_index])
 	{
 		if (exec->which_cmd[cmd_index] == _NO && access(token->content, X_OK))
 		{
-			if (get_one(exec->commands[cmd_index], exec->path) == E_MALLOC)
-				return (E_MALLOC);
+			get_one(exec, exec->commands[cmd_index], exec->path);
 		}
 		++cmd_index;
 	}
 	return (0);
 }
 
-/*
-	
+/*REVIEW - get_one
+
+//		1)	 Add a '/' sign left to the command ("ls" becomes "/ls");
+		2)	We iterate for every possible path;
+		3)	We strjoin the path with the command;
+		4)	We use access to see if the file in that path is a valid
+			executable. If it is, we free the old command, set the new
+			path as argv[0];
+		5)	Else, we free the current strjoined string, and we continue;
+		6)	In case of failure, next checks will prevent execve from being
+			launched for that command block.
 */
-static int	get_one(char **command, char **path)
+static int	get_one(t_exec *exec, char **command, char **path)
 {
 	char	*temp;
 	int		i;
 
 	i = 0;
 	if (_add_sign_left(command, '/') != 0)
-		return (E_MALLOC);
+		error(E_MALLOC, exec);
 	while (path[i])
 	{
 		temp = ft_strjoin(path[i], *command);
 		if (!temp)
-			return (E_MALLOC);
+			error(E_MALLOC, exec);
 		if (access(temp, X_OK) == 0)
 		{
 			free(*command);
@@ -67,12 +90,17 @@ static int	get_one(char **command, char **path)
 	return (0);
 }
 
-//	I have to reallocate the entire fucking string 
+// 	I have to reallocate the entire fucking string
 //	to put a fucking '/'
 //	calm down Ale calm down
 //	It's all ok
 //	Just string management
 //	Nothing to worry about chill
+/*REVIEW - _add_sign_left
+
+//		Add a sign left in a string.
+		String is reallocated.
+*/
 static int	_add_sign_left(char **string, char sign)
 {
 	size_t	len;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   general3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:39:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:02:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 17:15:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-/*
+/*REVIEW - _sub_strlen
 	Count until the char is in the charset.
 	TWO MODES:
 
@@ -43,7 +43,7 @@ int	_sub_strlen(char *s, char *charset, int mode)
 	return (i);
 }
 
-/*
+/*REVIEW - _sub_strcpy
 	Copy until the char is in the charset.
 	TWO MODES:
 
@@ -77,6 +77,10 @@ int	_sub_strcpy(char *dest, char *src, char *charset, int mode)
 	return (i);
 }
 
+/*REVIEW - double_cmp
+	A strncmp with double comparison.
+	It is possible to set a number of chars to ignore for second string.
+*/
 int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
 {
 	if (ft_strncmp(s1, s2, ft_strlen(s2) - ignore_n_char))
@@ -86,8 +90,9 @@ int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
 	return (0);
 }
 
-/*
-Cut a string from start to end (included).
+/*REVIEW - cut_string
+
+//Cut a string from start to end (included).
 	
 Example:
 
@@ -125,6 +130,10 @@ char	*_cut_string(char *string, size_t start, size_t end)
 	return (string);
 }
 
+/*REVIEW - cut_string
+
+//	Set exit status. Returns it.
+*/
 int	set_exit_status(t_exec *exec, int exit_status)
 {
 	*exec->exit_status = exit_status;

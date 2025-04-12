@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 09:29:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 18:11:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@ static void	find_last_file(t_exec *exec, t_token *token);
 static int	add_one(t_exec *exec, t_token *token);
 static int	get_here_doc_file(char *limiter, t_exec *exec);
 
+/*REVIEW - get_file_data
+
+//	1)	We find the last file in the command block.
+		Example: (cat < file1.txt <file2.txt >file3.txt >file4.txt)
+		STDIN: 	file2.txt;
+		STDOUT: file4.txt.
+		See find_last_file below for more information.
+	2)	We iterate for all token contents;
+	3)	If we find a execution separator (|, &&, ||), we stop;
+	4)	If the token is a redictor sign (>, >>, <, <<), we
+		manage that file (see add_one below);
+	5)	If something goes wrong (non existing files), we return error.
+		This error will abort the command block, preventing execution;
+	6)	If find_last_file does not find any OUTPUT redirections, and if
+		there are NO pipes, dup the regular STDOUT;
+	7)	If find_last_file does not find any OUTPUT redirections, and if
+		there are pipes, dup the STDOUT side of the pipe;
+	8)	If there are redirections on STDIN or STDOUT, add_one will manage
+		them.
+*/
 int	get_file_data(t_exec *exec, t_token *token)
 {
 	find_last_file(exec, token);
@@ -40,6 +60,12 @@ int	get_file_data(t_exec *exec, t_token *token)
 	return (0);
 }
 
+/*REVIEW - find_last_file
+
+//	Finds last STDIN redirector and STDOUT redirector in command block.
+	Command blocks are divided by execution separator (|, &&, ||).
+	
+*/
 static void	find_last_file(t_exec *exec, t_token *token)
 {
 	exec->last_in = -1;
@@ -54,8 +80,22 @@ static void	find_last_file(t_exec *exec, t_token *token)
 	}
 }
 
-//	RED_IN avrà un ruolo importante nelle parentesi...
+//FIXME - 	RED_IN avrà un ruolo importante nelle parentesi...
 //	grep -v .c <(ls | grep -v .h)
+//
+/*REVIEW - add_one
+
+//	1)	If REDIRECT_INPUT (RED_IN): open file with INFILE permissions;
+		If HERE_DOC:				take fd in here_docs array;
+		If OUTFILE_TRUNC:			open file with O_T permissions;
+		If OUTFILE_APPEND:			open file with O_A permissions.
+	
+	2)	If fd is invalid, and the token is an outfile: stop the whole program;
+	3)	If fd is invalid, and the token is an infile: stop the cmd block;
+	4)	If the token is the last STDIN/STDOUT redirector:
+		dup the fd on STDOUT if is a redirect output sign, else in STDIN;
+	5)	If fd is not a here_doc fd, close it.
+*/
 static int	add_one(t_exec *exec, t_token *token)
 {
 	int	fd;
@@ -68,6 +108,8 @@ static int	add_one(t_exec *exec, t_token *token)
 		fd = open(token->content, OUTFILE_TRUNC, 0666);
 	else
 		fd = open(token->content, OUTFILE_APPEND, 0666);
+	if (fd == -1 && (token->type == RED_OUT || token->type == RED_O_APPEND))
+		error(E_OPEN, exec);
 	if (fd == -1)
 		return (bash_message(E_OPEN, token->content));
 	if ((token->id == exec->last_in && is_red_input_sign(token->type)) || \
@@ -80,6 +122,19 @@ static int	add_one(t_exec *exec, t_token *token)
 	return (close(fd), 0);
 }
 
+/*REVIEW - get_here_doc_file
+
+//	1)	We open a file named "here_doc";
+	2)	We write "> ": a bash syntax string that means "Write here, user".
+		The write process goes line per line. If user gives a special
+		character, called LIMITER, the write process stops.
+		Limiter is not written in here doc file.
+	3)	We close and open here_doc file to move the cursor to the start
+		of the line;
+	4)	We return the new fd, if there are no errors.
+		It will be saved in a here_doc_fds array, and closed at the end
+		of its own command block.
+*/
 static int	get_here_doc_file(char *limiter, t_exec *exec)
 {
 	int		fd;
@@ -100,7 +155,7 @@ static int	get_here_doc_file(char *limiter, t_exec *exec)
 		line = get_next_line_bonus(0);
 	}
 	close(fd);
-	open("here_doc", INFILE_DOC, 0666);
+	fd = open("here_doc", INFILE_DOC, 0666);
 	if (fd < 0)
 		return (free(line), unlink("here_doc"), error(E_OPEN, exec));
 	if (!line)
@@ -108,6 +163,18 @@ static int	get_here_doc_file(char *limiter, t_exec *exec)
 	return (free(line), unlink("here_doc"), fd);
 }
 
+/*REVIEW - prepare_here_docs
+
+//		For every command block, we open all here_docs.
+		However, we need to keep the fd only if the here_doc is 
+		the last STDIN redirector.
+		1)	We iterate through every command line content;
+		2)	We find the last file for the current command block;
+		3)	We iterate through every token of the command block;
+		4)	We gain the fd of the here doc;
+		5)	If the current token here_doc is not the last STDIN redirector,
+			we close it instantly, and reset here_doc_fds[i] to zero.
+*/
 void	prepare_here_docs(t_exec *exec, t_token *token)
 {
 	int	i;

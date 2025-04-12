@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:02:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:21:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	erase_one(char *item, char ***env, t_exec *exec)
 	int	item_len;
 	int	env_len;
 
-	if (!(*env)[0])
+	if (!*env || !(*env)[0])
 		return ;
 	i = -1;
 	item_len = ft_strlen(item);

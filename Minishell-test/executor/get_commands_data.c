@@ -3,19 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   get_commands_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 09:28:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 17:35:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int			get_one(t_exec *exec, t_token **token, int cmd_num);
-int			count_arguments(t_token *token);
+static int	get_one(t_exec *exec, t_token **token, int cmd_num);
+static int	count_arguments(t_token *token);
 static void	get_builtin_functions(t_exec *exec);
 
+/*REVIEW - get_commands_data
+
+//	1)	Stores data in exec->builtins, an array of functions.
+		See get_builtin_functions below;
+	2)	Iterate for all commands line. When finding a command,
+		increase the cmd_num index;
+	3)	If a token is a COMMAND, we alloc and set a matrix (an argv)
+		for it (see get_one);
+	4)	We check if it is a builtin. If it is, we store the value of
+		the builtin in the exec->which_cmd array, in position [cmd_num].
+		If it is not a builtin, 0 (_NO) will be saved.
+		See enum e_builtin for every builtin value;
+	5)	If the token is not a COMMAND, we just go to next token.
+		In add_one, we go to next token that is not a COMMAND or ARGUMENT.
+*/
 int	get_commands_data(t_exec *exec, t_token *token)
 {
 	int	cmd_num;
@@ -26,8 +41,7 @@ int	get_commands_data(t_exec *exec, t_token *token)
 	{
 		if (token->type == COMMAND)
 		{
-			if (get_one(exec, &token, cmd_num) != 0)
-				error(E_MALLOC, exec);
+			get_one(exec, &token, cmd_num);
 			exec->which_cmd[cmd_num] = \
 			is_a_builtin_cmd(exec->commands[cmd_num][0]);
 			++cmd_num;
@@ -38,7 +52,22 @@ int	get_commands_data(t_exec *exec, t_token *token)
 	return (0);
 }
 
-int	get_one(t_exec *exec, t_token **token, int cmd_num)
+/*REVIEW - get_one
+
+//	1)	Stores data in exec->builtins, an array of functions.
+		See get_builtin_functions below;
+	2)	Iterate for all commands line. When finding a command,
+		increase the cmd_num index;
+	3)	If a token is a COMMAND, we alloc and set a matrix (an argv)
+		for it (see get_one);
+	4)	We check if it is a builtin. If it is, we store the value of
+		the builtin in the exec->which_cmd array, in position [cmd_num].
+		If it is not a builtin, 0 (_NO) will be saved.
+		See enum e_builtin for every builtin value;
+	5)	If the token is not a COMMAND, we just go to next token.
+		In add_one, we go to next token that is not a COMMAND or ARGUMENT.
+*/
+static int	get_one(t_exec *exec, t_token **token, int cmd_num)
 {
 	int	command_argc;
 	int	i;
@@ -63,7 +92,17 @@ int	get_one(t_exec *exec, t_token **token, int cmd_num)
 	return (0);
 }
 
-int	count_arguments(t_token *token)
+/*REVIEW - count_arguments
+
+//	1)	Counter starts from 1, because elements starts from 0 (argv[0]);
+	2)	We counts every argument, considering parenthesis;
+	3)	If the token is a execution separator (|, &&, ||) or not exists,
+		stop the counting;
+	4)	If token priority is different than its previous,
+		stop the counting;
+	5)	If token is a COMMAND or ARGUMENT, increase counter.
+*/
+static int	count_arguments(t_token *token)
 {
 	int	counter;
 
@@ -73,7 +112,7 @@ int	count_arguments(t_token *token)
 	{
 		if (is_exec_sep(token->type) == _YES || !token->content)
 			break ;
-		else if (token->content && token->prior != (token + 1)->prior)
+		else if (token->id != 0 && token->prior != (token - 1)->prior)
 			break ;
 		else if (token->type == COMMAND || token->type == ARGUMENT)
 			counter++;
@@ -82,6 +121,10 @@ int	count_arguments(t_token *token)
 	return (counter);
 }
 
+/*REVIEW - get_builtin_functions
+
+//	Self-explanatory.
+*/
 static void	get_builtin_functions(t_exec *exec)
 {
 	exec->builtins[B_ECHO] = ft_echo;

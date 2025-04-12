@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/01 15:53:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 18:33:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	main(void)
 }
 */
 
-/*
-	A lighter and faster version of my ft_printf project.
+/*REVIEW -	_fd_printf
 
+//	A lighter and faster version of my ft_printf project.
 	It takes an fd as argument.
 */
 int	_fd_printf(int fd, const char *str, ...)

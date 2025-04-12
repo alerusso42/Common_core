@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 14:50:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:25:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 //REVIEW - error
-
+//
 //	error prints the errore type, then free all the memory, including parsing
 	part memory, and exit the whole program.
 	It is called for serious problem, like malloc errors.
@@ -42,7 +42,7 @@ int		error(int err, t_exec *memory)
 }
 
 /*
-//REVIEW - error
+//REVIEW - bash_message
 
 //	bash_message prints the error type, showing, in some cases,
 	what file cause the error.
@@ -73,6 +73,15 @@ int	bash_message(int message, char *file)
 	return (1);
 }
 
+/*
+//REVIEW - is_a_valid_executable
+
+	This function is launched before command execution.
+	It checks the executability of the program, and prints a bash_message if:
+
+	1)	The executable is a directory 	(Exit status 126);
+	2)	There executable does not exist (Exit status 127).
+*/
 int	is_a_valid_executable(t_exec *exec, int i)
 {
 	DIR	*dir;
@@ -84,11 +93,13 @@ int	is_a_valid_executable(t_exec *exec, int i)
 	{
 		bash_message(E_IS_DIRECTORY, exec->commands[i][0]);
 		closedir(dir);
+		set_exit_status(exec, 126);
 		return (_NO);
 	}
 	else if (access(exec->commands[i][0], F_OK | X_OK) != 0)
 	{
 		bash_message(E_CMD_NOTFOUND, exec->commands[i][0]);
+		set_exit_status(exec, 127);
 		return (_NO);
 	}
 	return (_YES);

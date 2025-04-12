@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 13:55:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:26:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 //REVIEW - ft_exit
 
 //		Operations:
-		1)	We update execution storage (important if we are in a fork), 
-		A getter used by free_memory.
-		2)	We save exit status, and free everything.
-		3)	We exit, with last exit status.
+		1)	We save exit status, and free everything.
+		2)	We exit, with last exit status.
 */
 int	ft_exit(char **args, t_exec *exec)
 {

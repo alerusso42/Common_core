@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   memory2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:17:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/07 17:07:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 18:30:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
+/*REVIEW - get_main_struct_data
+
+//		This function is a bridge between Minishell parsing part by ftersill
+		or execution debug program.
+*/
 void	get_main_struct_data(t_exec *exec, void *data, int debug)
 {
 	t_debug_data	*debug_data;
@@ -31,6 +36,11 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 	(void)dati_da_france;
 }
 
+/*REVIEW - close_and_reset
+
+//		1)	Close an fd;
+		2)	Sets it to zero.
+*/
 void	close_and_reset(int *fd)
 {
 	if (*fd >= 3)

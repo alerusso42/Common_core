@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 09:18:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:18:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
+//NOTE -	TO USE THESE FUNCTION, YOU MUST USE cpy_env FIRST!!!
+//			We need to copy the environment to heap first, and saving the
+//			new environment, its size and its last element.
+//			Execution part needs these three variables to work properly.
+//
+//
+//NOTE - Usage: give the environment taken in main;
+//				the address of a char** variable, for the copied environment; 
+//				the address of an int variable, that will store the env size;
+//				the address of an int variable, that will store env last elem.
+/*
+//REVIEW - cpy_env
+
+//		Operations:
+		1)	Finds the search string in the environment matrix, skipping '=';
+		2)	Where, if not NULL, is set to i if env[i], otherwise to -1;
+		3)	Returns env[i], that MUST NOT BE FREED.
+*/
 int	cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env)
 {
 	int	i;
@@ -41,15 +59,17 @@ int	cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env)
 	return (0);
 }
 
-//NOTE - Usage: give **environment (NOT ADDRESS), the string to search, 
-//				an optional int ptr where, if not NULL, will be stored
+//NOTE - Returns the content of an item in the environment, if exist. 
+//				give **environment (NOT ADDRESS);
+//				the string to search; 
+//				an optional int ptr. If not NULL, it will be given the
 //				index of the env element, or -1 if not found.
 //				You can safely pass it to NULL.
 //NOTE - YOU MUST NOT FREE THE RETURNED STRING! It's env memory!!!
 
 /*
-//REVIEW - get_pwd_address
-
+//REVIEW - ft_getenv
+//
 //		Operations:
 		1)	Finds the search string in the environment matrix, skipping '=';
 		2)	Where, if not NULL, is set to i if env[i], otherwise to -1;
@@ -76,9 +96,9 @@ char	*ft_getenv(char **env, char *search, int *where)
 	return (env[i]);
 }
 
-//NOTE - Usage: give **environment (NOT ADDRESS), returns pwd location.
+//NOTE - 	Returns this stuff: "~/42projects/Minishell$"
+//			Usage: give **environment (NOT ADDRESS), returns pwd location.
 //NOTE - YOU MUST FREE THE RETURNED STRING!	If NULL is returned, is E_MALLOC!
-
 /*
 //REVIEW - get_pwd_address
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 15:03:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 18:27:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	free_memory2(t_exec *exec);
 
+//REVIEW - Free for data used in execution Minishell part debug program
 void	*free_debug_data(t_debug_data *data)
 {
 	data->matrix = _free_three_d_matrix(data->matrix);
@@ -55,7 +56,7 @@ int	alloc_memory(t_exec *exec, int cmd_num)
 	return (0);
 }
 
-//REVIEW - Release memory of t_exec
+//REVIEW - Release memory of t_exec. Restores STDIN and STDOUT.
 void	free_memory(t_exec *exec)
 {
 	if (!exec)
@@ -75,6 +76,8 @@ void	free_memory(t_exec *exec)
 	free_memory2(exec);
 }
 
+//REVIEW - 	This part is useless. It is put just to be sure all junk 
+//			has been trashed.
 static void	free_memory2(t_exec *exec)
 {
 	int	i;

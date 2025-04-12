@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/11 09:34:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/12 17:00:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,6 @@ enum e_permissions
 	INFILE_DOC = O_RDWR | O_CREAT,
 	OUTFILE_TRUNC = O_RDWR | O_CREAT | O_TRUNC,
 	OUTFILE_APPEND = O_RDWR | O_CREAT | O_APPEND,
-};
-
-enum e_storage
-{
-	STORE,
-	RECEIVE,
-	_FREE,	
 };
 
 enum e_exec_errors
