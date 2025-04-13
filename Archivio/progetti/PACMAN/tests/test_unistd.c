@@ -36,10 +36,24 @@ Available mode strings:
 #define POKEDEX "/workspaces/Common_core/getnextline/updated_pokedex.txt"
 int	main(void)
 {
-	SDL_RWops	*fd;
+	SDL_RWops		*fd;
+	unsigned char	*str;
+	int				size;
+	int				i;
 
 	fd = SDL_RWFromFile(POKEDEX, "a+");
 	if (!fd)
-		return (SDL_T)
+		return (1);
+	size = 100;
+	str = SDL_malloc(size);
+	if (!str)
+		return (2);
+	i = 0;
+	while (i++ != size)
+		str[i] = SDL_ReadU8(fd);
 	SDL_RWclose(fd);
+	str[i] = 0;
+	i = 0;
+	while (str[i])
+		SDL_RWwrite();
 }
