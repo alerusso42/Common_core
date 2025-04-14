@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:24:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 20:04:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 23:35:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,35 @@
 
 static int	find_directory(char **dir_path, char **old_str);
 static int	get_start_end(char **start_with, char **end_with, char *old_str);
-static int	dir_size(char **to_save, char *dir_path);
-int			dir_check(char *to_save, char *dir_path, char *start_with, \
-	char *end_with);
-char		*fill_occurrences(char *to_save, char *dir_path, char *old_str);
+static int	dir_size(int *size, char *dir_path);
+static void	search_len(t_wildcard *wdata);
+char		*fill_occurrences(t_wildcard *wdata);
 
 int	convert_wildcard(char *old_str, char **new_str)
 {
-	char	*temp;
-	char	*dir_path;
-	char	*start_with;
-	char	*end_with;
-	char	*to_save;
+	t_wildcard	wdata;
 
-	temp = old_str;
+	wdata = (t_wildcard){0};
+	wdata.old_str = old_str;
 	*new_str = NULL;
 	if (!ft_strchr(old_str, '*'))
 		return (_fd_printf(2, "I see no * in |%s|, sir\n", old_str));
-	if (find_directory(&dir_path, &old_str) == E_MALLOC)
+	if (find_directory(&wdata.dir_path, &old_str) == E_MALLOC)
 		return (E_MALLOC);
-	if (get_start_end(&start_with, &end_with, old_str) == E_MALLOC)
-		return (E_MALLOC);
-	to_save = NULL;
-	if (dir_size(&to_save, dir_path) != 0)
-		return (E_MALLOC);
-	if (dir_check(to_save, dir_path, start_with, end_with) != 0)
-		*new_str = ft_strdup(temp);
+	if (get_start_end(&wdata.start, &wdata.end, old_str) == E_MALLOC)
+		return (free(wdata.dir_path), E_MALLOC);
+	search_len(&wdata);
+	dir_size(&wdata.dir_size, wdata.dir_path);
+	if (wdata.dir_size == 0)
+		*new_str = ft_strdup(wdata.old_str);
 	else
-		*new_str = fill_occurrences(to_save, dir_path, temp);
-	temp = to_save;
+		*new_str = fill_occurrences(&wdata);
+	free(wdata.dir_path);
+	free(wdata.start);
+	free(wdata.end);
 	if (!*new_str)
-		return (free(start_with), free(end_with), free(temp), E_MALLOC);
-	return (free(start_with), free(end_with), free(temp), 0);
+		return (E_MALLOC);
+	return (0);
 }
 
 static int	find_directory(char **dir_path, char **old_str)
@@ -53,19 +50,22 @@ static int	find_directory(char **dir_path, char **old_str)
 	int	i;
 
 	i = 0;
-	while ((*old_str)[i] && (*old_str)[i] != '/')
+	while ((*old_str)[i])
 		++i;
-	if (!(*old_str)[i])
+	i -= (i != 0);
+	while (i != 0 && (*old_str)[i] != '/')
+		--i;
+	if (i == 0)
 	{
 		*dir_path = ft_strdup("./");
 		if (!*dir_path)
 			return (E_MALLOC);
 		return (0);
 	}
-	*dir_path = ft_calloc(i + 1, sizeof(char));
+	*dir_path = ft_calloc(i + 2, sizeof(char));
 	if (!*dir_path)
 		return (E_MALLOC);
-	ft_strlcpy(*dir_path, *old_str, i);
+	ft_strlcpy(*dir_path, *old_str, i + 2);
 	*old_str += i + 1;
 	return (0);
 }
@@ -91,31 +91,39 @@ static int	get_start_end(char **start_with, char **end_with, \
 	if (*start_with)
 		_sub_strcpy(*start_with, old_str, "*", EXCL);
 	if (*end_with)
-		_sub_strcpy(*end_with, old_str + half, "*", EXCL);
+		_sub_strcpy(*end_with, old_str + half + 1, "", EXCL);
 	return (0);
 }
 
-static int	dir_size(char **to_save, char *dir_path)
+static void	search_len(t_wildcard *wdata)
 {
-	int				i;
+	if (wdata->start)
+		wdata->start_len = ft_strlen(wdata->start);
+	else
+		wdata->start_len = 0;
+	if (wdata->end)
+		wdata->end_len = ft_strlen(wdata->end);
+	else
+		wdata->end_len = 0;
+}
+
+static int	dir_size(int *size, char *dir_path)
+{
 	DIR				*dir;
 	struct dirent	*file;
 
-	i = 0;
+	*size = 0;
 	dir = opendir(dir_path);
 	if (!dir)
 		return (E_WILDCARD_NOTFOUND);
 	file = readdir(dir);
 	while (file)
 	{
-		++i;
+		++(*size);
 		file = readdir(dir);
 	}
-	*to_save = ft_calloc(i + 1, sizeof(char));
-	if (!*to_save)
-		return (closedir(dir), E_MALLOC);
-	(*to_save)[i] = _STOP;
-	return (closedir(dir), 0);
+	closedir(dir);
+	return (0);
 }
 
 /*
@@ -126,7 +134,7 @@ debug_resources/libft.a
 */
 int	main()
 {
-	char	*test1 = "*";
+	char	*test1 = "m*.c";
 	char	*test2 = "bu*";
 	char	*test3 = "*.c";
 	char	*result;

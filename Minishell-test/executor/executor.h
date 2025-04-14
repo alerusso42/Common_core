@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 18:54:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 22:25:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,17 @@ struct s_exec
 	int				at_least_one_pipe:1;
 	int				debug:1;
 };
+
+typedef struct s_wildcard
+{
+	char	*old_str;
+	char	*start;
+	char	*end;
+	char	*dir_path;
+	int		start_len;
+	int		end_len;
+	int		dir_size;
+}t_wildcard;
 
 typedef struct s_debug_data
 {

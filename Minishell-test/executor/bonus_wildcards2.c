@@ -6,99 +6,66 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:11:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 20:08:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 22:54:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void	search_len(int *start_len, char *start, int *end_len, char *end);
-static int	fill_matrix(char *dir_path, char **matrix, char *to_save);
+static int	fill_matrix(t_wildcard *wdata, char **matrix);
+static int	check_one(t_wildcard *wdata, char *file);
 
-int	dir_check(char *to_save, char *dir_path, \
-	char *start_with, char *end_with)
-{
-	DIR				*dir;
-	struct dirent	*file;
-	int				i;
-	int				start_len;
-	int				end_len;
-
-	dir = opendir(dir_path);
-	if (!dir)
-		return (E_OPEN);
-	i = 0;
-	search_len(&start_len, start_with, &end_len, end_with);
-	file = readdir(dir);
-	while (file)
-	{
-		if ((!start_with || !ft_strncmp(start_with, file->d_name, start_len))\
-		 && (!end_with || !_reverse_strncmp(end_with, file->d_name, end_len)))
-			to_save[i++] = _YES;
-		else
-			to_save[i++] = _NO;
-		file = readdir(dir);
-	}
-	return (closedir(dir), 0);
-}
-
-static void	search_len(int *start_len, char *start, int *end_len, char *end)
-{
-	if (start)
-		*start_len = ft_strlen(start);
-	else
-		*start_len = 0;
-	if (end)
-		*end_len = ft_strlen(end);
-	else
-		*end_len = 0;
-}
-
-char	*fill_occurrences(char *to_save, char *dir_path, \
-	char *old_str)
+char	*fill_occurrences(t_wildcard *wdata)
 {
 	char	**matrix;
 	char	*new_str;
-	int		matrix_len;
 
-	matrix_len = 0;
-	while (to_save[matrix_len] != _STOP)
-		++matrix_len;
-	if (!matrix_len)
-		return (ft_strdup(old_str));
-	matrix = ft_calloc(matrix_len + 1, sizeof(char *));
+	matrix = ft_calloc(wdata->dir_size + 1, sizeof(char *));
 	if (!matrix)
 		return (NULL);
-	if (fill_matrix(dir_path, matrix, to_save))
+	if (fill_matrix(wdata, matrix))
 		return (_free_matrix(matrix), NULL);
+	if (wdata->dir_size == 0)
+		return (_free_matrix(matrix), ft_strdup(wdata->old_str));
 	new_str = _reverse_split(matrix, ' ');
 	if (!new_str)
 		return (_free_matrix(matrix), NULL);
 	return (_free_matrix(matrix), new_str);
 }
 
-static int	fill_matrix(char *dir_path, char **matrix, char *to_save)
+static int	fill_matrix(t_wildcard *wdata, char **matrix)
 {
 	DIR				*dir;
 	int				i;
 	struct dirent	*file;
 
-	dir = opendir(dir_path);
+	dir = opendir(wdata->dir_path);
 	if (!dir)
 		return (E_OPEN);
 	i = 0;
 	file = readdir(dir);
 	while (file)
 	{
-		if (to_save[i])
+		if (check_one(wdata, file->d_name))
 		{
 			matrix[i] = ft_strdup(file->d_name);
 			if (!matrix[i])
-				return (E_MALLOC);
+				return (closedir(dir), E_MALLOC);
 			++i;
 		}
 		file = readdir(dir);
 	}
+	wdata->dir_size = i;
 	closedir(dir);
 	return (0);
+}
+
+static int	check_one(t_wildcard *wdata, char *file)
+{
+	
+	if ((!wdata->start || !ft_strncmp(wdata->start, file, wdata->start_len))\
+	 && (!wdata->end || !_reverse_strncmp(wdata->end, file, wdata->end_len)))
+		return (_YES);
+	else
+		return (_NO);
 }

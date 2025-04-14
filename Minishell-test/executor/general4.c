@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 20:16:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 23:09:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ int	_reverse_strncmp(char *s1, char *s2, int len)
 		++i;
 	while (s2[j])
 		++j;
-	while (!diff && len-- && i != 0 && j != 0)
+	while (!diff && len && i != 0 && j != 0)
 	{
-		diff = s1[i--] != s2[j]--;
+		diff = s1[i--] != s2[j--];
+		len--;
 	}
 	return (len + diff);
 }
