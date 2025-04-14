@@ -55,3 +55,24 @@ Token = che, 1, 0,
 Token = bello, 1, 0,
 [END]
 
+
+#Esecuzione senza valgrind/gdb dà output strano
+case: make frm
+	[Test0, 2 token]
+	Token = make, 0, 0,
+	Token = frm, 1, 0,
+	[END]
+
+case: export ciao=pippo | echo ciao
+[Test1, 6 Token]
+T = export,		0, 0,
+T = ciao=pippo,	1, 0,
+T = |, 			7, 0,
+T = echo, 		0, 0,
+T = ciao,		1, 0,
+[END]
+
+[Test2, 1 Token]
+T = export, 0, 0,
+[END]
+

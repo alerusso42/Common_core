@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:10:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 17:12:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:32:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	is_red_sign(int sign)
 	else if (sign == RED_O_APPEND)
 		return (_YES);
 	else if (sign == HERE_DOC)
+		return (_YES);
+	else if (sign == RED_SUBSHELL)
 		return (_YES);
 	return (_NO);
 }

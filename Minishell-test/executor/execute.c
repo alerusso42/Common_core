@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 16:43:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:17:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	execute(t_token *tokens, void *data, int debug)
 {
 	t_exec	exec;
 
+	merge_tokens(tokens, debug);
 	exec = (t_exec){0};
 	get_main_struct_data(&exec, data, debug);
 	if (!tokens)
@@ -67,10 +68,11 @@ int	execute(t_token *tokens, void *data, int debug)
 //	1)	We iterate while there are token with a valid content;
 	2)	We set the exit status at 0;
 	3)	We alter STDIN and STDOUT, if we do not fail to get filedatas;
-	4)		We invoke the program in a child;
+	4)	We invoke the program in a child;
 	5)	If there is a here_doc opened, we close it;
-	6)	We go to the next command block;
-	7)	We wait every children.
+	6)	If there is a STDIN pipe opened, we dup it;
+	7)	We go to the next command block;
+	8)	We wait every children.
 */
 static int	execute_loop(t_token *token, t_exec *exec)
 {
@@ -81,9 +83,13 @@ static int	execute_loop(t_token *token, t_exec *exec)
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
 		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
-		if (goto_next_command_block(exec, &token) != 0)
-			break ;
+		if (exec->pipe_fds[0])
+		{
+			dup2(exec->pipe_fds[0], 0);
+			close_and_reset(&exec->pipe_fds[0]);
+		}
 		exec->cmd_num++;
+		goto_next_command_block(exec, &token);
 	}
 	wait_everyone(exec);
 	return (0);
@@ -91,7 +97,7 @@ static int	execute_loop(t_token *token, t_exec *exec)
 
 /*REVIEW - execute
 
-//FIXME - 	Questa funzione è in work in progress, necessita pesanti modifiche
+//FIXME - 	Questa funzione è in work in progress, necessita modifiche
 //	per poter gestire la parte bonus del progetto, in particolare le ().
 //	In breve, passa al blocco di comandi successivo: 
 //	se il separatore è '||' o '&&', attende prima che tutti i figli finiscano.
@@ -104,7 +110,9 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	}
 	if ((*tokens)->type == AND || (*tokens)->type == OR)
 	{
-		while (((*tokens)->content) && \
+		wait_everyone(exec);
+		while (((*tokens)->content && \
+		(*tokens)->type != AND && (*tokens)->type != OR) || \
 		(((*tokens)->type == AND && *exec->exit_status != 0) || \
 		((*tokens)->type == OR && *exec->exit_status == 0)))
 		{
@@ -112,9 +120,6 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 				exec->cmd_num++;
 			++(*tokens);
 		}
-		if (!(*tokens)->content)
-			return (1);
-		wait_everyone(exec);
 	}
 	if ((*tokens)->content)
 		++(*tokens);
@@ -148,35 +153,34 @@ static int	invoke_programs(t_exec *exec, int i)
 		error(E_FORK, exec);
 	else if (pid == 0)
 	{
+		close_and_reset(&exec->pipe_fds[0]);
 		execve(exec->commands[i][0], exec->commands[i], *exec->env);
 		return (ft_exit(NULL, exec), 1);
 	}
 	exec->pid_list[i] = pid;
-	if (exec->pipe_fds[0])
-	{
-		dup2(exec->pipe_fds[0], 0);
-		close(exec->pipe_fds[0]);
-		dup2(exec->stdout_fd, 1);
-		exec->pipe_fds[0] = 0;
-	}
 	return (0);
 }
 
 /*REVIEW - wait_everyone
 
-//FIXME - This function does not respect bonus () priority. Binary tree(?)
-//	1)	We set an index to the last command done index;
-	2)	We wait all pids we have saved;
-	3)	We set last_command_done to i.
+//	1)	We reset STDIN and STDOUT;
+	2)	We set an index to the last command done index;
+	3)	We wait all pids until last cmd done;
+	4)	If a pid exist and it's the last command, update the exit status;
+	5)	We set last_command_done to i.
 */
 static int	wait_everyone(t_exec *exec)
 {
 	int	i;
 
+	dup2(exec->stdin_fd, 0);
+	dup2(exec->stdout_fd, 0);
 	i = exec->last_cmd_done;
-	while (exec->pid_list[i])
+	while (i != exec->cmd_num)
 	{
-		waitpid(exec->pid_list[i], exec->exit_status, 0);
+		if (exec->pid_list[i])
+			waitpid(exec->pid_list[i], exec->exit_status, 0);
+		exec->pid_list[i] = 0;
 		++i;
 	}
 	exec->last_cmd_done = i;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 18:33:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:07:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	_fd_printf(int fd, const char *str, ...)
 				print("/UNKNOWN SPECIFIER/", fd);
 		}
 		else
-			write(1, &str[index], 1);
+			write(fd, &str[index], 1);
 		++index;
 	}
 	va_end(ptr);

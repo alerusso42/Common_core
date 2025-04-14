@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 18:11:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:47:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static int	get_here_doc_file(char *limiter, t_exec *exec);
 */
 int	get_file_data(t_exec *exec, t_token *token)
 {
+	int	file_not_found;
+
+	file_not_found = 0;
 	find_last_file(exec, token);
-	while (token->content)
+	while (token->content && !is_exec_sep(token->type))
 	{
-		if (is_exec_sep(token->type))
-			break ;
-		else if (is_red_sign(token->type))
-			if (add_one(exec, token) != 0)
-				return (1);
+		if (!file_not_found && is_red_sign(token->type))
+			file_not_found = add_one(exec, token);
 		++token;
 	}
 	if (exec->last_out == -1 && token->type != PIPE)
@@ -54,10 +54,9 @@ int	get_file_data(t_exec *exec, t_token *token)
 	{
 		pipe(exec->pipe_fds);
 		dup2(exec->pipe_fds[1], 1);
-		close(exec->pipe_fds[1]);
-		exec->pipe_fds[1] = 0;
+		close_and_reset(&exec->pipe_fds[1]);
 	}
-	return (0);
+	return (file_not_found);
 }
 
 /*REVIEW - find_last_file
@@ -111,7 +110,7 @@ static int	add_one(t_exec *exec, t_token *token)
 	if (fd == -1 && (token->type == RED_OUT || token->type == RED_O_APPEND))
 		error(E_OPEN, exec);
 	if (fd == -1)
-		return (bash_message(E_OPEN, token->content));
+		return (bash_message(E_OPEN, token->content), 1);
 	if ((token->id == exec->last_in && is_red_input_sign(token->type)) || \
 		(token->id == exec->last_out && is_red_output_sign(token->type)))
 	{

@@ -22,8 +22,6 @@ NONE = 2;
 
 || = 9;
 
-* = 10;
-
 Output Format:
 
 For each case, output the following:
@@ -48,18 +46,22 @@ case: ls file1.txt | grep "error" > output.txt
 Expected output:
 
 case: ls file1.txt | grep "error" > output.txt
-[Test1, 6 token]
-Token = ls, 0, 0,
-Token = file1.txt, 3, 0,
-Token = |, 7, 0,
-Token = grep, 0, 0,
-Token = "error", 1, 0,
-Token = output.txt, 3, 0,
+[Test1, 7 token]
+Token = ls, 		0, 0,
+Token = >,			3, 0,
+Token = file1.txt, 	2, 0,
+Token = |, 			7, 0,
+Token = grep, 		0, 0,
+Token = "error", 	1, 0,
+Token = >,			3, 0,
+Token = output.txt, 2, 0,
 [END]
 Instructions for Processing:
 
 Tokens should be identified and categorized according to the rules provided.
 
-The redirection signs (e.g., >, <, >>, <<) should be omitted, and only the content of the redirection (e.g., file names) should be included as tokens.
+Tokens number must be equal or bigger the number of tokens.
+
+Both redirection signs (e.g., >, <, >>, <<) and the content of the redirection (e.g., file names) should be included as tokens.
 
 The token order should match the sequence in the command line input.

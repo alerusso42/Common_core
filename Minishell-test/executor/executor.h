@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 17:00:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:54:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ enum e_types
 	PIPE,
 	AND,
 	OR,
-	WILDCARD,
+	RED_SUBSHELL,
 };
 
 enum e_builtin
@@ -114,6 +114,7 @@ enum e_exec_errors
 	E_CD_PATH,
 	E_CMD_NOTFOUND,
 	E_IS_DIRECTORY,
+	E_WILDCARD_NOTFOUND,
 };
 
 enum e_sub_strlen
@@ -132,6 +133,7 @@ enum e_environment
 
 enum e_bools
 {
+	_STOP = 2,
 	_YES = 1,
 	_NO = 0,
 };
@@ -165,6 +167,8 @@ int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
 int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
 char	*_cut_string(char *string, size_t start, size_t end);
 int		set_exit_status(t_exec *exec, int exit_status);
+char	*_reverse_split(char **matrix, char separator);
+int		_reverse_strncmp(char *s1, char *s2, int len);
 
 //SECTION - Environment management
 
@@ -174,8 +178,9 @@ char	*ft_getenv(char **env, char *search, int *where);
 int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
 char	*get_pwd_address(char **env);
 
-//SECTION Preparing data: env path, files, commands' path
+//SECTION Preparing data: modify tokens, env path, files, commands' path
 
+void	merge_tokens(t_token *token, int debug);
 void	prepare_here_docs(t_exec *exec, t_token *token);
 int		get_commands_data(t_exec *exec, t_token *token);
 int		get_paths_data(t_exec *exec, t_token *token);
