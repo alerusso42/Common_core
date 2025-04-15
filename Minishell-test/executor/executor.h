@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 22:25:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:07:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <dirent.h>
+# include "../minishell.h"
 
 typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
+typedef struct s_token t_token;
 
-typedef struct s_token
-{
-	char			*content;
-	int				id;
-	int				prior;
-	unsigned int	type:4;
-}	t_token;
+
+// typedef struct s_token
+// {
+// 	char			*content;
+// 	int				id;
+// 	int				prior;
+// 	unsigned int	type:4;
+// }	t_token;
 
 struct s_exec
 {
@@ -166,6 +169,7 @@ void	close_and_reset(int *fd);
 void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
 char	*_ft_strjoin_free(char *s1, char *s2);
+int		parse_env_from_str(char **line, t_exec *exec, int fd);
 int		count_commands(t_exec *exec, t_token *tokens);
 int		_ft_realloc(void **content, int nmemb, int old_nmemb, size_t sizeof_);
 int		is_red_sign(int sign);
@@ -177,6 +181,7 @@ int		_sub_strlen(char *s, char *charset, int mode);
 int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
 int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
 char	*_cut_string(char *string, size_t start, size_t end);
+char	*_cat_string(char *src, char *catstr, size_t start, int which_free);
 int		set_exit_status(t_exec *exec, int exit_status);
 char	*_reverse_split(char **matrix, char separator);
 int		_reverse_strncmp(char *s1, char *s2, int len);

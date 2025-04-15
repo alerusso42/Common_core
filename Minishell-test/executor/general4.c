@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 23:09:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:42:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,17 @@ int	_reverse_strncmp(char *s1, char *s2, int len)
 		len--;
 	}
 	return (len + diff);
+}
+
+/*REVIEW - double_cmp
+	A strncmp with double comparison.
+	It is possible to set a number of chars to ignore for second string.
+*/
+int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
+{
+	if (ft_strncmp(s1, s2, ft_strlen(s2) - ignore_n_char))
+		return (1);
+	if (ft_strncmp(s1, s2, s1_len))
+		return (1);
+	return (0);
 }

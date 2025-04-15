@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:16:00 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 18:35:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:52:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main()
 
 //SECTION - cd e getcwd gestiscono da soli i casi limite?
 //NOTE - 	Test OK!
-
+/*
 int	main(void)
 {
 	int		len;
@@ -126,4 +126,52 @@ int	main(void)
 	pwd = getcwd(NULL, 0);
 	printf("EXIT STATUS: %d;\nbash:%s\n", exit_status, pwd);
 	free(pwd);
+}
+*/
+
+static void	to_free(char *s1, char *s2, int which);
+#include "debug_resources/all.h"
+char	*_cat_string(char *src, char *catstr, size_t start, int which_free)
+{
+	size_t	i;
+	char	*new;
+	size_t	catstr_len;
+
+	if (!src || !catstr)
+		return (to_free(src, catstr, which_free), NULL);
+	i = 0;
+	while (src[i] && i < start)
+		++i;
+	if (i > start && !src[i])
+		return (to_free(src, catstr, which_free), NULL);
+	catstr_len = ft_strlen(catstr);
+	new = (char *)ft_calloc(ft_strlen(src) + catstr_len + 2, sizeof(char));
+	if (new)
+	{
+		ft_strlcpy(new, src, start + 2);
+		ft_strlcpy(new + start, catstr, catstr_len + 2);
+		if (source[i])
+			sub_strcpy(new + start + catstr_len, src + start, "", EXCLUDE);
+	}
+	return (to_free(src, catstr, which_free), new);
+}
+
+static void	to_free(char *s1, char *s2, int which)
+{
+	if (which == 1 || which >= 3)
+		free(source);
+	if (which == 2 || which >= 3)
+		free(catstr);
+}
+
+int	main()
+{
+	char	*test1 = "AAA";
+	char	*sub = "AAA";
+	char	*new;
+	int		len = 2;
+
+	new = _cat_string(test1, sub, len, 0);
+	fd_printf(1, "%s\n", new);
+	free(new);
 }

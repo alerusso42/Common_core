@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 12:04:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:35:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,14 @@ char	*_ft_strjoin_free(char *s1, char *s2)
 	while (s2[++size])
 		new_str[index++] = s2[size];
 	return (free(s1), free(s2), new_str);
+}
+
+/*REVIEW - set_exit_status
+
+//	Set exit status. Returns it.
+*/
+int	set_exit_status(t_exec *exec, int exit_status)
+{
+	*exec->exit_status = exit_status;
+	return (exit_status);
 }

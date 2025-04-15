@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:39:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 17:15:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:05:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,6 @@ int	_sub_strcpy(char *dest, char *src, char *charset, int mode)
 	return (i);
 }
 
-/*REVIEW - double_cmp
-	A strncmp with double comparison.
-	It is possible to set a number of chars to ignore for second string.
-*/
-int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
-{
-	if (ft_strncmp(s1, s2, ft_strlen(s2) - ignore_n_char))
-		return (1);
-	if (ft_strncmp(s1, s2, s1_len))
-		return (1);
-	return (0);
-}
-
 /*REVIEW - cut_string
 
 //Cut a string from start to end (included).
@@ -130,12 +117,41 @@ char	*_cut_string(char *string, size_t start, size_t end)
 	return (string);
 }
 
-/*REVIEW - cut_string
+/*REVIEW - cat_string
 
-//	Set exit status. Returns it.
+//Cat a string in another string, starting from start (included).
 */
-int	set_exit_status(t_exec *exec, int exit_status)
+static void	to_free(char *s1, char *s2, int which);
+
+char	*_cat_string(char *src, char *catstr, size_t start, int which_free)
 {
-	*exec->exit_status = exit_status;
-	return (exit_status);
+	size_t	i;
+	char	*new;
+	size_t	catstr_len;
+
+	if (!src || !catstr)
+		return (to_free(src, catstr, which_free), NULL);
+	i = 0;
+	while (src[i] && i < start)
+		++i;
+	if (i > start && !src[i])
+		return (to_free(src, catstr, which_free), NULL);
+	catstr_len = ft_strlen(catstr);
+	new = (char *)ft_calloc(ft_strlen(src) + catstr_len + 2, sizeof(char));
+	if (new)
+	{
+		ft_strlcpy(new, src, start + 2);
+		ft_strlcpy(new + start, catstr, catstr_len + 2);
+		if (src[i])
+			_sub_strcpy(new + start + catstr_len, src + start, "", EXCL);
+	}
+	return (to_free(src, catstr, which_free), new);
+}
+
+static void	to_free(char *s1, char *s2, int which)
+{
+	if (which == 1 || which >= 3)
+		free(s1);
+	if (which == 2 || which >= 3)
+		free(s2);
 }

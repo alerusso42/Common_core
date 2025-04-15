@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 14:47:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:11:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ static int	get_here_doc_file(char *limiter, t_exec *exec)
 	limiter_len = ft_strlen(limiter);
 	while ((line) && (double_cmp(limiter, line, limiter_len, 1)) != 0)
 	{
+		parse_env_from_str(&line, exec, fd);
 		ft_putstr_fd("> ", 2);
 		ft_putstr_fd(line, fd);
 		free(line);
