@@ -101,4 +101,24 @@ Token = file2.txt, 3, 0,
 [END]
 
 
+case: cat < input.txt | grep "error" > out1.txt >> out2.txt || echo "ERROR!!!" >> log.txt
+	[Test6, 15 token]
+	Token = cat,              0, 0,
+	Token = <<,               6, 0,
+	Token = LIM, 		      2, 0,
+	Token = |,                7, 0,
+	Token = grep,             0, 0,
+	Token = "error",          1, 0,
+	Token = >,                3, 0,
+	Token = out1.txt,         2, 0,
+	Token = >>,               5, 0,
+	Token = out2.txt,         2, 0,
+	Token = ||,	              9, 0,
+	Token = echo,             0, 0,
+	Token = "ERROR!",			1, 0,
+	Token = >>,               5, 0,
+	Token = log.txt,          2, 0,
+[END]
+
+
 

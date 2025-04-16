@@ -19,24 +19,34 @@ Row are: token_content // type // priority
 	Token = make, 0, 0,
 	Token = frm, 1, 0,
 	[END]
-	
 
-case: cat < input.txt | grep "error" > out1.txt >> out2.txt || echo "ERROR!!!" >> log.txt
-	[Test1, 15 token]
-	Token = cat,              0, 0,
-	Token = <<,               6, 0,
-	Token = LIM, 		      2, 0,
-	Token = |,                7, 0,
-	Token = grep,             0, 0,
-	Token = "error",          1, 0,
-	Token = >,                3, 0,
-	Token = out1.txt,         2, 0,
-	Token = >>,               5, 0,
-	Token = out2.txt,         2, 0,
-	Token = ||,	              9, 0,
-	Token = echo,             0, 0,
-	Token = "ERROR!",			1, 0,
-	Token = >>,               5, 0,
-	Token = log.txt,          2, 0,
+case: unset USER
+[Test1, 2 token]
+Token = unset, 0, 0,
+Token = USER, 1, 0,
+[END]
+
+case: export USER USER=ale USER+=russo USER+=42 I_AM_SHYY
+[Test2, 6 token]
+Token = export,			0, 0,
+Token = USER, 			1, 0,
+Token = USER=ale,		1, 0,
+Token = USER+=russo,	1, 0,
+Token = USER+=42,		1, 0,
+Token = I_AM_SHYY,		1, 0,
+[END]
+
+case: env
+[Test3, 3 Token]
+T = env, 		0, 0,
+T = >>,			3, 0,
+T = file.txt,	2, 0,
+[END]
+
+case: export
+[Test4, 3 Token]
+T = export, 		0, 0,
+T = >>,			5, 0,
+T = file.txt,	2, 0,
 [END]
 	
