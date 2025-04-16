@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:39:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/15 17:05:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/16 11:01:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,11 @@ char	*_cut_string(char *string, size_t start, size_t end)
 */
 static void	to_free(char *s1, char *s2, int which);
 
+// usage: new = _cat_string(src, catstr, 4, 2);
+//	src = "Hello";	catstr = " World"; start = 5; which_free = 2;
+//	new = "Hello World"
+//
+//	which_free: 0 FREE NOTHING, 1 FREE src, 2 FREE catstr, 3 FREE BOTH	
 char	*_cat_string(char *src, char *catstr, size_t start, int which_free)
 {
 	size_t	i;

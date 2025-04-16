@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_wildcards2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:11:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 22:54:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:38:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static int	fill_matrix(t_wildcard *wdata, char **matrix);
-static int	check_one(t_wildcard *wdata, char *file);
+static int	check_one(char *search, char *file);
 
 char	*fill_occurrences(t_wildcard *wdata)
 {
@@ -46,7 +46,7 @@ static int	fill_matrix(t_wildcard *wdata, char **matrix)
 	file = readdir(dir);
 	while (file)
 	{
-		if (check_one(wdata, file->d_name))
+		if (file->d_name[0] != '.' && check_one(wdata->search, file->d_name))
 		{
 			matrix[i] = ft_strdup(file->d_name);
 			if (!matrix[i])
@@ -60,12 +60,30 @@ static int	fill_matrix(t_wildcard *wdata, char **matrix)
 	return (0);
 }
 
-static int	check_one(t_wildcard *wdata, char *file)
+static int	check_one(char *search, char *file)
 {
-	
-	if ((!wdata->start || !ft_strncmp(wdata->start, file, wdata->start_len))\
-	 && (!wdata->end || !_reverse_strncmp(wdata->end, file, wdata->end_len)))
-		return (_YES);
-	else
-		return (_NO);
+	int	f_i;
+	int	s_i;
+
+	f_i = 0;
+	s_i = 0;
+	while (search[s_i])
+	{
+		if (!file[f_i])
+			return (0);
+		else if (search[s_i] != '*')
+		{
+			while (file[f_i] && file[f_i] != search[s_i])
+			{
+				if (s_i == 0 || search[s_i - 1] != '*')
+					return (0);
+				++f_i;
+			}
+			++f_i;
+		}
+		++s_i;
+	}
+	if (search[s_i - 1] != '*' && file[f_i])
+		return (0);
+	return (1);
 }

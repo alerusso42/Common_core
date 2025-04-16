@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/15 17:07:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:13:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ struct s_exec
 typedef struct s_wildcard
 {
 	char	*old_str;
-	char	*start;
-	char	*end;
+	char	*search;
 	char	*dir_path;
 	int		start_len;
 	int		end_len;
@@ -169,7 +168,6 @@ void	close_and_reset(int *fd);
 void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
 char	*_ft_strjoin_free(char *s1, char *s2);
-int		parse_env_from_str(char **line, t_exec *exec, int fd);
 int		count_commands(t_exec *exec, t_token *tokens);
 int		_ft_realloc(void **content, int nmemb, int old_nmemb, size_t sizeof_);
 int		is_red_sign(int sign);
@@ -185,6 +183,7 @@ char	*_cat_string(char *src, char *catstr, size_t start, int which_free);
 int		set_exit_status(t_exec *exec, int exit_status);
 char	*_reverse_split(char **matrix, char separator);
 int		_reverse_strncmp(char *s1, char *s2, int len);
+void	write_here_doc(char *line, t_exec *exec, int fd);
 
 //SECTION - Environment management
 

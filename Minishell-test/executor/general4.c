@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/15 16:42:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/16 11:01:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,34 @@ int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
 	if (ft_strncmp(s1, s2, s1_len))
 		return (1);
 	return (0);
+}
+
+void	write_here_doc(char *line, t_exec *exec, int fd)
+{
+	int		i;
+	int		end;
+	char	*env_str;
+	char	temp;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] == '$')
+		{
+			end = i + 1;
+			while (line[end] && line[end] != ' ' && line[end] != '$')
+				++end;
+			temp = line[end];
+			line[end] = 0;
+			env_str = ft_getenv(*exec->env, line + i + 1, NULL);
+			if (env_str)
+				ft_putstr_fd(env_str, fd);
+			if (!temp)
+				break ;
+			line[end] = temp;
+			i = end - 1;
+		}
+		else
+			write(fd, &line[i], 1);
+	}
 }
