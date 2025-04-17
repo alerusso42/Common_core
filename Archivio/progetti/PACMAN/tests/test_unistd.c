@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../includes/lib.h"
 
 //SECTION - RWFromFile
 /*
@@ -33,27 +33,53 @@ Available mode strings:
 		For example, "t" is sometimes appended 
 		to make explicit the file is a text file.
 */
-#define POKEDEX "/workspaces/Common_core/getnextline/updated_pokedex.txt"
-int	main(void)
+#define POKEDEX "../../../../getnextline/updated_pokedex.txt"
+#define close SDL_RWclose
+#define free SDL_free
+int	main2(void)
 {
 	SDL_RWops		*fd;
 	unsigned char	*str;
 	int				size;
 	int				i;
 
-	fd = SDL_RWFromFile(POKEDEX, "a+");
+	fd = SDL_RWFromFile(POKEDEX, "r");
 	if (!fd)
 		return (1);
-	size = 100;
-	str = SDL_malloc(size);
+	size = SDL_RWsize(fd);
+	if (size <= 0)
+		return (9);
+	str = SDL_calloc(size + 1, sizeof(char));
 	if (!str)
 		return (2);
-	i = 0;
-	while (i++ != size)
-		str[i] = SDL_ReadU8(fd);
+	if (SDL_RWread(fd, str, sizeof(char), size) != size)
+		return (SDL_free(str), SDL_RWclose(fd), 7);
 	SDL_RWclose(fd);
-	str[i] = 0;
+	str[size] = 0;
+	fd = SDL_RWFromFile("Outputt.txt", "w");
+	if (!fd)
+		return (9);
+	SDL_RWwrite(fd, str, sizeof(char), size);
+	close(fd);
+	free(str);
+}
+
+int	main(void)
+{
+	SDL_RWops		**fd;
+	int				i;
+
 	i = 0;
-	while (str[i])
-		SDL_RWwrite();
+	fd = SDL_calloc(22, sizeof(SDL_RWops *));
+	while (i != 20)
+	{
+		fd[i] = SDL_RWFromFile(POKEDEX, "r");
+		printf("%d: %d\n", i, fd[i]->type);
+		++i;
+	}
+	i = 0;
+	while (i != 20)
+		SDL_RWclose(fd[i++]);
+	SDL_free(fd);
+	SDL_Quit();
 }

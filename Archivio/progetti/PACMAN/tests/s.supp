@@ -1,0 +1,7 @@
+{
+   SDL
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*
+   obj:/usr/lib/*
+}

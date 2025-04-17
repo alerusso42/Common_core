@@ -1,5 +1,5 @@
-#ifndef TEST_H
-# define TEST_H
+#ifndef LIB_H
+# define LIB_H
 
 /*
 //SECTION - C Standard Library (libc) Headers
@@ -9,8 +9,6 @@
 //		independent of the operating system.
 //		We should not face portability issues when using them.
 */
-//REVIEW -	Memory allocation (malloc, free), conversions, processes, etc.
-# include <stdlib.h>
 //REVIEW -	String manipulation functions.
 # include <string.h>
 //REVIEW -	Standard math functions (sin, cos, sqrt, etc.).
@@ -23,6 +21,8 @@
 # include <assert.h>
 //REVIEW -	Fixed-width integer types (e.g., uint64_t).
 # include <stdint.h>
+//REVIEW -	Limits.
+# include <limits.h>
 //REVIEW -	Error handling utilities.
 # include <errno.h>
 //REVIEW -	Handling functions with a variable number of arguments.
