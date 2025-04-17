@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 16:17:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:38:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,8 @@ static int	invoke_programs(t_exec *exec, int i)
 	{
 		close_and_reset(&exec->pipe_fds[0]);
 		execve(exec->commands[i][0], exec->commands[i], *exec->env);
-		return (ft_exit(NULL, exec), 1);
+		return (set_exit_status(exec, 127), ft_exit(NULL, exec), 1);
 	}
-	exec->pid_list[i] = pid;
 	return (0);
 }
 
@@ -171,18 +170,8 @@ static int	invoke_programs(t_exec *exec, int i)
 */
 static int	wait_everyone(t_exec *exec)
 {
-	int	i;
-
 	dup2(exec->stdin_fd, 0);
 	dup2(exec->stdout_fd, 0);
-	i = exec->last_cmd_done;
-	while (i != exec->cmd_num)
-	{
-		if (exec->pid_list[i])
-			waitpid(exec->pid_list[i], exec->exit_status, 0);
-		exec->pid_list[i] = 0;
-		++i;
-	}
-	exec->last_cmd_done = i;
+	wait(exec->exit_status);
 	return (0);
 }

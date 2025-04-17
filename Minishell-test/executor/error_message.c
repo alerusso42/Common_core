@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 16:25:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:54:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ int	bash_message(int message, char *file)
 	else if (message == E_CD_ARGS)
 	{
 		_fd_printf(2, "bash: cd: too many arguments\n");
+	}
+	else if (message == E_CD_NOHOME)
+	{
+		_fd_printf(2, "bash: cd: HOME not set\n");
 	}
 	else if (message == E_CMD_NOTFOUND)
 	{

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:24:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/16 14:11:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:19:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@ static int	find_directory(char **dir_path, char **old_str);
 static int	dir_size(int *size, char *dir_path);
 char		*fill_occurrences(t_wildcard *wdata);
 
+//NOTE - 	Usage: 	give it a token content, and the ptr to a new string.
+//					the new string can be NULL.
+//					if returns anything different than 0, program must be quit.
+//					
+//					if (convert_wildcard(temp, &token->content))		
+//						MALLOC ERROR! STOP EVERYTHING
+
+/*REVIEW - convert_wildcard
+
+//		EXAMPLE: /bin/g*e*p
+		1)	If there is no '*', it wildly destroy the program;
+		2)	Find the directory to search (save_directory).
+			Save when the search starts;
+				Folder = /bin/	Search = g*e*p
+		3)	Counts the number of elements in the directory (see dir_size).
+			If there are none, the new string is the dup of the search string;
+		4)	Else, it's the result of the research (see fill_occurrences);
+		5)	Free everything. Stop.
+*/
 int	convert_wildcard(char *old_str, char **new_str)
 {
 	t_wildcard	wdata;
@@ -39,6 +58,14 @@ int	convert_wildcard(char *old_str, char **new_str)
 	return (0);
 }
 
+/*REVIEW - find_directory
+
+//		Goes to the end of the string. 
+		Go backwards until it finds '/', or '/0'.
+		If it does not find any '/', return "./" = CURRENT_DIRECTORY
+
+		Else, dir_path copy old str (/bin/g*e*p) till last /.
+*/
 static int	find_directory(char **dir_path, char **old_str)
 {
 	int	i;
@@ -64,6 +91,12 @@ static int	find_directory(char **dir_path, char **old_str)
 	return (0);
 }
 
+/*REVIEW - dir_size
+
+//		Counts all files in directory.
+
+		*dir functions uses two structs
+*/
 static int	dir_size(int *size, char *dir_path)
 {
 	DIR				*dir;

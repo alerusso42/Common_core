@@ -6,32 +6,11 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/16 15:51:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:04:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-
-//NOTE - Returns the content of an item in the environment, if exist. 
-//				give **environment (NOT ADDRESS);
-//				the string to search; 
-//				an optional int ptr. If not NULL, it will be given the
-//				index of the env element, or -1 if not found.
-//				You can safely pass it to NULL.
-//NOTE - YOU MUST NOT FREE THE RETURNED STRING! It's env memory!!!
-
-char	*get_env(char **env, char *search)
-{
-	char	*item;
-
-	item = ft_getenv(env, search, NULL);
-	if (!item)
-		return (NULL);
-	while (*item != '=')
-		++item;
-	++item;
-	return (item);
-}
 
 //NOTE -	TO USE THESE FUNCTION, YOU MUST USE cpy_env FIRST!!!
 //			We need to copy the environment to heap first, and saving the
@@ -78,6 +57,29 @@ int	cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env)
 		*env_size = i;
 	*last_env = i;
 	return (0);
+}
+
+//NOTE - Returns the content of an item in the environment, if exist. 
+//				give **environment (NOT ADDRESS);
+//				the string to search; 
+//				an optional int ptr. If not NULL, it will be given the
+//				index of the env element, or -1 if not found.
+//				You can safely pass it to NULL.
+//NOTE - YOU MUST NOT FREE THE RETURNED STRING! It's env memory!!!
+
+char	*get_env(char **env, char *search)
+{
+	char	*item;
+
+	item = ft_getenv(env, search, NULL);
+	if (!item)
+		return (NULL);
+	while (*item && *item != '=')
+		++item;
+	if (!*item)
+		return (NULL);
+	++item;
+	return (item);
 }
 
 //NOTE - 	Returns this stuff: "~/42projects/Minishell$"

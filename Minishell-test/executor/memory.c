@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 18:27:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:31:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ int	alloc_memory(t_exec *exec, int cmd_num)
 	exec->commands = (char ***)ft_calloc(cmd_num + 2, sizeof(char **));
 	if (!exec->commands)
 		error(E_MALLOC, exec);
-	exec->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
-	if (!exec->pid_list)
-		error(E_MALLOC, exec);
 	exec->builtins = (t_builtin *)ft_calloc(BUILT_N, sizeof(t_builtin));
 	if (!exec->builtins)
 		error(E_MALLOC, exec);
@@ -67,8 +64,6 @@ void	free_memory(t_exec *exec)
 	close(exec->stdout_fd);
 	exec->commands = _free_three_d_matrix(exec->commands);
 	exec->path = _free_matrix(exec->path);
-	free(exec->pid_list);
-	exec->pid_list = NULL;
 	free(exec->builtins);
 	exec->builtins = NULL;
 	free(exec->which_cmd);

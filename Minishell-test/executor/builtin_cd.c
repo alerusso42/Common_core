@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 16:24:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:07:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static int	up_env(char **update, char *old_pwd, char *pwd, t_exec *exec);
+static void	back_to_home(char **env, char **new_dir);
 
 /*REVIEW - ft_cd
 
@@ -42,16 +43,18 @@ int	ft_cd(char **args, t_exec *exec)
 	char	*old_pwd;
 	char	*pwd;
 	char	**pwd_update;
+	char	*new_dir;
 
 	*exec->exit_status = 0;
 	if (args[1] && args[2])
 		return (bash_message(E_CD_ARGS, NULL), set_exit_status(exec, 1));
-	if (!args[1])
-		return (0);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 		error(E_MALLOC, exec);
-	if (chdir(args[1]) != 0)
+	new_dir = args[1];
+	if (!args[1])
+		back_to_home(*exec->env, &new_dir);
+	if (chdir(new_dir) != 0)
 		return (free(old_pwd), set_exit_status(exec, 1));
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
@@ -62,6 +65,25 @@ int	ft_cd(char **args, t_exec *exec)
 	pwd_update[0] = NULL;
 	up_env(pwd_update, old_pwd, pwd, exec);
 	return (0);
+}
+
+/*REVIEW - back_to_home
+
+//	cd without arguments change current directory to $HOME (from env).		
+	If $HOME is unsetted, bash prints a unique message.
+*/
+static void	back_to_home(char **env, char **new_dir)
+{
+	*new_dir = ft_getenv(env, "HOME", NULL);
+	if (!*new_dir)
+	{
+		bash_message(E_CD_NOHOME, NULL);
+		return ;
+	}
+	while (*new_dir && *new_dir != '=')
+		++(*new_dir);
+	if (*new_dir == '=')
+		++(*new_dir);
 }
 
 /*REVIEW - update_environment

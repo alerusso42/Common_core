@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:16:00 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/15 16:52:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:53:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(void)
 	free(pwd);
 }
 */
-
+/*
 static void	to_free(char *s1, char *s2, int which);
 #include "debug_resources/all.h"
 char	*_cat_string(char *src, char *catstr, size_t start, int which_free)
@@ -174,4 +174,29 @@ int	main()
 	new = _cat_string(test1, sub, len, 0);
 	fd_printf(1, "%s\n", new);
 	free(new);
+}*/
+
+int	main()
+{
+	pid_t	pid[50];
+	int		count;
+	int		exit_status;
+
+	count = 0;
+	while (count != 40)
+	{
+		pid[count] = fork();
+		if (pid[count] < 0)
+			return (printf("vaffanculo"));
+		else if (pid[count] == 0)
+		{
+			if (count % 2 == 0)
+				sleep(1);
+			exit(count);
+		}
+		++count;
+	}
+	while (wait(&exit_status) > 0)
+		printf("%d\n", exit_status / 256);
+	return (0);
 }
