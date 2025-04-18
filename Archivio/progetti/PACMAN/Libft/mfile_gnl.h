@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:56:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:19:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,17 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct s_fd
+{
+	SDL_RWops	*p;
+	int			n;
+}	t_fd;
+
+//		SDL_SUPPORT
+
+t_fd	fd_open(const char *filename, const char *permissions);
+void	fd_close(t_fd fd);
 
 //		ORIGINAL GNL
 char	*gnl(int fd);
