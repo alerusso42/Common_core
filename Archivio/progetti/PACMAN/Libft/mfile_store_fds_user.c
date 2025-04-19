@@ -3,70 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_store_fds_user.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/28 15:08:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:50:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mfile_gnl.h"
 
-int	manage_fds(int *fd, char **filename, int which, int flag);
+t_fd	openfd(const char *filename, const char *permissions)
+{
+	t_manage_fds	*data;
+	t_fd			new_fd;
+	int				i;
+
+	data = fd_database(0);
+	i = fd_indexation();
+	if (!data->fds[i].n)
+		return ((t_fd){NULL, 0});
+	data->fds[i].p = SDL_RWFromFile(filename, permissions);
+	if (!data->fds[i].p)
+	{
+		return (closefd(data->fds[i]), (t_fd){0});
+	}
+	data->filenames[i] = ft_strdup(filename);
+	if (!data->filenames[i])
+	{
+		return (closefd(data->fds[i]), (t_fd){0});
+	}
+	data->curr_fd = data->fds[i];
+	data->curr_file = data->filenames[i];
+	if (data->curr_fd.n > data->last)
+		data->last = data->curr_fd.n;
+	new_fd.n = data->fds[i].n;
+	new_fd.p = data->fds[i].p;
+	return (new_fd);
+}
+
+char	*get_static_buffer(int fd, bool reset, bool reset_all);
+
+void	closefd(t_fd fd)
+{
+	t_manage_fds	*data;
+
+	data = fd_database(0);
+	if (!data->fds[fd.n].n)
+		return ;
+	data->fds[fd.n].n = 0;
+	free(data->filenames[fd.n]);
+	data->filenames[fd.n] = NULL;
+	if (fd.p)
+		SDL_RWclose(fd.p);
+	if (data->buffer[fd.n][0])
+		get_static_buffer(fd.n, 1, 0);
+}
 
 /*
 	Give back current data.
 
 	Give the address of a fd and a string.
 */
-int	get_filedata(int *fd, char **filename)
+int	get_filedata(t_fd *fd, char **filename)
 {
-	return (manage_fds(fd, filename, 0, 3));
-}
+	t_manage_fds	*data;
 
-/*
-	Give a new fd and filename to the stock.
-
-	They will be set as the current.
-
-	If it fails (bad arg, other issues, return
-	an error value different than 0).
-
-	Else, return 0 on success.
-	You should always check that it does not fail.
-*/
-int	give_filedata(int fd, char *filename)
-{
-	char	*dup_filename;
-
-	dup_filename = ft_strdup(filename);
-	return (manage_fds(&fd, &dup_filename, 0, 0));
+	data = fd_database(0);
+	if (fd)
+		*fd = data->curr_fd;
+	if (filename)
+		*filename = data->curr_file;
+	if (fd && !fd->n || fd && !fd->p || filename && !*filename)
+		return (0);
+	return (1);
 }
 
 /*
 	Close every fd.
 	Reset the stock.
-
-	WARNING: 	the stock is NOT allocated with malloc.
-				let this function manage close files.
+	Always safe to call.
 */
-int	del_filedata(void)
+void	del_filedata(void)
 {
-	return (manage_fds(NULL, NULL, 0, 2));
+	t_manage_fds	*data;
+	int				i;
+
+	data = fd_database(0);
+	i = 1;
+	while ("loop as long there are fd to close")
+	{
+		if (i == data->last + 1)
+			break ;
+		if (data->fds[i].n)
+			closefd(data->fds[i]);
+		++i;
+	}
+	fd_database(1);
 }
 
 /*
 	Update the fd set as the current.
 */
-int	switch_filedata(int fd)
+int	switch_filedata(t_fd fd)
 {
-	return (manage_fds(NULL, NULL, fd, 1));
-}
+	t_manage_fds	*data;
 
-/*
-	Update an fd, for example when using reset_fd.
-*/
-int	update_filedata(int old_fd, int new_fd)
-{
-	return (manage_fds(&new_fd, NULL, old_fd, 4));
+	data = fd_database(0);
+	data->curr_fd = data->fds[fd.n];
+	data->curr_file = data->filenames[fd.n];
+	if (!data->curr_fd.n || !data->curr_fd.p || !data->curr_file)
+		return (0);
+	return (1);
 }

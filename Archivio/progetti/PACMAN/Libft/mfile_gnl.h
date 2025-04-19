@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/18 19:19:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:46:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #ifndef MFILE_GNL_H
 # define MFILE_GNL_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 10000
 # endif
 # ifndef MAX_FILES
 #  define MAX_FILES 120
@@ -67,10 +67,25 @@ typedef struct s_fd
 	int			n;
 }	t_fd;
 
+typedef struct s_manage_fds
+{
+	char	buffer[MAX_FILES + 1][BUFFER_SIZE + 1];
+	t_fd	fds[MAX_FILES + 1];
+	char	*filenames[MAX_FILES + 1];
+	t_fd	curr_fd;
+	char	*curr_file;
+	int		last;
+}			t_manage_fds;
+
 //		SDL_SUPPORT
 
-t_fd	fd_open(const char *filename, const char *permissions);
-void	fd_close(t_fd fd);
+t_fd			openfd(const char *filename, const char *permissions);
+t_manage_fds	*fd_database(bool delete);
+int				get_filedata(t_fd *fd, char **filename);
+void			del_filedata(void);
+int				switch_filedata(t_fd fd);
+int				fd_indexation(void);
+void			closefd(t_fd fd);
 
 //		ORIGINAL GNL
 char	*gnl(int fd);
@@ -110,10 +125,5 @@ char	**read_all_line(int line_num);
 int		write_line(int line_num, int position, char *string);
 char	*get_n_line(int fd, int n);
 int		reset_fd(int fd, char *name);
-int		get_filedata(int *fd, char **filename);
-int		give_filedata(int fd, char *filename);
-int		del_filedata(void);
-int		switch_filedata(int fd);
-int		update_filedata(int old_fd, int new_fd);
 
 #endif

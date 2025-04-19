@@ -18,8 +18,9 @@ SRC_MFILE = mfile_find_line.c mfile_get_next_line_original.c \
 			mfile_gnl_utils1.c mfile_gnl_utils2.c \
 			mfile_hold_space.c mfile.main.c mfile_num_line.c \
 			mfile_read_all_line.c mfile_read_line.c mfile_reset_fd.c \
-			mfile_set_maximum_word_len.c mfile_store_fds_back.c \
-			mfile_store_fds_user.c mfile_write_line.c mfile_initiate_file.c
+			mfile_set_maximum_word_len.c \
+			mfile_write_line.c mfile_initiate_file.c \
+			mfile_store_fds_user.c mfile_store_fds_utils.c 
 SRC_OTHER = other_add_sign.c other_cut_string.c other_del_pointer.c \
 			other_free_matrix.c other_move_sign.c other_realloc.c \
 			other_strjoin_free.c other_sub_string_tools.c \
