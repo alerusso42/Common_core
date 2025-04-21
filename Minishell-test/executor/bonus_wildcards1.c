@@ -42,8 +42,6 @@ int	convert_wildcard(char *old_str, char **new_str)
 	wdata = (t_wildcard){0};
 	wdata.old_str = old_str;
 	*new_str = NULL;
-	if (!ft_strchr(old_str, '*'))
-		return (_fd_printf(2, "I see no * in |%s|, sir\n", old_str));
 	if (find_directory(&wdata.dir_path, &old_str) == E_MALLOC)
 		return (E_MALLOC);
 	wdata.search = old_str;
