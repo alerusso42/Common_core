@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 08:43:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/19 11:31:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/21 00:47:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	fd_indexation(void)
 	if (i == MAX_FILES)
 		return (0);
 	data->fds[i].n = i;
-
 	return (i);
 }
 

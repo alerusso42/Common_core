@@ -6,12 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/19 11:46:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/21 04:25:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Memoria statica usata ---> BUFFER_SIZE * 4000
-// Define per il debug
+// Memoria statica usata ---> (BUFFER_SIZE + 1) * ((MAX_FILES + 1) * 20)
 #ifndef MFILE_GNL_H
 # define MFILE_GNL_H
 # ifndef BUFFER_SIZE
@@ -20,27 +19,9 @@
 # ifndef MAX_FILES
 #  define MAX_FILES 120
 # endif
-# define COUNTER 100000000
-# define FORCE_READ_ONE_TEXT 0
 // Define usati nel programma
-# define FIND 1
-# define GET 2
-# define MOVE 3
 # define SHORTWORDS_LEN 4
 # define MIDWORDS_LEN 10
-# define RESET -2
-# define MALLOC 1
-# define REALLOC 2
-# define FREE 3
-# define CALLOC 4
-# define MEMCPY 5
-# define FULL_MEMORY -1
-# define SUCCESS 1
-# define NO_NEWLINE_FOUND 0
-# define EOF_OR_NEWLINE_FOUND 1
-# define EOF_OR_NEWLINE_NOT_FOUND -1
-# define EMPTY_BUFFER 0
-# define END_OR_CORRUPTION -1
 // Librerie
 # include <unistd.h>
 # include <string.h>

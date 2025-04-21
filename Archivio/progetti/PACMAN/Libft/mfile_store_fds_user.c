@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/19 12:50:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/21 00:45:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	closefd(t_fd fd)
 	data = fd_database(0);
 	if (!data->fds[fd.n].n)
 		return ;
+	if (data->fds[fd.n].n == data->last)
+		data->last--;
 	data->fds[fd.n].n = 0;
 	free(data->filenames[fd.n]);
 	data->filenames[fd.n] = NULL;
