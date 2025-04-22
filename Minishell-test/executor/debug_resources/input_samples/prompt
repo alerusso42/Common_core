@@ -6,7 +6,7 @@ COMMAND = 0;
 
 ARGUMENT = 1;
 
-NONE = 2;
+FILE = 2;
 
 > = 3;
 
@@ -22,6 +22,10 @@ NONE = 2;
 
 || = 9;
 
+( = 10;
+
+) = 10.
+
 Output Format:
 
 For each case, output the following:
@@ -32,7 +36,7 @@ Token = <token_content>, <type>, <priority>,
 [END]
 Example Input:
 
-case: make frm
+make frm
 
 Expected output:
 
@@ -41,21 +45,43 @@ case: make frm
 Token = make, 0, 0,
 Token = frm, 1, 0,
 [END]
-case: ls file1.txt | grep "error" > output.txt
+
+Example input: 
+
+ls file1.txt | grep "error" > output.txt
 
 Expected output:
 
 case: ls file1.txt | grep "error" > output.txt
 [Test1, 7 token]
 Token = ls, 		0, 0,
-Token = >,			3, 0,
-Token = file1.txt, 	2, 0,
+Token = file1.txt, 	1, 0,
 Token = |, 			7, 0,
 Token = grep, 		0, 0,
 Token = "error", 	1, 0,
 Token = >,			3, 0,
 Token = output.txt, 2, 0,
 [END]
+
+Example input:
+
+(cat <(ls))
+
+Expected output:
+
+case: (cat <(ls)) && echo done!
+[Test2, 9 token]
+Token = (, 			10, 1,
+Token = cat,		0, 	1,
+Token = <,		 	4, 	1,
+Token = (,			10,	2,
+Token = ls, 		0, 	2,
+Token = ),		 	10,	1,
+Token = ),			10,	0,
+Token = &&,			8,	0,
+Token = done,		1,	0,
+[END]
+
 Instructions for Processing:
 
 Tokens should be identified and categorized according to the rules provided.

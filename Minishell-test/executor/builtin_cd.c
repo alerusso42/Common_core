@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 11:07:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:53:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ static void	back_to_home(char **env, char **new_dir)
 		bash_message(E_CD_NOHOME, NULL);
 		return ;
 	}
-	while (*new_dir && *new_dir != '=')
+	while (**new_dir && **new_dir != '=')
 		++(*new_dir);
-	if (*new_dir == '=')
+	if (**new_dir == '=')
 		++(*new_dir);
 }
 

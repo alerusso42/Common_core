@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 10:40:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:23:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ enum e_types
 	PIPE,
 	AND,
 	OR,
+	PARENTHESIS,
 	RED_SUBSHELL,
 };
 

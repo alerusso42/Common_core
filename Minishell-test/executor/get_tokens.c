@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/14 16:15:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:15:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void	merge_one(t_token *token, int debug, int i);
+static void	merge_one(t_token *token, int debug, int i, bool update_type);
 static void	sort_id(t_token *token);
 
 /*REVIEW - merge_tokens
@@ -50,7 +50,8 @@ static void	sort_id(t_token *token);
 			(so there is <(...)), mark the token as a RED_SUBSHELL;
 		3)	Else, if is a regular redirector sign (<, <<, >, >>), merge it with
 			its file;
-		4)	Lastly, sort the id of every token.
+		4)	We restart the loop, to merge '(' and ')';
+		5)	Lastly, sort the id of every token.
 */
 void	merge_tokens(t_token *token, int debug)
 {
@@ -65,11 +66,33 @@ void	merge_tokens(t_token *token, int debug)
 		}
 		else if (is_red_sign(token[i].type))
 		{
-			merge_one(token, debug, i);
+			merge_one(token, debug, i, 0);
 		}
 		i++;
 	}
+	i = 0;
+	while (token[i].content)
+	{
+		if (token[i].content[0] == '(' || token[i].content[0] == ')')
+			merge_one(token, debug, i, 1);
+		else
+			++i;
+	}
 	sort_id(token);
+}
+
+void	p_tok(t_token *token)
+{
+	int i = 0;
+	while (token[i].content)
+	{
+		_fd_printf(1, "\n^^\n%d:", i);
+		_fd_printf(1, "\ncont:\t%s", token[i].content);
+		_fd_printf(1, "\ntype:\t%d", token[i].type);
+		_fd_printf(1, "\nid:\t%d", token[i].id);
+		_fd_printf(1, "\nprior:\t%d", token[i].prior);
+		++i;
+	}
 }
 
 /*REVIEW - merge_one
@@ -79,7 +102,7 @@ void	merge_tokens(t_token *token, int debug)
 		3)	For every other token after current token,
 			we drag them one position behind.
 */
-static void	merge_one(t_token *token, int debug, int i)
+static void	merge_one(t_token *token, int debug, int i, bool update_type)
 {
 	int	j;
 
@@ -87,6 +110,11 @@ static void	merge_one(t_token *token, int debug, int i)
 		free(token[i].content);
 	token[i].content = NULL;
 	token[i].content = token[i + 1].content;
+	if (update_type)
+	{
+		token[i].type = token[i + 1].type;
+		token[i].prior = token[i + 1].prior;
+	}
 	i++;
 	j = i;
 	while (token[i].content && token[++j].content)

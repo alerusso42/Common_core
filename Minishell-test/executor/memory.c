@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 11:31:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:37:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	alloc_memory(t_exec *exec, int cmd_num)
 	exec->here_doc_fds = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!exec->here_doc_fds)
 		error(E_MALLOC, exec);
+	exec->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
+	if (!exec->pid_list)
+		error(E_MALLOC, exec);
 	return (0);
 }
 
@@ -66,6 +69,8 @@ void	free_memory(t_exec *exec)
 	exec->path = _free_matrix(exec->path);
 	free(exec->builtins);
 	exec->builtins = NULL;
+	free(exec->pid_list);
+	exec->pid_list = NULL;
 	free(exec->which_cmd);
 	exec->which_cmd = NULL;
 	free_memory2(exec);
