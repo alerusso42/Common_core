@@ -22,6 +22,19 @@ Row are: token_content // type // priority
 
 case: ls | (cd .. && ( cd executor && (cd obj_executor && (echo $PWD && (sleep 2)))) && echo $PWD && sleep 1) && echo $PWD
 [Test1, 35 token]
+	Token = ls,             	0, 0,
+	Token = |,              	7, 0,
+	Token = (,              	10, 1,
+	Token = echo,             	0, 1,
+	Token = ..,             	1, 1,
+	Token = ),					10, 0,
+	Token = &&,             	8, 0,
+	Token = echo,           	0, 0,
+	Token = $PWD,           	1, 0,
+[END]
+
+case: ls | (cd .. && ( cd executor && (cd obj_executor && (echo $PWD && (sleep 2)))) && echo $PWD && sleep 1) && echo $PWD
+[Test0, 35 token]
 Token = ls,             	0, 0,
 Token = |,              	7, 0,
 Token = (,              	10, 1,

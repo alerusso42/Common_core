@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 16:09:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:29:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ typedef int				(*t_builtin)(char **, t_exec *);
 typedef struct s_token t_token;
 
 
-// typedef struct s_token
-// {
-// 	char			*content;
-// 	int				id;
-// 	int				prior;
-// 	unsigned int	type:4;
-// }	t_token;
+typedef struct s_token
+{
+	char			*content;
+	int				id;
+	int				prior;
+	unsigned int	type:4;
+}	t_token;
 
 struct s_exec
 {
@@ -51,6 +51,7 @@ struct s_exec
 	int				last_cmd_done;
 	int				stdin_fd;
 	int				stdout_fd;
+	int				prior_layer;
 	int				at_least_one_pipe:1;
 	int				debug:1;
 };

@@ -5,6 +5,7 @@ COMMON_CORE = ../../
 SRC = 	builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c builtin_export.c \
 		builtin_pwd.c builtin_unset.c \
 		environment.c environment2.c \
+		bonus_parenthesis.c \
 		error_message.c execute.c general.c general2.c general3.c general4.c \
 		get_tokens.c get_commands_data.c get_paths_data.c get_file_data.c \
 		memory.c memory2.c \

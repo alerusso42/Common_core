@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 16:14:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:36:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	execute(t_token *tokens, void *data, int debug)
 */
 int	execute_loop(t_token *token, t_exec *exec)
 {
+	exec->prior_layer = token->prior;
 	exec->cmd_num = 0;
 	while (token->content)
 	{
@@ -82,13 +83,13 @@ int	execute_loop(t_token *token, t_exec *exec)
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
 		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
+		exec->cmd_num++;
+		goto_next_command_block(exec, &token);
 		if (exec->pipe_fds[0])
 		{
 			dup2(exec->pipe_fds[0], 0);
 			close_and_reset(&exec->pipe_fds[0]);
 		}
-		exec->cmd_num++;
-		goto_next_command_block(exec, &token);
 	}
 	wait_everyone(exec);
 	if (token->prior != 0)
@@ -121,10 +122,14 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 				exec->cmd_num++;
 			++(*tokens);
 		}
-		//TODO - GATE GUARDIAN
 	}
-	if ((*tokens)->content)
-		++(*tokens);
+	if (!(*tokens)->content)
+		return (0);
+	++(*tokens);
+	if (exec->prior_layer < (*tokens)->prior)
+		manage_parenthesis(exec, tokens, 0);
+	else if (exec->prior_layer > (*tokens)->prior)
+		return (wait_everyone(exec), ft_exit(NULL, exec), 0);
 	return (0);
 }
 
@@ -182,7 +187,7 @@ static int	wait_everyone(t_exec *exec)
 	i = exec->last_cmd_done;
 	while (i != exec->cmd_num)
 	{
-		if (exec->pid_list)
+		if (exec->pid_list[i])
 		{
 			waitpid(exec->pid_list[i], &exit_status, 0);
 			if (i == exec->cmd_num - 1)
