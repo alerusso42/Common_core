@@ -6,13 +6,12 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 11:02:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:14:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static int	execute_loop(t_token *token, t_exec *exec);
 static int	goto_next_command_block(t_exec *exec, t_token **tokens);
 static int	invoke_programs(t_exec *exec, int i);
 static int	wait_everyone(t_exec *exec);
@@ -74,7 +73,7 @@ int	execute(t_token *tokens, void *data, int debug)
 	7)	We go to the next command block;
 	8)	We wait every children.
 */
-static int	execute_loop(t_token *token, t_exec *exec)
+int	execute_loop(t_token *token, t_exec *exec)
 {
 	exec->cmd_num = 0;
 	while (token->content)
@@ -92,6 +91,8 @@ static int	execute_loop(t_token *token, t_exec *exec)
 		goto_next_command_block(exec, &token);
 	}
 	wait_everyone(exec);
+	if (token->prior != 0)
+		ft_exit(NULL, exec);
 	return (0);
 }
 
@@ -120,6 +121,7 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 				exec->cmd_num++;
 			++(*tokens);
 		}
+		//TODO - GATE GUARDIAN
 	}
 	if ((*tokens)->content)
 		++(*tokens);

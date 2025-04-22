@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 11:23:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:09:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ enum e_bools
 //SECTION - Main function
 
 int		execute(t_token *tokens, void *data, int debug);
+int		execute_loop(t_token *token, t_exec *exec);
 
 //SECTION Memory management
 
@@ -219,5 +220,9 @@ int		ft_export(char **args, t_exec *exec);
 int		ft_unset(char **args, t_exec *exec);
 int		ft_env(char **args, t_exec *exec);
 int		ft_exit(char **args, t_exec *exec);
+
+//SECTION - Parenthesis
+
+int	manage_parenthesis(t_exec *exec, t_token **token, int getfd);
 
 #endif

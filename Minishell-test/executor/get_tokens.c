@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 12:15:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:03:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	merge_tokens(t_token *token, int debug)
 	sort_id(token);
 }
 
+/*
 void	p_tok(t_token *token)
 {
 	int i = 0;
@@ -94,6 +95,7 @@ void	p_tok(t_token *token)
 		++i;
 	}
 }
+*/
 
 /*REVIEW - merge_one
 

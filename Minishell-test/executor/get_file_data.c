@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/16 10:35:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:10:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,10 @@ static int	add_one(t_exec *exec, t_token *token)
 		fd = exec->here_doc_fds[exec->cmd_num];
 	else if (token->type == RED_OUT)
 		fd = open(token->content, OUTFILE_TRUNC, 0666);
-	else
+	else if (token->type == RED_O_APPEND)
 		fd = open(token->content, OUTFILE_APPEND, 0666);
+	else
+		fd = manage_parenthesis(exec, &token, 1);
 	if (fd == -1 && (token->type == RED_OUT || token->type == RED_O_APPEND))
 		error(E_OPEN, exec);
 	if (fd == -1)
