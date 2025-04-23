@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 19:36:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:03:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,16 @@ int	execute(t_token *tokens, void *data, int debug)
 int	execute_loop(t_token *token, t_exec *exec)
 {
 	exec->prior_layer = token->prior;
-	exec->cmd_num = 0;
+	exec->cmd_num = token->cmd_num;
 	while (token->content)
 	{
 		*exec->exit_status = 0;
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
 		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
-		exec->cmd_num++;
-		goto_next_command_block(exec, &token);
+		if (goto_next_command_block(exec, &token))//FIXME - Togliere!
+			return (0);
+		exec->cmd_num = token->cmd_num;
 		if (exec->pipe_fds[0])
 		{
 			dup2(exec->pipe_fds[0], 0);
@@ -92,7 +93,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 		}
 	}
 	wait_everyone(exec);
-	if (token->prior != 0)
+	if (exec->prior_layer != 0)
 		ft_exit(NULL, exec);
 	return (0);
 }
@@ -128,8 +129,9 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	++(*tokens);
 	if (exec->prior_layer < (*tokens)->prior)
 		manage_parenthesis(exec, tokens, 0);
-	else if (exec->prior_layer > (*tokens)->prior)
+	if (exec->prior_layer > (*tokens)->prior)
 		return (wait_everyone(exec), ft_exit(NULL, exec), 0);
+		//return (1);//FIXME - Togliere!
 	return (0);
 }
 

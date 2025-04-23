@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 13:03:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:43:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,19 @@ static void	merge_one(t_token *token, int debug, int i, bool update_type)
 static void	sort_id(t_token *token)
 {
 	int	i;
+	int	cmd_num;
 
 	i = 0;
+	cmd_num = 0;
 	while (token[i].content)
 	{
+		if (is_exec_sep(token[i].type))
+			++cmd_num;
+		token[i].cmd_num = cmd_num;
 		token[i].id = i;
 		++i;
 	}
+	token[i].cmd_num = cmd_num + 1;
+	token[i].prior = -1;
+	token[i].id = -1;
 }

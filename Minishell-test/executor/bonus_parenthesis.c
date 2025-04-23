@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 16:06:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:01:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	redir_output(t_exec *exec, t_token *token, int fds[2], int getfd);
 static void	print_file(int infile, int outfile);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
-{
-	pid_t	pid;
+{//FIXME - Ripristinare fork
+	pid_t	pid;//
 	int		fds[2];
 	int		temp_fd;
 	
@@ -26,12 +26,14 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	fds[1] = 0;
 	pipe(fds);
 	exec->stdout_fd = fds[1];
-	pid = fork();
-	if (pid < 0)
-		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));
-	else if (pid == 0)
+	dup2(fds[1], 1);
+	pid = fork();//
+	if (pid < 0)//
+		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
+	else if (pid == 0)//
 		execute_loop(*token, exec);
 	exec->stdout_fd = temp_fd;
+	dup2(temp_fd, 1);
 	while ((*token)->content && (*token)->prior == (*token + 1)->prior)
 		++(*token);
 	if ((*token)->content)
@@ -43,11 +45,14 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 
 static void	redir_output(t_exec *exec, t_token *token, int fds[2], int getfd)
 {
+	int	layer;
+
 	if (getfd)
 		return ;
-	while (token->content && !is_exec_sep(token->type))
+	layer = exec->prior_layer;
+	while (layer < token->prior && !is_exec_sep(token->type))
 		++token;
-	if (!token->content || token->type == AND || token->type == OR)
+	if (layer > token->prior || token->type == AND || token->type == OR)
 	{
 		print_file(fds[1], exec->stdout_fd);
 		close_and_reset(&fds[0]);

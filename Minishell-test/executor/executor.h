@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 19:29:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:47:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
 typedef struct s_token t_token;
 
-
+/*
 typedef struct s_token
 {
 	char			*content;
 	int				id;
 	int				prior;
 	unsigned int	type:4;
-}	t_token;
+}	t_token;*/
 
 struct s_exec
 {
