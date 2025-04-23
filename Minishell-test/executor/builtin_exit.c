@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/15 10:30:29 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:25:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ int	ft_exit(char **args, t_exec *exec)
 	free_memory(exec);
 	return (exit(exit_status), 0);
 }
-

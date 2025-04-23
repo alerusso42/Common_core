@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 09:47:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:10:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ int		set_exit_status(t_exec *exec, int exit_status);
 char	*_reverse_split(char **matrix, char separator);
 int		_reverse_strncmp(char *s1, char *s2, int len);
 void	write_here_doc(char *line, t_exec *exec, int fd);
+int		pipe_append(int fds[2]);
 
 //SECTION - Environment management
 

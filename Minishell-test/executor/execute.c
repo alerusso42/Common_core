@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 12:03:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:25:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ static int	goto_next_command_block(t_exec *exec, t_token **tokens)
 	if (exec->prior_layer < (*tokens)->prior)
 		manage_parenthesis(exec, tokens, 0);
 	if (exec->prior_layer > (*tokens)->prior)
-		return (wait_everyone(exec), ft_exit(NULL, exec), 0);
-		//return (1);//FIXME - Togliere!
+		//return (wait_everyone(exec), ft_exit(NULL, exec), 0);
+		return (1);//FIXME - Togliere!
 	return (0);
 }
 

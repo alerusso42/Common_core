@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 16:10:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:03:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_file_data(t_exec *exec, t_token *token)
 
 	file_not_found = 0;
 	find_last_file(exec, token);
-	while (token->content && !is_exec_sep(token->type))
+	while (token->prior == exec->prior_layer && !is_exec_sep(token->type))
 	{
 		if (!file_not_found && is_red_sign(token->type))
 			file_not_found = add_one(exec, token);
@@ -50,7 +50,8 @@ int	get_file_data(t_exec *exec, t_token *token)
 	}
 	if (exec->last_out == -1 && token->type != PIPE)
 		dup2(exec->stdout_fd, 1);
-	if (exec->last_out == -1 && token->type == PIPE)
+	if (exec->last_out == -1 && token->type == PIPE \
+		&& exec->prior_layer == token->prior)
 	{
 		pipe(exec->pipe_fds);
 		dup2(exec->pipe_fds[1], 1);

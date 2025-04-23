@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/16 11:01:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:10:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,16 @@ void	write_here_doc(char *line, t_exec *exec, int fd)
 		else
 			write(fd, &line[i], 1);
 	}
+}
+
+int	pipe_append(int fds[2])
+{
+	fds[1] = open("_temp_pipe_file_", OUTFILE_APPEND, 0666);
+	if (fds[1] <= 0)
+		return (1);
+	fds[0] = open("_temp_pipe_file_", INFILE);
+	if (fds[0] <= 0)
+		return (close(fds[1]), 1);
+	unlink("_temp_pipe_file_");
+	return (0);
 }

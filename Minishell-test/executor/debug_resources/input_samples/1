@@ -34,7 +34,7 @@ case: ls | ( echo Ciao && ( echo mondo! ) ) | cat
 	Token = ),					10, 1,
 	Token = ),					10, 0,
 	Token = |,  	           	7, 0,
-	Token = cat,    	       	0, 0,
+	Token = echo,    	       	0, 0,
 [END]
 
 case: ls | (cd .. && ( cd executor && (cd obj_executor && (echo $PWD && (sleep 2)))) && echo $PWD && sleep 1) && echo $PWD

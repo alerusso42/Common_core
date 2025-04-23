@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 12:01:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:22:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,31 @@ static void	print_file(int infile, int outfile);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 {//FIXME - Ripristinare fork
-	pid_t	pid;//
+	//pid_t	pid;//
 	int		fds[2];
 	int		temp_fd;
 	
 	temp_fd = exec->stdout_fd;
 	fds[0] = 0;
 	fds[1] = 0;
+	int	layer = exec->prior_layer;
 	pipe(fds);
 	exec->stdout_fd = fds[1];
 	dup2(fds[1], 1);
-	pid = fork();//
-	if (pid < 0)//
-		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
-	else if (pid == 0)//
+	//pid = fork();//
+	//if (pid < 0)//
+	//	return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
+	//else if (pid == 0)//
 		execute_loop(*token, exec);
+	exec->prior_layer = layer;
 	exec->stdout_fd = temp_fd;
 	dup2(temp_fd, 1);
-	while ((*token)->content && (*token)->prior == (*token + 1)->prior)
+	while ((*token)->content && (*token)->prior > exec->prior_layer)
 		++(*token);
 	if ((*token)->content)
 		++(*token);
-	redir_output(exec, *token, fds, getfd);
 	close(fds[1]);
+	redir_output(exec, *token, fds, getfd);
 	return (fds[0]);
 }
 
@@ -54,14 +56,13 @@ static void	redir_output(t_exec *exec, t_token *token, int fds[2], int getfd)
 		++token;
 	if (layer > token->prior || token->type == AND || token->type == OR)
 	{
-		print_file(fds[1], exec->stdout_fd);
+		print_file(fds[0], exec->stdout_fd);
 		close_and_reset(&fds[0]);
 	}
 	else
 	{
-		if (exec->stdin_fd)
-			close_and_reset(&exec->stdin_fd);
-		exec->stdin_fd = fds[0];
+		close_and_reset(&exec->pipe_fds[0]);
+		exec->pipe_fds[0] = fds[0];
 	}
 }
 
