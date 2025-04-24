@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/12 17:35:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:33:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	get_one(t_exec *exec, t_token **token, int cmd_num);
 static int	count_arguments(t_token *token);
 static void	get_builtin_functions(t_exec *exec);
+int			get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
 
 /*REVIEW - get_commands_data
 
@@ -105,11 +106,17 @@ static int	get_one(t_exec *exec, t_token **token, int cmd_num)
 static int	count_arguments(t_token *token)
 {
 	int	counter;
+	int	cmd_layer;
 
 	counter = 1;
+	cmd_layer = token->prior;
 	++token;
 	while ("LOOP: counts every argument, considering parenthesis")
 	{
+		if (token->type == RED_SUBSHELL)
+			counter++;
+		while (token->content && token->prior != cmd_layer)
+			++token;
 		if (is_exec_sep(token->type) == _YES || !token->content)
 			break ;
 		else if (token->id != 0 && token->prior != (token - 1)->prior)
@@ -134,4 +141,15 @@ static void	get_builtin_functions(t_exec *exec)
 	exec->builtins[B_UNSET] = ft_unset;
 	exec->builtins[B_ENV] = ft_env;
 	exec->builtins[B_EXIT] = ft_exit;
+}
+
+int	get_subshell_filename(t_exec *exec, t_token **token, int cmd_num)
+{
+	int	pipe_fd;
+
+	pipe_fd = manage_parenthesis(exec, token, 1);
+	if (pipe_fd <= 0)
+		error(E_OPEN, exec);
+	
+	return (0);
 }

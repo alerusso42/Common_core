@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 16:22:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:26:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	//pid_t	pid;//
 	int		fds[2];
 	int		temp_fd;
-	
+
 	temp_fd = exec->stdout_fd;
 	fds[0] = 0;
 	fds[1] = 0;
@@ -35,13 +35,15 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 		execute_loop(*token, exec);
 	exec->prior_layer = layer;
 	exec->stdout_fd = temp_fd;
+	close(1);
 	dup2(temp_fd, 1);
 	while ((*token)->content && (*token)->prior > exec->prior_layer)
 		++(*token);
-	if ((*token)->content)
-		++(*token);
+	write(fds[1], "\0", 1);
 	close(fds[1]);
 	redir_output(exec, *token, fds, getfd);
+	if ((*token)->content)
+		++(*token);
 	return (fds[0]);
 }
 

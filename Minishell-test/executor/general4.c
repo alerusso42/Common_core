@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 14:10:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:17:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,17 @@ void	write_here_doc(char *line, t_exec *exec, int fd)
 	}
 }
 
-int	pipe_append(int fds[2])
+void	close_all(t_exec *exec)
 {
-	fds[1] = open("_temp_pipe_file_", OUTFILE_APPEND, 0666);
-	if (fds[1] <= 0)
-		return (1);
-	fds[0] = open("_temp_pipe_file_", INFILE);
-	if (fds[0] <= 0)
-		return (close(fds[1]), 1);
-	unlink("_temp_pipe_file_");
-	return (0);
+	t_debug_data	*debug;
+
+	close_and_reset(&exec->pipe_fds[0]);
+	close_and_reset(&exec->pipe_fds[1]);
+	close_and_reset(&exec->stdin_fd);
+	close_and_reset(&exec->stdout_fd);
+	if (exec->debug)
+	{
+		debug = exec->main_struct_pointer;
+		close_and_reset(&debug->fd_to_close);
+	}
 }

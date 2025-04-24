@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 14:25:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:10:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static int	goto_next_command_block(t_exec *exec, t_token **tokens);
+static int	next_cmd_block(t_exec *exec, t_token **token, t_token *first_token);
 static int	invoke_programs(t_exec *exec, int i);
-static int	wait_everyone(t_exec *exec);
+static int	wait_everyone(t_exec *exec, t_token *first_token);
 
 //NOTE - Il main della parte di esecuzione.
 //		Utilizzo:
@@ -44,20 +44,20 @@ static int	wait_everyone(t_exec *exec);
 	6)	Now, we iterate every command in execute_loop;
 	7)	We free only the memory of execution.
 */
-int	execute(t_token *tokens, void *data, int debug)
+int	execute(t_token *token, void *data, int debug)
 {
 	t_exec	exec;
 
-	merge_tokens(tokens, debug);
+	merge_tokens(token, debug);
 	exec = (t_exec){0};
 	get_main_struct_data(&exec, data, debug);
-	if (!tokens)
+	if (!token)
 		error(E_ARGS, &exec);
-	alloc_memory(&exec, count_commands(&exec, tokens));
-	prepare_here_docs(&exec, tokens);
-	get_commands_data(&exec, tokens);
-	get_paths_data(&exec, tokens);
-	execute_loop(tokens, &exec);
+	alloc_memory(&exec, count_commands(&exec, token));
+	prepare_here_docs(&exec, token);
+	get_commands_data(&exec, token);
+	get_paths_data(&exec, token);
+	execute_loop(token, &exec);
 	free_memory(&exec);
 	return (0);
 }
@@ -75,6 +75,9 @@ int	execute(t_token *tokens, void *data, int debug)
 */
 int	execute_loop(t_token *token, t_exec *exec)
 {
+	t_token	*first_token;
+
+	first_token = token;
 	exec->prior_layer = token->prior;
 	exec->cmd_num = token->cmd_num;
 	while (token->content)
@@ -83,7 +86,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
 		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
-		if (goto_next_command_block(exec, &token))//FIXME - Togliere!
+		if (next_cmd_block(exec, &token, first_token))//FIXME - Togliere!
 			return (0);
 		exec->cmd_num = token->cmd_num;
 		if (exec->pipe_fds[0])
@@ -92,7 +95,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 			close_and_reset(&exec->pipe_fds[0]);
 		}
 	}
-	wait_everyone(exec);
+	wait_everyone(exec, first_token);
 	if (exec->prior_layer != 0)
 		ft_exit(NULL, exec);
 	return (0);
@@ -100,36 +103,34 @@ int	execute_loop(t_token *token, t_exec *exec)
 
 /*REVIEW - execute
 
-//FIXME - 	Questa funzione è in work in progress, necessita modifiche
-//	per poter gestire la parte bonus del progetto, in particolare le ().
-//	In breve, passa al blocco di comandi successivo: 
-//	se il separatore è '||' o '&&', attende prima che tutti i figli finiscano.
 */
-static int	goto_next_command_block(t_exec *exec, t_token **tokens)
+static int	next_cmd_block(t_exec *exec, t_token **token, t_token *first_token)
 {
-	while ((*tokens)->content && is_exec_sep((*tokens)->type) == _NO)
+	while (exec->prior_layer <= (*token)->prior && is_exec_sep((*token)->type) == _NO)
 	{
-		++(*tokens);
+		++(*token);
 	}
-	if ((*tokens)->type == AND || (*tokens)->type == OR)
+	if ((*token)->type == AND || (*token)->type == OR)
 	{
-		wait_everyone(exec);
-		while (((*tokens)->content && \
-		(*tokens)->type != AND && (*tokens)->type != OR) || \
-		(((*tokens)->type == AND && *exec->exit_status != 0) || \
-		((*tokens)->type == OR && *exec->exit_status == 0)))
+		exec->cmd_num += 1;
+		wait_everyone(exec, first_token);
+		exec->cmd_num -= 1;
+		while ((exec->prior_layer <= (*token)->prior && \
+		(*token)->type != AND && (*token)->type != OR) || \
+		(((*token)->type == AND && *exec->exit_status != 0) || \
+		((*token)->type == OR && *exec->exit_status == 0)))
 		{
-			if (is_exec_sep((*tokens)->type))
+			if (is_exec_sep((*token)->type))
 				exec->cmd_num++;
-			++(*tokens);
+			++(*token);
 		}
 	}
-	if (!(*tokens)->content)
+	if (!(*token)->content)
 		return (0);
-	++(*tokens);
-	if (exec->prior_layer < (*tokens)->prior)
-		manage_parenthesis(exec, tokens, 0);
-	if (exec->prior_layer > (*tokens)->prior)
+	++(*token);
+	if (exec->prior_layer < (*token)->prior)
+		manage_parenthesis(exec, token, 0);
+	if (exec->prior_layer > (*token)->prior)
 		//return (wait_everyone(exec), ft_exit(NULL, exec), 0);
 		return (1);//FIXME - Togliere!
 	return (0);
@@ -162,7 +163,7 @@ static int	invoke_programs(t_exec *exec, int i)
 		error(E_FORK, exec);
 	else if (pid == 0)
 	{
-		close_and_reset(&exec->pipe_fds[0]);
+		close_all(exec);
 		execve(exec->commands[i][0], exec->commands[i], *exec->env);
 		return (set_exit_status(exec, 127), ft_exit(NULL, exec), 1);
 	}
@@ -178,25 +179,25 @@ static int	invoke_programs(t_exec *exec, int i)
 	4)	If a pid exist and it's the last command, update the exit status;
 	5)	We set last_command_done to i.
 */
-static int	wait_everyone(t_exec *exec)
+static int	wait_everyone(t_exec *exec, t_token *first_token)
 {
 	int	i;
 	int	exit_status;
 
 	exit_status = 0;
 	dup2(exec->stdin_fd, 0);
-	dup2(exec->stdout_fd, 0);
-	i = exec->last_cmd_done;
+	dup2(exec->stdout_fd, 1);
+	i = first_token->cmd_num;
 	while (i != exec->cmd_num)
 	{
 		if (exec->pid_list[i])
 		{
 			waitpid(exec->pid_list[i], &exit_status, 0);
 			if (i == exec->cmd_num - 1)
-				*exec->exit_status = exit_status; 
+				*exec->exit_status = exit_status;
+			exec->pid_list[i] = 0;
 		}
 		++i;
 	}
-	exec->last_cmd_done = i;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/22 10:37:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:18:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*free_debug_data(t_debug_data *data)
 	free(data->filename2);
 	data->filename1 = NULL;
 	data->filename2 = NULL;
-	close(data->fd_to_close);
+	close_and_reset(&data->fd_to_close);
 	data->fd_to_close = 0;
 	free(data->tokens);
 	data->tokens = NULL;

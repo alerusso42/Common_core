@@ -1,8 +1,34 @@
-define a
+define a1
 	display exec->stdout_fd
 	display exec->stdin_fd
 	display exec->pipe_fds[0]
 	display exec->pipe_fds[1]
 	display fds[0]
 	display fds[1]
+end
+
+define a2
+	set $z = 0	
+	while ((*token)[$z].id != -1)	
+		p (*token)[$z]	
+		set $z = $z + 1
+	end	
+end
+
+define a3	
+	set $z = 0	
+	while (token[$z].id != -1)	
+		p token[$z]
+		set $z = $z + 1
+	end	
+end
+
+define l1
+	p get_next_line_bonus(fds[0])
+	p sleep(1)
+	run
+end
+
+define l2
+	p get_next_line_bonus(7)
 end

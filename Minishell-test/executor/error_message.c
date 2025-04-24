@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 10:54:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:12:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	is_a_valid_executable(t_exec *exec, int i)
 
 	if (exec->which_cmd[i] != 0)
 		return (_YES);
+	if (!exec->commands[i][0])
+		return (_NO);
 	dir = opendir(exec->commands[i][0]);
 	if (dir)
 	{

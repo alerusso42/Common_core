@@ -1,7 +1,7 @@
 ls | (cd .. ; ( cd executor ; (cd obj_executor ; (echo $PWD && (sleep 2)))) ; echo $PWD && sleep 1) ; echo $PWD
 
 case: ls | (cd .. && ( cd executor && (cd obj_executor && (echo $PWD && (sleep 2)))) && echo $PWD && sleep 1) && echo $PWD
-[Test1, 35 token]
+[Test0, 35 token]
 Token = ls,             	0, 0,
 Token = |,              	7, 0,
 Token = (,              	10, 1,

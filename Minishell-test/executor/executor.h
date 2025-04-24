@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 14:10:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:43:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int		set_exit_status(t_exec *exec, int exit_status);
 char	*_reverse_split(char **matrix, char separator);
 int		_reverse_strncmp(char *s1, char *s2, int len);
 void	write_here_doc(char *line, t_exec *exec, int fd);
-int		pipe_append(int fds[2]);
+void	close_all(t_exec *exec);
 
 //SECTION - Environment management
 
@@ -225,6 +225,7 @@ int		ft_exit(char **args, t_exec *exec);
 
 //SECTION - Parenthesis
 
-int	manage_parenthesis(t_exec *exec, t_token **token, int getfd);
+int		manage_parenthesis(t_exec *exec, t_token **token, int getfd);
+int		get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
 
 #endif

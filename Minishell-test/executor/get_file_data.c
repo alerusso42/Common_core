@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 16:03:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:44:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ int	get_file_data(t_exec *exec, t_token *token)
 */
 static void	find_last_file(t_exec *exec, t_token *token)
 {
+	int	layer;
+
+	layer = token->prior;
 	exec->last_in = -1;
 	exec->last_out = -1;
 	while (token->content && is_exec_sep(token->type) == _NO)
@@ -76,7 +79,13 @@ static void	find_last_file(t_exec *exec, t_token *token)
 			exec->last_in = token->id;
 		else if (token->type == RED_OUT || token->type == RED_O_APPEND)
 			exec->last_out = token->id;
-		++token;
+		if (token->type == RED_SUBSHELL)
+		{
+			while (layer < token->prior)
+				++token;
+		}
+		else
+			++token;
 	}
 }
 
@@ -109,7 +118,7 @@ static int	add_one(t_exec *exec, t_token *token)
 	else if (token->type == RED_O_APPEND)
 		fd = open(token->content, OUTFILE_APPEND, 0666);
 	else
-		fd = manage_parenthesis(exec, &token, 1);
+		return (get_subshell_filename(exec, &token, 1));
 	if (fd == -1 && (token->type == RED_OUT || token->type == RED_O_APPEND))
 		error(E_OPEN, exec);
 	if (fd == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:16:00 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 15:53:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:17:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <dirent.h>
 
 //SECTION - Opening multiple fds on the same file
 //NOTE - 	Test OK!
@@ -176,6 +177,9 @@ int	main()
 	free(new);
 }*/
 
+/*
+//SECTION - Cosa torna wait?
+//NOTE - Wait torna l'ultimo figlio che CRONOLOGICAMENTE è finito
 int	main()
 {
 	pid_t	pid[50];
@@ -199,4 +203,35 @@ int	main()
 	while (wait(&exit_status) > 0)
 		printf("%d\n", exit_status / 256);
 	return (0);
-}
+}*/
+
+/*
+//SECTION - Dove vanno gli fd aperti con pipe?
+//NOTE - A quanto sembra vanno in /dev/fd/
+int	main()
+{
+	int 			fds[2];
+	DIR				*dir;
+	struct dirent	*file;
+
+	dir = opendir("/dev/fd");
+	file = readdir(dir);
+	while (file)
+	{
+		printf("%s\n", file->d_name);
+		file = readdir(dir);
+	}
+	pipe(fds);
+	closedir(dir);
+	printf("\nIN:\t%d\nOUT:\t%d\n", fds[0], fds[1]);
+	dir = opendir("/dev/fd");
+	file = readdir(dir);
+	while (file)
+	{
+		printf("%s\n", file->d_name);
+		file = readdir(dir);
+	}
+	closedir(dir);
+	close(fds[0]);
+	close(fds[1]);
+}*/
