@@ -12,7 +12,7 @@
 
 #include "executor.h"
 
-static int	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer);
+static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer);
 static int	count_arguments(t_exec *exec, t_token *token, int cmd_layer);
 static void	get_builtin_functions(t_exec *exec);
 int			get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
@@ -71,7 +71,7 @@ int	get_commands_data(t_exec *exec, t_token *token)
 	5)	If the token is not a COMMAND, we just go to next token.
 		In add_one, we go to next token that is not a COMMAND or ARGUMENT.
 */
-static int	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
+static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 {
 	int	command_argc;
 	int	i;
@@ -85,7 +85,7 @@ static int	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 	while ((i != command_argc))
 	{
 		i += (token->type == RED_SUBSHELL);
-		while (cmd_layer != token->prior)
+		while (token->content && cmd_layer != token->prior)
 			++token;
 		if ((token->content) && \
 			(token->type == COMMAND || token->type == ARGUMENT))
@@ -95,9 +95,9 @@ static int	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 				error(E_MALLOC, exec);
 			++i;
 		}
-		++token;
+		if (token->content)
+			++token;
 	}
-	return (0);
 }
 
 /*REVIEW - count_arguments

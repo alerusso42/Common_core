@@ -141,7 +141,7 @@ static void	sort_id(t_token *token)
 	cmd_num = 0;
 	while (token[i].content)
 	{
-		j = i;
+		j = i++;
 		current_layer = token[j].prior;
 		while (token[j].content && current_layer <= token[j].prior)
 		{

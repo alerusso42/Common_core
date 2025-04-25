@@ -9,7 +9,7 @@ end
 
 define a2
 	set $z = 0	
-	while ((*token)[$z].id != -1)	
+	while ((*token)[$z].content != (void *)0)	
 		p (*token)[$z]	
 		set $z = $z + 1
 	end	
@@ -17,7 +17,7 @@ end
 
 define a3	
 	set $z = 0	
-	while (token[$z].id != -1)	
+	while (token[$z].content != (void *)0)	
 		p token[$z]
 		set $z = $z + 1
 	end	
