@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 19:43:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:20:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ struct s_exec
 	char			*which_cmd;
 	void			*main_struct_pointer;
 	int				*here_doc_fds;
+	int				*proc_sub_fds;
 	int				*exit_status;
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;
 	int				cmd_num;
+	int				curr_cmd;
 	int				last_cmd_done;
 	int				stdin_fd;
 	int				stdout_fd;
@@ -130,7 +132,7 @@ enum e_exec_errors
 	E_CD_NOHOME,
 	E_CMD_NOTFOUND,
 	E_IS_DIRECTORY,
-	E_WILDCARD_NOTFOUND,
+	E_PERMISSION_DENIED,
 };
 
 enum e_sub_strlen
@@ -161,7 +163,7 @@ int		execute_loop(t_token *token, t_exec *exec);
 
 //SECTION Memory management
 
-int		alloc_memory(t_exec *exec, int cmd_num);
+int		alloc_memory(t_exec *exec, int cmd_num, int largest_cmd_block);
 void	free_memory(t_exec *memory);
 void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
@@ -173,7 +175,6 @@ void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
 char	*_ft_strjoin_free(char *s1, char *s2);
 int		count_commands(t_exec *exec, t_token *tokens);
-int		_ft_realloc(void **content, int nmemb, int old_nmemb, size_t sizeof_);
 int		is_red_sign(int sign);
 int		is_exec_sep(int sign);
 int		is_red_input_sign(int sign);
@@ -189,6 +190,10 @@ char	*_reverse_split(char **matrix, char separator);
 int		_reverse_strncmp(char *s1, char *s2, int len);
 void	write_here_doc(char *line, t_exec *exec, int fd);
 void	close_all(t_exec *exec);
+int		find_command_argument_index(t_exec *exec, t_token *token);
+void	find_command_id(t_exec *exec, t_token *token);
+int		largest_cmd_block(t_token *token);
+void	save_process_substitution_fd(t_exec *exec, int proc_sub_fd);
 
 //SECTION - Environment management
 

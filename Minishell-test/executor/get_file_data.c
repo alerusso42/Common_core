@@ -6,14 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 19:44:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:37:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static void	find_last_file(t_exec *exec, t_token *token);
-static int	add_one(t_exec *exec, t_token *token);
+static int	add_one(t_exec *exec, t_token *token, t_token **token_address);
 static int	get_here_doc_file(char *limiter, t_exec *exec);
 
 /*REVIEW - get_file_data
@@ -45,7 +45,7 @@ int	get_file_data(t_exec *exec, t_token *token)
 	while (token->prior == exec->prior_layer && !is_exec_sep(token->type))
 	{
 		if (!file_not_found && is_red_sign(token->type))
-			file_not_found = add_one(exec, token);
+			file_not_found = add_one(exec, token, &token);
 		++token;
 	}
 	if (exec->last_out == -1 && token->type != PIPE)
@@ -75,21 +75,20 @@ static void	find_last_file(t_exec *exec, t_token *token)
 	exec->last_out = -1;
 	while (token->content && is_exec_sep(token->type) == _NO)
 	{
-		if (token->type == RED_IN || token->type == HERE_DOC)
+		if (token->type == RED_SUBSHELL)
+		{
+			while (token->content && layer < token->prior)
+				++token;
+		}
+		else if (token->type == RED_IN || token->type == HERE_DOC)
 			exec->last_in = token->id;
 		else if (token->type == RED_OUT || token->type == RED_O_APPEND)
 			exec->last_out = token->id;
-		if (token->type == RED_SUBSHELL)
-		{
-			while (layer < token->prior)
-				++token;
-		}
-		else
+		else if (token->content)
 			++token;
 	}
 }
 
-//FIXME - 	RED_IN avrà un ruolo importante nelle parentesi...
 //	grep -v .c <(ls | grep -v .h)
 //
 /*REVIEW - add_one
@@ -97,7 +96,8 @@ static void	find_last_file(t_exec *exec, t_token *token)
 //	1)	If REDIRECT_INPUT (RED_IN): open file with INFILE permissions;
 		If HERE_DOC:				take fd in here_docs array;
 		If OUTFILE_TRUNC:			open file with O_T permissions;
-		If OUTFILE_APPEND:			open file with O_A permissions.
+		If OUTFILE_APPEND:			open file with O_A permissions;
+		If RED_SUBSHELL (<(ls)):	call get_subshell_filename.
 	
 	2)	If fd is invalid, and the token is an outfile: stop the whole program;
 	3)	If fd is invalid, and the token is an infile: stop the cmd block;
@@ -105,7 +105,7 @@ static void	find_last_file(t_exec *exec, t_token *token)
 		dup the fd on STDOUT if is a redirect output sign, else in STDIN;
 	5)	If fd is not a here_doc fd, close it.
 */
-static int	add_one(t_exec *exec, t_token *token)
+static int	add_one(t_exec *exec, t_token *token, t_token **token_address)
 {
 	int	fd;
 
@@ -118,7 +118,7 @@ static int	add_one(t_exec *exec, t_token *token)
 	else if (token->type == RED_O_APPEND)
 		fd = open(token->content, OUTFILE_APPEND, 0666);
 	else
-		return (get_subshell_filename(exec, &token, 1));
+		return (get_subshell_filename(exec, token_address, 1));
 	if (fd == -1 && (token->type == RED_OUT || token->type == RED_O_APPEND))
 		error(E_OPEN, exec);
 	if (fd == -1)
@@ -160,7 +160,6 @@ static int	get_here_doc_file(char *limiter, t_exec *exec)
 	limiter_len = ft_strlen(limiter);
 	while ((line) && (double_cmp(limiter, line, limiter_len, 1)) != 0)
 	{
-		//ft_putstr_fd(line, fd);
 		write_here_doc(line, exec, fd);
 		ft_putstr_fd("> ", exec->stdout_fd);
 		free(line);

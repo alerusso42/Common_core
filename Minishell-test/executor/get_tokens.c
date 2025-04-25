@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/23 11:43:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:42:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	merge_tokens(t_token *token, int debug)
 		if (token[i].type == RED_IN && token[i].prior != token[i + 1].prior)
 		{
 			token[i].type = RED_SUBSHELL;
+			token[i].prior += 1;
 		}
 		else if (is_red_sign(token[i].type))
 		{

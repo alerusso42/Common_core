@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_wildcards1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:24:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 15:19:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:02:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static int	dir_size(int *size, char *dir_path)
 	*size = 0;
 	dir = opendir(dir_path);
 	if (!dir)
-		return (E_WILDCARD_NOTFOUND);
+		return (1);
 	file = readdir(dir);
 	while (file)
 	{

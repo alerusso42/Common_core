@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 09:17:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:10:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,5 @@ void	write_here_doc(char *line, t_exec *exec, int fd)
 		}
 		else
 			write(fd, &line[i], 1);
-	}
-}
-
-void	close_all(t_exec *exec)
-{
-	t_debug_data	*debug;
-
-	close_and_reset(&exec->pipe_fds[0]);
-	close_and_reset(&exec->pipe_fds[1]);
-	close_and_reset(&exec->stdin_fd);
-	close_and_reset(&exec->stdout_fd);
-	if (exec->debug)
-	{
-		debug = exec->main_struct_pointer;
-		close_and_reset(&debug->fd_to_close);
 	}
 }

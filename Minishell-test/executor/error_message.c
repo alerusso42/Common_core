@@ -6,11 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 19:12:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:24:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+
+static int	bash_message2(int message, char *file);
 
 /*
 //REVIEW - error
@@ -68,11 +70,22 @@ int	bash_message(int message, char *file)
 	}
 	else if (message == E_CMD_NOTFOUND)
 	{
-		_fd_printf(2, "%s: command not found\n");
+		_fd_printf(2, "%s: command not found\n", file);
 	}
-	else if (message == E_IS_DIRECTORY)
+	else
+		return (bash_message2(message, file));
+	return (1);
+}
+
+static int	bash_message2(int message, char *file)
+{
+	if (message == E_IS_DIRECTORY)
 	{
-		_fd_printf(2, "bash: %s: Is a directory\n");
+		_fd_printf(2, "bash: %s: Is a directory\n", file);
+	}
+	else if (message == E_PERMISSION_DENIED)
+	{
+		_fd_printf(2, "bash: %s: Permission denied\n", file);
 	}
 	return (1);
 }

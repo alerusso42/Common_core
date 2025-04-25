@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 19:10:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:11:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	execute(t_token *token, void *data, int debug)
 	get_main_struct_data(&exec, data, debug);
 	if (!token)
 		error(E_ARGS, &exec);
-	alloc_memory(&exec, count_commands(&exec, token));
+	alloc_memory(&exec, count_commands(&exec, token), largest_cmd_block(token));
 	prepare_here_docs(&exec, token);
 	get_commands_data(&exec, token);
 	get_paths_data(&exec, token);
@@ -82,10 +82,11 @@ int	execute_loop(t_token *token, t_exec *exec)
 	exec->cmd_num = token->cmd_num;
 	while (token->content)
 	{
+		find_command_id(exec, token);
 		*exec->exit_status = 0;
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
-		close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
+		
 		if (next_cmd_block(exec, &token, first_token))//FIXME - Togliere!
 			return (0);
 		exec->cmd_num = token->cmd_num;

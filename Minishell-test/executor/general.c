@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/15 15:35:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:16:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,6 @@ void	*_free_three_d_matrix(char ***matrix)
 	return (NULL);
 }
 
-/*REVIEW - count_commands
-
-//	Count the number of command block in the commands line sent by parsing.
-	exec allocation size depend on this number.
-	Checks if there are pipe on the commands line.
-*/
-int	count_commands(t_exec *exec, t_token *tokens)
-{
-	int	cmd_num;
-	int	pipe_num;
-
-	cmd_num = 0;
-	pipe_num = 0;
-	while (tokens->content != NULL)
-	{
-		pipe_num += (tokens->type == PIPE);
-		cmd_num += (tokens->type == COMMAND);
-		++tokens;
-	}
-	exec->at_least_one_pipe = pipe_num > 0;
-	return (cmd_num);
-}
-
 /*REVIEW - _ft_strjoin_free
 
 //	Like strjoin, but frees both string.
@@ -119,14 +96,4 @@ char	*_ft_strjoin_free(char *s1, char *s2)
 	while (s2[++size])
 		new_str[index++] = s2[size];
 	return (free(s1), free(s2), new_str);
-}
-
-/*REVIEW - set_exit_status
-
-//	Set exit status. Returns it.
-*/
-int	set_exit_status(t_exec *exec, int exit_status)
-{
-	*exec->exit_status = exit_status;
-	return (exit_status);
 }

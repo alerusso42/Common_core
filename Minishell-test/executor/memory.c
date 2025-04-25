@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 09:18:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:07:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*free_debug_data(t_debug_data *data)
 }
 
 //REVIEW - Alloc for t_exec
-int	alloc_memory(t_exec *exec, int cmd_num)
+int	alloc_memory(t_exec *exec, int cmd_num, int largest_cmd_block)
 {
 	exec->stdin_fd = dup(0);
 	exec->stdout_fd = dup(1);
@@ -52,6 +52,9 @@ int	alloc_memory(t_exec *exec, int cmd_num)
 		error(E_MALLOC, exec);
 	exec->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!exec->pid_list)
+		error(E_MALLOC, exec);
+	exec->proc_sub_fds = (int *)ft_calloc(largest_cmd_block + 1, sizeof(int));
+	if (!exec->proc_sub_fds)
 		error(E_MALLOC, exec);
 	return (0);
 }
@@ -76,7 +79,7 @@ void	free_memory(t_exec *exec)
 	free_memory2(exec);
 }
 
-//REVIEW - 	This part is useless. It is put just to be sure all junk 
+//REVIEW - 	This part is near to useless. It is put just to be sure all junk 
 //			has been trashed.
 static void	free_memory2(t_exec *exec)
 {
@@ -88,6 +91,11 @@ static void	free_memory2(t_exec *exec)
 	while (++i != exec->cmd_num)
 	{
 		close_and_reset(&exec->here_doc_fds[i]);
+	}
+	i = -1;
+	while (exec->proc_sub_fds[++i])
+	{
+		close_and_reset(&exec->proc_sub_fds[i]);
 	}
 	free(exec->here_doc_fds);
 	exec->here_doc_fds = NULL;
