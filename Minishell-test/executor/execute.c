@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:11:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:12:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 		*exec->exit_status = 0;
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
-		
+		close_temp_files(exec);
 		if (next_cmd_block(exec, &token, first_token))//FIXME - Togliere!
 			return (0);
 		exec->cmd_num = token->cmd_num;
@@ -98,7 +98,8 @@ int	execute_loop(t_token *token, t_exec *exec)
 	}
 	wait_everyone(exec, first_token);
 	if (exec->prior_layer != 0)
-		ft_exit(NULL, exec);
+		return (0);
+		//ft_exit(NULL, exec);
 	return (0);
 }
 

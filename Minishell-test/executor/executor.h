@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:20:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:29:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ int		find_command_argument_index(t_exec *exec, t_token *token);
 void	find_command_id(t_exec *exec, t_token *token);
 int		largest_cmd_block(t_token *token);
 void	save_process_substitution_fd(t_exec *exec, int proc_sub_fd);
+void	close_temp_files(t_exec *exec);
 
 //SECTION - Environment management
 

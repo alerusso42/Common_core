@@ -26,5 +26,9 @@ case: cat <(ls)
 	Token = <,              	4, 0,
 	Token = (,              	10, 1,
 	Token = ls,             	0, 1,
+	Token = <,              	4, 0,
+	Token = (,              	10, 1,
+	Token = ls,             	0, 1,
+	Token = ),					10, 0,
 	Token = ),					10, 0,
 [END]

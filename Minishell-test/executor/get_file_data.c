@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:37:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:27:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ static int	get_here_doc_file(char *limiter, t_exec *exec);
 int	get_file_data(t_exec *exec, t_token *token)
 {
 	int	file_not_found;
+	int	current_cmd;
 
 	file_not_found = 0;
+	current_cmd = token->cmd_num;
 	find_last_file(exec, token);
-	while (token->prior == exec->prior_layer && !is_exec_sep(token->type))
+	while (token->type == RED_SUBSHELL || \
+		(token->prior == exec->prior_layer && !is_exec_sep(token->type)))
 	{
 		if (!file_not_found && is_red_sign(token->type))
 			file_not_found = add_one(exec, token, &token);
-		++token;
+		if (token->content)
+			++token;
 	}
 	if (exec->last_out == -1 && token->type != PIPE)
 		dup2(exec->stdout_fd, 1);
@@ -57,6 +61,7 @@ int	get_file_data(t_exec *exec, t_token *token)
 		dup2(exec->pipe_fds[1], 1);
 		close_and_reset(&exec->pipe_fds[1]);
 	}
+	exec->cmd_num = current_cmd;
 	return (file_not_found);
 }
 
@@ -118,7 +123,7 @@ static int	add_one(t_exec *exec, t_token *token, t_token **token_address)
 	else if (token->type == RED_O_APPEND)
 		fd = open(token->content, OUTFILE_APPEND, 0666);
 	else
-		return (get_subshell_filename(exec, token_address, 1));
+		return (get_subshell_filename(exec, token_address, exec->cmd_num));
 	if (fd == -1 && (token->type == RED_OUT || token->type == RED_O_APPEND))
 		error(E_OPEN, exec);
 	if (fd == -1)

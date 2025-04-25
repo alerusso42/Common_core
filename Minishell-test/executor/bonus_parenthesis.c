@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/24 16:26:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:38:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	int		fds[2];
 	int		temp_fd;
 
+	if (getfd)
+		++(*token);
 	temp_fd = exec->stdout_fd;
 	fds[0] = 0;
 	fds[1] = 0;

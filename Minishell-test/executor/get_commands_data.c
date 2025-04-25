@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:22:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:31:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static int	get_one(t_exec *exec, t_token **token, int cmd_num, int cmd_layer);
+static int	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer);
 static int	count_arguments(t_exec *exec, t_token *token, int cmd_layer);
 static void	get_builtin_functions(t_exec *exec);
 int			get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
@@ -44,10 +44,11 @@ int	get_commands_data(t_exec *exec, t_token *token)
 		if (token->type == COMMAND)
 		{
 			cmd_layer = token->prior;
-			get_one(exec, &token, cmd_num, cmd_layer);
+			get_one(exec, token, cmd_num, cmd_layer);
 			exec->which_cmd[cmd_num] = \
 			is_a_builtin_cmd(exec->commands[cmd_num][0]);
 			++cmd_num;
+			while ((++token)->type != COMMAND);
 		}
 		else
 			++token;
@@ -70,12 +71,12 @@ int	get_commands_data(t_exec *exec, t_token *token)
 	5)	If the token is not a COMMAND, we just go to next token.
 		In add_one, we go to next token that is not a COMMAND or ARGUMENT.
 */
-static int	get_one(t_exec *exec, t_token **token, int cmd_num, int cmd_layer)
+static int	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 {
 	int	command_argc;
 	int	i;
 
-	command_argc = count_arguments(exec, *token, cmd_layer);
+	command_argc = count_arguments(exec, token, cmd_layer);
 	exec->commands[cmd_num] = \
 	(char **)ft_calloc(command_argc + 1, sizeof(char *));
 	if (!exec->commands[cmd_num])
@@ -83,18 +84,18 @@ static int	get_one(t_exec *exec, t_token **token, int cmd_num, int cmd_layer)
 	i = 0;
 	while ((i != command_argc))
 	{
-		while (cmd_layer != (*token)->prior)
-			++(*token);
-		if ((*token)->type == COMMAND || (*token)->type == ARGUMENT)
+		i += (token->type == RED_SUBSHELL);
+		while (cmd_layer != token->prior)
+			++token;
+		if ((token->content) && \
+			(token->type == COMMAND || token->type == ARGUMENT))
 		{
-			exec->commands[cmd_num][i] = ft_strdup((*token)->content);
+			exec->commands[cmd_num][i] = ft_strdup(token->content);
 			if (!exec->commands[cmd_num][i])
 				error(E_MALLOC, exec);
 			++i;
 		}
-		else if ((*token)->type == RED_SUBSHELL)
-			++i;
-		++(*token);
+		++token;
 	}
 	return (0);
 }
@@ -173,5 +174,5 @@ int	get_subshell_filename(t_exec *exec, t_token **token, int cmd_num)
 	}
 	exec->commands[cmd_num][argv_index] = filename;
 	save_process_substitution_fd(exec, pipe_fd);
-	return (0);
+	return (free(temp), 0);
 }

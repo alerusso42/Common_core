@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:42:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:22:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,19 +133,28 @@ static void	merge_one(t_token *token, int debug, int i, bool update_type)
 static void	sort_id(t_token *token)
 {
 	int	i;
+	int	j;
 	int	cmd_num;
+	int	current_layer;
 
 	i = 0;
 	cmd_num = 0;
 	while (token[i].content)
 	{
-		if (is_exec_sep(token[i].type))
-			++cmd_num;
-		token[i].cmd_num = cmd_num;
-		token[i].id = i;
-		++i;
+		j = i;
+		current_layer = token[j].prior;
+		while (token[j].content && current_layer <= token[j].prior)
+		{
+			token[j].cmd_num = cmd_num;
+			token[j].id = j;
+			++j;
+		}
+		++cmd_num;
+		while (token[i].content && \
+			 current_layer == token[i].prior && !is_exec_sep(token[i].type))
+			++i;
 	}
-	token[i].cmd_num = cmd_num + 1;
+	token[i].cmd_num = cmd_num;
 	token[i].prior = -1;
 	token[i].id = -1;
 }

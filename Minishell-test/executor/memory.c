@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:07:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:32:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ static void	free_memory2(t_exec *exec)
 	}
 	free(exec->here_doc_fds);
 	exec->here_doc_fds = NULL;
+	free(exec->proc_sub_fds);
+	exec->proc_sub_fds = NULL;
 	if (exec->pipe_fds[0])
 		close(exec->pipe_fds[0]);
 	if (exec->pipe_fds[1])
