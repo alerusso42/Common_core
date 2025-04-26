@@ -12,7 +12,7 @@
 
 #include "executor.h"
 
-static int	next_cmd_block(t_exec *exec, t_token **token, t_token *first_token);
+static int	next_command(t_exec *exec, t_token **token, t_token *first_token);
 static int	invoke_programs(t_exec *exec, int i);
 static int	wait_everyone(t_exec *exec, t_token *first_token);
 
@@ -53,7 +53,7 @@ int	execute(t_token *token, void *data, int debug)
 	get_main_struct_data(&exec, data, debug);
 	if (!token)
 		error(E_ARGS, &exec);
-	alloc_memory(&exec, count_commands(&exec, token), largest_cmd_block(token));
+	alloc_memory(&exec, count_commands(&exec, token), proc_sub_num(token));
 	prepare_here_docs(&exec, token);
 	get_commands_data(&exec, token);
 	get_paths_data(&exec, token);
@@ -87,7 +87,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 		if (get_file_data(exec, token) == 0)
 			invoke_programs(exec, exec->cmd_num);
 		close_temp_files(exec);
-		if (next_cmd_block(exec, &token, first_token))//FIXME - Togliere!
+		if (next_command(exec, &token, first_token))//FIXME - Togliere if!
 			return (0);
 		exec->cmd_num = token->cmd_num;
 		if (exec->pipe_fds[0])
@@ -106,27 +106,16 @@ int	execute_loop(t_token *token, t_exec *exec)
 /*REVIEW - execute
 
 */
-static int	next_cmd_block(t_exec *exec, t_token **token, t_token *first_token)
+static int	next_command(t_exec *exec, t_token **token, t_token *first_token)
 {
-	while (exec->prior_layer <= (*token)->prior && is_exec_sep((*token)->type) == _NO)
-	{
-		++(*token);
-	}
+	next_cmd_block(token, exec->prior_layer, _YES);
 	if ((*token)->type == AND || (*token)->type == OR)
 	{
 		exec->cmd_num += 1;
 		wait_everyone(exec, first_token);
-		exec->cmd_num -= 1;
-		while ((exec->prior_layer <= (*token)->prior && \
-		(*token)->type != AND && (*token)->type != OR) || \
-		(((*token)->type == AND && *exec->exit_status != 0) || \
-		((*token)->type == OR && *exec->exit_status == 0)))
-		{
-			if (is_exec_sep((*token)->type))
-				exec->cmd_num++;
-			++(*token);
-		}
+		goto_valid_block(exec, token);
 	}
+	exec->cmd_num = (*token)->cmd_num;
 	if (!(*token)->content)
 		return (0);
 	++(*token);
@@ -155,6 +144,8 @@ static int	invoke_programs(t_exec *exec, int i)
 {
 	pid_t	pid;
 
+	if (!exec->commands[i][0])
+		return (0);
 	if (is_a_valid_executable(exec, i) == _NO)
 		return (0);
 	if (exec->which_cmd[i] != 0)

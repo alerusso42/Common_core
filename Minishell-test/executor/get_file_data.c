@@ -82,8 +82,7 @@ static void	find_last_file(t_exec *exec, t_token *token)
 	{
 		if (token->type == RED_SUBSHELL)
 		{
-			while (token->content && layer < token->prior)
-				++token;
+			skip_deeper_layers(&token, layer);
 		}
 		else if (token->type == RED_IN || token->type == HERE_DOC)
 			exec->last_in = token->id;

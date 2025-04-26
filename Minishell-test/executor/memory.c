@@ -33,7 +33,7 @@ void	*free_debug_data(t_debug_data *data)
 }
 
 //REVIEW - Alloc for t_exec
-int	alloc_memory(t_exec *exec, int cmd_num, int largest_cmd_block)
+int	alloc_memory(t_exec *exec, int cmd_num, int proc_sub_num)
 {
 	exec->stdin_fd = dup(0);
 	exec->stdout_fd = dup(1);
@@ -53,7 +53,7 @@ int	alloc_memory(t_exec *exec, int cmd_num, int largest_cmd_block)
 	exec->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!exec->pid_list)
 		error(E_MALLOC, exec);
-	exec->proc_sub_fds = (int *)ft_calloc(largest_cmd_block + 1, sizeof(int));
+	exec->proc_sub_fds = (int *)ft_calloc(proc_sub_num + 1, sizeof(int));
 	if (!exec->proc_sub_fds)
 		error(E_MALLOC, exec);
 	return (0);

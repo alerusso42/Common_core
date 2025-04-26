@@ -83,30 +83,32 @@ void	find_command_id(t_exec *exec, t_token *token)
 	}
 }
 
-int	largest_cmd_block(t_token *token)
+int	proc_sub_num(t_token *token)
 {
 	int		record;
-	int		current_score;
-	int		current_layer;
+	int		curr_score;
+	int		curr_layer;
 	t_token	*curr_token;
 
 	record = 0;
 	while (token->content)
 	{
-		current_score = 0;
-		current_layer = token->prior;
 		curr_token = token;
-		while (curr_token->content && is_exec_sep(curr_token->type) == _NO)
+		curr_layer = token->prior;
+		curr_score = 0;
+		while (token->prior >= curr_layer)
 		{
-			if (current_layer == curr_token->prior)
-				++current_score;
-			++curr_token;
+			curr_score += (token->type == RED_SUBSHELL);
+			if (token->type == RED_SUBSHELL)
+				skip_deeper_layers(&token, curr_layer);
+			else
+				++token;
 		}
-		if (current_score > record)
-			record = current_score;
-		while (token->content && is_exec_sep(token->type) == _NO && \
-		current_layer == token->prior)
-			++token;
+		if (curr_score > record)
+			record = curr_score;
+		token = curr_token;
+		next_cmd_block(&token, curr_layer, _NO);
+		++token;
 	}
 	return (record);
 }

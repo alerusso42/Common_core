@@ -96,6 +96,7 @@ enum e_types
 	OR,
 	PARENTHESIS,
 	RED_SUBSHELL,
+	NONE,
 };
 
 enum e_builtin
@@ -120,7 +121,7 @@ enum e_permissions
 
 enum e_exec_errors
 {
-	NONE,
+	NO_ERR,
 	E_ARGS,
 	E_MALLOC,
 	E_OPEN,
@@ -163,7 +164,7 @@ int		execute_loop(t_token *token, t_exec *exec);
 
 //SECTION Memory management
 
-int		alloc_memory(t_exec *exec, int cmd_num, int largest_cmd_block);
+int		alloc_memory(t_exec *exec, int cmd_num, int proc_sub_num);
 void	free_memory(t_exec *memory);
 void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
@@ -192,9 +193,15 @@ void	write_here_doc(char *line, t_exec *exec, int fd);
 void	close_all(t_exec *exec);
 int		find_command_argument_index(t_exec *exec, t_token *token);
 void	find_command_id(t_exec *exec, t_token *token);
-int		largest_cmd_block(t_token *token);
+int		proc_sub_num(t_token *token);
 void	save_process_substitution_fd(t_exec *exec, int proc_sub_fd);
 void	close_temp_files(t_exec *exec);
+void	next_token(t_token **token, int search1, int search2, int search3);
+void	next_cmd_block(t_token **token, int layer, bool accept_deeper_token);
+void	skip_deeper_layers(t_token **token, int layer);
+int		count_in_layer(t_token *token, int layer);
+int		cmd_block_len(t_token *token, int layer);
+void	goto_valid_block(t_exec *exec, t_token **token);
 
 //SECTION - Environment management
 

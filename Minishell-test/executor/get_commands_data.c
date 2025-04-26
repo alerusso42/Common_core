@@ -85,8 +85,8 @@ static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 	while ((i != command_argc))
 	{
 		i += (token->type == RED_SUBSHELL);
-		while (token->content && cmd_layer != token->prior)
-			++token;
+		if (token->type == RED_SUBSHELL)
+			skip_deeper_layers(&token, cmd_layer);
 		if ((token->content) && \
 			(token->type == COMMAND || token->type == ARGUMENT))
 		{
@@ -119,9 +119,10 @@ static int	count_arguments(t_exec *exec, t_token *token, int cmd_layer)
 	while ("LOOP: counts every argument, considering parenthesis")
 	{
 		if (token->type == RED_SUBSHELL)
+		{
 			counter++;
-		while (token->content && token->prior != cmd_layer)
-			++token;
+			skip_deeper_layers(&token, cmd_layer);
+		}
 		if (is_exec_sep(token->type) == _YES || !token->content)
 			break ;
 		else if (token->id != 0 && exec->prior_layer != token->prior)
