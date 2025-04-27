@@ -108,7 +108,10 @@ int	execute_loop(t_token *token, t_exec *exec)
 */
 static int	next_command(t_exec *exec, t_token **token, t_token *first_token)
 {
-	next_cmd_block(token, exec->prior_layer, _YES);
+	while (exec->prior_layer <= (*token)->prior && \
+		!(exec->prior_layer == (*token)->prior && is_exec_sep((*token)->type)))
+		++(*token);
+	//next_cmd_block(token, exec->prior_layer, _YES);
 	if ((*token)->type == AND || (*token)->type == OR)
 	{
 		exec->cmd_num += 1;

@@ -59,6 +59,9 @@ debug_libft:
 	cp ../../Libft/libft.a debug_resources/
 	$(MAKE) fclean -C ../../Libft/
 
+start: debug_libft deb
+	clear
+
 git: fclean frm
 	cd $(COMMON_CORE)
 	git add .

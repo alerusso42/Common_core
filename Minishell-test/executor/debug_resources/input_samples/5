@@ -122,7 +122,7 @@ Token = ),              1, 0,
 
 
 case: cat <<EOF
-[Test6, 4 token]
+[Test6, 2 token]
 Token = cat, 0, 0,
 Token = <<,	 6, 0,
 Token = EOF, 2, 0,
@@ -130,7 +130,7 @@ Token = EOF, 2, 0,
 
 
 case: ls -a --author | grep .c -v | grep .h -v
-[Test7, 12 token]
+[Test7, 11 token]
 Token = ls,             0, 0,
 Token = -a,             1, 0,
 Token = --author,       1, 0,

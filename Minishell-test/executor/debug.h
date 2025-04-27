@@ -13,6 +13,10 @@
 #ifndef DEBUG_H
 # define DEBUG_H
 # include "debug_resources/all.h"
-# define DEBUG_PATH "/home/alerusso/Common_core/Minishell-test/executor/debug_resources/input_samples/"
-
+//SECTION - Path home
+# define PCHOME_DEBUG_PATH "/home/alerusso/Common_core/Minishell-test/executor\
+/debug_resources/input_samples/"
+//SECTION - Path Codespace
+# define CODESPACE_DEBUG_PATH "/workspaces/Common_core/Minishell-test/executor\
+/debug_resources/input_samples/"
 #endif

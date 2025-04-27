@@ -12,24 +12,29 @@
 
 #include "executor.h"
 
-static void	redir_output(t_exec *exec, t_token *token, int fds[2], int getfd);
-static void	print_file(int infile, int outfile);
+static void	redir_output(t_exec *exec, bool redir_to_pipe, int input_fd);
+static bool	detect_pipe(t_token *token, int getfd);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 {//FIXME - Ripristinare fork
 	//pid_t	pid;//
 	int		fds[2];
 	int		temp_fd;
+	int		redir_to_pipe;
 
 	if (getfd)
 		++(*token);
 	temp_fd = exec->stdout_fd;
 	fds[0] = 0;
 	fds[1] = 0;
+	redir_to_pipe = detect_pipe(*token, getfd);
 	int	layer = exec->prior_layer;
-	pipe(fds);
-	exec->stdout_fd = fds[1];
-	dup2(fds[1], 1);
+	if (getfd || redir_to_pipe)
+	{
+		pipe(fds);
+		exec->stdout_fd = fds[1];
+		dup2(fds[1], 1);
+	}
 	//pid = fork();//
 	//if (pid < 0)//
 	//	return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
@@ -39,47 +44,28 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	exec->stdout_fd = temp_fd;
 	close(1);
 	dup2(temp_fd, 1);
-	//while ((*token)->content && (*token)->prior > exec->prior_layer)
-	//	++(*token);
 	skip_deeper_layers(token, exec->prior_layer);
-	write(fds[1], "\0", 1);
 	close(fds[1]);
-	redir_output(exec, *token, fds, getfd);
+	redir_output(exec, redir_to_pipe, fds[0]);
 	if ((*token)->content)
 		++(*token);
 	return (fds[0]);
 }
 
-static void	redir_output(t_exec *exec, t_token *token, int fds[2], int getfd)
+static void	redir_output(t_exec *exec, bool redir_to_pipe, int input_fd)
 {
-	int	layer;
-
-	if (getfd)
+	if (redir_to_pipe == 0)
 		return ;
-	layer = exec->prior_layer;
-	while (layer < token->prior && !is_exec_sep(token->type))
-		++token;
-	if (layer > token->prior || token->type == AND || token->type == OR)
-	{
-		print_file(fds[0], exec->stdout_fd);
-		close_and_reset(&fds[0]);
-	}
-	else
-	{
-		close_and_reset(&exec->pipe_fds[0]);
-		exec->pipe_fds[0] = fds[0];
-	}
+	close_and_reset(&exec->pipe_fds[0]);
+	exec->pipe_fds[0] = input_fd;
 }
 
-static void	print_file(int infile, int outfile)
+static bool	detect_pipe(t_token *token, int getfd)
 {
-	char	*line;
-
-	line = get_next_line_bonus(infile);
-	while (line)
-	{
-		ft_putstr_fd(line, outfile);
-		free(line);
-		line = get_next_line_bonus(infile);
-	}
+	if (getfd)
+		return (0);
+	skip_deeper_layers(&token, token->prior - 1);
+	if (token->type == PIPE)
+		return (1);
+	return (0);
 }

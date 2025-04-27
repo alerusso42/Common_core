@@ -30,7 +30,10 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 2 || argv[1][0] == '\0')
 		return (fd_printf(2, "\nInsert a file num.\n"));
-	filename = ft_strjoin(DEBUG_PATH, argv[1]);
+	if (getenv("CODESPACES"))
+		filename = ft_strjoin(CODESPACE_DEBUG_PATH, argv[1]);
+	else
+		filename = ft_strjoin(PCHOME_DEBUG_PATH, argv[1]);
 	fd = open(filename, O_RDWR, 0666);
 	if (fd == -1 || !filename)
 		return (l_printf("Err: |%s|", filename), free(filename), close(fd), 1);
