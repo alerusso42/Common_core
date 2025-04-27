@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 15:22:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:04:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,9 @@ static void	sort_id(t_token *token)
 		++cmd_num;
 		token = curr_token;
 		next_cmd_block(&token, current_layer, _NO);
-		++token;
+		token += (token->content != NULL);
 	}
-	token[i].cmd_num = cmd_num;
-	token[i].prior = -1;
-	token[i].id = -1;
+	token->cmd_num = cmd_num;
+	token->prior = -1;
+	token->id = -1;
 }

@@ -6,14 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 15:31:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:45:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
 static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer);
-static int	count_arguments(t_exec *exec, t_token *token, int cmd_layer);
+static int	count_arguments(t_token *token, int cmd_layer);
 static void	get_builtin_functions(t_exec *exec);
 int			get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
 
@@ -73,16 +73,16 @@ int	get_commands_data(t_exec *exec, t_token *token)
 */
 static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 {
-	int	command_argc;
+	int	cmd_argc;
 	int	i;
 
-	command_argc = count_arguments(exec, token, cmd_layer);
-	exec->commands[cmd_num] = \
-	(char **)ft_calloc(command_argc + 1, sizeof(char *));
+	cmd_argc = count_arguments(token, cmd_layer);
+	exec->commands[cmd_num] = (char **)ft_calloc(cmd_argc + 1, sizeof(char *));
 	if (!exec->commands[cmd_num])
 		error(E_MALLOC, exec);
+	tok_next(&token, COMMAND, cmd_layer, _YES);
 	i = 0;
-	while ((i != command_argc))
+	while ((i != cmd_argc))
 	{
 		i += (token->type == RED_SUBSHELL);
 		if (token->type == RED_SUBSHELL)
@@ -110,11 +110,12 @@ static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 		stop the counting;
 	5)	If token is a COMMAND or ARGUMENT, increase counter.
 */
-static int	count_arguments(t_exec *exec, t_token *token, int cmd_layer)
+static int	count_arguments(t_token *token, int cmd_layer)
 {
 	int	counter;
 
 	counter = 1;
+	tok_next(&token, COMMAND, cmd_layer, _YES);
 	++token;
 	while ("LOOP: counts every argument, considering parenthesis")
 	{
@@ -125,7 +126,7 @@ static int	count_arguments(t_exec *exec, t_token *token, int cmd_layer)
 		}
 		if (is_exec_sep(token->type) == _YES || !token->content)
 			break ;
-		else if (token->id != 0 && exec->prior_layer != token->prior)
+		else if (token->id != 0 && cmd_layer != token->prior)
 			break ;
 		else if (token->type == COMMAND || token->type == ARGUMENT)
 			counter++;
@@ -170,8 +171,8 @@ int	get_subshell_filename(t_exec *exec, t_token **token, int cmd_num)
 	argv_index = find_command_argument_index(exec, current_token);
 	if (argv_index <= 0)
 	{
-		bash_message(E_PERMISSION_DENIED, temp);
-		return (close(pipe_fd), free(temp), 1);
+		bash_message(E_PERMISSION_DENIED, filename);
+		return (close(pipe_fd), free(temp), free(filename), 1);
 	}
 	exec->commands[cmd_num][argv_index] = filename;
 	save_process_substitution_fd(exec, pipe_fd);

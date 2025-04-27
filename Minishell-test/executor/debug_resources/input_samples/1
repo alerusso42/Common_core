@@ -15,13 +15,13 @@ FILE = 2;
 Row are: token_content // type // priority
 
 
-[Test2, 2 token]
+[Test0, 2 token]
 	Token = make, 0, 0,
 	Token = frm, 1, 0,
 [END]
 
 case: cat <(ls)
-[Test0, 35 token]
+[Test1, 35 token]
 	Token = cat,             	0, 0,
 	Token = <,              	4, 0,
 	Token = (,              	10, 1,
@@ -34,7 +34,7 @@ case: cat <(ls)
 [END]
 
 case: ls | (cd .. && ( cd executor && (cd obj_executor && (echo $PWD && (sleep 2)))) && echo $PWD && sleep 1) && echo $PWD
-[Test1, 35 token]
+[Test2, 35 token]
 Token = ls,             	0, 0,
 Token = |,              	7, 0,
 Token = (,              	10, 1,

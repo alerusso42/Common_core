@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 14:29:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:26:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ void	skip_deeper_layers(t_token **token, int layer);
 int		count_in_layer(t_token *token, int layer);
 int		cmd_block_len(t_token *token, int layer);
 void	goto_valid_block(t_exec *exec, t_token **token);
+void	tok_next(t_token **token, int chr, int layer, bool accept_deeper_tok);
 
 //SECTION - Environment management
 

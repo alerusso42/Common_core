@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:35:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:55:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	find_command_argument_index(t_exec *exec, t_token *token)
 
 	current = token;
 	cmd_argc = 0;
-	while (token->id != 0 && token->cmd_num != (token - 1)->cmd_num)
+	while (token->id != 0 && \
+		(token->prior >= (token - 1)->prior || \
+			token->cmd_num != (token - 1)->cmd_num))
 		--token;
 	while (token != current)
 	{
