@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/27 12:26:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:03:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	close_and_reset(int *fd);
 void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
 char	*_ft_strjoin_free(char *s1, char *s2);
+int		bigger(int n1, int n2);
 int		count_commands(t_exec *exec, t_token *tokens);
 int		is_red_sign(int sign);
 int		is_exec_sep(int sign);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 15:27:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:38:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ static void	find_last_file(t_exec *exec, t_token *token)
 	exec->last_out = -1;
 	while (token->content && is_exec_sep(token->type) == _NO)
 	{
+		if (token->type == RED_IN || token->type == HERE_DOC)
+			exec->last_in = token->id;
+		else if (token->type == RED_OUT || token->type == RED_O_APPEND)
+			exec->last_out = token->id;
 		if (token->type == RED_SUBSHELL)
 		{
 			skip_deeper_layers(&token, layer);
 		}
-		else if (token->type == RED_IN || token->type == HERE_DOC)
-			exec->last_in = token->id;
-		else if (token->type == RED_OUT || token->type == RED_O_APPEND)
-			exec->last_out = token->id;
 		else if (token->content)
 			++token;
 	}

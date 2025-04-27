@@ -6,13 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:08:08 by ftersill          #+#    #+#             */
-/*   Updated: 2025/04/14 11:02:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:33:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 #include "executor.h"
 #include "debug_resources/all.h"
+#include <errno.h>
 
 int	testing(int test_num, int fd, t_debug_data *deb);
 int	alloc_memory_for_test(char *test, char ****matrix, t_token **exec, \
@@ -29,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 2 || argv[1][0] == '\0')
 		return (fd_printf(2, "\nInsert a file num.\n"));
-	filename = ft_strjoin("debug_resources/input_samples/", argv[1]);
+	filename = ft_strjoin(DEBUG_PATH, argv[1]);
 	fd = open(filename, O_RDWR, 0666);
 	if (fd == -1 || !filename)
 		return (l_printf("Err: |%s|", filename), free(filename), close(fd), 1);

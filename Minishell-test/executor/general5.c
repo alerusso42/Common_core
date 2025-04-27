@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/27 12:55:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:04:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,10 @@ int	proc_sub_num(t_token *token)
 			else
 				++token;
 		}
-		if (curr_score > record)
-			record = curr_score;
+		record = bigger(record, curr_score);
 		token = curr_token;
 		next_cmd_block(&token, curr_layer, _NO);
-		++token;
+		token += (token->content != NULL);
 	}
 	return (record);
 }

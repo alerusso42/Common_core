@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:16:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:03:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,9 @@ char	*_ft_strjoin_free(char *s1, char *s2)
 	while (s2[++size])
 		new_str[index++] = s2[size];
 	return (free(s1), free(s2), new_str);
+}
+
+int	bigger(int n1, int n2)
+{
+	return (n1 * (n1 >= n2) + n2 * (n1 < n2));
 }
