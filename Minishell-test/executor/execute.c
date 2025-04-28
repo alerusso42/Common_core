@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 15:12:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:59:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ int	execute(t_token *token, void *data, int debug)
 	prepare_here_docs(&exec, token);
 	get_commands_data(&exec, token);
 	get_paths_data(&exec, token);
+	if (token->prior != 0)
+	{
+		manage_parenthesis(&exec, &token, 0);
+		if (exec.pipe_fds[0])
+		{
+			dup_and_reset(&exec.pipe_fds[0], 0);
+		}
+	}
 	execute_loop(token, &exec);
 	free_memory(&exec);
 	return (0);
@@ -99,7 +107,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 	wait_everyone(exec, first_token);
 	if (exec->prior_layer != 0)
 		return (0);
-		//ft_exit(NULL, exec);
+		//exit_process(exec);
 	return (0);
 }
 
@@ -125,7 +133,7 @@ static int	next_command(t_exec *exec, t_token **token, t_token *first_token)
 	if (exec->prior_layer < (*token)->prior)
 		manage_parenthesis(exec, token, 0);
 	if (exec->prior_layer > (*token)->prior)
-		//return (wait_everyone(exec), ft_exit(NULL, exec), 0);
+		//return (wait_everyone(exec, first_token), exit_process(exec), 0);
 		return (1);//FIXME - Togliere!
 	return (0);
 }

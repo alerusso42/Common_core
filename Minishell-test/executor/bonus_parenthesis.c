@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/27 12:51:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:38:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-static void	redir_output(t_exec *exec, bool redir_to_pipe, int input_fd);
+static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2]);
 static bool	detect_pipe(t_token *token, int getfd);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
@@ -42,22 +42,23 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 		execute_loop(*token, exec);
 	exec->prior_layer = layer;
 	exec->stdout_fd = temp_fd;
+	redir_to_pipe = (getfd == 0) * (redir_to_pipe == 1);
+	return (dup2(temp_fd, 1), redir_output(exec, token, redir_to_pipe, fds));
+}
+
+static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
+{
 	close(1);
-	dup2(temp_fd, 1);
-	skip_deeper_layers(token, exec->prior_layer);
 	close(fds[1]);
-	redir_output(exec, redir_to_pipe, fds[0]);
+	skip_deeper_layers(token, exec->prior_layer);
+	if (pipe == 1)
+	{
+		close_and_reset(&exec->pipe_fds[0]);
+		exec->pipe_fds[0] = fds[0];
+	}
 	if ((*token)->content)
 		++(*token);
 	return (fds[0]);
-}
-
-static void	redir_output(t_exec *exec, bool redir_to_pipe, int input_fd)
-{
-	if (redir_to_pipe == 0)
-		return ;
-	close_and_reset(&exec->pipe_fds[0]);
-	exec->pipe_fds[0] = input_fd;
 }
 
 static bool	detect_pipe(t_token *token, int getfd)

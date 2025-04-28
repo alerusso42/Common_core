@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/27 14:38:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:28:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	get_file_data(t_exec *exec, t_token *token)
 		if (token->content)
 			++token;
 	}
-	if (exec->last_out == -1 && token->type != PIPE)
+	if (exec->last_out == -1 && \
+		!(token->type == PIPE && exec->prior_layer == token->prior))
 		dup2(exec->stdout_fd, 1);
 	if (exec->last_out == -1 && token->type == PIPE \
 		&& exec->prior_layer == token->prior)
 	{
 		pipe(exec->pipe_fds);
-		dup2(exec->pipe_fds[1], 1);
-		close_and_reset(&exec->pipe_fds[1]);
+		dup_and_reset(&exec->pipe_fds[1], 1);
 	}
 	exec->cmd_num = current_cmd;
 	return (file_not_found);

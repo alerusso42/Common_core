@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:15:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:20:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:28:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,8 @@ void	close_and_reset(int *fd)
 	*fd = 0;
 }
 
-/*REVIEW - set_exit_status
-
-//	Set exit status. Returns it.
-*/
-int	set_exit_status(t_exec *exec, int exit_status)
+void	dup_and_reset(int *new_fd, int old_fd)
 {
-	*exec->exit_status = exit_status;
-	return (exit_status);
+	dup2(*new_fd, old_fd);
+	close_and_reset(new_fd);
 }

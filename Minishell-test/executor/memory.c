@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 15:32:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:54:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ static void	free_memory2(t_exec *exec)
 {
 	int	i;
 
-	if (access("here_doc", F_OK) == 0)
-		unlink("here_doc");
 	i = -1;
 	while (++i != exec->cmd_num)
 	{

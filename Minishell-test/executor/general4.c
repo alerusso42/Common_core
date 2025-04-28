@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:10:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:26:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,14 @@ void	write_here_doc(char *line, t_exec *exec, int fd)
 		else
 			write(fd, &line[i], 1);
 	}
+}
+
+/*REVIEW - set_exit_status
+
+//	Set exit status. Returns it.
+*/
+int	set_exit_status(t_exec *exec, int exit_status)
+{
+	*exec->exit_status = exit_status;
+	return (exit_status);
 }

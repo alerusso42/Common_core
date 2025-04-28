@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 12:24:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:33:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		error(int err, t_exec *memory)
 	{
 		ft_putstr_fd("Open critical error\n", 2);
 	}
-	return (ft_exit(NULL, memory));
+	return (exit_process(memory));
 }
 
 /*
@@ -79,7 +79,15 @@ int	bash_message(int message, char *file)
 
 static int	bash_message2(int message, char *file)
 {
-	if (message == E_IS_DIRECTORY)
+	if (message == E_EXIT_NUMERIC)
+	{
+		_fd_printf(2, "bash: exit: %s: numeric argument required\n", file);
+	}
+	else if (message == E_EXIT_NUMERIC)
+	{
+		_fd_printf(2, "bash: exit: too many arguments\n", file);
+	}
+	else if (message == E_IS_DIRECTORY)
 	{
 		_fd_printf(2, "bash: %s: Is a directory\n", file);
 	}
@@ -87,6 +95,8 @@ static int	bash_message2(int message, char *file)
 	{
 		_fd_printf(2, "bash: %s: Permission denied\n", file);
 	}
+	else
+		_fd_printf(2, "ERROR MESSAGE NOT REGISTERED.\n");
 	return (1);
 }
 

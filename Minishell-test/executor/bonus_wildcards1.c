@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:24:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/25 11:02:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:37:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ static int	dir_size(int *size, char *dir_path)
 
 /*
 cc bonus_wildcards1.c bonus_wildcards2.c general3.c general.c general4.c \
-printf_fd.c environment.c debug_resources/libft.a -g -Wall -Wextra -Werror
+printf_fd.c environment.c environment2.c debug_resources/libft.a \
+-g -Wall -Wextra -Werror
 */
 int	main()
 {
