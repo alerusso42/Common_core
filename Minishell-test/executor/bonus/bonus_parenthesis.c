@@ -75,12 +75,14 @@ static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
 	exec->proc_sub_temp_fds[--i] = 0;
 	close(1);
 	close(fds[1]);
-	skip_deeper_layers(token, exec->prior_layer);
 	if (pipe == 1)
 	{
 		close_and_reset(&exec->pipe_fds[0]);
 		exec->pipe_fds[0] = fds[0];
 	}
+	skip_deeper_layers(token, exec->prior_layer);
+	if ((*token)->type == AND || (*token)->type == OR)
+		goto_valid_block(exec, token);
 	if ((*token)->content)
 		++(*token);
 	return (fds[0]);

@@ -193,6 +193,7 @@ char	*_cat_string(char *src, char *catstr, size_t start, int which_free);
 int		set_exit_status(t_exec *exec, int exit_status);
 char	*_reverse_split(char **matrix, char separator);
 int		_reverse_strncmp(char *s1, char *s2, int len);
+void	sort_matrix(char **matrix);
 void	write_here_doc(char *line, t_exec *exec, int fd);
 void	close_all(t_exec *exec);
 int		find_command_argument_index(t_exec *exec, t_token *token);

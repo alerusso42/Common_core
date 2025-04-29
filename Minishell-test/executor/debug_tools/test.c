@@ -238,16 +238,20 @@ int	main()
 
 //SECTION - Main per testare le wildcards
 /*
-cc bonus_wildcards1.c bonus_wildcards2.c general3.c general.c general4.c \
-printf_fd.c environment.c environment2.c debug_resources/libft.a \
--g -Wall -Wextra -Werror
+cc test.c ../bonus/bonus_wildcards1.c ../bonus/bonus_wildcards2.c \
+../utils/general3.c ../utils/general.c ../utils/general4.c \
+../utils/printf_fd.c \
+../env_management/environment.c ../env_management/environment2.c \
+debug_resources/libft.a -g -Wall -Wextra -Werror
 */
 /*
+#include "../executor.h"
+
 int	main()
 {
 	char	*test1 = "*";
 	char	*test2 = "bu*pwd*.c";
-	char	*test3 = "/bin/*";
+	char	*test3 = "/bin/";//add * after /
 	char	*result;
 
 	if (convert_wildcard(test1, &result))
@@ -264,3 +268,21 @@ int	main()
 	free(result);
 	printf("\n\nYou didn't crash!\n");
 }*/
+
+int	main()
+{
+	pid_t	pid;
+	int		exit_status;
+
+	pid = fork();
+	if (pid < 0)
+		return (printf("vaffanculo"));
+	else if (pid == 0)
+	{
+		sleep(100);
+		exit(0);
+	}
+	wait(&exit_status);
+		printf("%d\n", exit_status / 256);
+	return (0);
+}

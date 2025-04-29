@@ -76,6 +76,32 @@ int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
 	return (0);
 }
 
+void	sort_matrix(char **matrix)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	if (!matrix || !matrix[0])
+		return ;
+	i = 0;
+	while (matrix[i + 1])
+	{
+		j = 0;
+		while (matrix[j + 1])
+		{
+			if (ft_strncmp(matrix[j], matrix[j + 1], INT_MAX) > 0)
+			{
+				temp = matrix[j];
+				matrix[j] = matrix[j + 1];
+				matrix[j + 1] = temp;
+			}
+			++j;
+		}
+		++i;
+	}
+}
+
 void	write_here_doc(char *line, t_exec *exec, int fd)
 {
 	int		i;

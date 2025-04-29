@@ -27,6 +27,7 @@ char	*fill_occurrences(t_wildcard *wdata)
 		return (_free_matrix(matrix), NULL);
 	if (wdata->dir_size == 0)
 		return (_free_matrix(matrix), ft_strdup(wdata->old_str));
+	sort_matrix(matrix);
 	new_str = _reverse_split(matrix, ' ');
 	if (!new_str)
 		return (_free_matrix(matrix), NULL);

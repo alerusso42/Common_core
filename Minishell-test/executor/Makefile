@@ -85,6 +85,7 @@ deb: $(OBJ_DIR) $(OBJ) $(OBJ_DEBUG)
 
 clean: frm
 	rm -rf obj_executor/*.o *.out
+	rm -f debug_tools/*.out
 	rm -rf obj_executor
 
 fclean: clean
