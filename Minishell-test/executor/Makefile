@@ -69,7 +69,7 @@ $(OBJ_DIR)/%.o: %.c
 $(NAME): $(OBJ_DIR) $(OBJ)
 	ar rcs $(NAME).a $(OBJ)
 
-$(OBJ_DIR): $(OBJ_DIR)
+$(OBJ_DIR): 
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/$(BONUS_DIR)
 	mkdir -p $(OBJ_DIR)/$(BUILT_DIR)

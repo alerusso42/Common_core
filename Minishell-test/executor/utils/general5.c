@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:22:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:33:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,20 @@ int	proc_sub_num(t_token *token)
 		token = curr_token;
 		next_cmd_block(&token, curr_layer, _NO);
 		token += (token->content != NULL);
+	}
+	return (record);
+}
+
+int	deepest(t_token *token)
+{
+	int		record;
+
+	record = 0;
+	while (token->content)
+	{
+		if (record < token->prior)
+			record = token->prior;
+		++token;
 	}
 	return (record);
 }

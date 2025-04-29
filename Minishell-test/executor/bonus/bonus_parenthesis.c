@@ -6,12 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:19:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:58:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
+static void	prepare_recursion(t_exec *exec, int fds[2], int std_out, int pipe);
 static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2]);
 static bool	detect_pipe(t_token *token, int getfd);
 
@@ -25,25 +26,42 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	if (getfd)
 		++(*token);
 	temp_fd = exec->stdout_fd;
-	fds[0] = 0;
-	fds[1] = 0;
 	redir_to_pipe = detect_pipe(*token, getfd);
 	int	layer = exec->prior_layer;
-	if (getfd || redir_to_pipe)
-	{
-		pipe(fds);
-		exec->stdout_fd = fds[1];
-		dup2(fds[1], 1);
-	}
+	prepare_recursion(exec, fds, temp_fd, getfd || redir_to_pipe);
 	//pid = fork();//
 	//if (pid < 0)//
 	//	return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
 	//else if (pid == 0)//
 		execute_loop(*token, exec);
+	//if (getfd == 0)//
+	//	exec->pid_list[(*token)->cmd_num] = pid;//
 	exec->prior_layer = layer;
 	exec->stdout_fd = temp_fd;
 	redir_to_pipe = (getfd == 0) * (redir_to_pipe == 1);
 	return (dup2(temp_fd, 1), redir_output(exec, token, redir_to_pipe, fds));
+}
+
+static void	prep_recursion(t_exec *exec, int fds[2], int std_out, int pipe)
+{
+	fds[0] = 0;
+	fds[1] = 0;
+	if (pipe)
+	{
+		pipe(fds);
+		exec->stdout_fd = fds[1];
+		dup2(fds[1], 1);
+	}
+}
+
+static bool	detect_pipe(t_token *token, int getfd)
+{
+	if (getfd)
+		return (0);
+	skip_deeper_layers(&token, token->prior - 1);
+	if (token->type == PIPE)
+		return (1);
+	return (0);
 }
 
 static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
@@ -61,12 +79,31 @@ static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
 	return (fds[0]);
 }
 
-static bool	detect_pipe(t_token *token, int getfd)
+int	get_subshell_filename(t_exec *exec, t_token **token, int cmd_num)
 {
-	if (getfd)
-		return (0);
-	skip_deeper_layers(&token, token->prior - 1);
-	if (token->type == PIPE)
-		return (1);
-	return (0);
+	int		pipe_fd;
+	int		argv_index;
+	char	*filename;
+	char	*temp;
+	t_token	*current_token;
+
+	current_token = *token;
+	pipe_fd = manage_parenthesis(exec, token, _YES);
+	if (pipe_fd <= 0)
+		error(E_OPEN, exec);
+	temp = ft_itoa(pipe_fd);
+	if (!temp)
+		return (close(pipe_fd), error(E_MALLOC, exec));
+	filename = ft_strjoin("/dev/fd/", temp);
+	if (!filename)
+		return (close(pipe_fd), free(temp), error(E_MALLOC, exec));
+	argv_index = find_command_argument_index(exec, current_token);
+	if (argv_index <= 0)
+	{
+		bash_message(E_PERMISSION_DENIED, filename);
+		return (close(pipe_fd), free(temp), free(filename), 1);
+	}
+	free(exec->commands[cmd_num][argv_index]);
+	exec->commands[cmd_num][argv_index] = filename;
+	return (save_process_substitution_fd(exec, pipe_fd), free(temp), 0);
 }

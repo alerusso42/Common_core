@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:22:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:51:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer);
 static int	count_arguments(t_token *token, int cmd_layer);
 static void	get_builtin_functions(t_exec *exec);
-int			get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
+static void	add_placeholder(t_exec *exec, int cmd_num, int *i);
 
 /*REVIEW - get_commands_data
 
@@ -76,27 +76,27 @@ static void	get_one(t_exec *exec, t_token *token, int cmd_num, int cmd_layer)
 	int	cmd_argc;
 	int	i;
 
+	tok_next(&token, COMMAND, cmd_layer, _YES);
 	cmd_argc = count_arguments(token, cmd_layer);
 	exec->commands[cmd_num] = (char **)ft_calloc(cmd_argc + 1, sizeof(char *));
 	if (!exec->commands[cmd_num])
 		error(E_MALLOC, exec);
-	tok_next(&token, COMMAND, cmd_layer, _YES);
 	i = 0;
 	while ((i != cmd_argc))
 	{
-		i += (token->type == RED_SUBSHELL);
 		if (token->type == RED_SUBSHELL)
+		{
 			skip_deeper_layers(&token, cmd_layer);
+			add_placeholder(exec, cmd_num, &i);
+		}
 		if ((token->content) && \
 			(token->type == COMMAND || token->type == ARGUMENT))
 		{
 			exec->commands[cmd_num][i] = ft_strdup(token->content);
-			if (!exec->commands[cmd_num][i])
+			if (!exec->commands[cmd_num][i++])
 				error(E_MALLOC, exec);
-			++i;
 		}
-		if (token->content)
-			++token;
+		token += (token->content != NULL);
 	}
 }
 
@@ -115,7 +115,6 @@ static int	count_arguments(t_token *token, int cmd_layer)
 	int	counter;
 
 	counter = 1;
-	tok_next(&token, COMMAND, cmd_layer, _YES);
 	++token;
 	while ("LOOP: counts every argument, considering parenthesis")
 	{
@@ -150,31 +149,10 @@ static void	get_builtin_functions(t_exec *exec)
 	exec->builtins[B_EXIT] = ft_exit;
 }
 
-int	get_subshell_filename(t_exec *exec, t_token **token, int cmd_num)
+static void	add_placeholder(t_exec *exec, int cmd_num, int *i)
 {
-	int		pipe_fd;
-	int		argv_index;
-	char	*filename;
-	char	*temp;
-	t_token	*current_token;
-
-	current_token = *token;
-	pipe_fd = manage_parenthesis(exec, token, _YES);
-	if (pipe_fd <= 0)
-		error(E_OPEN, exec);
-	temp = ft_itoa(pipe_fd);
-	if (!temp)
-		return (close(pipe_fd), error(E_MALLOC, exec));
-	filename = ft_strjoin("/dev/fd/", temp);
-	if (!filename)
-		return (close(pipe_fd), free(temp), error(E_MALLOC, exec));
-	argv_index = find_command_argument_index(exec, current_token);
-	if (argv_index <= 0)
-	{
-		bash_message(E_PERMISSION_DENIED, filename);
-		return (close(pipe_fd), free(temp), free(filename), 1);
-	}
-	exec->commands[cmd_num][argv_index] = filename;
-	save_process_substitution_fd(exec, pipe_fd);
-	return (free(temp), 0);
+	exec->commands[cmd_num][*i] = ft_strdup("");
+	if (!exec->commands[cmd_num][*i])
+		error(E_MALLOC, exec);
+	(*i)++;
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:22:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:37:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*free_debug_data(t_debug_data *data)
 }
 
 //REVIEW - Alloc for t_exec
-int	alloc_memory(t_exec *exec, int cmd_num, int proc_sub_num)
+void	alloc_memory(t_exec *exec, t_token *token, int cmd_num)
 {
 	exec->stdin_fd = dup(0);
 	exec->stdout_fd = dup(1);
@@ -53,10 +53,12 @@ int	alloc_memory(t_exec *exec, int cmd_num, int proc_sub_num)
 	exec->pid_list = (int *)ft_calloc(cmd_num + 1, sizeof(int));
 	if (!exec->pid_list)
 		error(E_MALLOC, exec);
-	exec->proc_sub_fds = (int *)ft_calloc(proc_sub_num + 1, sizeof(int));
+	exec->proc_sub_fds = (int *)ft_calloc(proc_sub_num(token) + 1, sizeof(int));
 	if (!exec->proc_sub_fds)
 		error(E_MALLOC, exec);
-	return (0);
+	exec->proc_sub_temp_fds = (int *)ft_calloc(deepest(token) + 1, sizeof(int));
+	if (!exec->proc_sub_fds)
+		error(E_MALLOC, exec);
 }
 
 //REVIEW - Release memory of t_exec. Restores STDIN and STDOUT.
@@ -95,12 +97,17 @@ static void	free_memory2(t_exec *exec)
 	{
 		close_and_reset(&exec->proc_sub_fds[i]);
 	}
+	i = -1;
+	while (exec->proc_sub_temp_fds[++i])
+	{
+		close_and_reset(&exec->proc_sub_temp_fds[i]);
+	}
 	free(exec->here_doc_fds);
 	exec->here_doc_fds = NULL;
 	free(exec->proc_sub_fds);
 	exec->proc_sub_fds = NULL;
-	if (exec->pipe_fds[0])
-		close(exec->pipe_fds[0]);
-	if (exec->pipe_fds[1])
-		close(exec->pipe_fds[1]);
+	free(exec->proc_sub_temp_fds);
+	exec->proc_sub_temp_fds = NULL;
+	close_and_reset(&exec->pipe_fds[0]);
+	close_and_reset(&exec->pipe_fds[1]);
 }

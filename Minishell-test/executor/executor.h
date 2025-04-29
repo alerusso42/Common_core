@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 17:33:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:33:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ struct s_exec
 	void			*main_struct_pointer;
 	int				*here_doc_fds;
 	int				*proc_sub_fds;
+	int				*proc_sub_temp_fds;
 	int				*exit_status;
 	int				pipe_fds[2];
 	int				last_in;
@@ -166,7 +167,7 @@ int		execute_loop(t_token *token, t_exec *exec);
 
 //SECTION Memory management
 
-int		alloc_memory(t_exec *exec, int cmd_num, int proc_sub_num);
+void	alloc_memory(t_exec *exec, t_token *token, int cmd_num);
 void	free_memory(t_exec *memory);
 void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
@@ -197,6 +198,7 @@ void	close_all(t_exec *exec);
 int		find_command_argument_index(t_exec *exec, t_token *token);
 void	find_command_id(t_exec *exec, t_token *token);
 int		proc_sub_num(t_token *token);
+int		deepest(t_token *token);
 void	save_process_substitution_fd(t_exec *exec, int proc_sub_fd);
 void	close_temp_files(t_exec *exec);
 void	dup_and_reset(int *new_fd, int old_fd);

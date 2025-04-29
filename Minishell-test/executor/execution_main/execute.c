@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:22:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:12:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	execute(t_token *token, void *data, int debug)
 	get_main_struct_data(&exec, data, debug);
 	if (!token)
 		error(E_ARGS, &exec);
-	alloc_memory(&exec, count_commands(&exec, token), proc_sub_num(token));
+	alloc_memory(&exec, token, count_commands(&exec, token));
 	prepare_here_docs(&exec, token);
 	get_commands_data(&exec, token);
 	get_paths_data(&exec, token);

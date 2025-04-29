@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:44:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:19:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/28 20:33:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ int	ft_echo(char **args, t_exec *exec)
 				write(1, &args[i][j], 1);
 			++j;
 		}
-		if (args[i + 1])
+		if (args[++i])
 			write(1, " ", 1);
-		++i;
 	}
 	return (write(1, "\n", (int)print_slash_n));
 }
