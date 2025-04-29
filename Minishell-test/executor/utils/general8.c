@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:40:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:23:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:40:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ void	tok_next(t_token **token, int chr, int layer, bool accept_deeper_tok)
 				break ;
 		}
 	}
+}
+
+bool	detect_pipe(t_token *token, int getfd, int layer)
+{
+	if (getfd)
+		return (0);
+	skip_deeper_layers(&token, layer);
+	if (token->type == PIPE)
+		return (1);
+	return (0);
 }

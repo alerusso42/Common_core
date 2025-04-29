@@ -32,3 +32,16 @@ end
 define l2
 	p get_next_line_bonus(7)
 end
+
+define cmd	
+	set $z1 = 0	
+	while (exec->commands[$z1] != (void *)0)
+		set $z2 = 0
+		p $z1
+		while (exec->commands[$z1][$z2] != (void *)0)
+			p exec->commands[$z1][$z2]
+			set $z2 = $z2 + 1
+		end	
+		set $z1 = $z1 + 1
+	end	
+end

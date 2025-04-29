@@ -95,8 +95,14 @@ re: fclean all
 
 #frm = file remove
 frm: 
-	rm -f *.txt
+	rm -f *.txt *.gdb *.supp
 	rm -f $(DEBUG_DIR)/debug_resources/bash_tests/*.txt
+
+gdb: 
+	$(MAKE) gdb_file -C debug_tools/
+
+val: 
+	$(MAKE) valgrind_file -C debug_tools/
 
 #FIXME - Remove the following commands in the final project.
 #Get a copy of my libft.a

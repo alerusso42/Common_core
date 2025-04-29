@@ -5,8 +5,8 @@
 [ ]	Tok_next e next_token.. migliorare nomi
 [X]	Stringa vuota ai comandi per RED_SUBSHELL
 [ ]	Sort ascii su wildcards
-[ ]	aggiungere deepest_layer
-[ ]	aggiornare at_least_one_pipe inizio execute_loop
-[ ]	Salvare pid quando getfd == 0
+[X]	aggiungere deepest_layer
+[X]	aggiornare at_least_one_pipe inizio execute_loop
+[X]	Salvare pid quando getfd == 0
 [ ]	Forkare con here_doc
 [ ]	forkare con le parentesi senza esplodere

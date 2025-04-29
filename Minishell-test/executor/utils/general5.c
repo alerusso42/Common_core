@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/29 12:33:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:35:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,5 @@ int	deepest(t_token *token)
 			record = token->prior;
 		++token;
 	}
-	return (record);
+	return (record + 1);
 }

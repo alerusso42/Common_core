@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/29 12:12:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:52:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 	first_token = token;
 	exec->prior_layer = token->prior;
 	exec->cmd_num = token->cmd_num;
+	exec->at_least_one_pipe = detect_pipe(token, _NO, token->prior);
 	while (token->content)
 	{
 		find_command_id(exec, token);
