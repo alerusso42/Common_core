@@ -83,8 +83,8 @@ $(OBJ_DIR):
 deb: $(OBJ_DIR) $(OBJ) $(OBJ_DEBUG)
 	cc -D DEBUG=1 $(FLAGS) -fPIE $(OBJ_DEBUG) $(OBJ) $(DEBUG_LIBFT) -o exe.out
 
-clean:
-	rm -rf obj_executor/*.o *.out *.txt
+clean: frm
+	rm -rf obj_executor/*.o *.out
 	rm -rf obj_executor
 
 fclean: clean
