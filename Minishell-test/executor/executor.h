@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/29 14:41:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:40:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
 void	close_and_reset(int *fd);
 
-//SECTION - General
+//SECTION - Utils
 
 void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
@@ -245,8 +245,9 @@ int		ft_unset(char **args, t_exec *exec);
 int		ft_env(char **args, t_exec *exec);
 int		ft_exit(char **args, t_exec *exec);
 
-//SECTION - Parenthesis
+//SECTION - Bonus
 
+int		convert_wildcard(char *old_str, char **new_str);
 int		manage_parenthesis(t_exec *exec, t_token **token, int getfd);
 int		get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
 

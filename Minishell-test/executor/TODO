@@ -3,7 +3,9 @@
 [ ]	Norminette
 [ ]	Migliorare nomi utils
 [ ]	Tok_next e next_token.. migliorare nomi
+[ ] Preparare funzione che stampi il token
 [X]	Stringa vuota ai comandi per RED_SUBSHELL
+[ ] Skippare && / || dopo ricorsione
 [ ]	Sort ascii su wildcards
 [X]	aggiungere deepest_layer
 [X]	aggiornare at_least_one_pipe inizio execute_loop
