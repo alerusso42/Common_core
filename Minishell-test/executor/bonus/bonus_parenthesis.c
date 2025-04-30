@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/30 17:07:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:17:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2]);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 {//FIXME - Ripristinare fork
-	//pid_t	pid;//
+	pid_t	pid;//
 	int		fds[2];
 	int		temp_fd;
 	int		redir_to_pipe;
@@ -28,13 +28,15 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	redir_to_pipe = detect_pipe(*token, getfd, (*token)->prior - 1);
 	int	layer = exec->prior_layer;
 	prep_recursion(exec, fds, temp_fd, getfd || redir_to_pipe);
-	//pid = fork();//
-	//if (pid < 0)//
-	//	return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
-	//else if (pid == 0)//
+	pid = fork();//
+	if (pid < 0)//
+		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
+	else if (pid == 0)//
 		execute_loop(*token, exec);
-	//if (getfd == 0)//
-	//	exec->pid_list[(*token)->cmd_num] = pid;//
+	if (getfd == 0)//
+		wait_everyone();//
+	if (getfd == 0)//
+		exec->pid_list[(*token)->cmd_num] = pid;//
 	exec->prior_layer = layer;
 	exec->stdout_fd = temp_fd;
 	return (dup2(temp_fd, 1), redir_output(exec, token, redir_to_pipe, fds));

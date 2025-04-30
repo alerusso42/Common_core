@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/30 17:09:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:15:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
 typedef struct s_token t_token;
 
+//NOTE - Valgrind
+/*
+		valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes 
+		--trace-children=yes --track-origins=yes --suppressions=v.supp 
+		./exe.out 1
+*/
 /*
 typedef struct s_token
 {

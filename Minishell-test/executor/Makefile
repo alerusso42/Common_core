@@ -84,7 +84,7 @@ deb: $(OBJ_DIR) $(OBJ) $(OBJ_DEBUG)
 	cc -D DEBUG=1 $(FLAGS) -fPIE $(OBJ_DEBUG) $(OBJ) $(DEBUG_LIBFT) -o exe.out
 
 clean: frm
-	rm -rf obj_executor/*.o *.out
+	rm -rf obj_executor/*.o *.out *.gdb *.supp
 	rm -f debug_tools/*.out
 	rm -rf obj_executor
 
@@ -96,7 +96,7 @@ re: fclean all
 
 #frm = file remove
 frm: 
-	rm -f *.txt *.gdb *.supp
+	rm -f *.txt
 	rm -f $(DEBUG_DIR)/debug_resources/bash_tests/*.txt
 
 gdb: 

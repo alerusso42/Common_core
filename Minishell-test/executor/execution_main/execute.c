@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/30 17:14:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:40:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ int	execute_loop(t_token *token, t_exec *exec)
 	}
 	wait_everyone(exec, first_token);
 	if (exec->prior_layer != 0)
-		return (0);
-		//exit_process(exec);
+		//return (0);
+		exit_process(exec);
 	return (0);
 }
 
@@ -134,8 +134,8 @@ static int	next_command(t_exec *exec, t_token **token, t_token *first_token)
 	if (exec->prior_layer < (*token)->prior)
 		manage_parenthesis(exec, token, 0);
 	if (exec->prior_layer > (*token)->prior)
-		//return (wait_everyone(exec, first_token), exit_process(exec), 0);
-		return (1);//FIXME - Togliere!
+		return (wait_everyone(exec, first_token), exit_process(exec), 0);
+		//return (1);//FIXME - Togliere!
 	return (0);
 }
 
