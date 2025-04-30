@@ -182,8 +182,11 @@ Token = log.txt,        2, 0,
 [END]
 
 case: (cat <(ls | grep .c)) | grep builtin
-[Test10, 13 token]
+[Test10, 18 token]
 Token = (,              2, 1,
+Token = cd,				0, 1,
+Token = builtins/,		1, 1,
+Token = &&,				8, 1,
 Token = cat,            0, 1,
 Token = <,              4, 1,
 Token = (,              2, 2,
@@ -196,4 +199,6 @@ Token = ),              2, 0,
 Token = |,              7, 0,
 Token = grep,           0, 0,
 Token = builtin,        1, 0,
+Token = &&,				8, 0,
+Token = pwd,			0, 0,
 [END]

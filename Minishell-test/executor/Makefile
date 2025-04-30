@@ -42,10 +42,10 @@ MEMORY_FILES = 			memory.c memory2.c
 MEMORY = 				$(addprefix $(MEM_DIR)/, $(MEMORY_FILES))
 
 #SECTION - General utilities to abstract part of program
-UTILS_FILES = 			general.c general2.c general3.c \
-						general4.c general5.c general6.c \
-						general7.c general8.c \
-						printf_fd.c
+UTILS_FILES = 			printf_fd.c utils_count.c utils_debug.c utils_fds.c \
+						utils_generic.c utils_heredoc.c utils_matrix.c  \
+						utils_parenthesis2.c utils_parenthesis.c  \
+						utils_string2.c utils_string.c utils_tokencheck.c
 UTILS = 				$(addprefix $(UTILS_DIR)/, $(UTILS_FILES))
 
 #SECTION - Putting all together:

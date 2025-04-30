@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/29 15:40:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:09:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ int		cmd_block_len(t_token *token, int layer);
 void	goto_valid_block(t_exec *exec, t_token **token);
 void	tok_next(t_token **token, int chr, int layer, bool accept_deeper_tok);
 bool	detect_pipe(t_token *token, int getfd, int layer);
+void	p_tok(t_token *token);
+void	p_end(t_exec *exec);
 
 //SECTION - Environment management
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/29 14:52:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:14:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	execute(t_token *token, void *data, int debug)
 {
 	t_exec	exec;
 
+	p_tok(token);
 	merge_tokens(token, debug);
 	exec = (t_exec){0};
 	get_main_struct_data(&exec, data, debug);
@@ -66,6 +67,7 @@ int	execute(t_token *token, void *data, int debug)
 		}
 	}
 	execute_loop(token, &exec);
+	p_end(&exec);
 	free_memory(&exec);
 	return (0);
 }
@@ -101,8 +103,7 @@ int	execute_loop(t_token *token, t_exec *exec)
 		exec->cmd_num = token->cmd_num;
 		if (exec->pipe_fds[0])
 		{
-			dup2(exec->pipe_fds[0], 0);
-			close_and_reset(&exec->pipe_fds[0]);
+			dup_and_reset(&exec->pipe_fds[0], 0);
 		}
 	}
 	wait_everyone(exec, first_token);

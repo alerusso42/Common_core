@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.c                                          :+:      :+:    :+:   */
+/*   utils_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:22:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:04:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,58 @@ char	*_ft_strjoin_free(char *s1, char *s2)
 	return (free(s1), free(s2), new_str);
 }
 
-int	bigger(int n1, int n2)
+char	*_reverse_split(char **matrix, char separator)
 {
-	return (n1 * (n1 >= n2) + n2 * (n1 < n2));
+	char	*string;
+	int		i;
+	int		size;
+	int		j;
+
+	i = 0;
+	size = 0;
+	while (matrix[i])
+	{
+		size += ft_strlen(matrix[i]) + 1;
+		++i;
+	}
+	string = (char *)ft_calloc(size + 1, sizeof(char));
+	if (!string)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (matrix[++i])
+	{
+		while (string[j])
+			++j;
+		if (j != 0 && separator)
+			string[j++] = separator;
+		_sub_strcpy(&string[j], matrix[i], "", EXCL);
+	}
+	return (string);
+}
+
+void	sort_matrix(char **matrix)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	if (!matrix || !matrix[0])
+		return ;
+	i = 0;
+	while (matrix[i + 1])
+	{
+		j = 0;
+		while (matrix[j + 1])
+		{
+			if (ft_strncmp(matrix[j], matrix[j + 1], INT_MAX) > 0)
+			{
+				temp = matrix[j];
+				matrix[j] = matrix[j + 1];
+				matrix[j + 1] = temp;
+			}
+			++j;
+		}
+		++i;
+	}
 }
