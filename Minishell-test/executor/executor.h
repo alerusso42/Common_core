@@ -29,15 +29,61 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 /home/alerusso/Common_core/Minishell-test/executor/v.supp ./exe.out 1
 */
 
+//ANCHOR - Data structures
+
+/*REVIEW - token array 
+
+	The array of token:		ls // 	> // 	file // -R
+	
+-	content:	a string with token content (ls, file.txt, >...)
+	//
+-	t_quote:	type of quotes (0 = -, 1 = "", 2 = '')
+	//
+	id:			integer that shows token index. Last is -1
+	//
+-	prior:		layer in the parenthesis.
+	//			( increase by 1, ) decrease by 1.
+	//			last token has layer == -1
+	//
+-	cmd_num:	command block num -> 	ls | 	grep .c		/
+	//									0		1			2
+-	type:		read the enum "types" below
+*/
 typedef struct s_token
 {
 	char			*content;
+	int				t_quote;
 	int				id;
 	int				prior;
 	int				cmd_num;
 	unsigned int	type:4;
 }	t_token;
 
+/*REVIEW - execution data structure
+
+	Every time a command is called, without syntax error,
+	The program allocs memory for this structure.
+	
+-	*builtins:	an array of functions.
+	//			using those brings to builtin functions
+	//
+-	*pid_list:	an array of pid.
+	//			0 refers to the command in token->cmd_num == 0.
+	//			for ls | grep, ls pid goes in pid_list[0]
+	//
+	***commands:3d matrix of commands.
+	//			commands = {ls, NULL}, {grep, .c, NULL}
+	//
+-	***env:		a pointer to the env matrix from main data struct
+	//
+-	*env_size:	a pointer to the env_size int from main data struct.
+	//			represents the env matrix allocated memory size
+	//
+	*last_env:	a pointer to the last_env int from main data struct.
+	//			represents the last env element's index
+	//
+-	type:		read the enum "types" below
+*/
 struct s_exec
 {
 	t_builtin		*builtins;
@@ -91,6 +137,26 @@ typedef struct s_debug_data
 	int		fd_to_close;
 }	t_debug_data;
 
+//ANCHOR - Enums
+
+/*REVIEW - token types 
+
+	Token are organized by 12 types.
+	Here's the explanation for all of those:
+	
+	0)	COMMAND:		grep, ls...
+	1)	ARGUMENT:		-n, filename, ../ ...
+	2)	FILES:			filename, EOF...
+	3)	RED_OUT:		>
+	4)	RED_IN:			<
+	5)	RED_O_APPEND:	>>
+	6)	HERE_DOC:		<<
+	7)	PIPE:			|
+	8)	AND:			&&
+	9)	OR:				||
+	10)	PARENTHESIS:	(, )
+	11)	RED_SUBSHELL:	redirect subshell: cat <(ls)
+*/
 enum e_types
 {
 	COMMAND,
@@ -163,10 +229,13 @@ enum e_environment
 
 enum e_bools
 {
-	_STOP = 2,
-	_YES = 1,
 	_NO = 0,
+	_YES = 1,
+	_STOP = 2,
 };
+
+//ANCHOR - 	List of unctions called in all program.
+//			Section name is folder name.
 
 //SECTION -	Bonus
 
@@ -231,7 +300,7 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug);
 
 int		_fd_printf(int fd, const char *str, ...);
 
-//	NOTE -	utils_count:Get crucial data from the token
+//	NOTE -	utils_count:Get crucial data from token
 
 int		count_commands(t_exec *exec, t_token *tokens);
 int		find_command_argument_index(t_exec *exec, t_token *token);
