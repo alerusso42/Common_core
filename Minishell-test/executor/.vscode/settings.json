@@ -2,6 +2,8 @@
 	"files.associations": {
 		"executor.h": "c",
 		"minishell.h": "c",
-		"all.h": "c"
+		"all.h": "c",
+		"libft.h": "c",
+		"dirent.h": "c"
 	}
 }

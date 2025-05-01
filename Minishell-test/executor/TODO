@@ -13,7 +13,7 @@
 [X]	Salvare pid quando getfd == 0
 [ ]	Ricezione segnali con here_doc
 [ ]	Ricezione generica segnali
-[ ]	forkare con le parentesi senza esplodere
+[X]	forkare con le parentesi senza esplodere
 	[ ]	Rimangono aperti fd 5, 6, 7, 8 con "cat < ( cat < ( ls ) )"
-	[ ]	Ordine sbagliato comando demon, segfaulta un figlio
+	[X]	Ordine sbagliato comando demon, segfaulta un figlio
 	[ ]	Fixare detect pipe

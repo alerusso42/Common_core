@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general5.c                                         :+:      :+:    :+:   */
+/*   utils_count.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/29 14:35:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:48:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@
 int	count_commands(t_exec *exec, t_token *tokens)
 {
 	int	cmd_num;
-	int	pipe_num;
 
 	cmd_num = 0;
-	pipe_num = 0;
 	while (tokens->content != NULL)
 	{
-		pipe_num += (tokens->type == PIPE);
 		cmd_num += (tokens->type == COMMAND);
 		++tokens;
 	}
-	exec->at_least_one_pipe = pipe_num > 0;
+	exec->last_cmd = tokens->cmd_num;
 	return (cmd_num);
 }
 

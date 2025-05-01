@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/30 18:15:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:42:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ typedef struct s_token t_token;
 		--trace-children=yes --track-origins=yes --suppressions=v.supp 
 		./exe.out 1
 */
-/*
+
 typedef struct s_token
 {
 	char			*content;
 	int				id;
 	int				prior;
+	int				cmd_num;
 	unsigned int	type:4;
-}	t_token;*/
+}	t_token;
 
 struct s_exec
 {
@@ -56,6 +57,7 @@ struct s_exec
 	int				last_in;
 	int				last_out;
 	int				cmd_num;
+	int				last_cmd;
 	int				curr_cmd;
 	int				last_cmd_done;
 	int				stdin_fd;
@@ -170,6 +172,7 @@ enum e_bools
 
 int		execute(t_token *tokens, void *data, int debug);
 int		execute_loop(t_token *token, t_exec *exec);
+int		wait_everyone(t_exec *exec);
 
 //SECTION Memory management
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/30 18:17:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/01 02:52:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
 	else if (pid == 0)//
 		execute_loop(*token, exec);
-	if (getfd == 0)//
-		wait_everyone();//
 	if (getfd == 0)//
 		exec->pid_list[(*token)->cmd_num] = pid;//
 	exec->prior_layer = layer;
@@ -85,6 +83,8 @@ static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
 	skip_deeper_layers(token, exec->prior_layer);
 	if ((*token)->type == AND || (*token)->type == OR)
 		goto_valid_block(exec, token);
+	if ((*token)->type == AND || (*token)->type == OR)
+		wait_everyone(exec);
 	if ((*token)->content)
 		++(*token);
 	return (fds[0]);
