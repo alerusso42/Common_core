@@ -38,12 +38,12 @@ EXECUTION_PREP_FILES = 	get_commands_data.c get_file_data.c \
 EXECUTION_PREP =		$(addprefix $(PREP_DIR)/, $(EXECUTION_PREP_FILES))
 
 #SECTION - allocate, get memory from main program, free
-MEMORY_FILES = 			memory.c memory2.c
+MEMORY_FILES = 			memory.c
 MEMORY = 				$(addprefix $(MEM_DIR)/, $(MEMORY_FILES))
 
 #SECTION - General utilities to abstract part of program
 UTILS_FILES = 			printf_fd.c utils_count.c utils_debug.c utils_fds.c \
-						utils_generic.c utils_heredoc.c utils_matrix.c  \
+						utils_generic.c utils_matrix.c  \
 						utils_parenthesis2.c utils_parenthesis.c  \
 						utils_string2.c utils_string.c utils_tokencheck.c
 UTILS = 				$(addprefix $(UTILS_DIR)/, $(UTILS_FILES))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/30 15:04:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:48:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,6 @@ void	*_free_three_d_matrix(char ***matrix)
 	}
 	free(matrix);
 	return (NULL);
-}
-
-/*REVIEW - _ft_strjoin_free
-
-//	Like strjoin, but frees both string.
-*/
-char	*_ft_strjoin_free(char *s1, char *s2)
-{
-	char	*new_str;
-	int		index;
-	int		size;
-
-	if ((!s1) || (!s2))
-		return (free(s1), free(s2), NULL);
-	index = 0;
-	while (s1[index])
-		++index;
-	size = index;
-	index = 0;
-	while (s2[index])
-		++index;
-	size += index;
-	new_str = (char *)ft_calloc(size + 2, sizeof(char));
-	if (!new_str)
-		return (free(s1), free(s2), NULL);
-	index = -1;
-	while (s1[++index])
-		new_str[index] = s1[index];
-	size = -1;
-	while (s2[++size])
-		new_str[index++] = s2[size];
-	return (free(s1), free(s2), new_str);
 }
 
 char	*_reverse_split(char **matrix, char separator)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/01 01:42:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:04:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
 typedef struct s_token t_token;
 
-//NOTE - Valgrind
+//NOTE - Valgrind home
 /*
-		valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes 
-		--trace-children=yes --track-origins=yes --suppressions=v.supp 
-		./exe.out 1
+valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes 
+--trace-children=yes --track-origins=yes --suppressions=
+/home/alerusso/Common_core/Minishell-test/executor/v.supp ./exe.out 1
 */
 
 typedef struct s_token
@@ -168,50 +168,106 @@ enum e_bools
 	_NO = 0,
 };
 
-//SECTION - Main function
+//SECTION -	Bonus
+
+int		convert_wildcard(char *old_str, char **new_str);
+int		manage_parenthesis(t_exec *exec, t_token **token, int getfd);
+int		get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
+
+//SECTION -	Builtin
+
+int		ft_cd(char **args, t_exec *exec);
+int		ft_echo(char **args, t_exec *exec);
+int		ft_env(char **args, t_exec *exec);
+int		ft_exit(char **args, t_exec *exec);
+int		exit_process(t_exec *exec);
+int		ft_export(char **args, t_exec *exec);
+int		ft_pwd(char **args, t_exec *exec);
+int		ft_unset(char **args, t_exec *exec);
+
+//SECTION -	Environment management
+
+//	NOTE -	Functions to use in main program
+
+int		cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env);
+char	*get_env(char **env, char *search);
+char	*get_pwd_address(char **env);
+
+//	NOTE -	Functions to use in execution part only
+
+int		expand_env(char ***env, int *env_size, t_exec *exec);
+char	*ft_getenv(char **env, char *search, int *where);
+int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
+
+//SECTION -	Execution main
 
 int		execute(t_token *tokens, void *data, int debug);
 int		execute_loop(t_token *token, t_exec *exec);
 int		wait_everyone(t_exec *exec);
 
-//SECTION Memory management
+//	NOTE -	Error and prints
+
+int		error(int error_type, t_exec *memory);
+int		bash_message(int message, char *file);
+
+//SECTION -	Execution preparations
+
+void	merge_tokens(t_token *token, int debug);
+void	prepare_here_docs(t_exec *exec, t_token *token);
+int		get_commands_data(t_exec *exec, t_token *token);
+int		get_paths_data(t_exec *exec, t_token *token);
+int		get_file_data(t_exec *exec, t_token *token);
+
+//SECTION -	Memory management
 
 void	alloc_memory(t_exec *exec, t_token *token, int cmd_num);
 void	free_memory(t_exec *memory);
 void	*free_debug_data(t_debug_data *data);
 void	get_main_struct_data(t_exec *exec, void *data, int debug);
-void	close_and_reset(int *fd);
 
-//SECTION - Utils
+//SECTION -	Utils
 
-void	*_free_matrix(char **matrix);
-void	*_free_three_d_matrix(char ***matrix);
-char	*_ft_strjoin_free(char *s1, char *s2);
-int		bigger(int n1, int n2);
+//	NOTE -	printf_fd:	a ft_printf that accepts an fd
+
+int		_fd_printf(int fd, const char *str, ...);
+
+//	NOTE -	utils_count:Get crucial data from the token
+
 int		count_commands(t_exec *exec, t_token *tokens);
-int		is_red_sign(int sign);
-int		is_exec_sep(int sign);
-int		is_red_input_sign(int sign);
-int		is_red_output_sign(int sign);
-int		is_a_builtin_cmd(char *cmd);
-int		_sub_strlen(char *s, char *charset, int mode);
-int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
-int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
-char	*_cut_string(char *string, size_t start, size_t end);
-char	*_cat_string(char *src, char *catstr, size_t start, int which_free);
-int		set_exit_status(t_exec *exec, int exit_status);
-char	*_reverse_split(char **matrix, char separator);
-int		_reverse_strncmp(char *s1, char *s2, int len);
-void	sort_matrix(char **matrix);
-void	write_here_doc(char *line, t_exec *exec, int fd);
-void	close_all(t_exec *exec);
 int		find_command_argument_index(t_exec *exec, t_token *token);
 void	find_command_id(t_exec *exec, t_token *token);
 int		proc_sub_num(t_token *token);
 int		deepest(t_token *token);
+
+//	NOTE -	debug:		Prints all token, delimiting execution		
+
+void	p_tok(t_token *token);
+void	p_end(t_exec *exec);
+
+//	NOTE -	fds:		Manage fds (close temp files, closing if fd >= 3...)
+
+void	close_all(t_exec *exec);
 void	save_process_substitution_fd(t_exec *exec, int proc_sub_fd);
 void	close_temp_files(t_exec *exec);
+void	close_and_reset(int *fd);
 void	dup_and_reset(int *new_fd, int old_fd);
+
+//	NOTE -	generic:	Various functions
+
+int		bigger(int n1, int n2);
+int		is_a_valid_executable(t_exec *exec, int i);
+int		set_exit_status(t_exec *exec, int exit_status);
+void	write_here_doc(char *line, t_exec *exec, int fd);
+
+//	NOTE -	matrix:		Matrix management
+
+void	*_free_matrix(char **matrix);
+void	*_free_three_d_matrix(char ***matrix);
+char	*_reverse_split(char **matrix, char separator);
+void	sort_matrix(char **matrix);
+
+//	NOTE -	parenthesis:Skip token in parenthesis and much more
+
 void	next_token(t_token **token, int search1, int search2, int search3);
 void	next_cmd_block(t_token **token, int layer, bool accept_deeper_token);
 void	skip_deeper_layers(t_token **token, int layer);
@@ -220,47 +276,23 @@ int		cmd_block_len(t_token *token, int layer);
 void	goto_valid_block(t_exec *exec, t_token **token);
 void	tok_next(t_token **token, int chr, int layer, bool accept_deeper_tok);
 bool	detect_pipe(t_token *token, int getfd, int layer);
-void	p_tok(t_token *token);
-void	p_end(t_exec *exec);
 
-//SECTION - Environment management
+//	NOTE -	string:		String utilities
 
-int		cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env);
-int		expand_env(char ***env, int *env_size, t_exec *exec);
-char	*ft_getenv(char **env, char *search, int *where);
-int		env_pars(char *item, int *no_eq_plus, int *name_size, int *cont_size);
-char	*get_pwd_address(char **env);
+int		_sub_strlen(char *s, char *charset, int mode);
+int		_sub_strcpy(char *dest, char *src, char *charset, int mode);
+char	*_cut_string(char *string, size_t start, size_t end);
+char	*_cat_string(char *src, char *catstr, size_t start, int which_free);
+char	*_ft_strjoin_free(char *s1, char *s2);
+int		_reverse_strncmp(char *s1, char *s2, int len);
+int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
 
-//SECTION Preparing data: modify tokens, env path, files, commands' path
+//	NOTE -	tokencheck:	is_alpha for token types (is redirection sign? ecc.)
 
-void	merge_tokens(t_token *token, int debug);
-void	prepare_here_docs(t_exec *exec, t_token *token);
-int		get_commands_data(t_exec *exec, t_token *token);
-int		get_paths_data(t_exec *exec, t_token *token);
-int		get_file_data(t_exec *exec, t_token *token);
-
-//SECTION Error and prints
-
-int		error(int error_type, t_exec *memory);
-int		exit_process(t_exec *exec);
-int		bash_message(int message, char *file);
-int		is_a_valid_executable(t_exec *exec, int i);
-int		_fd_printf(int fd, const char *str, ...);
-
-//SECTION - Builtin
-
-int		ft_echo(char **args, t_exec *exec);
-int		ft_cd(char **args, t_exec *exec);
-int		ft_pwd(char **args, t_exec *exec);
-int		ft_export(char **args, t_exec *exec);
-int		ft_unset(char **args, t_exec *exec);
-int		ft_env(char **args, t_exec *exec);
-int		ft_exit(char **args, t_exec *exec);
-
-//SECTION - Bonus
-
-int		convert_wildcard(char *old_str, char **new_str);
-int		manage_parenthesis(t_exec *exec, t_token **token, int getfd);
-int		get_subshell_filename(t_exec *exec, t_token **token, int cmd_num);
+int		is_red_sign(int sign);
+int		is_exec_sep(int sign);
+int		is_red_input_sign(int sign);
+int		is_red_output_sign(int sign);
+int		is_a_builtin_cmd(char *cmd);
 
 #endif
