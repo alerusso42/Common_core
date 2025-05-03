@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/01 13:04:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:16:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <dirent.h>
-# include "../minishell.h"
+//# include "../minishell.h"
 
 typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
@@ -82,7 +82,40 @@ typedef struct s_token
 	*last_env:	a pointer to the last_env int from main data struct.
 	//			represents the last env element's index
 	//
--	type:		read the enum "types" below
+-	**path:		a matrix made from the env variable "path".
+	//			stores all programs possible paths
+	//
+-	*which_cmd:	a string that stores what kind of builtin
+	//			a command is.
+	//			a non builtin command has value 0.
+	//			otherwise, see builtin enum.
+	//			echo ciao | grep c | exit 7 
+	//			which_cmd = [1, 0, 7]
+	//
+-	*here_doc_fds:an array of here_docs fds.
+	//			0 refers to the here doc in token->cmd_num == 0.
+	//			for <<EOF1 <<EOF2 | <<EOF3, EOF2 fd goes in
+	//			here_doc_fds[0], EOF3 fd goes in
+	//			here_doc_fds[1]. EOF1 is created, but not saved.
+	//			here_doc_fds[i] is closed at the end
+	//			of command_block[i]
+	//
+-	*proc_sub_fds:an array of process substitution fds.
+	//			every time there's a <(ls), a fd 
+	//			containing the output of the subshell
+	//			is created.
+	//			proc_sub_fds stores all of these fds
+	//			for every command block.
+	//			for cat <(ls) <(ls -R) | cat, 
+	//			proc_sub_fds = [fd of <(ls), fd of <(ls -R)]
+	//			proc_sub_fds are all closed at the end of
+	//			a command block
+	//
+-	*proc_sub_temp_fds:stores all fds that cannot be
+				closed in subshell.
+				for cat <(ls), <(ls) process cannot close
+				original STDOUT (terminal) and the STDIN pipe
+				end created before the process.
 */
 struct s_exec
 {
