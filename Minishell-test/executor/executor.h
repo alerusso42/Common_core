@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/03 14:16:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 11:41:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <dirent.h>
-//# include "../minishell.h"
+# include "../minishell.h"
 
 typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
@@ -24,9 +24,10 @@ typedef struct s_token t_token;
 
 //NOTE - Valgrind home
 /*
-valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes 
---trace-children=yes --track-origins=yes --suppressions=
-/home/alerusso/Common_core/Minishell-test/executor/v.supp ./exe.out 1
+valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
+--trace-children=yes --track-origins=yes -s -q \
+--suppressions=/home/alerusso/Common_core/Minishell-test/executor/v.supp \
+./exe.out 1
 */
 
 //ANCHOR - Data structures
@@ -112,10 +113,16 @@ typedef struct s_token
 	//			a command block
 	//
 -	*proc_sub_temp_fds:stores all fds that cannot be
-				closed in subshell.
-				for cat <(ls), <(ls) process cannot close
-				original STDOUT (terminal) and the STDIN pipe
-				end created before the process.
+	//			closed in a subshell.
+	//			for cat <(ls), <(ls) process cannot close
+	//			original STDOUT (terminal) and the STDIN pipe
+	//			end created before the process.
+	//			this array has size equal to:
+	//			(cmd_block with biggest proc sub num) * 2.
+	//			this data is found with proc_sub_num() ft
+	//
+-	*exit_status:a pointer to the main struct exit code
+	//
 */
 struct s_exec
 {
@@ -367,6 +374,7 @@ void	*_free_matrix(char **matrix);
 void	*_free_three_d_matrix(char ***matrix);
 char	*_reverse_split(char **matrix, char separator);
 void	sort_matrix(char **matrix);
+char	*lowest_ascii_matrix(char **matrix, char *current);
 
 //	NOTE -	parenthesis:Skip token in parenthesis and much more
 

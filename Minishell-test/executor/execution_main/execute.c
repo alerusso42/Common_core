@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/01 03:12:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:47:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ static int	next_command(t_exec *exec, t_token **token)
 		exec->cmd_num += 1;
 		wait_everyone(exec);
 		goto_valid_block(exec, token);
+		exec->at_least_one_pipe = detect_pipe(*token, _NO, (*token)->prior);
 	}
 	exec->cmd_num = (*token)->cmd_num;
 	if (!(*token)->content)

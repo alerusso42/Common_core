@@ -4,6 +4,7 @@
 		"minishell.h": "c",
 		"all.h": "c",
 		"libft.h": "c",
-		"dirent.h": "c"
+		"dirent.h": "c",
+		"types.h": "c"
 	}
 }

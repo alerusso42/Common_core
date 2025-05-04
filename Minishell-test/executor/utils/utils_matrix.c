@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/01 12:48:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 11:21:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,27 @@ void	sort_matrix(char **matrix)
 		}
 		++i;
 	}
+}
+
+char	*lowest_ascii_matrix(char **matrix, char *current)
+{
+	char	*lowest;
+	int		i;
+
+	if (!matrix || !matrix[0])
+		return (NULL);
+	lowest = NULL;
+	i = 0;
+	while (matrix[i])
+	{
+		if ((current && ft_strncmp(matrix[i], current, INT_MAX) <= 0))
+		{
+			++i;
+			continue ;
+		}
+		if (!lowest || ft_strncmp(matrix[i], lowest, INT_MAX) < 0)
+			lowest = matrix[i];
+		++i;
+	}
+	return (lowest);
 }

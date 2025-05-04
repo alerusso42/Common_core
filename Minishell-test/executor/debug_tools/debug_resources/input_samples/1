@@ -16,33 +16,12 @@ Row are: token_content // type // priority
 
 
 [Test0, 2 token]
-	Token = make, 	0, 0,
-	Token = frm, 	1, 0,
+	Token = make, 0, 0,
+	Token = frm, 1, 0,
 [END]
 
-case: cat <<EOF | (grep "warn" && sort <(cut -d: -f2 <<< "$(cat file.txt)") || echo "no warnings") >> log.txt
-[Test12, 33 token]
-Token = cat,                  0, 0,
-Token = <<,                   6, 0,
-Token = EOF,                  2, 0,
-Token = |,                    7, 0,
-Token = (,                    2, 1,
-Token = grep,                 0, 1,
-Token = "warn",               1, 1,
-Token = &&,                   8, 1,
-Token = sort,                 0, 1,
-Token = <,                    4, 1,
-Token = (,                    2, 2,
-Token = cut,                  0, 2,
-Token = -d:,                  1, 2,
-Token = -f2,                  1, 2,
-Token = <<<,                  6, 2,
-Token = EOF,				  2, 2,
-Token = ),                    2, 1,
-Token = ||,                   9, 1,
-Token = echo,                 0, 1,
-Token = "no warnings",        1, 1,
-Token = ),                    2, 0,
-Token = >>,                   5, 0,
-Token = log.txt,              2, 0,
+case: export
+[Test1, 1 token]
+Token = export,				0, 0,
 [END]
+

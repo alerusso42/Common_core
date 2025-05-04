@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/01 12:25:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 10:44:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 	exec->env = &gen->env;
 	exec->env_size = &gen->env_size;
 	exec->last_env = &gen->last_env;
-	exec->exit_status = &gen->exit_status;
+	exec->exit_status = &gen->exit_code;
 	*exec->exit_status = 0;
 }
 
