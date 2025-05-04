@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 10:44:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:00:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	alloc_memory(t_exec *exec, t_token *token, int cmd_num)
 {
 	exec->stdin_fd = dup(0);
 	exec->stdout_fd = dup(1);
-	exec->cmd_num = cmd_num;
+	exec->curr_cmd = cmd_num;
 	exec->commands = (char ***)ft_calloc(cmd_num + 2, sizeof(char **));
 	if (!exec->commands)
 		error(E_MALLOC, exec);
@@ -87,7 +87,7 @@ void	alloc_memory(t_exec *exec, t_token *token, int cmd_num)
 	if (!exec->proc_sub_fds)
 		error(E_MALLOC, exec);
 	exec->proc_sub_temp_fds = (int *)ft_calloc(deepest(token) * 2, sizeof(int));
-	if (!exec->proc_sub_fds)
+	if (!exec->proc_sub_temp_fds)
 		error(E_MALLOC, exec);
 }
 
@@ -118,7 +118,7 @@ static void	free_memory2(t_exec *exec)
 	int	i;
 
 	i = -1;
-	while (++i != exec->cmd_num)
+	while (++i != exec->curr_cmd)
 	{
 		close_and_reset(&exec->here_doc_fds[i]);
 	}

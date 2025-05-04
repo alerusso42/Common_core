@@ -146,18 +146,10 @@ Token = -v,             1, 0,
 
 
 
-case: cat file4.txt file4.txt | grep "error" file3.txt file2.txt
+case: cat file4.txt
 [Test8, 11 token]
 Token = cat,            0, 0,
 Token = file4.txt,      1, 0,
-Token = file4.txt,      1, 0,
-Token = |,              7, 0,
-Token = grep,           0, 0,
-Token = "error",        1, 0,
-Token = >>,				5, 0,
-Token = file3.txt,      2, 0,
-Token = >>,				5, 0,
-Token = file2.txt,      2, 0,
 [END]
 
 
@@ -246,7 +238,7 @@ Token = EOF,                  2, 0,
 Token = |,                    7, 0,
 Token = (,                    2, 1,
 Token = grep,                 0, 1,
-Token = "warn",               1, 1,
+Token = warn,               1, 1,
 Token = &&,                   8, 1,
 Token = sort,                 0, 1,
 Token = <,                    4, 1,
@@ -254,7 +246,7 @@ Token = (,                    2, 2,
 Token = cut,                  0, 2,
 Token = -d:,                  1, 2,
 Token = -f2,                  1, 2,
-Token = <<<,                  6, 2,
+Token = <<,                  6, 2,
 Token = EOF,				  2, 2,
 Token = ),                    2, 1,
 Token = ||,                   9, 1,
@@ -263,4 +255,19 @@ Token = "no warnings",        1, 1,
 Token = ),                    2, 0,
 Token = >>,                   5, 0,
 Token = log.txt,              2, 0,
+[END]
+
+case: export
+[Test13, 1 token]
+Token = export,				0, 0,
+[END]
+
+case: ls /dev/fd <(ls)
+[Test14, 10 token]
+Token = ls,				0,	0,
+Token = /dev/fd,		1,	0,
+Token = <,				4,	0,
+Token = (,				1,	1,
+Token = ls,				0,	1,
+Token = ),				1,	0,
 [END]

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:15:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 12:44:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:03:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	close_temp_files(t_exec *exec)
 {
 	int	i;
 
-	close_and_reset(&exec->here_doc_fds[exec->cmd_num]);
+	close_and_reset(&exec->here_doc_fds[exec->curr_cmd]);
 	i = 0;
 	while (exec->proc_sub_fds[i])
 	{

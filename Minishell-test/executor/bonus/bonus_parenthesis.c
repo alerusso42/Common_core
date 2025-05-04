@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/01 02:52:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 14:59:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	prep_recursion(t_exec *exec, int fds[2], int std_out, int do_pipe);
 static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2]);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
-{//FIXME - Ripristinare fork
+{
 	pid_t	pid;//
 	int		fds[2];
 	int		temp_fd;

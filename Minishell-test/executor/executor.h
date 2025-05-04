@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 11:41:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:57:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,48 @@ typedef struct s_token
 	//
 -	*exit_status:a pointer to the main struct exit code
 	//
+	pipe_fds[2]:an array that stores, with pipes, 
+	//			pipe STDIN and pipe STDOUT,
+	//			in pipe_fds[0] and pipe_fds[1]
+	//
+	last_in:	last input file token id in a 
+	//			command block.
+	//			for cat <f1 <<EOF <f2, last_in == 3
+	//
+	last_out:	last output file token id in a 
+	//			command block.
+	//			for cat >f1 >>f2 >f3, last_out == 3
+	//
+	curr_cmd:	current command block that is being
+	//			executed
+	//
+	//
+	last_cmd:	number of command blocks.
+	//			for ls | grep .c
+	//			last_cmd == 2
+	//
+	stdin_fd:	an fd that stores a dup of STDIN
+	//
+	stdout_fd:	an fd that stores a dup of STDOUT
+	//
+	prior_layer:current priority layer (parenthesis).
+	//			execute_loop is called recursively in 
+	//			parenthesis: at the start of a loop,
+	//			prior_layer is set to current token prior.
+	//			for echo <(cat <(ls))
+	//			echo	---->	prior_layer == 0
+	//			cat		---->	prior_layer == 1
+	//			ls		---->	prior_layer == 2
+	//
+	at_least_one_pipe:bool that shows if, in the whole
+	//			command, there is at least one pipe.
+	//			It is updated at the start of
+	//			execution_loop and after a && or ||
+	//
+	debug:		bool that shows if we are in 
+	//			execution debug mode or not.
+	//			Execution debug mode will not be
+	//			included in final project
 */
 struct s_exec
 {
@@ -142,10 +184,8 @@ struct s_exec
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;
-	int				cmd_num;
-	int				last_cmd;
 	int				curr_cmd;
-	int				last_cmd_done;
+	int				last_cmd;
 	int				stdin_fd;
 	int				stdout_fd;
 	int				prior_layer;
@@ -153,16 +193,37 @@ struct s_exec
 	int				debug:1;
 };
 
+/*REVIEW - wildcard data structure
+
+	Every time a wildcard is parsed, the program
+	allocs memory for this structure.
+	Example:	Common_core/Libft/*.h
+	
+-	*old_str:	The starting string to expand.
+	//			"Common_core/Libft/*.h"
+	//
+-	*search:	The occurence to search.
+	//			"*.h"
+	//
+-	*dir_path:	The folder to search where.
+	//			"Common_core/Libft/"
+	//
+-	dir_size:	The number of element in the directory.
+	//			55
+	//
+*/
 typedef struct s_wildcard
 {
 	char	*old_str;
 	char	*search;
 	char	*dir_path;
-	int		start_len;
-	int		end_len;
 	int		dir_size;
 }t_wildcard;
 
+/*REVIEW - wildcard data structure
+
+	Data to free from execution debug mode
+*/
 typedef struct s_debug_data
 {
 	char	***matrix;
@@ -214,6 +275,11 @@ enum e_types
 	NONE,
 };
 
+/*REVIEW - builtins enum
+
+	Builtins enum. BUILT_N is used to allocate
+	t_builtin *builtins
+*/
 enum e_builtin
 {
 	B_ECHO = 1,
@@ -226,6 +292,12 @@ enum e_builtin
 	BUILT_N = 8,
 };
 
+/*REVIEW - permissions enum
+
+	Every file opened with open in the program has a
+	set of permissions allowed, using bitwise
+	operations.
+*/
 enum e_permissions
 {
 	INFILE = O_RDONLY,
@@ -234,6 +306,11 @@ enum e_permissions
 	OUTFILE_APPEND = O_RDWR | O_CREAT | O_APPEND,
 };
 
+/*REVIEW - error enum 
+
+	Error enum, used to print different error messages 
+	in the function bash_message() and error()
+*/
 enum e_exec_errors
 {
 	NO_ERR,
@@ -253,12 +330,26 @@ enum e_exec_errors
 	E_PERMISSION_DENIED,
 };
 
+/*REVIEW - sub_strlen enum 
+
+	sub_strlen and sub_strcpy are utilities functions,
+	that counts/copy strings until a set of characters
+	is INCLUDED/EXCLUDED.
+
+	string = ffffile.txt
+	_sub_strlen(string, ".", INCL) = 4
+	_sub_strlen(string, ".", EXCL) = 7
+*/
 enum e_sub_strlen
 {
 	INCL,
 	EXCL,
 };
 
+/*REVIEW - environment enum
+
+	//TODO - 
+*/
 enum e_environment
 {
 	ENV_NO_EQ_PLUS = 0,
@@ -267,6 +358,11 @@ enum e_environment
 	ENV_WHICH_VAL = 3,
 };
 
+/*REVIEW - sub_strlen enum
+
+	boolean yes/no. Stop is set here to avoid creating
+	a new enum
+*/
 enum e_bools
 {
 	_NO = 0,
@@ -344,7 +440,6 @@ int		_fd_printf(int fd, const char *str, ...);
 
 int		count_commands(t_exec *exec, t_token *tokens);
 int		find_command_argument_index(t_exec *exec, t_token *token);
-void	find_command_id(t_exec *exec, t_token *token);
 int		proc_sub_num(t_token *token);
 int		deepest(t_token *token);
 
