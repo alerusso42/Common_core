@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 17:58:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:08:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ static int	invoke_programs(t_exec *exec, int i)
 {
 	pid_t	pid;
 
-	if (!exec->commands[i][0])
+	if (!exec->commands[i] || !exec->commands[i][0])
 		return (0);
 	if (is_a_valid_executable(exec, i) == _NO)
 		return (0);

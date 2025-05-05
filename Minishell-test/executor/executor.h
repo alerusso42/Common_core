@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 18:57:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:03:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
 	//									0		1			2
 -	type:		read the enum "types" below
 */
-typedef struct s_token
+/*typedef struct s_token
 {
 	char			*content;
 	int				t_quote;
@@ -58,7 +58,7 @@ typedef struct s_token
 	int				prior;
 	int				cmd_num;
 	unsigned int	type:4;
-}	t_token;
+}	t_token;*/
 
 /*REVIEW - execution data structure
 
@@ -197,10 +197,10 @@ struct s_exec
 
 	Every time a wildcard is parsed, the program
 	allocs memory for this structure.
-	Example:	Common_core/Libft/*.h
+	Example:	Common_core/Libft/.h
 	
 -	*old_str:	The starting string to expand.
-	//			"Common_core/Libft/*.h"
+	//			"Common_core/Libft/.h"
 	//
 -	*search:	The occurence to search.
 	//			"*.h"

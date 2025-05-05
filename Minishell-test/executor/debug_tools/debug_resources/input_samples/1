@@ -14,11 +14,11 @@ FILE = 2;
 
 Row are: token_content // type // priority
 
-
-case: cat file4.txt
-[Test0, 11 token]
-Token = grep,           0, 0,
-Token = <,				4, 0,
-Token = fiiii,			2, 0,
+oooo
+[Test0, 35 token]
+Token = cat, 0, 0,
+Token = <, 4, 0,
+Token = abc.txt, 2, 0,
 [END]
+
 
