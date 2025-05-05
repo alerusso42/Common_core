@@ -14,11 +14,15 @@ FILE = 2;
 
 Row are: token_content // type // priority
 
-oooo
-[Test0, 35 token]
-Token = cat, 0, 0,
-Token = <, 4, 0,
-Token = abc.txt, 2, 0,
+case: ls > pippo.txt | grep ca
+[Test0, 6 token]
+Token = ls,         0, 0,
+Token = >,          3, 0,
+Token = pippo.txt,  2, 0,
+Token = |,          7, 0,
+Token = grep,       0, 0,
+Token = ca,         1, 0,
 [END]
+
 
 
