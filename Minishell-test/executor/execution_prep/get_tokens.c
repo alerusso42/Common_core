@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/28 19:22:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:16:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
 static void	merge_one(t_token *token, int debug, int i, bool update_type);
+static void	manage_subshell(t_token *token);
 static void	sort_id(t_token *token);
 
 /*REVIEW - merge_tokens
@@ -79,7 +80,7 @@ void	merge_tokens(t_token *token, int debug)
 		else
 			++i;
 	}
-	sort_id(token);
+	return (manage_subshell(token), sort_id(token));
 }
 
 /*
@@ -123,6 +124,16 @@ static void	merge_one(t_token *token, int debug, int i, bool update_type)
 	while (token[i].content && token[++j].content)
 		token[i++] = token[j];
 	token[i] = token[j];
+}
+
+static void	manage_subshell(t_token *token)
+{
+	while (token->content)
+	{
+		if (token->type == RED_SUBSHELL)
+			token->prior -= 1;
+		++token;
+	}
 }
 
 /*REVIEW - merge_one

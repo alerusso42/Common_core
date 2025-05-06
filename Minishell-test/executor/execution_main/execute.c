@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/05 15:25:12 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:57:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	execute(t_token *token, void *data, int debug)
 	prepare_here_docs(&exec, token);
 	get_commands_data(&exec, token);
 	get_paths_data(&exec, token);
-	if (token->prior != 0)
+	while (token->prior > 0)
 	{
 		manage_parenthesis(&exec, &token, 0);
 		if (exec.pipe_fds[0])
@@ -65,6 +65,7 @@ int	execute(t_token *token, void *data, int debug)
 	}
 	if (token->content)
 		execute_loop(token, &exec);
+	wait_everyone(&exec);
 	p_end(&exec);
 	free_memory(&exec);
 	return (0);

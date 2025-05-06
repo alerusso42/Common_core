@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/05 15:25:56 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:30:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 	exec->env_size = &gen->env_size;
 	exec->last_env = &gen->last_env;
 	exec->exit_code = &gen->exit_code;
+	exec->first_token = gen->token;
 	*exec->exit_code = 0;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:53:39 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/05 15:31:57 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:37:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	main(int ac, char **av, char **env)
 	sa.sa_sigaction = signals;
 	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &sa, NULL);
-	if (cpy_env(env, &gen.env, &gen.env_size, &gen.last_env))
-		return (1);
 	if (start(&gen) == 1)
 		return (1);
 	// ricordarsi di forse levare sta cosa
