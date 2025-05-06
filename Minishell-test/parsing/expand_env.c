@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 08:55:30 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/05 15:19:54 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:06:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,6 @@ void	expand_env(t_token *token, t_data *gen)
 //	--serve per espandere le variabili di ambiente all`interno della struttura
 void	expanding_variables(t_token *token, t_data *gen)
 {
-	int	id;
-	int	i;
-	int var_id;
-
-	id = 0;
-	i = 0;
-	var_id = 1;
 	expand_exit_code(token, gen);
 	expand_env(token, gen);
 	// expand_wildcards(token, gen);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/06 11:30:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:21:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	alloc_memory(t_exec *exec, t_token *token, int cmd_num)
 {
 	exec->stdin_fd = dup(0);
 	exec->stdout_fd = dup(1);
-	exec->curr_cmd = cmd_num;
+	exec->last_cmd = cmd_num;
 	exec->commands = (char ***)ft_calloc(cmd_num + 2, sizeof(char **));
 	if (!exec->commands)
 		error(E_MALLOC, exec);
@@ -87,7 +87,8 @@ void	alloc_memory(t_exec *exec, t_token *token, int cmd_num)
 	exec->proc_sub_fds = (int *)ft_calloc(proc_sub_num(token) + 1, sizeof(int));
 	if (!exec->proc_sub_fds)
 		error(E_MALLOC, exec);
-	exec->proc_sub_temp_fds = (int *)ft_calloc(deepest(token) * 2, sizeof(int));
+	exec->proc_sub_temp_fds = (int *)ft_calloc\
+	((deepest(token) + proc_sub_num(token)) * 2, sizeof(int));
 	if (!exec->proc_sub_temp_fds)
 		error(E_MALLOC, exec);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 14:59:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:30:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
 	i = 0;
 	while (exec->proc_sub_temp_fds[i])
 		++i;
-	exec->proc_sub_temp_fds[--i] = 0;
-	exec->proc_sub_temp_fds[--i] = 0;
-	close(1);
+	if (i)
+		exec->proc_sub_temp_fds[--i] = 0;
+	if (i)
+		exec->proc_sub_temp_fds[--i] = 0;
+	dup2(exec->stdout_fd, 1);
 	close(fds[1]);
 	if (pipe == 1)
 	{
@@ -85,7 +87,7 @@ static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
 		goto_valid_block(exec, token);
 	if ((*token)->type == AND || (*token)->type == OR)
 		wait_everyone(exec);
-	if ((*token)->content)
+	if ((*token)->content && (*token)->type != RED_SUBSHELL)
 		++(*token);
 	return (fds[0]);
 }
