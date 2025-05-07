@@ -1,6 +1,6 @@
 #–– Compiler settings
 CC       = cc
-CFLAGS   = -g -Wall -Werror -Wextra -I./Ssj_libft
+CFLAGS   = -g -Wall -Werror -Wextra  -fpie -I./Ssj_libft
 LDFLAGS  = -lreadline -lhistory -lncurses
 
 #–– Library
