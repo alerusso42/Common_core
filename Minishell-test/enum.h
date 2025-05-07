@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:15:38 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/05 15:16:52 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:19:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ enum e_exec_errors
 	E_FORK,
 	E_NOENV,
 	E_ENV_PARSING,
+	E_CD,
 	E_CD_ARGS,
 	E_CD_PATH,
 	E_CD_NOHOME,
