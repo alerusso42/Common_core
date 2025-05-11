@@ -12,7 +12,7 @@ PARS_DIR  = parsing
 NAME     = minishell
 
 #––	Suppression file
-SUPP_FILE = /home/alerusso/Minishell/suppression.supp
+SUPP_FILE = /workspaces/Common_core/Minishell/suppression.supp
 
 #–– All source files, with their relative paths
 SRCS = \
