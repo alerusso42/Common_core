@@ -120,7 +120,7 @@ static int	add_one(t_exec *exec, t_token *token, t_token **token_address)
 	else if (token->type == RED_O_APPEND)
 		fd = open(token->content, OUTFILE_APPEND, 0666);
 	else
-		return (get_subshell_filename(exec, token_address, exec->curr_cmd));
+		return (get_subshell_filename(exec, token_address, token->cmd_num));
 	if (fd == -1 && access(token->content, F_OK) == 0)
 		return (bash_message(E_PERMISSION_DENIED, token->content), 1);
 	else if (fd == -1)
