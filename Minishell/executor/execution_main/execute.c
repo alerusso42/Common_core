@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/12 16:56:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:41:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ static int	next_command(t_exec *exec, t_token **token)
 	exec->curr_cmd = (*token)->cmd_num;
 	if (exec->prior_layer < (*token)->prior)
 		manage_parenthesis(exec, token, 0);
+	if (exec->prior_layer > (*token)->prior)
+		return (1);
 	return (0);
 }
 

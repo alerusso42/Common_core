@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/12 17:58:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:12:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ static int	filedata_after_parenthesis(t_exec *exec)
 	while (token->cmd_num != exec->curr_cmd && token->content)
 	{
 		next_cmd_block(&token, exec->prior_layer, _NO);
-		++token;
+		token += (token->content != NULL);
 	}
-	while (token->prior != exec->prior_layer)
+	while (token->prior > exec->prior_layer)
 		++token;
 	if (token->id == 0 || (token - 1)->type == RED_SUBSHELL || \
 		is_red_sign(token->type) == _NO || \
-		token->prior != exec->prior_layer)
+		token->prior > exec->prior_layer)
 		return (0);
 	if (get_file_data(exec, token, _NO) == 1)
 	{
