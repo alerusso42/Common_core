@@ -6,14 +6,15 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/10 20:46:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:58:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-static void	prep_recursion(t_exec *exec, int fds[2], int std_out, int do_pipe);
-static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2]);
+static int	prep_recursion(t_exec *exec, int fds[2], int std_out, int do_pipe);
+static int	redir_output(t_exec *exec, t_token **token, bool _pipe, int fds[2]);
+static int	filedata_after_parenthesis(t_exec *exec);
 
 int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 {
@@ -22,76 +23,93 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 	int		temp_fd;
 	int		redir_to_pipe;
 
-	if (getfd)
-		++(*token);
+	(*token) += (getfd != 0);
 	temp_fd = exec->stdout_fd;
 	exec->curr_cmd = (*token)->cmd_num;
 	redir_to_pipe = detect_pipe(*token, getfd, (*token)->prior - 1);
+	if (filedata_after_parenthesis(exec) == 1)
+		return (redir_output(exec, token, redir_to_pipe, fds), 0);
 	prep_recursion(exec, fds, temp_fd, getfd || redir_to_pipe);
 	pid = fork();
 	if (pid < 0)
-		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));//
+		return (close(fds[0]), close(fds[1]), error(E_FORK, exec));
 	else if (pid == 0)
 		execute_loop(*token, exec);
 	if (getfd == 0)
 		exec->pid_list[(*token)->cmd_num] = pid;
+	if (exec->stdout_fd != temp_fd)
+		close_and_reset(&exec->stdout_fd);
 	exec->stdout_fd = temp_fd;
 	redir_output(exec, token, redir_to_pipe, fds);
-	if ((*token)->prior == exec->prior_layer && !getfd)
-		++(*token);
+	(*token) += ((*token)->prior == exec->prior_layer && !getfd);
 	return (fds[0]);
 }
 
-static void	prep_recursion(t_exec *exec, int fds[2], int std_out, int do_pipe)
+static int	filedata_after_parenthesis(t_exec *exec)
 {
-	int	i;
+	t_token	*token;
 
-	i = 0;
-	while (exec->proc_sub_temp_fds[i])
-		++i;
-	fds[0] = 0;
-	fds[1] = 0;
-	if (do_pipe)
+	exec->file_not_found = 0;
+	token = exec->first_token;
+	while (token->cmd_num != exec->curr_cmd && token->content)
 	{
-		pipe(fds);
-		exec->stdout_fd = fds[1];
-		dup2(fds[1], 1);
-		exec->proc_sub_temp_fds[i++] = std_out;
-		exec->proc_sub_temp_fds[i] = fds[0];
+		next_cmd_block(&token, exec->prior_layer, _NO);
+		++token;
 	}
-	else
+	while (token->prior != exec->prior_layer)
+		++token;
+	if (token->id == 0 || (token - 1)->type == RED_SUBSHELL || \
+		is_red_sign(token->type) == _NO || \
+		token->prior != exec->prior_layer)
+		return (0);
+	if (get_file_data(exec, token, _NO) == 1)
 	{
-		exec->proc_sub_temp_fds[i++] = -1;
-		exec->proc_sub_temp_fds[i] = -1;
+		exec->file_not_found = 1;
+		return (1);
 	}
+	if (exec->last_out != -1)
+		exec->stdout_fd = dup(STDOUT_FILENO);
+	return (0);
 }
 
-static int	redir_output(t_exec *exec, t_token **token, bool pipe, int fds[2])
+static int	prep_recursion(t_exec *exec, int fds[2], int std_out, int do_pipe)
 {
-	int	i;
+	fds[0] = 0;
+	fds[1] = 0;
+	if (do_pipe && pipe(fds) == 0)
+	{
+		if (exec->last_out == -1)
+		{
+			exec->stdout_fd = fds[1];
+			dup2(fds[1], 1);
+		}
+		else
+			close_and_reset(&exec->pipe_fds[1]);
+	}
+	save_temp_fds(exec, std_out, fds[0], do_pipe);
+	return (0);
+}
 
-	i = 0;
-	while (exec->proc_sub_temp_fds[i])
-		++i;
-	if (i)
-		exec->proc_sub_temp_fds[--i] = 0;
-	if (i)
-		exec->proc_sub_temp_fds[--i] = 0;
+static int	redir_output(t_exec *exec, t_token **token, bool _pipe, int fds[2])
+{
+	bool	process_sub;
+
+	if (exec->file_not_found && _pipe)
+		pipe(fds);
+	else if (!exec->file_not_found)
+		remove_temp_fds(exec);
 	dup2(exec->stdout_fd, 1);
 	close(fds[1]);
-	if (pipe == 1)
+	if (_pipe == 1)
 	{
 		close_and_reset(&exec->pipe_fds[0]);
 		exec->pipe_fds[0] = fds[0];
 	}
-	skip_deeper_layers(token, exec->prior_layer);
-	if (((*token)->type == AND || (*token)->type == OR))
-	{
-		exec->curr_cmd += 1;
-		wait_everyone(exec);
-		exec->curr_cmd -= 1;
-		goto_valid_block(exec, token);
-	}
+	if ((*token)->id != 0 && (*token - 1)->type == RED_SUBSHELL)
+		process_sub = 1;
+	else
+		process_sub = 0;
+	token_out_parenthesis(exec, token, process_sub);
 	return (fds[0]);
 }
 

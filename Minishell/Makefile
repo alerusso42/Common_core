@@ -12,7 +12,7 @@ PARS_DIR  = parsing
 NAME     = minishell
 
 #––	Suppression file
-SUPP_FILE = /workspaces/Common_core/Minishell/suppression.supp
+SUPP_FILE = /home/alerusso/Common_core/Minishell/suppression.supp
 
 #–– All source files, with their relative paths
 SRCS = \
@@ -41,6 +41,7 @@ SRCS = \
   executor/utils/utils_count.c \
   executor/utils/utils_debug.c \
   executor/utils/utils_fds.c \
+  executor/utils/utils_fds2.c \
   executor/utils/utils_generic.c \
   executor/utils/utils_heredoc.c \
   executor/utils/utils_matrix.c \
@@ -99,6 +100,9 @@ val:
 
 exec_deb:
 	$(MAKE) gdb -C executor/
-	mv executor/a.gdb . 
+	mv executor/a.gdb .
+
+frm: 
+	rm -f *.txt *.gdb
 
 re: fclean all

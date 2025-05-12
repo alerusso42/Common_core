@@ -1,4 +1,4 @@
-define a1
+define fds
 	display exec->stdout_fd
 	display exec->stdin_fd
 	display exec->pipe_fds[0]
@@ -7,7 +7,7 @@ define a1
 	display fds[1]
 end
 
-define a2
+define tok2
 	set $z = 0
 	while ((*token)[$z].content != (void *)0)
 		p (*token)[$z]
@@ -15,7 +15,7 @@ define a2
 	end
 end
 
-define a3
+define tok
 	set $z = 0
 	while (token[$z].content != (void *)0)
 		p token[$z]
@@ -23,14 +23,14 @@ define a3
 	end
 end
 
-define l1
+define test
 	p get_next_line_bonus(fds[0])
 	p sleep(1)
 	run
 end
 
-define l2
-	p get_next_line_bonus(7)
+define inpipe
+	p get_next_line_bonus(fds[0])
 end
 
 define cmd

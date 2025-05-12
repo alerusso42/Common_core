@@ -24,3 +24,9 @@
 	[X]	Rimangono aperti fd 5, 6, 7, 8 con "cat < ( cat < ( ls ) )"
 	[X]	Ordine sbagliato comando demon, segfaulta un figlio
 	[X]	Fixare detect pipe
+
+Chiedere a France:
+[ ]	Se non c'è una env, che si fa? Si ferma il programma?
+[ ]	Gestione fd aperti con <(cmd)
+[ ]	Gestione > file.txt (export)
+[ ]	(echo test) > file.txt && (cat) file.txt

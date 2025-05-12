@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/10 21:47:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:37:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	get_here_doc_file(char *limiter, t_exec *exec);
 	8)	If there are redirections on STDIN or STDOUT, add_one will manage
 		them.
 */
-int	get_file_data(t_exec *exec, t_token *token)
+int	get_file_data(t_exec *exec, t_token *token, bool do_pipe)
 {
 	int	file_not_found;
 	int	current_cmd;
@@ -51,7 +51,7 @@ int	get_file_data(t_exec *exec, t_token *token)
 		if (token->type != RED_SUBSHELL && !is_exec_sep(token->type))
 			token += (token->content != NULL);
 	}
-	if (token->type == PIPE && exec->prior_layer == token->prior)
+	if (do_pipe && token->type == PIPE && exec->prior_layer == token->prior)
 	{
 		pipe(exec->pipe_fds);
 		if (exec->last_out == -1 && !file_not_found)
@@ -59,7 +59,8 @@ int	get_file_data(t_exec *exec, t_token *token)
 		else
 			close_and_reset(&exec->pipe_fds[1]);
 	}
-	exec->curr_cmd = current_cmd;
+	if (do_pipe)
+		exec->curr_cmd = current_cmd;
 	return (file_not_found);
 }
 
