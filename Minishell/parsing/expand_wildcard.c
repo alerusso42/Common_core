@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:00:35 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/08 10:49:01 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:56:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,26 @@ int	find_char(t_token *token, char c)
 {
 	int	i;
 
+	if (!token->content)
+		return (0);
 	i = 0;
 	while (token->content[i])
 	{
 		if (token->content[i] == c)
 			return (1);
 		i++;
+	}
+	return (0);
+}
+
+int	wildcard_d_case(t_token *token, t_data *gen, int *id)
+{
+	(void)gen;
+	if (!ft_strncmp(token[(*id)].content, "<<", ft_strlen(token[(*id)].content)
+		) && find_char(&token[(*id) + 1], '*') == 1)
+	{
+		(*id) += 2;
+		return (1);
 	}
 	return (0);
 }
@@ -38,6 +52,8 @@ int	expand_wildcard(t_token *token, t_data *gen)
 	(void)gen;
 	while (token[id].content)
 	{
+		if (wildcard_d_case(token, gen, &id) == 1)
+			continue ;
 		if (find_char(&token[id], '*') == 1)
 		{
 			temp = ft_strdup(token[id].content);
