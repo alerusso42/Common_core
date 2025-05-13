@@ -27,6 +27,6 @@
 
 Chiedere a France:
 [ ]	Se non c'è una env, che si fa? Si ferma il programma?
-[ ]	Gestione fd aperti con <(cmd)
+[X]	Gestione fd aperti con <(cmd)
 [ ]	Gestione > file.txt (export)
-[ ]	(echo test) > file.txt && (cat) file.txt
+[X]	(echo test) > file.txt && (cat) file.txt

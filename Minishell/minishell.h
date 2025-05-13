@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:56:23 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/10 22:46:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/13 08:33:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "Ssj_libft/libft.h"
 # include "parsing/parsing.h"
 # include "executor/executor.h"
-# define SHELL_NAME "la più potente di tutte. By ftersill && alerusso"
 
 typedef struct s_data
 {

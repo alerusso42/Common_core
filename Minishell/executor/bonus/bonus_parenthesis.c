@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/13 06:15:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/13 08:43:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 static int	filedata_after_parenthesis(t_exec *exec, t_token *token)
 {
 	exec->file_not_found = 0;
-	if (token->id == 0 && (token - 1)->type == RED_SUBSHELL)
+	if (token->id != 0 && (token - 1)->type == RED_SUBSHELL)
 		return (0);
 	while (token->prior > exec->prior_layer)
 		++token;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:43:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/11 13:02:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/13 08:53:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,14 @@ int		change_shell_name(char **env)
 {
 	int		i;
 	char	*shell_name;
+	char	*pwd;
 
 	ft_getenv(env, "SHELL", &i);
-	shell_name = ft_strjoin("SHELL=", SHELL_NAME);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (E_MALLOC);
+	shell_name = ft_strjoin("SHELL=", pwd);
+	free(pwd);
 	if (!shell_name)
 		return (E_MALLOC);
 	free(env[i]);
