@@ -91,18 +91,26 @@ clean:
 	rm -rf $(OBJ_DIR)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
-fclean: clean
+fclean: clean frm
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 val: 
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --track-origins=yes -s -q --suppressions=$(SUPP_FILE) ./minishell
 
+supp: 
+	$(MAKE) val -C executor/
+	mv executor/v.supp .
+	mv v.supp $(SUPP_FILE)
+
 exec_deb:
 	$(MAKE) gdb -C executor/
 	mv executor/a.gdb .
 
 frm: 
-	rm -f *.txt *.gdb
+	rm -f *.txt *.gdb *.supp
+
+git: fclean 
+	git add . && git commit -m $(MSG) && git push origin $(BR)
 
 re: fclean all
