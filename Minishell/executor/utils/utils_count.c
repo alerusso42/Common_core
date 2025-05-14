@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_count.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 16:10:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:22:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 /*REVIEW - count_commands
 
-//	Count the number of command block in the commands line sent by parsing.
+//	Returns the number of command block in the commands line sent by parsing.
 	exec allocation size depend on this number.
-	Checks if there are pipe on the commands line.
 */
 int	count_commands(t_token *token)
 {
@@ -48,8 +47,7 @@ int	find_command_argument_index(t_exec *exec, t_token *token)
 				++token;
 			++cmd_argc;
 		}
-		else if (token->type == ARGUMENT)
-			++cmd_argc;
+		cmd_argc += token->type == ARGUMENT;
 		++token;
 	}
 	return (cmd_argc);

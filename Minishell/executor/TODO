@@ -26,7 +26,7 @@
 	[X]	Fixare detect pipe
 
 Chiedere a France:
-[ ]	Se non c'è una env, che si fa? Si ferma il programma?
+[X]	Se non c'è una env, che si fa? Si ferma il programma?
 [X]	Gestione fd aperti con <(cmd)
-[ ]	Gestione > file.txt (export)
+[X]	Gestione > file.txt (export)
 [X]	(echo test) > file.txt && (cat) file.txt

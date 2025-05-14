@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 18:41:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/11 00:49:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:30:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	write_here_doc(char *line, t_exec *exec, int fd)
 			env_str = get_env(*exec->env, line + i + 1);
 			if (env_str)
 				ft_putstr_fd(env_str, fd);
-			//if (!temp)
-			//	break ;
 			line[end] = temp;
 			i = end - 1;
 		}

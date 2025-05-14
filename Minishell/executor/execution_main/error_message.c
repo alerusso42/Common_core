@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/07 17:21:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 22:21:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ int		error(int err, t_exec *memory)
 	if (err == NONE)
 	{
 		ft_putstr_fd("Please insert an error.\n", 2);
-	}
-	else if (err == E_ARGS)
-	{
-		ft_putstr_fd("France non mi hai passato nulla lol\n", 2);
 	}
 	else if (err == E_MALLOC || err == E_FORK)
 	{
@@ -91,7 +87,7 @@ static int	bash_message2(int message, char *file)
 	{
 		_fd_printf(2, "bash: exit: %s: numeric argument required\n", file);
 	}
-	else if (message == E_EXIT_NUMERIC)
+	else if (message == E_EXIT_ARGS)
 	{
 		_fd_printf(2, "bash: exit: too many arguments\n", file);
 	}

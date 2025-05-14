@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:04:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/11 11:57:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:33:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static long long int	ft_pow(long long int n, int p)
 	return (n);
 }
 
-
 int	overflow_check(char *s, long long max, long long min)
 {
 	long long int	limit;
@@ -91,9 +90,8 @@ int	overflow_check(char *s, long long max, long long min)
 	while (++limit_size && (limit > 9 || limit < -9))
 		limit /= 10;
 	limit = max;
-	while (s[i] == '0')
-		++i;
-	num_size = ft_strlen(s + i);
+	while (s[i++] == '0');
+	num_size = ft_strlen(s + --i);
 	while (ft_isdigit(s[i]))
 		++i;
 	if (s[i] || num_size != limit_size)
@@ -103,8 +101,4 @@ int	overflow_check(char *s, long long max, long long min)
 		(-1 * (s[0] == '-') + 1 * (s[0] != '-')) + '0');
 	return (s[i] > limit / ft_pow(10, num_size) % 10 * \
 		(-1 * (s[0] == '-') + 1 * (s[0] != '-')) + '0');
-}// exit -9223372036854775808
-/*
-	display s[i]
-	display limit / ft_pow(10, num_size) % 10 * (-1 * (s[0] == '-') + 1 * (s[0] != '-')) + '0'
-*/
+}

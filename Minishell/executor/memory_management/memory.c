@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/06 21:21:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:38:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void	free_memory2(t_exec *exec)
 	int	i;
 
 	i = -1;
-	while (++i != exec->curr_cmd)
+	while (++i != exec->last_cmd)
 	{
 		close_and_reset(&exec->here_doc_fds[i]);
 	}

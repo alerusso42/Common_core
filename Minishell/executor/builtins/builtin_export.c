@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/09 09:11:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:10:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ static void	print_export(char **env);
 			no initialized data;
 		2)	For every argument in args, we loop using index i;
 		3)	If the parsing succeds, and if there are no pipe, we add the new
-			value in the environment (see below add_one).
+			value in the environment (see below add_one)
+			The add is skipped if the arg has no '=' 
+			and is already on the environment.
 			Else if the parsing fails, we print an error message and set ES to
 			1, and we go to the next argument.
 */
@@ -58,7 +60,9 @@ int	ft_export(char **args, t_exec *exec)
 	{
 		if (!env_pars(args[i], &pars_data[0], &pars_data[1], &pars_data[2]))
 		{
-			if (exec->at_least_one_pipe == _NO)
+			if (exec->at_least_one_pipe == _NO && \
+				(ft_strchr(args[i], '=') || \
+				!ft_getenv(*exec->env, args[i], NULL)))	
 				add_one(args[i], exec->env, exec, pars_data);
 		}
 		else
@@ -190,6 +194,11 @@ static char	*remove_plus(char *str)
 		declare -x ___M_A_N
 		declare -x MAN="Carlo Conti"
 		...
+		lowest ascii first, then the others.
+		lowest_ascii_matrix is a function that returns the lowest ascii
+		character in the matrix, and NULL if there are no more elements.
+		The second parameter is the current lowest element, so we can
+		loop through the matrix and find the next lowest element.
 
 //		Operations:
 		1)	If the environment is NULL, we return;

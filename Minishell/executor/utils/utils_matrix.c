@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:32:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/04 11:21:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:27:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ char	*_reverse_split(char **matrix, char separator)
 	int		size;
 	int		j;
 
-	i = 0;
+	i = -1;
 	size = 0;
-	while (matrix[i])
+	while (matrix[++i])
 	{
 		size += ft_strlen(matrix[i]) + 1;
-		++i;
 	}
 	string = (char *)ft_calloc(size + 1, sizeof(char));
 	if (!string)
