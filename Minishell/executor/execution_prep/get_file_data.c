@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/12 15:37:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:20:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ static int	add_one(t_exec *exec, t_token *token, t_token **token_address)
 	{
 		dup2(fd, is_red_output_sign(token->type));
 	}
-	if (token->type != HERE_DOC)
+	if (token->type != HERE_DOC || token->id == exec->last_in)
 		close(fd);
 	return (0);
 }
@@ -193,20 +193,15 @@ void	prepare_here_docs(t_exec *exec, t_token *token)
 {
 	int	i;
 
-	i = 0;
 	while (token->content)
 	{
-		find_last_file(exec, token);
-		while (token->content && !is_exec_sep(token->type))
+		i = token->cmd_num;
+		if (token->type == HERE_DOC)
 		{
-			if (token->type == HERE_DOC)
-				exec->here_doc_fds[i] = get_here_doc_file(token->content, exec);
-			if (token->id != exec->last_in && exec->here_doc_fds[i])
+			if (exec->here_doc_fds[i])
 				close_and_reset(&exec->here_doc_fds[i]);
-			++token;
+			exec->here_doc_fds[i] = get_here_doc_file(token->content, exec);
 		}
-		if (token->content)
-			++token;
-		++i;
+		++token;
 	}
 }

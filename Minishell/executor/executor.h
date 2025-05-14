@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/12 16:49:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:11:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,7 +311,7 @@ int		_fd_printf(int fd, const char *str, ...);
 
 //	NOTE -	utils_count:Get crucial data from token
 
-int		count_commands(t_exec *exec, t_token *tokens);
+int		count_commands(t_token *token);
 int		find_command_argument_index(t_exec *exec, t_token *token);
 int		proc_sub_num(t_token *token);
 int		deepest(t_token *token);

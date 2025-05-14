@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:15:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/12 14:24:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:38:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	close_all(t_exec *exec)
 	while (exec->proc_sub_temp_fds[i])
 		close_and_reset(&exec->proc_sub_temp_fds[i++]);
 	i = 0;
-	while (exec->here_doc_fds[i])
+	while (i != exec->last_cmd)
 		close_and_reset(&exec->here_doc_fds[i++]);
 }
 

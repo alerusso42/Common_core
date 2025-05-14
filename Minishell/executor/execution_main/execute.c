@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/13 10:44:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:11:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	execute(t_token *token, void *data, int debug)
 	exec = (t_exec){0};
 	get_main_struct_data(&exec, data, debug);
 	merge_tokens(token, debug);
-	alloc_memory(&exec, token, count_commands(&exec, token));
+	alloc_memory(&exec, token, count_commands(token));
 	prepare_here_docs(&exec, token);
 	get_commands_data(&exec, token);
 	get_paths_data(&exec, token);
@@ -170,7 +170,7 @@ static int	invoke_programs(t_exec *exec, int i)
 {
 	pid_t	pid;
 
-	if (!exec->commands[i] || !exec->commands[i][0])
+	if (!exec->commands || !exec->commands[i] || !exec->commands[i][0])
 		return (0);
 	if (is_a_valid_executable(exec, i) == _NO)
 		return (0);

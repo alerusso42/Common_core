@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/07 14:11:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:10:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,11 @@
 	exec allocation size depend on this number.
 	Checks if there are pipe on the commands line.
 */
-int	count_commands(t_exec *exec, t_token *tokens)
+int	count_commands(t_token *token)
 {
-	int	cmd_num;
-
-	cmd_num = 0;
-	while (tokens->content != NULL)
-	{
-		cmd_num += (tokens->type == COMMAND);
-		++tokens;
-	}
-	exec->last_cmd = tokens->cmd_num;
-	return (cmd_num);
+	while (token->content)
+		++token;
+	return (token->cmd_num);
 }
 
 int	find_command_argument_index(t_exec *exec, t_token *token)
