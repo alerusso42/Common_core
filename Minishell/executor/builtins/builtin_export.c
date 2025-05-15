@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 21:10:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:21:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ int	ft_export(char **args, t_exec *exec)
 	{
 		if (!env_pars(args[i], &pars_data[0], &pars_data[1], &pars_data[2]))
 		{
-			if (exec->at_least_one_pipe == _NO && \
-				(ft_strchr(args[i], '=') || \
-				!ft_getenv(*exec->env, args[i], NULL)))	
+			if (exec->at_least_one_pipe == _NO \
+				&& (ft_strchr(args[i], '=') || \
+				!ft_getenv(*exec->env, args[i], NULL)))
 				add_one(args[i], exec->env, exec, pars_data);
 		}
 		else
 		{
-			bash_message(E_ENV_PARSING, args[i]);
+			bash_message(E_EXPORT_PARSING, args[i]);
 			*exec->exit_code = 1;
 		}
 		++i;
@@ -118,7 +118,8 @@ static void	add_one(char *item, char ***env, t_exec *exec, int pars_data[4])
 	if (!name)
 		error(E_MALLOC, exec);
 	_sub_strcpy(name, item, "+=", EXCL);
-	if (ft_getenv(*env, name, &where) && pars_data[ENV_NO_EQ_PLUS] != 2)
+	if (ft_getenv(*env, name, &where)
+		&& (pars_data[ENV_NO_EQ_PLUS] != 2 || !ft_strchr((*env)[where], '=')))
 	{
 		free((*env)[where]);
 		(*env)[where] = NULL;

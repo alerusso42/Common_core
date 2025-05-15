@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 23:22:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:00:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,33 @@ int	count_commands(t_token *token)
 	return (token->cmd_num);
 }
 
+/*REVIEW - find_command_argument_index
+
+	This function takes as input a token, and returns the index of
+	that token in the command argument argv.
+	For example, if the command is "ls -l -a", and the token is "-l",
+	the function will return 1, because "-l" is the first argument
+	of the command "ls -l -a".
+	This is useful for determining the position of a redir_subshell token
+	in the command line, so that we can fill its placeholder.
+
+	example:	ls -l <(ls) -a
+	start as:	{/bin/ls, -l, "", -a, NULL}
+	must become:{/bin/ls, -l, "/dev/fd/5", -a, NULL}
+	So we must return the index for the redir_subshell token, which is 2.
+
+//	1)	We start from the token and go back to the first command token
+	2)	We count the number of command arguments until we reach the
+		first command token.
+	3)	If we find a redir_subshell token, we check if it is the first
+		command argument. If it is, we return -1.
+	4)	If we find a command token, we increment the command argument
+		count.
+	5)	If we find an argument token, we increment the command argument
+		count.
+	6)	If we reach the current token, we return the command argument
+		count.
+*/
 int	find_command_argument_index(t_exec *exec, t_token *token)
 {
 	t_token	*current;
@@ -53,6 +80,19 @@ int	find_command_argument_index(t_exec *exec, t_token *token)
 	return (cmd_argc);
 }
 
+/*REVIEW - proc_sub_num
+
+	Returns the command block with the most redir_subshells.
+	Used to allocate the right size for 
+	the proc_sub_fds and proc_sub_temp_fds array.
+
+//	1)	We start from the first token and go to the end of the command line;
+	2)	We count the number of red_subshells in the current command block;
+	3)	If we find a red_subshell token, we increment the red_subshell count;
+	4)	If we find a command token, we increment the command argument
+		count;
+	5)	The biggest red_subshell count is returned in the record variable.
+*/
 int	proc_sub_num(t_token *token)
 {
 	int		record;
@@ -82,6 +122,12 @@ int	proc_sub_num(t_token *token)
 	return (record);
 }
 
+/*REVIEW - deepest
+
+	Returns the deepest layer in the token list.
+	For:	 	ls && (ls && (ls && (ls))), the deepest layer is 3.
+	Layer:		0,	   1,	  2,	 3,	   -1
+*/
 int	deepest(t_token *token)
 {
 	int		record;
@@ -94,4 +140,14 @@ int	deepest(t_token *token)
 		++token;
 	}
 	return (record + 1);
+}
+
+int	matrix_size(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		++i;
+	return (i);
 }

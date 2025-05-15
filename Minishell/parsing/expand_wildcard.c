@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:00:35 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/13 15:56:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:21:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int	find_char(t_token *token, char c)
 {
 	int	i;
 
-	if (!token->content)
-		return (0);
 	i = 0;
-	while (token->content[i])
+	while (token->content && token->content[i])
 	{
 		if (token->content[i] == c)
 			return (1);

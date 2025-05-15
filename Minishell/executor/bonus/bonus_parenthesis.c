@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:52:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 23:35:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:20:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ static int	filedata_after_parenthesis(t_exec *exec, t_token *token);
 		making a pipe to redirect the output. We make the pipe when:
 		- we have a redirection, 	(ls) > file -->already done in 2);
 		- we have a pipe, 			(ls) | cat;
-		- we have a subshell, 		cat <(ls);
+		- we have a redir_subshell,	cat <(ls);
 		pipe[0] and STDOUT are saved in proc_sub_temp_fds array;
 	5)	We fork the process;
 	6)	If we are in the child process, we execute the command.
 		execute_loop takes care of ending the process;
 	7)	If we are in the parent process, and we are not in a
-		subshell, we save the PID of the child process,
-		because subshell processes must not be waited by parent.
+		red_subshell, we save the PID of the child process,
+		because red_subshell processes must not be waited by parent.
 	8)	If the stdout_fd is changed, it means we have done a
 		pipe. We close it, and reset the stdout_fd;
 	9)	We redirect the output from the pipe, if we have one;
@@ -72,7 +72,7 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 /*
 //REVIEW - filedata_after_parenthesis
 
-//	1)	If the previous token is a subshell, we return;
+//	1)	If the previous token is a redirect_subshell, we return;
 	2)	We go out of the parenthesis;
 	3)	If the token is not a redirection, we return;
 	4)	We get the file data. In case of error, we set the
@@ -84,6 +84,8 @@ int	manage_parenthesis(t_exec *exec, t_token **token, int getfd)
 static int	filedata_after_parenthesis(t_exec *exec, t_token *token)
 {
 	exec->file_not_found = 0;
+	exec->last_in = -1;
+	exec->last_out = -1;
 	if (token->id != 0 && (token - 1)->type == RED_SUBSHELL)
 		return (0);
 	while (token->prior > exec->prior_layer)
@@ -146,7 +148,7 @@ static int	prep_recursion(t_exec *exec, int fds[2], int std_out, int do_pipe)
 	3)	We redirect the output to the pipe, if we have one;
 	4)	We exit from parenthesis.
 		token_out_parenthesis behaves differently if it is a
-		subshell:
+		red_subshell:
 		- normal:	(ls) > file <<DOC | cat	------>	We move to pipe |
 		- subshell:	cat <(ls) > file	----------> We move to > file
 */

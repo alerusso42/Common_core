@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:06:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 23:29:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:11:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_here_doc_file(char *limiter, t_exec *exec);
 	8)	If there are redirections on STDIN or STDOUT, add_one will manage
 		them.
 	9)	We update the current command number: in add_one weird things
-		happen when subshells are present.
+		happen when redir_subshells are present.
 */
 int	get_file_data(t_exec *exec, t_token *token, bool do_pipe)
 {
@@ -93,9 +93,10 @@ static void	find_last_file(t_exec *exec, t_token *token)
 			exec->last_in = token->id;
 		else if (token->type == RED_OUT || token->type == RED_O_APPEND)
 			exec->last_out = token->id;
-		else if (token->type == RED_SUBSHELL)
+		if (token->type == RED_SUBSHELL)
 		{
-			skip_deeper_layers(&token, layer);
+			while (token->type == RED_SUBSHELL)
+				skip_deeper_layers(&token, layer);
 		}
 		else if (token->content)
 			++token;
@@ -143,7 +144,7 @@ static int	add_one(t_exec *exec, t_token *token, t_token **token_address)
 	{
 		dup2(fd, is_red_output_sign(token->type));
 	}
-	if (token->type != HERE_DOC || token->id == exec->last_in)
+	if (token->type != HERE_DOC)
 		close(fd);
 	return (0);
 }

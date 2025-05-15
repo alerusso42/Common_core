@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:32:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 22:47:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	get_commands_data(t_exec *exec, t_token *token)
 			exec->which_cmd[cmd_num] = \
 			is_a_builtin_cmd(exec->commands[cmd_num][0]);
 			++cmd_num;
-			while ((++token)->type != COMMAND);
+			while ((++token)->type != COMMAND)
+				;
 		}
 		else
 			++token;
@@ -143,7 +144,7 @@ static void	get_builtin_functions(t_exec *exec)
 
 /*REVIEW - add_placeholder
 
-//	Subshells are not counted in the matrix, but they are
+//	redirect_Subshell are not counted in the matrix, but they are
 		needed to be there for the redirection to work.
 		We add a placeholder in the matrix, so we can use it
 		in the get_subshell_filename function.

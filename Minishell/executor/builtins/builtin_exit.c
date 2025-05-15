@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 21:06:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:35:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	check_args(char **args, t_exec *exec)
 	*exec->exit_code = 0;
 	if (!args[1])
 		return (0);
-	else if (overflow_check(args[1], LLONG_MAX, LLONG_MIN) == _YES)
+	else if (overflow_check(args[1], LLONG_MAX, LLONG_MIN, 0) == _YES)
 	{
 		set_exit_code(exec, 2);
 		return (bash_message(E_EXIT_NUMERIC, args[1]), 0);

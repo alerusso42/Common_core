@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:51:32 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/14 18:23:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 13:45:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	is_operator(t_token *t, t_data *gen, int *id, bool check)
 			!ft_strncmp(t->content, ")", ft_strlen(t->content)))
 				return (and_or_pipe_parenthesis(t, gen, id));
 		}
-		
 	}
 	return (0);
 }
@@ -102,11 +101,8 @@ int	define_token_arg(t_token *token, t_data *gen)
 
 int	define_token_and_parenthesis(t_token *token, t_data *gen)
 {
-	int	i;
-	(void)i;
 	int	id;
 
-	i = 0;
 	id = 0;
 	while (token[id].content != NULL)
 	{

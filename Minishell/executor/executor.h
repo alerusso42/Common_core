@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 16:11:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:00:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
-typedef struct s_token t_token;
+typedef struct s_token	t_token;
 
 //NOTE - Valgrind home
 /*
@@ -221,7 +221,7 @@ typedef struct s_wildcard
 	char	*search;
 	char	*dir_path;
 	int		dir_size;
-}t_wildcard;
+}	t_wildcard;
 
 /*REVIEW - wildcard data structure
 
@@ -315,6 +315,7 @@ int		count_commands(t_token *token);
 int		find_command_argument_index(t_exec *exec, t_token *token);
 int		proc_sub_num(t_token *token);
 int		deepest(t_token *token);
+int		matrix_size(char **matrix);
 
 //	NOTE -	debug:		Prints all token, delimiting execution		
 
@@ -337,7 +338,7 @@ int		bigger(int n1, int n2);
 int		is_a_valid_executable(t_exec *exec, int i);
 int		set_exit_code(t_exec *exec, int exit_code);
 void	write_here_doc(char *line, t_exec *exec, int fd);
-int		overflow_check(char *s, long long max, long long min);
+int		overflow_check(char *s, long long max, long long min, int limit_size);
 
 //	NOTE -	matrix:		Matrix management
 

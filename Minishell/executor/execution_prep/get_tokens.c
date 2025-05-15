@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 23:15:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:44:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,6 @@ static void	sort_id(t_token *token)
 	token->prior = -1;
 	token->id = -1;
 }
-
 
 static void	switch_tokens(t_token *token, int i, int j)
 {

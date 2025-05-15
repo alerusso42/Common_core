@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 22:12:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:01:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	cpy_env(char **old_env, char ***new_env, int *env_size, int *last_env)
 
 	if (!old_env)
 		return (E_NOENV);
-	i = 0;
-	while (old_env[i++]);
+	i = matrix_size(old_env);
 	*new_env = ft_calloc(i + *env_size + 3, sizeof(char *));
 	if (!*new_env)
 		return (E_MALLOC);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:47:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/14 21:10:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:20:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_unset(char **args, t_exec *exec)
 		}
 		else
 		{
-			bash_message(E_ENV_PARSING, args[i]);
+			bash_message(E_UNSET_PARSING, args[i]);
 			*exec->exit_code = 1;
 		}
 		++i;
