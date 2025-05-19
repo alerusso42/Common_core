@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:15:38 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/15 17:27:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:05:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,22 @@ enum e_exec_errors
 	E_MALLOC,
 	E_OPEN,
 	E_FORK,
+	E_PROC_SUB,
+	E_HEREDOC_CTRL_D,
 	E_NOENV,
 	E_EXPORT_PARSING,
 	E_UNSET_PARSING,
+	E_ENV_PARSING,
+	E_ENV_DIRECTORY,
+	E_ENV_NOTFOUND,
+	E_ENV_EXE,
+	E_ENV_PERMISSION,
 	E_CD,
 	E_CD_ARGS,
 	E_CD_PATH,
 	E_CD_NOHOME,
 	E_EXIT_NUMERIC,
 	E_EXIT_ARGS,
-	E_ENV_PARSING,
-	E_ENV_DIRECTORY,
-	E_ENV_NOTFOUND,
-	E_ENV_EXE,
-	E_ENV_PERMISSION,
 	E_CMD_NOTFOUND,
 	E_IS_DIRECTORY,
 	E_PERMISSION_DENIED,
@@ -130,15 +132,7 @@ enum e_sub_strlen
 
 /*REVIEW - environment enum
 
-	Environment enum, used to parse the arguments
-	of ft_unset and ft_export.
-	An array of int of size 4 is allocated in stack.
-	Example: export var+="carlo conti"
-	Its elements are:
-	- no_eq_plus [0]:	0 if no =+ is found, 1 if = is found, 2 if + is found
-	- name_size [1]:	size of the name (var = 3)
-	- cont_size [2]:	size of the content (carlo conti = 11)
-	- which_val [3]:	the index of the variable in the env matrix
+	//TODO - 
 */
 enum e_environment
 {
@@ -158,6 +152,13 @@ enum e_bools
 	_NO = 0,
 	_YES = 1,
 	_STOP = 2,
+};
+
+enum e_signal
+{
+	CTRL_C = 10,
+	CTRL_D = 20,
+	CTRL_BACK = 30,
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:00:35 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/15 18:21:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/14 09:36:22 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

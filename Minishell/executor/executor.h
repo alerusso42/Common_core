@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/15 17:00:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:02:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <dirent.h>
 # include "../minishell.h"
 # include "../enum.h"
+# define DOC_NAME ".here_doc"
 
 typedef struct s_exec	t_exec;
 typedef int				(*t_builtin)(char **, t_exec *);
@@ -291,7 +292,7 @@ int		bash_message(int message, char *file);
 //SECTION -	Execution preparations
 
 void	merge_tokens(t_token *token, int debug);
-void	prepare_here_docs(t_exec *exec, t_token *token);
+int		prepare_here_docs(t_exec *exec, t_token *token);
 int		get_commands_data(t_exec *exec, t_token *token);
 int		get_paths_data(t_exec *exec, t_token *token);
 int		get_file_data(t_exec *exec, t_token *token, bool do_pipe);
@@ -359,6 +360,7 @@ void	goto_valid_block(t_exec *exec, t_token **token);
 void	tok_next(t_token **token, int chr, int layer, bool accept_deeper_tok);
 void	token_out_parenthesis(t_exec *exec, t_token **token, bool process_sub);
 bool	detect_pipe(t_token *token, int getfd, int layer);
+bool	check_proc_sub(t_exec *exec, t_token *token);
 
 //	NOTE -	string:		String utilities
 
