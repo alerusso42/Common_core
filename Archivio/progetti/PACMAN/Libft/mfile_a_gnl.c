@@ -6,13 +6,16 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:38:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/21 04:35:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:03:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mfile_gnl.h"
 
 char	*get_static_buffer(int fd, bool reset, bool reset_all);
+char	*read_empty_buffer(char *buffer, t_fd fd);
+char	*read_until_newline(char *buffer, t_fd fd, int i);
+char	*extract_ready_line(char *buffer, t_fd fd, int i);
 /*
 //TODO - 
 			1)	strlen fatto bene;
@@ -41,8 +44,6 @@ char	*gnl(void)
 	return (extract_ready_line(buffer, fd, i));
 }
 
-
-
 char	*get_static_buffer(int fd, bool reset, bool reset_all)
 {
 	t_manage_fds	*data;
@@ -68,4 +69,78 @@ char	*get_static_buffer(int fd, bool reset, bool reset_all)
 		}
 	}
 	return (data->buffer[fd]);
+}
+
+char	*read_empty_buffer(char *buffer, t_fd fd)
+{
+	int		bytes_read;
+	int		line_size;
+	int		diff;
+
+	bytes_read = 0;
+	diff = 0;
+	while (ft_strchr(buffer + bytes_read, '\n') == NULL)
+	{
+		bytes_read += readfd(fd.p, BUFFER_SIZE);
+		diff = bytes_read - diff;
+		if (diff == -1)
+			return (NULL);
+		if (diff != BUFFER_SIZE)
+			break ;
+		buffer[bytes_read] = 0;
+	}
+	line_size = sub_strlen(buffer, "\n", EXCLUDE);
+	return (read_until_newline(buffer, fd, line_size));
+}
+
+char	*read_until_newline(char *buffer, t_fd fd, int i)
+{
+	char	*new_line;
+
+	new_line = ft_calloc(i + 1, sizeof(char));
+	if (!new_line)
+		return (NULL);
+	sub_strcpy(new_line, buffer, "\n", EXCLUDE);
+	cut_string(buffer, 0, i);
+	return (new_line);
+}
+
+char	*extract_ready_line(char *buffer, t_fd fd, int i)
+{
+	char	*new_content;
+	char	*old_content;
+	char	*new_line;
+
+	old_content = read_until_newline(buffer, fd, i);
+	if (!old_content)
+		return (NULL);
+	new_content = read_empty_buffer(buffer, fd);
+	if (!new_content)
+		return (free(old_content), NULL);
+	new_line = ft_strjoin_free(old_content, new_content);
+	if (!new_line)
+		return (free(old_content), free(new_content), NULL);
+	return (new_line);
+}
+
+int	main(void)
+{
+	char	*line;
+	t_fd	fd;
+
+	fd = openfd("mfile_a_gnl.c", "r");
+	if (fd.n == 0)
+	{
+		perror("Error opening file");
+		return (1);
+	}
+	line = gnl();
+	while (line != NULL)
+	{
+		printf("%s\n", line);
+		free(line);
+		line = gnl();
+	}
+	del_filedata();
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/21 04:25:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:23:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			del_filedata(void);
 int				switch_filedata(t_fd fd);
 int				fd_indexation(void);
 void			closefd(t_fd fd);
+int				readfd(t_manage_fds	*data, int count);
 
 //		ORIGINAL GNL
 char	*gnl(int fd);
