@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:59:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:05:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:49:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	others(t_settings *settings);
 */
 int	switches(t_settings *settings)
 {
-	settings->switch_1_bonus = switch_to_bonus(settings);
 	others(settings);
 	update_var(settings);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/19 16:02:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:34:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,6 +371,7 @@ char	*_cat_string(char *src, char *catstr, size_t start, int which_free);
 char	*_ft_strjoin_free(char *s1, char *s2);
 int		_reverse_strncmp(char *s1, char *s2, int len);
 int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
+char	*remove_plus(char *str);
 
 //	NOTE -	tokencheck:	is_alpha for token types (is redirection sign? ecc.)
 

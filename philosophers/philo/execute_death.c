@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_death.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:54:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/14 14:21:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:08:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	someone_died(t_philo *philo, int lock)
 
 	if (philo->state == DEAD)
 		return (YES);
-	return (NO);
 	if (lock && pthread_mutex_lock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
 	state = philo->state;
