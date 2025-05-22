@@ -6,7 +6,7 @@
 /*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 09:38:38 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/14 12:44:30 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:16:04 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,4 @@ void	fill_struct(t_token *token, t_data *gen)
 			token_id++;
 		}
 	}
-	remove_quotes_token(token, gen);
 }

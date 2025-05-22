@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:37:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/15 16:47:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:42:18 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,11 @@ static void	free_memory2(t_exec *exec);
 //		This function is a bridge between Minishell parsing part by ftersill
 		or execution debug program.
 */
-void	get_main_struct_data(t_exec *exec, void *data, int debug)
+void	get_main_struct_data(t_exec *exec, void *data)
 {
-	t_debug_data	*debug_data;
 	t_data			*gen;
 
 	exec->main_struct_pointer = data;
-	exec->debug = debug;
-	if (debug)
-	{
-		debug_data = (t_debug_data *)data;
-		exec->env = &debug_data->env;
-		exec->env_size = &debug_data->env_size;
-		exec->last_env = &debug_data->last_env;
-		exec->exit_code = &debug_data->exit_code;
-		*exec->exit_code = 0;
-		return ;
-	}
 	gen = (t_data *)data;
 	exec->env = &gen->env;
 	exec->env_size = &gen->env_size;
@@ -43,24 +31,6 @@ void	get_main_struct_data(t_exec *exec, void *data, int debug)
 	exec->exit_code = &gen->exit_code;
 	exec->first_token = gen->token;
 	*exec->exit_code = 0;
-}
-
-//REVIEW - Free for data used in execution Minishell part debug program
-void	*free_debug_data(t_debug_data *data)
-{
-	data->matrix = _free_three_d_matrix(data->matrix);
-	free(data->temp);
-	data->temp = NULL;
-	free(data->filename1);
-	free(data->filename2);
-	data->filename1 = NULL;
-	data->filename2 = NULL;
-	close_and_reset(&data->fd_to_close);
-	data->fd_to_close = 0;
-	free(data->tokens);
-	data->tokens = NULL;
-	data->env = _free_matrix(data->env);
-	return (NULL);
 }
 
 //REVIEW - Alloc for t_exec
@@ -142,4 +112,11 @@ static void	free_memory2(t_exec *exec)
 	exec->proc_sub_temp_fds = NULL;
 	close_and_reset(&exec->pipe_fds[0]);
 	close_and_reset(&exec->pipe_fds[1]);
+}
+
+void	create_empty_matrix(t_exec *exec, int cmd_num)
+{
+	exec->commands[cmd_num] = (char **)ft_calloc(1, sizeof(char *));
+	if (!exec->commands[cmd_num])
+		error(E_MALLOC, exec);
 }

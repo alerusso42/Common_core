@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/15 16:35:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:11:13 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,21 @@ static int	check_args(char **args, t_exec *exec);
 */
 int	ft_exit(char **args, t_exec *exec)
 {
-	int	exit_code;
+	unsigned char	exit_code;
 
-	if (exec->at_least_one_pipe)
-		return (set_exit_code(exec, 0), 0);
+	set_exit_code(exec, 0);
+	if (check_args(args, exec) || exec->at_least_one_pipe)
+		return (0);
 	if (exec->prior_layer == 0)
 		_fd_printf(2, "exit\n");
-	if (check_args(args, exec))
-		return (0);
 	exit_code = *exec->exit_code;
-	if (exec->debug)
-		free_debug_data((t_debug_data *)exec->main_struct_pointer);
-	else
-	{
-		free_all(exec->first_token, exec->main_struct_pointer);
-		_free_matrix(*exec->env);
-	}
+	free_all(exec->first_token, exec->main_struct_pointer);
+	_free_matrix(*exec->env);
 	exec->main_struct_pointer = NULL;
 	free_memory(exec);
+	close(0);
+	close(1);
+	close(2);
 	return (exit(exit_code), 0);
 }
 
@@ -90,14 +87,12 @@ int	exit_process(t_exec *exec)
 	int	exit_code;
 
 	exit_code = *exec->exit_code;
-	if (exec->debug)
-		free_debug_data((t_debug_data *)exec->main_struct_pointer);
-	else
-	{
-		free_all(exec->first_token, exec->main_struct_pointer);
-		_free_matrix(*exec->env);
-	}
+	free_all(exec->first_token, exec->main_struct_pointer);
+	_free_matrix(*exec->env);
 	exec->main_struct_pointer = NULL;
 	free_memory(exec);
+	close(0);
+	close(1);
+	close(2);
 	return (exit(exit_code), 0);
 }

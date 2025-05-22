@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:15:38 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/19 16:05:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:03:15 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ enum e_exec_errors
 	E_MALLOC,
 	E_OPEN,
 	E_FORK,
-	E_PROC_SUB,
 	E_HEREDOC_CTRL_D,
 	E_NOENV,
 	E_EXPORT_PARSING,
@@ -112,6 +111,7 @@ enum e_exec_errors
 	E_CMD_NOTFOUND,
 	E_IS_DIRECTORY,
 	E_PERMISSION_DENIED,
+	E_PROC_SUB,
 };
 
 /*REVIEW - sub_strlen enum 

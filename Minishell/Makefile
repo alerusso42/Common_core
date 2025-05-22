@@ -37,7 +37,6 @@ SRCS = \
   executor/execution_prep/get_file_data.c \
   executor/execution_prep/get_paths_data.c \
   executor/execution_prep/get_tokens.c \
-  executor/memory_management/memory.c \
   executor/utils/printf_fd.c \
   executor/utils/utils_count.c \
   executor/utils/utils_debug.c \
@@ -46,6 +45,7 @@ SRCS = \
   executor/utils/utils_generic.c \
   executor/utils/utils_heredoc.c \
   executor/utils/utils_matrix.c \
+  executor/utils/utils_memory.c \
   executor/utils/utils_parenthesis2.c \
   executor/utils/utils_parenthesis.c \
   executor/utils/utils_string2.c \
@@ -64,7 +64,9 @@ SRCS = \
   parsing/parenthesis.c \
   parsing/parser.c \
   parsing/expand_wildcard.c \
+  parsing/expand_wildcard_2.c \
   parsing/parser_2.c \
+  parsing/ambiguous_redir.c \
 
 #–– Object files go under obj/, mirroring the tree
 OBJ_DIR = obj
@@ -97,10 +99,6 @@ supp:
 deb:
 	$(MAKE) gdb -C executor/
 	mv executor/a.gdb .
-
-#–– frm = file remove
-frm: 
-	rm -f *.txt *.gdb *.supp
 
 val: 
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --track-origins=yes -s -q --suppressions=$(SUPP_FILE) ./minishell

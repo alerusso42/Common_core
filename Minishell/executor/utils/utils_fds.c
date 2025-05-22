@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:15:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/15 16:10:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:43:47 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,12 @@
 */
 void	close_all(t_exec *exec)
 {
-	t_debug_data	*debug;
 	int				i;
 
 	close_and_reset(&exec->pipe_fds[0]);
 	close_and_reset(&exec->pipe_fds[1]);
 	close_and_reset(&exec->stdin_fd);
 	close_and_reset(&exec->stdout_fd);
-	if (exec->debug)
-	{
-		debug = exec->main_struct_pointer;
-		close_and_reset(&debug->fd_to_close);
-	}
 	i = 0;
 	while (exec->proc_sub_temp_fds[i])
 		close_and_reset(&exec->proc_sub_temp_fds[i++]);

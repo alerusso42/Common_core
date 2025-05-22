@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:03:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/15 16:44:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:41:12 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-static void	merge_one(t_token *token, int debug, int i, bool update_type);
+static void	merge_one(t_token *token, int i, bool update_type);
 static void	manage_subshell(t_token *token);
 static void	sort_id(t_token *token);
 static void	switch_tokens(t_token *token, int i, int j);
@@ -56,7 +56,7 @@ static void	switch_tokens(t_token *token, int i, int j);
 		5)	Lastly, sort the id of every token, and decrease in subshell the
 			layer of the <() token.
 */
-void	merge_tokens(t_token *token, int debug)
+void	merge_tokens(t_token *token)
 {
 	int	i;
 
@@ -70,7 +70,7 @@ void	merge_tokens(t_token *token, int debug)
 		}
 		else if (is_red_sign(token[i].type))
 		{
-			merge_one(token, debug, i, 0);
+			merge_one(token, i, 0);
 		}
 		i++;
 	}
@@ -78,7 +78,7 @@ void	merge_tokens(t_token *token, int debug)
 	while (token[i].content)
 	{
 		if (token[i].content[0] == '(' || token[i].content[0] == ')')
-			merge_one(token, debug, i, 1);
+			merge_one(token, i, 1);
 		else
 			++i;
 	}
@@ -87,17 +87,16 @@ void	merge_tokens(t_token *token, int debug)
 
 /*REVIEW - merge_one
 
-//		1)	If we are not in debug mode, free the current content ('>');
+//		1)	free the current content ('>');
 		2)	We update ONLY the content;
 		3)	For every other token after current token,
 			we drag them one position behind.
 */
-static void	merge_one(t_token *token, int debug, int i, bool update_type)
+static void	merge_one(t_token *token, int i, bool update_type)
 {
 	int	j;
 
-	if (!debug)
-		free(token[i].content);
+	free(token[i].content);
 	token[i].content = NULL;
 	token[i].content = token[i + 1].content;
 	if (update_type)

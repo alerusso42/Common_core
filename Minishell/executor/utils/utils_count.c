@@ -6,7 +6,7 @@
 /*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:24:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/16 15:47:06 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:55:27 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int	find_command_argument_index(t_exec *exec, t_token *token)
 
 	current = token;
 	cmd_argc = 0;
-	while (token->id != 0 && \
-		(token->prior >= (token - 1)->prior || \
+	while (token->id != 0 && (token->prior >= (token - 1)->prior || \
 			token->cmd_num != (token - 1)->cmd_num))
 		--token;
 	while (token != current)
@@ -70,8 +69,8 @@ int	find_command_argument_index(t_exec *exec, t_token *token)
 		{
 			if (cmd_argc == 0)
 				return (-1);
-			while (token != current && exec->prior_layer != (token + 1)->prior)
-				++token;
+			skip_deeper_layers(&token, exec->prior_layer);
+			--token;
 			++cmd_argc;
 		}
 		else

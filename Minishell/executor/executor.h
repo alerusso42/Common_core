@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/20 14:34:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:38:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ struct s_exec
 	int				*here_doc_fds;
 	int				*proc_sub_fds;
 	int				*proc_sub_temp_fds;
-	int				*exit_code;
+	unsigned char	*exit_code;
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;
@@ -194,7 +194,6 @@ struct s_exec
 	int				prior_layer;
 	int				at_least_one_pipe:1;
 	int				file_not_found:1;
-	int				debug:1;
 };
 
 /*REVIEW - wildcard data structure
@@ -280,7 +279,7 @@ int		change_shell_name(char **env);
 
 //SECTION -	Execution main
 
-int		execute(t_token *tokens, void *data, int debug);
+int		execute(t_token *tokens, void *data);
 int		execute_loop(t_token *token, t_exec *exec);
 int		wait_everyone(t_exec *exec);
 
@@ -291,18 +290,18 @@ int		bash_message(int message, char *file);
 
 //SECTION -	Execution preparations
 
-void	merge_tokens(t_token *token, int debug);
+void	merge_tokens(t_token *token);
 int		prepare_here_docs(t_exec *exec, t_token *token);
 int		get_commands_data(t_exec *exec, t_token *token);
-int		get_paths_data(t_exec *exec, t_token *token);
+int		get_paths_data(t_exec *exec);
 int		get_file_data(t_exec *exec, t_token *token, bool do_pipe);
 
 //SECTION -	Memory management
 
 void	alloc_memory(t_exec *exec, t_token *token, int cmd_num);
 void	free_memory(t_exec *memory);
-void	*free_debug_data(t_debug_data *data);
-void	get_main_struct_data(t_exec *exec, void *data, int debug);
+void	get_main_struct_data(t_exec *exec, void *data);
+void	create_empty_matrix(t_exec *exec, int cmd_num);
 
 //SECTION -	Utils
 
@@ -372,6 +371,7 @@ char	*_ft_strjoin_free(char *s1, char *s2);
 int		_reverse_strncmp(char *s1, char *s2, int len);
 int		double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char);
 char	*remove_plus(char *str);
+char	*_ft_strrstr(const char *haystack, const char *needle);
 
 //	NOTE -	tokencheck:	is_alpha for token types (is redirection sign? ecc.)
 
