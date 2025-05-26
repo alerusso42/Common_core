@@ -184,6 +184,7 @@ struct s_exec
 	int				*proc_sub_fds;
 	int				*proc_sub_temp_fds;
 	unsigned char	*exit_code;
+	char			*minishell_path;
 	int				pipe_fds[2];
 	int				last_in;
 	int				last_out;

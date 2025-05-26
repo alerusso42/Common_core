@@ -13,6 +13,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define PROMPT "Minishell$> "
+# define PROG_NAME "/minishell"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -36,6 +38,7 @@ typedef struct s_data
 	int					last_env;
 	int					env_size;
 	t_token				*token;
+	char				*minishell_path;
 }	t_data;
 
 typedef struct s_token

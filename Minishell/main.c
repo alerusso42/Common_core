@@ -18,7 +18,7 @@ int	start(t_data *gen, int i, int j)
 	while (1)
 	{
 		reset_standard_signal();
-		gen->input = readline("Minishell$> ");
+		gen->input = readline(PROMPT);
 		assign_signal_exit_code(gen);
 		if (!gen->input)
 			break ;
@@ -42,6 +42,21 @@ int	start(t_data *gen, int i, int j)
 	return (0);
 }
 
+int	get_minishell_path(t_data *gen)
+{
+	char	*temp;
+
+	gen->minishell_path = getcwd(NULL, 0);
+	if (!gen->minishell_path)
+		return (1);
+	temp = gen->minishell_path;
+	gen->minishell_path = _ft_strjoin(temp, PROG_NAME);
+	free(temp);
+	if (!gen->minishell_path)
+		return (1);
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_data				gen;
@@ -54,9 +69,12 @@ int	main(int ac, char **av, char **env)
 	gen = (t_data){0};
 	if (cpy_env(env, &gen.env, &gen.env_size, &gen.last_env) != 0)
 		return (ft_error("env error", -1, &gen, ""), 1);
+	if (get_minishell_path(&gen) == 1)
+		return (ft_error("malloc error", -1, &gen, ""), 1);
 	if (start(&gen, i, j) == 1)
 		return (1);
 	_free_matrix(gen.env);
+	free(gen.minishell_path);
 	close(0);
 	close(1);
 	close(2);
