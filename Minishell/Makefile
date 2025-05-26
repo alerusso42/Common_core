@@ -101,7 +101,7 @@ deb:
 	mv executor/a.gdb .
 
 val: 
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --track-origins=yes -s -q --suppressions=$(SUPP_FILE) ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --track-origins=yes -s --quiet --suppressions=$(SUPP_FILE) ./minishell
 
 clean:
 	rm -rf $(OBJ_DIR)

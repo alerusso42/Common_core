@@ -1,0 +1,14 @@
+Makefile
+Ssj_libft
+enum.h
+executor
+main.c
+minishell
+minishell.h
+obj
+output.txt
+parsing
+real_output.txt
+set_signal.c
+signals.c
+supp.supp
