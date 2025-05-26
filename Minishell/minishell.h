@@ -50,6 +50,8 @@ typedef struct s_token
 	bool	space_on_right; //se e` presente uno spazio alla dx del tok
 }	t_token;
 
+int	command_substitution(char **prompt, t_data *gen);
+
 //signals
 void	signals(int signal, siginfo_t *info, void *s);
 void	heredoc_signal(int signal, siginfo_t *info, void *s);

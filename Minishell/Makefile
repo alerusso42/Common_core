@@ -19,6 +19,7 @@ SRCS = \
   main.c \
   signals.c \
   set_signal.c \
+  executor/bonus/bonus_cmd_sub.c \
   executor/bonus/bonus_parenthesis.c \
   executor/bonus/bonus_wildcards1.c \
   executor/bonus/bonus_wildcards2.c \

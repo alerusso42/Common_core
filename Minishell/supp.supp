@@ -16,5 +16,5 @@
    suppress_sys_function
    Memcheck:Leak
    ...
-   obj:/usr/*
+   obj:/usr/bin/*
 }
