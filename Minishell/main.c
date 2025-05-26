@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:53:39 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/26 21:26:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/26 23:24:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	_free_matrix(gen.env);
 	free(gen.minishell_path);
+	free(gen.subcmd_stdout);
 	close(0);
 	close(1);
 	close(2);
