@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:53:39 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/26 23:24:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/27 00:05:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ int	start(t_data *gen, int i, int j)
 
 int	get_minishell_path(t_data *gen)
 {
-	char	*temp;
+	char	*pwd;
 
-	gen->minishell_path = getcwd(NULL, 0);
-	if (!gen->minishell_path)
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
 		return (1);
-	temp = gen->minishell_path;
-	gen->minishell_path = ft_strjoin(temp, PROG_NAME);
-	free(temp);
+	gen->minishell_path = ft_strjoin(pwd, PROG_NAME);
+	free(pwd);
 	if (!gen->minishell_path)
 		return (1);
 	return (0);

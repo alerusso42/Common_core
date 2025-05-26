@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/22 20:38:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/27 00:02:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,6 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
 */
 
 //ANCHOR - Data structures
-
-/*REVIEW - token array 
-
-	The array of token:		ls // 	> // 	file // -R
-	
--	content:	a string with token content (ls, file.txt, >...)
-	//
--	t_quote:	type of quotes (0 = -, 1 = "", 2 = '')
-	//
-	id:			integer that shows token index. Last is -1
-	//
--	prior:		layer in the parenthesis.
-	//			( increase by 1, ) decrease by 1.
-	//			last token has layer == -1
-	//
--	cmd_num:	command block num -> 	ls | 	grep .c		/
-	//									0		1			2
--	type:		read the enum "types" below
-*/
-/*typedef struct s_token
-{
-	char			*content;
-	int				t_quote;
-	int				id;
-	int				prior;
-	int				cmd_num;
-	unsigned int	type:4;
-}	t_token;*/
 
 /*REVIEW - execution data structure
 
@@ -170,31 +142,31 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
 */
 struct s_exec
 {
-	t_builtin		*builtins;
+	t_builtin		*builtins;	//an array of functions.
 	t_token			*first_token;
-	int				*pid_list;
-	char			***commands;
-	char			***env;
-	int				*env_size;
-	int				*last_env;
-	char			**path;
-	char			*which_cmd;
-	void			*main_struct_pointer;
-	int				*here_doc_fds;
-	int				*proc_sub_fds;
-	int				*proc_sub_temp_fds;
-	unsigned char	*exit_code;
-	char			*minishell_path;
-	int				pipe_fds[2];
-	int				last_in;
-	int				last_out;
-	int				curr_cmd;
-	int				last_cmd;
-	int				stdin_fd;
-	int				stdout_fd;
-	int				prior_layer;
-	int				at_least_one_pipe:1;
-	int				file_not_found:1;
+	int				*pid_list;	//an array of pid.
+	char			***commands;//3d matrix of commands.
+	char			***env;		//a pointer to the env matrix from t_data.
+	int				*env_size;	//a pointer to the env_size int from t_data.
+	int				*last_env;	//a pointer to the last_env int from t_data.
+	char			**path;		//a matrix made from the env variable "PATH".
+	char			*which_cmd;	//0 = NO_BUILTIN; 1 = B_ECHO; 2 = B_CD...
+	void			*main_struct_pointer;//ptr to t_data struct
+	int				*here_doc_fds;//array of here docs fds.
+	int				*proc_sub_fds;//array of process substitution <() fds.
+	int				*proc_sub_temp_fds;//stores temp fds for parenthesis
+	unsigned char	*exit_code;	//a pointer to the exit_code u_char from t_data.
+	char			*minishell_path;//a pointer to the m.path str from t_data.
+	int				pipe_fds[2];//pipe fds used for pipe | are placed here.
+	int				last_in;	//in a cmd_block, the last input file.
+	int				last_out;	//in a cmd_block, the last output file.
+	int				curr_cmd;	//current cmd that is being executed.
+	int				last_cmd;	//total number of commands.
+	int				stdin_fd;	//duplicate of STDIN_FILENO made with dup.
+	int				stdout_fd;	//duplicate of STDOUT_FILENO made with dup.
+	int				prior_layer;//every parenthesis layer increase this by one.
+	int				at_least_one_pipe:1;//on if there are pipes on cmd block.
+	int				file_not_found:1;//on if in get_filedata open error occurs.
 };
 
 /*REVIEW - wildcard data structure
@@ -218,31 +190,13 @@ struct s_exec
 */
 typedef struct s_wildcard
 {
-	char	*old_str;
-	char	*search;
-	char	*dir_path;
-	int		dir_size;
+	char	*old_str;	//The starting string to expand.
+	char	*search;	//The occurence to search.
+	char	*dir_path;	//The folder to search where.
+	int		dir_size;	//The number of element in the directory.
 }	t_wildcard;
 
-/*REVIEW - wildcard data structure
-
-	Data to free from execution debug mode
-*/
-typedef struct s_debug_data
-{
-	char	***matrix;
-	char	*temp;
-	char	*filename1;
-	char	*filename2;
-	char	**env;
-	t_token	*tokens;
-	int		exit_code;
-	int		last_env;
-	int		env_size;
-	int		fd_to_close;
-}	t_debug_data;
-
-//ANCHOR - 	List of unctions called in all program.
+//ANCHOR - 	List of functions called in all execution part.
 //			Section name is folder name.
 
 //SECTION -	Bonus
