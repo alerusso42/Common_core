@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:53:39 by ftersill          #+#    #+#             */
-/*   Updated: 2025/05/22 12:53:17 by ftersill         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:26:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	get_minishell_path(t_data *gen)
 	if (!gen->minishell_path)
 		return (1);
 	temp = gen->minishell_path;
-	gen->minishell_path = _ft_strjoin(temp, PROG_NAME);
+	gen->minishell_path = ft_strjoin(temp, PROG_NAME);
 	free(temp);
 	if (!gen->minishell_path)
 		return (1);
