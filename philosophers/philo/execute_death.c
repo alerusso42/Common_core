@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:54:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/20 16:08:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:11:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@
 # include "z_header_bonus.h"
 #endif
 
-int	someone_died(t_philo *philo, int lock)
+int	someone_died(t_philo *philo)
 {
-	int	state;
-
 	if (philo->state == DEAD)
 		return (YES);
-	if (lock && pthread_mutex_lock(philo->write_mutex) != 0)
+	if (get_current_time(&philo->time, &philo->current_time) != 0)
+		return (ER_GETTIMEOFDAY);
+	if (pthread_mutex_lock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
-	state = philo->state;
-	if (lock && pthread_mutex_unlock(philo->write_mutex) != 0)
+	if (philo->current_time - philo->last_meal_time > philo->time_to_die * MSECONDS)
+	{
+		philo->state = DEAD;
+		*philo->someone_died = YES;
+	}
+	if (pthread_mutex_unlock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
-	if (state == DEAD)
+	if (philo->state == DEAD)
 		return (YES);
 	return (NO);
 }

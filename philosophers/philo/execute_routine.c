@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:33:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/14 16:34:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:07:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*routine(void *ptr)
 
 static void	*routine_loop(t_philo *philo, int meals, int max)
 {
-	while (meals != max && philo->state != DEAD)
+	while (meals != max && someone_died(philo) == NO)
 	{
 		if (philo->turn_to_eat == philo->id % 2)
 		{
@@ -53,6 +53,6 @@ static void	*routine_loop(t_philo *philo, int meals, int max)
 		}
 		philo->turn_to_eat++;
 		wait(10);
-	}                                                                                 
+	}                                                                      
 	return (NULL);
 }

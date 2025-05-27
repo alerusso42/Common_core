@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 21:10:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:09:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ struct s_data
 	pthread_mutex_t	death_mutex;
 	int				meals_eaten;
 	int				current;
+	unsigned char	someone_died;
 };
 
 struct s_philo
 {
 	struct timeval	time;
+	unsigned char	*someone_died;
 	long long int	time_to_die;
 	long long int	time_to_eat;
 	long long int	time_to_sleep;

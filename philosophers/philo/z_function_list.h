@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   z_function_list.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/14 14:38:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:11:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		quit_threads(void);
 //	PHILOSOPHERS ROUTINE
 
 int		eat(t_philo *philo);
-int		someone_died(t_philo *philo, int lock);
+int		someone_died(t_philo *philo);
 void	*routine(void *ptr);
 
 #endif
