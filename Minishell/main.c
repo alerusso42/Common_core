@@ -37,9 +37,9 @@ int	start(t_data *gen, int i, int j)
 			}
 		}
 		free(gen->input);
+		gen->input = NULL;
 	}
-	write(1, "exit\n", 5);
-	return (0);
+	return (write(1, "exit\n", 5), 0);
 }
 
 int	get_minishell_path(t_data *gen)

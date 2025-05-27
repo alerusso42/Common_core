@@ -69,4 +69,6 @@ void	free_all(t_token *token, t_data *gen)
 	gen->subcmd_stdout = NULL;
 	free_token(token, gen);
 	free_struct(token);
+	free(gen->input);
+	gen->input = NULL;
 }

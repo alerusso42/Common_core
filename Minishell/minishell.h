@@ -44,17 +44,17 @@ typedef struct s_data
 
 typedef struct s_token
 {
-	char	*content;	// contenuto del token
-	int		type;	// tipo del token
-	int		id;		// posizione del token nell`input
-	int		prior;	// priorita`
-	int		t_quote; //tipo di quote contenuta nel token
+	char	*content;
+	int		type;
+	int		id;
+	int		prior;
+	int		t_quote;
 	int		cmd_num;
-	int		is_expanded; //se il tok e` stato espanso o meno
-	bool	space_on_right; //se e` presente uno spazio alla dx del tok
+	int		is_expanded;
+	bool	space_on_right;
 }	t_token;
 
-int	command_substitution(char **prompt, t_data *gen);
+int		command_substitution(char **prompt, t_data *gen);
 
 //signals
 void	signals(int signal, siginfo_t *info, void *s);

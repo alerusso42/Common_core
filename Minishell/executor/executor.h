@@ -142,31 +142,31 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
 */
 struct s_exec
 {
-	t_builtin		*builtins;	//an array of functions.
+	t_builtin		*builtins;
 	t_token			*first_token;
-	int				*pid_list;	//an array of pid.
-	char			***commands;//3d matrix of commands.
-	char			***env;		//a pointer to the env matrix from t_data.
-	int				*env_size;	//a pointer to the env_size int from t_data.
-	int				*last_env;	//a pointer to the last_env int from t_data.
-	char			**path;		//a matrix made from the env variable "PATH".
-	char			*which_cmd;	//0 = NO_BUILTIN; 1 = B_ECHO; 2 = B_CD...
-	void			*main_struct_pointer;//ptr to t_data struct
-	int				*here_doc_fds;//array of here docs fds.
-	int				*proc_sub_fds;//array of process substitution <() fds.
-	int				*proc_sub_temp_fds;//stores temp fds for parenthesis
-	unsigned char	*exit_code;	//a pointer to the exit_code u_char from t_data.
-	char			*minishell_path;//a pointer to the m.path str from t_data.
-	int				pipe_fds[2];//pipe fds used for pipe | are placed here.
-	int				last_in;	//in a cmd_block, the last input file.
-	int				last_out;	//in a cmd_block, the last output file.
-	int				curr_cmd;	//current cmd that is being executed.
-	int				last_cmd;	//total number of commands.
-	int				stdin_fd;	//duplicate of STDIN_FILENO made with dup.
-	int				stdout_fd;	//duplicate of STDOUT_FILENO made with dup.
-	int				prior_layer;//every parenthesis layer increase this by one.
-	int				at_least_one_pipe:1;//on if there are pipes on cmd block.
-	int				file_not_found:1;//on if in get_filedata open error occurs.
+	int				*pid_list;
+	char			***commands;
+	char			***env;
+	int				*env_size;
+	int				*last_env;
+	char			**path;
+	char			*which_cmd;
+	void			*main_struct_pointer;
+	int				*here_doc_fds;
+	int				*proc_sub_fds;
+	int				*proc_sub_temp_fds;
+	unsigned char	*exit_code;
+	char			*minishell_path;
+	int				pipe_fds[2];
+	int				last_in;
+	int				last_out;
+	int				curr_cmd;
+	int				last_cmd;
+	int				stdin_fd;
+	int				stdout_fd;
+	int				prior_layer;
+	int				at_least_one_pipe:1;
+	int				file_not_found:1;
 };
 
 /*REVIEW - wildcard data structure
@@ -190,10 +190,10 @@ struct s_exec
 */
 typedef struct s_wildcard
 {
-	char	*old_str;	//The starting string to expand.
-	char	*search;	//The occurence to search.
-	char	*dir_path;	//The folder to search where.
-	int		dir_size;	//The number of element in the directory.
+	char	*old_str;
+	char	*search;
+	char	*dir_path;
+	int		dir_size;
 }	t_wildcard;
 
 //ANCHOR - 	List of functions called in all execution part.
