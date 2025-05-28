@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ftersill <ftersill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/23 09:50:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:32:24 by ftersill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,16 @@ int	execute(t_token *token, void *data)
 	11)	We wait every children. If the layer is not 0, we exit from the
 		process.
 */
-int	execute_loop(t_token *token, t_exec *exec)
+void	execute_loop(t_token *token, t_exec *exec)
 {
 	exec->curr_cmd = token->cmd_num;
 	exec->at_least_one_pipe = detect_pipe(token, _NO, token->prior);
 	while (exec->prior_layer < token->prior)
 		manage_parenthesis(exec, &token, 0);
+	exec->curr_cmd = token->cmd_num;
 	while (exec->prior_layer == token->prior)
 	{
-		*exec->exit_code = 0;
+		set_exit_code(exec, 0);
 		dup2(exec->stdout_fd, 1);
 		if (get_file_data(exec, token, _YES) == 0)
 			invoke_programs(exec, exec->curr_cmd);
@@ -128,7 +129,6 @@ int	execute_loop(t_token *token, t_exec *exec)
 	wait_everyone(exec);
 	if (exec->prior_layer != 0)
 		exit_process(exec);
-	return (0);
 }
 
 /*REVIEW - next_command
@@ -169,6 +169,7 @@ static int	next_command(t_exec *exec, t_token **token)
 	exec->curr_cmd = (*token)->cmd_num;
 	while (exec->prior_layer < (*token)->prior)
 		manage_parenthesis(exec, token, 0);
+	exec->curr_cmd = (*token)->cmd_num;
 	if (exec->prior_layer > (*token)->prior)
 		return (1);
 	return (0);
@@ -237,9 +238,13 @@ int	wait_everyone(t_exec *exec)
 		{
 			if (i == exec->curr_cmd - 1)
 				set_execve_signal();
-			waitpid(exec->pid_list[i], &exit_code, 0);
-			if (i == exec->curr_cmd - 1)
+			if (exec->pid_list[i] > 0)
+			{
+				waitpid(exec->pid_list[i], &exit_code, 0);
 				set_exit_code(exec, exit_code / 256);
+			}
+			else
+				set_exit_code(exec, exec->pid_list[i] * -1);
 			exec->pid_list[i] = 0;
 		}
 		++i;
