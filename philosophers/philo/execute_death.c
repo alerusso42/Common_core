@@ -16,22 +16,22 @@
 # include "z_header_bonus.h"
 #endif
 
-int	someone_died(t_philo *philo)
+int	someone_else_died(t_philo *philo)
 {
 	if (philo->state == DEAD)
-		return (YES);
+		return (NO);
+	if (pthread_mutex_lock(philo->death_mutex) != 0)
+		return (ER_MUTEX_LOCK);
 	if (get_current_time(&philo->time, &philo->current_time) != 0)
 		return (ER_GETTIMEOFDAY);
-	if (pthread_mutex_lock(philo->write_mutex) != 0)
-		return (ER_MUTEX_LOCK);
+	if (*philo->someone_died == YES)
+		return (pthread_mutex_unlock(philo->death_mutex), YES);
 	if (philo->current_time - philo->last_meal_time > philo->time_to_die * MSECONDS)
-	{
-		philo->state = DEAD;
+	{	
 		*philo->someone_died = YES;
+		philo->state = DEAD;
 	}
-	if (pthread_mutex_unlock(philo->write_mutex) != 0)
+	if (pthread_mutex_unlock(philo->death_mutex) != 0)
 		return (ER_MUTEX_LOCK);
-	if (philo->state == DEAD)
-		return (YES);
 	return (NO);
 }

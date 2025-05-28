@@ -67,7 +67,7 @@ int		quit_threads(void);
 //	PHILOSOPHERS ROUTINE
 
 int		eat(t_philo *philo);
-int		someone_died(t_philo *philo);
+int		someone_else_died(t_philo *philo);
 void	*routine(void *ptr);
 
 #endif

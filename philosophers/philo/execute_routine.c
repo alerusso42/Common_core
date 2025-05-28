@@ -35,7 +35,7 @@ void	*routine(void *ptr)
 
 static void	*routine_loop(t_philo *philo, int meals, int max)
 {
-	while (meals != max && someone_died(philo) == NO)
+	while (meals != max && philo->state != DEAD)
 	{
 		if (philo->turn_to_eat == philo->id % 2)
 		{

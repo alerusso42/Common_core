@@ -54,11 +54,22 @@ int	p_state(t_philo *philo, int state)
 {
 	if (philo->state == DEAD)
 		return (DEAD);
-	if (get_current_time(&philo->time, &philo->current_time) != 0)
-		return (ER_GETTIMEOFDAY);
 	if (pthread_mutex_lock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
-	if (state == THINK)
+	if (get_current_time(&philo->time, &philo->current_time) != 0)
+		return (ER_GETTIMEOFDAY);
+	if (someone_else_died(philo) == YES)
+	{
+		return (pthread_mutex_unlock(philo->write_mutex));
+	}
+	if (get_current_time(&philo->time, &philo->current_time) != 0)
+		return (ER_GETTIMEOFDAY);
+	else if (philo->state == DEAD)
+	{
+		l_printf("%d %d ", philo->current_time, philo->id);
+		p_color(RED, "died\n");
+	}
+	else if (state == THINK)
 		l_printf("%d %d is thinking\n", philo->current_time, philo->id);
 	else if (state == EAT)
 		l_printf("%d %d is eating\n", philo->current_time, philo->id);
@@ -66,12 +77,6 @@ int	p_state(t_philo *philo, int state)
 		l_printf("%d %d is sleeping\n", philo->current_time, philo->id);
 	else if (state == FORK)
 		l_printf("%d %d has taken a fork\n", philo->current_time, philo->id);
-	else if (state == DEAD)
-	{
-		l_printf("%d %d ", philo->current_time, philo->id);
-		p_color(RED, "died\n");
-		philo->state = DEAD;
-	}
 	if (pthread_mutex_unlock(philo->write_mutex) != 0)
 		return (ER_MUTEX_LOCK);
 	return (0);

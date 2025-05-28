@@ -62,7 +62,7 @@ int	init_loop(t_data *data)
 		if (pthread_create(&data->threads[i], NULL, routine, \
 			(void *)&data->philo[i]) != 0)
 			return (ER_PTHREAD_CREATE);
-		err = wait(3 * MSECONDS);
+		err = wait(5);
 		if (err != 0)
 			return (err);
 		++i;
