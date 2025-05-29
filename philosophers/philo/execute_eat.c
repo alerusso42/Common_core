@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_eat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:41:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/14 16:31:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:09:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "z_header_bonus.h"
 #endif
 
-static int	block_fork(t_philo *philo, int which_fork);
-static int	unlock_forks(t_philo *philo, int which_fork);
+static void	block_fork(t_philo *philo, int which_fork);
+static void	unlock_forks(t_philo *philo, int which_fork);
 
 /*
 	0 = LEFT
@@ -29,15 +29,12 @@ static int	unlock_forks(t_philo *philo, int which_fork);
 
 int	eat(t_philo *philo)
 {
-	if (block_fork(philo, (philo->right_fork > philo->left_fork)) != 0)
-		return (ER_MUTEX_LOCK);
-	if (block_fork(philo, !(philo->right_fork > philo->left_fork)) != 0)
-		return (unlock_forks(philo, (philo->right_fork > philo->left_fork)), ER_MUTEX_LOCK);
+	block_fork(philo, (philo->right_fork > philo->left_fork));
+	p_state(philo, FORK);
+	block_fork(philo, !(philo->right_fork > philo->left_fork));
 	p_state(philo, EAT);
-	if (unlock_forks(philo, (philo->right_fork > philo->left_fork)) != 0)
-		return (ER_MUTEX_LOCK);
-	if (unlock_forks(philo, !(philo->right_fork > philo->left_fork)) != 0)
-		return (ER_MUTEX_LOCK);
+	unlock_forks(philo, !(philo->right_fork > philo->left_fork));
+	unlock_forks(philo, (philo->right_fork > philo->left_fork));
 	return (0);
 }
 
@@ -57,7 +54,7 @@ int	eat(t_philo *philo)
 	return (0);
 }*/
 
-static int	block_fork(t_philo *philo, int which_fork)
+static void	block_fork(t_philo *philo, int which_fork)
 {
 	pthread_mutex_t	*mutex;
 
@@ -69,16 +66,14 @@ static int	block_fork(t_philo *philo, int which_fork)
 	{
 		mutex = philo->forks[philo->right_fork];
 	}
-	if (pthread_mutex_lock(mutex) != 0)
-		return (ER_MUTEX_LOCK);
+	pthread_mutex_lock(mutex);
 	if (which_fork == BOTH)
 	{
-		return (block_fork(philo, RIGHT));
+		block_fork(philo, RIGHT);
 	}
-	return (0);
 }
 
-static int	unlock_forks(t_philo *philo, int which_fork)
+static void	unlock_forks(t_philo *philo, int which_fork)
 {
 	pthread_mutex_t	*mutex;
 
@@ -90,11 +85,9 @@ static int	unlock_forks(t_philo *philo, int which_fork)
 	{
 		mutex = philo->forks[philo->right_fork];
 	}
-	if (pthread_mutex_unlock(mutex) != 0)
-		return (ER_MUTEX_LOCK);
+	pthread_mutex_unlock(mutex);
 	if (which_fork == BOTH)
 	{
-		return (unlock_forks(philo, RIGHT));
+		unlock_forks(philo, RIGHT);
 	}
-	return (0);
 }

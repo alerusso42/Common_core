@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/14 14:35:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:25:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	start_threads(void)
 	i = 0;
 	err = 0;
 	data = storage(NULL, 1);
-	err = get_current_time(&data->time, NULL);
-	if (err != 0)
-		return (err);
+	get_current_time(&data->time, NULL);
 	if (pthread_mutex_init(&data->write_mutex, NULL) != 0)
 		return (ER_MUTEX_INIT);
 	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/27 17:08:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:08:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int	p_state(t_philo *philo, int state)
 		return (ER_GETTIMEOFDAY);
 	else if (philo->state == DEAD)
 	{
-		l_printf("%d %d ", philo->current_time, philo->id);
-		p_color(RED, "died\n");
+		l_printf("%d %d died\n", philo->current_time, philo->id);
 	}
 	else if (state == THINK)
 		l_printf("%d %d is thinking\n", philo->current_time, philo->id);

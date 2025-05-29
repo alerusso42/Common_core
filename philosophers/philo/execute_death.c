@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:54:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/27 17:11:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:08:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	someone_else_died(t_philo *philo)
 {
 	if (philo->state == DEAD)
 		return (NO);
-	if (pthread_mutex_lock(philo->death_mutex) != 0)
-		return (ER_MUTEX_LOCK);
-	if (get_current_time(&philo->time, &philo->current_time) != 0)
-		return (ER_GETTIMEOFDAY);
+	pthread_mutex_lock(philo->death_mutex);
+	get_current_time(&philo->time, &philo->current_time);
 	if (*philo->someone_died == YES)
+	{
+		philo->state = DEAD;
 		return (pthread_mutex_unlock(philo->death_mutex), YES);
+	}
 	if (philo->current_time - philo->last_meal_time > philo->time_to_die * MSECONDS)
-	{	
+	{
 		*philo->someone_died = YES;
 		philo->state = DEAD;
 	}
-	if (pthread_mutex_unlock(philo->death_mutex) != 0)
-		return (ER_MUTEX_LOCK);
+	pthread_mutex_unlock(philo->death_mutex);
 	return (NO);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/27 16:45:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:34:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,10 @@ static void	give_philosophers_informations(t_data *data)
 	}
 	i -= 1;
 	data->philo[0].left_fork = i;
-	data->philo[i].right_fork = 0; 
+	data->philo[i].right_fork = 0;
+	if (data->philo_num == 2)
+	{
+		data->philo[0].right_fork = 0;
+		data->philo[1].left_fork = 1;
+	}
 }
