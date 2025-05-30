@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_memory.c                                     :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/11 13:21:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:57:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,13 @@
 # include "z_header_bonus.h"
 #endif
 
-int	alloc_fork_copy(t_data *data, int num);
+static int	alloc_fork_copy(t_data *data, int num);
 
-int	alloc_memory(long long int philo_num)
+int	alloc_memory(t_data *data, long long int philo_num)
 {
-	t_data			*data;
-	int				num;
+	int	num;
 
 	num = (int)philo_num;
-	data = (t_data *)ft_calloc(1, sizeof(t_data));
-	if (!data)
-		return (ER_MALLOC);
-	storage((void *)data, 0);
 	data->philo = (t_philo *)ft_calloc(num + 1, sizeof(t_philo));
 	if (!data->philo)
 		return (ER_MALLOC);
@@ -45,7 +40,7 @@ int	alloc_memory(long long int philo_num)
 	return (0);
 }
 
-int	alloc_fork_copy(t_data *data, int num)
+static int	alloc_fork_copy(t_data *data, int num)
 {
 	int	i;
 
@@ -61,4 +56,39 @@ int	alloc_fork_copy(t_data *data, int num)
 	return (0);
 }
 
+static void	reset_philo(t_data *data);
 
+void	reset_memory(t_data	*data)
+{
+	if (!data)
+		return ;
+	if (data->philo)
+	{
+        reset_philo(data);
+		free(data->philo);
+		data->philo = NULL;
+	}
+	if (data->forks)
+	{
+		free(data->forks);
+		data->forks = NULL;
+	}
+	if (data->threads)
+	{
+		free(data->threads);
+		data->threads = NULL;
+	}
+}
+
+static void	reset_philo(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->philo[i].forks)
+	{
+		free(data->philo[i].forks);
+		data->philo[i].forks = NULL;
+		++i;
+	}
+}

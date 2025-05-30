@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/29 16:08:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:23:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	time_delay_test(void)
 	while (pause != 300 * MSECONDS)
 	{
 		err = gettimeofday(&time_one, NULL);
-		err = wait(pause);
+		err = ft_wait(pause);
 		if (err != 0)
 			return (err);
 		err = gettimeofday(&time_two, NULL);
@@ -54,29 +54,23 @@ int	p_state(t_philo *philo, int state)
 {
 	if (philo->state == DEAD)
 		return (DEAD);
-	if (pthread_mutex_lock(philo->write_mutex) != 0)
-		return (ER_MUTEX_LOCK);
-	if (get_current_time(&philo->time, &philo->current_time) != 0)
-		return (ER_GETTIMEOFDAY);
+	pthread_mutex_lock(philo->write_mutex);
+	get_current_time(&philo->time, &philo->current_time);
 	if (someone_else_died(philo) == YES)
 	{
 		return (pthread_mutex_unlock(philo->write_mutex));
 	}
-	if (get_current_time(&philo->time, &philo->current_time) != 0)
-		return (ER_GETTIMEOFDAY);
-	else if (philo->state == DEAD)
-	{
-		l_printf("%d %d died\n", philo->current_time, philo->id);
-	}
+	get_current_time(&philo->time, &philo->current_time);
+	if (philo->state == DEAD)
+		l_printf(M_DEAD, philo->current_time / MS, philo->id);
 	else if (state == THINK)
-		l_printf("%d %d is thinking\n", philo->current_time, philo->id);
+		l_printf(M_THINK, philo->current_time / MS, philo->id);
 	else if (state == EAT)
-		l_printf("%d %d is eating\n", philo->current_time, philo->id);
+		l_printf(M_EAT, philo->current_time / MS, philo->id);
 	else if (state == SLEEP)
-		l_printf("%d %d is sleeping\n", philo->current_time, philo->id);
+		l_printf(M_SLEEP, philo->current_time / MS, philo->id);
 	else if (state == FORK)
-		l_printf("%d %d has taken a fork\n", philo->current_time, philo->id);
-	if (pthread_mutex_unlock(philo->write_mutex) != 0)
-		return (ER_MUTEX_LOCK);
+		l_printf(M_FORK, philo->current_time / MS, philo->id);
+	pthread_mutex_unlock(philo->write_mutex);
 	return (0);
 }

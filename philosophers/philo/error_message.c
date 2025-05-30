@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 15:35:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:21:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	other_messages(int error);
 static int	other_messages2(int error);
 static int	other_messages3(int error);
 
-int	error(int error)
+int	error(t_data *data, int error)
 {
-	reset_memory();
+	reset_memory(data);
 	return (other_messages(error));
 }
 

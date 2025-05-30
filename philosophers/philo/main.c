@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/20 16:18:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:20:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,21 @@
 			Change the data struct, the allocation and
 			remove the forks string.
 */
-int	main(int argc, char *argv[], char **env)
+int	main(int argc, char *argv[])
 {
 	int			err_type;
-	t_settings	settings;
+	t_data		data;
 
-	switches(&settings);
-	variables(&settings);
-	err_type = parsing(argc, argv, &settings);
+	data = (t_data){0};
+	err_type = parsing(&data, argc, argv);
 	if (err_type != 0)
-		return (error(err_type));
-	(void)env;
-	err_type = start_threads();
+		return (error(&data, err_type));
+	err_type = start_threads(&data);
 	if (err_type != 0)
-		return (error(err_type));
-	err_type = quit_threads();
+		return (error(&data, err_type));
+	err_type = quit_threads(&data);
 	if (err_type != 0)
-		return (error(err_type));
-	reset_memory();
+		return (error(&data, err_type));
+	reset_memory(&data);
 	return (0);
 }

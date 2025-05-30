@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 11:39:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/03/13 20:47:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 10:50:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int	get_current_time(struct timeval *start, long long int *current)
 
 	if ((start) && !(start->tv_sec) && !(start->tv_usec))
 	{
-		if (gettimeofday(start, NULL) != 0)
-			return (ER_GETTIMEOFDAY);
+		gettimeofday(start, NULL);
 		return (0);
 	}
-	if (gettimeofday(&curr, NULL) != 0)
-		return (ER_GETTIMEOFDAY);
+	gettimeofday(&curr, NULL);
 	*current = ((curr.tv_sec - start->tv_sec) * SECONDS)\
 		+ (curr.tv_usec - start->tv_usec);
 	return (0);
@@ -46,7 +44,7 @@ int	get_current_time(struct timeval *start, long long int *current)
 		5)	We update rem (remaining time):
 			requested pause - elapsed time;
 		6)	If more than 1 MILLISECOND is left,
-			wait half the remaining time.
+			ft_wait half the remaining time.
 
 	This approach allows to sleep the most of the time,
 	and to check strictly the last MICROSECONDS using
@@ -98,7 +96,7 @@ int	get_current_time(struct timeval *start, long long int *current)
 	Notice: if usleep performs an error bigger than 1000,
 			our current parameter, we'll have delays.
 */
-int	wait(long long int pause)
+int	ft_wait(long long int pause)
 {
 	struct timeval	start;
 	struct timeval	curr;
@@ -124,24 +122,24 @@ static int	calc_delay(long long int *delay);
 
 	usleep function works with steps.
 
-	If you need to wait 20 micros:
+	If you need to ft_wait 20 micros:
 
 	0 µs - 7 µs - 14 µs - 21 µs - STOP!
 
 	Why did it stop at 21 micros, and not 20?
-	Because it checks if it has waited enough time
+	Because it checks if it has ft_waited enough time
 	every often (in this example, every 7 micros).
 	This chunk of time depends on system sheduling and
 	CPU characteristics.
 
-	What does the wait function do?
+	What does the ft_wait function do?
 
 	1)	If the delay has not been calculated yet, it
 		calls calc_delay;
 	2)	It calculates the rest in the division between
-		the wait length and the delay, saving it in diff
+		the ft_wait length and the delay, saving it in diff
 		(in above example: 20 % 7 = 6);
-	3)	It calculates The big chunks of the wait to do
+	3)	It calculates The big chunks of the ft_wait to do
 		(in above example: 20 - 6 = 14);
 	4)	It usleep for 14, then for 6.
 
@@ -149,11 +147,11 @@ static int	calc_delay(long long int *delay);
 	better.
 
 
-int	wait(long long int micros)
+int	ft_wait(long long int micros)
 {
 	static long long int	delay = -1;
 	long long int			diff;
-	long long int			big_wait;
+	long long int			big_ft_wait;
 	int						err;
 
 	err = 0;
@@ -162,8 +160,8 @@ int	wait(long long int micros)
 	if (err != 0)
 		return (err);
 	diff = micros % delay;
-	big_wait = micros - (diff);
-	if (usleep(big_wait) != 0)
+	big_ft_wait = micros - (diff);
+	if (usleep(big_ft_wait) != 0)
 		return (ER_USLEEP);
 	if (usleep(diff) != 0)
 		return (ER_USLEEP);
@@ -186,7 +184,7 @@ static int	calc_delay(long long int *delay)
 	return (0);
 }
 
-int	brute_wait(long long int micros)
+int	brute_ft_wait(long long int micros)
 {
 	while (micros--)
 		usleep(1);

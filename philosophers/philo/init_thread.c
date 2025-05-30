@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/29 15:25:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:20:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,16 @@
 # include "z_header_bonus.h"
 #endif
 
-int	init_loop(t_data *data);
+int	create_philos(t_data *data);
 int	init_mutex(t_data *data);
 
-int	start_threads(void)
+int	start_threads(t_data *data)
 {
 	int		i;
-	t_data	*data;
 	int		err;
 
 	i = 0;
 	err = 0;
-	data = storage(NULL, 1);
 	get_current_time(&data->time, NULL);
 	if (pthread_mutex_init(&data->write_mutex, NULL) != 0)
 		return (ER_MUTEX_INIT);
@@ -40,16 +38,15 @@ int	start_threads(void)
 		data->philo[i].death_mutex = &data->death_mutex;
 		++i;
 	}
-	err = init_loop(data);
+	err = create_philos(data);
 	if (err != 0)
 		return (err);
 	return (0);
 }
 
-int	init_loop(t_data *data)
+int	create_philos(t_data *data)
 {
 	int	i;
-	int	err;
 
 	if (init_mutex(data) != 0)
 		return (ER_MUTEX_INIT);
@@ -60,9 +57,7 @@ int	init_loop(t_data *data)
 		if (pthread_create(&data->threads[i], NULL, routine, \
 			(void *)&data->philo[i]) != 0)
 			return (ER_PTHREAD_CREATE);
-		err = wait(5);
-		if (err != 0)
-			return (err);
+		ft_wait(5);
 		++i;
 	}
 	return (0);
@@ -86,19 +81,17 @@ int	init_mutex(t_data *data)
 	return (0);
 }
 
-int	quit_threads(void)
+int	quit_threads(t_data	*data)
 {
 	int		i;
-	t_data	*data;
 
 	i = 0;
-	data = storage(NULL, 1);
 	while (i != data->philo_num)
 	{
 		pthread_join(data->threads[i], NULL);
 		++i;
 	}
-	wait(10 * MSECONDS);
+	ft_wait(10 * MSECONDS);
 	p_color(GREEN, "TUTTI FORI\n");
 	i = 0;
 	while (i != data->philo_num)
@@ -106,7 +99,7 @@ int	quit_threads(void)
 		if (pthread_mutex_destroy(&data->forks[i]) != 0)
 		{
 			p_color(RED, "\nWARNING! Trying to destroy a lock mutex!\n");
-			fd_printf(3, "@@@\tWARNING\t@@@");
+			fd_printf(2, "@@@\tWARNING\t@@@");
 		}
 		++i;
 	}

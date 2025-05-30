@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/27 17:11:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:20:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*storage(void *ptr, int mode);
 void	reset_memory();
 int		switches(t_settings *settings);
 int		variables(t_settings *settings);
-int		error(int error);
+int	    error(t_data *data, int error);
 
 //	DEBUG
 
@@ -48,21 +48,21 @@ int		p_state(t_philo *philo, int state);
 
 //	PARSING
 
-int		parsing(int argc, char *argv[], t_settings *settings);
+int	    parsing(t_data *data, int argc, char *argv[]);
 
 //	ALLOC MEMORY
 
-int		alloc_memory(long long int philo_num);
+int		alloc_memory(t_data *data, long long int philo_num);
 
 //	ITEMS
 
-int		wait(long long int pause);
+int		ft_wait(long long int pause);
 int		get_current_time(struct timeval *start, long long int *current);
 
 //	THREADS
 
-int		start_threads(void);
-int		quit_threads(void);
+int		start_threads(t_data *data);
+int		quit_threads(t_data *data);
 
 //	PHILOSOPHERS ROUTINE
 

@@ -23,12 +23,12 @@ BONUS_DIR = bonus_dir
 BONUS_MARK = $(BONUS_DIR)/.bonus_done
 DEBUG_FILE = g.gdb
 SUPPRESSION_FILE = s.supp
-SRC = 	alloc_memory.c reset_memory.c storage.c \
+SRC = 	memory.c \
 		error_message.c \
 		general_ft.c \
 		print_stuff.c  \
 		parsing.c \
-		switches.c variables.c main.c \
+		main.c \
 		item_time.c \
 		init_thread.c \
 		execute_eat.c execute_death.c execute_routine.c

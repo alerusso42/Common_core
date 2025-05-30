@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/29 15:34:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:21:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ static void	convert_argv(t_data *data, char *argv[]);
 static int	check_input_number(t_data *data);
 static void	give_philosophers_informations(t_data *data);
 
-int	parsing(int argc, char *argv[], t_settings *settings)
+int	parsing(t_data *data, int argc, char *argv[])
 {
 	long long int	long_num;
-	t_data			*data;
 
 	consider_empty_args(&argc, argv);
 	if (argc < 5 || argc > 6)
@@ -32,15 +31,13 @@ int	parsing(int argc, char *argv[], t_settings *settings)
 	long_num = ft_atoi(argv[1]);
 	if (long_num < 1 || long_num > INT_MAX)
 		return (ER_ATOI);
-	if (alloc_memory(long_num) != 0)
+	if (alloc_memory(data, long_num) != 0)
 		return (ER_MALLOC);
-	data = storage(NULL, 1);
 	data->philo_num = long_num;
 	convert_argv(data, argv);
 	if (check_input_number(data) != 0)
 		return (ER_ATOI);
 	give_philosophers_informations(data);
-	data->settings = settings;
 	return (0);
 }
 
@@ -111,9 +108,10 @@ static void	give_philosophers_informations(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (i != (int)data->philo_num)
+	i = -1;
+	while (++i != (int)data->philo_num)
 	{
+		data->philo[i].philo_num = data->philo_num;
 		data->philo[i].time_to_die = data->time_to_die;
 		data->philo[i].time_to_eat = data->time_to_eat;
 		data->philo[i].time_to_sleep = data->time_to_sleep;
@@ -124,7 +122,6 @@ static void	give_philosophers_informations(t_data *data)
 		data->philo[i].right_fork = i + 1;
 		data->philo[i].state = THINK;
 		data->philo[i].someone_died = &data->someone_died;
-		++i;
 	}
 	i -= 1;
 	data->philo[0].left_fork = i;
