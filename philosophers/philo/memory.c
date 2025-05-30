@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 11:57:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:41:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@
 # include "z_header_bonus.h"
 #endif
 
-static int	alloc_fork_copy(t_data *data, int num);
-
 int	alloc_memory(t_data *data, long long int philo_num)
 {
 	int	num;
+	int	i;
 
 	num = (int)philo_num;
 	data->philo = (t_philo *)ft_calloc(num + 1, sizeof(t_philo));
 	if (!data->philo)
 		return (ER_MALLOC);
-	data->philo[num] = (t_philo){0};
-	if (alloc_fork_copy(data, num) != 0)
-		return (ER_MALLOC);
+	i = -1;
+	while (++i != num)
+		data->philo[i] = (t_philo){0};
 	data->forks = (pthread_mutex_t *)\
 	ft_calloc(num + 1, sizeof(pthread_mutex_t));
 	if (!data->forks)
@@ -40,6 +39,7 @@ int	alloc_memory(t_data *data, long long int philo_num)
 	return (0);
 }
 
+/*
 static int	alloc_fork_copy(t_data *data, int num)
 {
 	int	i;
@@ -55,8 +55,7 @@ static int	alloc_fork_copy(t_data *data, int num)
 	}
 	return (0);
 }
-
-static void	reset_philo(t_data *data);
+*/	
 
 void	reset_memory(t_data	*data)
 {
@@ -64,7 +63,6 @@ void	reset_memory(t_data	*data)
 		return ;
 	if (data->philo)
 	{
-        reset_philo(data);
 		free(data->philo);
 		data->philo = NULL;
 	}
@@ -77,18 +75,5 @@ void	reset_memory(t_data	*data)
 	{
 		free(data->threads);
 		data->threads = NULL;
-	}
-}
-
-static void	reset_philo(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->philo[i].forks)
-	{
-		free(data->philo[i].forks);
-		data->philo[i].forks = NULL;
-		++i;
 	}
 }

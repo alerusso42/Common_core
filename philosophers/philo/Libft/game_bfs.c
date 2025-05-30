@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bfs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 12:16:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ int	get_best_path(t_map *map, int enemy_num)
 	clean_bfs(map, enemy_num);
 	bfs(&bfs_stuff);
 	is_valid_path = draw_path(&bfs_stuff);
-	if (is_valid_path == NO)
+	if (is_valid_path == false)
 	{
 		p_event_lost(map, enemy_num);
 		return (OFF);

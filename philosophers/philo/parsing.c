@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:25:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 11:21:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:43:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,17 @@ static void	give_philosophers_informations(t_data *data)
 		data->philo[i].number_of_times_each_philosopher_must_eat = \
 		(int)data->number_of_times_each_philosopher_must_eat;
 		data->philo[i].id = i;
-		data->philo[i].left_fork = i - 1;
-		data->philo[i].right_fork = i + 1;
+		data->philo[i].philo_fork = &data->forks[i];
+		data->philo[i].right_fork = &data->forks[i + 1];
 		data->philo[i].state = THINK;
 		data->philo[i].someone_died = &data->someone_died;
 	}
 	i -= 1;
-	data->philo[0].left_fork = i;
-	data->philo[i].right_fork = 0;
+	data->philo[i].last_philo = true;
+	data->philo[i].right_fork = &data->forks[0];
 	if (data->philo_num == 2)
 	{
-		data->philo[0].right_fork = 0;
-		data->philo[1].left_fork = 1;
+		data->philo[0].right_fork = &data->forks[i];
+		data->philo[1].right_fork = &data->forks[0];
 	}
 }

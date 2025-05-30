@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 12:32:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:45:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # endif
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 /*
 //	MESSAGES
@@ -126,7 +127,8 @@ struct s_philo
 {
 	struct timeval	time;
 	unsigned char	*someone_died;
-	pthread_mutex_t	**forks;
+	pthread_mutex_t	*philo_fork;
+	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*write_mutex;
 	pthread_mutex_t	*death_mutex;
 	long long int	philo_num;
@@ -138,9 +140,8 @@ struct s_philo
 	int				number_of_times_each_philosopher_must_eat;
 	int				meals_eaten;
 	int				id;
-	int				left_fork;
-	int				right_fork;
 	unsigned char	state:3;
+	unsigned char	last_philo:1;
 	unsigned char	turn_to_eat:1;
 };
 

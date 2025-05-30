@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:33:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 11:52:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:58:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ static void	*routine_loop(t_philo *philo, int meals, int max)
 		if (philo->turn_to_eat == philo->id % 2)
 		{
 			eat(philo);
-			get_current_time(&philo->time, &philo->last_meal_time);
-			ft_wait(philo->time_to_eat * MSECONDS);
 			++meals;
 			p_state(philo, SLEEP);
 			ft_wait(philo->time_to_sleep * MSECONDS);
+			ft_wait(100);
+			p_state(philo, THINK);
 		}
 		else
 		{
-			p_state(philo, THINK);
 			ft_wait(100);
 		}
 		philo->turn_to_eat++;

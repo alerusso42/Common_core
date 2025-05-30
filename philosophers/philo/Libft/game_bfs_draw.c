@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:02:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 11:23:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 		what is the winner: we return the winner.
 	-	If anything wins, it means that anything is valid.
 		in this case, we return -1: it means there are
-		no valid path.
+		false valid path.
 */
 static int	find_shortest_route(t_bfs *bfs, int x, int y)
 {
@@ -174,7 +174,7 @@ static void	normalize_path(t_bfs *bfs, int map_x, int map_y)
 		we set to zero every positive number.
 	-	In this way, they'll just see the marks and the zeros.
 
-	-	What happens if there is no valid path?
+	-	What happens if there is false valid path?
 	-	It means that around player there is nothing 
 		different from zeros.
 	-	Then, we can just simply call the function that clears
@@ -194,11 +194,11 @@ int	draw_path(t_bfs *bfs)
 	bfs->position[bfs->x][bfs->y].distance[bfs->n] = bfs->mark;
 	if (find_shortest_route(bfs, bfs->x, bfs->y) == -1)
 	{
-		return (normalize_path(bfs, bfs->map_x, bfs->map_y), NO);
+		return (normalize_path(bfs, bfs->map_x, bfs->map_y), false);
 	}
 	while ((bfs->x != stop_x) || (bfs->y != stop_y))
 	{
-		if (found_end(bfs->x, bfs->y, stop_x, stop_y) == YES)
+		if (found_end(bfs->x, bfs->y, stop_x, stop_y) == true)
 		{
 			bfs->position[bfs->en_x][bfs->en_y].distance[bfs->n] = bfs->mark;
 			break ;
@@ -206,5 +206,5 @@ int	draw_path(t_bfs *bfs)
 		record = find_shortest_route(bfs, bfs->x, bfs->y);
 		update_one(bfs, &bfs->x, &bfs->y, record);
 	}
-	return (normalize_path(bfs, bfs->map_x, bfs->map_y), YES);
+	return (normalize_path(bfs, bfs->map_x, bfs->map_y), true);
 }

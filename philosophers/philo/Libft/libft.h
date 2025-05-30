@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 09:45:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ enum e_charsets
 enum e_bool
 {
 	ON = 1,
-	YES = 1,
+	true = 1,
 	OFF = 0,
-	NO = 0,
+	false = 0,
 };
 
 t_sig_int64	ft_atoi(const char *nptr);

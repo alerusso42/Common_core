@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:41:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/29 16:09:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:24:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "z_header_bonus.h"
 #endif
 
-static void	block_fork(t_philo *philo, int which_fork);
-static void	unlock_forks(t_philo *philo, int which_fork);
+//static void	block_fork(t_philo *philo, int which_fork);
+//static void	unlock_forks(t_philo *philo, int which_fork);
 
 /*
 	0 = LEFT
@@ -29,12 +29,14 @@ static void	unlock_forks(t_philo *philo, int which_fork);
 
 int	eat(t_philo *philo)
 {
-	block_fork(philo, (philo->right_fork > philo->left_fork));
+	pthread_mutex_lock(philo->philo_fork);
 	p_state(philo, FORK);
-	block_fork(philo, !(philo->right_fork > philo->left_fork));
+	pthread_mutex_lock(philo->right_fork);
+	get_current_time(&philo->time, &philo->last_meal_time);
 	p_state(philo, EAT);
-	unlock_forks(philo, !(philo->right_fork > philo->left_fork));
-	unlock_forks(philo, (philo->right_fork > philo->left_fork));
+	ft_wait(philo->time_to_eat * MSECONDS);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->philo_fork);
 	return (0);
 }
 
@@ -53,18 +55,18 @@ int	eat(t_philo *philo)
 		return (ER_MUTEX_LOCK);
 	return (0);
 }*/
-
+/*
 static void	block_fork(t_philo *philo, int which_fork)
 {
 	pthread_mutex_t	*mutex;
 
 	if (which_fork == LEFT || which_fork == BOTH)
 	{
-		mutex = philo->forks[philo->left_fork];
+		mutex = philo->philo_fork;
 	}
 	else
 	{
-		mutex = philo->forks[philo->right_fork];
+		mutex = philo->right_fork;
 	}
 	pthread_mutex_lock(mutex);
 	if (which_fork == BOTH)
@@ -79,15 +81,15 @@ static void	unlock_forks(t_philo *philo, int which_fork)
 
 	if (which_fork == LEFT || which_fork == BOTH)
 	{
-		mutex = philo->forks[philo->left_fork];
+		mutex = philo->philo_fork;
 	}
 	else
 	{
-		mutex = philo->forks[philo->right_fork];
+		mutex = philo->right_fork;
 	}
 	pthread_mutex_unlock(mutex);
 	if (which_fork == BOTH)
 	{
 		unlock_forks(philo, RIGHT);
 	}
-}
+}*/

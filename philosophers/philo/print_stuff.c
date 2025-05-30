@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 11:23:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:44:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	p_state(t_philo *philo, int state)
 		return (DEAD);
 	pthread_mutex_lock(philo->write_mutex);
 	get_current_time(&philo->time, &philo->current_time);
-	if (someone_else_died(philo) == YES)
+	if (someone_else_died(philo) == true)
 	{
 		return (pthread_mutex_unlock(philo->write_mutex));
 	}

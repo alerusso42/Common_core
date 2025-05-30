@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 11:20:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:43:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,12 @@ int	create_philos(t_data *data)
 int	init_mutex(t_data *data)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i != data->philo_num)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 			return (ER_MUTEX_INIT);
-		j = -1;
-		while (++j != data->philo_num)
-			data->philo[j].forks[i] = &data->forks[i];
 		++i;
 	}
 	return (0);

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 NPHILO="5"
-TIME_DIE="405"
-TIME_EAT="200"
-TIME_SLEEP="200"
-N_EAT=""
+TIME_DIE="400"
+TIME_EAT="100"
+TIME_SLEEP="100"
+N_EAT="7"
 
 clear
 philo_output="./philo $NPHILO $TIME_DIE $TIME_EAT $TIME_SLEEP $N_EAT"
@@ -18,6 +18,4 @@ END {
         else
             print lines[i];
     }
-}'
-
-
+}' | grep " 0 is eating" | wc -l

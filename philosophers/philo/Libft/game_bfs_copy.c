@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bfs_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 12:15:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_bfs
 #define PRINT 1
 #define WALL 6
 
-#define NO 0
-#define YES 1
+#define false 0
+#define true 1
 
 int	en_x;
 int	en_y;
@@ -450,11 +450,11 @@ int	draw_path(t_bfs *bfs)
 	bfs->position[bfs->x][bfs->y].distance = -3;
 	if (find_shortest_route(bfs->position, bfs->x, bfs->y) == -1)
 	{
-		return (normalize_path(bfs->position), NO);
+		return (normalize_path(bfs->position), false);
 	}
 	while ((bfs->x != stop_x) || (bfs->y != stop_y))
 	{
-		if (found_end(bfs->x, bfs->y, stop_x, stop_y) == YES)
+		if (found_end(bfs->x, bfs->y, stop_x, stop_y) == true)
 		{
 			bfs->position[bfs->en_x][bfs->en_y].distance = -2;
 			break ;
@@ -464,7 +464,7 @@ int	draw_path(t_bfs *bfs)
 		if (PRINT >= 4)
 			print(bfs->position);
 	}
-	return (normalize_path(bfs->position), YES);
+	return (normalize_path(bfs->position), true);
 }
 
 void	prepare_bfs_1(t_bfs *bfs, int en_x, int en_y)
@@ -548,9 +548,9 @@ int	main()
 	is_valid_path = draw_path(&bfs_stuff);
 	if (PRINT >= 1)
 		print(position);
-	if (is_valid_path == YES)
+	if (is_valid_path == true)
 		printf("\n\nTrovato un path valido!\n");
-	if (is_valid_path == NO)
+	if (is_valid_path == false)
 		printf("\n\nNessun path valido!\n");
 	free_test_map(&position);
 	exit(0);

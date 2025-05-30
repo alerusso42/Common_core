@@ -16,7 +16,6 @@
 #	the bonus files.
 
 NAME = philo
-LIBFT = Libft/libft.a
 OBJ_DIR = obj_dir
 OBJ_BONUS_DIR = obj_bonus_dir
 BONUS_DIR = bonus_dir
@@ -25,7 +24,7 @@ DEBUG_FILE = g.gdb
 SUPPRESSION_FILE = s.supp
 SRC = 	memory.c \
 		error_message.c \
-		general_ft.c \
+		ft_atoi.c ft_calloc.c printf_light.c printf_fd.c \
 		print_stuff.c  \
 		parsing.c \
 		main.c \
@@ -42,20 +41,16 @@ SRC_BONUS = $(SRC:.c=_bonus.c)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 BONUS_OBJ = $(addprefix $(OBJ_BONUS_DIR)/, $(SRC_BONUS:.c=.o))
 
-COMP = cc -g -Wall -Wextra -Werror -ILibft -fPIE
+COMP = cc -g -Wall -Wextra -Werror -fPIE
 LFLAGS = -lpthread
-LIBFT_RELATIVE_PATH = Libft/
 
 
-$(NAME) : $(LIBFT) $(OBJ) $(OBJ_DIR) $(HEADER)
-	$(COMP) $(OBJ) $(LIBFT) -o $(NAME) $(LFLAGS)
+$(NAME) : $(OBJ) $(OBJ_DIR) $(HEADER)
+	$(COMP) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "\n$(NAME) done!!"
 
 all: $(NAME)
 
-
-$(LIBFT) : 
-	$(MAKE) -C $(LIBFT_RELATIVE_PATH)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(COMP) -c $< -o $@
@@ -69,14 +64,12 @@ $(OBJ_DIR) :
 clean: 
 	@rm -f $(OBJ) $(ALL) $(NAME) $(NAME_BONUS) *.out *.gdb  *.supp *.txt
 	@rm -rf $(OBJ_DIR) $(BONUS_DIR) $(OBJ_BONUS_DIR)
-	$(MAKE) clean -C $(LIBFT_RELATIVE_PATH)
 
 clear: 
 	clear
 
 fclean: clean
 	@rm -f $(NAME)
-	$(MAKE) fclean -C $(LIBFT_RELATIVE_PATH)
 
 re: fclean $(NAME)
 	
@@ -134,4 +127,4 @@ supp:
 		echo "Suppression file already generated."; \
 	fi
 
-.PHONY: all clean fclean re bonus debug supp BONUS
+.PHONY: all clean fclean re bonus debug supp

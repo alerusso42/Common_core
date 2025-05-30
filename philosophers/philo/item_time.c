@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 11:39:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/30 10:50:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:31:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ static int	calc_delay(long long int *delay);
 	0 µs - 7 µs - 14 µs - 21 µs - STOP!
 
 	Why did it stop at 21 micros, and not 20?
-	Because it checks if it has ft_waited enough time
+	Because it checks if it has waited enough time
 	every often (in this example, every 7 micros).
 	This chunk of time depends on system sheduling and
 	CPU characteristics.
