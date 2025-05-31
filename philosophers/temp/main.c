@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 11:41:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/31 09:30:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/header.h"
+# include "header/header.h"
 
 /*
 	ISSUES: every philo needs a global mutex (to write)

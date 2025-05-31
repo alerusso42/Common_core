@@ -4,8 +4,6 @@
 		"z_header.h": "c",
 		"z_function_list.h": "c",
 		"header.h": "c",
-		"data.h": "c",
-		"stdarg.h": "c",
-		"math.h": "c"
+		"data.h": "c"
 	}
 }

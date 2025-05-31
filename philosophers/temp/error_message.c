@@ -6,18 +6,29 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:41:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 11:54:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/31 09:13:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/header.h"
+# include "header/header.h"
 
 static int	other_messages(int error);
 static int	other_messages2(int error);
+static int	other_messages3(int error);
 
 int	error(t_data *data, int error)
 {
 	reset_memory(data);
+	return (other_messages(error));
+}
+
+static int	other_messages(int error)
+{
+	return (other_messages2(error));
+}
+
+static int	other_messages2(int error)
+{
 	if (error == ER_BAD_ARGC)
 	{
 		return (fd_printf(2, "Error\nYour program must take the following\
@@ -37,47 +48,16 @@ philosophers have eaten at least this many times, the \
 simulation\n\
 stops. If not specified, it stops when a philosopher dies.\n\n"));
 	}
-	return (other_messages(error));
+	return (other_messages3(error));
 }
 
-static int	other_messages(int error)
+static int	other_messages3(int error)
 {
-	if (error == ER_MALLOC)
+	if (error == ER_PARSING)
 	{
-		return (fd_printf(2, "Malloc error (Wtf).\n"));
+		return (fd_printf(2, "Error\nCommand not found. Please try another\
+			combination."));
 	}
-	else if (error == ER_NEGATIVE)
-	{
-		return (fd_printf(2, "Arguments must be positive integers\n"));
-	}
-	else if (error == ER_INVALID_ARG)
-	{
-		fd_printf(2, "Segmentation fault (core dumped)\n");
-		ft_wait(3 * SECONDS);
-		fd_printf(2, "EHHHH, VOLEVI!\n");
-		ft_wait(2 * SECONDS);
-		fd_printf(2, "GUARDA CHE FACCIA, NON SE L'ASPETTAVA!\n");
-	}
-	else if (error == (ER_GETTIMEOFDAY))
-	{
-		fd_printf(2, "Gettimeofday error (wtf)\n");
-	}
-	return (other_messages2(error));
-}
-
-static int	other_messages2(int error)
-{
-	if (error == (ER_USLEEP))
-	{
-		fd_printf(2, "Usleep error (wtf)\n");
-	}
-	else if (error == (ER_MUTEX_INIT))
-	{
-		fd_printf(2, "mutex_init error (wtf)\n");
-	}
-	else if (error == (ER_PTHREAD_CREATE))
-	{
-		fd_printf(2, "pthread_create error (wtf)\n");
-	}
-	return (error);
+	else
+		return (fd_printf(2, "Generic error\n"));
 }
