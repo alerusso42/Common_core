@@ -56,7 +56,7 @@ initiative = 5___,
 max_hitpoints = 15__,     
 current_hitpoints = 15__,     
 attack_bonus = 15__,     
-weapons = sword_____, bow_______,                                                                             
+weapons = sword_____, bow_______, (spazi.......................................................................)                                                                            
 spell_list = fireball__, Fly_______,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 _END_ENEMY]
 EOF

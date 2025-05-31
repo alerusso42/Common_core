@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/20 22:23:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:30:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include "structs.h"
+# include "libft.h"
 # include "other.h"
 
 typedef unsigned char	t_ob;
@@ -67,10 +68,11 @@ void			del_filedata(void);
 int				switch_filedata(t_fd fd);
 int				fd_indexation(void);
 void			closefd(t_fd fd);
-int				readfd(t_manage_fds	*data, int count);
+int				read_curr(t_manage_fds	*data, int count);
+int				readfd(t_fd	fd, char *buff, int count);
 
 //		ORIGINAL GNL
-char	*gnl(int fd);
+char	*gnl();
 char	*gnl_original_main_function(int fd, char buffer[BUFFER_SIZE + 1]);
 char	*get(char **store_bytes, char buffer[BUFFER_SIZE + 1], int nl, int fd);
 int		go_read(int fd, char buffer[BUFFER_SIZE + 1], char **new_line);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/21 00:45:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:42:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	closefd(t_fd fd)
 	if (data->fds[fd.n].n == data->last)
 		data->last--;
 	data->fds[fd.n].n = 0;
-	free(data->filenames[fd.n]);
+	SDL_free(data->filenames[fd.n]);
 	data->filenames[fd.n] = NULL;
 	if (fd.p)
 		SDL_RWclose(fd.p);
@@ -75,7 +75,7 @@ int	get_filedata(t_fd *fd, char **filename)
 		*fd = data->curr_fd;
 	if (filename)
 		*filename = data->curr_file;
-	if (fd && !fd->n || fd && !fd->p || filename && !*filename)
+	if ((fd && !fd->n) || (fd && !fd->p) || (filename && !*filename))
 		return (0);
 	return (1);
 }
@@ -94,7 +94,7 @@ void	del_filedata(void)
 	i = 1;
 	while ("loop as long there are fd to close")
 	{
-		if (i == data->last + 1)
+		if (i > data->last + 1)
 			break ;
 		if (data->fds[i].n)
 			closefd(data->fds[i]);

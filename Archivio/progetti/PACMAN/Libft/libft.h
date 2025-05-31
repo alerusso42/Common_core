@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:08:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:06:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/lib.h"
 # include "structs.h"
 
+typedef long long int	t_int64;
 typedef struct s_typelist
 {
 	void	*content;
@@ -41,7 +42,7 @@ enum e_bool
 	NO = 0,
 };
 
-int			ft_atoi(const char *nptr);
+t_int64		ft_atoi(const char *nptr);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isalnum(int c);
@@ -55,10 +56,10 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
-void		ft_putchar_fd(char c, int fd);
-void		ft_putendl_fd(char *s, int fd);
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr_fd(char *s, int fd);
+void		ft_putchar_fd(char c, SDL_RWops *fd);
+void		ft_putendl_fd(char *s, SDL_RWops *fd);
+void		ft_putnbr_fd(int n, SDL_RWops *fd);
+void		ft_putstr_fd(char *s, SDL_RWops *fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);

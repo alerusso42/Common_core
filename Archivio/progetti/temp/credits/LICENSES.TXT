@@ -1,0 +1,38 @@
+This software uses the following third-party libraries:
+
+---
+
+1. **cglm** (https://github.com/recp/cglm)  
+License: MIT License  
+Copyright (c) 2015 Recep Aslantas  
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+(The full license text is available in the cglm repository.)
+
+---
+
+2. **SDL2** (https://www.libsdl.org)  
+License: zlib License  
+Copyright (C) 1997-2024 Sam Lantinga  
+This software is provided 'as-is', without any express or implied warranty.  
+In no event will the authors be held liable for any damages arising from the use of this software.  
+(The full license text is available at: https://www.libsdl.org/license.php)
+
+---
+
+3. **PhysicsFS (physfs)** (https://icculus.org/physfs)  
+License: zlib License  
+Copyright (C) 2001-2024 Ryan C. Gordon  
+This software is provided 'as-is', without any express or implied warranty.  
+In no event will the authors be held liable for any damages arising from the use of this software.  
+(The full license text is available in the physfs source or on their website.)
+
+---
+
+4. **C Standard Library (libc)**  
+Used in accordance with the system’s implementation.  
+No redistribution of the standard C library is performed in this project.

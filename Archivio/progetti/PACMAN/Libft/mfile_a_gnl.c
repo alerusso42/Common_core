@@ -6,16 +6,15 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:38:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/21 00:03:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:59:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mfile_gnl.h"
 
-char	*get_static_buffer(int fd, bool reset, bool reset_all);
-char	*read_empty_buffer(char *buffer, t_fd fd);
-char	*read_until_newline(char *buffer, t_fd fd, int i);
-char	*extract_ready_line(char *buffer, t_fd fd, int i);
+char		*get_static_buffer(int fd, bool reset, bool reset_all);
+static void	read_from_file(char *buffer, t_fd fd, char **new_line);
+static int	read_from_buff(char *buffer, char **old_content);
 /*
 //TODO - 
 			1)	strlen fatto bene;
@@ -31,17 +30,18 @@ char	*gnl(void)
 {
 	char	*buffer;
 	t_fd	fd;
-	int		i;
+	char	*old_content;
+	char	*new_line;
 
+	old_content = NULL;
 	if (!get_filedata(&fd, NULL))
 		return (NULL);
 	buffer = get_static_buffer(fd.n, 0, 0);
-	if (!buffer[0])
-		return (read_empty_buffer(buffer, fd));
-	i = sub_strlen(buffer, "\n", EXCLUDE);
-	if (!buffer[i])
-		return (read_until_newline(buffer, fd, i));
-	return (extract_ready_line(buffer, fd, i));
+	if (read_from_buff(buffer, &old_content) == 1)
+		return (old_content);
+	read_from_file(buffer, fd, &new_line);
+	new_line = ft_strjoin_which(old_content, new_line, 3);
+	return (new_line);
 }
 
 char	*get_static_buffer(int fd, bool reset, bool reset_all)
@@ -71,75 +71,78 @@ char	*get_static_buffer(int fd, bool reset, bool reset_all)
 	return (data->buffer[fd]);
 }
 
-char	*read_empty_buffer(char *buffer, t_fd fd)
+static int	read_from_buff(char *buffer, char **old_content)
+{
+	int		i;
+	char	*s;
+
+	if (buffer[0] == '\0')
+		return (0);
+	i = sub_strlen(buffer, "\n", EXCLUDE);
+	s = ft_calloc(i + 1, sizeof(char));
+	if (!s)
+		return (0);
+	sub_strcpy(s, buffer, "\n", EXCLUDE);
+	if (*old_content)
+		*old_content = ft_strjoin_which(*old_content, s, 3);
+	else
+		*old_content = s;
+	if (buffer[i] == '\n')
+		return (cut_string(buffer, 0, i), 1);
+	cut_string(buffer, 0, i);
+	return (0);
+}
+
+static void	read_from_file(char *buffer, t_fd fd, char **new_line)
 {
 	int		bytes_read;
-	int		line_size;
 	int		diff;
 
 	bytes_read = 0;
 	diff = 0;
-	while (ft_strchr(buffer + bytes_read, '\n') == NULL)
+	*new_line = NULL;
+	while (ft_strchr(buffer, '\n') == NULL)
 	{
-		bytes_read += readfd(fd.p, BUFFER_SIZE);
+		if (*buffer)
+			*new_line = ft_strjoin_which(*new_line, buffer, 1);
+		if (*buffer && *new_line)
+			(*new_line)[bytes_read] = 0;
+		bytes_read += readfd(fd, buffer, BUFFER_SIZE);
 		diff = bytes_read - diff;
-		if (diff == -1)
-			return (NULL);
 		if (diff != BUFFER_SIZE)
+		{
+			cut_string(buffer, diff, BUFFER_SIZE);
 			break ;
+		}
+		diff = bytes_read;
 		buffer[bytes_read] = 0;
 	}
-	line_size = sub_strlen(buffer, "\n", EXCLUDE);
-	return (read_until_newline(buffer, fd, line_size));
+	read_from_buff(buffer, new_line);
 }
 
-char	*read_until_newline(char *buffer, t_fd fd, int i)
-{
-	char	*new_line;
-
-	new_line = ft_calloc(i + 1, sizeof(char));
-	if (!new_line)
-		return (NULL);
-	sub_strcpy(new_line, buffer, "\n", EXCLUDE);
-	cut_string(buffer, 0, i);
-	return (new_line);
-}
-
-char	*extract_ready_line(char *buffer, t_fd fd, int i)
-{
-	char	*new_content;
-	char	*old_content;
-	char	*new_line;
-
-	old_content = read_until_newline(buffer, fd, i);
-	if (!old_content)
-		return (NULL);
-	new_content = read_empty_buffer(buffer, fd);
-	if (!new_content)
-		return (free(old_content), NULL);
-	new_line = ft_strjoin_free(old_content, new_content);
-	if (!new_line)
-		return (free(old_content), free(new_content), NULL);
-	return (new_line);
-}
+#define POKEDEX "../tests/s.supp"
 
 int	main(void)
 {
 	char	*line;
 	t_fd	fd;
 
-	fd = openfd("mfile_a_gnl.c", "r");
+	fd = openfd(POKEDEX, "r");
 	if (fd.n == 0)
 	{
 		perror("Error opening file");
 		return (1);
 	}
 	line = gnl();
+	int c = 1;
 	while (line != NULL)
 	{
 		printf("%s\n", line);
-		free(line);
+		SDL_free(line);
 		line = gnl();
+		c++;
+		if (c == -1)
+			break ;
 	}
 	del_filedata();
 	return (0);

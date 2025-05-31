@@ -1,6 +1,11 @@
 {
 	"files.associations": {
 		"stdlib.h": "c",
-		"test.h": "c"
+		"test.h": "c",
+		"libft.h": "c",
+		"lib.h": "c",
+		"sdl.h": "c",
+		"sdl_net.h": "c",
+		"mfile_gnl.h": "c"
 	}
 }
