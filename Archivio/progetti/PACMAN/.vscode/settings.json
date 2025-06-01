@@ -1,11 +1,21 @@
 {
-	"files.associations": {
-		"stdlib.h": "c",
-		"test.h": "c",
-		"libft.h": "c",
-		"lib.h": "c",
-		"sdl.h": "c",
-		"sdl_net.h": "c",
-		"mfile_gnl.h": "c"
-	}
+  // Use multi-line comment style
+  "doxdocgen.generic.commentStyle": "multiLine",
+
+  // Customize the templates for brief, param, and return
+  "doxdocgen.generic.briefTemplate": "@brief ${cursor}",
+  "doxdocgen.generic.paramTemplate": "@param[in] ${param} ${cursor}",
+  "doxdocgen.generic.returnTemplate": "@return ${cursor}",
+
+  // Define the order of the tags
+  "doxdocgen.generic.order": [
+    "brief",
+    "empty",
+    "param",
+    "empty",
+    "return"
+],
+"files.associations": {
+	"mfile_gnl.h": "c"
+}
 }

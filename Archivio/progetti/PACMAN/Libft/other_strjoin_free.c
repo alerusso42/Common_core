@@ -48,6 +48,17 @@ static void	to_free(char *s1, char *s2, char which)
 		SDL_free(s2);
 }
 
+/*
+	A strjoin, but:
+1)	which == 0:	free NOTHING
+	which == 1:	free s1
+	which == 2: free s2
+	which == 3: free BOTH
+
+2)	if s1 or s2 are NULL, returns a strdup of other string.
+
+3)	Always frees string chosen by which, even in case of errors.
+*/
 char	*ft_strjoin_which(char *s1, char *s2, char which)
 {
 	char	*stringona;
