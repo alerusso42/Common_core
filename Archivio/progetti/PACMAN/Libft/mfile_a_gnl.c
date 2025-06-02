@@ -204,6 +204,7 @@ static void	read_from_file(char *buffer, t_fd fd, char **new_line)
 	read_from_buff(buffer, new_line);
 }
 
+/*NOTE - test main
 #define POKEDEX "../tests/pokedex.txt"
 
 int	main(void)
@@ -230,3 +231,4 @@ int	main(void)
 	del_filedata();
 	return (0);
 }
+*/

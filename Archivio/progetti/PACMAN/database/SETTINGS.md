@@ -6,6 +6,7 @@
 
 DEFAULT_FLAGS->=nn=,
 HASH_SIZE->1.3
+QUIET->n
 
 #SECTION - Files flags
 #	Choose the ending character of the line you need to save.
