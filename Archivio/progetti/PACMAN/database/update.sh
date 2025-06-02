@@ -6,10 +6,12 @@ MARKER="# --MARKER -- #"
 
 INIT_HASH="echo"
 
+exit_message=0
+
 DELIM="."
 while IFS= read -r line; do
-    if [[ "$line" == DEFAULT_LIMITER-">"* ]]; then
-        DELIM="${line#DEFAULT_LIMITER->}"
+    if [[ "$line" == DEFAULT_FLAGS-">"* ]]; then
+        DELIM="${line#DEFAULT_FLAGS->}"
         continue
     fi
 done < "$SETTINGS"
@@ -77,6 +79,7 @@ for key in "${!entries[@]}"; do
 		echo "deleted from settings"
 		hash_file="hash_${key}"
 		rm -rf $hash_file
+		exit_message=1
     fi
 done
 
@@ -100,8 +103,6 @@ if [[ $modification == 1 ]]; then
 	exit
 fi
 
-exit_message=0
-
 for file in "${real_files[@]}"; do
     hash_file="hash_$file"
 
@@ -109,13 +110,14 @@ for file in "${real_files[@]}"; do
     [[ ! -f "$file" ]] && continue
 
     # Get delimiter from settings
-    delim="${entries[$file]}"
+    delim="${entries[$file]:0:1}"
     [[ -z "$delim" ]] && continue  # Skip if no entry found
 
     # Check if hash_file exists
     if [[ ! -f "$hash_file" ]]; then
 		mkdir -p "$(dirname "$hash_file")"
 		touch "$hash_file"
+		echo $delim > "$hash_file"
 		echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
 		$INIT_HASH "$file" "$hash_file" "$delim"
@@ -129,14 +131,29 @@ for file in "${real_files[@]}"; do
 
     # Compare
     if [[ "$file_time" -ne "$hash_time" ]]; then
+		echo $delim > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
 		echo -ne "\e[33m$file \e[0m"
 		echo -e "\e[34mhash_data...\e[0m"
        $INIT_HASH "$file" "$hash_file" "$delim"
 	   exit_message=1
+	   continue
+    fi
+
+	# Old delimiter compare
+	old_delim=$(head -c 1 $hash_file)
+	if [[ "$delim" != "$old_delim" ]]; then
+		echo $delim > "$hash_file"
+        echo -ne "\e[34mUpdating \e[0m"
+		echo -ne "\e[33m$file \e[0m"
+		echo -e "\e[34mhash_data...\e[0m"
+       $INIT_HASH "$file" "$hash_file" "$delim"
+	   exit_message=1
+	   continue
     fi
 done
 
+#Create hash_files that does not exist yet
 for file in "${real_files[@]}"; do
     hash_file="hash_$file"
     [[ -f "$file" && -f "$hash_file" ]] && touch -r "$file" "$hash_file"
