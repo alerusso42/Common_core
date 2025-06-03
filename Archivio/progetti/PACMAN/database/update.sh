@@ -2,7 +2,8 @@
 
 SETTINGS="SETTINGS.md"
 # Save marker
-MARKER="# --MARKER -- #"
+MARKER="# -- FLAGS -- #"
+MARKER2="# -- ENUM -- #"
 
 INIT_HASH="echo"
 
@@ -12,6 +13,14 @@ DELIM="."
 while IFS= read -r line; do
     if [[ "$line" == DEFAULT_FLAGS-">"* ]]; then
         DELIM="${line#DEFAULT_FLAGS->}"
+        continue
+    fi
+done < "$SETTINGS"
+
+HASH_SIZE="0"
+while IFS= read -r line; do
+    if [[ "$line" == HASH_SIZE-">"* ]]; then
+        HASH_SIZE="${line#DEFAULT_FLAGS->}"
         continue
     fi
 done < "$SETTINGS"
@@ -35,6 +44,9 @@ while IFS= read -r line; do
     if [[ "$line" == "$MARKER" ]]; then
         found=1
         continue
+    fi
+    if [[ "$line" == "$MARKER2" ]]; then
+        break
     fi
 
     if [[ $found -eq 1 && "$line" == *"->"* ]]; then
@@ -120,7 +132,7 @@ for file in "${real_files[@]}"; do
 		echo $delim > "$hash_file"
 		echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
-		$INIT_HASH "$file" "$hash_file" "$delim"
+		$INIT_HASH "$file" "$hash_file" "$delim" "$HASH_SIZE"
 		exit_message=1
         continue
     fi
@@ -135,7 +147,7 @@ for file in "${real_files[@]}"; do
         echo -ne "\e[34mUpdating \e[0m"
 		echo -ne "\e[33m$file \e[0m"
 		echo -e "\e[34mhash_data...\e[0m"
-       $INIT_HASH "$file" "$hash_file" "$delim"
+       $INIT_HASH "$file" "$hash_file" "$delim" "$HASH_SIZE"
 	   exit_message=1
 	   continue
     fi
@@ -147,7 +159,7 @@ for file in "${real_files[@]}"; do
         echo -ne "\e[34mUpdating \e[0m"
 		echo -ne "\e[33m$file \e[0m"
 		echo -e "\e[34mhash_data...\e[0m"
-       $INIT_HASH "$file" "$hash_file" "$delim"
+       $INIT_HASH "$file" "$hash_file" "$delim" "$HASH_SIZE"
 	   exit_message=1
 	   continue
     fi

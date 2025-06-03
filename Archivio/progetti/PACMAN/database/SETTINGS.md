@@ -14,5 +14,5 @@ QUIET->n
 #	PATTERN: 	filename->DEFAULT_LIMITER
 #				userdata->$
 
-# --MARKER -- #
+# -- FLAGS -- #
 data/pokedex/pokedex.txt->]yy=,
