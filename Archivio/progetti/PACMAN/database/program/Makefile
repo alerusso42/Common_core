@@ -18,7 +18,8 @@ LIBFT_SRC := \
 	$(ROOT)/Libft/mfile_a_gnl.c \
 	$(ROOT)/Libft/mfile_rw_support.c \
 	$(ROOT)/Libft/mfile_store_fds_user.c \
-	$(ROOT)/Libft/mfile_store_fds_utils.c
+	$(ROOT)/Libft/mfile_store_fds_utils.c \
+	$(ROOT)/Libft/mfile_reset_fd.c
 
 # ------------------------------------------------
 # 2) Collect every .c under src/ 

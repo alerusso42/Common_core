@@ -210,7 +210,8 @@ for file in "${real_files[@]}"; do
     if [[ ! -f "$hash_file" ]]; then
         mkdir -p "$(dirname "$hash_file")"
         touch "$hash_file"
-        echo "$delim" > "$hash_file"
+		chmod 777 "$hash_file"
+        echo -n "$delim" > "$hash_file"
         echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
         $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
@@ -224,7 +225,7 @@ for file in "${real_files[@]}"; do
 
     if [[ "$file_time" -ne "$hash_time" ]]; then
         # Data file changed: overwrite delimiter in hash file and rebuild
-        echo "$delim" > "$hash_file"
+        echo -n "$delim" > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
@@ -237,7 +238,7 @@ for file in "${real_files[@]}"; do
     old_delim=$(head -c 1 "$hash_file")
     if [[ "$delim" != "$old_delim" ]]; then
         # Delimiter changed: overwrite first byte and rebuild
-        echo "$delim" > "$hash_file"
+        echo -n "$delim" > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"

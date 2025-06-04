@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:36:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 18:20:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:17:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int			trim_only_right(char **line, char *trimset);
 //	--MFILE
 
 //		ORIGINAL GNL
-char		*gnl(int fd);
 char		*gnl_original_main_function(int fd, char buffer[BUFFER_SIZE + 1]);
 char		*get(char **store_bytes, char buffer[BUFFER_SIZE + 1], \
 	int nl, int fd);

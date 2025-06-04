@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 22:30:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 01:04:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ int				fd_indexation(void);
 void			closefd(t_fd fd);
 int				read_curr(t_manage_fds	*data, int count);
 int				readfd(t_fd	fd, char *buff, int count);
+char			*get_static_buffer(int fd, bool reset, bool reset_all);
 
 //		ORIGINAL GNL
+
 char	*gnl();
 char	*gnl_original_main_function(int fd, char buffer[BUFFER_SIZE + 1]);
 char	*get(char **store_bytes, char buffer[BUFFER_SIZE + 1], int nl, int fd);
@@ -108,6 +110,6 @@ char	*read_line(int line_num, int position);
 char	**read_all_line(int line_num);
 int		write_line(int line_num, int position, char *string);
 char	*get_n_line(int fd, int n);
-int		reset_fd(int fd, char *name);
+int		reset_fd(t_fd fd);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_reset_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:41:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/21 10:43:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 01:04:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,8 @@
 	resetta il buffer di get_next_line.
     Se nello stock di fd era presente l'fd, lo aggiorna.
 */
-int	reset_fd(int fd, char *name)
+int	reset_fd(t_fd fd)
 {
-	int	old_fd;
-
-	get_next_line(fd, RESET);
-	close(fd);
-	old_fd = fd;
-	fd = open(name, O_RDWR);
-	if (fd == -1)
-		return (1);
-	update_filedata(old_fd, fd);
-	return (0);
+	get_static_buffer(fd.n, 1, 0);
+	return (SDL_RWseek(fd.p, 0, RW_SEEK_SET));
 }

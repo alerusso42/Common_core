@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:48:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 21:04:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 01:29:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ typedef struct s_data
 	char	*flags;
 	char	*data_file;
 	char	*hash_file;
+	int		*collision;
 	int		file_num;
+	int		file_size;
 	int		hash_size;
 }	t_data;
 
@@ -46,5 +48,9 @@ void	alloc_memory(t_data *data);
 void	free_memory(t_data *data);
 void	error(t_data *data, int err_type);
 int		ft_hash(t_data *data, char *key);
+void	print_filedata(t_data *data);
+void	fill_hash_table(t_data *data);
+void	print_hash_table(t_data *data);
+void	find_lowest_key(t_data *data, int *lowest_key, int *struct_i);
 
 #endif

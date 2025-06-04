@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:49:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 20:34:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 01:19:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_args(t_data *data, char *argv[])
 	data->data_fd = openfd(argv[1], "r");
 	if (!data->data_fd.n)
 		error(data, ER_OPEN);
-	data->hash_fd = openfd(argv[2], "rw");
+	data->hash_fd = openfd(argv[2], "w");
 	if (!data->data_fd.n)
 		error(data, ER_OPEN);
 	atoi_check = ft_atoi(argv[3]);
@@ -96,8 +96,7 @@ int		file_size(t_data *data)
 		line_num += count_char(buffer, '\n');
 		bytes_read = readfd(data->data_fd, buffer, BUFFER_SIZE);
 	}
-	if (!line_num)
-		return (0);
+	reset_fd(data->data_fd);
 	return (line_num + 1);
 }
 
