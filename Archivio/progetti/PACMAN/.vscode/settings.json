@@ -16,6 +16,8 @@
     "return"
 ],
 "files.associations": {
-	"mfile_gnl.h": "c"
+	"mfile_gnl.h": "c",
+	"structs.h": "c",
+	"all.h": "c"
 }
 }

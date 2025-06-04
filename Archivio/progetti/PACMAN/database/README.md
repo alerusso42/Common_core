@@ -13,12 +13,12 @@ If you call daft_get("DATA1") you get back "apple".
 
 You can format file in multiple field key-value, too.
 Example:
-|FRUIT1|
+FRUIT1|
 Type:apple
 Color:green
 Size:150 ml
 Weight:150 g
-|FRUIT2|
+FRUIT2|
 Type:banana
 Color:yellow
 Size:110 ml
@@ -73,13 +73,13 @@ data/pokedex/pokedex.txt->]yy=,
 
 Example. File is:
 # ------------------------------------- # 
-	[BULBASAUR]							|
+	BULBASAUR]							|
 	Id=0								|
 	Name=Bulbasaur						|
 	Types=GRASS,POISON					|
 	BaseStats=45,49,49,45,65,65			|
 	...									|
-	[IVYSAUR]							|
+	IVYSAUR]							|
 	Id=1								|
 	Name=Ivysaur						|
 	Types=GRASS,POISON					|

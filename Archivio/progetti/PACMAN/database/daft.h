@@ -27,6 +27,6 @@ void	*daft_get(char *search);
 */
 typedef enum e_daft_db
 {
-	POKEDEX,
+	POKEDEX_POKEDEX,
 }	t_daft_db;
 #endif

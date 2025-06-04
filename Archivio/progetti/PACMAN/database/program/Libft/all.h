@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:36:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 16:24:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:20:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
-void		ft_putchar_fd(char c, int fd);
-void		ft_putendl_fd(char *s, int fd);
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
@@ -145,11 +141,6 @@ char		*read_line(int line_num, int position);
 char		**read_all_line(int line_num);
 int			write_line(int line_num, int position, char *string);
 char		*get_n_line(int fd, int n);
-int			reset_fd(int fd, char *name);
-int			get_filedata(int *fd, char **filename);
-int			give_filedata(int fd, char *filename);
-int			del_filedata(void);
-int			switch_filedata(int fd);
 int			update_filedata(int old_fd, int new_fd);
 //	--GAME:
 

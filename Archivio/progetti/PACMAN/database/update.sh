@@ -99,7 +99,7 @@ done < "$SETTINGS"
 #         and save into the array real_files.
 # -----------------------------------------------------------------------------
 mapfile -t real_files < <(
-    find . -path './hash_data' -prune -o -type f \
+    find . \( -path './hash_data' -o -path './program' \) -prune -o -type f \
         ! -name "*.sh" \
         ! -name "*.c" \
         ! -name "*.h" \
@@ -199,7 +199,6 @@ i="-1"
 for file in "${real_files[@]}"; do
 	((++i))
     hash_file="hash_$file"
-
     # Skip if it somehow isn’t a regular file
     [[ ! -f "$file" ]] && continue
 
@@ -214,7 +213,7 @@ for file in "${real_files[@]}"; do
         echo "$delim" > "$hash_file"
         echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
-        $INIT_HASH "$file" "$hash_file" $i "$delim" "$HASH_SIZE"
+        $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
     fi
@@ -229,7 +228,7 @@ for file in "${real_files[@]}"; do
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
-        $INIT_HASH "$file" "$hash_file" $i "$delim" "$HASH_SIZE"
+        $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
     fi
@@ -242,7 +241,7 @@ for file in "${real_files[@]}"; do
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
-        $INIT_HASH "$file" "$hash_file" $i "$delim" "$HASH_SIZE"
+        $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
     fi
