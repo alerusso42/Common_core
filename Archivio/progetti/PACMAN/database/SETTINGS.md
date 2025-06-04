@@ -15,4 +15,6 @@ QUIET->n
 #				userdata->$
 
 # -- FLAGS -- #
-data/pokedex/pokedex.txt->]yy=,
+data/pokedex/pokedex.txt->[yy=,
+# -- ENUM -- #
+data/pokedex/pokedex.txt->POKEDEX
