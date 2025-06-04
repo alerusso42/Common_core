@@ -1,54 +1,70 @@
 #!/bin/bash
 
+# Path to the SETTINGS file
 SETTINGS="SETTINGS.md"
-# Save marker
+
+# Markers in SETTINGS.md that delimit the FLAGS and ENUM sections
 MARKER="# -- FLAGS -- #"
 MARKER2="# -- ENUM -- #"
 
+# Command (or placeholder) to build a hash for a data file
 INIT_HASH="echo"
 
+# Indicates whether any hash‐files were created/updated
 exit_message=0
 
+# Default delimiter (overridden by DEFAULT_FLAGS in SETTINGS.md)
 DELIM="."
+# Read DEFAULT_FLAGS from SETTINGS.md to set DELIM
 while IFS= read -r line; do
     if [[ "$line" == DEFAULT_FLAGS-">"* ]]; then
         DELIM="${line#DEFAULT_FLAGS->}"
-        continue
+        break
     fi
 done < "$SETTINGS"
 
+# Default hash‐table size (overridden by HASH_SIZE in SETTINGS.md)
 HASH_SIZE="0"
+# Read HASH_SIZE from SETTINGS.md
 while IFS= read -r line; do
     if [[ "$line" == HASH_SIZE-">"* ]]; then
-        HASH_SIZE="${line#DEFAULT_FLAGS->}"
-        continue
+        HASH_SIZE="${line#HASH_SIZE->}"
+        break
     fi
 done < "$SETTINGS"
 
-
-# Temporary file
+# Create a temporary file to build the updated SETTINGS.md
 TMPFILE=$(mktemp)
 
-
-# 1. Copy lines up to and including the marker to tmp
+# -----------------------------------------------------------------------------
+# STEP 1: Copy everything up to and including the “# -- FLAGS -- #” marker
+#         from SETTINGS.md into TMPFILE. We will later re‐emit the FLAGS lines.
+# -----------------------------------------------------------------------------
 awk -v marker="$MARKER" '
   { print }
   $0 == marker { exit }
-' $SETTINGS > "$TMPFILE"
+' "$SETTINGS" > "$TMPFILE"
 
-
+# -----------------------------------------------------------------------------
+# STEP 2: Parse per‐file flag entries from SETTINGS.md into an associative array
+# entries[file_path] = flags_string
+# We only read lines between MARKER and MARKER2.
+# -----------------------------------------------------------------------------
 declare -A entries
 found=0
 
 while IFS= read -r line; do
+    # When we hit the FLAGS marker, start capturing
     if [[ "$line" == "$MARKER" ]]; then
         found=1
         continue
     fi
+    # If we hit the ENUM marker, stop capturing flags
     if [[ "$line" == "$MARKER2" ]]; then
         break
     fi
 
+    # If inside the FLAGS section and line contains “->”, split at “->”
     if [[ $found -eq 1 && "$line" == *"->"* ]]; then
         filename="${line%%->*}"
         suffix="${line#*->}"
@@ -56,14 +72,21 @@ while IFS= read -r line; do
     fi
 done < "$SETTINGS"
 
+# -----------------------------------------------------------------------------
+# STEP 3: Parse any existing ENUM entries into a separate associative array
+# enum_entries[file_path] = enum_name
+# So that user‐provided ENUM names are preserved.
+# -----------------------------------------------------------------------------
 declare -A enum_entries
 found_enum=0
 
 while IFS= read -r line; do
+    # When we hit the ENUM marker, start capturing
     if [[ "$line" == "$MARKER2" ]]; then
         found_enum=1
         continue
     fi
+    # If inside the ENUM section and line contains “->”, split at “->”
     if [[ $found_enum -eq 1 && "$line" == *"->"* ]]; then
         fpath="${line%%->*}"
         ename="${line#*->}"
@@ -71,236 +94,245 @@ while IFS= read -r line; do
     fi
 done < "$SETTINGS"
 
+# -----------------------------------------------------------------------------
+# STEP 4: Discover all “data” files on disk (excluding hash_data, source, and .md)
+#         and save into the array real_files.
+# -----------------------------------------------------------------------------
+mapfile -t real_files < <(
+    find . -path './hash_data' -prune -o -type f \
+        ! -name "*.sh" \
+        ! -name "*.c" \
+        ! -name "*.h" \
+        ! -name "*.o" \
+        ! -name "Makefile" \
+        ! -name "*.md" \
+        -printf "%P\n"
+)
 
-#NOTE - Debug: print save entries
-#for file in "${!entries[@]}"; do
-#    echo "Saved: $file -> ${entries[$file]}"
-#done
-
-mapfile -t real_files < <(find . -path './hash_data' -prune -o -type f \
-    ! -name "*.sh" \
-    ! -name "*.c" \
-    ! -name "*.h" \
-    ! -name "*.o" \
-    ! -name "Makefile" \
-    ! -name "*.md" \
-    -printf "%P\n")
-
-
-
+# -----------------------------------------------------------------------------
+# STEP 5: Add any newly found files into entries[], using the default delimiter.
+#         If a file did not have an entry, notify user to update SETTINGS.md.
+# -----------------------------------------------------------------------------
 modification=0
 
 for file in "${real_files[@]}"; do
     if [[ -z "${entries[$file]}" ]]; then
-		entries["$file"]="$DELIM"
-		echo -ne "\e[33m$file \e[0m"
-		echo "added to settings. Remember to check $SETTINGS"
-		modification=1
+        entries["$file"]="$DELIM"
+        echo -ne "\e[33m$file \e[0m"
+        echo "added to settings. Remember to check $SETTINGS"
+        modification=1
     fi
 done
 
-
+# -----------------------------------------------------------------------------
+# STEP 6: Remove any entries whose files no longer exist, and delete their hash folder
+# -----------------------------------------------------------------------------
 for key in "${!entries[@]}"; do
     if ! printf '%s\n' "${real_files[@]}" | grep -qxF "$key"; then
         unset entries["$key"]
-		echo -ne "\e[33m$key \e[0m"
-		echo "deleted from settings"
-		hash_file="hash_${key}"
-		rm -rf $hash_file
-		exit_message=1
+        echo -ne "\e[33m$key \e[0m"
+        echo "deleted from settings"
+        hash_file="hash_${key}"
+        rm -rf "$hash_file"
+        exit_message=1
     fi
 done
 
+# -----------------------------------------------------------------------------
+# STEP 7: Rebuild SETTINGS.md:
+#   a) Copy header+FLAGS marker (already in TMPFILE)
+#   b) Re‐emit each “file->flags” line in sorted order
+#   c) Append the ENUM marker
+#   d) For each file, either preserve existing enum_entries[file] or generate a new one
+# -----------------------------------------------------------------------------
 {
-  # 1) Copy everything up to and including the FLAGS marker
+  # 7a) Copy everything up to and including the FLAGS marker
   awk -v marker="$MARKER" '{ print; if ($0 == marker) exit }' "$SETTINGS"
 
-  # 2) Re‐emit each file->flags in sorted order
+  # 7b) Re‐emit each “file->flags” in sorted order
   for key in $(printf '%s\n' "${!entries[@]}" | sort); do
       echo "$key->${entries[$key]}"
   done
 
-  # 3) Append the ENUM marker
+  # 7c) Append the ENUM marker
   echo "$MARKER2"
 
-  # 4) For each file, either use the existing enum or generate a default
+  # 7d) Emit each “file->enum_name”, preserving existing user‐provided enums
   for key in $(printf '%s\n' "${!entries[@]}" | sort); do
       if [[ -n "${enum_entries[$key]}" ]]; then
-          # User has already provided a custom enum for this file—keep it
+          # Use the user’s custom enum name
           echo "$key->${enum_entries[$key]}"
       else
-          # No existing enum; generate one from the full path
-          no_ext="${key#data/}"     # strip "data/" prefix if you still want to drop it
-          no_ext="${no_ext%.*}"     # strip the ".txt" (or any) extension
-		  enum_name="$(echo "$no_ext" | tr '/' '_' | tr -c '[:alnum:]_' '_' | tr '[:lower:]' '[:upper:]')"
-          enum_name="${enum_name%_}"
-		  echo "$key->$enum_name"
+          # Generate a default enum name from the file’s relative path
+          no_ext="${key#data/}"        # Strip “data/” prefix
+          no_ext="${no_ext%.*}"        # Strip extension (e.g. “.txt”)
+          enum_name="$(echo "$no_ext" \
+            | tr '/' '_' \
+            | tr -c '[:alnum:]_' '_' \
+            | tr '[:lower:]' '[:upper:]')"
+          enum_name="${enum_name%_}"   # Remove any trailing underscore
+          echo "$key->$enum_name"
       fi
   done
 } > "$TMPFILE"
 
-
-# Sovrascrivi il SETTINGS finale
+# Replace the old SETTINGS.md with the updated version
 mv "$TMPFILE" "$SETTINGS"
 
+# -----------------------------------------------------------------------------
+# STEP 8: Clean up any empty directories under hash_data/
+# -----------------------------------------------------------------------------
 find hash_data -type d -empty -exec rmdir {} \; 2>/dev/null
 
+# -----------------------------------------------------------------------------
+# STEP 9: If modifications were made, notify the user and exit so they can update SETTINGS.md
+# -----------------------------------------------------------------------------
 if [[ $modification == 1 ]]; then
-	echo -e "\e[33mmodifications in files detected. Update new files delimitators in $SETTINGS, then launch again update.sh\e[0m"
-	exit
+    echo -e "\e[33mModifications detected. Update new file delimiters in $SETTINGS, then run update.sh again.\e[0m"
+    exit
 fi
 
+# -----------------------------------------------------------------------------
+# STEP 10: Build or update hash files for each data file
+# -----------------------------------------------------------------------------
+i="-1"
 for file in "${real_files[@]}"; do
+	((++i))
     hash_file="hash_$file"
 
-    # Skip if it's not a regular file
+    # Skip if it somehow isn’t a regular file
     [[ ! -f "$file" ]] && continue
 
-    # Get delimiter from settings
+    # Get the single‐character delimiter from entries[file]
     delim="${entries[$file]:0:1}"
-    [[ -z "$delim" ]] && continue  # Skip if no entry found
+    [[ -z "$delim" ]] && continue
 
-    # Check if hash_file exists
+    # If the hash file does not exist yet, create it and build it
     if [[ ! -f "$hash_file" ]]; then
-		mkdir -p "$(dirname "$hash_file")"
-		touch "$hash_file"
-		echo $delim > "$hash_file"
-		echo -ne "\e[33m$hash_file \e[0m"
+        mkdir -p "$(dirname "$hash_file")"
+        touch "$hash_file"
+        echo "$delim" > "$hash_file"
+        echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
-		$INIT_HASH "$file" "$hash_file" "$delim" "$HASH_SIZE"
-		exit_message=1
+        $INIT_HASH "$file" "$hash_file" $i "$delim" "$HASH_SIZE"
+        exit_message=1
         continue
     fi
 
-    # Get mod times
+    # Compare modification times between data file and hash file
     file_time=$(stat -c %Y "$file")
     hash_time=$(stat -c %Y "$hash_file")
 
-    # Compare
     if [[ "$file_time" -ne "$hash_time" ]]; then
-		echo $delim > "$hash_file"
+        # Data file changed: overwrite delimiter in hash file and rebuild
+        echo "$delim" > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
-		echo -ne "\e[33m$file \e[0m"
-		echo -e "\e[34mhash_data...\e[0m"
-       $INIT_HASH "$file" "$hash_file" "$delim" "$HASH_SIZE"
-	   exit_message=1
-	   continue
+        echo -ne "\e[33m$file \e[0m"
+        echo -e "\e[34mhash_data...\e[0m"
+        $INIT_HASH "$file" "$hash_file" $i "$delim" "$HASH_SIZE"
+        exit_message=1
+        continue
     fi
 
-	# Old delimiter compare
-	old_delim=$(head -c 1 $hash_file)
-	if [[ "$delim" != "$old_delim" ]]; then
-		echo $delim > "$hash_file"
+    # Check if the stored delimiter in the first byte of hash_file changed
+    old_delim=$(head -c 1 "$hash_file")
+    if [[ "$delim" != "$old_delim" ]]; then
+        # Delimiter changed: overwrite first byte and rebuild
+        echo "$delim" > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
-		echo -ne "\e[33m$file \e[0m"
-		echo -e "\e[34mhash_data...\e[0m"
-       $INIT_HASH "$file" "$hash_file" "$delim" "$HASH_SIZE"
-	   exit_message=1
-	   continue
+        echo -ne "\e[33m$file \e[0m"
+        echo -e "\e[34mhash_data...\e[0m"
+        $INIT_HASH "$file" "$hash_file" $i "$delim" "$HASH_SIZE"
+        exit_message=1
+        continue
     fi
 done
 
-#Create hash_files that does not exist yet
+# -----------------------------------------------------------------------------
+# STEP 11: Sync hash file timestamps to match data file timestamps
+# -----------------------------------------------------------------------------
 for file in "${real_files[@]}"; do
     hash_file="hash_$file"
     [[ -f "$file" && -f "$hash_file" ]] && touch -r "$file" "$hash_file"
 done
 
-#!/bin/bash
-# … (qui vengono aggiornati FLAGS ed ENUM in SETTINGS.md) …
+# -----------------------------------------------------------------------------
+# STEP 12: Update daft.h’s enum block
+#   a) Save everything in daft.h after the final “}” into header_tail[]
+#   b) Generate new enum lines from SETTINGS.md’s “# -- ENUM -- #” section
+#   c) Remove old enum block from daft.h and insert the new lines
+#   d) Append back the saved header_tail lines (everything after the closing brace)
+# -----------------------------------------------------------------------------
 
 DAFT_HEADER="daft.h"
 
+# (a) Read and save all lines following the closing “}” in daft.h
 declare -a header_tail
 found_endmark=0
 i=0
 
 while IFS= read -r line; do
+    # Once we find the closing brace “}”, start saving all subsequent lines
     if [[ "$line" == "}" ]]; then
-		header_tail[$i]="$line"
-		((i++))
+        header_tail[$i]="$line"
+        ((i++))
         found_endmark=1
         continue
     fi
     if [[ $found_endmark -eq 1 ]]; then
         header_tail[$i]="$line"
-		((i++))
+        ((i++))
     fi
 done < "$DAFT_HEADER"
 
+# (b) Extract ENUM entries from SETTINGS.md into TMP_ENUM
 TMP_ENUM=$(mktemp)
-
-# 1. Leggi tutti i file->ENUM_NAME da SETTINGS.md sotto "# -- ENUM -- #"
-#    Supponiamo che tu abbia creato in memoria (o sappia già) 
-#    come estrarre queste coppie, ma in alternativa puoi farlo direttamente:
 found_enum=0
+
 while IFS= read -r line; do
     if [[ "$line" == "# -- ENUM -- #" ]]; then
         found_enum=1
         continue
     fi
-    # Se incontriamo il marker di fine (oppure fine file), usciamo
-    if [[ $found_enum -eq 1 ]] && [[ "$line" == "" ]]; then
+    # End if we hit a blank line after starting to capture
+    if [[ $found_enum -eq 1 && "$line" == "" ]]; then
         break
     fi
     if [[ $found_enum -eq 1 && "$line" == *"->"* ]]; then
-        # Linea del tipo: data/pokedex/pokedex.txt->POKEDEX
-        enum_name="${line#*->}"              # estrae "POKEDEX"
-        # Riempiamo un file temporaneo con la riga: "\tDAFT_DB_POKEDEX,"
+        # Extract the Enum name (the part after “->”)
+        enum_name="${line#*->}"
+        # Prepare a line with a leading tab for Norminette, e.g. “\tPOKEDEX,”
         printf "\t%s,\n" "$enum_name" >> "$TMP_ENUM"
     fi
 done < "$SETTINGS"
 
-# 2. Ordiniamo alfabeticamente le righe generate (opzionale, se non già ordinate)
+# Sort alphabetically (optional)
 sort "$TMP_ENUM" -o "$TMP_ENUM"
 
-# 3. Ora sostituiamo, in daft.h, tutto ciò che sta fra "//MARKER" e "//MARKER_END"
-
-# Per farlo, usiamo 'sed' con due passaggi:
-# (a) Rimuoviamo le righe fra MARKER e MARKER_END (escluse).
-# (b) Aggiungiamo le nuove righe subito dopo MARKER.
-
-# 3a) Cancella tutte le righe _tra_ (ma non inclusi) i marker in daft.h
-#     In questo modo conserviamo il commento "//MARKER" e "//MARKER_END" stessi.
-# 3a) Sovrascrive daft.h rimuovendo tutto tra i marker, lasciandoli intatti
+# (c) Remove everything between “{” and “}” (exclusive) in daft.h,
+#     but preserve the braces themselves.
 awk '/\{/{print; in_block=1; next}
      /\}/{in_block=0; print; next}
      !in_block' "$DAFT_HEADER" > "$DAFT_HEADER.tmp" && mv "$DAFT_HEADER.tmp" "$DAFT_HEADER"
-# Spieghiamo la sintassi di sed sopra:
-# - '/\/\/MARKER/ { … }' trova la riga che contiene "//MARKER"
-# - 'n' salta alla riga successiva (quindi NON cancella la linea con "//MARKER")
-# - ':a; N; /\/\/MARKER_END/!ba;' aggiunge riga per riga finché NON trova "//MARKER_END"
-# - 'd' elimina TUTTE quelle righe intermedie (ma lascia inalterate le due righe con i marker)
 
-# 3b) Inserisci le righe generate (TMP_ENUM) subito dopo la linea "//MARKER"
-#     Per mantenere la corretta indentazione (Norminette: tab, non spazi),
-#     usiamo 'sed' con l’opzione 'r' per leggere un file.
-#
-#    Ci serve un piccolo trucco: trasformiamo TMP_ENUM in una forma compatibile con sed.
-#    Qui supponiamo che TMP_ENUM contenga già le righe correttamente indentate:
-
+# Insert the new enum lines immediately after “{”
 sed -i "/{/ r $TMP_ENUM" "$DAFT_HEADER"
 
-# NOTA: questo inserisce ESATTAMENTE il contenuto di TMP_ENUM
-#       subito dopo la riga che contiene "//MARKER".
-
-# 4. Rimuoviamo il file temporaneo
+# Delete the temporary enum file
 rm "$TMP_ENUM"
 
-#head -c -1 "$DAFT_HEADER" > tmp.txt && mv tmp.txt "$DAFT_HEADER"
-
+# (d) Append back the saved tail lines (everything after “}”)
 for line in "${header_tail[@]}"; do
     echo "$line" >> "$DAFT_HEADER"
 done
 
-# Restore leftovers
-
-
+# -----------------------------------------------------------------------------
+# STEP 13: Final exit message
+# -----------------------------------------------------------------------------
 if [[ $exit_message == 1 ]]; then
-	echo -e "\e[32mhash files updated.\e[0m"
-	exit 0
+    echo -e "\e[32mFiles updated.\e[0m"
+    exit 0
 fi
-if [[ $exit_message == 0 ]]; then
-	echo "Nothing to be done with the database."
-	exit 0
-fi
+
+echo "Nothing to be done with the database."
+exit 0

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft.h                                             :+:      :+:    :+:   */
+/*   mfile_rw_support.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 15:44:55 by alerusso         ###   ########.fr       */
+/*   Created: 2025/05/20 22:23:11 by alerusso          #+#    #+#             */
+/*   Updated: 2025/05/31 14:32:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DAFT_H
-# define DAFT_H
+#include "mfile_gnl.h"
 
-//SECTION - functions prototypes
-
-int 	daft_init(void);
-void	daft_quit(void);
-void	daft_swap(int enum_id);
-void	*daft_get(char *search);
-
-//SECTION - enum
-/*
-	WARNING: 	don't modify this directly!
-				modify SETTINGS.md instead!
-*/
-typedef enum e_daft_db
+int	read_curr(t_manage_fds	*data, int count)
 {
-	POKEDEX,
-}	t_daft_db;
-#endif
+	char	*buff;
+
+	buff = data->buffer[data->curr_fd.n];
+	return (SDL_RWread(data->curr_fd.p, buff, sizeof(char), count));
+}
+
+int	readfd(t_fd	fd, char *buff, int count)
+{
+	return (SDL_RWread(fd.p, buff, sizeof(char), count));
+}

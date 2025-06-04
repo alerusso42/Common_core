@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft.h                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 15:44:55 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/24 22:40:12 by alerusso          #+#    #+#             */
+/*   Updated: 2025/04/17 21:21:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DAFT_H
-# define DAFT_H
+#include "libft.h"
+#define UN_BOTTO 100
 
-//SECTION - functions prototypes
-
-int 	daft_init(void);
-void	daft_quit(void);
-void	daft_swap(int enum_id);
-void	*daft_get(char *search);
-
-//SECTION - enum
-/*
-	WARNING: 	don't modify this directly!
-				modify SETTINGS.md instead!
-*/
-typedef enum e_daft_db
+void	ft_lstadd_back(t_typelist **lst, t_typelist *new)
 {
-	POKEDEX,
-}	t_daft_db;
-#endif
+	t_typelist	*pointer;
+
+	if ((lst) && (*lst))
+	{
+		pointer = ft_lstlast(*lst);
+		pointer->next = new;
+	}
+	else
+		*lst = new;
+}

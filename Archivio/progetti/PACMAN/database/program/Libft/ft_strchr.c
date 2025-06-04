@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft.h                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 15:44:55 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/19 16:59:43 by alerusso          #+#    #+#             */
+/*   Updated: 2025/04/17 21:24:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DAFT_H
-# define DAFT_H
+#include "libft.h"
 
-//SECTION - functions prototypes
-
-int 	daft_init(void);
-void	daft_quit(void);
-void	daft_swap(int enum_id);
-void	*daft_get(char *search);
-
-//SECTION - enum
-/*
-	WARNING: 	don't modify this directly!
-				modify SETTINGS.md instead!
-*/
-typedef enum e_daft_db
+char	*ft_strchr(const char *s, int c)
 {
-	POKEDEX,
-}	t_daft_db;
-#endif
+	if (!s)
+		return (NULL);
+	while (*s != '\0')
+	{
+		if (*s == (unsigned char)c)
+		{
+			return ((char *)s);
+		}
+		++s;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (NULL);
+}
+
+/*
+int main()
+{
+    printf("%s\n", ft_strchr("Mega_rayquaza", 'w'));
+    return (0);
+}*/

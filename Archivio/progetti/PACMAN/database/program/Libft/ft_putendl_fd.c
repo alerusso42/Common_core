@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft.h                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 15:44:55 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/23 16:32:48 by alerusso          #+#    #+#             */
+/*   Updated: 2025/04/17 21:20:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DAFT_H
-# define DAFT_H
+#include "libft.h"
 
-//SECTION - functions prototypes
-
-int 	daft_init(void);
-void	daft_quit(void);
-void	daft_swap(int enum_id);
-void	*daft_get(char *search);
-
-//SECTION - enum
-/*
-	WARNING: 	don't modify this directly!
-				modify SETTINGS.md instead!
-*/
-typedef enum e_daft_db
+void	ft_putendl_fd(char *s, SDL_RWops *fd)
 {
-	POKEDEX,
-}	t_daft_db;
-#endif
+	while (*s)
+		SDL_RWwrite(fd, s++, sizeof(char), 1);
+	SDL_RWwrite(fd, "\n", sizeof(char), 1);
+}
+
+/*
+int	main()
+{
+	int		fd;
+
+	fd = open("testoh.txt", O_RDWR);
+	if (fd == -1)
+		return (1);
+	ft_putendl_fd("fd:", fd);
+	close(fd);
+	return (0);
+}*/

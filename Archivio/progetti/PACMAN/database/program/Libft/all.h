@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:36:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 16:24:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:24:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "piscine.h"
 # include "game_bfs.h"
 
+typedef long long int	t_int64;
 //	BIG LIST
 //	--LIBFT:
 
