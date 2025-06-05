@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:48:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 01:29:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:40:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,40 @@ enum e_error
 	ER_MALLOC,
 };
 
+//SECTION -	collision
+
+void	collision_update(t_data *data, int old_key, int lowest_key, int *i);
+int		collision_check(t_data *data, int hash_pos);
+
+//SECTION -	fill_hash_table
+
+void	fill_hash_table(t_data *data);
+
+//SECTION -	hash
+
+int		ft_hash(t_data *data, char *key);
+
+//SECTION -	memory
+
 void	alloc_memory(t_data *data);
 void	free_memory(t_data *data);
 void	error(t_data *data, int err_type);
-int		ft_hash(t_data *data, char *key);
+
+//SECTION -	parse_args
+
+void	parse_args(t_data *data, char *argv[]);
+
+//SECTION -	print
+
 void	print_filedata(t_data *data);
-void	fill_hash_table(t_data *data);
 void	print_hash_table(t_data *data);
+
+//SECTION -	utils
+
+void	make_float(t_data *data, char *str, double *result);
+int		num_size(int n);
+int		count_char(char *str, char c);
+int		ft_abs(int n);
 void	find_lowest_key(t_data *data, int *lowest_key, int *struct_i);
 
 #endif

@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:50:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 20:57:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:34:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-int	ft_abs(int n)
-{
-	if (n == INT_MIN)
-		return (INT_MAX);
-	if (n < 0)
-		n *= -1;
-	return (n);
-}
 
 uint32_t	mur_switch(uint32_t h, unsigned char *data, int len, uint32_t m)
 {

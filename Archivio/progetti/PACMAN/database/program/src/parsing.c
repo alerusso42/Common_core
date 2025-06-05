@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:49:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 01:19:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:34:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,46 +42,6 @@ void	parse_args(t_data *data, char *argv[])
 		error(data, ER_ATOI);
 }
 
-void	make_float(t_data *data, char *str, double *result)
-{
-	long long int	atoi_check;
-	int				dot_i;
-	int				decimal_part;
-
-	atoi_check = 0;
-	dot_i = sub_strlen(str, ".", EXCLUDE);
-	if (str[dot_i])
-		atoi_check = ft_atoi(str + dot_i + 1);
-	if (atoi_check > INT_MAX || atoi_check < INT_MIN)
-		error(data, ER_ATOI);
-	decimal_part = atoi_check;
-	str[dot_i] = 0;
-	atoi_check = ft_atoi(str);
-	if (atoi_check > INT_MAX || atoi_check < INT_MIN)
-		error(data, ER_ATOI);
-	*result = atoi_check;
-	dot_i = num_size(decimal_part);
-	while (decimal_part)
-	{
-		*result += (decimal_part % 10) / (double)dot_i;
-		decimal_part /= 10;
-		dot_i /= 10;
-	}
-}
-
-int	num_size(int n)
-{
-	int	i;
-
-	i = 1;
-	while (n)
-	{
-		n /= 10;
-		i *= 10;
-	}
-	return (i);
-}
-
 int		file_size(t_data *data)
 {
 	char	buffer[BUFFER_SIZE + 1];
@@ -98,20 +58,4 @@ int		file_size(t_data *data)
 	}
 	reset_fd(data->data_fd);
 	return (line_num + 1);
-}
-
-int		count_char(char *str, char c)
-{
-	int	counter;
-
-	counter = 0;
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		if (*str == c)
-			counter += 1;
-		++str;
-	}
-	return (counter);
 }

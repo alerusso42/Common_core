@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:56:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 01:51:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:32:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+static char	*itoa_malloc_guard(t_data *data, int struct_i);
 
 void	print_filedata(t_data *data)
 {
@@ -39,35 +41,41 @@ void	print_filedata(t_data *data)
 	switch_filedata(data->data_fd);
 }
 
-int		collision_update(t_data *data, int lowest_key, int curr, int last);
-int		collision_check(t_data *data, int lowest_key, int curr, int last);
-void	collision_clear(t_data *data);
-
 void	print_hash_table(t_data *data)
 {
 	char	*pos_string;
 	int		struct_i;
 	int		lowest_key;
+	int		old_key;
 	int		i;
 
 	struct_i = 0;
+	old_key = -1;
 	lowest_key = -1;
-	i = 0;
+	i = 1;
 	find_lowest_key(data, &lowest_key, &struct_i);
 	while (lowest_key)
 	{
-		if (++i == struct_i)
-			ft_putstr_fd(",", data->hash_fd.p);
+		collision_update(data, old_key, lowest_key, &i);
+		old_key = lowest_key;
 		while (i != lowest_key)
 		{
 			ft_putendl_fd("", data->hash_fd.p);
 			++i;
 		}
-		pos_string = ft_itoa(data->hash_table[struct_i].pos);
-		if (!pos_string)
-			error(data, ER_MALLOC);
-		ft_putendl_fd(pos_string, data->hash_fd.p);
+		pos_string = itoa_malloc_guard(data, struct_i);
+		ft_putstr_fd(pos_string, data->hash_fd.p);
 		SDL_free(pos_string);
 		find_lowest_key(data, &lowest_key, &struct_i);
 	}
+}
+
+static char	*itoa_malloc_guard(t_data *data, int struct_i)
+{
+	char	*str;
+
+	str = ft_itoa(data->hash_table[struct_i].pos);
+	if (!str)
+		error(data, ER_MALLOC);
+	return (str);
 }

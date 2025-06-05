@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:58:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 00:00:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:39:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	parse_args(t_data *data, char *argv[]);
 void	error(t_data *data, int err_type);
 
 /*
