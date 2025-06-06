@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 09:58:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 12:23:08 by alerusso         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -19,53 +7,52 @@
 #include <malloc.h>
 #include <semaphore.h>
 #include <fcntl.h>
-#define PHILO 5
+#define PHILO 200
 #define SEM_NAME "NAME"
 #define TIME_EAT 3
 #define TIME_SLEEP 3
 #define FORKS PHILO
 
-/*
-int	main()
-{
-	pid_t	pid[PHILO];
-	int		i = 0;
-	sem_t	*sem;
+// int	main()
+// {
+// 	pid_t	pid[PHILO];
+// 	int		i = 0;
+// 	sem_t	*sem;
 
-	sem_unlink(SEM_NAME);
-	sem = sem_open(SEM_NAME, O_CREAT, 0666, FORKS);
-	if (!sem)
-		return (printf("gay\n"));
-	while (i != PHILO)
-	{
-		pid[i] = fork();
-		if (pid[i] == -1)
-			return (printf("ERROE\n"));
-		else if (!pid[i])
-		{
-			while (1)
-			{
-				sem_wait(sem);
-				sem_wait(sem);
-				printf("%d\tsem locked\n", i);
-				if (i % 2)
-					sleep(TIME_EAT);
-				else
-					sleep(TIME_SLEEP);
-				sem_post(sem);
-				sem_post(sem);
-				printf("%d\tsem unlocked\n", i);
-				usleep(5);
-			}
-		}
-		++i;
-	}
-	sem_close(sem);
-	while (wait(NULL))
-		;
-	sem_unlink(SEM_NAME);
-}
-*/
+// 	sem_unlink(SEM_NAME);
+// 	sem = sem_open(SEM_NAME, O_CREAT, 0666, FORKS);
+// 	if (!sem)
+// 		return (printf("gay\n"));
+// 	while (i != PHILO)
+// 	{
+// 		pid[i] = fork();
+// 		if (pid[i] == -1)
+// 			return (printf("CERCO UN EROE\n"));
+// 		else if (!pid[i])
+// 		{
+// 			while (1)
+// 			{
+// 				sem_wait(sem);
+// 				printf("%d\tsem locked\n", i);
+// 				sem_wait(sem);
+// 				printf("%d\tsem locked\n", i);
+// 				printf("%d\tis eating\n", i);
+// 				sleep(TIME_EAT);
+// 				sem_post(sem);
+// 				printf("%d\tsem unlocked\n", i);
+// 				sem_post(sem);
+// 				printf("%d\tsem unlocked\n", i);
+// 				printf("%d\tis sleeping\n", i);
+// 				sleep(TIME_SLEEP);
+// 			}
+// 		}
+// 		++i;
+// 	}
+// 	sem_close(sem);
+// 	while (wait(NULL))
+// 		;
+// 	sem_unlink(SEM_NAME);
+// }
 
 
 // int main()
