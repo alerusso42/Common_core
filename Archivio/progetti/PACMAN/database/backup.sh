@@ -1,6 +1,8 @@
 #!/bin/bash
 
 SETTINGS="SETTINGS.md"
+PRIVATE=".private"
+HASH_DATA="$(PRIVATE)/""hash_data/"
 # Save marker
 MARKER="# -- FLAGS -- #"
 MARKER2="# -- ENUM -- #"
@@ -77,7 +79,7 @@ done < "$SETTINGS"
 #    echo "Saved: $file -> ${entries[$file]}"
 #done
 
-mapfile -t real_files < <(find . -path './hash_data' -prune -o -type f \
+mapfile -t real_files < <(find . -path "$(HASH_DATA)" -prune -o -type f \
     ! -name "*.sh" \
     ! -name "*.c" \
     ! -name "*.h" \
@@ -143,7 +145,7 @@ done
 # Sovrascrivi il SETTINGS finale
 mv "$TMPFILE" "$SETTINGS"
 
-find hash_data -type d -empty -exec rmdir {} \; 2>/dev/null
+find "$(HASH_DATA)" -type d -empty -exec rmdir {} \; 2>/dev/null
 
 if [[ $modification == 1 ]]; then
 	echo -e "\e[33mmodifications in files detected. Update new files delimitators in $SETTINGS, then launch again update.sh\e[0m"
@@ -151,7 +153,7 @@ if [[ $modification == 1 ]]; then
 fi
 
 for file in "${real_files[@]}"; do
-    hash_file="hash_$file"
+    hash_file="$(HASH_DATA)""hash_$file"
 
     # Skip if it's not a regular file
     [[ ! -f "$file" ]] && continue
@@ -202,7 +204,7 @@ done
 
 #Create hash_files that does not exist yet
 for file in "${real_files[@]}"; do
-    hash_file="hash_$file"
+    hash_file=""$(HASH_DATA)"hash_$file"
     [[ -f "$file" && -f "$hash_file" ]] && touch -r "$file" "$hash_file"
 done
 

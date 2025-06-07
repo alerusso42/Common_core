@@ -27,6 +27,10 @@ void	*daft_get(char *search);
 */
 typedef enum e_daft_db
 {
+	HASH_DATA_POKEDEX_POKEDEX,
+	HASH_HASH_DATA_POKEDEX_POKEDEX,
+	HASH_PROGRAM_LIBFT__VSCODE_SETTINGS,
 	POKEDEX_POKEDEX,
+	PROGRAM_LIBFT__VSCODE_SETTINGS,
 }	t_daft_db;
 #endif

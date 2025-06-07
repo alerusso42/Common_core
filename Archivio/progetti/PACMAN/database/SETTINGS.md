@@ -23,5 +23,13 @@ QUIET->n
 
 # -- FLAGS -- #
 data/pokedex/pokedex.txt->=nn=,
+hash_data/pokedex/pokedex.txt->=nn=,
+hash_hash_data/pokedex/pokedex.txt->=nn=,
+hash_program/Libft/.vscode/settings.json->=nn=,
+program/Libft/.vscode/settings.json->=nn=,
 # -- ENUM -- #
 data/pokedex/pokedex.txt->POKEDEX_POKEDEX
+hash_data/pokedex/pokedex.txt->HASH_DATA_POKEDEX_POKEDEX
+hash_hash_data/pokedex/pokedex.txt->HASH_HASH_DATA_POKEDEX_POKEDEX
+hash_program/Libft/.vscode/settings.json->HASH_PROGRAM_LIBFT__VSCODE_SETTINGS
+program/Libft/.vscode/settings.json->PROGRAM_LIBFT__VSCODE_SETTINGS

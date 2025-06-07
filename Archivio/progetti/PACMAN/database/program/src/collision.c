@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:43:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/05 15:07:51 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/06 13:37:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void	collision_reset(t_data *data);
  * @brief   Add a hash_file index in the collision array
  *
  * 		if get_lowest_key() has failed in updating the key,
- * 		two variables have the same key: the lowest_key 
+ * 		two variables have the same key: therefore there is a collision.
+ *		if there is a collision:
+ *		collision_adder is called, and 
+ * 		
  * 
  *  
  *
@@ -27,8 +30,7 @@ static void	collision_reset(t_data *data);
  * @param[in]  old_key  	key of previous call of get_lowest_key()
  * @param[in]  lowest_key 	key of current call of get_lowest_key()
  * @param[in]  i 			pointer of hash_file write cursor
- * @param[out] result   [If a pointer or output parameter is used]
- * @return             [What the function returns; e.g. 0 on success, −1 on error, or the computed value]
+ * @return     none
  *
  * @note               [Any extra notes—e.g. side effects, thread-safety, performance caveats]
  *
@@ -38,7 +40,7 @@ static void	collision_reset(t_data *data);
  * @code
  *   int x = 2, y = 3;
  *   int sum = add_simple(x, y);
- *   /* sum is now 5 */
+ *    sum is now 5 */
 
 void	collision_update(t_data *data, int old_key, int lowest_key, int *i)
 {
