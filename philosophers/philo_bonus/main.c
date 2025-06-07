@@ -1,5 +1,12 @@
 #include "philo_bonus.h"
 
+void	lonely_philo(t_philo *philo)
+{
+	write_status(FORK, philo);
+	ft_wait(philo->table->t_death);
+	write_status(FORK, philo);
+}
+
 int	main(int arc, char **argv)
 {
 	t_table	table;
@@ -18,6 +25,8 @@ int	main(int arc, char **argv)
 	else
 		table.max_dinner = -1;
 	init_table(&table);
-	//GO FILO GO
+	if (table.n_philo == 1)
+		return (lonely_boy(&table.philo[0]));
+	marchinator(&table);
 	clear(&table);
 }

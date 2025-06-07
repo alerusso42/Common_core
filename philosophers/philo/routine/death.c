@@ -16,12 +16,12 @@ int	someone_else_died(t_philo *philo)
 {
 	if (philo->state == DEAD)
 		return (false);
-	get_current_time(&philo->time, &philo->current_time);
 	if (*philo->someone_died == true)
 	{
 		philo->state = DEAD;
 		return (true);
 	}
+	get_current_time(&philo->time, &philo->current_time);
 	if (philo->current_time - philo->last_meal_time >= \
 		philo->time_to_die * MSECONDS)
 	{

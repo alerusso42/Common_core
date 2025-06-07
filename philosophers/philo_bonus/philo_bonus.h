@@ -16,6 +16,16 @@
 #include <semaphore.h>
 #include <fcntl.h>
 
+#define SEM_NAME "sem"
+
+enum	e_action
+{
+	SLEEPING,
+	EATING,
+	THINKING,
+	FORK
+};
+
 typedef struct s_table	t_table;
 
 typedef struct s_philo
@@ -29,7 +39,9 @@ typedef struct s_philo
 
 typedef struct s_table
 {
-    sem_t				*sem;
+	t_philo				*philo;
+    sem_t				*fork_sem;
+	sem_t				*write_sem;
 	long				n_philo;
 	long				t_death;
 	long				t_eat;
@@ -37,7 +49,6 @@ typedef struct s_table
 	long				max_dinner;
 	long				start_program;
 	// bool				end_program;
-	// pid_t				*philo;
 }						t_table;
 
 int		parsing(char **argv);
@@ -46,5 +57,6 @@ void	init_table(t_table *table);
 void	clear(t_table *table);
 long	getcorrecttime(void);
 int		ft_wait(long pause);
+void	write_status(int action, t_philo *philo);
 
 #endif
