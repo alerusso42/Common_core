@@ -154,6 +154,7 @@ fi
 
 for file in "${real_files[@]}"; do
     hash_file="$(HASH_DATA)""hash_$file"
+    echo $hash_file
 
     # Skip if it's not a regular file
     [[ ! -f "$file" ]] && continue
