@@ -1,15 +1,26 @@
 #include "philo_bonus.h"
 
+void	open_sem(t_table *table)
+{
+	table->fork_sem = sem_open(SEM_NAME, O_CREAT, 0666, table->n_philo);
+    if (table->fork_sem == SEM_FAILED)
+		return (clear(table), exit(1));
+	sem_unlink(SEM_NAME);
+	table->write_sem = sem_open(SEM_NAME, O_CREAT, 0666, table->n_philo);
+    if (table->write_sem == SEM_FAILED)
+		return (clear(table), exit(1));
+	sem_unlink(SEM_NAME);
+}
+
 void	init_table(t_table *table)
 {
 	int	    i;
 	t_philo	*philo;
 
 	i = 0;
-	table->end_program = false;
 	table->philo = malloc(table->n_philo * (sizeof(t_philo)));
 	if (table->philo == NULL)
-		return (free(table->fork), printf("MALLOC HAS...FAILED?!"), exit(1));
+		return (printf("MALLOC HAS...FAILED?!"), exit(1));
     while (i != table->n_philo)
 	{
 		philo = table->philo + i;
@@ -20,16 +31,14 @@ void	init_table(t_table *table)
 		philo->table = table;
 		i++;
 	}
-	table->sem = sem_open(SEM_NAME, O_CREAT, 0666, table->n_philo);
-    if (table->sem == SEM_FAILED)
-		return (clear(table), exit(1));
-	sem_unlink(SEM_NAME);
+	open_sem(table);
 }
 
 void	clear(t_table *table)
 {
-	if (sem)
-		sem_close(table->sem);
-	free(table->fork);
+	if (table->fork_sem)
+		sem_close(table->fork_sem);
+	if (table->write_sem)
+		sem_close(table->write_sem);
 	free(table->philo);
 }

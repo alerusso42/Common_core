@@ -113,29 +113,27 @@
 // 	printf("MUHAHAHA\n");
 // }
 
-// int main(void)
-// {
-// 	pid_t	pid;
+int main(void)
+{
+	pid_t	pid;
 
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		while (1)
-// 		{
-// 			printf("MAMMA MIA SONO GAY\n");
-// 			sleep(1);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		sleep(5);
-// 		kill(pid, SIGSTOP);
-// 		write(1, "freeze\n", 7);
-// 		sleep(5);
-// 		write(1, "jk\n", 3);
-// 		kill(-1, SIGKILL);
-// 	}
-// 	sleep(20);
-// 	kill(pid, SIGKILL);
-// 	printf("QUANDO VAI ALL'INFERNO DI CHE TI HA MANDATO ALERUSSO\n");
-// }
+	pid = fork();
+	if (pid == 0)
+	{
+		while (1)
+		{
+			printf("MAMMA MIA SONO GAY\n");
+			sleep(1);
+		}
+	}
+	else
+	{
+		kill(pid, SIGSTOP);
+		write(1, "freeze\n", 7);
+		write(1, "jk\n", 3);
+		kill(-1, SIGKILL);
+	}
+	sleep(20);
+	kill(pid, SIGKILL);
+	printf("QUANDO VAI ALL'INFERNO DI CHE TI HA MANDATO ALERUSSO\n");
+}
