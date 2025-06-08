@@ -3,6 +3,10 @@
 # Path to the SETTINGS file
 SETTINGS="SETTINGS.md"
 
+# Directory in which to store all hash files (relative or absolute path)
+HASH_DIR=".private/hash_data"
+PROG_DIR="./private/program"
+
 # Markers in SETTINGS.md that delimit the FLAGS and ENUM sections
 MARKER="# -- FLAGS -- #"
 MARKER2="# -- ENUM -- #"
@@ -95,18 +99,18 @@ while IFS= read -r line; do
 done < "$SETTINGS"
 
 # -----------------------------------------------------------------------------
-# STEP 4: Discover all “data” files on disk (excluding hash_data, source, and .md)
-#         and save into the array real_files.
+# STEP 4: Discover all “data” files on disk (excluding $HASH_DIR, program, and .md)
 # -----------------------------------------------------------------------------
 mapfile -t real_files < <(
-    find . \( -path './hash_data' -o -path './program' \) -prune -o -type f \
-        ! -name "*.sh" \
-        ! -name "*.c" \
-        ! -name "*.h" \
-        ! -name "*.o" \
-        ! -name "Makefile" \
-        ! -name "*.md" \
-        -printf "%P\n"
+  find . \( -path "./$HASH_DIR" -o -path $PROG_DIR \) -prune -o -type f \
+      ! -name "*.sh" \
+      ! -name "*.c" \
+      ! -name "*.h" \
+      ! -name "*.o" \
+      ! -name "Makefile" \
+      ! -name "*.md" \
+	  ! -name "*.json" \
+      -printf "%P\n"
 )
 
 # -----------------------------------------------------------------------------
@@ -132,7 +136,8 @@ for key in "${!entries[@]}"; do
         unset entries["$key"]
         echo -ne "\e[33m$key \e[0m"
         echo "deleted from settings"
-        hash_file="hash_${key}"
+  	    clean="${file#data/}"
+		hash_file="${HASH_DIR}/${clean}"
         rm -rf "$hash_file"
         exit_message=1
     fi
@@ -198,7 +203,8 @@ fi
 i="-1"
 for file in "${real_files[@]}"; do
 	((++i))
-    hash_file="hash_$file"
+    clean="${file#data/}"
+	hash_file="${HASH_DIR}/${clean}"
     # Skip if it somehow isn’t a regular file
     [[ ! -f "$file" ]] && continue
 
@@ -214,6 +220,7 @@ for file in "${real_files[@]}"; do
         echo -n "$delim" > "$hash_file"
         echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
+		
         $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
@@ -225,7 +232,7 @@ for file in "${real_files[@]}"; do
 
     if [[ "$file_time" -ne "$hash_time" ]]; then
         # Data file changed: overwrite delimiter in hash file and rebuild
-        echo -n "$delim" > "$hash_file"
+		echo -n "$delim" > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
@@ -238,7 +245,7 @@ for file in "${real_files[@]}"; do
     old_delim=$(head -c 1 "$hash_file")
     if [[ "$delim" != "$old_delim" ]]; then
         # Delimiter changed: overwrite first byte and rebuild
-        echo -n "$delim" > "$hash_file"
+		echo -n "$delim" > "$hash_file"
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
@@ -252,7 +259,8 @@ done
 # STEP 11: Sync hash file timestamps to match data file timestamps
 # -----------------------------------------------------------------------------
 for file in "${real_files[@]}"; do
-    hash_file="hash_$file"
+	clean="${file#data/}"
+	hash_file="${HASH_DIR}/${clean}"
     [[ -f "$file" && -f "$hash_file" ]] && touch -r "$file" "$hash_file"
 done
 

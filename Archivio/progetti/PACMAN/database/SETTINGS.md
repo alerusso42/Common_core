@@ -24,4 +24,4 @@ QUIET->n
 # -- FLAGS -- #
 data/pokedex/pokedex.txt->=nn=,
 # -- ENUM -- #
-data/pokedex/pokedex.txt->POKEDEX_POKEDEX
+data/pokedex/pokedex.txt->POKEDEX
