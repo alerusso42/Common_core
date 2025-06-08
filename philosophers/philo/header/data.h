@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/08 12:58:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:11:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-typedef enum e_time	t_time;
+typedef struct s_data	t_data;
+typedef struct s_philo	t_philo;
 
 /*
 //	MESSAGES
@@ -31,7 +32,7 @@ typedef enum e_time	t_time;
 /*
 //	This defines the pause from a monitor check and another
 */
-# define MONITOR_TIMER 3 * MSECONDS
+# define MONITOR_TIMER 10e3
 
 enum e_error
 {
@@ -90,9 +91,6 @@ enum e_color
 	BOLD_WHITE = 97,
 };
 
-typedef struct s_data	t_data;
-typedef struct s_philo	t_philo;
-
 //philo * is an array of philosophers data structures
 //threads * is an array of threads
 //forks * is an array of forks
@@ -107,16 +105,16 @@ struct s_data
 	struct timeval	time;
 	t_philo			*philo;
 	pthread_t		*threads;
-	pthread_t		monitor;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*generic_mutex;
 	long long int	philo_num;
 	long long int	time_to_die;
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
 	long long int	number_of_times_each_philosopher_must_eat;
 	long long int	current_time;
+	pthread_t		monitor;
 	pthread_mutex_t	write_mutex;
-	pthread_mutex_t	generic_mutex;
 	unsigned char	someone_died;
 };
 
@@ -142,6 +140,7 @@ struct s_philo
 	unsigned char	state:3;
 	unsigned char	last_philo:1;
 	unsigned char	turn_to_eat:1;
+	unsigned char	death:1;
 };
 
 #endif

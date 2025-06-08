@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 11:52:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:48:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	alloc_memory(t_data *data, long long int philo_num)
 	num += 1;
 	data->forks = (pthread_mutex_t *)ft_calloc(num, sizeof(pthread_mutex_t));
 	if (!data->forks)
+		return (ER_MALLOC);
+	data->generic_mutex = (pthread_mutex_t *)ft_calloc(num, \
+		sizeof(pthread_mutex_t));
+	if (!data->generic_mutex)
 		return (ER_MALLOC);
 	data->threads = (pthread_t *) \
 	ft_calloc(num, sizeof(pthread_t));
@@ -66,6 +70,11 @@ void	reset_memory(t_data	*data)
 	{
 		free(data->forks);
 		data->forks = NULL;
+	}
+	if (data->generic_mutex)
+	{
+		free(data->generic_mutex);
+		data->generic_mutex = NULL;
 	}
 	if (data->threads)
 	{
