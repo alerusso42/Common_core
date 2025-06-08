@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:02:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 11:58:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:53:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ int				parsing(t_data *data, int argc, char *argv[]);
 
 //	ROUTINE
 
-int				eat(t_philo *philo);
-int				someone_else_died(t_philo *philo);
 void			*routine(void *ptr);
+void			*monitor(void *ptr);
+int				eat(t_philo *philo);
+int				philo_lives(t_philo *philo);
+int				someone_died(t_philo *philo);
+void			kill_everyone(t_data *data, int which, bool *everyone_lives);
 int				p_state(t_philo *philo, int state);
 
 //	UTILS

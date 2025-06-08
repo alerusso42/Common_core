@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:20:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/07 10:47:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:29:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ int	p_state(t_philo *philo, int state)
 		return (DEAD);
 	pthread_mutex_lock(philo->write_mutex);
 	get_current_time(&philo->time, &philo->current_time);
-	if (someone_else_died(philo) == true)
+	if (someone_died(philo) == true)
 	{
 		return (pthread_mutex_unlock(philo->write_mutex));
 	}
 	get_current_time(&philo->time, &philo->current_time);
-	if (philo->state == DEAD)
-		l_printf(M_DEAD, philo->current_time / MS, philo->id);
-	else if (state == THINK)
+	if (state == THINK)
 		l_printf(M_THINK, philo->current_time / MS, philo->id);
 	else if (state == EAT)
 		l_printf(M_EAT, philo->current_time / MS, philo->id);

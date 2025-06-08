@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:33:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 11:53:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:53:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ void	*lonely_philo(t_philo *philo)
 {
 	p_state(philo, FORK);
 	ft_wait(philo->time_to_die * MSECONDS);
-	p_state(philo, DEAD);
 	return (NULL);
 }
 
 static void	*routine_loop(t_philo *philo, int meals, int max)
 {
-	while (meals != max && philo->state != DEAD)
+	while (meals != max && philo_lives(philo))
 	{
 		if (philo->turn_to_eat == philo->id % 2)
 		{

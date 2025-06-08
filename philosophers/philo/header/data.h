@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 12:05:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:58:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
+typedef enum e_time	t_time;
+
 /*
 //	MESSAGES
 */
@@ -25,6 +27,11 @@
 # define M_SLEEP "%d %d is sleeping\n"
 # define M_FORK "%d %d has taken a fork\n"
 # define M_DEAD "%d %d died\n"
+
+/*
+//	This defines the pause from a monitor check and another
+*/
+# define MONITOR_TIMER 3 * MSECONDS
 
 enum e_error
 {
@@ -39,11 +46,14 @@ enum e_error
 	ER_PTHREAD_CREATE,
 };
 
+/*
 //	MS Stands for MilliSeconds
 //	Time during philo print is in microseconds.
 //	MS divides time before print
+*/
 enum e_time
 {
+	MICROSECONDS = 1,
 	MS = 1000,
 	MSECONDS = 1000,
 	SECONDS = 1000000,
@@ -97,13 +107,16 @@ struct s_data
 	struct timeval	time;
 	t_philo			*philo;
 	pthread_t		*threads;
+	pthread_t		monitor;
 	pthread_mutex_t	*forks;
 	long long int	philo_num;
 	long long int	time_to_die;
 	long long int	time_to_eat;
 	long long int	time_to_sleep;
 	long long int	number_of_times_each_philosopher_must_eat;
+	long long int	current_time;
 	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	generic_mutex;
 	unsigned char	someone_died;
 };
 
@@ -117,6 +130,7 @@ struct s_philo
 	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*write_mutex;
+	pthread_mutex_t	*generic_mutex;
 	long long int	philo_num;
 	long long int	time_to_die;
 	long long int	time_to_eat;

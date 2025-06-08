@@ -13,6 +13,7 @@ SRC = 	main.c \
 		utils/time.c \
 		routine/eat.c \
 		routine/death.c \
+		routine/monitor.c \
 		routine/print.c  \
 		routine/routine.c \
 
