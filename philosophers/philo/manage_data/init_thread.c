@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 16:38:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 21:22:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	create_philos(t_data *data)
 		if (pthread_create(&data->threads[i], NULL, routine, \
 			(void *)&data->philo[i]) != 0)
 			return (ER_PTHREAD_CREATE);
-		ft_wait(5 * MICROSECONDS);
+		ft_wait(100);
 		++i;
 	}
 	return (0);

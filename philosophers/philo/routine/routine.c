@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:33:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 17:19:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 21:15:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static void	*routine_loop(t_philo *philo, int meals, int max)
 				break ;
 			p_state(philo, SLEEP);
 			ft_wait(philo->time_to_sleep * MSECONDS);
-			ft_wait(300);
+			ft_wait(00);
 		}
 		else
 		{
-			ft_wait(300);
+			ft_wait(00);
 		}
 		philo->turn_to_eat++;
 	}
