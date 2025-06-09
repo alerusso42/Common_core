@@ -1,14 +1,14 @@
 #include "philo_bonus.h"
 
-static bool	check(t_philo *philo)
-{
-	long	time;
+// static bool	check(t_philo *philo)
+// {
+// 	long	time;
 
-	time = getcorrecttime();
-	if ((time - philo->last_dinner_time) >= philo->table->t_death / 1000)
-		return (true);
-	return (false);
-}
+// 	time = getcorrecttime();
+// 	if ((time - philo->last_dinner_time) >= philo->table->t_death / 1000)
+// 		return (true);
+// 	return (false);
+// }
 
 void	write_status(int action, t_philo *philo)
 {
@@ -16,15 +16,15 @@ void	write_status(int action, t_philo *philo)
 
 	if (philo->full)
 		return ;
-	time = (getcorrecttime() - philo->table->start_program);
 	sem_wait(philo->table->write_sem);
-	if (check(philo))
-	{
-		printf("%-6ld %-2d has died\n", time, philo->id);
-		sem_post(philo->table->write_sem);
-		clear(philo->table);
-		exit(69);
-	}
+	time = (getcorrecttime() - philo->table->start_program);
+	// if (check(philo))
+	// {
+	// 	printf("%-6ld %-2d died\n", time, philo->id);
+	// 	//sem_post(philo->table->write_sem);
+	// 	clear(philo->table);
+	// 	exit(69);
+	// }
 	if (action == FORK)
 		printf("%-6ld %-2d has taken a fork\n", time, philo->id);
 	else if (action == THINKING)
@@ -72,14 +72,6 @@ long	ft_atol(const char *nptr)
 	return (ft_number_long(nptr, x, sign));
 }
 
-long	getcorrecttime(void)
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((long)((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3)));
-}
-
 int	ft_wait(long pause)
 {
 	struct timeval	start;
@@ -99,4 +91,12 @@ int	ft_wait(long pause)
 			usleep(rem / 2);
 	}
 	return (0);
+}
+
+long	getcorrecttime(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((long)((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3)));
 }

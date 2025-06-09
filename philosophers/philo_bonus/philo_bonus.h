@@ -18,12 +18,19 @@
 
 #define SEM_NAME "sem"
 
+enum	e_forks
+{
+	LOCK,
+	UNLOCK,
+};
+
 enum	e_action
 {
 	SLEEPING,
 	EATING,
 	THINKING,
-	FORK
+	FORK,
+	FULL,
 };
 
 typedef struct s_table	t_table;
@@ -40,8 +47,11 @@ typedef struct s_philo
 typedef struct s_table
 {
 	t_philo				*philo;
+	pthread_t			*guardian;
     sem_t				*fork_sem;
 	sem_t				*write_sem;
+	pthread_mutex_t		mutex;
+	//pid_t				*pid_array;
 	long				n_philo;
 	long				t_death;
 	long				t_eat;
@@ -58,5 +68,13 @@ void	clear(t_table *table);
 long	getcorrecttime(void);
 int		ft_wait(long pause);
 void	write_status(int action, t_philo *philo);
+int		eat_and_sleep(t_philo *philo);
+void	think(t_philo *philo);
+void	lonely_boy(t_philo *philo);
+void    marchinator(t_table *table);
+void	set_bool(pthread_mutex_t *mutex, bool *dest, bool value);
+bool	get_bool(pthread_mutex_t *mutex, bool *value);
+void	set_long(pthread_mutex_t *mutex, long *dest, long value);
+long	get_long(pthread_mutex_t *mutex, long *value);
 
 #endif

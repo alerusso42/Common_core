@@ -128,10 +128,10 @@ int main(void)
 	}
 	else
 	{
-		kill(pid, SIGSTOP);
+		kill(pid, SIGKILL);
 		write(1, "freeze\n", 7);
 		write(1, "jk\n", 3);
-		kill(-1, SIGKILL);
+		kill(0, SIGKILL);
 	}
 	sleep(20);
 	kill(pid, SIGKILL);
