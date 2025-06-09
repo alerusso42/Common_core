@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 17:02:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:01:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ enum e_error
 */
 enum e_time
 {
-	MICROSECONDS = 1,
-	MS = 1000,
-	MSECONDS = 1000,
-	SECONDS = 1000000,
-	MINUTES = 6000000,
+	MICROSECONDS = 1LL,
+	MS = 1000LL,
+	MSECONDS = 1000LL,
+	SECONDS = 1000000LL,
+	MINUTES = 6000000LL,
 };
 
 enum e_philo_state
@@ -121,7 +121,6 @@ struct s_data
 
 //state represents enum e_state (DEAD, THINK, EATING...)
 //id of philo starts at ZERO
-//turn to eat is a bit field of 1 bit: it can be 0 or 1
 struct s_philo
 {
 	struct timeval	time;

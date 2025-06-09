@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:54:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 21:25:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 22:04:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	kill_everyone(t_data *data, int which, int *everyone_lives)
 	int		i;
 	bool	someone_full;
 
-	get_current_time(&data->time, &data->current_time);
-	fd_printf(2, "\n%d\n", data->current_time / MS);
 	i = 0;
 	someone_full = false;
 	while (i != data->philo_num)

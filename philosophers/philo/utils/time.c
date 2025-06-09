@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 11:39:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 11:52:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:16:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	get_current_time(struct timeval *start, long long int *current)
 			our current parameter, we'll have delays.
 */
 int	ft_wait(long long int pause)
-{
+{/*
 	struct timeval	start;
 	struct timeval	curr;
 	long long int	rem;
@@ -110,6 +110,8 @@ int	ft_wait(long long int pause)
 		if (rem > 1000)
 			usleep(rem / 2);
 	}
+	*/
+	usleep((int)pause);
 	return (0);
 }
 

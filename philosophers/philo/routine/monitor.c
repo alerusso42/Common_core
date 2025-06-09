@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:24:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 21:31:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:06:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ static void	monitor_loop(t_data *data, int i, int everyone_lives)
 	{
 		ft_wait(MONITOR_TIMER);
 		i = 0;
+		get_current_time(&data->time, &data->current_time);
 		while (i != data->philo_num && everyone_lives)
 		{
 			pthread_mutex_lock(&data->generic_mutex[i]);
-			get_current_time(&data->time, &data->current_time);
+			//fd_printf(2, "\n%d\n", data->current_time / MS);//FIXME - 
 			if (data->current_time - data->philo[i].last_meal_time >= \
 			data->philo[i].time_to_die * MSECONDS)
 			{
