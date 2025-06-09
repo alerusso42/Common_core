@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 12:20:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:02:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ enum e_philo_state
 	SLEEP = 2,
 	FORK = 3,
 	DEAD = 4,
+	FULL = 5,
 };
 
 enum e_color
@@ -137,9 +138,9 @@ struct s_philo
 	long long int	last_meal_time;
 	int				number_of_times_each_philosopher_must_eat;
 	int				id;
+	int				turn_to_eat;
 	unsigned char	state;
 	unsigned char	last_philo;
-	unsigned char	turn_to_eat;
 	unsigned char	death;
 };
 
