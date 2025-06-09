@@ -6,18 +6,12 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 22:41:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:18:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/header.h"
 
-/*
-	ISSUES: every philo needs a global mutex (to write)
-			and a mutex for every fork.
-			Change the data struct, the allocation and
-			remove the forks string.
-*/
 int	main(int argc, char *argv[])
 {
 	int			err_type;
