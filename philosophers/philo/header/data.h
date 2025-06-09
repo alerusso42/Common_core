@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/08 17:11:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:20:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,10 @@ struct s_philo
 	long long int	last_meal_time;
 	int				number_of_times_each_philosopher_must_eat;
 	int				id;
-	unsigned char	state:3;
-	unsigned char	last_philo:1;
-	unsigned char	turn_to_eat:1;
-	unsigned char	death:1;
+	unsigned char	state;
+	unsigned char	last_philo;
+	unsigned char	turn_to_eat;
+	unsigned char	death;
 };
 
 #endif

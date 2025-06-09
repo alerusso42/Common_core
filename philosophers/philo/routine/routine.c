@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:33:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/08 15:58:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:01:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	*routine_loop(t_philo *philo, int meals, int max)
 {
 	while (meals != max && philo_lives(philo))
 	{
-		if (philo->turn_to_eat == philo->id % 2)
+		if (philo->turn_to_eat % 2)
 		{
 			eat(philo);
 			++meals;
