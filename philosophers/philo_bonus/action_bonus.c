@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 11:01:22 by alerusso          #+#    #+#             */
+/*   Updated: 2025/06/10 11:01:23 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
 int	eat_and_sleep(t_philo *philo)
@@ -12,7 +24,7 @@ int	eat_and_sleep(t_philo *philo)
 	sem_post(philo->table->fork_sem);
 	philo->meal_counter++;
 	if (philo->meal_counter == philo->table->max_dinner)
-		return (FULL);
+		return (set_bool(&philo->deadlock, &philo->full, true), FULL);
 	set_long(&philo->table->mutex, &philo->last_dinner_time, \
 	getcorrecttime());
 	write_status(SLEEPING, philo);

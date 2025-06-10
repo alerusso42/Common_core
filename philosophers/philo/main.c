@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:06:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 23:18:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:50:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char *argv[])
 	err_type = parsing(&data, argc, argv);
 	if (err_type != 0)
 		return (error(&data, err_type));
-	printf("DEBUG: died=%lld ms, eat=%lld ms, sleep=%lld ms\n",data.time_to_die, data.time_to_eat, data.time_to_sleep);
 	err_type = start_threads(&data);
 	if (err_type != 0)
 		return (error(&data, err_type));

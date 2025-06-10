@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:54:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 22:04:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:59:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/header.h"
 
+//to avoid unnecessary locks, the data raise safe variable philo->death is set.
 int	philo_lives(t_philo *philo)
 {
 	int	is_alive;
@@ -28,6 +29,8 @@ int	philo_lives(t_philo *philo)
 	return (is_alive);
 }
 
+//enter here when monitor detects someone should die.
+//if someone is full, it does not print anything.
 void	kill_everyone(t_data *data, int which, int *everyone_lives)
 {
 	int		i;

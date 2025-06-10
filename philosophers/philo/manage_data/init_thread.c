@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:57:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 22:05:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:52:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	create_philos(t_data *data);
 int	init_mutex(t_data *data);
 
+//here starts the program timer
 int	start_threads(t_data *data)
 {
 	int		err;
@@ -50,6 +51,8 @@ int	create_philos(t_data *data)
 	return (0);
 }
 
+//TRICK
+//after mutex are initialized, the last philo forks are swapped
 int	init_mutex(t_data *data)
 {
 	int				i;

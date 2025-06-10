@@ -1,80 +1,93 @@
-#include "philo_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 11:01:56 by alerusso          #+#    #+#             */
+/*   Updated: 2025/06/10 11:01:57 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	*death_guardian(void *philo);
+#include "philo_bonus.h"
 
 void	routine(t_philo *philo)
 {
+	philo->table->guardian = malloc(sizeof(pthread_t));
 	philo->last_dinner_time = philo->table->start_program;
-	pthread_create(philo->table->guardian, NULL, death_guardian, (void *)philo);
-	while (1)
+	pthread_create(philo->table->guardian, NULL, death_guardian, philo);
+	pthread_detach(*philo->table->guardian);
+	while (get_bool(&philo->deadlock, &philo->is_dead) == false)
 	{
 		ft_wait(100);
 		if (eat_and_sleep(philo) == FULL)
+		{
+			ft_wait(50);
+			free(philo->table->guardian);
+			clear(philo->table);
 			exit(0);
-		think(philo);
+		}
+		if (get_bool(&philo->deadlock, &philo->is_dead) == false)
+			think(philo);
+		else
+			break ;
 	}
+	free(philo->table->guardian);
+	clear(philo->table);
+	exit(69);
 }
 
-void    marchinator(t_table *table)
+void		wait_everyone(t_table *table);
+
+void	marchinator(t_table *table)
 {
-	pid_t   philo;
-	int     i;
-	int     status;
+	int			i;
+	pthread_t	thread_id;
 
 	i = 0;
 	table->start_program = getcorrecttime();
 	while (i < table->n_philo)
 	{
-		philo = fork();
-		if (philo == -1)
+		table->pid_array[i] = fork();
+		if (table->pid_array[i] == -1)
 			return (clear(table), exit(1));
-		if (philo == 0)
-		{
+		if (table->pid_array[i] == 0)
 			routine(&table->philo[i]);
-		}
 		++i;
 		ft_wait(10);
 	}
-	while ((waitpid(-1, &status, WUNTRACED) != -1) && i)
+	table->pid_array[i] = 0;
+	pthread_create(&thread_id, NULL, jack_the_reaper, (void *)table);
+	wait_everyone(table);
+	sem_post(table->death_sem);
+	pthread_join(thread_id, NULL);
+}
+
+void	wait_everyone(t_table *table)
+{
+	int	status;
+	int	i;
+
+	status = 0;
+	i = 0;
+	while (table->pid_array[i] && (waitpid(-1, &status, WUNTRACED) != -1))
 	{
 		if (status / 256 == 69)
 		{
-			kill(0, SIGKILL);
-			printf("HAHAHA SONO INVINCIBILE");
+			while (i < table->n_philo)
+			{
+				mutex_handle(&table->mutex, LOCK);
+				if (table->pid_array[i])
+					kill(table->pid_array[i], SIGKILL);
+				mutex_handle(&table->mutex, UNLOCK);
+				++i;
+			}
 			break ;
 		}
-		--i;
+		mutex_handle(&table->mutex, LOCK);
+		table->pid_array[i] = 0;
+		mutex_handle(&table->mutex, UNLOCK);
+		++i;
 	}
-}
-
-static bool	check(t_philo *philo, long time_eat)
-{
-	long	time;
-
-	time = getcorrecttime();
-	if ((time - time_eat) >= philo->table->t_death)
-		return (true);
-	return (false);
-}
-
-void	*death_guardian(void *data)
-{
-	t_philo	*philo;
-	long	time;
-
-	philo = (t_philo *)data;
-	while (1)
-	{
-		ft_wait(100);
-		time = get_long(&philo->table->mutex, &philo->last_dinner_time);
-		if (check(philo, time))
-		{
-			sem_wait(philo->table->write_sem);
-			printf("%-6ld %-2d died\n", time, philo->id);
-			//sem_post(philo->table->write_sem);
-			clear(philo->table);
-			exit(69);
-		}
-	}
-	return (NULL);
 }

@@ -1,14 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 11:02:03 by alerusso          #+#    #+#             */
+/*   Updated: 2025/06/10 11:02:04 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
-
-// static bool	check(t_philo *philo)
-// {
-// 	long	time;
-
-// 	time = getcorrecttime();
-// 	if ((time - philo->last_dinner_time) >= philo->table->t_death / 1000)
-// 		return (true);
-// 	return (false);
-// }
 
 void	write_status(int action, t_philo *philo)
 {
@@ -18,13 +20,6 @@ void	write_status(int action, t_philo *philo)
 		return ;
 	sem_wait(philo->table->write_sem);
 	time = (getcorrecttime() - philo->table->start_program);
-	// if (check(philo))
-	// {
-	// 	printf("%-6ld %-2d died\n", time, philo->id);
-	// 	//sem_post(philo->table->write_sem);
-	// 	clear(philo->table);
-	// 	exit(69);
-	// }
 	if (action == FORK)
 		printf("%-6ld %-2d has taken a fork\n", time, philo->id);
 	else if (action == THINKING)

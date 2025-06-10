@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:24:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 23:06:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:54:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	*monitor(void *data_ptr)
 	return (NULL);
 }
 
+//MONITOR_TIME is set to 10e3: subject requires not more than 10 MS
 static void	monitor_loop(t_data *data, int i, int everyone_lives)
 {
 	while (everyone_lives)
@@ -37,7 +38,6 @@ static void	monitor_loop(t_data *data, int i, int everyone_lives)
 		while (i != data->philo_num && everyone_lives)
 		{
 			pthread_mutex_lock(&data->generic_mutex[i]);
-			//fd_printf(2, "\n%d\n", data->current_time / MS);//FIXME - 
 			if (data->current_time - data->philo[i].last_meal_time >= \
 			data->philo[i].time_to_die * MSECONDS)
 			{

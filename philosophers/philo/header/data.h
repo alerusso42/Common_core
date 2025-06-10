@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:17:53 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/09 23:01:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:48:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo	t_philo;
 //	This defines the pause from a monitor check and another
 */
 # define MONITOR_TIMER 10e3
+# define TIME_THINK 150
 
 enum e_error
 {
@@ -94,13 +95,19 @@ enum e_color
 
 //philo * is an array of philosophers data structures
 //threads * is an array of threads
-//forks * is an array of forks
+//forks * is an array of forks (mutex)
+//generic_mutex * is an array of mutex
 //
 //times are long long to manage atoi errors
 //someone died is updated by philosophers after death
 //
 //write mutex is used by philos to write and check if others died
 //to check if others died they use a ptr to someone died
+//
+//generic mutex is used for:
+//- philo->last_meal_time
+//- philo->state
+//otherwise data raise between monitor and philos would occur
 struct s_data
 {
 	struct timeval	time;
