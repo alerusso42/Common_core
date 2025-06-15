@@ -95,34 +95,23 @@ $(O_DIR):
 # 11) How to compile ANY “src/NAME.c” → “obj/NAME.o”
 # ------------------------------------------------
 
-# 10a) Libft
+# 11a) Libft
 $(LIBFT_OBJ_DIR)/%.o: $(ROOT)/Libft/%.c | $(O_DIR)
-	@echo "Compiling Libft: $< → $@"
 	$(COMP) $(CFLAGS) -c $< -o $@
 
-# 10b) Prep
+# 11b) Prep
 $(PREP_OBJ_DIR)/%.o: prep_src/%.c | $(O_DIR)
-	@echo "Compiling prep: $< → $@"
 	$(COMP) $(CFLAGS) -c $< -o $@
 
-# 10c) Daft
+# 11c) Daft
 $(DAFT_OBJ_DIR)/%.o: daft_src/%.c | $(O_DIR)
-	@echo "Compiling daft: $< → $@"
 	$(COMP) $(CFLAGS) -c $< -o $@
 
-# ------------------------------------------------
-# 12) Remove just the object‐directory
-# ------------------------------------------------
 clean:
 	rm -rf $(O_DIR)
 
-# ------------------------------------------------
-# 13) Remove objects AND the binary itself
-# ------------------------------------------------
 fclean: clean
 	rm -f $(PREP) $(DAFT)
 
-# ------------------------------------------------
-# 14) “Rebuild from scratch”
-# ------------------------------------------------
 re: fclean all
+.SILENT: 

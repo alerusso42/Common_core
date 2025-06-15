@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/15 20:31:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/15 22:17:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-#include "lib.h"
+#include "../lib.h"
 # include "structs.h"
 
 typedef long long int	t_int64;

@@ -18,6 +18,9 @@
 "files.associations": {
 	"mfile_gnl.h": "c",
 	"structs.h": "c",
-	"all.h": "c"
+	"all.h": "c",
+	"daft.h": "c",
+	"libft.h": "c",
+	"lib.h": "c"
 }
 }
