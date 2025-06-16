@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft_utils_debug.c                                 :+:      :+:    :+:   */
+/*   daft_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 15:12:21 by alerusso         ###   ########.fr       */
+/*   Created: 2025/06/16 12:01:17 by alerusso          #+#    #+#             */
+/*   Updated: 2025/06/16 19:49:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../daft/daft.h"
 
-int	_daft_log(int log)
+/*
+cc $(sdl2-config --cflags) -Wall -Wextra -Werror -g daft_test.c ../daft/daft.a $(sdl2-config --libs)
+*/
+int	main()
 {
-	t_daft_data	*data;
-
-	data = _daft_get_memory(NULL, false);
-	if (!data)
-		return (log);
-	if (log > DAFT_ERRORS)
-		data->last_error = log;
-	if (data->conf.debug_log == false)
-		return (log);
-	return (log);
+	daft_init();
+	daft_quit();
 }

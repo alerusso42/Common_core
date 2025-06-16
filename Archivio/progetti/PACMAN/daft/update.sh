@@ -5,20 +5,21 @@ exit_message=0
 
 # Path to the SETTINGS file
 SETTINGS="SETTINGS.md"
+DAFT_HEADER="daft.h"
 
 UPDATE="update.sh"
-PWD="/home/alerusso/Common_core/Archivio/progetti/PACMAN/database"
+PWD="/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
 
 # Directory in which to store all hash files (relative or absolute path)
 HASH_DIR=".private/hash_data"
-PROG_DIR="./private/program"
+PROG_DIR="./.private/program"
 
 # Markers in SETTINGS.md that delimit the FLAGS and ENUM sections
 MARKER="# -- FLAGS -- #"
 MARKER2="# -- ENUM -- #"
 
 # Command (or placeholder) to build a hash for a data file
-INIT_HASH="echo"
+INIT_HASH="$PROG_DIR""/prep.out"
 
 # Default delimiter (overridden by DEFAULT_FLAGS in SETTINGS.md)
 DELIM="."
@@ -50,12 +51,92 @@ TMPFILE=$(mktemp)
         # Replace the entire line, whatever came after PWD->
         echo -ne "\e[33mPwd has changed!\n\e[0m"
 		echo -ne "\e[33mUpdating daft obj files...\t\e[0m"
+   		 # 1) Remove any old daft_pwd extern or macro lines from the header
+   		 sed -i '/^[[:space:]]*extern[[:space:]]\+char[[:space:]]\*\s*daft_pwd.*;/d' "$DAFT_HEADER"
+   		 sed -i '/^[[:space:]]*#define[[:space:]]\+DAFT_PWD\s\+.*$/d' "$DAFT_HEADER"
+   		 # 2) Insert the new #define immediately after the globals marker
+   		 sed -i "/\/\/SECTION - Global variables/ a \
+		#define DAFT_PWD $current_pwd" "$DAFT_HEADER"
 		(cd .private/program && make re) || exit 2
 		echo -ne "\e[34mDone!\n\e[0m"
 		sed -i "s|^PWD=.*|PWD=${current_pwd}|" "$UPDATE"
 		pwd_changed=1
 		exit_message=1
     fi
+
+# -----------------------------------------------------------------------------
+# STEP 12: Update daft.h’s enum block
+#   a) Save everything in daft.h after the final “}” into header_tail[]
+#   b) Generate new enum lines from SETTINGS.md’s “# -- ENUM -- #” section
+#   c) Remove old enum block from daft.h and insert the new lines
+#   d) Append back the saved header_tail lines (everything after the closing brace)
+# -----------------------------------------------------------------------------
+
+
+
+# (a) Read and save all lines following the closing “}” in daft.h
+declare -a header_tail
+found_endmark=0
+i=0
+
+while IFS= read -r line; do
+    # Once we find the closing brace “}”, start saving all subsequent lines
+    if [[ "$line" == "}" ]]; then
+        header_tail[$i]="$line"
+        ((i++))
+        found_endmark=1
+        continue
+    fi
+    if [[ $found_endmark -eq 1 ]]; then
+        header_tail[$i]="$line"
+        ((i++))
+    fi
+done < "$DAFT_HEADER"
+
+# (b) Extract ENUM entries from SETTINGS.md into TMP_ENUM
+TMP_ENUM=$(mktemp)
+found_enum=0
+
+while IFS= read -r line; do
+    if [[ "$line" == "# -- ENUM -- #" ]]; then
+        found_enum=1
+        continue
+    fi
+    # End if we hit a blank line after starting to capture
+    if [[ $found_enum -eq 1 && "$line" == "" ]]; then
+        break
+    fi
+    if [[ $found_enum -eq 1 && "$line" == *"->"* ]]; then
+        # Extract the Enum name (the part after “->”)
+        enum_name="${line#*->}"
+        # Prepare a line with a leading tab for Norminette, e.g. “\tPOKEDEX,”
+        printf "\t%s,\n" "$enum_name" >> "$TMP_ENUM"
+    fi
+done < "$SETTINGS"
+
+# Sort alphabetically
+sort "$TMP_ENUM" -o "$TMP_ENUM"
+
+# (c) Remove everything between “{” and “}” (exclusive) in daft.h,
+#     but preserve the braces themselves.
+awk '/\{/{print; in_block=1; next}
+     /\}/{in_block=0; print; next}
+     !in_block' "$DAFT_HEADER" > "$DAFT_HEADER.tmp" && mv "$DAFT_HEADER.tmp" "$DAFT_HEADER"
+
+# Insert the new enum lines immediately after “{”
+sed -i "/{/ r $TMP_ENUM" "$DAFT_HEADER"
+
+# Delete the temporary enum file
+rm "$TMP_ENUM"
+
+# (d) Append back the saved tail lines (everything after “}”)
+for line in "${header_tail[@]}"; do
+    echo "$line" >> "$DAFT_HEADER"
+done
+
+# -----------------------------------------------------------------------------
+# STEP 14: Inject the daft_pwd global under “//SECTION - Global variables”
+# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # STEP 1: Copy everything up to and including the “# -- FLAGS -- #” marker
@@ -124,6 +205,7 @@ mapfile -t real_files < <(
       ! -name "*.c" \
       ! -name "*.h" \
       ! -name "*.o" \
+      ! -name "*.a" \
 	  ! -name "*.out" \
       ! -name "Makefile" \
       ! -name "*.md" \
@@ -238,7 +320,7 @@ for file in "${real_files[@]}"; do
         echo -n "$delim" > "$hash_file"
         echo -ne "\e[33m$hash_file \e[0m"
         echo -e "\e[34mdoes not exist. Creating it...\e[0m"
-		
+		echo  $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
@@ -254,6 +336,7 @@ for file in "${real_files[@]}"; do
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
+		echo  $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
@@ -267,6 +350,7 @@ for file in "${real_files[@]}"; do
         echo -ne "\e[34mUpdating \e[0m"
         echo -ne "\e[33m$file \e[0m"
         echo -e "\e[34mhash_data...\e[0m"
+		echo  $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}" "$HASH_SIZE"
         exit_message=1
         continue
@@ -281,88 +365,6 @@ for file in "${real_files[@]}"; do
 	hash_file="${HASH_DIR}/${clean}"
     [[ -f "$file" && -f "$hash_file" ]] && touch -r "$file" "$hash_file"
 done
-
-# -----------------------------------------------------------------------------
-# STEP 12: Update daft.h’s enum block
-#   a) Save everything in daft.h after the final “}” into header_tail[]
-#   b) Generate new enum lines from SETTINGS.md’s “# -- ENUM -- #” section
-#   c) Remove old enum block from daft.h and insert the new lines
-#   d) Append back the saved header_tail lines (everything after the closing brace)
-# -----------------------------------------------------------------------------
-
-DAFT_HEADER="daft.h"
-
-# (a) Read and save all lines following the closing “}” in daft.h
-declare -a header_tail
-found_endmark=0
-i=0
-
-while IFS= read -r line; do
-    # Once we find the closing brace “}”, start saving all subsequent lines
-    if [[ "$line" == "}" ]]; then
-        header_tail[$i]="$line"
-        ((i++))
-        found_endmark=1
-        continue
-    fi
-    if [[ $found_endmark -eq 1 ]]; then
-        header_tail[$i]="$line"
-        ((i++))
-    fi
-done < "$DAFT_HEADER"
-
-# (b) Extract ENUM entries from SETTINGS.md into TMP_ENUM
-TMP_ENUM=$(mktemp)
-found_enum=0
-
-while IFS= read -r line; do
-    if [[ "$line" == "# -- ENUM -- #" ]]; then
-        found_enum=1
-        continue
-    fi
-    # End if we hit a blank line after starting to capture
-    if [[ $found_enum -eq 1 && "$line" == "" ]]; then
-        break
-    fi
-    if [[ $found_enum -eq 1 && "$line" == *"->"* ]]; then
-        # Extract the Enum name (the part after “->”)
-        enum_name="${line#*->}"
-        # Prepare a line with a leading tab for Norminette, e.g. “\tPOKEDEX,”
-        printf "\t%s,\n" "$enum_name" >> "$TMP_ENUM"
-    fi
-done < "$SETTINGS"
-
-# Sort alphabetically
-sort "$TMP_ENUM" -o "$TMP_ENUM"
-
-# (c) Remove everything between “{” and “}” (exclusive) in daft.h,
-#     but preserve the braces themselves.
-awk '/\{/{print; in_block=1; next}
-     /\}/{in_block=0; print; next}
-     !in_block' "$DAFT_HEADER" > "$DAFT_HEADER.tmp" && mv "$DAFT_HEADER.tmp" "$DAFT_HEADER"
-
-# Insert the new enum lines immediately after “{”
-sed -i "/{/ r $TMP_ENUM" "$DAFT_HEADER"
-
-# Delete the temporary enum file
-rm "$TMP_ENUM"
-
-# (d) Append back the saved tail lines (everything after “}”)
-for line in "${header_tail[@]}"; do
-    echo "$line" >> "$DAFT_HEADER"
-done
-
-# -----------------------------------------------------------------------------
-# STEP 14: Inject the daft_pwd global under “//SECTION - Global variables”
-# -----------------------------------------------------------------------------
-
-if [[ $pwd_changed == 1 ]]; then
-	# 14a) Remove any prior daft_pwd declaration (value may vary)
-	sed -i '/^[[:space:]]*extern[[:space:]]\+char[[:space:]]\*daft_pwd.*;[[:space:]]*$/d' "$DAFT_HEADER"
-	# 14b) Insert a single declaration immediately after the marker
-	sed -i "/\/\/SECTION - Global variables/ a \
-	extern char *daft_pwd = $current_pwd;" "$DAFT_HEADER"
-fi
 
 # -----------------------------------------------------------------------------
 # STEP 15: Final exit message

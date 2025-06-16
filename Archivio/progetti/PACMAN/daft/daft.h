@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/15 20:39:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:11:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ typedef enum e_daft_db
 }	t_daft_db;
 
 //SECTION - Global variables
-extern char *daft_pwd = "/home/alerusso/Common_core/Archivio/progetti/PACMAN/database";
+#define DAFT_PWD "/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
 
 #endif

@@ -23,6 +23,6 @@ QUIET->n
 #  |___________________________________________________________|
 
 # -- FLAGS -- #
-data/pokedex/pokedex.txt->=nn=,
+data/pokedex/pokedex.txt->]yy=,
 # -- ENUM -- #
 data/pokedex/pokedex.txt->POKEDEX

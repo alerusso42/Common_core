@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:48:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/15 22:17:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:31:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 	int		file_num;
 	int		file_size;
 	int		hash_size;
+	int		alloc_size;
 }	t_data;
 
 enum e_error
