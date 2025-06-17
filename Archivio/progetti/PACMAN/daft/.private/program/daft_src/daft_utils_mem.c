@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 09:28:37 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 14:58:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,18 @@ int	_daft_add_node_back(t_daft_node	*list, int offset)
 		list = list->next;
 	list->next = node;
 	return (0);
+}
+
+void	_daft_free_old_mem(t_daft_data *data)
+{
+	if (!data->mem.type == NO_MEM)
+		return ;
+	else if (data->mem.type == STRING)
+		SDL_free(data->mem.ptr);
+	else if (data->mem.type == TWO_D_MATRIX)
+		free_matrix(data->mem.ptr);
+	else if (data->mem.type == THREE_D_MATRIX)
+		free_three_d_matrix(data->mem.ptr);
+	data->mem.ptr = NULL;
+	data->mem.type = NO_MEM;
 }

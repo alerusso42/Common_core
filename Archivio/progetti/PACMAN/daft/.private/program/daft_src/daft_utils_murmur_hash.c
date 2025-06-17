@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 07:33:30 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/17 09:05:22 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 14:44:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ int	_daft_hash(t_daft_list *file, char *key)
 	int	len;
 
 	len = sub_strlen(key, file->field_sep, EXCLUDE);
-	return (murmurhash2(key, len, SEED) % file->size + 1);
+	return (murmurhash2(key, len, SEED) % (file->size + 1));
 }

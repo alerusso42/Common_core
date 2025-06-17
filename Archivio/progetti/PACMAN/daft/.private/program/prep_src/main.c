@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:58:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 10:00:24 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 14:30:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	chdir("../../");
 	if (argc != 7)
 		return (1);
 	data = (t_data){0};

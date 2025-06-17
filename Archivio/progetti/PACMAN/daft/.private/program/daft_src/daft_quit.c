@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 07:31:10 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 15:00:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void daft_quit(void)
 	if (!data)
 		return ;
 	del_filedata();
+	_daft_free_old_mem(data);
 	data->files_names = free_matrix(data->files_names);
-	free(data->conf.default_flags);
+	SDL_free(data->conf.default_flags);
 	data->conf.default_flags = NULL;
 	i = 0;
 	if (!data->data_list)
@@ -52,16 +53,20 @@ static void	free_filedata(t_daft_list *filedata)
 		SDL_free(filedata);
 		return ;
 	}
-	i = 0;
-	while (filedata->node[i])
+	i = -1;
+	while (++i < filedata->size)
 	{
-		current = filedata->node[i];
-		while (current)
+		if (filedata->node[i])
 		{
-			next = current->next;
-			SDL_free(current);
-			current = next;
+			current = filedata->node[i];
+			while (current)
+			{
+				next = current->next;
+				SDL_free(current);
+				current = next;
+			}
 		}
-		++i;
 	}
+	SDL_free(filedata->node);
+	SDL_free(filedata);
 }

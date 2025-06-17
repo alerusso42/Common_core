@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:50:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 14:34:32 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 14:31:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int	ft_hash(t_data *data, char *key)
 	int	len;
 
 	len = sub_strlen(key, data->separator, EXCLUDE);
-	return (ft_abs(murmurhash2(key, len, SEED)) % data->hash_size + 1);
+	key[len] = 0;
+	return (murmurhash2(key, len, SEED) % (data->hash_size + 1));
 }

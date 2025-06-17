@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 18:32:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:09:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	fill_hash_table(t_data *data)
 	line = gnl();
 	while (line)
 	{
-		bytes_read += ft_strlen(line);
+		bytes_read += ft_strlen(line) + 1;
 		i = sub_strlen(line, data->separator, EXCLUDE);
 		if (line[i])
 		{
