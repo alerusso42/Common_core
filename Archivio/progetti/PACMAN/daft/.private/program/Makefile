@@ -19,6 +19,7 @@ ROOT := .
 LIBFT_SRC := \
 	$(wildcard $(ROOT)/Libft/ft_*.c) \
 	$(wildcard $(ROOT)/Libft/other_*.c) \
+	$(wildcard $(ROOT)/Libft/*printf*.c) \
 	$(ROOT)/Libft/mfile_a_gnl.c \
 	$(ROOT)/Libft/mfile_rw_support.c \
 	$(ROOT)/Libft/mfile_store_fds_user.c \

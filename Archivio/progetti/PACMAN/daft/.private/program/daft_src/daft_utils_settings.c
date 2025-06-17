@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 15:13:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 23:24:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	parse_config(t_daft_data *data, char *line);
 
+//	Checks for settings in all lines that are not comments.
+//	Stop when finding an empty line after the first setting found.
 int	_daft_save_config(t_daft_data *data)
 {
 	bool	found_first;
@@ -28,7 +30,7 @@ int	_daft_save_config(t_daft_data *data)
 			SDL_free(line);
 			break ;
 		}
-		else if (!ft_strchr("\n#", line[0]))
+		else if (!ft_strchr("#", line[0]))
 		{
 			found_first = true;
 			if (parse_config(data, line) != 0)
@@ -43,6 +45,7 @@ int	_daft_save_config(t_daft_data *data)
 	return (0);
 }
 
+//	List of all general config.
 static int	parse_config(t_daft_data *data, char *line)
 {
 	if (!ft_strncmp(line, "DEFAULT_FLAGS->", 15))

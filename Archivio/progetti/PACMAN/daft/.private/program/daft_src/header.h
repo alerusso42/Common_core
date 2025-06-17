@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 15:10:31 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/18 00:35:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ struct s_daft_list
 	char		*filename;
 	int			size;
 	char		field_sep[2];
-	char		key_value_sep;
-	char		values_sep;
+	char		key_value_sep[2];
+	char		values_sep[2];
 	t_bool		multiple_lines:1;
 	t_bool		split_values:1;		
 };
@@ -97,13 +97,14 @@ int			_daft_start_list(t_daft_node **list, int offset);
 int			_daft_add_node_back(t_daft_node	*list, int offset);
 t_daft_data	*_daft_get_memory(t_daft_data *new_data, bool update);
 int			_daft_resize_matr(char ***old_matr, int *size);
+int			_daft_resize_three_d_matr(char ****old_matr, int *size);
 char		*_cat_string(char *src, char *catstr, size_t start, int which_free);
-int			_daft_hash(t_daft_list *file, char *key);
+int			_daft_hash(t_daft_list *file, const char *key);
 void		_daft_free_old_mem(t_daft_data *data);
 
-void	*_daft_get_string(t_daft_data *data, t_daft_list *file);
+void	*_daft_get_string(t_daft_data *data, t_daft_list *file, char *key);
 void	*_daft_get_vertical_matr(t_daft_data *data, t_daft_list *file);
-void	*_daft_get_horizontal_matr(t_daft_data *data, t_daft_list *file);
+void	*_daft_get_horiz_matr(t_daft_data *data, t_daft_list *file, char *key);
 void	*_daft_get_three_d_matr(t_daft_data *data, t_daft_list *file);
 
 #endif

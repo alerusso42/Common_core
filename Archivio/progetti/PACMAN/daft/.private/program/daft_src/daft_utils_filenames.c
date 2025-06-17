@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_filenames.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 07:20:24 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 23:07:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 static int	parse_fnames(t_daft_data *data, char *line, int *matr_s);
 
+//	This function takes the filenames from SETTINGS.md, and saves them
+//	in a char ** matrix.
+//	Skips all lines found after the delimiter "# -- FLAGS -- #"
+//	that are either empty or comments '#'.
 int	_daft_save_fnames(t_daft_data *data)
 {
 	bool	found_files;
@@ -41,6 +45,9 @@ int	_daft_save_fnames(t_daft_data *data)
 	return (0);
 }
 
+//	Trim flags (->), resize matrix if necessary, compose file using
+//	the macro DAFT_PWD (updated with the script), and increase
+//	data->files_num.
 static int	parse_fnames(t_daft_data *data, char *line, int *matr_s)
 {
 	int		len;

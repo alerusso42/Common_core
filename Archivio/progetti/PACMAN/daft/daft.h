@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 12:11:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 22:27:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int 	daft_init(void);
 void	daft_quit(void);
 void	daft_swap(int enum_id);
-void	*daft_get(char *search);
+void	*daft_get(const char *search);
 
 //SECTION - enum
 
@@ -32,6 +32,6 @@ typedef enum e_daft_db
 }	t_daft_db;
 
 //SECTION - Global variables
-#define DAFT_PWD "/workspaces/Common_core/Archivio/progetti/PACMAN/daft"
+#define DAFT_PWD "/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_hashfiles.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 09:18:14 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 23:31:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ static char	*get_hash_filename(char *filename);
 static int	preparations(t_daft_list *file);
 static int	alloc_list(t_daft_list *file, int alloc_size);
 
+//	Used to get data for a file.
+//	Inner flags for the file are stored in file, named as the file,
+//	but stored in another directory: .private/hash_data.
+//	.private/hash_data stores the offset in which data must be searched.
 int	_daft_get_data(t_daft_list *file, char *filename)
 {
 	char	*hash_filename;
@@ -35,6 +39,7 @@ int	_daft_get_data(t_daft_list *file, char *filename)
 	return (closefd(file->filedata), 0);
 }
 
+//	search in the filename data/, then appends .private/hash_ in the tail.
 static char	*get_hash_filename(char *filename)
 {
 	int		i;
@@ -50,6 +55,7 @@ static char	*get_hash_filename(char *filename)
 	return (_cat_string(filename, ".private/hash_", i, 0));
 }
 
+//	Inner flags and the maximum hash value are saved.
 static int	preparations(t_daft_list *file)
 {
 	char		*line;
@@ -71,13 +77,14 @@ static int	preparations(t_daft_list *file)
 	file->field_sep[0] = line[i];
 	file->multiple_lines = (line[i + 1] == 'y');
 	file->split_values = (line[i + 2] == 'y');
-	file->key_value_sep = line[i + 3];
-	file->values_sep = line[i + 4];
+	file->key_value_sep[0] = line[i + 3];
+	file->values_sep[0] = line[i + 4];
 	SDL_free(line);
 	file->size = (int)alloc_size;
 	return (alloc_list(file, alloc_size));
 }
 
+//	Allocs the file lists array of hash data.
 static int	alloc_list(t_daft_list *file, int alloc_size)
 {
 	file->node = ft_calloc(alloc_size + 1, sizeof(t_daft_node));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:36:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 09:12:36 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 22:51:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 static int	get_settings_file(t_daft_data *data);
 static int	get_database_file(t_daft_data *data);
 
+/*
+//REVIEW -	daft_get
+//
+	Initialize daft memory.
+	Returns 0 on success.
+	On failure, creates a log file named daft_log, 
+	writing on it the issue, and returns an integer
+	different than 0, based on a enum called e_daft_logs.
+*/
 int 	daft_init(void)
 {
 	t_daft_data	*data;
@@ -26,12 +35,15 @@ int 	daft_init(void)
 		return (DAFT_LOG_MALLOC);
 	_daft_get_memory(data, true);
 	if (get_settings_file(data) != 0)
-		return (data->last_error);
+		return (daft_quit(), data->last_error);
 	if (get_database_file(data) != 0)
-		return (data->last_error);
+		return (daft_quit(), data->last_error);
 	return (0);
 }
 
+//	DAFT_PWD is updated upon launching the update script.
+//	All setting file is read, searching for the two section of
+//	settings.
 static int	get_settings_file(t_daft_data *data)
 {
 	char	*settings_file_name;
@@ -63,6 +75,8 @@ static int	get_settings_file(t_daft_data *data)
 	return (SDL_free(settings_file_name), closefd(settings_file), 0);
 }
 
+//	For every file, a dedicated struct is allocated.
+//	The struct stores its inner flags, its filename, 
 static int	get_database_file(t_daft_data *data)
 {
 	int	i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_hashfiles2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 09:36:54 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 23:35:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	get_one(t_daft_node **node, char *offsets);
 
+//	Reads all hash file.
+//	Stores all hash values and associated offsets.
 int	_daft_get_data2(t_daft_list *file)
 {
 	char	*line;
@@ -29,6 +31,10 @@ int	_daft_get_data2(t_daft_list *file)
 	return (0);
 }
 
+//	All offsets are saved.
+//	In case of collisions, a node is added with _daft_add_node_back.
+//	If a hash_values from zero to hash_size has no offset, the node
+//	in position of that hash_values is left to NULL.
 static int	get_one(t_daft_node **node, char *offsets)
 {
 	bool	first_allocation;

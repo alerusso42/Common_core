@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_murmur_hash.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 07:33:30 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/17 14:44:32 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/18 00:39:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ uint32_t	mur_switch(uint32_t h, unsigned char *data, int len, uint32_t m)
 	return (h);
 }
 
+//	https://en.wikipedia.org/wiki/MurmurHash
 uint32_t	murmurhash2(const void *key, int len, uint32_t seed)
 {
 	uint32_t		m;
@@ -53,10 +54,13 @@ uint32_t	murmurhash2(const void *key, int len, uint32_t seed)
 	return (mur_switch(h, data, len, m));
 }
 
-int	_daft_hash(t_daft_list *file, char *key)
+//	file->size + 1 is the size of the lists, and the hash limit.
+int	_daft_hash(t_daft_list *file, const char *key)
 {
 	int	len;
 
-	len = sub_strlen(key, file->field_sep, EXCLUDE);
+	len = 0;
+	while (key[len] && key[len] != file->field_sep[0])
+		++len;
 	return (murmurhash2(key, len, SEED) % (file->size + 1));
 }

@@ -3,22 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   daft_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/17 15:32:00 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/18 00:49:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static void	*select_data_struct(t_daft_data	*data, t_daft_list *file);
+static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
+static char	*check_key(const char *search, char field_sep[]);
+static void	*select_data_file(t_daft_data *data, t_daft_list *file, char *key);
 
-void	*daft_get(char *search)
+/*
+//REVIEW -	daft_get
+//
+	Takes a string as parameter. Gives back memory, or NULL.
+	Fds are open and closed, without fd leaks.
+
+	Memory returned depends on flags in SETTINGS.md.
+
+	1)	*nn**:	Returns a regular string (char *);
+	2)	*yn**:	Returns a 2D matrix(char **);
+	3)	*ny**:	Returns a 2D matrix(char **);
+	4)	*yy**:	Returns a 3D matrix(char **);
+
+	Example:
+	...
+	APPLE|
+	Colors=Red,Yellow,Green
+	Id=2
+	...
+	FLAGS GIVEN		|	SEARCH CONTENT	|	RETURNS
+------------------------------------------------------------
+	1)	|nn=,		|	Colors			|	"Red,Yellow,Green"
+	2)	|yn=,		|	APPLE			|	{"Red,Yellow,Green", "2"}
+	3)	|ny=,		|	Colors			|	{"Red", "Yellow", "Green"}
+	4)	|yy=,		|	APPLE			|	{"Red", "Yellow", "Green"}, {"2"}
+*/
+void	*daft_get(const char *search)
 {
 	t_daft_data	*data;
-	int			hash_result;
-	int			offset;
 	t_fd		fd;
 	void		*mem;
 
@@ -31,38 +57,71 @@ void	*daft_get(char *search)
 	fd = openfd(data->data_list[data->current_file]->filename, "r");
 	if (!fd.n)
 		return (NULL);
-	SDL_RWseek(fd.p, offset, 0);
-	//da mettere in un while
-	hash_result = _daft_hash(data->data_list[data->current_file], search);
-	if (!data->data_list[data->current_file]->node[hash_result])
-		return (NULL);
-	offset = data->data_list[data->current_file]->node[hash_result]->offset;
-	mem = gnl();
+	mem = get_mem(data, data->data_list[data->current_file], search, fd);
 	closefd(fd);
 	return (mem);
 }
 
-static void	*select_data_struct(t_daft_data	*data, t_daft_list *file)
+//	Gets hash from string
+static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
+{
+	int			hash_result;
+	int			offset;
+	t_daft_node	*current;
+	char		*key;
+
+	hash_result = _daft_hash(f, s);
+	if (!f->node[hash_result])
+		return (NULL);
+	key = NULL;
+	current = f->node[hash_result];
+	while (!key || (!key && current->next))
+	{
+		offset = f->node[hash_result]->offset;
+		SDL_RWseek(fd.p, offset, 0);
+		key = check_key(s, f->field_sep);
+		current = current->next;
+	}
+	if (!key)
+		return (NULL);
+	return (select_data_file(dt, f, key));
+}
+
+//	Check if key is right (for collisions).
+static char	*check_key(const char *search, char field_sep[])
+{
+	char	*key;
+
+	key = gnl();
+	if (!key)
+		return (NULL);
+	if (!ft_strncmp(search, key, sub_strlen(key, field_sep, EXCLUDE)))
+		return (key);
+	SDL_free(key);
+	return (NULL);
+}
+
+static void	*select_data_file(t_daft_data *data, t_daft_list *file, char *key)
 {
 	if (file->multiple_lines == false && file->split_values == false)
 	{
 		data->mem.type = STRING;
-		return _daft_get_string(data, file);
+		return (_daft_get_string(data, file, key));
 	}
 	else if (file->multiple_lines == true && file->split_values == false)
 	{
 		data->mem.type = TWO_D_MATRIX;
-		return (_daft_get_vertical_matr(data, file));
+		return (SDL_free(key), _daft_get_vertical_matr(data, file));
 	}
-	else if (file->multiple_lines == false && file->split_values == false)
+	else if (file->multiple_lines == false && file->split_values == true)
 	{
 		data->mem.type = TWO_D_MATRIX;
-		return _daft_get_horizontal_matr(data, file);
+		return (_daft_get_horiz_matr(data, file, key));
 	}
 	else if (file->multiple_lines == true && file->split_values == true)
 	{
 		data->mem.type = THREE_D_MATRIX;
-		return _daft_get_three_d_matr(data, file);
+		return (SDL_free(key), _daft_get_three_d_matr(data, file));
 	}
 	data->mem.type = NO_MEM;
 	return (NULL);
