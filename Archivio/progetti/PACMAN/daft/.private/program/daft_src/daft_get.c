@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/17 15:14:22 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/17 15:32:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,26 @@ void	*daft_get(char *search)
 
 static void	*select_data_struct(t_daft_data	*data, t_daft_list *file)
 {
-	void	*ptr;
-
-	ptr = NULL;
-	data->mem.type = NO_MEM;
 	if (file->multiple_lines == false && file->split_values == false)
 	{
-		ptr = _daft_get_string(data, file);
 		data->mem.type = STRING;
+		return _daft_get_string(data, file);
 	}
 	else if (file->multiple_lines == true && file->split_values == false)
 	{
-		ptr = _daft_get_vertical_matr(data, file);
 		data->mem.type = TWO_D_MATRIX;
+		return (_daft_get_vertical_matr(data, file));
 	}
 	else if (file->multiple_lines == false && file->split_values == false)
 	{
-		ptr = _daft_get_horizontal_matr(data, file);
 		data->mem.type = TWO_D_MATRIX;
+		return _daft_get_horizontal_matr(data, file);
 	}
 	else if (file->multiple_lines == true && file->split_values == true)
 	{
-		ptr = _daft_get_three_d_matr(data, file);
 		data->mem.type = THREE_D_MATRIX;
+		return _daft_get_three_d_matr(data, file);
 	}
-	return (ptr);
+	data->mem.type = NO_MEM;
+	return (NULL);
 }
