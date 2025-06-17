@@ -8,7 +8,7 @@ SETTINGS="SETTINGS.md"
 DAFT_HEADER="daft.h"
 
 UPDATE="update.sh"
-PWD="/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
+PWD="/workspaces/Common_core/Archivio/progetti/PACMAN/daft"
 
 # Directory in which to store all hash files (relative or absolute path)
 HASH_DIR=".private/hash_data"
@@ -301,6 +301,7 @@ fi
 # STEP 10: Build or update hash files for each data file
 # -----------------------------------------------------------------------------
 i="-1"
+(cd .private/program && make)
 for file in "${real_files[@]}"; do
 	((++i))
     clean="${file#data/}"

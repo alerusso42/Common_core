@@ -7,6 +7,7 @@ O_DIR := obj
 LIBFT_OBJ_DIR := $(O_DIR)/Libft_obj
 PREP_OBJ_DIR := $(O_DIR)/prep_obj
 DAFT_OBJ_DIR := $(O_DIR)/daft_obj
+DAFT_H := ../../daft.h
 
 # Project root (current directory)
 ROOT := .
@@ -70,11 +71,11 @@ all: $(PREP) $(DAFT)
 
 # Link step: make $(NAME) from all object files
 # Note: “| $(O_DIR)” means “ensure obj/ exists before proceeding”
-$(PREP): $(PREP_OBJ) | $(O_DIR)
-	$(COMP) $(CFLAGS) $(PREP_OBJ) -o $(PREP) $(LDFLAGS)
+$(PREP): $(PREP_OBJ) $(DAFT_H) | $(O_DIR)
+	$(COMP) $(CFLAGS) $(PREP_OBJ) $(DAFT_H) -o $(PREP) $(LDFLAGS)
 
-$(DAFT): $(DAFT_OBJ) | $(O_DIR)
-	ar rcs $(DAFT) $(DAFT_OBJ)
+$(DAFT): $(DAFT_OBJ) $(DAFT_H) | $(O_DIR)
+	ar rcs $(DAFT) $(DAFT_H) $(DAFT_OBJ)
 
 # ------------------------------------------------
 # 9) Ensure the obj/ directory exists

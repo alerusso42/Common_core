@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:36:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 15:43:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:12:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int 	daft_init(void)
 	if (!data)
 		return (DAFT_LOG_MALLOC);
 	_daft_get_memory(data, true);
-	if (get_settings_file(data) == 1)
+	if (get_settings_file(data) != 0)
 		return (data->last_error);
-	if (get_database_file(data) == 1)
+	if (get_database_file(data) != 0)
 		return (data->last_error);
 	return (0);
 }
@@ -73,6 +73,9 @@ static int	get_database_file(t_daft_data *data)
 	i = 0;
 	while (i != data->files_num)
 	{
+		data->data_list[i] = ft_calloc(1, sizeof(t_daft_list));
+		if (!data->data_list[i])
+			return (_daft_log(DAFT_LOG_MALLOC));
 		if (_daft_get_data(data->data_list[i], data->files_names[i]) != 0)
 			return (data->last_error);
 		++i;

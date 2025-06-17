@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 14:49:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:28:37 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ int	_daft_resize_matr(char ***old_matr, int *size)
 	return (0);
 }
 
-t_daft_node	*_daft_start_list(int offset)
+int	_daft_start_list(t_daft_node **list, int offset)
 {
-	t_daft_node	*list;
-
-	list = ft_calloc(1, sizeof(t_daft_node));
-	if (!list)
-		return (NULL);
-	list->offset = offset;
-	return (list);
+	*list = ft_calloc(1, sizeof(t_daft_node));
+	if (!*list)
+		return (1);
+	(*list)->offset = offset;
+	return (0);
 }
 
 int	_daft_add_node_back(t_daft_node	*list, int offset)

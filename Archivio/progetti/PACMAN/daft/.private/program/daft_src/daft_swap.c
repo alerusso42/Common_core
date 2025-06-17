@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft_test.c                                        :+:      :+:    :+:   */
+/*   daft_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 12:01:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 09:54:30 by codespace        ###   ########.fr       */
+/*   Created: 2025/06/17 08:35:31 by codespace         #+#    #+#             */
+/*   Updated: 2025/06/17 08:44:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../daft/daft.h"
-#include <stdio.h>
+#include "header.h"
 
-/*
-cc $(sdl2-config --cflags) -Wall -Wextra -Werror -g daft_test.c ../daft/daft.a $(sdl2-config --libs)
-*/
-int	main()
+void	daft_swap(int enum_id)
 {
-	int	times;
-	daft_init();
-	times = 10000;
-	while (times--)
-	{
-		char	*line = daft_get("[CALYRE");
-		printf("%s\n", line);
-	}
-	daft_quit();
+	t_daft_data	*data;
+
+	data = _daft_get_memory(NULL, false);
+	if (!data)
+		return ;
+	if (enum_id >= data->files_num || enum_id < 0)
+		return ;
+	data->current_file = enum_id;
 }

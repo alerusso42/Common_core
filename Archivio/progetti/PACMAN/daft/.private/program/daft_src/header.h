@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 19:36:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:29:17 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 # include "../../../daft.h"
 # include "../Libft/all.h"
 
+# define SEED 42
+
 typedef struct s_daft_data	t_daft_data;
 typedef struct s_daft_conf	t_daft_conf;
+typedef struct s_daft_mem	t_daft_mem;
 typedef struct s_daft_list	t_daft_list;
 typedef struct s_daft_node	t_daft_node;
 typedef unsigned int		t_bool;
@@ -27,9 +30,16 @@ struct s_daft_conf
 	t_bool	debug_log;
 };
 
+struct s_daft_mem
+{
+	void	*ptr;
+	char	type;
+};
+
 struct s_daft_data
 {
 	t_daft_conf	conf;
+	t_daft_mem	mem;
 	t_fd		log_file;
 	t_daft_list	**data_list;
 	char		**files_names;
@@ -44,7 +54,7 @@ struct s_daft_list
 	t_daft_node	**node;
 	char		*filename;
 	int			size;
-	char		field_sep;
+	char		field_sep[2];
 	char		key_value_sep;
 	char		values_sep;
 	t_bool		multiple_lines:1;
@@ -70,16 +80,23 @@ enum e_daft_logs
 	DAFT_LOG_MISSFLAGS,
 };
 
+enum e_daft_mem
+{
+	STRING,
+	TWO_D_MATRIX,
+	THREE_D_MATRIX,
+};
+
 int			_daft_save_config(t_daft_data *data);
 int			_daft_save_fnames(t_daft_data *data);
 int			_daft_get_data(t_daft_list *file, char *filename);
 int			_daft_get_data2(t_daft_list *file);
 int			_daft_log(int log);
-t_daft_node	*_daft_start_list(int offset);
+int			_daft_start_list(t_daft_node **list, int offset);
 int			_daft_add_node_back(t_daft_node	*list, int offset);
 t_daft_data	*_daft_get_memory(t_daft_data *new_data, bool update);
 int			_daft_resize_matr(char ***old_matr, int *size);
 char		*_cat_string(char *src, char *catstr, size_t start, int which_free);
-
+int			_daft_hash(t_daft_list *file, char *key);
 
 #endif

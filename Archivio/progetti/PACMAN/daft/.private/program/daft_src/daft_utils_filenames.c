@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_filenames.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 15:12:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 07:20:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	parse_fnames(t_daft_data *data, char *line, int *matr_s)
 	if (data->files_num == *matr_s)
 		if (_daft_resize_matr(&data->files_names, matr_s) == DAFT_LOG_MALLOC)
 			return (_daft_log(DAFT_LOG_MALLOC));
-	data->files_names[data->files_num] = ft_strjoin("/.private/", line);
+	data->files_names[data->files_num] = ft_strjoin("/", line);
 	if (!data->files_names[data->files_num])
 		return (_daft_log(DAFT_LOG_MALLOC));
 	temp = data->files_names[data->files_num];

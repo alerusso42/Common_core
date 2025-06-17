@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_quit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 14:40:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/17 07:31:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void daft_quit(void)
 		data->data_list[i] = NULL;
 		++i;
 	}
+	SDL_free(data->data_list);
+	data->data_list = NULL;
 	SDL_free(data);
 }
 
