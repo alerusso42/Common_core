@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"filesystem.h": "c",
+		"random": "c"
+	}
+}
