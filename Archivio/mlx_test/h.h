@@ -17,7 +17,7 @@
 # define WIN_X 800
 # define WIN_Y 800
 # define TITLE "TEST"
-# define FPS 1
+# define FPS 10
 # define FRAME_RATE ((1000 / FPS) * 1000)
 
 enum e_sprites

@@ -6,7 +6,7 @@ NAME := a.out
 
 all: $(NAME)
 
-$(NAME): mouse/*.c
+$(NAME): mouse/*.c *.h
 	cc -Wall -Wextra -Werror -g $^ $(MLX) $(LFLAGS) -o $@
 
 get: 
