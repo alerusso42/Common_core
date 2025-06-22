@@ -2,11 +2,15 @@ LFLAGS := -Lminilibx-linux -lmlx -lX11 -lXext -lm -Lprintf -LLibft
 # -lft
 MLX_GIT := git@github.com:42paris/minilibx-linux.git
 MLX := minilibx-linux/*.a
-NAME := a.out
+MOUSE := mouse.out
+LINE := line.out
 
-all: $(NAME)
+all: $(MOUSE) $(LINE)
 
-$(NAME): mouse/*.c *.h
+$(MOUSE): mouse/*.c *.h
+	cc -Wall -Wextra -Werror -g $^ $(MLX) $(LFLAGS) -o $@
+
+$(LINE): mouse_line/*.c *.h
 	cc -Wall -Wextra -Werror -g $^ $(MLX) $(LFLAGS) -o $@
 
 get: 
@@ -15,3 +19,5 @@ get:
 
 fclean : 
 	rm -rf minilibx-linux *.out
+
+re: fclean get all

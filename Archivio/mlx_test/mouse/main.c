@@ -151,12 +151,11 @@ static long	elapsed_time(t_time start)
 	return (diff);
 } */
 
-//NOTE - Mouse
+//NOTE - Mouse print
 
-/* static int	mouse(int keycode, t_mlx *mlx);
+static int	mouse(int keycode, t_mlx *mlx);
 static int	keyboard(int keycode, t_mlx *mlx);
 static int	loop(t_mlx *mlx);
-static long	elapsed_time(t_time start);
 
 int	main()
 {
@@ -186,7 +185,6 @@ static int	keyboard(int keycode, t_mlx *mlx)
 	{
 		mlx_destroy_window(mlx->con, mlx->window);
 		mlx_destroy_display(mlx->con);
-		free(mlx->window);
 		free(mlx->con);
 		exit(0);
 	}
@@ -216,14 +214,3 @@ static int	loop(t_mlx *mlx)
 	}
 	return (0);
 }
-
-static long	elapsed_time(t_time start)
-{
-	struct timeval	tv;
-	long			diff;
-
-	gettimeofday(&tv, NULL);
-	diff = (tv.tv_sec - start.tv_sec) * 1000000
-		 + (tv.tv_usec - start.tv_usec);
-	return (diff);
-} */
