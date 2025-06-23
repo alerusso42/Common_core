@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_mem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 09:57:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/20 23:52:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 09:49:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_memory(t_data *data)
 	i = 0;
 	while (i != TOTAL_ENTRIES)
 	{
-		//unlink(data->entry[i].filename);
+		unlink(data->entry[i].filename);
 		data->entries[i] = free_matrix(data->entries[i]);
 		++i;
 	}

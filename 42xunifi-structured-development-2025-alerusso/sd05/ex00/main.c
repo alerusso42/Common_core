@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/21 00:04:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:54:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main()
 	alloc_memory(&data);
 	parsing(&data);
 	frontend(&data);
-	rewrite_file(&data, data.filename, data.entry[ID].filename);
+	rewrite_file(&data, data.filename, data.entry[0].filename);
 	free_memory(&data);
 	return (0);
 }

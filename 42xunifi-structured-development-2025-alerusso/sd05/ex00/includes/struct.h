@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/21 04:59:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:39:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,14 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-//	separators and trim character (in CSV, ' ' and ',')
+//	DATABASE NAME
 
-# define TO_TRIM ' '
-# define SEPARATOR ','
-# define SEPARATOR_S ",\n"
-
-//	filenames
-
-# define DIR		"data/"
-# define ERROR_FILE DIR"error.log"
-# define D_NAME		DIR"lib.csv"
-# define DATA 		"lib.csv"
-
-//	variables of database columns
-
-# define NAMES 		"id", "book", "author"
-# define FILES		DIR"id_"DATA, DIR"book_"DATA, DIR"author_"DATA
-
-//	filetypes: 	types are equal to printf types (d, s, c...).
-//				TYPES[i] -> FILES[i] type
-
-# define TYPES "dss"
-
-//	max read in loop() function
+# include "database/states.h"
 
 # define MAX_READ 250
 
 typedef struct s_data	t_data;
 typedef struct s_entry	t_entry;
-
-enum e_entries
-{
-	ID,
-	AUTHOR_NAME,
-	BOOK_NAME,
-	TOTAL_ENTRIES,
-};
 
 enum e_errors
 {

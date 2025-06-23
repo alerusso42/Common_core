@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 09:59:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/20 23:44:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:00:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error(t_data *data, int err_type)
 {
-	fd_printf(2, "Error %d\n");
+	fd_printf(2, "Error %d\n", err_type);
 	free_memory(data);
 	exit(err_type);
 }

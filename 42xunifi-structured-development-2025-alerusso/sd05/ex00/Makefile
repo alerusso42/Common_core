@@ -13,7 +13,9 @@ $(LIBFT) :
 	$(MAKE) all -C $(LIBFT_DIR) 
 
 clean: 
-	rm -f data/*_* data/*.log  $(NAME)
+	rm -f  $(NAME)
+
+# data/*_* data/*.log
 
 fclean: clean
 	$(MAKE) fclean -C $(LIBFT_DIR) 
