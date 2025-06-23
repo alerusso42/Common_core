@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 08:48:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/23 12:13:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:29:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,4 @@ static void	trim_left(char *line, int *i)
 	if (*i != j)
 		cut_string(line, j + 1, *i);
 	(*i)++;
-}
-
-void	print_entries(char *entries[TOTAL_ENTRIES], int print)
-{
-	int	i;
-
-	if (print == -1)
-	{
-		l_printf(COL_MAGENTA"@Main menu"COL_R":\t");
-		l_printf("You can tip:\n");
-	}
-	else
-	{
-		l_printf(COL_MAGENTA"@%s"COL_R":\t", entries[print]);
-		l_printf("Please, select an entry.\n");
-		return ;
-	}
-	i = 0;
-	while (i != TOTAL_ENTRIES && entries[i])
-	{
-		l_printf(COL_YELLOW"\t%s"COL_R",", entries[i]);
-		++i;
-	}
-	l_printf("\b \n");
 }

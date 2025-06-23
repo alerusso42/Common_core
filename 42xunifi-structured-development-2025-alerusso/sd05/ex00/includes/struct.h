@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:34:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/23 12:39:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:48:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 # include "../header.h"
 # include <fcntl.h>
 # include <stdbool.h>
-
-//	DATABASE NAME
-
-# include "database/states.h"
 
 # define MAX_READ 250
 

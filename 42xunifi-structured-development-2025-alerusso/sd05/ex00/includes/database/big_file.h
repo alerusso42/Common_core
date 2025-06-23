@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 09:31:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/23 12:39:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:55:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define TO_TRIM ' '
 # define SEPARATOR ','
 # define SEPARATOR_S ",\n"
-# define QUOTE '"'
 
 //	filenames
 

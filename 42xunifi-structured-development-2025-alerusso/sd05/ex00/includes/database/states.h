@@ -6,19 +6,18 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 09:31:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/23 12:33:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:55:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_H
-# define LIB_H
+#ifndef STATES_H
+# define STATES_H
 
 //	separators and trim character (in CSV, ' ' and ',')
 
 # define TO_TRIM ' '
 # define SEPARATOR ','
 # define SEPARATOR_S ",\n"
-# define QUOTE '"'
 
 //	filenames
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:46:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/23 10:54:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:17:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main()
 	data = (t_data){0};
 	set_entries(&data);
 	alloc_memory(&data);
+	l_printf(COL_GREEN"\nPlease wait..\n"COL_R);
 	parsing(&data);
 	frontend(&data);
 	rewrite_file(&data, data.filename, data.entry[0].filename);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frontend.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 23:47:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/21 02:10:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:24:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	explain_usage(void)
 	l_printf(COL_YELLOW"\t\tSearch for entries defined in struct.h;\n"COL_R);
 	l_printf(COL_MAGENTA"\"return\""COL_R);
 	l_printf(COL_YELLOW"\t\t\tReturns to main menu;\n"COL_R);
-	l_printf(COL_MAGENTA"\"ID/AUTHOR/BOOK name/subname\""COL_R);
+	l_printf(COL_MAGENTA"\"FIELD name/subname\""COL_R);
 	l_printf(COL_YELLOW"\t{ONLY IN SEARCH MODE}: print entry;\n"COL_R);
 }
 
@@ -69,7 +69,35 @@ static void	loop(t_data *data, char	user_input[MAX_READ + 1])
 			i = -1;
 			main_menu = true;
 		}
+		else if (!sub_strcmp(user_input, "cmd", ""))
+			explain_usage();
 		else if (main_menu == false)
 			search(data, user_input, i);
 	}
+}
+
+//	print is index of entry to print.
+//	if -1 (main mode), prints all entries.
+void	print_entries(char *entries[TOTAL_ENTRIES], int print)
+{
+	int	i;
+
+	if (print == -1)
+	{
+		l_printf(COL_MAGENTA"@Main menu"COL_R":\t");
+		l_printf("You can tip:\n");
+	}
+	else
+	{
+		l_printf(COL_MAGENTA"@%s"COL_R":\t", entries[print]);
+		l_printf("Please, select an entry.\n");
+		return ;
+	}
+	i = 0;
+	while (i != TOTAL_ENTRIES && entries[i])
+	{
+		l_printf(COL_YELLOW" %s"COL_R",", entries[i]);
+		++i;
+	}
+	l_printf("\b \n");
 }
