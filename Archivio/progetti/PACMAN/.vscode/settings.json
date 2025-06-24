@@ -21,6 +21,14 @@
 	"all.h": "c",
 	"daft.h": "c",
 	"libft.h": "c",
-	"lib.h": "c"
+	"lib.h": "c",
+	"pacman.h": "c",
+	"struct.h": "c",
+	"func.h": "c",
+	"other.h": "c",
+	"mus.h": "c",
+	"textures.h": "c",
+	"macros.h": "c",
+	"string.h": "c"
 }
 }

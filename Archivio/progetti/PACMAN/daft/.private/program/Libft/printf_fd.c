@@ -6,17 +6,17 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 11:11:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/24 11:24:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdarg.h>
 #include <unistd.h>
 
-int			fd_printf(int fd, const char *str, ...);
-static int	type_print(char type, va_list ptr, int fd);
-static void	ft_putnbr(int num, int fd);
-static void	print(char *str, int fd);
+static int	type_print(char type, va_list ptr, t_fd fd);
+static void	ft_putnbr(int num, t_fd fd);
+static void	print(char *str, t_fd fd);
 
 /*
 int	main(void)
@@ -40,7 +40,7 @@ int	main(void)
 
 	It takes an fd as argument.
 */
-int	fd_printf(int fd, const char *str, ...)
+int	fd_printf(t_fd fd, const char *str, ...)
 {
 	int		index;
 	va_list	ptr;
@@ -59,14 +59,14 @@ int	fd_printf(int fd, const char *str, ...)
 				print("/UNKNOWN SPECIFIER/", fd);
 		}
 		else
-			write(fd, &str[index], 1);
+			SDL_RWwrite(fd.p, &str[index], sizeof(char), 1);
 		++index;
 	}
 	va_end(ptr);
 	return (0);
 }
 
-int	type_print(char type, va_list ptr, int fd)
+int	type_print(char type, va_list ptr, t_fd fd)
 {
 	char	c;
 	char	*s;
@@ -75,7 +75,7 @@ int	type_print(char type, va_list ptr, int fd)
 	if (type == 'c')
 	{
 		c = (char)va_arg(ptr, int);
-		write(fd, &c, 1);
+		SDL_RWwrite(fd.p, &c, sizeof(char), 1);
 	}
 	else if (type == 's')
 	{
@@ -92,7 +92,7 @@ int	type_print(char type, va_list ptr, int fd)
 	return (0);
 }
 
-void	ft_putnbr(int num, int fd)
+static void	ft_putnbr(int num, t_fd fd)
 {
 	char	str[12];
 	int		temp_num;
@@ -121,19 +121,19 @@ void	ft_putnbr(int num, int fd)
 	print(str, fd);
 }
 
-void	print(char *str, int fd)
+static void	print(char *str, t_fd fd)
 {
 	int	index;
 
 	if (!str)
 	{
-		write(fd, "(NULL)", 6);
+		SDL_RWwrite(fd.p, "(NULL)", sizeof(char), 6);
 		return ;
 	}
 	index = 0;
 	while (str[index] != '\0')
 	{
-		write(fd, &str[index], 1);
+		SDL_RWwrite(fd.p, &str[index], sizeof(char), 1);
 		++index;
 	}
 }

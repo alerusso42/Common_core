@@ -28,7 +28,8 @@ void	*daft_get(const char *search);
 
 typedef enum e_daft_db
 {
-	POKEDEX,
+	ENEMIES,
+	MEDIA_LIST,
 }	t_daft_db;
 
 //SECTION - Global variables

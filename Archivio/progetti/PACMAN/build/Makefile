@@ -1,6 +1,6 @@
 O_DIR = obj/
 
-ROOT = ..
+ROOT = .
 
 LIBFT_SRC = 	$(wildcard $(ROOT)/Libft/ft_*.c) \
 				$(wildcard $(ROOT)/Libft/other_*.c) \

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/15 22:17:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/24 11:34:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../lib.h"
 # include "structs.h"
 
+typedef struct s_fd	t_fd;
 typedef long long int	t_int64;
 typedef struct s_typelist
 {
@@ -90,7 +91,6 @@ t_typelist	*ft_lstmap(t_typelist *lst, void *(*f)(void *), \
 void (*del)(void *));
 //		PRINTF
 
-int			l_printf(const char *str, ...);
-int			fd_printf(int fd, const char *str, ...);
+int			fd_printf(t_fd fd, const char *str, ...);
 
 #endif

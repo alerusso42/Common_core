@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:36:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/15 20:31:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/24 11:29:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_tolower(int c);
-int			ft_toupper(int c);
 //		LIST
 
 t_typelist	*ft_lstnew(void *content, void *type);
@@ -66,23 +64,8 @@ t_typelist	*ft_lstmap(t_typelist *lst, void *(*f)(void *), \
 void (*del)(void *));
 //		PRINTF
 
-int			l_printf(const char *str, ...);
-int			fd_printf(int fd, const char *str, ...);
+int			fd_printf(t_fd fd, const char *str, ...);
 
-//	--PISCINE:
-
-char		*ft_strcapitalize(char *str);
-char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
-int			ft_iterative_factorial(int nb);
-int			ft_find_next_prime(int nb);
-int			ft_str_is_lowercase(char *str);
-int			ft_str_is_uppercase(char *str);
-int			ft_is_prime(int nb);
-int			ft_iterative_power(int nb, int power);
-void		ft_rev_int_tab(int *tab, int size);
-void		ft_sort_int_tab(int *tab, int size);
-int			ft_sqrt(int nb);
-char		*ft_strlowcase(char *str);
 //	--OTHER:
 
 int			add_sign_left(char **string, char sign);
@@ -100,54 +83,5 @@ void		copy_customset(char *dest, char *charset);
 int			sub_strlen(char *s, char *charset, int mode);
 int			sub_strcpy(char *dest, char *src, char *charset, int mode);
 int			trim_only_right(char **line, char *trimset);
-
-//	--MFILE
-
-//		ORIGINAL GNL
-char		*gnl_original_main_function(int fd, char buffer[BUFFER_SIZE + 1]);
-char		*get(char **store_bytes, char buffer[BUFFER_SIZE + 1], \
-	int nl, int fd);
-int			go_read(int fd, char buffer[BUFFER_SIZE + 1], char **new_line);
-int			loop_read(char **new_line, int *control_read, size_t *end, int fd);
-int			alloc_ft(void **content, void *new_content, size_t start, int mode);
-int			find_end_line(size_t *start, char *string);
-void		*calloc_memcpy(int size, void *dest, const void *src, int ft);
-void		trim_readbytes(char *buffer);
-char		*ft_strjoin_custom(char *s1, char *s2);
-//		WRITE_LINE SETTINGS
-
-int			set_maximum_word_len(int new_len);
-int			set_maximum_words(int new_len);
-//		INITIATE FILE
-
-void		initiate_file_demo(int fd, char *name);
-void		initiate_file(int fd, char *name, char **matrix);
-//		CUSTOM GNL (DONT USE IT!!)
-
-char		*get_next_line(int fd, int reset);
-char		*read_from_buffer(char buffer[BUFFER_SIZE + 1], int fd, int bytes);
-char		*get_next_line_main_function(int fd, char buffer[BUFFER_SIZE + 1]);
-//		DONT USE THESE: ONLY FOR LIBRARY PURPOSES!
-
-int			find_line(int fd, int num_search, va_list list);
-int			find_number_line(int fd, char *filename, int num_search, ...);
-//		EXPANDED MANAGE_FILE FUNCTIONS
-
-int			num_line(int num_search, ...);
-void		hold_space(int counter, int fd);
-int			move_cursor(int line_num);
-char		*read_line(int line_num, int position);
-char		**read_all_line(int line_num);
-int			write_line(int line_num, int position, char *string);
-char		*get_n_line(int fd, int n);
-int			update_filedata(int old_fd, int new_fd);
-//	--GAME:
-
-t_typelist	*store_list(t_typelist *list, int mode);
-void		del_free(void *ptr);
-int			draw_path(t_bfs *bfs);
-void		bfs(t_bfs *bfs);
-void		clean_bfs(t_bfs *bfs, int enemy_num);
-//int	    get_best_path(t_map *map, int enemy_num);
 
 #endif

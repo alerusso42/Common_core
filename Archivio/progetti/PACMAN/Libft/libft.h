@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 19:06:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:42:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void (*del)(void *));
 //		PRINTF
 
 int			l_printf(const char *str, ...);
-int			fd_printf(int fd, const char *str, ...);
+int			fd_printf(t_fd fd, const char *str, ...);
 
 #endif

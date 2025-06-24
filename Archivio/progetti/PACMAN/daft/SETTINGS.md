@@ -4,10 +4,10 @@
 #	Hash size:	1 means hash result are on a range from 0 to file_len.
 #				1.3 means are on range from 0 to (file_len * 1.3).
 
-DEFAULT_FLAGS->=nn=,
+DEFAULT_FLAGS->:ny:,
 HASH_SIZE->1.3
 DEBUG_LOG->y
-QUIET->n
+LIBFT->
 
 #SECTION - Files flags and enums
 #	OPTIONAL: Choose the enum names of your files, 
@@ -23,6 +23,8 @@ QUIET->n
 #  |___________________________________________________________|
 
 # -- FLAGS -- #
-data/pokedex/pokedex.txt->]yy=,
+data/enemies->:ny:,
+data/media_list->:ny:,
 # -- ENUM -- #
-data/pokedex/pokedex.txt->POKEDEX
+data/enemies->ENEMIES
+data/media_list->MEDIA_LIST
