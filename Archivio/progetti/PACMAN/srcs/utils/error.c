@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:23:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/24 18:27:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/24 23:49:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	print_error(t_data *data, int type)
 	if (!data->debug_file.n)
 		data->debug_file = openfd(ERROR_FILE, "w+");
 	if (data->debug_file.n)
-		fd_printf(data->debug_file, ctime(0));
+		fd_printf(data->debug_file, "#------#\n");
 	if (type == ER_OK)
 		fd_printf(data->debug_file, "No errors.\n");
 	else if (type == ER_MALLOC)

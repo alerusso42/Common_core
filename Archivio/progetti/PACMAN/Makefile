@@ -2,10 +2,11 @@ O_DIR = build/obj
 
 ROOT = .
 
-SRC = 	includes/*.h	\
-		srcs/*.c		\
+SRC = 	srcs/*.c		\
 		srcs/SDL/*.c	\
 		srcs/utils/*.c	\
+
+HEADER = includes/*.h
 
 SRC_OBJ := $(patsubst $(ROOT)/srcs/%.c, $(O_DIR)%.o, $(SRC))
 
@@ -17,12 +18,13 @@ LIB = daft/daft.a
 COMP = cc
 CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags)
 LDFLAGS = $(shell sdl2-config --libs)
+SDL = -lSDL2_mixer 
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(O_DIR)
+$(NAME): $(OBJ) $(O_DIR) $(HEADER)
 	@echo $(OBJ)
-	@$(COMP) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(LDFLAGS)
+	@$(COMP) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL) $(LDFLAGS)
 
 $(O_DIR):
 	mkdir -p $(O_DIR)
@@ -35,5 +37,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) fclean -C daft/.private/program
 
 re: fclean all

@@ -1,5 +1,7 @@
 # NOTE – Usage, Credits, Details
 
+# FIXME - valgrind leak with current conf, not accepts hash == 0
+
 # SECTION - What This Database Does
 This database lets you quickly find and retrieve data from a set of text put in data/ directory.
 It uses a hash-based lookup so that, given a key (e.g., "DATA1"), you immediately get the associated value (e.g., "apple").

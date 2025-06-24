@@ -29,6 +29,8 @@
 	"mus.h": "c",
 	"textures.h": "c",
 	"macros.h": "c",
-	"string.h": "c"
+	"string.h": "c",
+	"sdl_ttf.h": "c",
+	"sdl_quit.h": "c"
 }
 }

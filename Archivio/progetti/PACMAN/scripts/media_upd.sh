@@ -12,8 +12,10 @@ LIST_FILE="$DIR""media_list"
 #	Media location
 T_NAME="textures"
 M_NAME="mus"
+S_NAME="sound"
 TEXTURES=$DATA_DIR$T_NAME"/"
 MUSIC=$DATA_DIR$M_NAME"/"
+SOUND=$DATA_DIR$S_NAME"/"
 
 function open_temp() {
 	local HEADER="$H_DIR$1"".h"
@@ -58,6 +60,9 @@ function update_media()	{
 	elif [[ "$1" == "$MUSIC" ]];
 	then
 		TYPE="$M_NAME"
+	elif [[ "$1" == "$SOUND" ]];
+	then
+		TYPE="$S_NAME"
 	else
 		return 1
 	fi
@@ -79,7 +84,9 @@ function update_media()	{
 }
 
 touch $TEMP && chmod 777 $TEMP || exit 1
-> $LIST_FILE
+echo "#LIST OF ALL FILES#" > $LIST_FILE
 update_media "$TEXTURES" || { eval "$ERR"; }
 update_media "$MUSIC" || { eval "$ERR"; }
+update_media "$SOUND" || { eval "$ERR"; }
+echo >> $LIST_FILE
 rm $TEMP
