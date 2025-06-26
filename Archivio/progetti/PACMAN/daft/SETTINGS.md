@@ -5,7 +5,7 @@
 #				1.3 means are on range from 0 to (file_len * 1.3).
 
 DEFAULT_FLAGS->:ny:,
-HASH_SIZE->1.4
+HASH_SIZE->1.3
 DEBUG_LOG->y
 LIBFT->
 

@@ -1,6 +1,5 @@
 /* XPM */
 static char *Dead[] = {
-/* columns rows colors chars-per-pixel */
 "25 25 2 1 ",
 "  c black",
 ". c #FFEC00",

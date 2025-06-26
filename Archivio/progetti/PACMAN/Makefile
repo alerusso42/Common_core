@@ -15,9 +15,12 @@ OBJ = $(SRC_OBJ)
 NAME = pacman
 LIB = daft/daft.a
 
+IMG_CFLAGS  = $(shell pkg-config --cflags SDL2_image)
+IMG_LIBS    = $(shell pkg-config --libs SDL2_image)
+
 COMP = cc
-CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags)
-LDFLAGS = $(shell sdl2-config --libs)
+CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags) $(IMG_CFLAGS)
+LDFLAGS = $(shell sdl2-config --libs) $(IMG_LIBS)
 SDL = -lSDL2_mixer 
 
 all: $(NAME)

@@ -90,3 +90,4 @@ update_media "$MUSIC" || { eval "$ERR"; }
 update_media "$SOUND" || { eval "$ERR"; }
 echo >> $LIST_FILE
 rm $TEMP
+(cd daft/ && ./update.sh)

@@ -31,6 +31,8 @@
 	"macros.h": "c",
 	"string.h": "c",
 	"sdl_ttf.h": "c",
-	"sdl_quit.h": "c"
+	"sdl_quit.h": "c",
+	"header.h": "c",
+	"sdl_image.h": "c"
 }
 }

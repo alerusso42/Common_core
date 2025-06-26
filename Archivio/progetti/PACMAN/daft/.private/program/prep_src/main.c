@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:58:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 14:30:32 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/26 20:53:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	error(t_data *data, int err_type);
 /*
 $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}"
  "$HASH_SIZE"
+ chdir("../../");
 */
 int	main(int argc, char *argv[])
 {

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:33:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/16 17:40:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/26 20:51:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	find_lowest_key(t_data *data, int *lowest_key, int *struct_i)
 	curr_i = 0;
 	while (i != data->hash_size)
 	{
-		if (data->hash_table[i].key && \
+		if (data->hash_table[i].key != -1 && \
 			data->hash_table[i].key < curr_lowest && \
 			data->hash_table[i].key >= *lowest_key && \
 			i != *struct_i && \
@@ -102,5 +102,5 @@ void	find_lowest_key(t_data *data, int *lowest_key, int *struct_i)
 	*lowest_key = curr_lowest;
 	*struct_i = curr_i;
 	if (curr_lowest == INT_MAX)
-		*lowest_key = 0;
+		*lowest_key = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:56:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 19:25:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/26 20:51:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_hash_table(t_data *data)
 	lowest_key = -1;
 	i = 1;
 	find_lowest_key(data, &lowest_key, &struct_i);
-	while (lowest_key)
+	while (lowest_key != -1)
 	{
 		i = lowest_key;
 		collision_update(data, old_key, lowest_key, &i);

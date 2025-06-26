@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/25 01:14:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:12:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ static int	init_textures(t_data *data)
 	while (files[i])
 	{
 		printf("|%s|\n", files[i]);
+		data->sdl.texture[i] = IMG_LoadTexture(data->sdl.render, files[i]);
+		if (!data->sdl.texture[i])
+			return (error(data, ER_SDL));
 		++i;
 	}
 	return (0);
@@ -68,6 +71,7 @@ static int	init_music(t_data *data)
 	i = 0;
 	while (files[i])
 	{
+		printf("|%s|\n", files[i]);
 		data->sdl.mus[i] = Mix_LoadMUS(files[i]);
 		if (!data->sdl.mus[i])
 			return (error(data, ER_SDL));
@@ -87,6 +91,7 @@ static int	init_sound(t_data *data)
 	i = 0;
 	while (files[i])
 	{
+		printf("|%s|\n", files[i]);
 		data->sdl.sound[i] = Mix_LoadWAV(files[i]);
 		if (!data->sdl.sound[i])
 			return (error(data, ER_SDL));
@@ -94,5 +99,3 @@ static int	init_sound(t_data *data)
 	}
 	return (0);
 }
-
-

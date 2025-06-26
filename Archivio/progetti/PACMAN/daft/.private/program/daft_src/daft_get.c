@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/18 00:49:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:41:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
 		return (NULL);
 	key = NULL;
 	current = f->node[hash_result];
-	while (!key || (!key && current->next))
+	while (!key && current)
 	{
-		offset = f->node[hash_result]->offset;
+		offset = current->offset;
 		SDL_RWseek(fd.p, offset, 0);
 		key = check_key(s, f->field_sep);
 		current = current->next;
