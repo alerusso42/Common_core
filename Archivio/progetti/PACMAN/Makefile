@@ -4,7 +4,9 @@ ROOT = .
 
 SRC = 	srcs/*.c		\
 		srcs/SDL/*.c	\
+		srcs/map/*.c	\
 		srcs/utils/*.c	\
+		srcs/debug/*.c	\
 
 HEADER = includes/*.h
 

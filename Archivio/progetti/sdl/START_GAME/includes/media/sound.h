@@ -1,0 +1,20 @@
+
+
+#ifndef SOUND_H
+# define SOUND_H
+# include "../pacman.h"
+
+enum e_sound
+{
+LUGIA,
+PACMAN_BEGINNING,
+PACMAN_CHOMP,
+PACMAN_DEATH,
+PACMAN_EATFRUIT,
+PACMAN_EATGHOST,
+PACMAN_EXTRAPAC,
+PACMAN_INTERMISSION,
+TOTAL_SOUND,
+};
+
+#endif

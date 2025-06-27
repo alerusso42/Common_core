@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 00:29:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:46:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,34 @@ enum e_error
 	ER_OPEN,
 	ER_SDL,
 	ER_DAFT,
+	ER_MAP_ID,
+	ER_MAP_EXTENSION,
+	ER_MAP_LITTLE,
+	ER_MAP_BIG,
+	ER_MAP_PLAYER,
+	ER_MAP_COLLECTABLES,
+	ER_MAP_WALLS,
+	ER_MAP_FLOODFILL,
+	ER_MAP_EXIT,
+};
+
+enum e_symbol
+{
+	S_PLAYER = 	'P',
+	S_COL = 	'C',
+	S_EXIT = 	'E',
+	S_ENEMY =	'$',
+	S_WALL = 	'1',
+	S_HARD_WALL = 0,	
 };
 
 enum e_general
 {
 	X,
-	Y,	
+	Y,
+	RANDOM = -2,
+	MIN_MAP = 4,
+	MAX_MAP = 1000,
 };
 
 #endif
