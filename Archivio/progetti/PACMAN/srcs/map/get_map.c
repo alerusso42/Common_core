@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:07:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 17:00:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:24:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static int	read_map(t_data *data, t_fd fd)
 	line = gnl();
 	while (line && *line && *line != '\n')
 	{
-		x = 0;
+		x = -1;
 		while (line[++x])
 		{
-			data->map[y][x].val = line[x];
+			data->map[y][x + 1].val = line[x];
 			//update_global_values(data, line[x]);
 		}
 		line = gnl();

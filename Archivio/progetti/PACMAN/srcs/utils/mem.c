@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:27:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 16:56:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:31:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	alloc_map(t_data *data)
 {
 	int	i;
 
-	data->map = ft_calloc(data->game.map_size[Y] + 1, sizeof(t_map *));
+	data->map = ft_calloc(data->game.map_size[Y] + 3, sizeof(t_map *));
 	if (!data->map)
 		return (error(data, ER_MALLOC));
 	i = -1;
-	while (++i != data->game.map_size[Y] + 1)
+	while (++i != data->game.map_size[Y] + 2)
 	{
-		data->map[i] = ft_calloc(data->game.map_size[X] + 1, sizeof(t_map));
+		data->map[i] = ft_calloc(data->game.map_size[X] + 3, sizeof(t_map));
 		if (!data->map[i])
 			return (error(data, ER_MALLOC));
 	}

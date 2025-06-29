@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:15:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 17:03:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:14:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	file_size(int size[2], t_fd fd)
 	}
 	SDL_free(line);
 	reset_fd(fd);
-	size[x] = max_x;
-	size[y] = y;
+	size[X] = max_x;
+	size[Y] = y;
 	return (0);
 }

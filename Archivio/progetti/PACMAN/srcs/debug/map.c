@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:59:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 16:53:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:20:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	print_map(t_map **map)
 	y = 0;
 	while (map[y])
 	{
-		x = 0;
+		x = 1;
 		while (map[y][x].val)
 		{
-			printf("%d", map[y][x].val);
+			printf("%c", map[y][x].val);
 			++x;
 		}
 		printf("\n");
