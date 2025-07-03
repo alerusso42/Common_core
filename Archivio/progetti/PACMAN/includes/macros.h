@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:43:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 16:18:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:10:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define FPS 30ULL
 # define FRAME_TIME (1000ULL / FPS)
 # define DELTA_TIME FPS / 30
-# define MIN_SPEED 5 * 10e3
+# define MIN_SPEED 5000
 # define SDL_INIT_MASK 	(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | \
 						SDL_INIT_TIMER)
 

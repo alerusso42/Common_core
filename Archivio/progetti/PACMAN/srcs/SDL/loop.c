@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:31:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 17:58:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:26:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	game_loop(t_data *data)
 	{
 		map_render(data, first_rendering);
 		animations(data);
+		print_map(data->map);
 		SDL_RenderPresent(data->sdl.render);
 		first_rendering = false;
 		start_time = SDL_GetTicks64();

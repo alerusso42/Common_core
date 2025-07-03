@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:59:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 18:15:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:13:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	set_enemies(t_data *data)
 	if (alloc_enemies(data, enemy_num) != 0)
 		return (data->last_error);
 	i = 0;
-	while (data->enemy[i].type != enemy_num)
+	while (i != enemy_num)
 	{
 		data->enemy[i].type = _random(TOTAL_ENEMIES);
 		data->enemy[i].lifes = 1;
@@ -102,6 +102,13 @@ static int	alloc_enemies(t_data *data, int enemy_num)
 void	update_speed(t_entity *entity, int move_speed, int anim_speed)
 {
 	entity->speed = move_speed;
-	entity->move.interval = (MIN_SPEED * DELTA_TIME) / move_speed;
-	entity->anim.interval = (MIN_SPEED * DELTA_TIME) / anim_speed;
+	if (move_speed == 0)
+		entity->move.interval = INT_MAX;
+	else
+		entity->move.interval = (MIN_SPEED * DELTA_TIME) / move_speed;
+	if (anim_speed == 0)
+		entity->anim.interval = INT_MAX;
+	else
+		entity->anim.interval = (MIN_SPEED * DELTA_TIME) / anim_speed;
+
 }

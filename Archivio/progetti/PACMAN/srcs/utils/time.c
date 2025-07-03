@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:34:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/26 23:53:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:10:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //REVIEW - 	elapsed_time
 /*
-	Returns time passed, in microseconds, between now and start time.
+	Returns time passed, in milliseconds, between now and start time.
 	Start time is a struct timeval already set with gettimeofday.
 */
 uint64_t	elapsed_time(uint64_t start)
