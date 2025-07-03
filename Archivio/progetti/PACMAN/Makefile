@@ -3,6 +3,7 @@ O_DIR = build/obj
 ROOT = .
 
 SRC = 	srcs/*.c		\
+		srcs/engine/*.c	\
 		srcs/SDL/*.c	\
 		srcs/map/*.c	\
 		srcs/utils/*.c	\
@@ -42,6 +43,12 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	printf 1
 	$(MAKE) fclean -C daft/.private/program
 
-re: fclean all
+daft: 
+	printf 2
+	$(MAKE) -C daft/.private/program
+
+re: fclean daft all
+.PHONY: daft

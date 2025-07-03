@@ -6,12 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 16:52:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:04:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pacman.h"
 
+static int		init_render(t_data *data);
 static int		init_textures(t_data *data);
 static int		init_music(t_data *data);
 static int		init_sound(t_data *data);
@@ -20,14 +21,13 @@ int	init_all(t_data *data)
 {
 	if (daft_init() != 0)
 		return (error(data, ER_DAFT));
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	if (SDL_Init(SDL_INIT_MASK) != 0)
 		return (error(data, ER_SDL));
 	data->sdl.win = SDL_CreateWindow(WIN_NAME, WIN_X, WIN_Y, WIN_W, WIN_H, 0);
 	if (!data->sdl.win)
 		return (error(data, ER_SDL));
-	data->sdl.render = SDL_CreateRenderer(data->sdl.win, -1, SDL_RENDERER_SOFTWARE);
-	if (!data->sdl.render)
-		return (error(data, ER_SDL));
+	if (init_render(data) != 0)
+		return (data->last_error);
 	daft_swap(MEDIA_LIST);
 	if (init_textures(data) != 0)
 		return (data->last_error);
@@ -37,6 +37,18 @@ int	init_all(t_data *data)
 		return (data->last_error);
 	if (get_map(data, RANDOM) != 0)
 		return (data->last_error);
+	set_player(data);
+	set_enemies(data);
+	set_exit(data);
+	return (0);
+}
+
+int		init_render(t_data *data)
+{
+	data->sdl.render = SDL_CreateRenderer(data->sdl.win, -1, SDL_RENDERER_SOFTWARE);
+	if (!data->sdl.render)
+		return (error(data, ER_SDL));
+	SDL_SetRenderDrawColor(data->sdl.render, 0, 0, 0, 255);
 	return (0);
 }
 
@@ -51,12 +63,15 @@ static int	init_textures(t_data *data)
 	i = 0;
 	while (files[i])
 	{
-		printf("|%s|\n", files[i]);
+		if (DEBUG == true)
+			printf("|%s|\n", files[i]);
 		data->sdl.texture[i] = IMG_LoadTexture(data->sdl.render, files[i]);
 		if (!data->sdl.texture[i])
 			return (error(data, ER_SDL));
 		++i;
 	}
+	data->sdl.rect.w = SPRITE_SIZE;
+	data->sdl.rect.h = SPRITE_SIZE;
 	return (0);
 }
 
@@ -73,7 +88,8 @@ static int	init_music(t_data *data)
 	i = 0;
 	while (files[i])
 	{
-		printf("|%s|\n", files[i]);
+		if (DEBUG == true)
+			printf("|%s|\n", files[i]);
 		data->sdl.mus[i] = Mix_LoadMUS(files[i]);
 		if (!data->sdl.mus[i])
 			return (error(data, ER_SDL));
@@ -93,7 +109,8 @@ static int	init_sound(t_data *data)
 	i = 0;
 	while (files[i])
 	{
-		printf("|%s|\n", files[i]);
+		if (DEBUG == true)
+			printf("|%s|\n", files[i]);
 		data->sdl.sound[i] = Mix_LoadWAV(files[i]);
 		if (!data->sdl.sound[i])
 			return (error(data, ER_SDL));

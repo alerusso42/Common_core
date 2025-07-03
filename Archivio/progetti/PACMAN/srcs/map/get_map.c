@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:07:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/29 19:24:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:34:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	get_map(t_data *data, int map_id)
 	char	**maps;
 	t_fd	fd;
 
+	data->map = free_map(data->map);
+	data->old_map = free_map(data->old_map);
 	if (map_id == RANDOM)
 		map_id = _random(TOTAL_MAPS);
 	else if (map_id < 0 || map_id >= TOTAL_MAPS)
@@ -39,8 +41,7 @@ int	get_map(t_data *data, int map_id)
 		return (error(data, ER_MAP_BIG));
 	if (alloc_map(data) != 0 || read_map(data, fd) != 0 || check_map(data) != 0)
 		return (data->last_error);
-	print_map(data->map);
-	return (0);
+	return (print_map(data->map), 0);
 }
 
 static int	read_map(t_data *data, t_fd fd)
@@ -59,16 +60,24 @@ static int	read_map(t_data *data, t_fd fd)
 			data->map[y][x + 1].val = line[x];
 			//update_global_values(data, line[x]);
 		}
+		SDL_free(line);
 		line = gnl();
 		++y;
 	}
 	SDL_free(line);
 	closefd(fd);
+	copy_map(data->old_map, data->map);
+	data->game.collectables = count_stuff(data, S_COL);
 	return (0);
 }
 
 static int	check_map(t_data *data)
 {
-	(void)data;
+	if (count_stuff(data, S_PLAYER) != 1)
+		return (error(data, ER_MAP_PLAYER));
+	else if (count_stuff(data, S_EXIT) != 1)
+		return (error(data, ER_MAP_EXIT));
+	else if (valid_path(data) == false)
+		return(error(data, ER_MAP_FLOODFILL));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/05 01:04:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/02 23:01:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,6 @@ int		find_line(int fd, int num_search, va_list list);
 int		find_number_line(int fd, char *filename, int num_search, ...);
 //		EXPANDED MANAGE_FILE FUNCTIONS
 
-int		num_line(int num_search, ...);
-void	hold_space(int counter, int fd);
-int		move_cursor(int line_num);
-char	*read_line(int line_num, int position);
-char	**read_all_line(int line_num);
-int		write_line(int line_num, int position, char *string);
-char	*get_n_line(int fd, int n);
 int		reset_fd(t_fd fd);
 
 #endif

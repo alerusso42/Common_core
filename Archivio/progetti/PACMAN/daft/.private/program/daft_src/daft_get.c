@@ -6,14 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/29 19:06:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/02 23:47:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
 static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
-static char	*check_key(const char *search, char field_sep[], t_fd fd);
+static char	*check_key(const char *search, char field_sep[], t_fd *fd);
 static void	*select_data_file(t_daft_data *data, t_daft_list *file, char *key);
 
 /*
@@ -79,7 +79,7 @@ static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
 	{
 		offset = current->offset;
 		SDL_RWseek(fd.p, offset, 0);
-		key = check_key(s, f->field_sep, fd);
+		key = check_key(s, f->field_sep, &fd);
 		current = current->next;
 	}
 	if (!key)
@@ -88,7 +88,7 @@ static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
 }
 
 //	Check if key is right (for collisions).
-static char	*check_key(const char *search, char field_sep[], t_fd fd)
+static char	*check_key(const char *search, char field_sep[], t_fd *fd)
 {
 	char	*key;
 
@@ -98,7 +98,7 @@ static char	*check_key(const char *search, char field_sep[], t_fd fd)
 	if (!ft_strncmp(search, key, sub_strlen(key, field_sep, EXCLUDE)))
 		return (key);
 	SDL_free(key);
-	reset_fd(fd);
+	reset_fd(*fd);
 	return (NULL);
 }
 

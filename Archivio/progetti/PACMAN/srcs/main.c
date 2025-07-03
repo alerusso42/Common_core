@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:03:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 16:50:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:04:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main()
 	t_data	data;
 
 	data = (t_data){0};
+	getter(&data, true);
 	if (init_all(&data) != 0)
 		return (data.last_error);
 	game_loop(&data);

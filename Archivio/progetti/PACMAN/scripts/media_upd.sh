@@ -59,18 +59,24 @@ function update_media()	{
 	if [[ "$1" == "$TEXTURES" ]];
 	then
 		TYPE="$T_NAME"
+		plen=3
 	elif [[ "$1" == "$MUSIC" ]];
 	then
 		TYPE="$M_NAME"
+		plen=3
 	elif [[ "$1" == "$SOUND" ]];
 	then
 		TYPE="$S_NAME"
+		plen=2
 	elif [[ "$1" == "$MAP" ]];
 	then
 		TYPE="$MAP_NAME"
+		plen=4
 	else
 		return 1
 	fi
+	prefix="${TYPE:0:$plen}"
+	prefix="${prefix^^}_"
 	H_TEMP=$(mktemp)
 	echo -n "$TYPE:" >> "$LIST_FILE"
 	ls "$FILES" > "$TEMP"
@@ -80,7 +86,7 @@ function update_media()	{
 		upper="${upper%.*}"
 		line=$FILES$line
 		echo -n "$line""," >> $LIST_FILE
-		printf $'\t%s,\n' "$upper" >> "$H_TEMP"
+		printf $'\t%s,\n' "$prefix$upper" >> "$H_TEMP"
 	done < $TEMP
 	printf $'\t%s,\n' "TOTAL_""${TYPE^^}" >> "$H_TEMP"
 	close_temp $TYPE

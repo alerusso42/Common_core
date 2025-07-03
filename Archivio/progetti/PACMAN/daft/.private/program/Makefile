@@ -73,10 +73,10 @@ all: $(PREP) $(DAFT)
 # Link step: make $(NAME) from all object files
 # Note: “| $(O_DIR)” means “ensure obj/ exists before proceeding”
 $(PREP): $(PREP_OBJ) $(DAFT_H) | $(O_DIR)
-	$(COMP) $(CFLAGS) $(PREP_OBJ) $(DAFT_H) -o $(PREP) $(LDFLAGS)
+	$(COMP) $(CFLAGS) $(PREP_OBJ) -o $(PREP) $(LDFLAGS)
 
 $(DAFT): $(DAFT_OBJ) $(DAFT_H) | $(O_DIR)
-	ar rcs $(DAFT) $(DAFT_H) $(DAFT_OBJ)
+	ar rcs $(DAFT) $(DAFT_OBJ)
 
 # ------------------------------------------------
 # 9) Ensure the obj/ directory exists

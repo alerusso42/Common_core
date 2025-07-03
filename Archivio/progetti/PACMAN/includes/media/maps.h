@@ -4,7 +4,7 @@
 
 enum e_maps
 {
-ORIGINAL,
+MAPS_ORIGINAL,
 TOTAL_MAPS,
 };
 

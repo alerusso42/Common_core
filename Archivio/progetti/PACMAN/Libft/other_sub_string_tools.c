@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:24:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 10:25:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:00:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	sub_strcpy(char *dest, char *src, char *charset, int mode)
 {
 	int	i;
 
+	if (!dest || !src || !charset)
+		return (0);
 	i = 0;
 	if (mode == INCLUDE)
 	{

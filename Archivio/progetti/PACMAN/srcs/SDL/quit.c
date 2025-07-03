@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:27:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/27 16:57:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:02:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	destroy_media(t_SDL *sdl);
 
 void	free_all(t_data *data)
 {
+	SDL_free(data->enemy);
+	data->enemy = NULL;
 	destroy_media(&data->sdl);
 	Mix_HaltMusic();
 	if (data->sdl.win)
@@ -25,6 +27,7 @@ void	free_all(t_data *data)
 	SDL_Quit();
 	daft_quit();
 	data->map = free_map(data->map);
+	data->old_map = free_map(data->old_map);
 	del_filedata();
 }
 
