@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:59:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 10:43:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:47:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,18 @@ static int		which_text(t_entity *entity)
 	else if (entity->type == EN_EXIT)
 		texture = TEX_EXIT;
 	return (texture);
+}
+
+void	init_enemies_animation(t_data *data)
+{
+	int			i;
+	t_entity	*enemy;
+
+	enemy = data->enemy;
+	i = 0;
+	while (enemy[i].type != EN_LAST)
+	{
+		animate_one(data, &enemy[i]);
+		i++;
+	}
 }

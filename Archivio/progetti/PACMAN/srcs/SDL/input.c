@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:34:00 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 13:00:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:45:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ static void	keyboard(t_data *data, SDL_Keycode key)
 
 static void	window(t_data *data, SDL_WindowEvent *event)
 {
-	if (event->type == SDL_WINDOWEVENT_RESIZED)
+	if (event->event == SDL_WINDOWEVENT_SIZE_CHANGED)
 	{
 		SDL_SetWindowSize(data->sdl.win, event->data1, event->data2);
+		reset_map(data->old_map);
+		animations(data);
 	}
 }

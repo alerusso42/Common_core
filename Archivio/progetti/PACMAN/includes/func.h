@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 11:50:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:47:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int		error(t_data *data, int type);
 void	game_loop(t_data *data);
 void	events(t_data *data);
 void	move_enemies(t_data *data);
+void	init_enemies_animation(t_data *data);
 int		triggered(t_data *data, int en_x, int en_y);
+int		get_best_path(t_data *data, int enemy_num);
 
 //SECTION - Map
 
@@ -55,6 +57,7 @@ int			find_stuff(t_data *data, char c, int *x, int *y);
 int			count_stuff(t_data *data, char c);
 void		copy_map(t_map **map, t_map **old_map);
 int			valid_path(t_data *data);
+void		reset_map(t_map **map);
 t_data		*getter(t_data *newdata, bool update);
 int			alloc_map(t_data *data);
 void		*free_map(t_map **map);
@@ -70,5 +73,6 @@ void		swap(t_entity *entity, int x, int y);
 //SECTION - Debug
 
 void	print_map(t_map **map, t_map **old_map);
+void	print_bfs(t_map **map, int i);
 
 #endif

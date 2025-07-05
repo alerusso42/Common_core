@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:31:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 12:17:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:48:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	game_loop(t_data *data)
 
 	data->run = true;
 	first_rendering = true;
+	init_enemies_animation(data);
 	while (data->run == true)
 	{
 		map_render(data, first_rendering);
 		animations(data);
 		move_enemies(data);
 		//print_map(data->map, data->old_map);
+		print_bfs(data->map, 0);
 		SDL_RenderPresent(data->sdl.render);
 		first_rendering = false;
 		start_time = SDL_GetTicks64();

@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_bfs.h                                         :+:      :+:    :+:   */
+/*   bfs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:58:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 15:12:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 15:17:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_BFS_H
-# define GAME_BFS_H
-# include "libft.h"
+#ifndef BFS_H
+# define BFS_H
+# include "pacman.h"
+
+typedef struct s_map	t_map;
+typedef struct s_data	t_data;
 
 /*
 	PREREQUISITES:
@@ -42,14 +45,9 @@
 	with the libft functions (with the list support).
 */
 
-typedef struct s_position
-{
-	unsigned char	value;
-	char			*distance;
-}				t_position;
-
 typedef struct s_bfs
 {
+	t_map		**map;
 	int			n;
 	int			mark;
 	int			en_x;
@@ -60,7 +58,6 @@ typedef struct s_bfs
 	int			y;
 	int			map_x;
 	int			map_y;
-	t_position	**position;
 	int			distance;
 }				t_bfs;
 
@@ -69,6 +66,6 @@ void		del_free(void *ptr);
 int			draw_path(t_bfs *bfs);
 void		bfs(t_bfs *bfs);
 void		clean_bfs(t_bfs *bfs, int enemy_num);
-//int	    get_best_path(t_map *map, int enemy_num);
+int			get_best_path(t_data *data, int enemy_num);
 
 #endif

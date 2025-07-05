@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 12:26:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:05:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ struct s_game
 	int		collectables;
 	int		enemy_num;
 	bool	exit;
+	bool	player_moved;
 };
 
 
@@ -109,7 +110,8 @@ enum e_symbol
 	S_FMARK = 	'X',
 	S_FLOOR = 	'0',
 	S_WALL = 	'1',
-	S_HARD_WALL = 0,	
+	S_HARD_WALL = 0,
+	S_RESET = -1,	
 };
 
 enum e_entity_type
