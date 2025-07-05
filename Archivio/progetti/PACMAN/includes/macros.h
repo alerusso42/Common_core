@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:43:40 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 19:10:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:28:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define WIN_H 1800
 # define WIN_X 0
 # define WIN_Y 0
+# define WIN_FLAGS (SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE)
 # define SPRITE_SIZE 25
 # define WIN_NAME "PACMAN"
 # define FPS 30ULL

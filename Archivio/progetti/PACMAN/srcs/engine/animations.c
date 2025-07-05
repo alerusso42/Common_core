@@ -6,24 +6,33 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:59:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 17:55:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 10:43:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pacman.h"
 
-static void	animate_one(t_data *data, t_entity *entity);
 static int	which_text(t_entity *entity);
 
 void	animations(t_data *data)
 {
-	int	i;
+	int			i;
+	t_entity	*enemy;
 
-	animate_one(data, &data->player);
-	i = 0;
-	while (data->enemy[i].type != EN_LAST)
+	if (elapsed_time(data->player.anim.last) >= data->player.anim.interval)
+		animate_one(data, &data->player);
+	if (data->exit.triggered == false && data->game.collectables == 0)
 	{
-		animate_one(data, &data->enemy[i]);
+		data->exit.frame = 1;
+		data->exit.triggered = true;
+		animate_one(data, &data->exit);
+	}
+	enemy = data->enemy;
+	i = 0;
+	while (enemy[i].type != EN_LAST)
+	{
+		if (elapsed_time(enemy[i].anim.last) >= enemy[i].anim.interval)
+			animate_one(data, &enemy[i]);
 		i++;
 	}
 }
@@ -32,8 +41,6 @@ void	animate_one(t_data *data, t_entity *entity)
 {
 	int	i;
 
-	if (elapsed_time(entity->anim.last) < entity->anim.interval)
-		return ;
 	data->sdl.rect.x = entity->pos[X] * SPRITE_SIZE;
 	data->sdl.rect.y = entity->pos[Y] * SPRITE_SIZE;
 	i = which_text(entity);
@@ -66,5 +73,7 @@ static int		which_text(t_entity *entity)
 		texture = TEX_PURPLE_DOWN + entity->dir;
 	else if (entity->type == EN_RED)
 		texture = TEX_RED_DOWN + entity->dir;
+	else if (entity->type == EN_EXIT)
+		texture = TEX_EXIT;
 	return (texture);
 }

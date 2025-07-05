@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 18:08:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 11:50:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int		error(t_data *data, int type);
 //SECTION - Game
 
 void	game_loop(t_data *data);
+void	events(t_data *data);
+void	move_enemies(t_data *data);
+int		triggered(t_data *data, int en_x, int en_y);
 
 //SECTION - Map
 
@@ -60,11 +63,12 @@ void		set_exit(t_data *data);
 int			set_enemies(t_data *data);
 void		move(t_data *data, t_entity *entity, int x, int y);
 void		update_speed(t_entity *entity, int move_speed, int anim_speed);
-void		replace(int dest_x, int dest_y, int src_x, int src_y);
-void		swap(int x1, int y1, int x2, int y2);
+void		animate_one(t_data *data, t_entity *entity);
+void		replace(t_entity *entity, int x, int y);
+void		swap(t_entity *entity, int x, int y);
 
 //SECTION - Debug
 
-void	print_map(t_map **map);
+void	print_map(t_map **map, t_map **old_map);
 
 #endif

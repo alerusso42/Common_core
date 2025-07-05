@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:07:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 16:34:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 10:02:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_map(t_data *data, int map_id)
 		return (error(data, ER_MAP_BIG));
 	if (alloc_map(data) != 0 || read_map(data, fd) != 0 || check_map(data) != 0)
 		return (data->last_error);
-	return (print_map(data->map), 0);
+	return (print_map(data->map, NULL), 0);
 }
 
 static int	read_map(t_data *data, t_fd fd)

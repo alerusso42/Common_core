@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 18:04:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:26:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	init_all(t_data *data)
 		return (error(data, ER_DAFT));
 	if (SDL_Init(SDL_INIT_MASK) != 0)
 		return (error(data, ER_SDL));
-	data->sdl.win = SDL_CreateWindow(WIN_NAME, WIN_X, WIN_Y, WIN_W, WIN_H, 0);
+	data->sdl.win = SDL_CreateWindow(WIN_NAME, WIN_X, WIN_Y, WIN_W, WIN_H, WIN_FLAGS);
 	if (!data->sdl.win)
 		return (error(data, ER_SDL));
 	if (init_render(data) != 0)

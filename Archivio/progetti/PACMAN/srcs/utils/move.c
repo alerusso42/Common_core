@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 17:21:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:14:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,22 @@ static int	move_player(t_data *data, t_entity *entity, int x, int y);
 
 void	move(t_data *data, t_entity *entity, int x, int y)
 {
-	if (elapsed_time(entity->move.last) < entity->move.interval)
-		return ;
+	char	tile;
+
+	update_dir(entity, x, y);
+	tile = data->map[y][x].val;
 	entity->move.last = SDL_GetTicks64();
 	if (entity->type == PLAYER)
 	{
 		if (move_player(data, entity, x, y) == true)
 			return ;
 	}
-	else if (data->map[y][x].val == S_PLAYER)
+	else if (tile == S_PLAYER)
 		data->run = false;
-	else if (data->map[y][x].val == S_WALL || data->map[y][x].val == S_EXIT\
-	 || 	data->map[y][x].val != S_HARD_WALL)
+	else if (tile == S_ENEMY || tile == S_EXIT || \
+	tile == S_WALL || tile == S_HARD_WALL)
 		return ;
-	update_dir(entity, x, y);
-	swap(entity->pos[X], entity->pos[Y], x, y);
+	swap(entity, x, y);
 	entity->pos[X] = x;
 	entity->pos[Y] = y;
 }
@@ -42,8 +43,7 @@ static int	move_player(t_data *data, t_entity *entity, int x, int y)
 		data->run = false;
 	else if (data->map[y][x].val == S_COL)
 	{
-		update_dir(entity, x, y);
-		replace(entity->pos[X], entity->pos[Y], x, y);
+		replace(entity, x, y);
 		data->game.collectables -= 1;
 	}
 	else if (data->map[y][x].val == S_EXIT)
@@ -63,28 +63,36 @@ static int	move_player(t_data *data, t_entity *entity, int x, int y)
 	Dest is set to src.
 	Src is set to '0' (floor).
 */
-void	replace(int dest_x, int dest_y, int src_x, int src_y)
+void	replace(t_entity *entity, int x, int y)
 {
 	t_data	*data;
 
 	data = getter(NULL, false);
-	data->map[dest_y][dest_x].val = data->map[src_y][src_x].val;
-	data->map[src_y][src_x].val = S_FLOOR;
+	data->map[y][x].val = data->map[entity->pos[Y]][entity->pos[X]].val;
+	data->map[entity->pos[Y]][entity->pos[X]].val = S_FLOOR;
+	data->old_map[entity->pos[Y]][entity->pos[X]].val = -1;
+	entity->pos[X] = x;
+	entity->pos[Y] = y;
+	animate_one(data, entity);
 }
 
 /*
 	Takes two values on the map (dest and src).
 	They are swapped.
 */
-void	swap(int x1, int y1, int x2, int y2)
+void	swap(t_entity *entity, int x, int y)
 {
 	t_data	*data;
 	char	temp;
 
 	data = getter(NULL, false);
-	temp = data->map[y1][x1].val;
-	data->map[y1][x1].val = data->map[y2][x2].val;
-	data->map[y2][x2].val = temp;
+	temp = data->map[y][x].val;
+	data->map[y][x].val = data->map[entity->pos[Y]][entity->pos[X]].val;
+	data->map[entity->pos[Y]][entity->pos[X]].val = temp;
+	data->old_map[entity->pos[Y]][entity->pos[X]].val = -1;
+	entity->pos[X] = x;
+	entity->pos[Y] = y;
+	animate_one(data, entity);
 }
 
 /*

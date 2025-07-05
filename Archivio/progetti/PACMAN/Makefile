@@ -5,6 +5,7 @@ ROOT = .
 SRC = 	srcs/*.c		\
 		srcs/engine/*.c	\
 		srcs/SDL/*.c	\
+		srcs/IA/*.c	\
 		srcs/map/*.c	\
 		srcs/utils/*.c	\
 		srcs/debug/*.c	\

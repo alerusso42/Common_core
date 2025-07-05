@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 18:13:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:26:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ enum e_entity_type
 	EN_CIAN,
 	EN_ORANGE,
 	TOTAL_ENEMIES,
-	EN_DOGGO,
+	EN_EXIT,
 	EN_LAST = -1,
 };
 
@@ -140,6 +140,7 @@ enum e_general
 	LEFT,
 	RIGHT,
 	UP,
+	TOTAL_MOVEMENT,
 	PLAYER = EN_LAST,
 };
 
