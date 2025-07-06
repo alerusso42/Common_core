@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 16:47:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/06 01:37:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		error(t_data *data, int type);
 void	game_loop(t_data *data);
 void	events(t_data *data);
 void	move_enemies(t_data *data);
+void	update_enemy_path(t_data *data);
 void	init_enemies_animation(t_data *data);
 int		triggered(t_data *data, int en_x, int en_y);
 int		get_best_path(t_data *data, int enemy_num);

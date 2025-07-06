@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 17:05:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/06 01:35:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ struct s_game
 	int		collectables;
 	int		enemy_num;
 	bool	exit;
-	bool	player_moved;
 };
 
 
@@ -69,6 +68,7 @@ struct s_entity
 	char	type;
 	uint8_t	dir:3;
 	bool	triggered;
+	bool	update_path;
 };
 
 struct s_data

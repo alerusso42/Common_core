@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:05:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 10:54:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/06 02:06:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	triggered(t_data *data, int en_x, int en_y)
 		if ((x_eye_contact(data->map, &data->player, en_x, en_y) == true) || \
 		(y_eye_contact(data->map, &data->player, en_x, en_y) == true))
 			return (true);
-	}
-	return (false);
+	}	return (false);
 }
 
 static int	eye(char value)

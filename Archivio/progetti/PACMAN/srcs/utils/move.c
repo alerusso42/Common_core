@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 17:07:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/06 01:39:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	move_player(t_data *data, t_entity *entity, int x, int y)
 	else if (data->map[y][x].val == S_COL)
 	{
 		replace(entity, x, y);
-		data->game.player_moved = true;
+		update_enemy_path(data);
 		data->game.collectables -= 1;
 	}
 	else if (data->map[y][x].val == S_EXIT)
@@ -54,7 +54,7 @@ static int	move_player(t_data *data, t_entity *entity, int x, int y)
 	}
 	else if (data->map[y][x].val == S_FLOOR)
 	{
-		data->game.player_moved = true;
+		update_enemy_path(data);
 		return (false);
 	}
 	return (true);
