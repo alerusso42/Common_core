@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 12:26:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:16:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ static int	init_music(t_data *data)
 	char	**files;
 	int		i;
 
-	if (Mix_OpenAudio(48000, AUDIO_S16SYS, 2, 2048) != 0)
+	//NOTE usare il driver dsp
+	if (Mix_OpenAudio(44100, AUDIO_S16, 1, 5000) != 0)
 		return (error(data, ER_SDL));
 	files = daft_get("mus");
 	if (!files)

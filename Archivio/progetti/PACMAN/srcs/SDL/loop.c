@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:31:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 16:48:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/06 16:50:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	game_loop(t_data *data)
 	data->run = true;
 	first_rendering = true;
 	init_enemies_animation(data);
+	Mix_PlayMusic(data->sdl.mus[MUS_MAIN], 0);
 	while (data->run == true)
 	{
 		map_render(data, first_rendering);
