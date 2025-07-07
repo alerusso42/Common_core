@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:34:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 15:00:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:52:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 uint32_t	_random(int size)
 {
 	uint32_t	clock;
-	
+
+	return (rand());
 	clock = SDL_GetTicks();
 	return (clock % size);
 }

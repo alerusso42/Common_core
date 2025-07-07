@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:08:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/06 01:48:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:46:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	move_one(t_data *data, t_entity *enemy, int i)
 	{
 		if (triggered(data, enemy->pos[X], data->enemy->pos[Y]))
 		{
-			printf("NIGERUDAYO, SMOKEY[%d]!\n", enemy->id);
+			Mix_PlayChannel(-1, data->sdl.sound[SO_PACMAN_INTERMISSION], 0);
 			enemy->triggered = true;
 		}
 	}
 	coord[X] = enemy->pos[X];
 	coord[Y] = enemy->pos[Y];
-	if (enemy->triggered == true && enemy->update_path == true)
+	if (enemy->triggered == true/* && enemy->update_path == true*/)
 	{
 		data->enemy[i].triggered = get_best_path(data, i);
 		enemy->update_path = false;
@@ -86,7 +86,7 @@ void	update_enemy_path(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->enemy[i].type)
+	while (data->enemy[i].type != EN_LAST)
 	{
 		data->enemy[i].update_path = true;
 		++i;

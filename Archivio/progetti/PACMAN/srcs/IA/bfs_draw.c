@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:02:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 15:44:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:08:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 	-	At the end of this ranking process, we check
 		what is the winner: we return the winner.
-	-	If anything wins, it means that anything is valid.
+	-	If nothing wins, it means that nothing is valid.
 		in this case, we return -1: it means there are
 		no valid path.
 */
@@ -194,11 +194,11 @@ int	draw_path(t_bfs *bfs)
 	bfs->map[bfs->y][bfs->x].distance[bfs->n] = bfs->mark;
 	if (find_shortest_route(bfs, bfs->x, bfs->y) == -1)
 	{
-		return (normalize_path(bfs, bfs->map_x, bfs->map_y), NO);
+		return (normalize_path(bfs, bfs->map_x, bfs->map_y), false);
 	}
 	while ((bfs->x != stop_x) || (bfs->y != stop_y))
 	{
-		if (found_end(bfs->x, bfs->y, stop_x, stop_y) == YES)
+		if (found_end(bfs->x, bfs->y, stop_x, stop_y) == true)
 		{
 			bfs->map[bfs->en_y][bfs->en_x].distance[bfs->n] = bfs->mark;
 			break ;
