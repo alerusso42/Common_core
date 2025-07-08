@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:29:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	find_distance(t_bfs *bfs, int x, int y, int distance)
 	*y_alloc = y;
 	new = ft_lstnew((void *)x_alloc, (void *)y_alloc);
 	if (!new)
-		return (SDL_free(x_alloc), SDL_free(y_alloc), 1);
+		return (FREE(x_alloc), FREE(y_alloc), 1);
 	list = store_list(NULL, 1);
 	if (bfs->position[x][y].distance[bfs->n] != -1)
 		bfs->position[x][y].distance[bfs->n] = distance + 1;
@@ -136,7 +136,7 @@ void	bfs(t_bfs *bfs)
 	bfs->y = *y;
 	list = ft_lstnew((void *)x, (void *)y);
 	if (!list)
-		return (SDL_free(x), SDL_free(y));
+		return (FREE(x), FREE(y));
 	tail = list;
 	store_list(list, 0);
 	bfs_loop(bfs, list);

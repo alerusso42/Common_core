@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/13 11:16:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void	quit_sdl(t_sdl *sdl)
 		if (sdl->img[index].texture)
 			SDL_DestroyTexture(sdl->img[index].texture);
 		if (sdl->img[index].surface)
-			SDL_FreeSurface(sdl->img[index].surface);
+			FREESurface(sdl->img[index].surface);
 		++index;
 	}
 	if (sdl->img_flags)

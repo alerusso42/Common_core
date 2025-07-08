@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:11:28 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/18 00:44:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	*_daft_get_vertical_matr(t_daft_data *data, t_daft_list *file)
 	{
 		if (size == i)
 			if (_daft_resize_matr(&matr, &size) != 0)
-				return (SDL_free(line), NULL);
+				return (FREE(line), NULL);
 		matr[i] = ft_strdup(line + sub_strlen(line, file->field_sep, EXCLUDE));
-		SDL_free(line);
+		FREE(line);
 		if (!matr[i++])
 			return (free_matrix(matr));
 		line = gnl();
 	}
-	SDL_free(line);
+	FREE(line);
 	data->mem.ptr = matr;
 	return (matr);
 }
@@ -54,7 +54,7 @@ void	*_daft_get_horiz_matr(t_daft_data *data, t_daft_list *file, char *key)
 	char	**matr;
 
 	matr = split_values(file, key);
-	SDL_free(key);
+	FREE(key);
 	data->mem.ptr = matr;
 	return (matr);
 }
@@ -92,14 +92,14 @@ void	*_daft_get_three_d_matr(t_daft_data *data, t_daft_list *file)
 	{
 		if (size == i)
 			if (_daft_resize_three_d_matr(&matr, &size) != 0)
-				return (SDL_free(line), NULL);
+				return (FREE(line), NULL);
 		matr[i] = split_values(file, line);
-		SDL_free(line);
+		FREE(line);
 		if (!matr[i++])
 			return (free_three_d_matrix(matr));
 		line = gnl();
 	}
-	SDL_free(line);
+	FREE(line);
 	data->mem.ptr = matr;
 	return (matr);
 }

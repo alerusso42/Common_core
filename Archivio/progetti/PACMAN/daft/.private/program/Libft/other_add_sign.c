@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:05:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 14:44:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	add_sign_left(char **string, char sign)
 		return (1);
 	new_string[0] = sign;
 	ft_strlcpy(new_string + 1, *string, ft_strlen(*string));
-	SDL_free(*string);
+	FREE(*string);
 	*string = new_string;
 	return (0);
 }
@@ -44,7 +44,7 @@ int	add_sign_right(char **string, char sign)
 	new_string[len + 1] = 0;
 	ft_strlcpy(new_string, *string, ft_strlen(*string));
 	new_string[len] = sign;
-	SDL_free(*string);
+	FREE(*string);
 	*string = new_string;
 	return (0);
 }

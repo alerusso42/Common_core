@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/04 15:56:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	if ((find_base(base_from)) == -1 || (find_base(base_to) == -1))
 		return (NULL);
 	nbr_base_ten = ft_atoi_base(nbr, base_from);
-	print = (char *)SDL_malloc(34 * sizeof(char));
+	print = (char *)MALLOC(34 * sizeof(char));
 	print[0] = '0';
 	print[1] = '\0';
 	ft_strcpy(&nbr_new_base, ft_putnbr_base(nbr_base_ten, base_to, print));
 	ft_invert_array(&nbr_new_base);
-	SDL_free(print);
+	FREE(print);
 	return (nbr_new_base);
 }
 
@@ -79,11 +79,11 @@ static void	ft_strcpy(char **dest, char *src)
 
 	i = 0;
 	if (*dest == NULL)
-		SDL_free(*dest);
+		FREE(*dest);
 	while (src[i] != '\0')
 		++i;
 	if (i != 0)
-		*dest = (char *)SDL_malloc(i * sizeof(char));
+		*dest = (char *)MALLOC(i * sizeof(char));
 	if (i != 0)
 	{
 		i = 0;

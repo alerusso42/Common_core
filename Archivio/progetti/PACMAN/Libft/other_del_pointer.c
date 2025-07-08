@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:20:54 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 14:44:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ static void	del_one(void **ptr)
 {
 	if (!ptr)
 		return ;
-	SDL_free(*ptr);
+	FREE(*ptr);
 	*ptr = NULL;
 }

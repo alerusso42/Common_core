@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:06:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:26:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:37:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*s2;
 
 	i = 0;
-	s2 = (char *)SDL_malloc(sizeof(char) * ft_strlen(s) + 1);
+	s2 = (char *)MALLOC(sizeof(char) * ft_strlen(s) + 1);
 	if (!s2)
 		return (NULL);
 	while (s[i])

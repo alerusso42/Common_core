@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/24 12:42:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:45:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 #include "../includes/lib.h"
 # include "structs.h"
+# define MALLOC SDL_malloc
+# define FREE SDL_free
 
 typedef long long int	t_int64;
 typedef struct s_typelist
@@ -56,10 +58,10 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
-void		ft_putchar_fd(char c, SDL_RWops *fd);
-void		ft_putendl_fd(char *s, SDL_RWops *fd);
-void		ft_putnbr_fd(int n, SDL_RWops *fd);
-void		ft_putstr_fd(char *s, SDL_RWops *fd);
+void		ft_putchar_fd(char c, IO_STRUCT *fd);
+void		ft_putendl_fd(char *s, IO_STRUCT *fd);
+void		ft_putnbr_fd(int n, IO_STRUCT *fd);
+void		ft_putstr_fd(char *s, IO_STRUCT *fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);

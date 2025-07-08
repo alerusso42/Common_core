@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:37:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 22:11:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:48:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*set_terminator(char *str, int index);
 
-char	*read_from_buffer(char buff[BUFFER_SIZE + 1], SDL_RWops *fd, int bytes)
+char	*read_from_buffer(char buff[BUFFER_SIZE + 1], IO_STRUCT *fd, int bytes)
 {
 	int		len;
 	char	*bytes_read;
@@ -27,8 +27,8 @@ char	*read_from_buffer(char buff[BUFFER_SIZE + 1], SDL_RWops *fd, int bytes)
 	while (buff[len] != 0)
 		++len;
 	index = 0;
-	if ((!len) && (bytes--) && (SDL_RWread(fd, bytes_read + index++, 1) < 1))
-		return (SDL_free(bytes_read), NULL);
+	if ((!len) && (bytes--) && (READ(fd, bytes_read + index++, 1) < 1))
+		return (FREE(bytes_read), NULL);
 	while ((bytes) && (len--))
 	{
 		bytes_read[index] = buff[index];

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:26:15 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 20:21:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	int		size;
 
 	if ((!s1) || (!s2))
-		return (SDL_free(s1), SDL_free(s2), NULL);
+		return (FREE(s1), FREE(s2), NULL);
 	index = 0;
 	while (s1[index])
 		++index;
@@ -30,22 +30,22 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	size += index;
 	stringona = (char *)ft_calloc(size + 2, sizeof(char));
 	if (!stringona)
-		return (SDL_free(s1), SDL_free(s2), NULL);
+		return (FREE(s1), FREE(s2), NULL);
 	index = -1;
 	while (s1[++index])
 		stringona[index] = s1[index];
 	size = -1;
 	while (s2[++size])
 		stringona[index++] = s2[size];
-	return (SDL_free(s1), SDL_free(s2), stringona);
+	return (FREE(s1), FREE(s2), stringona);
 }
 
 static void	to_free(char *s1, char *s2, char which)
 {
 	if (which == 1 || which >= 3)
-		SDL_free(s1);
+		FREE(s1);
 	if (which >= 2)
-		SDL_free(s2);
+		FREE(s2);
 }
 
 /*

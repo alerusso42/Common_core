@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 23:35:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	_daft_get_data2(t_daft_list *file)
 	while (line)
 	{
 		if (get_one(&file->node[(int)ft_atoi(line)], line) != 0)
-			return (SDL_free(line), DAFT_LOG_MALLOC);
-		SDL_free(line);
+			return (FREE(line), DAFT_LOG_MALLOC);
+		FREE(line);
 		line = gnl();
 	}
 	return (0);

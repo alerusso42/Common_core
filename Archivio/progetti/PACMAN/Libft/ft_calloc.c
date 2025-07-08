@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:05:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 13:52:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:41:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	pointer = NULL;
 	if ((nmemb == 0) || (size == 0))
-		return (SDL_malloc(0));
+		return (MALLOC(0));
 	total_size = (nmemb * size);
 	if (total_size / nmemb != size)
 		return (NULL);
-	pointer = SDL_malloc(total_size);
+	pointer = MALLOC(total_size);
 	if (pointer == NULL)
 		return (NULL);
 	ft_memset(pointer, 0, total_size);

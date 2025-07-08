@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/24 12:41:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:47:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	fd_printf(t_fd fd, const char *str, ...)
 				print("/UNKNOWN SPECIFIER/", fd);
 		}
 		else
-			SDL_RWwrite(fd.p, &str[index], sizeof(char), 1);
+			WRITE(fd.p, &str[index], sizeof(char), 1);
 		++index;
 	}
 	va_end(ptr);
@@ -75,7 +75,7 @@ int	type_print(char type, va_list ptr, t_fd fd)
 	if (type == 'c')
 	{
 		c = (char)va_arg(ptr, int);
-		SDL_RWwrite(fd.p, &c, sizeof(char), 1);
+		WRITE(fd.p, &c, sizeof(char), 1);
 	}
 	else if (type == 's')
 	{
@@ -127,13 +127,13 @@ static void	print(char *str, t_fd fd)
 
 	if (!str)
 	{
-		SDL_RWwrite(fd.p, "(NULL)", sizeof(char), 6);
+		WRITE(fd.p, "(NULL)", sizeof(char), 6);
 		return ;
 	}
 	index = 0;
 	while (str[index] != '\0')
 	{
-		SDL_RWwrite(fd.p, &str[index], sizeof(char), 1);
+		WRITE(fd.p, &str[index], sizeof(char), 1);
 		++index;
 	}
 }

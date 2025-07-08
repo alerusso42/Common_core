@@ -35,14 +35,14 @@ Available mode strings:
 */
 #define POKEDEX "pokedex.txt"
 #define close SDL_RWclose
-#define free SDL_free
+#define free FREE
 #define OFFSET 0
 int	main(int argc, char *argv[])
 {
 	if (argc != 2)
 		return (42);
 	int				offset = atoi(argv[1]);
-	SDL_RWops		*fd;
+	IO_STRUCT		*fd;
 	unsigned char	*str;
 	int				size;
 
@@ -53,15 +53,15 @@ int	main(int argc, char *argv[])
 	str = SDL_calloc(size + 1, sizeof(char));
 	if (!str)
 		return (2);
-	SDL_RWseek(fd, offset, 0);
-	if (SDL_RWread(fd, str, sizeof(char), size) != (size_t)size)
-		return (SDL_free(str), SDL_RWclose(fd), 7);
+	SEEK(fd, offset, 0);
+	if (READ(fd, str, sizeof(char), size) != (size_t)size)
+		return (FREE(str), SDL_RWclose(fd), 7);
 	SDL_RWclose(fd);
 	str[size] = 0;
 	fd = SDL_RWFromFile("Outputt.txt", "w");
 	if (!fd)
 		return (9);
-	SDL_RWwrite(fd, str, sizeof(char), size);
+	WRITE(fd, str, sizeof(char), size);
 	close(fd);
 	free(str);
 	return (0);
@@ -69,11 +69,11 @@ int	main(int argc, char *argv[])
 
 // int	main(void)
 // {
-// 	SDL_RWops		**fd;
+// 	IO_STRUCT		**fd;
 // 	int				i;
 
 // 	i = 0;
-// 	fd = SDL_calloc(22, sizeof(SDL_RWops *));
+// 	fd = SDL_calloc(22, sizeof(IO_STRUCT *));
 // 	while (i != 20)
 // 	{
 // 		fd[i] = SDL_RWFromFile(POKEDEX, "r");
@@ -83,6 +83,6 @@ int	main(int argc, char *argv[])
 // 	i = 0;
 // 	while (i != 20)
 // 		SDL_RWclose(fd[i++]);
-// 	SDL_free(fd);
+// 	FREE(fd);
 // 	SDL_Quit();
 // }

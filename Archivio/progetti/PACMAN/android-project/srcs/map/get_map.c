@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:07:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 10:02:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ static int	read_map(t_data *data, t_fd fd)
 			data->map[y][x + 1].val = line[x];
 			//update_global_values(data, line[x]);
 		}
-		SDL_free(line);
+		FREE(line);
 		line = gnl();
 		++y;
 	}
-	SDL_free(line);
+	FREE(line);
 	closefd(fd);
 	copy_map(data->old_map, data->map);
 	data->game.collectables = count_stuff(data, S_COL);

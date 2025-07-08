@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:38:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 22:59:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ int	main(void)
 	while (line != NULL)
 	{
 		printf("%s\n", line);
-		SDL_free(line);
+		FREE(line);
 		line = gnl();
 		c++;
 	}

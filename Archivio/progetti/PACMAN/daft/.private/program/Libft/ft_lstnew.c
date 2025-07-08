@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:21:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:37:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_typelist	*ft_lstnew(void *content, void *type)
 {
 	t_typelist	*new_node;
 
-	new_node = (t_typelist *)SDL_malloc(sizeof(t_typelist));
+	new_node = (t_typelist *)MALLOC(sizeof(t_typelist));
 	if (!new_node)
 		return (NULL);
 	new_node->content = content;

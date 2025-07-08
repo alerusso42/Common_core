@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 23:07:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	_daft_save_fnames(t_daft_data *data)
 			found_files = true;
 		else if (parse_fnames(data, line, &matr_s) == DAFT_LOG_MALLOC)
 		{
-			SDL_free(line);
+			FREE(line);
 			return (DAFT_LOG_MALLOC);
 		}
-		SDL_free(line);
+		FREE(line);
 		line = gnl();
 	}
-	SDL_free(line);
+	FREE(line);
 	return (0);
 }
 
@@ -69,8 +69,8 @@ static int	parse_fnames(t_daft_data *data, char *line, int *matr_s)
 	data->files_names[data->files_num] = \
 	ft_strjoin(DAFT_PWD, data->files_names[data->files_num]);
 	if (!data->files_names[data->files_num])
-		return (SDL_free(temp), _daft_log(DAFT_LOG_MALLOC));
-	SDL_free(temp);
+		return (FREE(temp), _daft_log(DAFT_LOG_MALLOC));
+	FREE(temp);
 	data->files_num += 1;
 	return (0);
 }

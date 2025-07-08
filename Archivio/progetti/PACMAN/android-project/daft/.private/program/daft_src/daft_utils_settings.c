@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 23:24:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	_daft_save_config(t_daft_data *data)
 	{
 		if (found_first && !line[0])
 		{
-			SDL_free(line);
+			FREE(line);
 			break ;
 		}
 		else if (!ft_strchr("#", line[0]))
@@ -35,11 +35,11 @@ int	_daft_save_config(t_daft_data *data)
 			found_first = true;
 			if (parse_config(data, line) != 0)
 			{
-				SDL_free(line);
+				FREE(line);
 				break ;
 			}
 		}
-		SDL_free(line);
+		FREE(line);
 		line = gnl();
 	}
 	return (0);

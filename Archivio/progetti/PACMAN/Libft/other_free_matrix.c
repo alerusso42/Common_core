@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:14:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 14:45:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	*free_matrix(char **matrix)
 	while (matrix[index])
 	{
 		if (matrix[index])
-			SDL_free(matrix[index]);
+			FREE(matrix[index]);
 		matrix[index] = NULL;
 		++index;
 	}
 	if (matrix)
-		SDL_free(matrix);
+		FREE(matrix);
 	return (NULL);
 }
 
@@ -50,14 +50,14 @@ void	*free_three_d_matrix(char ***matrix)
 		index_two = 0;
 		while (matrix[index_one][index_two])
 		{
-			SDL_free(matrix[index_one][index_two]);
+			FREE(matrix[index_one][index_two]);
 			matrix[index_one][index_two] = NULL;
 			++index_two;
 		}
-		SDL_free(matrix[index_one]);
+		FREE(matrix[index_one]);
 		matrix[index_one] = NULL;
 		++index_one;
 	}
-	SDL_free(matrix);
+	FREE(matrix);
 	return (NULL);
 }

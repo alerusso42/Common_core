@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:15:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 14:45:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	move_sign(char **type, char **name, char *sign)
 		if ((*(*name)++) == *sign)
 			count_sign++;
 	trim_only_right(&temp, sign);
-	SDL_free(temp);
+	FREE(temp);
 	if (!(*name))
 		return (1);
 	temp = (char *)ft_calloc(count_sign + 1, sizeof(char));

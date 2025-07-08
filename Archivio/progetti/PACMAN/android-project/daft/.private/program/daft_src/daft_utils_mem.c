@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 22:24:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	_daft_resize_matr(char ***old_matr, int *size)
 		*size = *size * 2;
 	new_matr = ft_calloc(*size + 1, sizeof(char *));
 	if (!new_matr)
-		return (SDL_free(*old_matr), DAFT_LOG_MALLOC);
+		return (FREE(*old_matr), DAFT_LOG_MALLOC);
 	i = 0;
 	while ((*old_matr) && (*old_matr)[i])
 	{
 		new_matr[i] = (*old_matr)[i];
 		++i;
 	}
-	SDL_free(*old_matr);
+	FREE(*old_matr);
 	*old_matr = new_matr;
 	return (0);
 }
@@ -85,7 +85,7 @@ void	_daft_free_old_mem(t_daft_data *data)
 	if (data->mem.type == NO_MEM)
 		return ;
 	else if (data->mem.type == STRING)
-		SDL_free(data->mem.ptr);
+		FREE(data->mem.ptr);
 	else if (data->mem.type == TWO_D_MATRIX)
 		free_matrix(data->mem.ptr);
 	else if (data->mem.type == THREE_D_MATRIX)

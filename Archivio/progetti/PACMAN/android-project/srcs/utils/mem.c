@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:27:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 10:44:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ void	*free_map(t_map **map)
 		x = 1;
 		while (map[y][x].distance)
 		{
-			SDL_free(map[y][x].distance);
+			FREE(map[y][x].distance);
 			map[y][x].distance = NULL;
 			++x;
 		}
-		SDL_free(map[y]);
+		FREE(map[y]);
 		map[y] = NULL;
 		++y;
 	}
-	SDL_free(map);
+	FREE(map);
 	return (NULL);
 }

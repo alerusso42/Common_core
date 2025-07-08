@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 23:31:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	_daft_get_data(t_daft_list *file, char *filename)
 	if (!hash_filename)
 		return (_daft_log(DAFT_LOG_MALLOC));
 	file->filedata = openfd(hash_filename, "r");
-	SDL_free(hash_filename);
+	FREE(hash_filename);
 	if (!file->filedata.n)
 		return (_daft_log(DAFT_LOG_OPEN));
 	file->filename = filename;
@@ -67,19 +67,19 @@ static int	preparations(t_daft_list *file)
 		return (_daft_log(DAFT_LOG_FILESETT));
 	alloc_size = ft_atoi(line);
 	if (alloc_size == LLONG_MAX || alloc_size <= 0)
-		return (SDL_free(line), _daft_log(DAFT_LOG_ALLOCSIZE));
+		return (FREE(line), _daft_log(DAFT_LOG_ALLOCSIZE));
 	i = sub_strlen(line, " ", EXCLUDE);
 	if (!line[i])
-		return (SDL_free(line), _daft_log(DAFT_LOG_MISSFLAGS));
+		return (FREE(line), _daft_log(DAFT_LOG_MISSFLAGS));
 	i += 1;
 	if (ft_strlen(line + i) != 5)
-		return (SDL_free(line), _daft_log(DAFT_LOG_MISSFLAGS));
+		return (FREE(line), _daft_log(DAFT_LOG_MISSFLAGS));
 	file->field_sep[0] = line[i];
 	file->multiple_lines = (line[i + 1] == 'y');
 	file->split_values = (line[i + 2] == 'y');
 	file->key_value_sep[0] = line[i + 3];
 	file->values_sep[0] = line[i + 4];
-	SDL_free(line);
+	FREE(line);
 	file->size = (int)alloc_size;
 	return (alloc_list(file, alloc_size));
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 22:58:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ void daft_quit(void)
 	del_filedata();
 	_daft_free_old_mem(data);
 	data->files_names = free_matrix(data->files_names);
-	SDL_free(data->conf.default_flags);
+	FREE(data->conf.default_flags);
 	data->conf.default_flags = NULL;
 	i = 0;
 	if (!data->data_list)
-		return (SDL_free(data));
+		return (FREE(data));
 	while (data->data_list[i])
 	{
 		free_filedata(data->data_list[i]);
 		data->data_list[i] = NULL;
 		++i;
 	}
-	SDL_free(data->data_list);
+	FREE(data->data_list);
 	data->data_list = NULL;
-	SDL_free(data);
+	FREE(data);
 }
 
 //	Filedata is the struct of files inner data (flags, filenames, hash data).
@@ -68,7 +68,7 @@ static void	free_filedata(t_daft_list *filedata)
 
 	if (!filedata->node)
 	{
-		SDL_free(filedata);
+		FREE(filedata);
 		return ;
 	}
 	i = -1;
@@ -80,11 +80,11 @@ static void	free_filedata(t_daft_list *filedata)
 			while (current)
 			{
 				next = current->next;
-				SDL_free(current);
+				FREE(current);
 				current = next;
 			}
 		}
 	}
-	SDL_free(filedata->node);
-	SDL_free(filedata);
+	FREE(filedata->node);
+	FREE(filedata);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:27:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 10:42:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	destroy_media(t_SDL *sdl);
 
 void	free_all(t_data *data)
 {
-	SDL_free(data->enemy);
+	FREE(data->enemy);
 	data->enemy = NULL;
 	destroy_media(&data->sdl);
 	Mix_HaltMusic();

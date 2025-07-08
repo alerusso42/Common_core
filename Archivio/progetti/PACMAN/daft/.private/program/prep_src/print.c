@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:56:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/26 20:51:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_filedata(t_data *data)
 	ft_putstr_fd(file_size, data->hash_fd.p);
 	ft_putstr_fd(" ", data->hash_fd.p);
 	ft_putstr_fd(data->flags, data->hash_fd.p);
-	SDL_free(file_size);
+	FREE(file_size);
 	switch_filedata(data->data_fd);
 }
 
@@ -49,7 +49,7 @@ void	print_hash_table(t_data *data)
 		old_key = lowest_key;
 		pos_string = itoa_malloc_guard(data, struct_i);
 		ft_putstr_fd(pos_string, data->hash_fd.p);
-		SDL_free(pos_string);
+		FREE(pos_string);
 		find_lowest_key(data, &lowest_key, &struct_i);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 22:30:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:45:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_list
 
 typedef struct s_fd
 {
-	SDL_RWops	*p;
+	IO_STRUCT	*p;
 	int			n;
 }	t_fd;
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:36:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 22:51:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	get_settings_file(t_daft_data *data)
 		return (_daft_log(DAFT_LOG_MALLOC));
 	settings_file = openfd(settings_file_name, "r");
 	if (!settings_file.n)
-		return (SDL_free(settings_file_name), _daft_log(DAFT_LOG_SETT));
+		return (FREE(settings_file_name), _daft_log(DAFT_LOG_SETT));
 	line = gnl();
 	while (line)
 	{
@@ -69,10 +69,10 @@ static int	get_settings_file(t_daft_data *data)
 			if (_daft_save_fnames(data) == DAFT_LOG_MALLOC)
 				closefd(settings_file);
 		}
-		SDL_free(line);
+		FREE(line);
 		line = gnl();
 	}
-	return (SDL_free(settings_file_name), closefd(settings_file), 0);
+	return (FREE(settings_file_name), closefd(settings_file), 0);
 }
 
 //	For every file, a dedicated struct is allocated.

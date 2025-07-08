@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:42:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:34:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	move_cursor(int line_num)
 	search = get_n_line(fd, line_num - 1);
 	if (!search)
 		return (1);
-	SDL_free(search);
+	FREE(search);
 	return (0);
 }
 
@@ -72,7 +72,7 @@ int	find_line(int fd, int num_search, va_list list)
 	{
 		while (ft_strnstr(string, search, ft_strlen(search)) == NULL)
 		{
-			SDL_free(string);
+			FREE(string);
 			string = get_next_line(fd, 0);
 			if (!string)
 				break ;
@@ -82,6 +82,6 @@ int	find_line(int fd, int num_search, va_list list)
 	}
 	if (!string)
 		return (-1);
-	SDL_free(string);
+	FREE(string);
 	return (counter);
 }

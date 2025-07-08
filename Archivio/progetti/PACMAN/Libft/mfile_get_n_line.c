@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:41:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:35:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_n_line(int fd, int n)
 	while (n--)
 	{
 		if (line)
-			SDL_free(line);
+			FREE(line);
 		line = get_next_line(fd, 0);
 		if (!line)
 			break ;

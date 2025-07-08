@@ -6,17 +6,17 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:32:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:20:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:47:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, SDL_RWops *fd)
+void	ft_putendl_fd(char *s, IO_STRUCT *fd)
 {
 	while (*s)
-		SDL_RWwrite(fd, s++, sizeof(char), 1);
-	SDL_RWwrite(fd, "\n", sizeof(char), 1);
+		WRITE(fd, s++, sizeof(char), 1);
+	WRITE(fd, "\n", sizeof(char), 1);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:41:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:21:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,7 +394,7 @@ t_typelist	*free_newlist(t_typelist **lst, void (*del)(void *), int how_much)
 	if (how_much == ONLY_HEAD)
 	{
 		if (*lst)
-			SDL_free((*lst));
+			FREE((*lst));
 	}
 	else if (how_much == EVERYTHING)
 	{

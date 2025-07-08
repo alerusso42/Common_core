@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:31:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:20:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ char	**ft_split(char const *s, char c)
 		*strings = 0;
 		while ((*strings))
 		{
-			SDL_free(*strings);
+			FREE(*strings);
 			*strings = NULL;
 			strings++;
 		}
 		strings = saveposition_pointer;
-		SDL_free(strings);
+		FREE(strings);
 		strings = NULL;
 	}
 	if (strings)

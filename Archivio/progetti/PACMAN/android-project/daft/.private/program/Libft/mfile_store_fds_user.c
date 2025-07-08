@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 15:42:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	closefd(t_fd fd)
 	if (data->fds[fd.n].n == data->last)
 		data->last--;
 	data->fds[fd.n].n = 0;
-	SDL_free(data->filenames[fd.n]);
+	FREE(data->filenames[fd.n]);
 	data->filenames[fd.n] = NULL;
 	if (fd.p)
 		SDL_RWclose(fd.p);

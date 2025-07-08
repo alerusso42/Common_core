@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:51:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 15:37:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 void	del_free(void *ptr)
 {
-	SDL_free(ptr);
+	FREE(ptr);
 	ptr = NULL;
 }
 

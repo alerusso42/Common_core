@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:12:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/26 20:43:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	error(t_data *data, int err_type)
 
 void	free_memory(t_data *data)
 {
-	SDL_free(data->hash_table);
-	SDL_free(data->collision);
+	FREE(data->hash_table);
+	FREE(data->collision);
 	del_filedata();
 }
 

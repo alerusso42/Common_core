@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 08:43:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 13:43:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:48:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int main()
 	char *s = NULL;
 	int size = SDL_RWsize(fd1.p);
 	s = malloc(size + 1);
-	size = SDL_RWread(fd1.p, s, sizeof(char), size);
+	size = READ(fd1.p, s, sizeof(char), size);
 	s[size] = 0;
 	char	*tmp = memchr(s, 'G', size);
-	SDL_RWwrite(fd2.p, tmp, sizeof(char), 40);
+	WRITE(fd2.p, tmp, sizeof(char), 40);
     free(s);
 	t_fd	fd;
 	get_filedata(&fd, &s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 12:09:16 by codespace        ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	fill_hash_table(t_data *data)
 		}
 		cursor = bytes_read;
 		++line_num;
-		SDL_free(line);
+		FREE(line);
 		line = gnl();
 	}
 }

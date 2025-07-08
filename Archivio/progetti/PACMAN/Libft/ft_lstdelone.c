@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:40:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:21:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void	ft_lstdelone(t_typelist *lst, void (*del)(void *))
 	{
 		del(lst->content);
 		del(lst->type);
-		SDL_free(lst);
+		FREE(lst);
 	}
 }

@@ -6,16 +6,16 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 15:31:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:20:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:47:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, SDL_RWops *fd)
+void	ft_putstr_fd(char *s, IO_STRUCT *fd)
 {
 	while (*s)
-		SDL_RWwrite(fd, s++, sizeof(char), 1);
+		WRITE(fd, s++, sizeof(char), 1);
 }
 
 /*
