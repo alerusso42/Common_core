@@ -6,11 +6,12 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:43:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/16 19:20:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:44:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+//# define SDL_IOStream SDL_IOStream
 
 static void	collision_adder(t_data *data, int hash_pos);
 static void	collision_reset(t_data *data, int i);

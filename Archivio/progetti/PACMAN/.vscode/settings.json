@@ -42,6 +42,8 @@
 	"type_traits": "c",
 	"utility": "c",
 	"sound.h": "c",
-	"bfs.h": "c"
+	"bfs.h": "c",
+	"stdarg.h": "c",
+	"format": "c"
 }
 }

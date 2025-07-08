@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   z_function_list.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 09:33:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/13 16:14:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:56:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef Z_FUNCTION_LIST_H
 # define Z_FUNCTION_LIST_H
 # include "Libft/all.h"
-# include <SDL2/SDL_mixer.h>
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL.h>
+# include <SDL3/SDL_mixer.h>
+# include <SDL3/SDL_image.h>
+# include <SDL3/SDL.h>
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>

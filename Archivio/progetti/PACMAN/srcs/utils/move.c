@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 11:25:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:00:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	move(t_data *data, t_entity *entity, int x, int y)
 
 	update_dir(entity, x, y);
 	tile = data->map[y][x].val;
-	entity->move.last = SDL_GetTicks64();
+	entity->move.last = SDL_GetTicks();
 	if (entity->type == PLAYER)
 	{
 		if (move_player(data, entity, x, y) == true)

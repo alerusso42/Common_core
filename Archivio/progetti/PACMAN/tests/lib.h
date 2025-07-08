@@ -31,23 +31,23 @@
 # include <stdbool.h>
 
 /* 
-//SECTION - SDL2 Libraries (Graphics/Audio library, ensures portability)
+//SECTION - SDL3 Libraries (Graphics/Audio library, ensures portability)
 
-//		SDL2 is a minimalist and cross-platform graphics/audio library,
+//		SDL3 is a minimalist and cross-platform graphics/audio library,
 //		originally developed by Sam Lantinga.
 */
-//REVIEW -	Core SDL2 functionality
-# include <SDL2/SDL.h>
-//REVIEW -	Official SDL2 extensions
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL_mixer.h>
-# include <SDL2/SDL_ttf.h>
-# include <SDL2/SDL_net.h>
+//REVIEW -	Core SDL3 functionality
+# include <SDL3/SDL.h>
+//REVIEW -	Official SDL3 extensions
+# include <SDL3/SDL_image.h>
+# include <SDL3/SDL_mixer.h>
+# include <SDL3/SDL_ttf.h>
+# include <SDL3/SDL_net.h>
 
 /*
 //SECTION - Other Libraries
 
-//		Additional third-party libraries that complement SDL2
+//		Additional third-party libraries that complement SDL3
 //		for graphics, math, and file system support.
 */
 //REVIEW - 	Virtual FileSystem, developed by Ryan C. Gordon (icculus)

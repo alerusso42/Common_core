@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:34:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 19:10:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:00:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ uint64_t	elapsed_time(uint64_t start)
 	uint64_t	curr;
 	long		diff;
 
-	curr = SDL_GetTicks64();
+	curr = SDL_GetTicks();
 	diff = curr - start;
 	return (diff);
 }

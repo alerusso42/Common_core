@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:59:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 16:47:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:05:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	animate_one(t_data *data, t_entity *entity)
 	data->sdl.rect.x = entity->pos[X] * SPRITE_SIZE;
 	data->sdl.rect.y = entity->pos[Y] * SPRITE_SIZE;
 	i = which_text(entity);
-	SDL_RenderCopy(data->sdl.render, data->sdl.texture[i], NULL, &data->sdl.rect);
+	SDL_RenderTexture(data->sdl.render, data->sdl.texture[i], NULL, &data->sdl.rect);
 	if (entity->frame == entity->last_frame)
 		entity->frame = 0;
 	else
 		entity->frame += 1; 
-	entity->anim.last = SDL_GetTicks64();
+	entity->anim.last = SDL_GetTicks();
 }
 
 static int		which_text(t_entity *entity)

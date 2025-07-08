@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:26:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_fd	openfd(const char *filename, const char *permissions)
 	i = fd_indexation();
 	if (!data->fds[i].n)
 		return ((t_fd){NULL, 0});
-	data->fds[i].p = SDL_RWFromFile(filename, permissions);
+	data->fds[i].p = OPEN(filename, permissions);
 	if (!data->fds[i].p)
 	{
 		return (closefd(data->fds[i]), (t_fd){0});
@@ -56,7 +56,7 @@ void	closefd(t_fd fd)
 	FREE(data->filenames[fd.n]);
 	data->filenames[fd.n] = NULL;
 	if (fd.p)
-		SDL_RWclose(fd.p);
+		CLOSE(fd.p);
 	if (data->buffer[fd.n][0])
 		get_static_buffer(fd.n, 1, 0);
 }

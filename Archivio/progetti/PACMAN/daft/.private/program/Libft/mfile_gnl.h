@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:45:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:55:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # ifndef MAX_FILES
 #  define MAX_FILES 20
 # endif
-# define IO_STRUCT SDL_RWops
 # include <unistd.h>
 # include <string.h>
 # include <stdarg.h>
@@ -42,7 +41,7 @@ typedef struct s_list
 
 typedef struct s_fd
 {
-	IO_STRUCT	*p;
+	SDL_IOStream	*p;
 	int			n;
 }	t_fd;
 
@@ -69,6 +68,7 @@ int				read_curr(t_manage_fds	*data, int count);
 int				readfd(t_fd	fd, char *buff, int count);
 char			*get_static_buffer(int fd, bool reset, bool reset_all);
 char			*gnl();
+int				writefd(SDL_IOStream *fd, const char *s, size_t size, size_t len);
 int				reset_fd(t_fd fd);
 
 #endif

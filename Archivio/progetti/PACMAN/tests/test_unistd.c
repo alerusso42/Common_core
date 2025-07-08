@@ -34,16 +34,16 @@ Available mode strings:
 		to make explicit the file is a text file.
 */
 #define POKEDEX "../../../../getnextline/updated_pokedex.txt"
-#define close SDL_RWclose
+#define close CLOSE
 #define free FREE
 int	main2(void)
 {
-	IO_STRUCT		*fd;
+	SDL_IOStream		*fd;
 	unsigned char	*str;
 	int				size;
 	int				i;
 
-	fd = SDL_RWFromFile(POKEDEX, "r");
+	fd = OPEN(POKEDEX, "r");
 	if (!fd)
 		return (1);
 	size = SDL_RWsize(fd);
@@ -53,10 +53,10 @@ int	main2(void)
 	if (!str)
 		return (2);
 	if (READ(fd, str, sizeof(char), size) != size)
-		return (FREE(str), SDL_RWclose(fd), 7);
-	SDL_RWclose(fd);
+		return (FREE(str), CLOSE(fd), 7);
+	CLOSE(fd);
 	str[size] = 0;
-	fd = SDL_RWFromFile("Outputt.txt", "w");
+	fd = OPEN("Outputt.txt", "w");
 	if (!fd)
 		return (9);
 	WRITE(fd, str, sizeof(char), size);
@@ -66,20 +66,20 @@ int	main2(void)
 
 int	main(void)
 {
-	IO_STRUCT		**fd;
+	SDL_IOStream		**fd;
 	int				i;
 
 	i = 0;
-	fd = SDL_calloc(22, sizeof(IO_STRUCT *));
+	fd = SDL_calloc(22, sizeof(SDL_IOStream *));
 	while (i != 20)
 	{
-		fd[i] = SDL_RWFromFile(POKEDEX, "r");
+		fd[i] = OPEN(POKEDEX, "r");
 		printf("%d: %d\n", i, fd[i]->type);
 		++i;
 	}
 	i = 0;
 	while (i != 20)
-		SDL_RWclose(fd[i++]);
+		CLOSE(fd[i++]);
 	FREE(fd);
 	SDL_Quit();
 }

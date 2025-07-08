@@ -17,8 +17,8 @@ OBJ = $(LIBFT_OBJ)
 NAME = test.out
 
 COMP = cc
-CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags)
-LDFLAGS = $(shell sdl2-config --libs)
+CFLAGS = -Wall -Wextra -Werror -g $(shell SDL3-config --cflags)
+LDFLAGS = $(shell SDL3-config --libs)
 
 all: $(NAME)
 

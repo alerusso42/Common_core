@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 23:31:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 11:07:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:00:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	game_loop(t_data *data)
 		//print_map(data->map, data->old_map);
 		//print_bfs(data->map, 0);
 		SDL_RenderPresent(data->sdl.render);
-		start_time = SDL_GetTicks64();
+		start_time = SDL_GetTicks();
 		events(data);
-		update_time = SDL_GetTicks64() - start_time;
+		update_time = SDL_GetTicks() - start_time;
 		if (update_time < FRAME_TIME)
 			SDL_Delay(FRAME_TIME - (uint32_t)(update_time));
 	}

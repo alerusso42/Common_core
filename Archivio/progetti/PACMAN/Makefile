@@ -19,19 +19,33 @@ OBJ = $(SRC_OBJ)
 NAME = pacman
 LIB = daft/daft.a
 
-IMG_CFLAGS  = $(shell pkg-config --cflags SDL2_image)
-IMG_LIBS    = $(shell pkg-config --libs SDL2_image)
+IMG_CFLAGS  = $(shell pkg-config --cflags SDL3_image)
+IMG_LIBS    = $(shell pkg-config --libs SDL3_image)
 
-COMP = cc
-CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags) $(IMG_CFLAGS)
-LDFLAGS = $(shell sdl2-config --libs) $(IMG_LIBS)
-SDL = -lSDL2_mixer 
+COMP = cc -Wall -Wextra -Werror -g
+SDL3_PATH      := /home/alerusso/libs/SDL
+SDL_IMAGE_PATH := /home/alerusso/libs/SDL_image/install
+SDL_MIXER_PATH := /home/alerusso/libs/SDL_mixer/install
+# Include paths
+CFLAGS += \
+  -I$(SDL3_PATH)/include \
+  -I$(SDL_IMAGE_PATH)/include \
+  -I$(SDL_MIXER_PATH)/include \
+  -I$(HOME)/libs/SDL/install/include \
+  -I$(HOME)/libs/SDL_mixer/install/include \
+  -I$(HOME)/libs/SDL_image/install/include
+
+# Library paths and linking
+LDFLAGS += \
+  -L$(HOME)/libs/SDL/install/lib -lSDL3 \
+  -L$(HOME)/libs/SDL_mixer/install/lib -lSDL3_mixer \
+  -L$(HOME)/libs/SDL_image/install/lib -lSDL3_image
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(O_DIR) $(HEADER)
 	@echo $(OBJ)
-	@$(COMP) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL) $(LDFLAGS)
+	@$(COMP) $(OBJ) $(LIB) -o $(NAME) $(CFLAGS) $(LDFLAGS)
 
 $(O_DIR):
 	mkdir -p $(O_DIR)

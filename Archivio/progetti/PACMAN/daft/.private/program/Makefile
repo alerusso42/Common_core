@@ -1,5 +1,5 @@
 # ——————————————————————————————
-#  Makefile for “DAFT” project (SDL2 + Libft + src)
+#  Makefile for “DAFT” project (SDL3 + Libft + src)
 # ——————————————————————————————
 
 # Directory where all .o files go:
@@ -57,8 +57,8 @@ DAFT := ../../daft.a
 # 7) Compiler + flags
 # ------------------------------------------------
 COMP   := cc
-CFLAGS := -Wall -Wextra -Werror -g $(shell sdl2-config --cflags)
-LDFLAGS:= $(shell sdl2-config --libs)
+CFLAGS := -Wall -Wextra -Werror -g -I$(SDL3_PATH)/include
+LDFLAGS:= -L$(SDL3_PATH)/build -lSDL3
 
 # ------------------------------------------------
 # 8) Phony targets

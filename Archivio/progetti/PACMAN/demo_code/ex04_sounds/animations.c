@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:17:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:05:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ for (int i = 0; i < num_drivers; i++)
 	error = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
 	if (error != 0)
 		return (quit_sdl(&sdl), 1);
-	sdl.win = SDL_CreateWindow("SDL2 exercise", X, Y, W, H, 0);
+	sdl.win = SDL_CreateWindow("SDL3 exercise", X, Y, W, H, 0);
 	if (!sdl.win)
 		return (quit_sdl(&sdl), 2);
 	sdl.render = SDL_CreateRenderer(sdl.win, -1, 0);
@@ -137,7 +137,7 @@ int	update_screen(t_sdl *sdl, int *which)
 	sdl->rect.y = 50;
 	sdl->rect.w = sdl->img[*which].surface->w;
 	sdl->rect.h = sdl->img[*which].surface->h;
-	if (SDL_RenderCopy(sdl->render, sdl->img[*which].texture, NULL, &sdl->rect)\
+	if (SDL_RenderTexture(sdl->render, sdl->img[*which].texture, NULL, &sdl->rect)\
 	 != 0)
 		return (7);
 	SDL_RenderPresent(sdl->render);

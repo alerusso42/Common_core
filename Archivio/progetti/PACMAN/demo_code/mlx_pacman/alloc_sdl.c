@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:56:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ for (int i = 0; i < num_drivers; i++)
 	error = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
 	if (error != 0)
 		return (quit_sdl(&sdl), 1);
-	sdl.win = SDL_CreateWindow("SDL2 exercise", X, Y, W, H, 0);
+	sdl.win = SDL_CreateWindow("SDL3 exercise", X, Y, W, H, 0);
 	if (!sdl.win)
 		return (quit_sdl(&sdl), 2);
 	sdl.render = SDL_CreateRenderer(sdl.win, -1, 0);

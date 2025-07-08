@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:37:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 12:25:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:05:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ static void	render(t_data *data, char entity, int x, int y)
 		return ;
 	data->sdl.rect.x = x * SPRITE_SIZE;
 	data->sdl.rect.y = y * SPRITE_SIZE;
-	SDL_RenderCopy(data->sdl.render, data->sdl.texture[i], NULL, &data->sdl.rect);
+	SDL_RenderTexture(data->sdl.render, data->sdl.texture[i], NULL, &data->sdl.rect);
 }

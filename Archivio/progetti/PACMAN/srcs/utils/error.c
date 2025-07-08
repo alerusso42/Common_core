@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:23:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 11:43:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:07:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	error(t_data *data, int type)
 
 static void	print_error(t_data *data, int type)
 {
-	char	errstr[255];
-
 	if (!data->debug_file.n)
 		data->debug_file = openfd(ERROR_FILE, "w+");
 	if (data->debug_file.n)
@@ -40,7 +38,7 @@ static void	print_error(t_data *data, int type)
 	else if (type == ER_SDL)
 	{
 		fd_printf(data->debug_file, "SDL error.\n");
-		fd_printf(data->debug_file, SDL_GetErrorMsg(errstr, 255));
+		fd_printf(data->debug_file, SDL_GetError());
 	}
 	else if (type == ER_DAFT)
 		fd_printf(data->debug_file, "Daft error.\n");
