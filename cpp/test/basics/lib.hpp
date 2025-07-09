@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:36:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 14:37:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/09 09:34:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define LIB_HPP
 
 # include <iostream>
+# include <string>
+# include <fstream>
 
 #endif
