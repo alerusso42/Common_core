@@ -1,7 +1,6 @@
 NAME = libft.a
 CC = cc
 OBJ_DIR = obj_dir
-CFLAGS = -Wall -Wextra -Werror -g -I$(SDL3_PATH)/include
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c \
 	ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
@@ -40,8 +39,11 @@ OBJ_OTHER = $(addprefix $(OBJ_DIR)/, $(SRC_OTHER:.c=.o))
 OBJ_PISCINE = $(addprefix $(OBJ_DIR)/, $(SRC_PISCINE:.c=.o))
 OBJ_PRINTF = $(addprefix $(OBJ_DIR)/, $(SRC_PRINTF:.c=.o))
 
+CFLAGS = -Wall -Wextra -Werror -g -I$(HOME)/libs/SDL/include
+LFLAGS = -L$(HOME)/.local/bin/ -lSDL3
+
 $(NAME): $(OBJ) $(OBJ_BONUS) $(OBJ_PRINTF)
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_PRINTF)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ) $(OBJ_BONUS) $(OBJ_PRINTF) $(LFLAGS)
 
 $(OBJ_DIR) : 
 	mkdir -p $(OBJ_DIR)
@@ -56,7 +58,7 @@ mfile: $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE
 	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE)
 
 all: $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE) $(OBJ_GAME)
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE) $(OBJ_GAME)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE) $(OBJ_GAME) $(LFLAGS)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@

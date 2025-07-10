@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 17:03:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/09 23:44:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,6 @@ enum e_charsets
 	ALPHANUM,
 	EXCLUDE,
 	INCLUDE,
-};
-
-enum e_bool
-{
-	ON = 1,
-	YES = 1,
-	OFF = 0,
-	NO = 0,
 };
 
 t_int64		ft_atoi(const char *nptr);

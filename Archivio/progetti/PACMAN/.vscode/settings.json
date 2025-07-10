@@ -44,6 +44,8 @@
 	"sound.h": "c",
 	"bfs.h": "c",
 	"stdarg.h": "c",
-	"format": "c"
+	"format": "c",
+	"sdl_mixer.h": "c",
+	"maps.h": "c"
 }
 }

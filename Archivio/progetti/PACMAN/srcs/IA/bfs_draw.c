@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:02:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/07 22:08:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/09 23:53:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,5 @@ int	draw_path(t_bfs *bfs)
 		record = find_shortest_route(bfs, bfs->x, bfs->y);
 		update_one(bfs, &bfs->x, &bfs->y, record);
 	}
-	return (normalize_path(bfs, bfs->map_x, bfs->map_y), YES);
+	return (normalize_path(bfs, bfs->map_x, bfs->map_y), true);
 }

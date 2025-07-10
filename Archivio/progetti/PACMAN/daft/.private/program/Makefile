@@ -57,8 +57,17 @@ DAFT := ../../daft.a
 # 7) Compiler + flags
 # ------------------------------------------------
 COMP   := cc
-CFLAGS := -Wall -Wextra -Werror -g -I$(SDL3_PATH)/include
-LDFLAGS:= -L$(SDL3_PATH)/build -lSDL3
+# Include paths
+CFLAGS += \
+  -I$(HOME)/libs/SDL_image/include/ \
+  -I$(HOME)/libs/SDL_mixer/include/ \
+  -I$(HOME)/libs/SDL/include
+
+#LDFLAGS = $(shell pkg-config --libs --cflags sdl3 sdl3-mixer sdl3-image)\
+# Library paths and linking
+LDFLAGS =	-L$(HOME)/.local/bin/sdl -lSDL3 \
+  			-L$(HOME)/.local/bin/sdl -lSDL3_mixer \
+  			-L$(HOME)/.local/bin/sdl -lSDL3_image -lm  \
 
 # ------------------------------------------------
 # 8) Phony targets

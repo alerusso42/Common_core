@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 19:12:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/10 02:13:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	init_all(t_data *data)
 {
 	if (daft_init() != 0)
 		return (error(data, ER_DAFT));
+	int	i = 0;
+	int	j = SDL_GetNumVideoDrivers();
+	while (i != j)
+	{
+		printf("Using video driver: %s\n", SDL_GetVideoDriver(i++));
+	}
+	printf("Current video driver: %s\n", SDL_GetCurrentVideoDriver());
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		return (error(data, ER_SDL));
 	data->sdl.win = SDL_CreateWindow(WIN_NAME, WIN_W, WIN_H, WIN_FLAGS);
