@@ -23,9 +23,9 @@ COMP = cc -Wall -Wextra -Werror -g
 
 # Include paths
 CFLAGS += \
-  -I$(HOME)/libs/SDL_image/include/ \
-  -I$(HOME)/libs/SDL_mixer/include/ \
-  -I$(HOME)/libs/SDL/include
+  -I$(HOME)/libs/SDL3/SDL_image/include/ \
+  -I$(HOME)/libs/SDL3/SDL_mixer/include/ \
+  -I$(HOME)/libs/SDL3/SDL/include
 
 #LDFLAGS = $(shell pkg-config --libs --cflags sdl3 sdl3-mixer sdl3-image)
 

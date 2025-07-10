@@ -52,8 +52,8 @@
 //		for graphics, math, and file system support.
 */
 //REVIEW - 	Virtual FileSystem, developed by Ryan C. Gordon (icculus)
-# include <physfs.h>
+//# include <physfs.h>
 //REVIEW - 	Mathematics library for graphics (OpenGL math), 
 //			developed by the cglm project
-# include <cglm/cglm.h>
+//# include <cglm/cglm.h>
 #endif
