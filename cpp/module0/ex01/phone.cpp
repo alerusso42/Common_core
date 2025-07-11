@@ -3,17 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   phone.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/10 17:04:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:40:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phone.hpp"
 
 static void	add(Contact *contact);
+static void	search(PhoneBook *phone);
 
+/*
+//REVIEW - phonebook
+
+PHONE_SIZE must be at least 1
+
+1)	Print guide prints the instruction;
+2)	Takes a string in input using getline.
+	while its invalid, ask it again;
+3)	if input is "exit", return.
+	else, execute a command.
+*/
 int main() 
 {
 	string		s;
@@ -21,35 +33,34 @@ int main()
 
 	if (PHONE_SIZE <= 0)
 		return (std::cerr << "Phone too small", 1);
-	std::cout << "\033[1;32mWelcome to PhoneBook! Commands:";
-	std::cout << "\nEXIT:\tStop program, clear the Phone forever"; 
-	std::cout << "\nADD:\tAdd a new contact to the phone. Please fill every";
-	std::cout << "field!";
-	std::cout << "\nSEARCH:\tPrints all phonebook, then asks for the index of";
-	std::cout << " the contact to print. The index is the saving order.";
-	std::cout << " If number of contacts surpasses " << PHONE_SIZE << ", ";
-	std::cout << "then first contact gets replaced.\nHave fun!\n\033[0m";
+	print_guide();
 	std::cout << "Please, insert a valid command:\n";
 	std::getline(std::cin, s);
-	while (valid_string(s) == true && \
-	s.compare("EXIT") != 0 && s.compare("exit") != 0)
+	while (valid_input(s) == false)
+		std::getline(std::cin, s);
+	while (s.compare("EXIT") != 0 && s.compare("exit") != 0)
 	{
 		execute(s, &phone);
 		std::cout << "Please, insert a valid command:\n";
 		std::getline(std::cin, s);
+		while (valid_input(s) == false)
+			std::getline(std::cin, s);
 	}
-	std::cout << "GOODBYE, JOJO!\n";
 }
 
+//	First_free_index select from the phone the first free space,
+//	or the oldest occupied space.
 void	execute(string s, PhoneBook *phone)
 {
 	(void)phone;
 	if (s.compare("ADD") == 0 || s.compare("add") == 0)
 		add(&phone->contacts[first_free_index(phone)]);
 	else if (s.compare("SEARCH") == 0 || s.compare("search") == 0)
-		std::cout << "Not implemented.\n";
+		search(phone);
 }
 
+//	add_info may fail if user insert a non valid string.
+//	if fails, contact is reset.
 static void	add(Contact *contact)
 {
 	string	s;
@@ -66,3 +77,44 @@ static void	add(Contact *contact)
 		return ;
 }
 
+/*
+//REVIEW - search
+
+Phone must have at least one contact.
+
+1)	First, the entire phonebook is printed;
+2)	Valid search checks if:
+	-	the string is invalid; 
+	-	stoi (=string to integer) fails; 
+	-	index is over PHONE_SIZE or lower zero;
+	-	contact selected is empty.
+3)	Lastly, every contact is printed, with a '\n'. 
+
+*/
+static void	search(PhoneBook *phone)
+{
+	string	s;
+	int		index;
+	int		i;
+
+	if (phone->contacts[0].first_name.empty() == true)
+	{
+		std::cout << EMPTY_CONTACTS_MSG;
+		return ;
+	}
+	print_phonebook(phone);
+	std::cout << "Please, insert a valid phone index:\n";
+	std::getline(std::cin, s);
+	while (valid_search(phone, s, &index) == false)
+	{
+		std::cout << "Please, insert a valid phone index:\n";
+		std::getline(std::cin, s);
+	}
+	i = 0;
+	while (i != ENTRY_NUM)
+	{
+		std::cout <<  *phone->contacts[index].entry_list[i] << std::endl;
+		++i;
+	}
+	std::cout <<  phone->contacts[index].darkest_secret << std::endl;
+}
