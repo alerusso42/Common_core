@@ -12,6 +12,10 @@
 #ifndef __ACCOUNT_H__
 #define __ACCOUNT_H__
 
+#include <vector>
+#include <algorithm>
+#include <functional>
+
 // ************************************************************************** //
 //                               Account Class                                //
 // ************************************************************************** //
@@ -54,7 +58,15 @@ private:
 
 	Account( void );
 
+//SECTION - Added
+
+	static accounts_t		_accounts;
+
 };
+
+	typedef std::vector<Account::t>							  accounts_t;
+	typedef std::vector<int>								  ints_t;
+	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;
 
 
 
