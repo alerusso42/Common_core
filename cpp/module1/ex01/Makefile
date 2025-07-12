@@ -1,5 +1,5 @@
 NAME	=	zombie
-SRC		=	main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRC		=	main.cpp Zombie.cpp zombieHorde.cpp
 HEADER	=	Zombie.hpp
 
 all: $(NAME)

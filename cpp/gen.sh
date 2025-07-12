@@ -4,7 +4,7 @@ Usage="Usage:_./copy_lib.sh_<src_mod>_<src_ex>_<dest_mod>_<dest_ex>\
 \nOptional:_<header_file>_<file1.cpp>_<filen.cpp>"
 #	./copy_lib	2 	1			3 	2
 
-FILES=("Makefile")
+FILES=("Makefile lib class_build.cpp")
 MODULE="module"
 EXERCISE="ex0"
 
@@ -57,16 +57,7 @@ cat > $TMP <<EOF
 #include <iostream>
 #include <string>
 #include <cstdlib>
-
-typedef	std::string	string;
-
-//	lib
-
-string	ft_reverse(string s);
-bool	valid_input(string s);
-string	ft_itoa(int n);
-bool	ft_atoi(string s, int *n);
-bool	check_str(string s, int (*func)(int), int expect_res);
+#include "lib/lib.hpp"
 
 #endif
 EOF
