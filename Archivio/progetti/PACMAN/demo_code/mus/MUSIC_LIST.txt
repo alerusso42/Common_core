@@ -1,9 +1,0 @@
-Feeling-Resolute.ogg
-MUSIC_LIST.txt
-pacman_beginning.wav
-pacman_chomp.wav
-pacman_death.wav
-pacman_eatfruit.wav
-pacman_eatghost.wav
-pacman_extrapac.wav
-pacman_intermission.wav

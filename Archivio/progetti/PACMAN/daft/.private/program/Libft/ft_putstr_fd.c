@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 15:31:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 16:44:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/12 23:16:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, SDL_IOStream *fd)
+void	ft_putstr_fd(char *s, SDL_RWops *fd)
 {
 	while (*s)
 		WRITE(fd, s++, sizeof(char), 1);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:56:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/12 23:52:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <malloc.h>
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
+#include "libft.h"
 
 char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
 int			ft_atoi_base(char *str, char *base);
 int			find_base(char *base);
-int			ft_atoi(char *str, char *base, int base_len, int i);
 int			ft_exp(int base, int power);
 int			convert_nbr_values(char temp, char *base);
 char		*ft_putnbr_base(int nbr, char *base, char *print);

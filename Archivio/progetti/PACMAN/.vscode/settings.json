@@ -46,6 +46,7 @@
 	"stdarg.h": "c",
 	"format": "c",
 	"sdl_mixer.h": "c",
-	"maps.h": "c"
+	"maps.h": "c",
+	"sdl.h": "c"
 }
 }

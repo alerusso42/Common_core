@@ -37,9 +37,9 @@
 //		originally developed by Sam Lantinga.
 */
 //REVIEW -	Core SDL3 functionality
-# include <SDL3/SDL.h>
-# include <SDL3_mixer/SDL_mixer.h>
-# include <SDL3_image/SDL_image.h>
+# include <SDL2/SDL.h>
+# include "/home/alerusso/libs/SDL_mixer/include/SDL_mixer.h"
+# include "/home/alerusso/libs/SDL_image/include/SDL_image.h"
 //REVIEW -	Official SDL3 extension
 
 /*

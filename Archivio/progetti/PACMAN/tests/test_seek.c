@@ -42,7 +42,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (42);
 	int				offset = atoi(argv[1]);
-	SDL_IOStream		*fd;
+	SDL_RWops		*fd;
 	unsigned char	*str;
 	int				size;
 
@@ -69,11 +69,11 @@ int	main(int argc, char *argv[])
 
 // int	main(void)
 // {
-// 	SDL_IOStream		**fd;
+// 	SDL_RWops		**fd;
 // 	int				i;
 
 // 	i = 0;
-// 	fd = SDL_calloc(22, sizeof(SDL_IOStream *));
+// 	fd = SDL_calloc(22, sizeof(SDL_RWops *));
 // 	while (i != 20)
 // 	{
 // 		fd[i] = OPEN(POKEDEX, "r");

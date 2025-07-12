@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:43:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 18:00:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/13 00:49:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	move_player(t_data *data, t_entity *entity, int x, int y)
 	{
 		replace(entity, x, y);
 		update_enemy_path(data);
-		Mix_PlayChannel(-1, data->sdl.sound[SO_PACMAN_CHOMP], 0);
 		data->game.collectables -= 1;
 	}
 	else if (data->map[y][x].val == S_EXIT)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:59:56 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/05 15:39:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/13 00:33:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	set_enemies(t_data *data)
 	if (data->enemy)
 		return (0);
 	enemy_num = count_stuff(data, S_ENEMY);
-	data->enemy = ft_calloc(enemy_num + 1, sizeof(t_entity));
+	data->enemy = ft_calloc(enemy_num + 2, sizeof(t_entity));
 	if (!data->enemy)
 		return (error(data, ER_MALLOC));
 	if (enemy_num <= 0)
@@ -72,6 +72,7 @@ int	set_enemies(t_data *data)
 		++i;
 	}
 	data->enemy[i].type = EN_LAST;
+	data->game.enemy_num = enemy_num;
 	return (0);
 }
 
@@ -94,7 +95,7 @@ static int	alloc_enemies(t_data *data, int enemy_num)
 				data->enemy[i].pos[Y] = y;
 				++i;
 			}
-			data->map[y][x].distance = ft_calloc(enemy_num + 1, sizeof(char));
+			data->map[y][x].distance = ft_calloc(enemy_num + 2, sizeof(char));
 			if (!data->map[y][x].distance)
 				return (error(data, ER_MALLOC));
 		}

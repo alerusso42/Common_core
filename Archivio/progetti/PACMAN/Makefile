@@ -2,38 +2,38 @@ O_DIR = build/obj
 
 ROOT = .
 
-SRC = 	srcs/*.c		\
-		srcs/engine/*.c	\
-		srcs/SDL/*.c	\
-		srcs/IA/*.c	\
-		srcs/map/*.c	\
-		srcs/utils/*.c	\
-		srcs/debug/*.c	\
+SRC :=  $(wildcard srcs/*.c) \
+        $(wildcard srcs/engine/*.c) \
+        $(wildcard srcs/SDL/*.c) \
+        $(wildcard srcs/IA/*.c) \
+        $(wildcard srcs/map/*.c) \
+        $(wildcard srcs/utils/*.c) \
+        $(wildcard srcs/debug/*.c)
 
 HEADER = includes/*.h
 
-SRC_OBJ := $(patsubst $(ROOT)/srcs/%.c, $(O_DIR)%.o, $(SRC))
+#SRC_OBJ := $(patsubst $(ROOT)/srcs/%.c, $(O_DIR)%.o, $(SRC))
 
-OBJ = $(SRC_OBJ)
+OBJ := $(patsubst %.c, $(O_DIR)/%.o, $(SRC))
 
 NAME = pacman
 LIB = daft/daft.a
+#LIB = daft/.private/program/daft_src/*.c daft/.private/program/Libft/*.c
 
 COMP = cc -Wall -Wextra -Werror -g
 
 # Include paths
 CFLAGS += \
-  -I$(HOME)/libs/SDL3/SDL_image/include/ \
-  -I$(HOME)/libs/SDL3/SDL_mixer/include/ \
-  -I$(HOME)/libs/SDL3/SDL/include
+  -I$(HOME)/libs/SDL2/SDL_mixer/include/ \
+  -I$(HOME)/libs/SDL2/SDL_image/include/ \
+  -I$(HOME)/libs/SDL2/SDL/include
 
 #LDFLAGS = $(shell pkg-config --libs --cflags sdl3 sdl3-mixer sdl3-image)
 
 # Library paths and linking
-LDFLAGS = 	-L$(HOME)/.local/bin/sdl -lSDL3 -lSDL3 \
-  			-L$(HOME)/.local/bin/sdl -lSDL3 -lSDL3_mixer \
-  			-L$(HOME)/.local/bin/sdl -lSDL3 -lSDL3_image -lm  \
-			
+LDFLAGS = 	-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2 \
+  			-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2_mixer \
+			-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2_image -lm  \
 
 all: $(NAME)
 
@@ -45,6 +45,10 @@ $(O_DIR):
 	mkdir -p $(O_DIR)
 
 $(O_DIR)%.o: $(ROOT)/srcs/%.c | $(O_DIR)
+	$(COMP) $(CFLAGS) -c $< -o $@
+
+build/obj/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(COMP) $(CFLAGS) -c $< -o $@
 
 clean:

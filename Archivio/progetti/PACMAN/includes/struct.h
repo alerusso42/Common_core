@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:41:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 18:21:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/12 23:40:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ struct s_SDL
 	Mix_Music	*mus[TOTAL_MUS + 1];
 	Mix_Chunk	*sound[TOTAL_SOUND + 1];
 	SDL_Texture	*texture[TOTAL_TEXTURES + 1];
-	SDL_FRect	rect;
+	SDL_Rect	rect;
 	void		*win;
 	void		*render;
 	bool		sound_playing;

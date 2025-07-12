@@ -6,21 +6,21 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:42:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 16:49:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/12 23:16:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_putnbr(int num, SDL_IOStream *fd);
-static void	print(char *str, SDL_IOStream *fd);
+static void	ft_putnbr(int num, SDL_RWops *fd);
+static void	print(char *str, SDL_RWops *fd);
 
-void	ft_putnbr_fd(int n, SDL_IOStream *fd)
+void	ft_putnbr_fd(int n, SDL_RWops *fd)
 {
 	ft_putnbr(n, fd);
 }
 
-static void	ft_putnbr(int num, SDL_IOStream *fd)
+static void	ft_putnbr(int num, SDL_RWops *fd)
 {
 	char	str[12];
 	int		temp_num;
@@ -50,7 +50,7 @@ static void	ft_putnbr(int num, SDL_IOStream *fd)
 }
 
 // Printa una stringa con SDL_write.
-static void	print(char *str, SDL_IOStream *fd)
+static void	print(char *str, SDL_RWops *fd)
 {
 	int	index;
 

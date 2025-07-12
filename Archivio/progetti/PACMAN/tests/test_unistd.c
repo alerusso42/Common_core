@@ -38,7 +38,7 @@ Available mode strings:
 #define free FREE
 int	main2(void)
 {
-	SDL_IOStream		*fd;
+	SDL_RWops		*fd;
 	unsigned char	*str;
 	int				size;
 	int				i;
@@ -66,11 +66,11 @@ int	main2(void)
 
 int	main(void)
 {
-	SDL_IOStream		**fd;
+	SDL_RWops		**fd;
 	int				i;
 
 	i = 0;
-	fd = SDL_calloc(22, sizeof(SDL_IOStream *));
+	fd = SDL_calloc(22, sizeof(SDL_RWops *));
 	while (i != 20)
 	{
 		fd[i] = OPEN(POKEDEX, "r");

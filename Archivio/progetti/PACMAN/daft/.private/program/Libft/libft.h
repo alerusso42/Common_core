@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/09 23:44:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/12 23:20:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 #  define FREE SDL_free
 #  define WRITE writefd
 #  define READ readfd
-#  define SEEK SDL_SeekIO
-#  define OPEN SDL_IOFromFile
-#  define CLOSE SDL_CloseIO
-#  define SDL_IOStream SDL_IOStream
+#  define SEEK SDL_RWseek
+#  define OPEN SDL_RWFromFile
+#  define CLOSE SDL_RWclose
+#  define SDL_RWops SDL_RWops
 # endif
 
 typedef struct s_fd	t_fd;
@@ -60,10 +60,10 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
-void		ft_putchar_fd(char c, SDL_IOStream *fd);
-void		ft_putendl_fd(char *s, SDL_IOStream *fd);
-void		ft_putnbr_fd(int n, SDL_IOStream *fd);
-void		ft_putstr_fd(char *s, SDL_IOStream *fd);
+void		ft_putchar_fd(char c, SDL_RWops *fd);
+void		ft_putendl_fd(char *s, SDL_RWops *fd);
+void		ft_putnbr_fd(int n, SDL_RWops *fd);
+void		ft_putstr_fd(char *s, SDL_RWops *fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);

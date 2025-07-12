@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/10 02:13:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/13 00:25:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,9 @@ int	init_all(t_data *data)
 {
 	if (daft_init() != 0)
 		return (error(data, ER_DAFT));
-	int	i = 0;
-	int	j = SDL_GetNumVideoDrivers();
-	while (i != j)
-	{
-		printf("Using video driver: %s\n", SDL_GetVideoDriver(i++));
-	}
-	printf("Current video driver: %s\n", SDL_GetCurrentVideoDriver());
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		return (error(data, ER_SDL));
-	data->sdl.win = SDL_CreateWindow(WIN_NAME, WIN_W, WIN_H, WIN_FLAGS);
+	data->sdl.win = SDL_CreateWindow(WIN_NAME, 0, 0, WIN_W, WIN_H, WIN_FLAGS);
 	if (!data->sdl.win)
 		return (error(data, ER_SDL));
 	if (init_render(data) != 0)
@@ -52,7 +45,7 @@ int	init_all(t_data *data)
 
 int		init_render(t_data *data)
 {
-	data->sdl.render = SDL_CreateRenderer(data->sdl.win, NULL);
+	data->sdl.render = SDL_CreateRenderer(data->sdl.win, -1, SDL_RENDERER_SOFTWARE);
 	if (!data->sdl.render)
 		return (error(data, ER_SDL));
 	SDL_SetRenderDrawColor(data->sdl.render, 0, 0, 0, 255);
@@ -89,7 +82,7 @@ static int	init_music(t_data *data)
 	int		i;
 
 	//NOTE usare il driver dsp
-	if (Mix_OpenAudio(0, NULL) != 0)
+	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 2048) != 0)
 		return (error(data, ER_SDL));
 	files = daft_get("mus");
 	if (!files)

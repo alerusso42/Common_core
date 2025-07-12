@@ -6,15 +6,15 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:08:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 10:46:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/13 00:35:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pacman.h"
 
 static void	move_one(t_data *data, t_entity *enemy, int i);
-static void	move_to_random(int where, int coord[2]);
-static void	move_to_player(t_map **map, int coord[2], int i);
+void	move_to_random(int where, int coord[2]);
+void	move_to_player(t_map **map, int coord[2], int i);
 
 void	move_enemies(t_data *data)
 {
@@ -26,6 +26,8 @@ void	move_enemies(t_data *data)
 		move_one(data, &data->enemy[i], i);
 		++i;
 	}
+	if (data->game.exit == true)
+		move_one(data, &data->exit, data->game.enemy_num);
 }
 
 static void	move_one(t_data *data, t_entity *enemy, int i)
@@ -54,31 +56,6 @@ static void	move_one(t_data *data, t_entity *enemy, int i)
 	else
 		move_to_random(_random(TOTAL_MOVEMENT), coord);
 	move(data, enemy, coord[X], coord[Y]);
-}
-
-static void	move_to_random(int where, int coord[2])
-{
-	if (where == DOWN)
-		coord[Y] += 1;
-	else if (where == UP)
-		coord[Y] -= 1;
-	else if (where == LEFT)
-		coord[X] -= 1;
-	else if (where == RIGHT)
-		coord[X] += 1;
-}
-
-static void	move_to_player(t_map **map, int coord[2], int i)
-{
-	map[coord[Y]][coord[X]].distance[i] = 0;
-	if (map[coord[Y] + 1][coord[X]].distance[i] < 0)
-		coord[Y] += 1;
-	else if (map[coord[Y] - 1][coord[X]].distance[i] < 0)
-		coord[Y] -= 1;
-	else if (map[coord[Y]][coord[X] - 1].distance[i] < 0)
-		coord[X] -= 1;
-	else if (map[coord[Y]][coord[X] + 1].distance[i] < 0)
-		coord[X] += 1;
 }
 
 void	update_enemy_path(t_data *data)

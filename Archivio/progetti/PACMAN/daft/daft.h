@@ -33,6 +33,6 @@ typedef enum e_daft_db
 }	t_daft_db;
 
 //SECTION - Global variables
-#define DAFT_PWD "/home/alerusso/Desktop/Common_core/Archivio/progetti/PACMAN/daft"
+#define DAFT_PWD "/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
 
 #endif

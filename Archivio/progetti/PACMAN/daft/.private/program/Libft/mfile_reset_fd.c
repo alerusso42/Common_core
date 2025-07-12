@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:41:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 17:04:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/12 23:23:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@
 int	reset_fd(t_fd fd)
 {
 	get_static_buffer(fd.n, 1, 0);
-	return (SEEK(fd.p, 0, SDL_IO_SEEK_SET));
+	return (SEEK(fd.p, 0, 0));
 }
