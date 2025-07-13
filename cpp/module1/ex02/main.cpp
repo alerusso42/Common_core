@@ -1,18 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/13 15:27:46 by codespace        ###   ########.fr       */
+/*   Updated: 2025/07/13 16:45:17 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
 
 #include <iostream>
 #include <string>
@@ -20,23 +16,18 @@
 
 typedef	std::string	string;
 
-class Zombie
+int	main()
 {
-public:
-	void	announce(void);
-	bool	empty(void);
-	void	set(string name, bool heap);
-	Zombie() : name(""), heap(false) {}
-	~Zombie();
-private:
-	string	name;
-	bool	heap;
-};
+	string	s;
+	string	*ptr;
+	string	&ref = s;
 
-Zombie	*newZombie(string name);
-void 	randomChump(string name);
-Zombie* zombieHorde(int N, std::string name);
-
-# define MSG "BraiiiiiiinnnzzzZ..."
-
-#endif
+	s = "HI THIS IS BRAIN";
+	ptr = &s;
+	std::cout << &s << std::endl;
+	std::cout << &ptr << std::endl;
+	std::cout << &ref << std::endl;
+	std::cout << s << std::endl;
+	std::cout << *ptr << std::endl;
+	std::cout << ref << std::endl;
+}
