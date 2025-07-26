@@ -1,5 +1,5 @@
-NAME	=	phone
-SRC		=	class_build.cpp utils.cpp HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
+NAME	=	violence
+SRC		=	HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
 LIB_SRC =	string.cpp
 LIB		=	$(addprefix lib/, $(LIB_SRC))
 HEADER	=	Weapon.hpp HumanA.hpp HumanB.hpp

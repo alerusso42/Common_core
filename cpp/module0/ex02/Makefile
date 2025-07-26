@@ -15,3 +15,6 @@ clean:
 fclean: clean
 
 re: fclean all
+
+log:
+	https://cdn.intra.42.fr/document/document/34946/19920104_091532.log

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/26 15:54:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/26 15:55:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,25 @@
 # include "HumanA.hpp"
 # include "HumanB.hpp"
 
-HumanB::HumanB(string name)
+HumanA::HumanA(string name, Weapon weapon)
 {
-	Weapon	unarmed;
-
-	this->weapon = &unarmed;
+	this->weapon = &weapon;
 	this->name = name;
 }
 
-HumanB::~HumanB(void)
+HumanA::~HumanA(void)
 {
 }
 
-void	HumanB::attack(void)
+void	HumanA::attack(void)
 {
 	const string	&weapon_type = weapon->getType();
 
-	std::cout << name << " attacks with their ";
-	if (weapon_type.empty())
-	{
-		std::cout << "bare hands! What? Is he crazy?? " << name << ", wtf?";
-	}
-	else
-		std::cout << weapon_type;
+	std::cout << name << " attacks with their " << weapon_type;
 	std::cout << std::endl;
 }
 
-void	HumanB::setWeapon(Weapon weapon)
+void	HumanA::setWeapon(Weapon weapon)
 {
 	this->weapon = &weapon;
 }
