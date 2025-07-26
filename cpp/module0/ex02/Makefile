@@ -1,8 +1,8 @@
-NAME	=	phone
-SRC		=	phone.cpp class_build.cpp utils.cpp utils2.cpp
+NAME	=	account
+SRC		=	Account.cpp tests.cpp
 LIB_SRC =	string.cpp
 LIB		=	$(addprefix lib/, $(LIB_SRC))
-HEADER	=	phone.hpp
+HEADER	=	Account.hpp general.hpp
 
 all: $(NAME)
 

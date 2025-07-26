@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:10:02 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/26 11:07:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:44:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 # include <cstdlib>
 # include <errno.h>
 
-//"[19920104_091532]"
-# define TIMESTAMP "[20252607_110511] "
+//"[19920104_091532] "
+//"[20252607_110511] "
+# define TIMESTAMP "[19920104_091532] "
 
 # define RST		"\033[0m" /* Reset to default color */
 # define RED		"\033[1;31m" /* Bold Red */
