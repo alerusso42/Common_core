@@ -1,0 +1,5 @@
+Android NDK: WARNING: Ignoring unknown import directory: /home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/libs    
+Android NDK: /home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/src/Android.mk: Cannot find module with tag 'SDL' in import path    
+Android NDK: Are you sure your NDK_MODULE_PATH variable is properly defined ?    
+Android NDK: The following directories were searched:    
+Android NDK:         

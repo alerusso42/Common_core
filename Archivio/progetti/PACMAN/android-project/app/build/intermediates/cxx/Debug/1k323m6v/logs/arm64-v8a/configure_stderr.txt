@@ -1,0 +1,1 @@
+/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/src/Android.mk:26: *** Android NDK: Aborting.    .  Stop.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/13 17:01:44 by codespace        ###   ########.fr       */
+/*   Updated: 2025/07/26 10:46:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 class Weapon
 {
 public:
-	Weapon() : name("SAS"), damage(42) {}
+	Weapon(string type, int damage);
+	Weapon();
 	~Weapon();
+	const string	*get_type();
+	void			*set_type(string new_type);
 private:
-	string	name;
+	string	type;
 	int		damage;
 };
 

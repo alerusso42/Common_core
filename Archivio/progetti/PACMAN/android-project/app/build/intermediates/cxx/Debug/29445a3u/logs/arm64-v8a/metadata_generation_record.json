@@ -1,0 +1,106 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 19 min SDK version: arm64-v8a",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON /home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/.cxx/Debug/29445a3u/arm64-v8a/android_gradle_build.json due to:",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "- no fingerprint file, will remove stale configuration folder",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "removing stale contents from \u0027/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/.cxx/Debug/29445a3u/arm64-v8a\u0027",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/.cxx/Debug/29445a3u/arm64-v8a\u0027",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "executing ndkBuild /home/alerusso/Android/Sdk/ndk/25.1.8937393/ndk-build \\\n  NDK_PROJECT_PATH\u003dnull \\\n  APP_BUILD_SCRIPT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk \\\n  NDK_APPLICATION_MK\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Application.mk \\\n  APP_ABI\u003darm64-v8a \\\n  NDK_ALL_ABIS\u003darm64-v8a \\\n  NDK_DEBUG\u003d1 \\\n  NDK_OUT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj \\\n  NDK_LIBS_OUT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib \\\n  APP_PLATFORM\u003dandroid-19 \\\n  APP_SHORT_COMMANDS\u003dfalse \\\n  LOCAL_SHORT_COMMANDS\u003dfalse \\\n  -B \\\n  -n\n",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "/home/alerusso/Android/Sdk/ndk/25.1.8937393/ndk-build \\\n  NDK_PROJECT_PATH\u003dnull \\\n  APP_BUILD_SCRIPT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk \\\n  NDK_APPLICATION_MK\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Application.mk \\\n  APP_ABI\u003darm64-v8a \\\n  NDK_ALL_ABIS\u003darm64-v8a \\\n  NDK_DEBUG\u003d1 \\\n  NDK_OUT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj \\\n  NDK_LIBS_OUT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib \\\n  APP_PLATFORM\u003dandroid-19 \\\n  APP_SHORT_COMMANDS\u003dfalse \\\n  LOCAL_SHORT_COMMANDS\u003dfalse \\\n  -B \\\n  -n\n",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed with problem. Exception: com.android.ide.common.process.ProcessException: Android NDK: /home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/src/Android.mk: Cannot find module with tag \u0027SDL\u0027 in import path    \nAndroid NDK: Are you sure your NDK_MODULE_PATH variable is properly defined ?    \nAndroid NDK: The following directories were searched:    \nAndroid NDK:         \n\nC++ build system [configure] failed while executing:\n    /home/alerusso/Android/Sdk/ndk/25.1.8937393/ndk-build \\\n      NDK_PROJECT_PATH\u003dnull \\\n      APP_BUILD_SCRIPT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk \\\n      NDK_APPLICATION_MK\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Application.mk \\\n      APP_ABI\u003darm64-v8a \\\n      NDK_ALL_ABIS\u003darm64-v8a \\\n      NDK_DEBUG\u003d1 \\\n      NDK_OUT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj \\\n      NDK_LIBS_OUT\u003d/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib \\\n      APP_PLATFORM\u003dandroid-19 \\\n      APP_SHORT_COMMANDS\u003dfalse \\\n      LOCAL_SHORT_COMMANDS\u003dfalse \\\n      -B \\\n      -n\n  from /home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app\n/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/src/Android.mk:23: *** Android NDK: Aborting.    .  Stop.",
+    "file_": "/home/alerusso/Common_core/Archivio/progetti/PACMAN/android-project/app/jni/Android.mk",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  }
+]
