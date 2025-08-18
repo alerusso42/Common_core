@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/26 15:55:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/08/17 09:41:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # include "HumanA.hpp"
 # include "HumanB.hpp"
 
-HumanA::HumanA(string name, Weapon weapon)
+HumanA::HumanA(string name, Weapon &weapon)
 {
 	this->weapon = &weapon;
 	this->name = name;
@@ -32,7 +32,7 @@ void	HumanA::attack(void)
 	std::cout << std::endl;
 }
 
-void	HumanA::setWeapon(Weapon weapon)
+void	HumanA::setWeapon(Weapon &weapon)
 {
 	this->weapon = &weapon;
 }
