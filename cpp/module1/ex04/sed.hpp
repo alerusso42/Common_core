@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/30 11:09:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/08/30 12:29:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#ifndef SED_HPP
+# define SED_HPP
 
-int main()
-{
-	Weapon club = Weapon("crude spiked club");
-	HumanA a("Bob", club);
-	a.attack();
-	club.setType("some other type of club");
-	a.attack();
-	return 0;
-}
+# include <fstream>
+# include <string>
+# include <cstdlib>
+# include "lib/lib.hpp"
 
-int	main2()
-{
-	Weapon club = Weapon("crude spiked club");
-	HumanB jim("Jim");
-	jim.attack();
-	jim.setWeapon(club);
-	club.setType("some other type of club");
-	jim.attack();
-	return 0;
-}
+# define USAGE "This program mimics sed. You must give 3 parameters:\n\
+the filename;\n string to replace;\n replacement string\n"
+
+#endif

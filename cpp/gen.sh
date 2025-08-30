@@ -1,10 +1,10 @@
 #!/bin/bash
 
-Usage="Usage:_./copy_lib.sh_<src_mod>_<src_ex>_<dest_mod>_<dest_ex>\
+Usage="Usage:_./gen.sh_<src_mod>_<src_ex>_<dest_mod>_<dest_ex>\
 \nOptional:_<header_file>_<file1.cpp>_<filen.cpp>"
-#	./copy_lib	2 	1			3 	2
+#	./gen.sh	2 	1			3 	2
 
-FILES=("Makefile lib class_build.cpp")
+FILES=("Makefile" "lib" "class_build.cpp")
 MODULE="module"
 EXERCISE="ex0"
 
@@ -22,7 +22,7 @@ DEST_DIR="$MODULE""$3"
 SRC_EX="$EXERCISE""$2"
 DEST_EX="$EXERCISE""$4"
 SRC="$SRC_DIR"/"$SRC_EX"
-DEST="$DEST_DIR"/"$DEST_EX
+DEST="$DEST_DIR"/"$DEST_EX"
 
 mkdir -p $DEST_DIR
 mkdir -p $DEST
