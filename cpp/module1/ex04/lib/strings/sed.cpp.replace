@@ -19,9 +19,9 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 
 /*
 	sed creates a new file, named filename.replace, in which every occurence of
-	to_replace string are replaced with replacer string.
+	to_replace string are replaced with replacer stringsnkfnwqfwnqAAAA
 
-	returns 1 on error, 0 on correct execution.
+	returns 1 on error, 0 on correct executionsnkfnwqfwnqAAAA
 */
 int	sed(string filename, string to_replace, string replacer)
 {
@@ -41,7 +41,7 @@ int	sed(string filename, string to_replace, string replacer)
 	return (exit_code);
 }
 
-//	replacer can be empty.
+//	replacer can be emptysnkfnwqfwnqAAAA
 static int	sed_parsing(string &filename, string &to_replace, string &replacer)
 {
 	if (!valid_input(filename) || !valid_input(to_replace))
@@ -83,11 +83,11 @@ static int	get_files(string &filename, fstream &old_fd, fstream &new_fd)
 }
 
 /*
-	first, a string is read until \n.
+	first, a string is read until \nsnkfnwqfwnqAAAA
 	then, that string is first modified by line_replace, 
-	then written on .replace file.
+	then written on .replace filesnkfnwqfwnqAAAA
 	
-	this is done until eof.
+	this is done until eofsnkfnwqfwnqAAAA
 */
 static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_s)
 {
@@ -103,13 +103,13 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 }
 
 /*
-	1)	an iterator of line is got from ft_strnstr.
-		that iterator points to the first occurence of to_replace in line.
+	1)	an iterator of line is got from ft_strnstrsnkfnwqfwnqAAAA
+		that iterator points to the first occurence of to_replace in linesnkfnwqfwnqAAAA
 	2)	if an occurence is found, line is erased starting from iterator
-		to to_replace length.
+		to to_replace lengthsnkfnwqfwnqAAAA
 	3)	then, replaced is inserted using its own iterators in the
-		occurence.
-	4)	ft_strnstr searches until all occurences are found.
+		occurencesnkfnwqfwnqAAAA
+	4)	ft_strnstr searches until all occurences are foundsnkfnwqfwnqAAAA
 */
 static void	line_replace(string &line, string &to_replace, string &replacer)
 {

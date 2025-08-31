@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:09:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/31 22:49:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/08/31 23:11:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ iterator	ft_strnstr(string &big, string &little, size_t len)
 	i = 0;
 	while (big[i] && len--)
 	{
-		if (little.compare(&big[i]))
+		if (little.compare(&big[i]) == 0)
 			return (big.begin() + i);
 		i++;
 	}
