@@ -1,6 +1,6 @@
 NAME	=	sed
 SRC		=	main.cpp
-LIB_SRC =	string.cpp
+LIB_SRC =	strings/cut_string.cpp strings/input_checker.cpp
 LIB		=	$(addprefix lib/, $(LIB_SRC))
 HEADER	=	sed.hpp
 

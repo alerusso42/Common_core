@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/08/30 11:58:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:00:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include <cstdlib>
 #include <errno.h>
 
-typedef	std::string	string;
+typedef	std::string		string;
+typedef	std::fstream	fstream;
 
 //	lib
 
@@ -28,6 +29,8 @@ bool	valid_input(string s);
 string	ft_itoa(int n);
 bool	ft_atoi(string s, int *n);
 bool	check_str(string s, int (*func)(int), int expect_res);
+int     cut_string(string string, size_t start, size_t end);
+int		sed(string filename, string to_replace, string replacer);
 
 //	It was me, DIO!
 # define DIO "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⠀⠀⠀⠀⠀⠘⠀⣷⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n\
