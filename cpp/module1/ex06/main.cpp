@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/25 10:43:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:46:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Harl.hpp"
 
-int main(int argc, char *argv[]) 
+//	D	359
+//	I	300
+//	W	534
+//	E	394
+//	divided by ten
+int	main()
 {
-	std::string	s;
-	int			i;
-	int			j;
+	Harl	harl;
 
-	if (argc == 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (1);
-	}
-	i = 1;
-	while (argv[i])
-	{
-		j = 0;
-		s = argv[i];
-		while (s[j])
-		{
-			s[j] = std::toupper(s[j]);
-			j++;
-		}
-		std::cout << s;
-		++i;
-	}
-	std::cout << std::endl;
+	harl.complain("DEBUG");
+	harl.complain("INFO");
+	harl.complain("WARNING");
+	harl.complain("ERROR");
+	harl.complain("ERRO");
+	harl.complain("ERRORR");
+	return (0);
 }

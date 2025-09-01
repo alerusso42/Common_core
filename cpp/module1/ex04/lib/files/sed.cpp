@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   sed.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 22:18:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/31 23:14:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 10:10:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+	test for sed:
+	.	...	.	..		.
+	assurdo	assurdo	ass	assurdoa	assurd	assurdoaassurdoassurdo
+*/
+
 #include "../lib.hpp"
+# define USAGE_SED "This program mimics sed. You must give 3 parameters:\n\
+the filename;\n string to replace;\n replacement string\n"
 
 static int	get_files(string &filename, fstream &old_fd, fstream &new_fd);
 static void	line_replace(string &line, string &to_replace, string &replacer);
@@ -19,9 +27,9 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 
 /*
 	sed creates a new file, named filename.replace, in which every occurence of
-	to_replace string are replaced with replacer stringsnkfnwqfwnqAAAA
+	to_replace string are replaced with replacer string.
 
-	returns 1 on error, 0 on correct executionsnkfnwqfwnqAAAA
+	returns 1 on error, 0 on correct execution.
 */
 int	sed(string filename, string to_replace, string replacer)
 {
@@ -41,7 +49,7 @@ int	sed(string filename, string to_replace, string replacer)
 	return (exit_code);
 }
 
-//	replacer can be emptysnkfnwqfwnqAAAA
+//	replacer can be empty.
 static int	sed_parsing(string &filename, string &to_replace, string &replacer)
 {
 	if (!valid_input(filename) || !valid_input(to_replace))
@@ -83,11 +91,11 @@ static int	get_files(string &filename, fstream &old_fd, fstream &new_fd)
 }
 
 /*
-	first, a string is read until \nsnkfnwqfwnqAAAA
+	first, a string is read until \n.
 	then, that string is first modified by line_replace, 
-	then written on .replace filesnkfnwqfwnqAAAA
+	then written on .replace file.
 	
-	this is done until eofsnkfnwqfwnqAAAA
+	this is done until eof.
 */
 static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_s)
 {
@@ -103,23 +111,24 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 }
 
 /*
-	1)	an iterator of line is got from ft_strnstrsnkfnwqfwnqAAAA
-		that iterator points to the first occurence of to_replace in linesnkfnwqfwnqAAAA
+	1)	an iterator of line is got from ft_strnstr.
+		that iterator points to the first occurence of to_replace in line.
 	2)	if an occurence is found, line is erased starting from iterator
-		to to_replace lengthsnkfnwqfwnqAAAA
+		to to_replace length.
 	3)	then, replaced is inserted using its own iterators in the
-		occurencesnkfnwqfwnqAAAA
-	4)	ft_strnstr searches until all occurences are foundsnkfnwqfwnqAAAA
+		occurence.
+	4)	ft_strnstr searches until all occurences are found.
 */
 static void	line_replace(string &line, string &to_replace, string &replacer)
 {
-	iterator	i;
+	size_t	i;
 
-	i = ft_strnstr(line, to_replace, line.length());
-	while (i != line.end())
+	i = line.find(to_replace, 0);
+	while (i != line.npos)
 	{
-		line.erase(i, i + to_replace.length());
-		line.insert(i, replacer.begin(), replacer.end());
-		i = ft_strnstr(line, to_replace, line.length());
+		line.erase(i, to_replace.length());
+		line.insert(i, replacer);
+		i = line.find(to_replace, i);
+		i += replacer.length();
 	}
 }

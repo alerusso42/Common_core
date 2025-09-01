@@ -25,6 +25,7 @@
 # define FPS 60
 # define FRAME_RATE ((1000 / FPS) * 1000)
 # define START_COLOR 0xFF00FF
+# define PI 3.141592653589793
 
 enum e_sprites
 {
@@ -86,5 +87,7 @@ double	proportion(double a, double b, double c, double d);
 double	safe_division(double divisor, double dividend);
 long	elapsed_time(t_time start);
 int		random_color(void);
+
+void	line(t_mlx *mlx, double angle);
 
 #endif

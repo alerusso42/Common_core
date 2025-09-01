@@ -1,9 +1,11 @@
-NAME	=	sed
-SRC		=	main.cpp
+NAME	=	harlFilter
+SRC		=	main.cpp \
+			Harl.cpp \
+			utils.cpp
 LIB_SRC =	strings/input_checker.cpp \
 			files/sed.cpp
 LIB		=	$(addprefix lib/, $(LIB_SRC))
-HEADER	=	sed.hpp
+HEADER	=	Harl.hpp
 
 all: $(NAME)
 

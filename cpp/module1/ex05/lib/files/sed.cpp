@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   sed.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 22:18:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/31 23:14:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 10:10:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+	test for sed:
+	.	...	.	..		.
+	assurdo	assurdo	ass	assurdoa	assurd	assurdoaassurdoassurdo
+*/
+
 #include "../lib.hpp"
+# define USAGE_SED "This program mimics sed. You must give 3 parameters:\n\
+the filename;\n string to replace;\n replacement string\n"
 
 static int	get_files(string &filename, fstream &old_fd, fstream &new_fd);
 static void	line_replace(string &line, string &to_replace, string &replacer);
@@ -113,13 +121,14 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 */
 static void	line_replace(string &line, string &to_replace, string &replacer)
 {
-	iterator	i;
+	size_t	i;
 
-	i = ft_strnstr(line, to_replace, line.length());
-	while (i != line.end())
+	i = line.find(to_replace, 0);
+	while (i != line.npos)
 	{
-		line.erase(i, i + to_replace.length());
-		line.insert(i, replacer.begin(), replacer.end());
-		i = ft_strnstr(line, to_replace, line.length());
+		line.erase(i, to_replace.length());
+		line.insert(i, replacer);
+		i = line.find(to_replace, i);
+		i += replacer.length();
 	}
 }

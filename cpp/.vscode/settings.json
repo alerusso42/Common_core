@@ -48,6 +48,8 @@
 		"typeinfo": "cpp",
 		"cstring": "cpp",
 		"sstream": "cpp",
-		"lib.hpp": "c"
+		"lib.hpp": "c",
+		"ranges": "cpp",
+		"span": "cpp"
 	}
 }

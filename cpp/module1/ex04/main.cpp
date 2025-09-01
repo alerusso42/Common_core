@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/31 22:54:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 10:10:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ std::ios::binary → modalità binaria
 int	main(int argc, char *argv[])
 {
 	if (argc != 4)
-		return (std::cout << USAGE, 1);
+		return (std::cerr << USAGE, 1);
 	return (sed(argv[1], argv[2], argv[3]));
 }

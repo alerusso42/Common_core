@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/25 10:43:21 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/01 16:40:01 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/01 17:53:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Harl.hpp"
 
-int main(int argc, char *argv[]) 
+int	alpha_hash(string s)
 {
-	std::string	s;
-	int			i;
-	int			j;
+	int	hash;
+	int	i;
 
-	if (argc == 1)
+	hash = 0;
+	i = 0;
+	while (s[i] && i < 12)
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (1);
-	}
-	i = 1;
-	while (argv[i])
-	{
-		j = 0;
-		s = argv[i];
-		while (s[j])
-		{
-			s[j] = std::toupper(s[j]);
-			j++;
-		}
-		std::cout << s;
+		hash += (int)s[i];
 		++i;
 	}
-	std::cout << std::endl;
+	return (hash / 10);
 }

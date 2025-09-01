@@ -93,14 +93,14 @@ bool	valid_input(std::string s)
 	int	i;
 
 	if (s.empty() == true)
-		return (std::cout << "\033[1;31mBad value\n\033[0m", false);
+		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 	if (s.size() >= 1000)
-		return (std::cout << "\033[1;31mBad value\n\033[0m", false);
+		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 	i = 0;
 	while (s[i])
 	{
 		if (std::isprint(s[i]) == false)
-			return (std::cout << "\033[1;31mBad value\n\033[0m", false);
+			return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 		++i;
 	}
 	return (true);

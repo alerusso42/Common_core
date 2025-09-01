@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:09:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/31 23:11:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:12:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ iterator	ft_strnstr(string &big, string &little, size_t len)
 	i = 0;
 	while (big[i] && len--)
 	{
-		if (little.compare(&big[i]) == 0)
+		if (big.compare(i, little.length(), little) == 0)
 			return (big.begin() + i);
 		i++;
 	}
