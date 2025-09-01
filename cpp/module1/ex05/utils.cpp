@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:40:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 17:53:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:43:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	alpha_hash(string s)
 		hash += (int)s[i];
 		++i;
 	}
+	if (hash >= 1000)
+		return (99);
 	return (hash / 10);
 }

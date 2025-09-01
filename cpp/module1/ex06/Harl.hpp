@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 18:29:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:01:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <cstdlib>
 # include "lib/lib.hpp"
 
+# define USAGE "Give as a parameter DEBUG, INFO, WARNING, ERROR"
 # define MSG_DEBUG "I love having extra bacon for my \
 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!"
 # define MSG_INFO "I cannot believe adding extra bacon costs more money. \
@@ -26,6 +27,9 @@ You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking \
 # define MSG_WARNING "I think I deserve to have some extra bacon for free. \
 I’ve been coming for years, whereas you started working here just last month."
 # define MSG_ERROR "This is unacceptable! I want to speak to the manager now."
+# define MSG_IGNORED "Probably complaining about insignificant problems"
+
+# define MASK 16
 
 typedef class Harl	Harl;
 typedef void		(Harl::*t_harl)(void);
@@ -37,10 +41,10 @@ typedef void		(Harl::*t_harl)(void);
 //	divided by ten
 enum	e_levels
 {
-	LV_DEBUG = 35,
-	LV_INFO = 30,
-	LV_WARNING = 53,
-	LV_ERROR = 39,
+	LV_DEBUG = 24,
+	LV_INFO = 61,
+	LV_WARNING = 84,
+	LV_ERROR = 98,
 	LV_NUM = 100,
 };
 
@@ -62,5 +66,6 @@ public:
 
 
 int	alpha_hash(string s);
+int	filter_check(string s, int filter);
 
 #endif

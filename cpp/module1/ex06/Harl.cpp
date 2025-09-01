@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 18:26:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/01 23:06:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@ Harl::~Harl()
 
 void	Harl::debug(void)
 {
-	std::cout << MSG_DEBUG << std::endl;
+	std::cout << MSG_DEBUG;
 }
 
 void	Harl::info(void)
 {
-	std::cout << MSG_INFO << std::endl;
+	std::cout << MSG_INFO;
 }
 
 void	Harl::warning(void)
 {
-	std::cout << MSG_WARNING << std::endl;
+	std::cout << MSG_WARNING;
 }
 
 void	Harl::error(void)
 {
-	std::cout << MSG_ERROR << std::endl;
+	std::cout << MSG_ERROR;
 }
 
 void	Harl::empty(void)
@@ -58,6 +58,11 @@ void	Harl::complain(string s)
 
 	if (valid_input(s) == false)
 		return ;
+	std::cout << "[ " << s << " ]" << std::endl;
+	std::cout << "[ ";
+	if (filter_check(s, this->filter) == 1)
+		return (std::cout << MSG_IGNORED << " ]\n\n", (void)0);
 	level = alpha_hash(s);
 	(this->*ft[level])();
+	std::cout << " ]\n\n";
 }
