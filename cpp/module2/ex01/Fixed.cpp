@@ -24,6 +24,16 @@ Fixed::Fixed(const Fixed& copy)
 	this->fixed_point = copy.getRawBits();
 }
 
+Fixed::Fixed(const int n)
+{
+	this->fixed_point = n;
+}
+
+Fixed::Fixed(const float n)
+{
+	this->fixed_point = (int)(n * 1.0) << 8;
+}
+
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
@@ -34,6 +44,12 @@ Fixed&	Fixed::operator=(const Fixed& copy)
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->fixed_point = copy.getRawBits();
 	return (*this);
+}
+
+std::ostream&	Fixed::operator<<(std::ostream& fd)
+{
+	fd << this->getRawBits();
+	return (fd);
 }
 
 int		Fixed::getRawBits(void) const

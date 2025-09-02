@@ -187,5 +187,11 @@ clean:
 fclean: clean
 
 re: fclean all
+
+run: 
+	make && ./\$(NAME)
+
+val: 
+	make && valgrind --track-fds=yes --show-leak-kinds=all --leak-check=full ./\$(NAME)
 EOF
 

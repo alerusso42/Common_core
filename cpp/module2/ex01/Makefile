@@ -1,4 +1,4 @@
-NAME =	 		program
+NAME =	 		fixed
 SRC	=	 		main.cpp \
 				Fixed.cpp
 LIB_SRC	= 		files/sed.cpp \

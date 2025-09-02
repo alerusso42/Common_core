@@ -26,11 +26,14 @@ private:
 public:
 	Fixed();
 	Fixed(const Fixed& copy);
+	Fixed(const int n);
+	Fixed(const float n);
 	~Fixed();
 
-	Fixed&	operator=(const Fixed& copy);
-	int		getRawBits(void) const;
-	void	setRawBits(int const raw);
+	Fixed&			operator=(const Fixed& copy);
+	std::ostream&	operator<<(std::ostream& fd);
+	int				getRawBits(void) const;
+	void			setRawBits(int const raw);
 }	Fixed;
 
 #endif
