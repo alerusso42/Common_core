@@ -1,90 +1,191 @@
 #!/bin/bash
 
-Usage="Usage: ./gen.sh <src mod> <src_ex> <dest_mod> <dest_ex>\
-\nOptional: <header_file> <file1.cpp> <filen.cpp>"
-#	./gen.sh	2 	1			3 	2
+# Header 42 standardizzato (puoi adattare nome/email/date con variabili se vuoi)
+HEADER42="/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FILENAME											:+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: $(date '+%Y/%m/%d %H:%M:%S') by alerusso          #+#    #+#             */
+/*   Updated: $(date '+%Y/%m/%d %H:%M:%S') by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */"
 
-FILES=("Makefile" "lib")
+
+Usage="Usage: ./gen.sh <src_mod> <src_ex> <dest_mod> <dest_ex> [Class1 Class2 ...]"
+
+FILES=("lib")
 MODULE="module"
-EXERCISE="ex0"
+EXERCISE="ex"
 
-error()
-{
-	echo -e "$1\n"
-	exit 1
+error() {
+    echo -e "$1\n"
+    exit 1
 }
 
 if [ $# -lt 4 ]; then
-	error "$Usage"
+    error "$Usage"
 fi
-SRC_DIR="$MODULE""$1"
-DEST_DIR="$MODULE""$3"
-SRC_EX="$EXERCISE""$2"
-DEST_EX="$EXERCISE""$4"
-SRC="$SRC_DIR"/"$SRC_EX"
-DEST="$DEST_DIR"/"$DEST_EX"
 
-mkdir -p $DEST_DIR
-mkdir -p $DEST
+# Parametri
+SRC_DIR="${MODULE}$1/${EXERCISE}0$2"
+DEST_DIR="${MODULE}$3/${EXERCISE}0$4"
 
+echo $SRC_DIR
+echo $DEST_DIR
 
+mkdir -p "$DEST_DIR"
+
+# Copia i file base
 for file in "${FILES[@]}"; do
-	echo "$file"
-	cp -r $SRC/$file $DEST
+    if [ -e "$SRC_DIR/$file" ]; then
+        cp -r "$SRC_DIR/$file" "$DEST_DIR"
+    fi
 done
-printf "Copied from $SRC to $DEST\n"
+printf "Copied from $SRC_DIR to $DEST_DIR\n"
 
-#SECTION - copy other empty files
+# Header principale
 
-HEADER="\
-/* ************************************************************************** */\n\
-/*                                                                            */\n\
-/*                                                        :::      ::::::::   */\n\
-/*   megaphone.cpp                                      :+:      :+:    :+:   */\n\
-/*                                                    +:+ +:+         +:+     */\n\
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */\n\
-/*                                                +#+#+#+#+#+   +#+           */\n\
-/*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */\n\
-/*   Updated: 2025/07/09 14:53:00 by alerusso         ###   ########.fr       */\n\
-/*                                                                            */\n\
-/* ************************************************************************** */\n"
+FILENAME="header.hpp"
+echo "$HEADER42" | sed "s/FILENAME/$FILENAME/" > "$DEST_DIR/header.hpp"
+echo "" >> "$DEST_DIR/header.hpp"
+GUARD="HEADER_HPP"
+HEADER_FILE="$DEST_DIR/header.hpp"
+printf "#ifndef $GUARD\n# define $GUARD\n/* Auto-generated header aggregator */\n" >> "$HEADER_FILE"
+printf "# include \"lib/lib.hpp\"\n" >> "$HEADER_FILE"
 
+# Se ci sono classi aggiuntive
+shift 4
+if [ $# -gt 0 ]; then
+    for class in "$@"; do
+        HPP_FILE="$DEST_DIR/$class.hpp"
+        CPP_FILE="$DEST_DIR/$class.cpp"
 
-TMP=$(mktemp)
-trap 'rm -f "$TMP"' EXIT
-cat > $TMP <<EOF
+        # Guard name
+        GUARD=$(echo "${class}_HPP" | tr '[:lower:]' '[:upper:]')
 
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include "lib/lib.hpp"
+        # .hpp
+		FILENAME="$class.hpp"
+		echo "$HEADER42" | sed "s/FILENAME/$FILENAME/" > "$HPP_FILE"
+		echo "" >> "$HPP_FILE"
+        cat >> "$HPP_FILE" <<EOF
+#ifndef $GUARD
+# define $GUARD
+# include "header.hpp"
+
+class $class {
+public:
+	$class();
+	~$class();
+	$class(const $class &other);
+	$class &operator=(const $class &other);
+};
 
 #endif
 EOF
-if [ $# -eq 4 ]; then
-	rm $TMP
-	exit 0
+
+        # .cpp
+		FILENAME="$class.cpp"
+		echo "$HEADER42" | sed "s/FILENAME/$FILENAME/" > "$CPP_FILE"
+		echo "" >> "$CPP_FILE"
+        cat >> "$CPP_FILE" <<EOF
+#include "$class.hpp"
+
+$class::$class()
+{
+
+}
+
+$class::~$class()
+{
+
+}
+
+$class::$class(const $class &other)
+{ 
+	*this = other;
+}
+
+$class &$class::operator=(const $class &other)
+{
+	if (this != &other) 
+	{
+		// copy fields
+	}
+	return *this;
+}
+EOF
+
+        # Aggiungi include a header.hpp
+        echo "#include \"$class.hpp\"" >> "$HEADER_FILE"
+    done
 fi
-# Scrive l'header file con define guard
-HEADER_FILE="$5"
-DEFINE=${5^^}
-DEFINE="${DEFINE//./_}"
-printf "$HEADER\n" > "$DEST/$HEADER_FILE"
-printf "#ifndef $DEFINE\n# define $DEFINE\n" >> "$DEST/$HEADER_FILE"
-cat -A "$TMP"
-while IFS= read -r line; do
-  if [ "$line" = "#endif" ]; then
-	 printf "#endif" >> "$DEST/$HEADER_FILE"
-	break
-  fi
-  printf "%s\n" "$line" >> "$DEST/$HEADER_FILE"
-done < "$TMP"
-rm $TMP
-# Altri file da creare e includere l'header
-i=6
-while [ $i -le $# ]; do
-	file="${!i}"
-	printf "$HEADER\n" > "$DEST/$file"
-	printf "#include \"$HEADER_FILE\"\n" >> "$DEST/$file"
-	((i++))
+
+printf "\n#endif" >> "$HEADER_FILE"
+
+# Crea main.cpp
+FILENAME="main.cpp"
+echo "$HEADER42" | sed "s/FILENAME/$FILENAME/" > "$DEST_DIR/main.cpp"
+echo "" >> "$DEST_DIR/main.cpp"
+cat >> "$DEST_DIR/main.cpp" <<EOF
+# include "header.hpp"
+
+int main() 
+{
+	std::cout << "Program start" << std::endl;
+	return 0;
+}
+EOF
+
+
+# --- Generazione Makefile ---
+
+# Nome eseguibile (puoi anche parametrizzarlo invece di "program")
+NAME="	program"
+
+# Lista sorgenti di base
+SRC_LIST="	main.cpp"
+
+# Aggiungi ogni classe alla lista sorgenti
+for class in "$@"; do
+    SRC_LIST="$SRC_LIST \\
+				$class.cpp"
 done
+
+# Lista header (tutte le classi + aggregatore)
+HEADER_LIST="	header.hpp"
+for class in "$@"; do
+    HEADER_LIST="$HEADER_LIST \\
+			$class.hpp"
+done
+
+# Recupera tutti i .cpp dentro lib/ mantenendo struttura cartelle
+LIB_SRC_LIST=$(find "$DEST_DIR/lib" -type f -name "*.cpp" | sed "s|$DEST_DIR/lib/||" | sort | sed 's|^|\t|' | sed 's|$| \\|' )
+LIB_LIST='$(addprefix lib/, $(LIB_SRC))'
+
+# Scrivi Makefile
+cat > "$DEST_DIR/Makefile" <<EOF
+NAME =	 	$NAME
+SRC	=	 	$SRC_LIST
+LIB_SRC	= 	$LIB_SRC_LIST
+LIB	= 		$LIB_LIST
+HEADER = 	$HEADER_LIST
+
+C =		 g++
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+
+all: \$(NAME)
+
+\$(NAME): \$(SRC) \$(LIB) \$(HEADER)
+	\$(C) \$(CFLAGS) \$(SRC) \$(LIB) -o \$(NAME)
+
+clean:
+	rm -rf \$(NAME)
+
+fclean: clean
+
+re: fclean all
+EOF
+
