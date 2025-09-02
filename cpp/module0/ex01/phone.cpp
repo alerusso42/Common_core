@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phone.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/11 17:40:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/02 12:42:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ PHONE_SIZE must be at least 1
 3)	if input is "exit", return.
 	else, execute a command.
 */
-int main() 
+int main()
 {
 	string		s;
 	PhoneBook	phone;

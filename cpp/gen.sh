@@ -1,10 +1,10 @@
 #!/bin/bash
 
-Usage="Usage:_./gen.sh_<src_mod>_<src_ex>_<dest_mod>_<dest_ex>\
-\nOptional:_<header_file>_<file1.cpp>_<filen.cpp>"
+Usage="Usage: ./gen.sh <src mod> <src_ex> <dest_mod> <dest_ex>\
+\nOptional: <header_file> <file1.cpp> <filen.cpp>"
 #	./gen.sh	2 	1			3 	2
 
-FILES=("Makefile" "lib" "class_build.cpp")
+FILES=("Makefile" "lib")
 MODULE="module"
 EXERCISE="ex0"
 
@@ -15,7 +15,7 @@ error()
 }
 
 if [ $# -lt 4 ]; then
-	error $Usage
+	error "$Usage"
 fi
 SRC_DIR="$MODULE""$1"
 DEST_DIR="$MODULE""$3"

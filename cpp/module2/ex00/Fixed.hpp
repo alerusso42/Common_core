@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/02 14:50:14 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include "lib/lib.hpp"
+
+typedef class Fixed
+{
+private:
+	int					fixed_point;
+	static const int	frac_bits = 8;
+public:
+	Fixed();
+	Fixed(const Fixed& copy);
+	~Fixed();
+
+	Fixed&	operator=(const Fixed& copy);
+	int		getRawBits(void) const;
+	void	setRawBits(int const raw);
+}	Fixed;
+
+#endif
