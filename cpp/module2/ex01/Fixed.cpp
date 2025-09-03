@@ -31,7 +31,7 @@ Fixed::Fixed(const int n)
 
 Fixed::Fixed(const float n)
 {
-	this->fixed_point = (int)(n * 1.0) << 8;
+	this->fixed_point = (int)(n * 1.0) << this->frac_bits;
 }
 
 Fixed::~Fixed(void)
@@ -46,9 +46,9 @@ Fixed&	Fixed::operator=(const Fixed& copy)
 	return (*this);
 }
 
-std::ostream&	Fixed::operator<<(std::ostream& fd)
+std::ostream&	operator<<(std::ostream& fd, const Fixed& fp)
 {
-	fd << this->getRawBits();
+	fd << fp.getRawBits();
 	return (fd);
 }
 

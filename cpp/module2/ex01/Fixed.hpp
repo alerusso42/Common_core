@@ -36,4 +36,6 @@ public:
 	void			setRawBits(int const raw);
 }	Fixed;
 
+std::ostream&	operator<<(std::ostream& fd, const Fixed& fp);
+
 #endif
