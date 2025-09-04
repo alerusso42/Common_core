@@ -46,12 +46,6 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed&	Fixed::operator=(const Fixed& copy)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
-	return (*this);
-}
 
 std::ostream&	operator<<(std::ostream& fd, const Fixed& fp)
 {
@@ -77,4 +71,51 @@ int	Fixed::toInt(void) const
 float	Fixed::toFloat(void) const
 {
 	return ((float)this->fixed_point / (1 << this->frac_bits));
+}
+
+Fixed&	Fixed::operator=(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = copy.getRawBits();
+	return (*this);
+}
+
+char	Fixed::operator<(const Fixed& copy)
+{
+	return (copy.fixed_point < )
+}
+
+char	Fixed::operator<=(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = copy.getRawBits();
+	return (*this);
+}
+
+char	Fixed::operator>(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = copy.getRawBits();
+	return (*this);
+}
+
+char	Fixed::operator>=(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = copy.getRawBits();
+	return (*this);
+}
+
+char	Fixed::operator==(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = copy.getRawBits();
+	return (*this);
+}
+
+char	Fixed::operator!=(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = copy.getRawBits();
+	return (*this);
 }

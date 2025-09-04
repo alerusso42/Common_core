@@ -31,6 +31,12 @@ public:
 	~Fixed();
 
 	Fixed&			operator=(const Fixed& copy);
+	char			operator<(const Fixed& copy);
+	char			operator<=(const Fixed& copy);
+	char			operator>(const Fixed& copy);
+	char			operator>=(const Fixed& copy);
+	char			operator==(const Fixed& copy);
+	char			operator!=(const Fixed& copy);
 	std::ostream&	operator<<(std::ostream& fd);
 	int				getRawBits(void) const;
 	void			setRawBits(int const raw);
