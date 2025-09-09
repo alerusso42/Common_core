@@ -14,19 +14,19 @@
 
 Fixed::Fixed(void)
 {
-	std::cout << "Default constructor called" << std::endl;
+	//std::cout << "Default constructor called" << std::endl;
 	this->fixed_point = 0;
 }
 
 Fixed::Fixed(const Fixed& copy)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	//std::cout << "Copy constructor called" << std::endl;
 	this->fixed_point = copy.getRawBits();
 }
 
 Fixed::Fixed(const int n)
 {
-	std::cout << "Float constructor called" << std::endl;
+	//std::cout << "Float constructor called" << std::endl;
 	this->fixed_point = n << this->frac_bits;
 }
 
@@ -37,13 +37,13 @@ Fixed::Fixed(const int n)
 */	
 Fixed::Fixed(const float n)
 {
-	std::cout << "Int constructor called" << std::endl;
+	//std::cout << "Int constructor called" << std::endl;
 	this->fixed_point = n * (1 << this->frac_bits) + (n > 0 ? 0.5 : -0.5);
 }
 
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	//std::cout << "Destructor called" << std::endl;
 }
 
 
@@ -73,49 +73,137 @@ float	Fixed::toFloat(void) const
 	return ((float)this->fixed_point / (1 << this->frac_bits));
 }
 
-Fixed&	Fixed::operator=(const Fixed& copy)
+Fixed&	Fixed::operator=(const Fixed& val)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
+	//std::cout << "Copy assignment operator called" << std::endl;
+	this->fixed_point = val.getRawBits();
 	return (*this);
 }
 
-char	Fixed::operator<(const Fixed& copy)
+char	Fixed::operator<(const Fixed& val)
 {
-	return (copy.fixed_point < )
+	return (this->fixed_point < val.fixed_point);
 }
 
-char	Fixed::operator<=(const Fixed& copy)
+char	Fixed::operator<=(const Fixed& val)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
+	return (this->fixed_point <= val.fixed_point);
+}
+
+char	Fixed::operator>(const Fixed& val)
+{
+	return (this->fixed_point > val.fixed_point);
+}
+
+char	Fixed::operator>=(const Fixed& val)
+{
+	return (this->fixed_point >= val.fixed_point);
+}
+
+char	Fixed::operator==(const Fixed& val)
+{
+	return (this->fixed_point == val.fixed_point);
+}
+
+char	Fixed::operator!=(const Fixed& val)
+{
+	return (this->fixed_point != val.fixed_point);
+}
+
+Fixed	Fixed::operator++(int something)
+{
+	Fixed	val;
+
+	(void)something;
+	val = *this;
+	this->fixed_point++;
+	return (val);
+}
+
+Fixed	Fixed::operator--(int something)
+{
+	Fixed	val;
+
+	(void)something;
+	val = *this;
+	this->fixed_point--;
+	return (val);
+}
+
+Fixed	Fixed::operator++(void)
+{
+	++this->fixed_point;
 	return (*this);
 }
 
-char	Fixed::operator>(const Fixed& copy)
+Fixed	Fixed::operator--(void)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
+	--this->fixed_point;
 	return (*this);
 }
 
-char	Fixed::operator>=(const Fixed& copy)
+Fixed	Fixed::operator+(const Fixed& val)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
-	return (*this);
+	Fixed	res;
+
+	res = this->fixed_point + val.getRawBits();
+	return (res);
 }
 
-char	Fixed::operator==(const Fixed& copy)
+Fixed	Fixed::operator-(const Fixed& val)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
-	return (*this);
+	Fixed	res;
+
+	res = this->fixed_point - val.getRawBits();
+	return (res);
 }
 
-char	Fixed::operator!=(const Fixed& copy)
+Fixed	Fixed::operator*(const Fixed& val)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixed_point = copy.getRawBits();
-	return (*this);
+	Fixed	res;
+
+	res = (int)(this->fixed_point * val.getRawBits()) / (float)(1 << 16);
+	return (res);
+}
+
+Fixed	Fixed::operator/(const Fixed& val)
+{
+	Fixed	res;
+
+	if (val.getRawBits() == 0)
+	{
+		std::cerr << "Fixed::operator/, Warning:\n";
+		std::cerr << this->fixed_point << "divided by" << val.getRawBits();
+		std::cerr << std::endl;
+	}
+	res = this->fixed_point / val.getRawBits();
+	return (res);
+}
+
+Fixed&	Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a.getRawBits() > b.getRawBits())
+		return (a);
+	return (b);
+}
+
+const Fixed&	Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if (a.getRawBits() > b.getRawBits())
+		return (a);
+	return (b);
+}
+
+Fixed&	Fixed::min(Fixed& a, Fixed& b)
+{
+	if (a.getRawBits() < b.getRawBits())
+		return (a);
+	return (b);
+}
+
+const Fixed&	Fixed::min(const Fixed& a, const Fixed& b)
+{
+	if (a.getRawBits() < b.getRawBits())
+		return (a);
+	return (b);
 }

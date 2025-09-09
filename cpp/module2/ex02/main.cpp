@@ -42,7 +42,7 @@
 		int: 3 (BIN: 0001 1000)
 	2)	
 */
-
+/*
 int	main( void ) 
 {
 	Fixed	a;
@@ -58,8 +58,8 @@ int	main( void )
 	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
-return 0;
-}
+	return 0;
+}*/
 
 /*
 	6.375
@@ -89,3 +89,30 @@ return 0;
 
 	arrotondamento:	110011 + 0.1 OPPURE - 0.1 se fosse negativo.
 */
+
+/*
+$> ./a.out
+0
+0.00390625
+0.00390625
+0.00390625
+0.0078125
+10.1016
+10.1016
+*/
+
+#include <iostream>
+int main( void ) 
+{
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+	return 0;
+}
+
