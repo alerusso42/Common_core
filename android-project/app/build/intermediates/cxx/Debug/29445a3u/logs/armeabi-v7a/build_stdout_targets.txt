@@ -1,0 +1,4 @@
+Android NDK: WARNING:/home/alerusso/android-project/app/jni/Android.mk:cpufeatures: LOCAL_LDLIBS is always ignored for static libraries    
+make: Nothing to be done for 'SDL2'.
+[armeabi-v7a] Compile thumb  : main <= main.c
+[armeabi-v7a] SharedLibrary  : libmain.so

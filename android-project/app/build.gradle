@@ -1,0 +1,34 @@
+def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY');
+def buildAsApplication = !buildAsLibrary
+if (buildAsApplication) {
+    apply plugin: 'com.android.application'
+}
+else {
+    apply plugin: 'com.android.library'
+}
+
+
+android {
+    if (buildAsApplication) {
+        namespace "org.libsdl.app"
+    }
+    compileSdkVersion 34
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 34
+        externalNativeBuild {
+             ndkBuild {
+                arguments "APP_PLATFORM=android-19"
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            }
+        }
+    }
+    sourceSets.main {
+        jniLibs.srcDirs = ['build/intermediates/ndkBuild/debug/obj/local']
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'jni/Android.mk'
+        }
+    }
+}
