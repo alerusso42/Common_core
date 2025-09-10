@@ -90,29 +90,18 @@ int	main( void )
 	arrotondamento:	110011 + 0.1 OPPURE - 0.1 se fosse negativo.
 */
 
-/*
-$> ./a.out
-0
-0.00390625
-0.00390625
-0.00390625
-0.0078125
-10.1016
-10.1016
-*/
-
-#include <iostream>
-int main( void ) 
+int main( void )
 {
 	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
+	Fixed const b( Fixed( 5.05f ) - Fixed( 5.06f ) * 100 );
 	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
+	a = ( a + 2 - 2.05f);
+	std::cout << a << std::endl;
+	Fixed c( Fixed( 2.05f ) * Fixed( 2.12f ) );
+	std::cout << ( c * 2 / 4) << std::endl;
+	std::cout << a-- << std::endl;
+	std::cout << a << std::endl;
+	std::cout << Fixed::min( a, b ) << std::endl;
 	return 0;
 }
-

@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include "lib/lib.hpp"
+#include "../../lib.hpp"
 
 typedef class Fixed
 {
@@ -35,12 +35,12 @@ public:
 	static Fixed&		min(Fixed& a, Fixed& b);
 	static const Fixed&	min(const Fixed& a, const Fixed& b);
 	Fixed&				operator=(const Fixed& val);
-	char				operator<(const Fixed& val);
-	char				operator<=(const Fixed& val);
-	char				operator>(const Fixed& val);
-	char				operator>=(const Fixed& val);
-	char				operator==(const Fixed& val);
-	char				operator!=(const Fixed& val);
+	bool				operator<(const Fixed& val);
+	bool				operator<=(const Fixed& val);
+	bool				operator>(const Fixed& val);
+	bool				operator>=(const Fixed& val);
+	bool				operator==(const Fixed& val);
+	bool				operator!=(const Fixed& val);
 	Fixed				operator++(int);
 	Fixed				operator--(int);
 	Fixed				operator++(void);

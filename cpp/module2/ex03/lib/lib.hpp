@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/10 10:18:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:35:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 typedef	std::string				string;
 typedef	std::fstream			fstream;
 typedef	std::string::iterator	iterator;
+
+enum e_general
+{
+	X,	
+	Y,	
+};
 
 //	lib
 

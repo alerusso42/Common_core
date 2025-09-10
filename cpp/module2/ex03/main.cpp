@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.hpp											:+:      :+:    :+:   */
+/*   main.cpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/02 16:51:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/02 16:51:11 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_HPP
-# define HEADER_HPP
-/* Auto-generated header aggregator */
-# include "lib/lib.hpp"
+# include "header.hpp"
 
-#endif
+int main()
+{
+	Point	a(0, 1);
+	Point	b(1, 0);
+	Point	c(1, 1);
+	Point	point(0.5f, 0);
+
+	std::cout << bsp(a, b, c, point) << std::endl;
+	return 0;
+}
