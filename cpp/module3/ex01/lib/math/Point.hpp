@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   Point.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 09:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/11 09:17:31 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#pragma once
+#ifndef POINT_HPP
+# define POINT_HPP
+# include "fpoint/Fixed.hpp"
 
-int main() 
+class Point
 {
-	string		random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
+private:
+	Fixed const	x;
+	Fixed const	y;
+public:
+	Point();
+	Point(Fixed const x, Fixed const y);
+	~Point();
+	Point(const Point &other);
+	Point &operator=(const Point &other);
+	void	get_coords(Fixed coords[2]) const;
+};
 
-	std::srand(random_gen());
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(12);
-	clap.takeDamage(123);
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(123);
-	clap.attack(random_names[std::rand() % 3]);
-}
+#endif

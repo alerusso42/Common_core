@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   DiamondTrap.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 09:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/11 09:17:31 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/11 16:07:31 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/11 16:07:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#ifndef DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
+# include "ClapTrap.hpp"
+# include "FragTrap.hpp"
+# include "ScavTrap.hpp"
 
-int main() 
+class DiamondTrap : public FragTrap, public ScavTrap
 {
-	string		random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
+private:
+	string	name;
+public:
+	DiamondTrap();
+	DiamondTrap(string name);
+	~DiamondTrap();
+	DiamondTrap(const DiamondTrap &other);
+	DiamondTrap &operator=(const DiamondTrap &other);
+	void 		whoAmI();
+	void 		print_stats();
+};
 
-	std::srand(random_gen());
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(12);
-	clap.takeDamage(123);
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(123);
-	clap.attack(random_names[std::rand() % 3]);
-}
+#endif

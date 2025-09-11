@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 09:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/11 09:17:31 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/11 16:07:31 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/11 16:07:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 int main() 
 {
 	string		random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
-
 	std::srand(random_gen());
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(12);
-	clap.takeDamage(123);
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(123);
-	clap.attack(random_names[std::rand() % 3]);
+	ClapTrap	clap(random_names[std::rand() % 3]);
+	ScavTrap	scav(random_names[std::rand() % 3]);
+	FragTrap	frag(random_names[std::rand() % 3]);
+
+	scav.attack(frag.getname());
+	scav.beRepaired(10);
+	scav.takeDamage(30);
+	scav.attack(frag.getname());
+	scav.beRepaired(40);
+	scav.attack(frag.getname());
+	clap.takeDamage(74);
+	clap.attack(frag.getname());
+	frag.highFivesGuys();
+	frag.attack(frag.getname());
+	return (0);
 }

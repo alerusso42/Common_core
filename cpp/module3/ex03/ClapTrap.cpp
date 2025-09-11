@@ -12,34 +12,38 @@
 
 #include "ClapTrap.hpp"
 
-int	n;
+int	counter;
 
 ClapTrap::ClapTrap(void)
 {
-	this->name = ft_itoa(n);
-	this->hit_points = 10;
-	this->energy_points = 10;
-	this->attack_damage = 10;
-	std::cout << this->name << " is born.." << std::endl;
-	++n;
+	this->name = ft_itoa(counter);
+	this->hit_points = HP;
+	this->energy_points = EP;
+	this->attack_damage = AD;
+	this->n = counter;
+	std::cout << "\033[32m";
+	std::cout << this->name << ":\tClapTrap constructor" << std::endl;
+	std::cout << "\033[0m";
+	++counter;
 }
 
 ClapTrap::ClapTrap(string name)
 {
-	this->name = name.append(ft_itoa(n));
+	this->name = name.append(ft_itoa(counter));
 	this->hit_points = 10;
 	this->energy_points = 10;
 	this->attack_damage = 10;
+	this->n = counter;
 	std::cout << "\033[32m";
-	std::cout << this->name << ":\tconstructor" << std::endl;
+	std::cout << this->name << ":\tClapTrap constructor" << std::endl;
 	std::cout << "\033[0m";
-	++n;
+	++counter;
 }
 
 ClapTrap::~ClapTrap()
 {
 	std::cout << "\033[33m";
-	std::cout << this->name << ":\tdestructor" << std::endl;
+	std::cout << this->name << ":\tClapTrap destructor" << std::endl;
 	std::cout << "\033[0m";
 }
 
@@ -61,6 +65,11 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 		this->energy_points = other.energy_points;
 	}
 	return *this;
+}
+
+string	&ClapTrap::getname()
+{
+	return (this->name);
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -88,7 +97,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 void ClapTrap::death(void)
 {
-	std::cout << this->name << " IS DEAD.. why??" << std::endl;
+	std::cout << this->name << " has no life left!" << std::endl;
 }
 
 void ClapTrap::no_energy(void)

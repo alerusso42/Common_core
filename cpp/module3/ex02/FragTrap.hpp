@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   FragTrap.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 09:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/11 09:17:31 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/11 16:07:31 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/11 16:07:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
+# include "ClapTrap.hpp"
 
-int main() 
+class FragTrap : public ClapTrap
 {
-	string		random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
+public:
+	FragTrap();
+	FragTrap(string name);
+	~FragTrap();
+	FragTrap(const FragTrap &other);
+	FragTrap &operator=(const FragTrap &other);
+	void highFivesGuys(void);
+};
 
-	std::srand(random_gen());
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(12);
-	clap.takeDamage(123);
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(123);
-	clap.attack(random_names[std::rand() % 3]);
-}
+#endif

@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FragTrap.cpp											:+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 16:07:31 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/11 16:07:31 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "FragTrap.hpp"
+
+FragTrap::FragTrap()
+{
+	this->hit_points = 100;
+	this->energy_points = 100;
+	this->attack_damage = 30;
+	std::cout << "\033[32m";
+	std::cout << this->name << ":\tFragTrap constructor!" << std::endl;
+	std::cout << "\033[0m";
+}
+
+FragTrap::FragTrap(string name) : ClapTrap(name)
+{
+	this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
+	std::cout << "\033[32m";
+	std::cout << this->name << ":\tFragTrap constructor!" << std::endl;
+	std::cout << "\033[0m";
+}
+
+FragTrap::~FragTrap()
+{
+	std::cout << "\033[33m";
+	std::cout << this->name << ":\tFragTrap destructor!" << std::endl;
+	std::cout << "\033[33m";
+}
+
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
+{
+	this->name = other.name;
+	this->attack_damage = other.attack_damage;
+	this->hit_points = other.hit_points;
+	this->energy_points = other.energy_points;
+}
+
+FragTrap &FragTrap::operator=(const FragTrap &other)
+{
+	if (this != &other) 
+	{
+		this->name = other.name;
+		this->attack_damage = other.attack_damage;
+		this->hit_points = other.hit_points;
+		this->energy_points = other.energy_points;
+	}
+	return *this;
+}
+
+void FragTrap::highFivesGuys(void)
+{
+	std::cout << this->name << "\tHIGH FIVES GUYS!" << std::endl;
+}

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   ScavTrap.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 09:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/11 09:17:31 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/11 11:56:25 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/11 11:56:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
+# include "ClapTrap.hpp"
 
-int main() 
+//	takes from ClapTrap
+class ScavTrap : public ClapTrap
 {
-	string		random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
+private:
+	bool	guard_mode;
+	Fixed	point;
+public:
+	ScavTrap();
+	ScavTrap(string name);
+	~ScavTrap();
+	ScavTrap(const ScavTrap &other);
+	ScavTrap &operator=(const ScavTrap &other);
+	void guardGate();
+	void attack(const std::string& target);
+};
 
-	std::srand(random_gen());
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(12);
-	clap.takeDamage(123);
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(123);
-	clap.attack(random_names[std::rand() % 3]);
-}
+# include "FragTrap.hpp"
+
+#endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   ClapTrap.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 # include "header.hpp"
+# define RAND_NAMES "Giovannino", "Giovanna", "Giovannone"
 
-int main() 
+//	root class
+class ClapTrap
 {
-	string		random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
+protected:
+	void 	death(void);
+	void 	no_energy(void);
+	string	name;
+	int		hit_points;
+	int		energy_points;
+	int		attack_damage;
+	int	n;
+public:
+	ClapTrap();
+	ClapTrap(string name);
+	~ClapTrap();
+	ClapTrap(const ClapTrap &other);
+	ClapTrap &operator=(const ClapTrap &other);
 
-	std::srand(random_gen());
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(12);
-	clap.takeDamage(123);
-	clap.attack(random_names[std::rand() % 3]);
-	clap.beRepaired(123);
-	clap.attack(random_names[std::rand() % 3]);
-}
+	void attack(const std::string& target);
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
+};
+
+# include "ScavTrap.hpp"
+
+#endif
