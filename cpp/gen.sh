@@ -169,9 +169,13 @@ LIB_LIST='$(addprefix lib/, $(LIB_SRC))'
 cat > "$DEST_DIR/Makefile" <<EOF
 NAME =	 	$NAME
 SRC	=	 	$SRC_LIST
+
 LIB_SRC	= 	$LIB_SRC_LIST
+
 LIB	= 		$LIB_LIST
+
 HEADER = 	$HEADER_LIST
+
 
 C =		 g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g

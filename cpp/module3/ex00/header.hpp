@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/11 09:17:31 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/11 09:17:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define HEADER_HPP
 /* Auto-generated header aggregator */
 # include "lib/lib.hpp"
+# include "ClapTrap.hpp"
 
 #endif

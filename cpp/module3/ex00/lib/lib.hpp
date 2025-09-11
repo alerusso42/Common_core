@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/11 09:02:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/11 10:08:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int			sed(string filename, string to_replace, string replacer);
 
 //	math
 
+int			random_gen();
+int			random_gen(size_t size);
 bool		bsp(Point const a, Point const b, Point const c, Point const point);
 Fixed const	triangle_area(Point const a, Point const b, Point const c);
 

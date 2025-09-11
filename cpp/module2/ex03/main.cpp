@@ -14,10 +14,10 @@
 
 int main()
 {
-	Point	a(0, 1);
-	Point	b(1, 0);
-	Point	c(1, 1);
-	Point	point(0.5f, 0);
+	Point	a(-6, -6);
+	Point	b(0, -6);
+	Point	c(-3, 0);
+	Point	point(3, 3);
 
 	std::cout << bsp(a, b, c, point) << std::endl;
 	return 0;

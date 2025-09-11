@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.hpp											:+:      :+:    :+:   */
+/*   Point.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_HPP
-# define HEADER_HPP
-/* Auto-generated header aggregator */
-# include "lib/lib.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
+# include "fpoint/Fixed.hpp"
+
+class Point
+{
+private:
+	Fixed const	x;
+	Fixed const	y;
+public:
+	Point();
+	Point(Fixed const x, Fixed const y);
+	~Point();
+	Point(const Point &other);
+	Point &operator=(const Point &other);
+	void	get_coords(Fixed coords[2]) const;
+};
 
 #endif
