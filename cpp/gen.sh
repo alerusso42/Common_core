@@ -75,8 +75,10 @@ if [ $# -gt 0 ]; then
 # define $GUARD
 # include "header.hpp"
 
-class $class {
+class $class
+{
 public:
+//	canonic form:
 	$class();
 	~$class();
 	$class(const $class &other);
