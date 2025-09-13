@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:34:02 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/12 18:43:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/13 17:00:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ protected:
 	string	ideas[Brain::IDEAS + 1];
 public:
 	Brain();
+	Brain(string s);
 	~Brain();
 	Brain(const Brain &other);
 	Brain &operator=(const Brain &other);

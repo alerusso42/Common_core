@@ -1,8 +1,9 @@
-NAME =	 		program
+NAME =	 		brain
 SRC	=	 		main.cpp \
 				Animal.cpp \
 				Dog.cpp \
 				Cat.cpp \
+				Brain.cpp \
 				WrongAnimal.cpp \
 				WrongCat.cpp
 

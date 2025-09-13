@@ -15,11 +15,13 @@
 Cat::Cat() : Animal()
 {
 	this->type = "cat";
+	this->ideas = new Brain();
 	std::cout << "Cat " << this->type << ":\tCostructor" << std::endl;
 }
 
 Cat::~Cat()
 {
+	delete this->ideas;
 	std::cout << "Cat " << this->type << ":\tDestructor" << std::endl;
 }
 

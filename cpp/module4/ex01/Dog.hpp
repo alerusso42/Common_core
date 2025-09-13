@@ -13,9 +13,12 @@
 #ifndef DOG_HPP
 # define DOG_HPP
 # include "header.hpp"
+# include "Brain.hpp"
 
 class Dog : public Animal
 {
+private:
+	Brain	*ideas;
 public:
 	Dog();
 	~Dog();
