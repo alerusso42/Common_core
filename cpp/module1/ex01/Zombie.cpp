@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/13 15:40:13 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/15 20:53:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void	Zombie::set(string zombie_name, bool alloc_heap)
 bool	Zombie::empty(void)
 {
 	return (name.empty());
+}
+
+Zombie::Zombie()
+{
+	this->heap = false;
+}
+
+Zombie::Zombie(const string &name, bool heap)
+{
+	this->heap = heap;
+	this->name = name;
 }
 
 Zombie::~Zombie()

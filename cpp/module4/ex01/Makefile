@@ -1,9 +1,9 @@
 NAME =	 		brain
 SRC	=	 		main.cpp \
+				Brain.cpp \
 				Animal.cpp \
 				Dog.cpp \
 				Cat.cpp \
-				Brain.cpp \
 				WrongAnimal.cpp \
 				WrongCat.cpp
 
@@ -19,6 +19,7 @@ LIB_SRC	= 		files/sed.cpp \
 LIB	= 		$(addprefix lib/, $(LIB_SRC))
 
 HEADER = 		header.hpp \
+			Brain.hpp \
 			Animal.hpp \
 			Dog.hpp \
 			Cat.hpp \

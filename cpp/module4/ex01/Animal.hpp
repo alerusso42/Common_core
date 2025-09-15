@@ -12,7 +12,7 @@
 
 #ifndef ANIMAL_HPP
 # define ANIMAL_HPP
-# include "header.hpp"
+# include "lib/lib.hpp"
 
 class Animal
 {
@@ -28,7 +28,7 @@ public:
 	virtual void	makeSound() const;
 };
 
-#include "Dog.hpp"
-#include "Cat.hpp"
+# include "Dog.hpp"
+# include "Cat.hpp"
 
 #endif

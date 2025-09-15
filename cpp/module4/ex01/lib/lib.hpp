@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/11 16:08:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/15 08:33:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <fstream>
 # include <string>
 # include <cstdlib>
-# include <errno.h>
 # include "math/fpoint/Fixed.hpp"
 # include "math/Point.hpp"
 

@@ -14,8 +14,8 @@
 # define HEADER_HPP
 /* Auto-generated header aggregator */
 # include "lib/lib.hpp"
-#include "Brain.hpp"
-#include "Animal.hpp"
-#include "WrongAnimal.hpp"
+# include "Brain.hpp"
+# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
 #endif

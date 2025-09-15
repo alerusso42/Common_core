@@ -43,3 +43,8 @@ void	Cat::makeSound()  const
 {
 	std::cout << "Cat " << this->type << ":\tMIAO 🐈" << std::endl;
 }
+
+const Brain	&Cat::abilities(void) const
+{
+	return (*this->ideas);
+}

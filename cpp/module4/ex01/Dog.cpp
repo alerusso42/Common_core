@@ -43,3 +43,8 @@ void	Dog::makeSound() const
 {
 	std::cout << "Dog " << this->type << ":\tBAU 🐕" << std::endl;
 }
+
+const Brain	&Dog::abilities(void) const
+{
+	return (*this->ideas);
+}

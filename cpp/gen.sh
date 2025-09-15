@@ -73,7 +73,7 @@ if [ $# -gt 0 ]; then
         cat >> "$HPP_FILE" <<EOF
 #ifndef $GUARD
 # define $GUARD
-# include "header.hpp"
+# include "lib/lib.hpp"
 
 class $class
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/13 15:27:46 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/15 20:50:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ public:
 	void	announce(void);
 	bool	empty(void);
 	void	set(string name, bool heap);
-	Zombie() : name(""), heap(false) {}
+	Zombie(const string &name, bool heap);
+	Zombie();
 	~Zombie();
 private:
 	string	name;
