@@ -1,13 +1,11 @@
 NAME	=	account
 SRC		=	Account.cpp tests.cpp
-LIB_SRC =	string.cpp
-LIB		=	$(addprefix lib/, $(LIB_SRC))
-HEADER	=	Account.hpp general.hpp
+HEADER	=	Account.hpp
 
 all: $(NAME)
 
 $(NAME): $(SRC) $(LIB) $(HEADER)
-	g++ -Wall -Wextra -Werror -std=c++98 -g $(SRC) $(LIB) $(HEADER) -o $(NAME)
+	g++ -Wall -Wextra -Werror -std=c++98 -g $(SRC) $(HEADER) -o $(NAME)
 
 clean: 
 	rm -rf $(NAME)

@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 07:09:52 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/26 14:10:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:40:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include <string>
+#include <cstdlib>
 #include "Account.hpp"
-#include "general.hpp"
+
+# define TIMESTAMP "[19920104_091532] "
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
