@@ -1,4 +1,4 @@
-#Tue Sep 09 11:24:22 CEST 2025
-base.0=/home/alerusso/android-project/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Tue Sep 16 22:00:53 CEST 2025
+base.0=/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

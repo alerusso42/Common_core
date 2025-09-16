@@ -6,9 +6,9 @@
     "deprecated": false,
     "default": true
   },
-  "cxxBuildFolder": "/home/alerusso/android-project/app/build/.cxx/Debug/29445a3u/x86_64",
-  "soFolder": "/home/alerusso/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/x86_64",
-  "soRepublishFolder": "/home/alerusso/android-project/app/build/intermediates/ndkBuild/debug/obj/local/x86_64",
+  "cxxBuildFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/.cxx/Debug/29445a3u/x86_64",
+  "soFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/x86_64",
+  "soRepublishFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/ndkBuild/debug/obj/local/x86_64",
   "abiPlatformVersion": 19,
   "variant": {
     "buildSystemArgumentList": [
@@ -28,13 +28,13 @@
     "implicitBuildTargetSet": [],
     "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
     "module": {
-      "cxxFolder": "/home/alerusso/android-project/app/build/.cxx",
-      "intermediatesBaseFolder": "/home/alerusso/android-project/app/build/intermediates",
-      "intermediatesFolder": "/home/alerusso/android-project/app/build/intermediates/cxx",
+      "cxxFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/.cxx",
+      "intermediatesBaseFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates",
+      "intermediatesFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx",
       "gradleModulePathName": ":app",
-      "moduleRootFolder": "/home/alerusso/android-project/app",
-      "moduleBuildFile": "/home/alerusso/android-project/app/build.gradle",
-      "makeFile": "/home/alerusso/android-project/app/jni/Android.mk",
+      "moduleRootFolder": "/home/alerusso/Common_core/Archivio/android-project/app",
+      "moduleBuildFile": "/home/alerusso/Common_core/Archivio/android-project/app/build.gradle",
+      "makeFile": "/home/alerusso/Common_core/Archivio/android-project/app/jni/Android.mk",
       "buildSystem": "NDK_BUILD",
       "ndkFolder": "/home/alerusso/Android/Sdk/ndk/25.1.8937393",
       "ndkVersion": "25.1.8937393",
@@ -115,7 +115,7 @@
         "SYSTEM": {}
       },
       "project": {
-        "rootBuildGradleFolder": "/home/alerusso/android-project",
+        "rootBuildGradleFolder": "/home/alerusso/Common_core/Archivio/android-project",
         "sdkFolder": "/home/alerusso/Android/Sdk",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
@@ -133,21 +133,21 @@
   "buildSettings": {
     "environmentVariables": []
   },
-  "prefabFolder": "/home/alerusso/android-project/app/build/.cxx/Debug/29445a3u/prefab/x86_64",
+  "prefabFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/.cxx/Debug/29445a3u/prefab/x86_64",
   "isActiveAbi": true,
   "fullConfigurationHash": "29445a3u1gsv6ejt20i46b2e5b644e6l476h2x6x311d4760155l49z1e",
   "fullConfigurationHashKey": "# Values used to calculate the hash in this folder name.\n# Should not depend on the absolute path of the project itself.\n#   - AGP: 8.1.1.\n#   - $NDK is the path to NDK 25.1.8937393.\n#   - $PROJECT is the path to the parent folder of the root Gradle build file.\n#   - $ABI is the ABI to be built with. The specific value doesn\u0027t contribute to the value of the hash.\n#   - $HASH is the hash value computed from this text.\nNDK_PROJECT_PATH\u003dnull\nAPP_BUILD_SCRIPT\u003d$PROJECT/app/jni/Android.mk\nNDK_APPLICATION_MK\u003d$PROJECT/app/jni/Application.mk\nAPP_ABI\u003d$ABI\nNDK_ALL_ABIS\u003d$ABI\nNDK_DEBUG\u003d1\nNDK_OUT\u003d$PROJECT/app/build/intermediates/cxx/Debug/$HASH/obj\nNDK_LIBS_OUT\u003d$PROJECT/app/build/intermediates/cxx/Debug/$HASH/lib\nAPP_PLATFORM\u003dandroid-19",
   "configurationArguments": [
     "NDK_PROJECT_PATH\u003dnull",
-    "APP_BUILD_SCRIPT\u003d/home/alerusso/android-project/app/jni/Android.mk",
-    "NDK_APPLICATION_MK\u003d/home/alerusso/android-project/app/jni/Application.mk",
+    "APP_BUILD_SCRIPT\u003d/home/alerusso/Common_core/Archivio/android-project/app/jni/Android.mk",
+    "NDK_APPLICATION_MK\u003d/home/alerusso/Common_core/Archivio/android-project/app/jni/Application.mk",
     "APP_ABI\u003dx86_64",
     "NDK_ALL_ABIS\u003dx86_64",
     "NDK_DEBUG\u003d1",
-    "NDK_OUT\u003d/home/alerusso/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj",
-    "NDK_LIBS_OUT\u003d/home/alerusso/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib",
+    "NDK_OUT\u003d/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj",
+    "NDK_LIBS_OUT\u003d/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib",
     "APP_PLATFORM\u003dandroid-19"
   ],
   "stlLibraryFile": "/home/alerusso/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so",
-  "intermediatesParentFolder": "/home/alerusso/android-project/app/build/intermediates/cxx/Debug/29445a3u"
+  "intermediatesParentFolder": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u"
 }
