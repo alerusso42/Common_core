@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phone.hpp                                          :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:10:02 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/12 13:28:03 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/17 11:20:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@
 #include <cstdlib>
 #include <errno.h>
 #include "lib/lib.hpp"
-
-# define PHONE_SIZE 8
-# define FIELD_SIZE 10
-# define ENTRY_NUM 4
+#include "Contact.hpp"
 
 # define RST		"\033[0m" /* Reset to default color */
 # define RED		"\033[1;31m" /* Bold Red */
@@ -32,45 +29,27 @@
 # define BCYAN		"\033[1;36m" /* Bold Cyan*/
 # define BWHITE		"\033[1;37m" /* Bold White*/
 
-typedef	std::string	string;
-
-typedef class Contact
-{
-	private:
-		/* data */
-	public:
-		string	*entry_list[ENTRY_NUM + 1];
-		string	first_name;
-		string	last_name;
-		string	nickname;
-		string	phone_number;
-		string	darkest_secret;
-}	Contact;
-
 typedef class PhoneBook
 {
 	private:
-		/* data */
-	public:
 		Contact	contacts[PHONE_SIZE + 1];
 		int		reset_id;
+	public:
 		PhoneBook(void);
 		~PhoneBook(void);
+		
+		Contact	*get_contacts();
+		int		&get_id();
+		void	add(void);
+		void	search(void);
+		int		first_free_index(void);
 }	Phone;
 
 void	print_guide(void);
 void	reset_contact(Contact *phone);
-int		first_free_index(PhoneBook *phone);
 void	execute(string s, PhoneBook *phone);
-bool	add_info(Contact *phone, string *dest, string msg);
 bool	valid_search(PhoneBook *phone, string s, int *index);
 void	print_phonebook(PhoneBook *phone);
-
-# define INvalid_input_MSG "\033[1;31mBad value\n\033[0m"
-# define EMPTY_CONTACTS_MSG "\033[1;32mNo contacts registered.\n\033[0m"
-# define INVALID_SEARCH_MSG "\033[1;32mOut of range search.\n\033[0m"
-# define MISSING_NUMBER_MSG "\033[1;32mContact does not exist.\n\033[0m"
-# define ATOI_BAD_VALUE_MSG "\033[1;31mValue must be integer\n\033[0m"
 
 //	It was me, DIO!
 # define DIO "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⠀⠀⠀⠀⠀⠘⠀⣷⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n\

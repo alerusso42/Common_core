@@ -6,21 +6,27 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 07:09:52 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/16 14:40:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/17 11:57:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
 #include <cstdlib>
 #include "Account.hpp"
 
+# define CORRECTION false
 # define TIMESTAMP "[19920104_091532] "
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
+
+static void	print_time(void);
 
 int	Account::checkAmount(void) const
 {
@@ -49,7 +55,7 @@ int	Account::getNbWithdrawals(void)
 
 void	Account::displayStatus( void ) const
 {
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
 	std::cout << "deposits:" << _nbDeposits << ";";
@@ -59,7 +65,7 @@ void	Account::displayStatus( void ) const
 
 void	Account::displayAccountsInfos(void)
 {
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "accounts:" << _nbAccounts << ";";
 	std::cout << "total:" << _totalAmount << ";";
 	std::cout << "deposits:" << _totalNbDeposits << ";";
@@ -73,7 +79,7 @@ Account::Account(int initial_deposit)
 	_nbAccounts += 1;
 	_amount = initial_deposit;
 	_totalAmount += initial_deposit;
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
 	std::cout << "created" << std::endl;
@@ -83,7 +89,7 @@ Account::Account(void)
 {
 	_accountIndex = _nbAccounts;
 	_nbAccounts += 1;
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
 	std::cout << "created" << std::endl;
@@ -91,7 +97,7 @@ Account::Account(void)
 
 Account::~Account(void)
 {
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
 	std::cout << "closed";
@@ -100,7 +106,7 @@ Account::~Account(void)
 
 void	Account::makeDeposit(int deposit)
 {
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "p_amount:" << _amount << ";";
 	std::cout << "deposit:" << deposit << ";";
@@ -115,7 +121,7 @@ void	Account::makeDeposit(int deposit)
 
 bool	Account::makeWithdrawal(int withdrawal)
 {
-	std::cout << TIMESTAMP;
+	print_time();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "p_amount:" << _amount << ";";
 	std::cout << "withdrawal:";
@@ -133,4 +139,18 @@ bool	Account::makeWithdrawal(int withdrawal)
 	std::cout << "nb_withdrawals:" << _nbWithdrawals;
 	std::cout << std::endl;
 	return (0);
+}
+
+static void	print_time(void)
+{
+	std::time_t	temp;
+	std::tm		*time;
+	char 		buffer[20];
+
+	if (CORRECTION)
+		return (std::cout << TIMESTAMP, (void)0);
+	temp = std::time(NULL);
+	time = std::localtime(&temp);
+	std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S]", time);
+	std::cout << buffer;
 }

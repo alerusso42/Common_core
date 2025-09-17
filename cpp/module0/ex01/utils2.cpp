@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 11:18:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/11 17:24:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/17 10:52:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phone.hpp"
+#include "PhoneBook.hpp"
 
 static void	print_line(int len);
 static void	print_one(string s);
@@ -34,7 +34,7 @@ void	print_phonebook(PhoneBook *phone)
 
 	i = 0;
 	print_entries_name();
-	while (i != PHONE_SIZE && phone->contacts[i].first_name.empty() == false)
+	while (i != PHONE_SIZE && phone->get_contacts()[i].empty() == false)
 	{
 		print_line((FIELD_SIZE + 1) * ENTRY_NUM);
 		j = 0;
@@ -43,7 +43,7 @@ void	print_phonebook(PhoneBook *phone)
 		while (j < ENTRY_NUM - 1)
 		{
 			std::cout << "|";
-			print_one(*phone->contacts[i].entry_list[j]);
+			print_one(*phone->get_contacts()[i].get_list()[j]);
 			++j;
 		}
 		std::cout << "|";

@@ -118,7 +118,8 @@ bool	ft_atoi(std::string s, int *n)
 		return (2);
 	if (check_str(s, std::isdigit, true, 1) == 1)
 		return (2);
-	*n = std::atoi(s.c_str());
+	if (n)
+		*n = std::atoi(s.c_str());
 	return (0);
 }
 

@@ -50,6 +50,7 @@
 		"sstream": "cpp",
 		"lib.hpp": "c",
 		"ranges": "cpp",
-		"span": "cpp"
+		"span": "cpp",
+		"ctime": "cpp"
 	}
 }
