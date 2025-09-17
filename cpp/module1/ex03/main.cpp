@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 12:11:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:43:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main()
 	Weapon club = Weapon("crude spiked club");
 	HumanA a("Bob", club);
 	a.attack();
+	a.setWeapon(club);
 	club.setType("some other type of club");
 	a.attack();
 	return 0;

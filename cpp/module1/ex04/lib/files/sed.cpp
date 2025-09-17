@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 22:18:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 10:10:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/17 12:29:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 {
 	string	line;
 
+	if (!old_s.compare(new_s))
+		return (0);
 	while (std::getline(old_fd, line))
 	{
 		line_replace(line, old_s, new_s);
@@ -129,6 +131,5 @@ static void	line_replace(string &line, string &to_replace, string &replacer)
 		line.erase(i, to_replace.length());
 		line.insert(i, replacer);
 		i = line.find(to_replace, i);
-		i += replacer.length();
 	}
 }

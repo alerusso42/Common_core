@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:40:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 22:55:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/17 12:34:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	filter_check(string s, int filter)
 		case (LV_INFO)	:
 			return (LV_INFO < filter);
 		case (LV_WARNING) :
-			return (LV_INFO < filter);
+			return (LV_WARNING < filter);
 		case (LV_ERROR)	:
-			return (LV_INFO < filter);
+			return (LV_ERROR < filter);
 		default	:
 			return (1);
 	}

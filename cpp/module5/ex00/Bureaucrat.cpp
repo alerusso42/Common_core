@@ -14,24 +14,65 @@
 
 Bureaucrat::Bureaucrat() : name("giorgio")
 {
+	this->grade = this->LOWEST_GRADE;
+}
 
+Bureaucrat::Bureaucrat(string name) : name(name)
+{
+	this->grade = this->LOWEST_GRADE;
+}
+
+Bureaucrat::Bureaucrat(int grade) : name("giorgio")
+{
+	this->grade = grade;
+	check_grade();
+}
+
+Bureaucrat::Bureaucrat(int grade, string name) : name(name)
+{
+	this->grade = grade;
+	check_grade();
+}
+
+Bureaucrat::Bureaucrat(string name, int grade) : name(name)
+{
+	this->grade = grade;
+	check_grade();
 }
 
 Bureaucrat::~Bureaucrat()
-{
+{}
 
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat &other)
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.name)
 { 
-	*this = other;
+	this->grade = grade;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
 	if (this != &other) 
 	{
-		// copy fields
+		this->grade = other.grade;
 	}
 	return *this;
+}
+
+void	Bureaucrat::increment(void)
+{
+	this->grade--;
+	check_grade();
+}
+
+void	Bureaucrat::decrement(void)
+{
+	this->grade++;
+	check_grade();
+}
+
+void	Bureaucrat::check_grade()
+{
+	if (this->grade > LOWEST_GRADE)
+		throw (Error(EX_GRADE_LOW));
+	else if (this->grade < 0)
+		throw (Error(EX_GRADE_HIGH));
 }

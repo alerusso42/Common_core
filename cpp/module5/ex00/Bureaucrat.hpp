@@ -18,6 +18,7 @@
 # include <string>
 # include <stdexcept>
 # include <cstdlib>
+# include "Error.hpp"
 
 typedef std::string	string;
 
@@ -29,20 +30,23 @@ private:
 		LOWEST_GRADE = 150,
 	};
 	const string	name;
-	uint32_t		grade;
+	int				grade;
 public:
 //	canonic form:
 	Bureaucrat();
+	Bureaucrat(string name);
+	Bureaucrat(int grade);
+	Bureaucrat(string name, int grade);
+	Bureaucrat(int grade, string name);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &other);
-	decrement(void);
-	increment(void);
-};
 
-class Error : public std::exception
-{
-	
+	const string	getName(void);
+	int				getGrade(void);
+	void			increment(void);
+	void			decrement(void);
+	void			check_grade(void);
 };
 
 #endif

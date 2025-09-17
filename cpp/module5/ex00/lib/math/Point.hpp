@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   Point.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 14:40:16 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANA_HPP
-# define HUMANA_HPP
-# include "Weapon.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
+# include "fpoint/Fixed.hpp"
 
-class HumanA
+class Point
 {
-public:
-	HumanA(string name, Weapon &weapon);
-	~HumanA();
-	Weapon	&weapon;
-	string	name;
-	void	attack(void);
-	void	setWeapon(Weapon &weapon);
 private:
+	Fixed const	x;
+	Fixed const	y;
+public:
+	Point();
+	Point(Fixed const x, Fixed const y);
+	~Point();
+	Point(const Point &other);
+	Point &operator=(const Point &other);
+	void	get_coords(Fixed coords[2]) const;
 };
 
 #endif

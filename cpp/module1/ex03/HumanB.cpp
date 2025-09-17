@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/17 09:59:40 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/17 14:19:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # include "HumanA.hpp"
 # include "HumanB.hpp"
 
-HumanB::HumanB(string name)
+HumanB::HumanB(string name) 
 {
-	this->weapon = 0;
 	this->name = name;
 }
 

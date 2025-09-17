@@ -14,6 +14,17 @@
 
 int main()
 {
-	std::cout << "Program start" << std::endl;
-	return 0;
+	Bureaucrat	b(150);
+
+	std::srand(random_gen());
+	try
+	{
+		Bureaucrat	a(0);
+		b.decrement();
+	}
+	catch(const Error &e)
+	{
+		e.print();
+	}
+	return (0);
 }

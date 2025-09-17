@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/08/17 09:41:58 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/17 14:45:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 # include "HumanA.hpp"
 # include "HumanB.hpp"
 
-HumanA::HumanA(string name, Weapon &weapon)
+HumanA::HumanA(string name, Weapon &weapon) : weapon(weapon)
 {
-	this->weapon = &weapon;
 	this->name = name;
 }
 
 HumanA::~HumanA(void)
-{
-}
+{}
 
 void	HumanA::attack(void)
 {
-	const string	&weapon_type = weapon->getType();
+	const string	&weapon_type = weapon.getType();
 
 	std::cout << name << " attacks with their " << weapon_type;
 	std::cout << std::endl;
@@ -34,5 +32,8 @@ void	HumanA::attack(void)
 
 void	HumanA::setWeapon(Weapon &weapon)
 {
-	this->weapon = &weapon;
+	(void)weapon;
+	std::cout << "cannot assign " << weapon.getType() << ": ";
+	std::cout << this->name << " has already weapon " << this->weapon.getType();
+	std::cout << std::endl;
 }

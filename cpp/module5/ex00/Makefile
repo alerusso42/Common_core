@@ -1,6 +1,7 @@
-NAME =	 		program
+NAME =	 		paper,please
 SRC	=	 		main.cpp \
-				Bureaucrat.cpp
+				Bureaucrat.cpp \
+				Error.cpp
 
 LIB_SRC	= 		files/sed.cpp \
 	math/bsp.cpp \
@@ -15,8 +16,7 @@ LIB_SRC	= 		files/sed.cpp \
 
 LIB	= 		$(addprefix lib/, $(LIB_SRC))
 
-HEADER = 		header.hpp \
-			Bureaucrat.hpp
+HEADER = 	Bureaucrat.hpp Error.hpp
 
 
 C =		 g++
