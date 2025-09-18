@@ -37,7 +37,7 @@
 //		originally developed by Sam Lantinga.
 */
 //REVIEW -	Core SDL3 functionality
-# include <SDL2/SDL.h>
+# include "../../../../../jni/SDL2/include/SDL.h"
 //REVIEW -	Official SDL3 extensions
 /*# include <SDL3/SDL_image.h>
 # include <SDL3/SDL_mixer.h>

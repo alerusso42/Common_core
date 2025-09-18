@@ -60,7 +60,17 @@
   /home/alerusso/Common_core/Archivio/android-project/app/jni/SDL2/include/SDL_version.h \
   /home/alerusso/Common_core/Archivio/android-project/app/jni/SDL2/include/SDL_locale.h \
   /home/alerusso/Common_core/Archivio/android-project/app/jni/SDL2/include/SDL_misc.h \
-  /home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/stdbool.h
+  /home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/stdbool.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/daft.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/libft.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/../lib.h \
+  /home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/stdint.h \
+  /home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/errno.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/../../../../../../jni/SDL2/include/SDL.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/structs.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/mfile_gnl.h \
+  /home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/limits.h \
+  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/other.h
 
 /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/header.h:
 
@@ -183,3 +193,23 @@
 /home/alerusso/Common_core/Archivio/android-project/app/jni/SDL2/include/SDL_misc.h:
 
 /home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/stdbool.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/daft.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/libft.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/../lib.h:
+
+/home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/stdint.h:
+
+/home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/errno.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/../../../../../../jni/SDL2/include/SDL.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/structs.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/mfile_gnl.h:
+
+/home/alerusso/Android/Sdk/ndk/25.1.8937393/sources/cxx-stl/llvm-libc++/include/limits.h:
+
+/home/alerusso/Common_core/Archivio/android-project/app/jni/../src/../src/include/../main/daft/.private/program/Libft/other.h:

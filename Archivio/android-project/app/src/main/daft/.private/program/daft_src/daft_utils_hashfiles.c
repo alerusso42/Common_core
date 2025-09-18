@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/19 00:46:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static char	*get_hash_filename(char *filename)
 	int		i;
 
 	i = 0;
-	while (filename[i] && ft_strncmp(filename + i, "/daft/data/", 11))
+	while (filename[i] && ft_strncmp(filename + i, "daft/data/", 10))
 	{
 		++i;
 	}
 	if (!filename[i])
 		return (NULL);
-	i += 6;
-	return (_cat_string(filename, ".private/hash_", i, 0));
+	i += 5;
+	return (_cat_string(filename, "private/hash_", i, 0));
 }
 
 //	Inner flags and the maximum hash value are saved.

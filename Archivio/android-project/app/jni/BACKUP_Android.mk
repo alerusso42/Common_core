@@ -1,19 +1,10 @@
 LOCAL_PATH := $(call my-dir)
 
-###########################
-#
-# SDL shared library
-#
-###########################
-
+# --- SDL2 shared library ---
 include $(CLEAR_VARS)
-
 LOCAL_MODULE := SDL2
-
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
-
-LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
-
+LOCAL_LDLIBS := -llog -landroid -lOpenSLES -lGLESv1_CM -lGLESv2
+LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES
 LOCAL_SRC_FILES := \
 	$(subst $(LOCAL_PATH)/,, \
 	$(wildcard $(LOCAL_PATH)/src/*.c) \
@@ -60,72 +51,27 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(LOCAL_PATH)/src/video/yuv2rgb/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/test/*.c))
 
-LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES
-LOCAL_CFLAGS += \
-	-Wall -Wextra \
-	-Wdocumentation \
-	-Wmissing-prototypes \
-	-Wunreachable-code-break \
-	-Wunneeded-internal-declaration \
-	-Wmissing-variable-declarations \
-	-Wfloat-conversion \
-	-Wshorten-64-to-32 \
-	-Wunreachable-code-return \
-	-Wshift-sign-overflow \
-	-Wstrict-prototypes \
-	-Wkeyword-macro \
-
-# Warnings we haven't fixed (yet)
-LOCAL_CFLAGS += -Wno-unused-parameter -Wno-sign-compare
-
-LOCAL_CXXFLAGS += -std=gnu++11
-
-LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -lOpenSLES -llog -landroid
-
-LOCAL_LDFLAGS := -Wl,--no-undefined
-
-ifeq ($(NDK_DEBUG),1)
-    cmd-strip :=
-endif
-
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/SDL2/include
 LOCAL_STATIC_LIBRARIES := cpufeatures
-
+LOCAL_LDLIBS := -llog -landroid -lOpenSLES -lGLESv1_CM -lGLESv2
 include $(BUILD_SHARED_LIBRARY)
 
-
-###########################
-#
-# SDL static library
-#
-###########################
-
-LOCAL_MODULE := SDL2_static
-
-LOCAL_MODULE_FILENAME := libSDL2
-
-LOCAL_LDLIBS :=
-
-LOCAL_LDFLAGS :=
-
-LOCAL_EXPORT_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
-
-include $(BUILD_STATIC_LIBRARY)
-
-
-###########################
-#
-# SDL main static library
-#
-###########################
-
+# --- main ---
 include $(CLEAR_VARS)
+LOCAL_MODULE := main
+PROJ_PATH	:= ../src/
+LOCAL_SRC_FILES := 	$(addprefix $(PROJ_PATH), \
+					main.c \
+					utils/file.c)
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/SDL2/include
+LOCAL_SHARED_LIBRARIES := SDL2
+LOCAL_LDLIBS := -llog -landroid -lOpenSLES -lGLESv1_CM -lGLESv2
+include $(BUILD_SHARED_LIBRARY)
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
-
-LOCAL_MODULE := SDL2_main
-
-LOCAL_MODULE_FILENAME := libSDL2main
-
+# --- cpufeatures ---
+include $(CLEAR_VARS)
+LOCAL_MODULE    := cpufeatures
+LOCAL_LDLIBS := -llog -landroid -lOpenSLES -lGLESv1_CM -lGLESv2
+LOCAL_SRC_FILES := 3rdparty/cpufeatures/cpu-features.c
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/3rdparty/cpufeatures
 include $(BUILD_STATIC_LIBRARY)
-
-$(call import-module,android/cpufeatures)

@@ -6,15 +6,19 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 03:00:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/09 11:24:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/19 00:47:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../src/include/header.h"
+#include <android/log.h>
+
+#define LOG_TAG "DAFT"
 
 int	main()
 {
 	t_data	data;
+	char	**test;
 
 	data = (t_data){0};
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -31,6 +35,14 @@ int	main()
 	app_loop(&data);
 	SDL_Quit();
 	free_txtr(&data);
+	if (daft_init() != 0)
+		return (1);
+	daft_swap(ENEMIES);
+	test = daft_get("RED");
+	__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "s: %s\n", test[1]);
+	if (ft_strncmp(test[0], "3", 12) == 0 || ft_strncmp(test[0], "RED", 12) == 0)
+		SDL_Delay(4000);
+	daft_quit();
 	return (0);
 }
 
