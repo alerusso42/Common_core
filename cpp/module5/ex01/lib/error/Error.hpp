@@ -1,14 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
+/*   Error.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 16:40:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/18 15:52:22 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/18 16:27:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef ERROR_HPP
+# define ERROR_HPP
 
+# include <stdexcept>
+# include <iostream>
+# include <fstream>
+# include <string>
+# include <cstdlib>
+
+typedef	std::string	string;
+
+enum e_error
+{
+	EX_GRADE_HIGH,
+	EX_GRADE_LOW,
+	EX_NUM,
+};
+
+class Error : public std::runtime_error
+{
+	private:
+		int		_code;
+		string	get_msg(int type);
+		int		get_code();
+	public:
+		Error(int code);
+		void	print() const;
+};
+
+#endif

@@ -1,14 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
+/*   Point.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 16:40:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/18 15:52:22 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
+# include "fpoint/Fixed.hpp"
 
+class Point
+{
+private:
+	Fixed const	x;
+	Fixed const	y;
+public:
+	Point();
+	Point(Fixed const x, Fixed const y);
+	~Point();
+	Point(const Point &other);
+	Point &operator=(const Point &other);
+	void	get_coords(Fixed coords[2]) const;
+};
+
+#endif

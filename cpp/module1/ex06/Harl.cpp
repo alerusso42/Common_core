@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 23:06:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:08:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
-Harl::Harl(int filter)
+Harl::Harl(string filter)
 {
-	int	i;
+	static string	names[] = {FILTER_ARRAY};
 
-	this->filter = filter;
-	i = -1;
-	while (++i < LV_NUM)
-		this->ft[i] = &Harl::empty;
+	this->names = names;
+	this->filter = this->find_lv(filter);
+	this->ft[LV_EMPTY] = &Harl::empty;
 	this->ft[LV_DEBUG] = &Harl::debug;
 	this->ft[LV_INFO] = &Harl::info;
 	this->ft[LV_WARNING] = &Harl::warning;
@@ -50,7 +49,19 @@ void	Harl::error(void)
 }
 
 void	Harl::empty(void)
-{}
+{
+	std::cout << "[ " MSG_EMPTY << " ]" << std::endl;
+}
+
+int	Harl::find_lv(string s)
+{
+	for (int i = 0; i < LV_NUM; i++)
+	{
+		if (!s.compare(this->names[i]))
+			return (i);
+	}
+	return (LV_EMPTY);
+}
 
 void	Harl::complain(string s)
 {
@@ -60,9 +71,31 @@ void	Harl::complain(string s)
 		return ;
 	std::cout << "[ " << s << " ]" << std::endl;
 	std::cout << "[ ";
-	if (filter_check(s, this->filter) == 1)
-		return (std::cout << MSG_IGNORED << " ]\n\n", (void)0);
-	level = alpha_hash(s);
+	level = find_lv(s);
+	if (level == LV_EMPTY || filter_check(level) == 1)
+		return (std::cout << MSG_EMPTY << " ]\n\n", (void)0);
 	(this->*ft[level])();
 	std::cout << " ]\n\n";
+}
+
+//returns 1 on error	
+int	Harl::filter_check(int level)
+{
+	switch (level < this->filter)
+	{	
+		case (false):
+			return (false);
+		default:
+			return (true);
+	}
+}
+
+bool	Harl::invalid(void)
+{
+	if (this->filter == LV_EMPTY)
+	{
+		this->empty();
+		return (true);
+	}
+	return (false);
 }

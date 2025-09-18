@@ -1,14 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
+/*   header.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 16:40:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/18 15:52:22 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/18 16:28:32 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/18 16:28:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef HEADER_HPP
+# define HEADER_HPP
+/* Auto-generated header aggregator */
+# include "lib/lib.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
+#endif

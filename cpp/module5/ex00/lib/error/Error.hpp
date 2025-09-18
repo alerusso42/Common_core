@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 16:17:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:27:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 # define ERROR_HPP
 
 # include <stdexcept>
-# include "lib/lib.hpp"
+# include <iostream>
+# include <fstream>
+# include <string>
+# include <cstdlib>
+
+typedef	std::string	string;
 
 enum e_error
 {
@@ -25,13 +30,13 @@ enum e_error
 
 class Error : public std::runtime_error
 {
-	public:
-		Error(int code);
-		string	get_msg(int type);
-		int		get_code();
-		void	print() const;
 	private:
 		int		_code;
+		string	get_msg(int type);
+		int		get_code();
+	public:
+		Error(int code);
+		void	print() const;
 };
 
 #endif

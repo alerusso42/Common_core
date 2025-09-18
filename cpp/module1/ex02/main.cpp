@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/13 16:45:17 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/18 14:54:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main()
 	s = "HI THIS IS BRAIN";
 	ptr = &s;
 	std::cout << &s << std::endl;
-	std::cout << &ptr << std::endl;
+	std::cout << ptr << std::endl;
 	std::cout << &ref << std::endl;
 	std::cout << s << std::endl;
 	std::cout << *ptr << std::endl;

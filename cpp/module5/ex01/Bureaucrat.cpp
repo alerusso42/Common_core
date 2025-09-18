@@ -77,11 +77,6 @@ void	Bureaucrat::check_grade()
 		this->GradeTooHighException();
 }
 
-std::ostream&	Bureaucrat::operator<<(std::ostream& fd)
-{
-	fd << this->name << ", bureaucrat grade " << this->grade << std::endl;
-}
-
 void	Bureaucrat::GradeTooHighException(void)
 {
 	throw (Error(EX_GRADE_HIGH));

@@ -51,6 +51,7 @@
 		"lib.hpp": "c",
 		"ranges": "cpp",
 		"span": "cpp",
-		"ctime": "cpp"
+		"ctime": "cpp",
+		"iomanip": "cpp"
 	}
 }

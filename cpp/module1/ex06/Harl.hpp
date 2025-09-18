@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 23:01:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:10:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking \
 # define MSG_WARNING "I think I deserve to have some extra bacon for free. \
 I’ve been coming for years, whereas you started working here just last month."
 # define MSG_ERROR "This is unacceptable! I want to speak to the manager now."
-# define MSG_IGNORED "Probably complaining about insignificant problems"
+# define MSG_EMPTY "Probably complaining about insignificant problems"
+
+# define FILTER_ARRAY "DEBUG", "INFO", "WARNING", "ERROR", "DEBUG"
+# define MSG_ARRAY MSG_DEBUG, MSG_INFO, MSG_WARNING, MSG_ERROR, MSG_EMPTY
 
 # define MASK 16
 
@@ -41,11 +44,12 @@ typedef void		(Harl::*t_harl)(void);
 //	divided by ten
 enum	e_levels
 {
-	LV_DEBUG = 24,
-	LV_INFO = 61,
-	LV_WARNING = 84,
-	LV_ERROR = 98,
-	LV_NUM = 100,
+	LV_DEBUG,
+	LV_INFO,
+	LV_WARNING,
+	LV_ERROR,
+	LV_EMPTY,
+	LV_NUM,
 };
 
 class Harl
@@ -57,15 +61,18 @@ private:
 	void 	error(void);
 	void	empty(void);
 	int		filter;
+	string	*names;
 public:
-	Harl(int filter);
+	Harl(string filter);
 	~Harl();
 	void 	complain(std::string level);
-	t_harl	ft[100];
+	int		find_lv(string s);
+	int		filter_check(int level);
+	t_harl	ft[LV_NUM + 1];
+	bool	invalid(void);
 };
 
-
 int	alpha_hash(string s);
-int	filter_check(string s, int filter);
+int	filter_check(int filter);
 
 #endif

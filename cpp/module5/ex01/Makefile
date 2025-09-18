@@ -1,8 +1,10 @@
 NAME =	 		paper,please
 SRC	=	 		main.cpp \
-				Bureaucrat.cpp
+				Bureaucrat.cpp \
+				Form.cpp
 
-LIB_SRC	= 		files/sed.cpp \
+LIB_SRC	= 		error/Error.cpp \
+	files/sed.cpp \
 	math/bsp.cpp \
 	math/fpoint/Fixed.cpp \
 	math/fpoint/fixed_func.cpp \
@@ -10,13 +12,14 @@ LIB_SRC	= 		files/sed.cpp \
 	math/Point.cpp \
 	math/random.cpp \
 	math/test.cpp \
-	error/Error.cpp \
 	strings/input_checker.cpp \
 	strings/print.cpp \
 
 LIB	= 		$(addprefix lib/, $(LIB_SRC))
 
-HEADER = 	Bureaucrat.hpp
+HEADER = 		header.hpp \
+			Bureaucrat.hpp \
+			Form.hpp
 
 
 C =		 g++
