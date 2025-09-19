@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : name("giorgio")
 {
@@ -57,6 +58,12 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	return *this;
 }
 
+std::ostream&	Bureaucrat::operator<<(std::ostream& fd)
+{
+	fd << this->name << ", bureaucrat grade " << this->grade << std::endl;
+	return (fd);
+}
+
 void	Bureaucrat::increment(void)
 {
 	this->grade--;
@@ -69,12 +76,68 @@ void	Bureaucrat::decrement(void)
 	check_grade();
 }
 
+const string	Bureaucrat::getName(void)
+{
+	return (this->name);
+}
+
+int	Bureaucrat::getGrade(void)
+{
+	return (this->grade);
+}
+
+int	Bureaucrat::getLowestGrade(void)
+{
+	return (this->LOWEST_GRADE);
+}
+
 void	Bureaucrat::check_grade()
 {
 	if (this->grade > LOWEST_GRADE)
 		this->GradeTooLowException();
 	else if (this->grade <= 0)
 		this->GradeTooHighException();
+}
+
+int	Bureaucrat::signForm(Form &form)
+{
+	int	exit_code = 0;
+
+	try
+	{
+		exit_code = form.beSigned(*this);
+	}
+	catch(const Error& e)
+	{
+		e.print();
+		return (form.F_GRADE_LOW);
+	}
+	if (exit_code == form.F_CORRECT)
+		std::cout << this->name << " signed " << form.getName() << std::endl;
+	else
+		this->print_form_error(form, exit_code);
+	return (exit_code);
+	
+}
+
+void	Bureaucrat::print_form_error(Form &form, int error)
+{
+	std::cout << this->name << " couldn’t sign ";
+	std::cout << form.getName() << "because ";
+	switch (error)
+	{
+		case (form.F_ALREADY_SIGN) :
+		{
+			std::cout << "is already sign";
+			break ;
+		}
+		case (form.F_BAD_BUREAUCRAT) :
+		{
+			std::cout << "bureaucrat is invalid";
+			break ;
+		}
+	}
+	std::cout << std::endl;
 }
 
 void	Bureaucrat::GradeTooHighException(void)

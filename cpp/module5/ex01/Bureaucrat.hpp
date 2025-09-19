@@ -12,15 +12,17 @@
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
-
 # include <iostream>
 # include <fstream>
 # include <string>
 # include <stdexcept>
 # include <cstdlib>
 # include "lib/lib.hpp"
+# include "Form.hpp"
 
 typedef std::string	string;
+
+class Form;
 
 class Bureaucrat
 {
@@ -31,6 +33,7 @@ private:
 	};
 	const string	name;
 	int				grade;
+	void			print_form_error(Form &form, int error);
 public:
 //	canonic form:
 	Bureaucrat();
@@ -41,12 +44,15 @@ public:
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &other);
+	std::ostream&	operator<<(std::ostream& fd);
 
 	const string	getName(void);
 	int				getGrade(void);
+	int				getLowestGrade(void);
 	void			increment(void);
 	void			decrement(void);
 	void			check_grade(void);
+	int				signForm(Form &form);
 	void			GradeTooHighException(void);
 	void			GradeTooLowException(void);
 };

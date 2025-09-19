@@ -13,6 +13,9 @@
 #ifndef FORM_HPP
 # define FORM_HPP
 # include "lib/lib.hpp"
+# include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -35,6 +38,16 @@ public:
 	~Form();
 	Form(const Form &other);
 	Form &operator=(const Form &other);
+
+	enum e_failures
+	{
+		F_CORRECT,
+		F_ALREADY_SIGN,
+		F_BAD_BUREAUCRAT,
+		F_GRADE_LOW,
+	};
+	const string	&getName(void);
+	int				beSigned(Bureaucrat &Bureaucrat);
 };
 
 #endif

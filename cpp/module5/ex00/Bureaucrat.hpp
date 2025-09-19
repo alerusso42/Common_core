@@ -45,6 +45,7 @@ public:
 
 	const string	getName(void);
 	int				getGrade(void);
+	int				getLowestGrade(void);
 	void			increment(void);
 	void			decrement(void);
 	void			check_grade(void);
