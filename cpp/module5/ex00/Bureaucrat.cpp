@@ -77,24 +77,24 @@ void	Bureaucrat::check_grade()
 		this->GradeTooHighException();
 }
 
-const string	Bureaucrat::getName(void)
+const string	Bureaucrat::getName(void) const
 {
 	return (this->name);
 }
 
-int				Bureaucrat::getGrade(void)
+int	Bureaucrat::getGrade(void) const
 {
 	return (this->grade);
 }
 
-int				Bureaucrat::getLowestGrade(void)
+int	Bureaucrat::getLowestGrade(void) const
 {
 	return (this->LOWEST_GRADE);
 }
 
-std::ostream&	Bureaucrat::operator<<(std::ostream& fd)
+std::ostream&	operator<<(std::ostream& fd, const Bureaucrat &b)
 {
-	fd << this->name << ", bureaucrat grade " << this->grade << std::endl;
+	fd << b.getName() << ", bureaucrat grade " << b.getGrade() << std::endl;
 	return (fd);
 }
 

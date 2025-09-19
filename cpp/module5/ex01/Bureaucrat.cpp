@@ -58,9 +58,9 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	return *this;
 }
 
-std::ostream&	Bureaucrat::operator<<(std::ostream& fd)
+std::ostream&	operator<<(std::ostream& fd, const Bureaucrat &b)
 {
-	fd << this->name << ", bureaucrat grade " << this->grade << std::endl;
+	fd << b->name << ", bureaucrat grade " << b->grade << std::endl;
 	return (fd);
 }
 
@@ -76,7 +76,7 @@ void	Bureaucrat::decrement(void)
 	check_grade();
 }
 
-const string	Bureaucrat::getName(void)
+const string	Bureaucrat::getName(void) const
 {
 	return (this->name);
 }

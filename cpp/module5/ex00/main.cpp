@@ -26,5 +26,6 @@ int main()
 	{
 		e.print();
 	}
+	std::cout << b;
 	return (0);
 }

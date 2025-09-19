@@ -44,11 +44,10 @@ public:
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &other);
-	std::ostream&	operator<<(std::ostream& fd);
 
-	const string	getName(void);
-	int				getGrade(void);
-	int				getLowestGrade(void);
+	const string	getName(void) const;
+	int				getGrade(void) const;
+	int				getLowestGrade(void) const;
 	void			increment(void);
 	void			decrement(void);
 	void			check_grade(void);
@@ -56,5 +55,7 @@ public:
 	void			GradeTooHighException(void);
 	void			GradeTooLowException(void);
 };
+
+std::ostream&	operator<<(std::ostream& fd, const Bureaucrat &b);
 
 #endif
