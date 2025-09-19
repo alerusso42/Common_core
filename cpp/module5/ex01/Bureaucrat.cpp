@@ -60,7 +60,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 
 std::ostream&	operator<<(std::ostream& fd, const Bureaucrat &b)
 {
-	fd << b->name << ", bureaucrat grade " << b->grade << std::endl;
+	fd << b.getName() << ", bureaucrat grade " << b.getGrade() << std::endl;
 	return (fd);
 }
 
@@ -81,12 +81,12 @@ const string	Bureaucrat::getName(void) const
 	return (this->name);
 }
 
-int	Bureaucrat::getGrade(void)
+int	Bureaucrat::getGrade(void) const
 {
 	return (this->grade);
 }
 
-int	Bureaucrat::getLowestGrade(void)
+int	Bureaucrat::getLowestGrade(void) const
 {
 	return (this->LOWEST_GRADE);
 }
@@ -110,9 +110,9 @@ int	Bureaucrat::signForm(Form &form)
 	catch(const Error& e)
 	{
 		e.print();
-		return (form.F_GRADE_LOW);
+		return (F_GRADE_LOW);
 	}
-	if (exit_code == form.F_CORRECT)
+	if (exit_code == F_CORRECT)
 		std::cout << this->name << " signed " << form.getName() << std::endl;
 	else
 		this->print_form_error(form, exit_code);
@@ -126,12 +126,12 @@ void	Bureaucrat::print_form_error(Form &form, int error)
 	std::cout << form.getName() << "because ";
 	switch (error)
 	{
-		case (form.F_ALREADY_SIGN) :
+		case (F_ALREADY_SIGN) :
 		{
 			std::cout << "is already sign";
 			break ;
 		}
-		case (form.F_BAD_BUREAUCRAT) :
+		case (F_BAD_BUREAUCRAT) :
 		{
 			std::cout << "bureaucrat is invalid";
 			break ;

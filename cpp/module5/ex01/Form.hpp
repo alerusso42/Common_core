@@ -17,6 +17,14 @@
 
 class Bureaucrat;
 
+enum e_failures
+{
+	F_CORRECT,
+	F_ALREADY_SIGN,
+	F_BAD_BUREAUCRAT,
+	F_GRADE_LOW,
+};
+
 class Form
 {
 private:
@@ -24,13 +32,14 @@ private:
 	{
 		LOWEST_GRADE = 150,
 	};
-	const string	name;
 	bool			sign;
 	const int		grade_exec;
 	const int		grade_sign;
+	const string	name;
 	void			GradeTooHighException(void);
 	void			GradeTooLowException(void);
 	void			check_grade(int grade);
+	string			rand_name(void);
 public:
 //	canonic form:
 	Form();
@@ -39,13 +48,6 @@ public:
 	Form(const Form &other);
 	Form &operator=(const Form &other);
 
-	enum e_failures
-	{
-		F_CORRECT,
-		F_ALREADY_SIGN,
-		F_BAD_BUREAUCRAT,
-		F_GRADE_LOW,
-	};
 	const string	&getName(void);
 	int				beSigned(Bureaucrat &Bureaucrat);
 };
