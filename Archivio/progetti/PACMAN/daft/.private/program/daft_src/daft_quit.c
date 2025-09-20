@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:02:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void daft_quit(void)
 	if (!data)
 		return ;
 	del_filedata();
-	_daft_free_old_mem(data);
+	_daft_free_mem(data, -1);
 	data->files_names = free_matrix(data->files_names);
 	FREE(data->conf.default_flags);
 	data->conf.default_flags = NULL;

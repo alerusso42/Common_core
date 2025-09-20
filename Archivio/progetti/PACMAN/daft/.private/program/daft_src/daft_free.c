@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   daft_swap.c                                        :+:      :+:    :+:   */
+/*   daft_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 08:35:31 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/20 16:40:45 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/20 16:43:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/20 17:09:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
 /*
-//REVIEW -	daft_swap
+//REVIEW -	daft_get
 //
-	In daft.h, there is an enum, called e_daft_db.
-	You can pass those enum to daft_swap, to change database.
-
-	Note: enum names can be changed in SETTINGS.md
+	Free a memory returned by daft, in a call of daft_get.
+	Only calls that does not return NULL count; the count starts by 0.
+	If -1 is given, every allocated memory from start are freed; then, count
+	is reset to 0.
 */
-void	daft_swap(int enum_id)
+void	daft_free(int daft_get_call)
 {
 	t_daft_data	*data;
 
 	data = _daft_get_memory(NULL, false);
 	if (!data)
 		return ;
-	if (enum_id >= data->files_num || enum_id < 0)
-		return ;
-	data->current_file = enum_id;
+	_daft_free_mem(data, daft_get_call);
+	return ;
 }

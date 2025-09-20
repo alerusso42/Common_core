@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/08 15:49:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:01:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ void	*daft_get(const char *search)
 	data = _daft_get_memory(NULL, false);
 	if (!data)
 		return (0);
-	_daft_free_old_mem(data);
 	fd = openfd(data->data_list[data->current_file]->filename, "r");
 	if (!fd.n)
 		return (NULL);
 	mem = get_mem(data, data->data_list[data->current_file], search, fd);
 	closefd(fd);
+	if (mem)
+		_daft_add_mem(data);
 	return (mem);
 }
 

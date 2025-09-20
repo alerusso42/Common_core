@@ -37,12 +37,12 @@
 //		originally developed by Sam Lantinga.
 */
 //REVIEW -	Core SDL3 functionality
-# include <SDL3/SDL.h>
+# include <SDL2/SDL.h>
 //REVIEW -	Official SDL3 extensions
-# include <SDL3/SDL_image.h>
-# include <SDL3/SDL_mixer.h>
-# include <SDL3/SDL_ttf.h>
-# include <SDL3/SDL_net.h>
+# include <SDL2/SDL_image.h>
+# include <SDL2/SDL_mixer.h>
+# include <SDL2/SDL_ttf.h>
+# include <SDL2/SDL_net.h>
 
 /*
 //SECTION - Other Libraries

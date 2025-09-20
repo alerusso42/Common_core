@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:03:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,31 @@ int	_daft_add_node_back(t_daft_node	*list, int offset)
 	return (0);
 }
 
-//REVIEW -	Last ptr given by daft_get() is stored in
-//			data->mem. This ptr is freed on the next call
-//			of daft_*.
-void	_daft_free_old_mem(t_daft_data *data)
+//REVIEW - 	Takes the ptr of a 3D matrix.
+//			Reallocs it, increasing its size.
+//			If old size (*size) is == 0, *size becomes 2;
+//			Else, *size is doubled.
+int	_daft_resize_three_d_matr(char ****old_matr, int *size)
 {
-	if (data->mem.type == NO_MEM)
-		return ;
-	else if (data->mem.type == STRING)
-		FREE(data->mem.ptr);
-	else if (data->mem.type == TWO_D_MATRIX)
-		free_matrix(data->mem.ptr);
-	else if (data->mem.type == THREE_D_MATRIX)
-		free_three_d_matrix(data->mem.ptr);
-	data->mem.ptr = NULL;
-	data->mem.type = NO_MEM;
+	char	***new_matr;
+	int		i;
+
+	if (!old_matr || !*old_matr || !size)
+		return (DAFT_LOG_MALLOC);
+	if (!*size)
+		*size = 2;
+	else
+		*size = *size * 2;
+	new_matr = ft_calloc(*size + 1, sizeof(char **));
+	if (!new_matr)
+		return (FREE(*old_matr), DAFT_LOG_MALLOC);
+	i = 0;
+	while ((*old_matr)[i])
+	{
+		new_matr[i] = (*old_matr)[i];
+		++i;
+	}
+	FREE(*old_matr);
+	*old_matr = new_matr;
+	return (0);
 }

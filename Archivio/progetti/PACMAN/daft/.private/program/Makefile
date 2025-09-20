@@ -58,7 +58,7 @@ DAFT := ../../daft.a
 # ------------------------------------------------
 COMP   := cc
 # Include paths
-CFLAGS += \
+CFLAGS +=  -Wall -Wextra -Werror -g \
   -I$(HOME)/libs/SDL2/SDL_image/include/ \
   -I$(HOME)/libs/SDL2/SDL_mixer/include/ \
   -I$(HOME)/libs/SDL2/SDL/include
@@ -85,7 +85,7 @@ $(PREP): $(PREP_OBJ) $(DAFT_H) | $(O_DIR)
 	$(COMP) $(CFLAGS) $(PREP_OBJ) -o $(PREP) $(LDFLAGS)
 
 $(DAFT): $(DAFT_OBJ) $(DAFT_H) | $(O_DIR)
-	ar rcs $(DAFT) $(DAFT_OBJ)
+	ar rcs $(DAFT) $(PREP_OBJ) $(DAFT_OBJ)
 
 # ------------------------------------------------
 # 9) Ensure the obj/ directory exists

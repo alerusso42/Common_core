@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/18 00:35:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:01:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ struct s_daft_conf
 
 struct s_daft_mem
 {
-	void	*ptr;
-	char	type;
+	void			*ptr;
+	char			type;
+	t_daft_mem		*next;
 };
 
 struct s_daft_data
 {
 	t_daft_conf	conf;
 	t_daft_mem	mem;
+	t_daft_mem	*old_mem;
 	t_fd		log_file;
 	t_daft_list	**data_list;
 	char		**files_names;
@@ -100,7 +102,9 @@ int			_daft_resize_matr(char ***old_matr, int *size);
 int			_daft_resize_three_d_matr(char ****old_matr, int *size);
 char		*_cat_string(char *src, char *catstr, size_t start, int which_free);
 int			_daft_hash(t_daft_list *file, const char *key);
-void		_daft_free_old_mem(t_daft_data *data);
+
+int			_daft_add_mem(t_daft_data *data);
+void		_daft_free_mem(t_daft_data *data, int call_n);
 
 void	*_daft_get_string(t_daft_data *data, t_daft_list *file, char *key);
 void	*_daft_get_vertical_matr(t_daft_data *data, t_daft_list *file);

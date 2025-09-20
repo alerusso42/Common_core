@@ -6,37 +6,81 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:09:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-//REVIEW - 	Takes the ptr of a 3D matrix.
-//			Reallocs it, increasing its size.
-//			If old size (*size) is == 0, *size becomes 2;
-//			Else, *size is doubled.
-int	_daft_resize_three_d_matr(char ****old_matr, int *size)
-{
-	char	***new_matr;
-	int		i;
+static t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n);
+static void			_daft_free_old_mem(t_daft_mem *mem);
 
-	if (!old_matr || !*old_matr || !size)
-		return (DAFT_LOG_MALLOC);
-	if (!*size)
-		*size = 2;
+int		_daft_add_mem(t_daft_data *data)
+{
+	t_daft_mem	*list;
+
+	list = data->old_mem;
+	while (list && list->next)
+		list = list->next;
+	if (list)
+		list->next = ft_calloc(1, sizeof(t_daft_mem));
 	else
-		*size = *size * 2;
-	new_matr = ft_calloc(*size + 1, sizeof(char **));
-	if (!new_matr)
-		return (FREE(*old_matr), DAFT_LOG_MALLOC);
-	i = 0;
-	while ((*old_matr)[i])
+		list = ft_calloc(1, sizeof(t_daft_mem));
+	if (!list)
+		return (_daft_log(DAFT_LOG_MALLOC));
+	list->ptr = data->mem.ptr;
+	list->type = data->mem.type;
+	return (0);
+}
+
+void	_daft_free_mem(t_daft_data *data, int call_n)
+{
+	t_daft_mem	*temp;
+	int			i;
+
+	if (call_n >= 0)
 	{
-		new_matr[i] = (*old_matr)[i];
+		temp = _daft_old_mem_node(data, call_n - 1);
+		if (temp && temp->next)
+			temp->next = temp->next->next;
+		_daft_free_old_mem(_daft_old_mem_node(data, call_n));
+	}
+	i = 0;
+	temp = data->old_mem;
+	while (temp)
+	{
+		temp = temp->next;
+		_daft_free_old_mem(_daft_old_mem_node(data, i));
 		++i;
 	}
-	FREE(*old_matr);
-	*old_matr = new_matr;
-	return (0);
+}
+
+static t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n)
+{
+	t_daft_mem	*mem;
+
+	if (n < 0)
+		return (NULL);
+	mem = data->old_mem;
+	while (mem && mem->next && n--)
+		mem = mem->next;
+	return (mem);
+}
+
+//REVIEW -	Last ptr given by daft_get() is stored in
+//			data->mem. This ptr is freed on the next call
+//			of daft_*.
+static void	_daft_free_old_mem(t_daft_mem *mem)
+{
+	if (!mem || mem->type == NO_MEM)
+		return ;
+	else if (mem->type == STRING)
+		FREE(mem->ptr);
+	else if (mem->type == TWO_D_MATRIX)
+		free_matrix(mem->ptr);
+	else if (mem->type == THREE_D_MATRIX)
+		free_three_d_matrix(mem->ptr);
+	mem->ptr = NULL;
+	mem->type = NO_MEM;
+	FREE(mem);
 }
