@@ -6,13 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/20 17:02:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:35:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
 static void	free_filedata(t_daft_list *filedata);	
+static void	update_filedata(t_daft_data *data);
 
 /*
 //REVIEW -	daft_quit
@@ -29,6 +30,7 @@ void daft_quit(void)
 	_daft_get_memory(NULL, true);
 	if (!data)
 		return ;
+	update_filedata(data);
 	del_filedata();
 	_daft_free_mem(data, -1);
 	data->files_names = free_matrix(data->files_names);
@@ -87,4 +89,19 @@ static void	free_filedata(t_daft_list *filedata)
 	}
 	FREE(filedata->node);
 	FREE(filedata);
+}
+
+static void	update_filedata(t_daft_data *data)
+{
+	int	i;
+
+	if (!data->data_list)
+		return ;
+	i = 0;
+	while (data->data_list[i])
+	{
+		if (data->data_list[i]->edit)
+			_daft_edit_hash_file(data->data_list[i], i);
+		++i;
+	}
 }

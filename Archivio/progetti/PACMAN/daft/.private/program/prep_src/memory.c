@@ -6,35 +6,38 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:12:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:12:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 
-void	error(t_data *data, int err_type)
+void	_daft_prep_error(t_daft_prep *data, int err_type)
 {
-	free_memory(data);
-	exit(err_type);
+	_daft_prep_free_memory(data);
+	if (data->exit)
+		exit(err_type);
 }
 
-void	free_memory(t_data *data)
+void	_daft_prep_free_memory(t_daft_prep *data)
 {
 	FREE(data->hash_table);
 	FREE(data->collision);
-	del_filedata();
+	closefd(data->data_fd);
+	closefd(data->hash_fd);
 }
 
-void	alloc_memory(t_data *data)
+void	_daft_prep_alloc_memory(t_daft_prep *data)
 {
 	int	i;
 
-	data->hash_table = (t_hash *)ft_calloc(data->hash_size, sizeof(t_hash));
+	data->hash_table = (t_daft_hash *)\
+	ft_calloc(data->hash_size, sizeof(t_daft_hash));
 	if (!data->hash_table)
-		error(data, ER_MALLOC);
+		_daft_prep_error(data, ER_MALLOC);
 	data->collision = (int *)ft_calloc(data->hash_size, sizeof(int));
 	if (!data->collision)
-		error(data, ER_MALLOC);
+		_daft_prep_error(data, ER_MALLOC);
 	i = -1;
 	while (++i != data->hash_size)
 		data->hash_table[i].key = -1;

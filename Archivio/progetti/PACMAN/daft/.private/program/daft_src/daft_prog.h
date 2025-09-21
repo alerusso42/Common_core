@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   daft_prog.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/20 17:01:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:10:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#ifndef DAFT_PROG_H
+# define DAFT_PROG_H
 # include "../../../daft.h"
 # include "../Libft/all.h"
 
@@ -48,6 +48,7 @@ struct s_daft_data
 	int			files_num;
 	int			current_file;
 	int			last_error;
+	int			minimal_alloc_size;
 };
 
 struct s_daft_list
@@ -60,7 +61,8 @@ struct s_daft_list
 	char		key_value_sep[2];
 	char		values_sep[2];
 	t_bool		multiple_lines:1;
-	t_bool		split_values:1;		
+	t_bool		split_values:1;
+	t_bool		edit:1;	
 };
 
 struct s_daft_node
@@ -102,6 +104,11 @@ int			_daft_resize_matr(char ***old_matr, int *size);
 int			_daft_resize_three_d_matr(char ****old_matr, int *size);
 char		*_cat_string(char *src, char *catstr, size_t start, int which_free);
 int			_daft_hash(t_daft_list *file, const char *key);
+char		**_daft_split(char const *s, char c, int string_size);
+uint32_t	murmurhash2(const void *key, int len, uint32_t seed);
+char		*_daft_get_hash_filename(char *filename);
+int			_daft_edit_hash_file(t_daft_list *list, int f_num);
+int			_daft_prep_prog(char *fnames[2], char *flags, int f_num, int f_size);
 
 int			_daft_add_mem(t_daft_data *data);
 void		_daft_free_mem(t_daft_data *data, int call_n);

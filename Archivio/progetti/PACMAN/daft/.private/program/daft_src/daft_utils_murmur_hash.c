@@ -6,12 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 07:33:30 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/18 00:39:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:01:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
+/*
 uint32_t	mur_switch(uint32_t h, unsigned char *data, int len, uint32_t m)
 {
 	if (len == 3)
@@ -52,7 +53,7 @@ uint32_t	murmurhash2(const void *key, int len, uint32_t seed)
 		len -= 4;
 	}
 	return (mur_switch(h, data, len, m));
-}
+}*/
 
 //	file->size + 1 is the size of the lists, and the hash limit.
 int	_daft_hash(t_daft_list *file, const char *key)

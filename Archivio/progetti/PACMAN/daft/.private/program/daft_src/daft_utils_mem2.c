@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/20 17:09:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:00:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
 static t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n);
 static void			_daft_free_old_mem(t_daft_mem *mem);
@@ -28,23 +28,20 @@ int		_daft_add_mem(t_daft_data *data)
 		list = ft_calloc(1, sizeof(t_daft_mem));
 	if (!list)
 		return (_daft_log(DAFT_LOG_MALLOC));
+	if (!data->old_mem)
+		data->old_mem = list;
+	list = _daft_old_mem_node(data, INT_MAX);
+	list->next = data->mem.next;
 	list->ptr = data->mem.ptr;
 	list->type = data->mem.type;
 	return (0);
 }
 
-void	_daft_free_mem(t_daft_data *data, int call_n)
+static void	free_all_mem(t_daft_data *data)
 {
-	t_daft_mem	*temp;
 	int			i;
+	t_daft_mem	*temp;
 
-	if (call_n >= 0)
-	{
-		temp = _daft_old_mem_node(data, call_n - 1);
-		if (temp && temp->next)
-			temp->next = temp->next->next;
-		_daft_free_old_mem(_daft_old_mem_node(data, call_n));
-	}
 	i = 0;
 	temp = data->old_mem;
 	while (temp)
@@ -53,6 +50,27 @@ void	_daft_free_mem(t_daft_data *data, int call_n)
 		_daft_free_old_mem(_daft_old_mem_node(data, i));
 		++i;
 	}
+	data->old_mem = NULL;
+}
+
+void	_daft_free_mem(t_daft_data *data, int call_n)
+{
+	t_daft_mem	*temp;
+	t_daft_mem	*to_delete;
+
+	if (call_n < 0)
+		return (free_all_mem(data));
+	to_delete = _daft_old_mem_node(data, call_n);
+	temp = _daft_old_mem_node(data, call_n - 1);
+	if (temp && temp->next)
+		temp->next = temp->next->next;
+	else if (call_n == 0 && data->old_mem)
+		temp = data->old_mem->next;
+	_daft_free_old_mem(to_delete);
+	if (call_n == 0)
+		data->old_mem = temp;
+	return ;
+
 }
 
 static t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n)

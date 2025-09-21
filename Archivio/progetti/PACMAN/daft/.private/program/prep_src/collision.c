@@ -6,15 +6,15 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:43:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/12 23:16:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:11:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 //# define SDL_RWops SDL_RWops
 
-static void	collision_adder(t_data *data, int hash_pos);
-static void	collision_reset(t_data *data, int i);
+static void	collision_adder(t_daft_prep *data, int hash_pos);
+static void	collision_reset(t_daft_prep *data, int i);
 
 /**
  * @brief   Add a hash_file index in the collision array
@@ -43,7 +43,7 @@ static void	collision_reset(t_data *data, int i);
  *   int sum = add_simple(x, y);
  *    sum is now 5 */
 
-void	collision_update(t_data *data, int old_key, int lowest_key, int *i)
+void	_daft_coll_upd(t_daft_prep *data, int old_key, int lowest_key, int *i)
 {
 	if (old_key == lowest_key)
 		collision_adder(data, lowest_key);
@@ -54,7 +54,7 @@ void	collision_update(t_data *data, int old_key, int lowest_key, int *i)
 	}
 }
 
-static void	collision_adder(t_data *data, int hash_pos)
+static void	collision_adder(t_daft_prep *data, int hash_pos)
 {
 	int	i;
 
@@ -65,7 +65,7 @@ static void	collision_adder(t_data *data, int hash_pos)
     ft_putstr_fd(" ", data->hash_fd.p);
 }
 
-static void	collision_reset(t_data *data, int struct_i)
+static void	collision_reset(t_daft_prep *data, int struct_i)
 {
 	int		i;
 	char	*temp;
@@ -79,13 +79,13 @@ static void	collision_reset(t_data *data, int struct_i)
 	ft_putstr_fd("\n", data->hash_fd.p);
 	temp = ft_itoa(struct_i);
 	if (!temp)
-		error(data, ER_MALLOC);
+		_daft_prep_error(data, ER_MALLOC);
 	ft_putstr_fd(temp, data->hash_fd.p);
 	ft_putstr_fd(" :\t", data->hash_fd.p);
 	free(temp);
 }
 
-int	collision_check(t_data *data, int hash_pos)
+int	_daft_coll_check(t_daft_prep *data, int hash_pos)
 {
 	int	i;
 

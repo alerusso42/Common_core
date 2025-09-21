@@ -6,17 +6,26 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:11:28 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/18 00:25:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:29:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
 /*
 	1)	|nn=,		|	Colors			|	"Red,Yellow,Green"
 */
 void	*_daft_get_string(t_daft_data *data, t_daft_list *file, char *key)
 {
-	data->mem.ptr = key;
-	return (key + sub_strlen(key, file->field_sep, EXCLUDE));
+	char	*mem;
+	int		size;
+
+	size = ft_strlen(key) + data->minimal_alloc_size;
+	mem = ft_calloc(size, sizeof(char));
+	if (!mem)
+		return (FREE(key), NULL);
+	ft_strlcpy(mem, key, size - data->minimal_alloc_size + 1);
+	FREE(key);
+	data->mem.ptr = mem;
+	return (mem + sub_strlen(mem, file->field_sep, EXCLUDE));
 }

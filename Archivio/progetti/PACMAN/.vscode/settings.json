@@ -47,6 +47,7 @@
 	"format": "c",
 	"sdl_mixer.h": "c",
 	"maps.h": "c",
-	"sdl.h": "c"
+	"sdl.h": "c",
+	"daft_prog.h": "c"
 }
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:50:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/17 14:31:12 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/21 11:11:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 
 uint32_t	mur_switch(uint32_t h, unsigned char *data, int len, uint32_t m)
 {
@@ -53,7 +53,7 @@ uint32_t	murmurhash2(const void *key, int len, uint32_t seed)
 	return (mur_switch(h, data, len, m));
 }
 
-int	ft_hash(t_data *data, char *key)
+int	_daft_ft_hash(t_daft_prep *data, char *key)
 {
 	int	len;
 

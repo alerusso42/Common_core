@@ -6,22 +6,22 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:56:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:12:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 
-static char	*itoa_malloc_guard(t_data *data, int struct_i);
+static char	*itoa_malloc_guard(t_daft_prep *data, int struct_i);
 
-void	print_filedata(t_data *data)
+void	_daft_print_filedata(t_daft_prep *data)
 {
 	char	*file_size;
 
 	switch_filedata(data->hash_fd);
 	file_size = ft_itoa(data->hash_size);
 	if (!file_size)
-		error(data, ER_MALLOC);
+		_daft_prep_error(data, ER_MALLOC);
 	ft_putstr_fd(file_size, data->hash_fd.p);
 	ft_putstr_fd(" ", data->hash_fd.p);
 	ft_putstr_fd(data->flags, data->hash_fd.p);
@@ -29,7 +29,7 @@ void	print_filedata(t_data *data)
 	switch_filedata(data->data_fd);
 }
 
-void	print_hash_table(t_data *data)
+void	_daft_print_hash_table(t_daft_prep *data)
 {
 	char	*pos_string;
 	int		struct_i;
@@ -41,25 +41,25 @@ void	print_hash_table(t_data *data)
 	old_key = -1;
 	lowest_key = -1;
 	i = 1;
-	find_lowest_key(data, &lowest_key, &struct_i);
+	_daft_find_lowest_key(data, &lowest_key, &struct_i);
 	while (lowest_key != -1)
 	{
 		i = lowest_key;
-		collision_update(data, old_key, lowest_key, &i);
+		_daft_coll_upd(data, old_key, lowest_key, &i);
 		old_key = lowest_key;
 		pos_string = itoa_malloc_guard(data, struct_i);
 		ft_putstr_fd(pos_string, data->hash_fd.p);
 		FREE(pos_string);
-		find_lowest_key(data, &lowest_key, &struct_i);
+		_daft_find_lowest_key(data, &lowest_key, &struct_i);
 	}
 }
 
-static char	*itoa_malloc_guard(t_data *data, int struct_i)
+static char	*itoa_malloc_guard(t_daft_prep *data, int struct_i)
 {
 	char	*str;
 
 	str = ft_itoa(data->hash_table[struct_i].pos);
 	if (!str)
-		error(data, ER_MALLOC);
+		_daft_prep_error(data, ER_MALLOC);
 	return (str);
 }

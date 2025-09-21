@@ -6,13 +6,12 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:23:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
-static char	*get_hash_filename(char *filename);
 static int	preparations(t_daft_list *file);
 static int	alloc_list(t_daft_list *file, int alloc_size);
 
@@ -24,7 +23,7 @@ int	_daft_get_data(t_daft_list *file, char *filename)
 {
 	char	*hash_filename;
 
-	hash_filename = get_hash_filename(filename);
+	hash_filename = _daft_get_hash_filename(filename);
 	if (!hash_filename)
 		return (_daft_log(DAFT_LOG_MALLOC));
 	file->filedata = openfd(hash_filename, "r");
@@ -40,18 +39,18 @@ int	_daft_get_data(t_daft_list *file, char *filename)
 }
 
 //	search in the filename data/, then appends .private/hash_ in the tail.
-static char	*get_hash_filename(char *filename)
+char	*_daft_get_hash_filename(char *filename)
 {
 	int		i;
 
 	i = 0;
-	while (filename[i] && ft_strncmp(filename + i, "/daft/data/", 11))
+	while (filename[i] && ft_strncmp(filename + i, "daft/data/", 10))
 	{
 		++i;
 	}
 	if (!filename[i])
 		return (NULL);
-	i += 6;
+	i += 5;
 	return (_cat_string(filename, ".private/hash_", i, 0));
 }
 

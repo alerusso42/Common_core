@@ -6,43 +6,40 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:49:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/16 17:58:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:12:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 
-void	make_float(t_data *data, char *str, double *result);
-int		num_size(int n);
-int		file_size(t_data *data);
-int		count_char(char *str, char c);
+static int		file_size(t_daft_prep *data);
 
-void	parse_args(t_data *data, char *argv[])
+void	_daft_prep_parse_args(t_daft_prep *data, char *argv[])
 {
 	long long int	atoi_check;
 	double			hash_size_modifier;
 
 	data->data_fd = openfd(argv[1], "r");
 	if (!data->data_fd.n)
-		error(data, ER_OPEN);
+		_daft_prep_error(data, ER_OPEN);
 	data->hash_fd = openfd(argv[2], "w");
 	if (!data->data_fd.n)
-		error(data, ER_OPEN);
+		_daft_prep_error(data, ER_OPEN);
 	atoi_check = ft_atoi(argv[3]);
 	if (atoi_check > INT_MAX || atoi_check < INT_MIN)
-		error(data, ER_ATOI);
+		_daft_prep_error(data, ER_ATOI);
 	data->file_num = (int)atoi_check;
 	ft_strlcpy(data->separator, argv[4], 2);
 	data->flags = argv[5];
 	if (!data->separator[0] || !data->flags[0])
-		error(data, ER_ATOI);
-	make_float(data, argv[6], &hash_size_modifier);
+		_daft_prep_error(data, ER_ATOI);
+	_daft_make_float(data, argv[6], &hash_size_modifier);
 	data->hash_size = file_size(data) * hash_size_modifier;
 	if (!data->hash_size)
-		error(data, ER_ATOI);
+		_daft_prep_error(data, ER_ATOI);
 }
 
-int		file_size(t_data *data)
+static int	file_size(t_daft_prep *data)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int		bytes_read;
@@ -53,9 +50,33 @@ int		file_size(t_data *data)
 	while (bytes_read > 0)
 	{
 		buffer[bytes_read] = 0;
-		line_num += count_char(buffer, '\n');
+		line_num += _daft_count_char(buffer, '\n');
 		bytes_read = readfd(data->data_fd, buffer, BUFFER_SIZE);
 	}
 	reset_fd(data->data_fd);
 	return (line_num + 1);
+}
+
+//	this function is called as a bridge of daft_src and prep_src
+int	_daft_prep_prog(char *filenames[2], char *flags, int f_num, int f_size)
+{
+	t_daft_prep	data;
+
+	data = (t_daft_prep){0};
+	data.file_size = f_size;
+	data.file_num = f_num;
+	data.flags = flags;
+	data.data_fd = openfd(filenames[0], "r");
+	if (!data.data_fd.n)
+		_daft_prep_error(&data, ER_OPEN);
+	data.hash_fd = openfd(filenames[1], "w");
+	if (!data.data_fd.n)
+		_daft_prep_error(&data, ER_OPEN);
+	_daft_prep_alloc_memory(&data);
+	switch_filedata(data.data_fd);
+	_daft_fill_hash_table(&data);
+	_daft_print_filedata(&data);
+	_daft_print_hash_table(&data);
+	_daft_prep_free_memory(&data);
+	return (0);
 }

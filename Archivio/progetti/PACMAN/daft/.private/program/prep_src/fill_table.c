@@ -6,15 +6,15 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 22:17:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:11:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 
-static void	fill_one(t_data *data, char *line, int line_num, int cursor);
+static void	fill_one(t_daft_prep *data, char *line, int line_num, int cursor);
 
-void	fill_hash_table(t_data *data)
+void	_daft_fill_hash_table(t_daft_prep *data)
 {
 	char	*line;
 	int		bytes_read;
@@ -42,9 +42,9 @@ void	fill_hash_table(t_data *data)
 	}
 }
 
-static void	fill_one(t_data *data, char *line, int line_num, int cursor)
+static void	fill_one(t_daft_prep *data, char *line, int line_num, int cursor)
 {
-	data->hash_table[line_num].key = ft_hash(data, line);
+	data->hash_table[line_num].key = _daft_ft_hash(data, line);
 	data->hash_table[line_num].pos = cursor;
 	data->alloc_size++;
 }

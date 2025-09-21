@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/20 16:03:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:39:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
 //REVIEW - 	if update == true, the static ptr is set to new_data.
 //			always returns static ptr.
@@ -27,7 +27,7 @@ t_daft_data	*_daft_get_memory(t_daft_data *new_data, bool update)
 //			Reallocs it, increasing its size.
 //			If old size (*size) is == 0, *size becomes 2;
 //			Else, *size is doubled.
-int	_daft_resize_matr(char ***old_matr, int *size)
+int			_daft_resize_matr(char ***old_matr, int *size)
 {
 	char	**new_matr;
 	int		i;

@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:58:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/06/29 18:06:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:11:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prep.h"
 
-void	error(t_data *data, int err_type);
+void	_daft_prep_error(t_daft_prep *data, int err_type);
 
 /*
 $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}"
@@ -21,18 +21,19 @@ $INIT_HASH "$file" "$hash_file" $i "$delim" "${entries[$file]:0:999}"
 */
 int	main(int argc, char *argv[])
 {
-	t_data	data;
+	t_daft_prep	data;
 
 	if (argc != 7)
 		return (1);
 	//chdir("../../");
-	data = (t_data){0};
-	parse_args(&data, argv);
-	alloc_memory(&data);
+	data = (t_daft_prep){0};
+	data.exit = true;
+	_daft_prep_parse_args(&data, argv);
+	_daft_prep_alloc_memory(&data);
 	switch_filedata(data.data_fd);
-	fill_hash_table(&data);
-	print_filedata(&data);
-	print_hash_table(&data);
-	free_memory(&data);
+	_daft_fill_hash_table(&data);
+	_daft_print_filedata(&data);
+	_daft_print_hash_table(&data);
+	_daft_prep_free_memory(&data);
 	return (0);
 }

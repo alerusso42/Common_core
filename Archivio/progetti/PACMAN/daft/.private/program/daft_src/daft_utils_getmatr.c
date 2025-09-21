@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:11:28 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:14:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "daft_prog.h"
 
-static void	*split_values(t_daft_list *file, char *line);
+static void	*split_values(t_daft_list *file, char *line, int min_size);
 
 /*
 	2)	|yn=,		|	APPLE			|	{"Red,Yellow,Green", "2"}
@@ -53,7 +53,7 @@ void	*_daft_get_horiz_matr(t_daft_data *data, t_daft_list *file, char *key)
 {
 	char	**matr;
 
-	matr = split_values(file, key);
+	matr = split_values(file, key, data->minimal_alloc_size);
 	FREE(key);
 	data->mem.ptr = matr;
 	return (matr);
@@ -61,14 +61,14 @@ void	*_daft_get_horiz_matr(t_daft_data *data, t_daft_list *file, char *key)
 
 //	Trims the key_value_sep, FOURTH PARAM: ]nn=;
 //	Split using key_values_sep, FIFTH PARAM: ]nn=;
-static void	*split_values(t_daft_list *file, char *line)
+static void	*split_values(t_daft_list *file, char *line, int min_size)
 {
 	int		i;
 	char	**matr;
 
 	i = sub_strlen(line, file->key_value_sep, EXCLUDE);
 	i += sub_strlen(line + i, file->key_value_sep, INCLUDE);
-	matr = ft_split(line + i, *file->values_sep);
+	matr = _daft_split(line + i, *file->values_sep, min_size);
 	return (matr);
 }
 
@@ -93,7 +93,7 @@ void	*_daft_get_three_d_matr(t_daft_data *data, t_daft_list *file)
 		if (size == i)
 			if (_daft_resize_three_d_matr(&matr, &size) != 0)
 				return (FREE(line), NULL);
-		matr[i] = split_values(file, line);
+		matr[i] = split_values(file, line, data->minimal_alloc_size);
 		FREE(line);
 		if (!matr[i++])
 			return (free_three_d_matrix(matr));
