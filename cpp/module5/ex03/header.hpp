@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   header.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,49 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#ifndef HEADER_HPP
+# define HEADER_HPP
+/* Auto-generated header aggregator */
+# include "lib/lib.hpp"
+#include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "Intern.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-/*
-	SIGN	25;	EXEC	5	
-*/
-int main() 
-{
-	Bureaucrat	b("Mega Rayquaza", 25);
-	AForm	*f1 = new PresidentialPardonForm("Gabibbo");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
-
-/*
-	SIGN	72;	EXEC	45	
-*/
-int TEST2main() 
-{
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new RobotomyRequestForm("Ezio Greggio");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
-
-/*
-	SIGN	145;	EXEC	137	
-*/
-int TEST3main() 
-{
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new ShrubberyCreationForm("Gerry Scotti");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
+#endif

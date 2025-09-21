@@ -12,47 +12,25 @@
 
 # include "header.hpp"
 
-/*
-	SIGN	25;	EXEC	5	
-*/
-int main() 
+int main2() 
 {
+	Intern someRandomIntern;
+	AForm *rrf;
+
+	std::srand(random_gen());
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	Bureaucrat	b("Mega Rayquaza", 25);
-	AForm	*f1 = new PresidentialPardonForm("Gabibbo");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
+	b.signForm(*rrf);
+	rrf->execute(b);
+	delete rrf;
+	return (0);
 }
 
-/*
-	SIGN	72;	EXEC	45	
-*/
-int TEST2main() 
+int	main()
 {
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new RobotomyRequestForm("Ezio Greggio");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
-
-/*
-	SIGN	145;	EXEC	137	
-*/
-int TEST3main() 
-{
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new ShrubberyCreationForm("Gerry Scotti");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
+	Intern someRandomIntern;
+	AForm* rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	if (!rrf) { std::cerr << "Form not created\n"; return 1; }
+	delete rrf;
+	return (0);
 }

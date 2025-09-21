@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,49 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
+# include "lib/lib.hpp"
+# include "AForm.hpp"
 
-/*
-	SIGN	25;	EXEC	5	
-*/
-int main() 
+class RobotomyRequestForm : public AForm
 {
-	Bureaucrat	b("Mega Rayquaza", 25);
-	AForm	*f1 = new PresidentialPardonForm("Gabibbo");
+private:
+	string	target;
+public:
+//	canonic form:
+	RobotomyRequestForm(const string &s);
+	~RobotomyRequestForm();
+	RobotomyRequestForm(const RobotomyRequestForm &other);
+	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
+	void	execute(const Bureaucrat &executor) const;
+};
 
-/*
-	SIGN	72;	EXEC	45	
-*/
-int TEST2main() 
-{
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new RobotomyRequestForm("Ezio Greggio");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
-
-/*
-	SIGN	145;	EXEC	137	
-*/
-int TEST3main() 
-{
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new ShrubberyCreationForm("Gerry Scotti");
-
-	std::srand(random_gen());
-	b.signForm(*f1);
-	f1->execute(b);
-	delete f1;
-	return 0;
-}
+#endif

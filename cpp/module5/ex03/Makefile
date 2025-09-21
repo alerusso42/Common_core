@@ -2,6 +2,7 @@ NAME =	 		program
 SRC	=	 		main.cpp \
 				Bureaucrat.cpp \
 				AForm.cpp \
+				Intern.cpp \
 				ShrubberyCreationForm.cpp \
 				RobotomyRequestForm.cpp \
 				PresidentialPardonForm.cpp
@@ -23,6 +24,7 @@ LIB	= 		$(addprefix lib/, $(LIB_SRC))
 HEADER = 		header.hpp \
 			Bureaucrat.hpp \
 			AForm.hpp \
+			Intern.hpp \
 			ShrubberyCreationForm.hpp \
 			RobotomyRequestForm.hpp \
 			PresidentialPardonForm.hpp
@@ -40,7 +42,7 @@ clean:
 	rm -rf $(NAME)
 
 fclean: clean
-	rm -f *_shrubbery
+
 re: fclean all
 
 run: 

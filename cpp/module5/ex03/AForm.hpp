@@ -15,8 +15,8 @@
 # include "lib/lib.hpp"
 # include "Bureaucrat.hpp"
 
-# define FORM_NAMES "presidential request", "robotomy request", \
-					"shrubbery request", NULL 
+# define FORM_NAMES "presidential pardon", "robotomy request", \
+					"shrubbery creation", ""
 
 class Bureaucrat;
 
