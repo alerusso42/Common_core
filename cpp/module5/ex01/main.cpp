@@ -12,7 +12,8 @@
 
 # include "header.hpp"
 
-int main()
+//SECTION -	decrementing bureaucrat
+int TEST1main()
 {
 	Bureaucrat	b1(150);
 	Bureaucrat	b2(1);
@@ -28,6 +29,49 @@ int main()
 	}
 	Form f1(90, 30);
 	b2.signForm(f1);
+	b1.signForm(f1);
+	return (0);
+}
+
+//SECTION -	bad form
+int TEST2main()
+{
+	try
+	{
+		Form f1(0, 12);
+	}
+	catch(const Error& e)
+	{
+		e.print();
+	}
+	return (0);
+}
+
+//SECTION -	form too strong
+int TEST3main()
+{
+	Bureaucrat	b(124);
+	Form 		f1(42, 42);
+
+	try
+	{
+		f1.beSigned(b);
+	}
+	catch(const Error& e)
+	{
+		e.print();
+	}
+	return (0);
+}
+
+//SECTION -	bureaucrat not strong enough
+int main()
+{
+	Bureaucrat	b(124);
+	Form 		f1(42, 42);
+
+	Bureaucrat	b1(41, "GOKU SUPER SAIYAN 104");
+	b.signForm(f1);
 	b1.signForm(f1);
 	return (0);
 }

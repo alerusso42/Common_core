@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp											:+:      :+:    :+:   */
+/*   AForm.cpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form() : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
+AForm::AForm() : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
 name(rand_name())
 {
 	this->sign = false;
 }
 
-Form::Form(int exec, int sign) : grade_exec(exec), grade_sign(sign), \
+AForm::AForm(int exec, int sign) : grade_exec(exec), grade_sign(sign), \
 name(rand_name())
 {
 	this->sign = false;
@@ -37,23 +37,23 @@ name(rand_name())
 	}
 }
 
-Form::~Form()
+AForm::~AForm()
 {}
 
-Form::Form(const Form &other) : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
+AForm::AForm(const AForm &other) : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
 name(rand_name())
 {
 	this->sign = other.sign;
 	(void)other;
 }
 
-Form &Form::operator=(const Form &other)
+AForm &AForm::operator=(const AForm &other)
 {
 	this->sign = other.sign;
 	return *this;
 }
 
-string	Form::rand_name()
+string	AForm::rand_name()
 {
 	string	name;
 	string	temp;
@@ -72,7 +72,7 @@ string	Form::rand_name()
 	return (name);
 }
 
-void	Form::check_grade(int grade)
+void	AForm::check_grade(int grade)
 {
 	if (grade > LOWEST_GRADE)
 		this->GradeTooLowException();
@@ -80,22 +80,32 @@ void	Form::check_grade(int grade)
 		this->GradeTooHighException();
 }
 
-void	Form::GradeTooHighException(void)
+void	AForm::GradeTooHighException(void) const
 {
 	throw (Error(EX_GRADE_HIGH));
 }
 
-void	Form::GradeTooLowException(void)
+void	AForm::GradeTooLowException(void) const
 {
 	throw (Error(EX_GRADE_LOW));
 }
 
-const string	&Form::getName(void)
+const string	&AForm::getName(void) const
 {
 	return (this->name);
 }
 
-int	Form::beSigned(Bureaucrat &Bureaucrat)
+int	AForm::getGradeExec(void) const
+{
+	return (this->grade_exec);
+}
+
+int	AForm::getGradeSign(void) const
+{
+	return (this->grade_sign);
+}
+
+int	AForm::beSigned(Bureaucrat &Bureaucrat)
 {
 	if (this->sign)
 		return (F_ALREADY_SIGN);
@@ -105,4 +115,12 @@ int	Form::beSigned(Bureaucrat &Bureaucrat)
 		this->GradeTooLowException();
 	this->sign = true;
 	return (0);
+}
+
+void	AForm::beExec(const Bureaucrat &Bureaucrat) const
+{
+	if (Bureaucrat.getGrade() > this->grade_exec)
+		this->GradeTooLowException();
+	if (this->sign == false)
+		throw Error(EX_NOT_SIGN);
 }

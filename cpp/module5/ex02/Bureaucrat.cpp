@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : name("giorgio")
 {
@@ -99,7 +99,7 @@ void	Bureaucrat::check_grade()
 		this->GradeTooHighException();
 }
 
-int	Bureaucrat::signForm(Form &form)
+int	Bureaucrat::signForm(AForm &form)
 {
 	int	exit_code = 0;
 
@@ -120,7 +120,7 @@ int	Bureaucrat::signForm(Form &form)
 	
 }
 
-void	Bureaucrat::print_form_error(Form &form, int error)
+void	Bureaucrat::print_form_error(AForm &form, int error)
 {
 	std::cout << this->name << " couldn’t sign ";
 	std::cout << form.getName() << " because ";
