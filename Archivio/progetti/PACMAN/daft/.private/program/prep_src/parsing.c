@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:49:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 11:12:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 14:58:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	_daft_prep_prog(char *filenames[2], char *flags, int f_num, int f_size)
 	t_daft_prep	data;
 
 	data = (t_daft_prep){0};
-	data.file_size = f_size;
+	data.hash_size = f_size;
 	data.file_num = f_num;
 	data.flags = flags;
+	*data.separator = *flags;
 	data.data_fd = openfd(filenames[0], "r");
 	if (!data.data_fd.n)
 		_daft_prep_error(&data, ER_OPEN);

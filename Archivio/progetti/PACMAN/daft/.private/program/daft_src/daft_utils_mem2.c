@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 13:00:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 16:14:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,25 @@ int		_daft_add_mem(t_daft_data *data)
 	if (!data->old_mem)
 		data->old_mem = list;
 	list = _daft_old_mem_node(data, INT_MAX);
-	list->next = data->mem.next;
-	list->ptr = data->mem.ptr;
-	list->type = data->mem.type;
+	*list = data->mem;
+	data->mem_size++;
 	return (0);
 }
 
 static void	free_all_mem(t_daft_data *data)
 {
-	int			i;
 	t_daft_mem	*temp;
+	t_daft_mem	*next;
 
-	i = 0;
 	temp = data->old_mem;
 	while (temp)
 	{
-		temp = temp->next;
-		_daft_free_old_mem(_daft_old_mem_node(data, i));
-		++i;
+		next = temp->next;
+		_daft_free_old_mem(temp);
+		temp = next;
 	}
 	data->old_mem = NULL;
+	data->mem_size = -1;
 }
 
 void	_daft_free_mem(t_daft_data *data, int call_n)
@@ -69,11 +68,12 @@ void	_daft_free_mem(t_daft_data *data, int call_n)
 	_daft_free_old_mem(to_delete);
 	if (call_n == 0)
 		data->old_mem = temp;
+	data->mem_size--;
 	return ;
 
 }
 
-static t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n)
+t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n)
 {
 	t_daft_mem	*mem;
 
@@ -98,7 +98,6 @@ static void	_daft_free_old_mem(t_daft_mem *mem)
 		free_matrix(mem->ptr);
 	else if (mem->type == THREE_D_MATRIX)
 		free_three_d_matrix(mem->ptr);
-	mem->ptr = NULL;
-	mem->type = NO_MEM;
+	FREE(mem->key);
 	FREE(mem);
 }

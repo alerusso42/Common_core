@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:03:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 13:03:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:53:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,11 @@ int	main()
 	char	***m3;
 
 	(void)m1, (void)m2, (void)m3;
-	daft_init();
+	if (daft_init())
+		return (1);
 	daft_swap(POKEDEX);
-	m1 = daft_get("[BULBASAUR");
-	m2 = daft_get("[CALYREX");
-	daft_free(3);
+	m1 = daft_get("[IVYSAUR");
 	test_print(m1);
-	m3 = daft_get("CALYREX");
-	(void)m2, (void)m3;
 	daft_quit();
 	return (0);
 }

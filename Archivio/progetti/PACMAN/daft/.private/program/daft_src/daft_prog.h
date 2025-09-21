@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 11:10:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:00:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../Libft/all.h"
 
 # define SEED 42
+# define DAFT_REPLACE DAFT_PWD"/replace"
 
 typedef struct s_daft_data	t_daft_data;
 typedef struct s_daft_conf	t_daft_conf;
@@ -32,9 +33,13 @@ struct s_daft_conf
 
 struct s_daft_mem
 {
-	void			*ptr;
-	char			type;
 	t_daft_mem		*next;
+	void			*ptr;
+	char			*key;
+	int				file;
+	int				hash;
+	char			type;
+	t_bool			add:1;
 };
 
 struct s_daft_data
@@ -45,8 +50,10 @@ struct s_daft_data
 	t_fd		log_file;
 	t_daft_list	**data_list;
 	char		**files_names;
+	char		*error_message;
 	int			files_num;
 	int			current_file;
+	int			mem_size;
 	int			last_error;
 	int			minimal_alloc_size;
 };
@@ -67,8 +74,8 @@ struct s_daft_list
 
 struct s_daft_node
 {
-	int			offset;
 	t_daft_node	*next;
+	int			offset;
 };
 
 enum e_daft_logs
@@ -112,6 +119,7 @@ int			_daft_prep_prog(char *fnames[2], char *flags, int f_num, int f_size);
 
 int			_daft_add_mem(t_daft_data *data);
 void		_daft_free_mem(t_daft_data *data, int call_n);
+t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n);
 
 void	*_daft_get_string(t_daft_data *data, t_daft_list *file, char *key);
 void	*_daft_get_vertical_matr(t_daft_data *data, t_daft_list *file);

@@ -6,12 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 09:23:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 10:00:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:55:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
-
 
 /*
 struct s_daft_list
@@ -33,6 +32,7 @@ int	_daft_edit_hash_file(t_daft_list *list, int f_num)
 {
 	char	*fnames[2];
 	char	flags[5];
+	int		exit_code;
 
 	fnames[0] = list->filename;
 	fnames[1] = _daft_get_hash_filename(list->filename);
@@ -43,5 +43,7 @@ int	_daft_edit_hash_file(t_daft_list *list, int f_num)
 	flags[2] = (list->split_values) ? 'y': 'n';
 	flags[3] = *list->key_value_sep;
 	flags[4] = *list->values_sep;
-	return (_daft_prep_prog(fnames, flags, f_num, list->size));
+	exit_code = _daft_prep_prog(fnames, flags, f_num, list->size);
+	FREE(fnames[1]);
+	return ((exit_code));
 }

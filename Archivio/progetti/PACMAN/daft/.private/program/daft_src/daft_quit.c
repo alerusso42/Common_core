@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 10:35:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 16:52:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	free_filedata(t_daft_list *filedata);	
 static void	update_filedata(t_daft_data *data);
+static void	update_hashdata(t_daft_data *data);
 
 /*
 //REVIEW -	daft_quit
@@ -31,11 +32,14 @@ void daft_quit(void)
 	if (!data)
 		return ;
 	update_filedata(data);
-	del_filedata();
+	update_hashdata(data);
 	_daft_free_mem(data, -1);
+	del_filedata();
 	data->files_names = free_matrix(data->files_names);
 	FREE(data->conf.default_flags);
 	data->conf.default_flags = NULL;
+	FREE(data->error_message);
+	data->error_message = NULL;
 	i = 0;
 	if (!data->data_list)
 		return (FREE(data));
@@ -91,7 +95,7 @@ static void	free_filedata(t_daft_list *filedata)
 	FREE(filedata);
 }
 
-static void	update_filedata(t_daft_data *data)
+static void	update_hashdata(t_daft_data *data)
 {
 	int	i;
 
@@ -103,5 +107,39 @@ static void	update_filedata(t_daft_data *data)
 		if (data->data_list[i]->edit)
 			_daft_edit_hash_file(data->data_list[i], i);
 		++i;
+	}
+}
+
+static void	update_filedata(t_daft_data *data)
+{
+	int			i;
+	t_daft_mem	*mem;
+
+	if (!data->data_list)
+		return ;
+	i = data->mem_size;
+	mem = _daft_old_mem_node(data, i--);
+	while (mem)
+	{
+		if (data->data_list[i]->edit)
+			_daft_edit_hash_file(data->data_list[i], i);
+		mem = _daft_old_mem_node(data, i--);
+	}
+}
+
+static void	check_mem(t_daft_data *data, char *key)
+{
+	int			i;
+	t_daft_mem	*mem;
+
+	if (!data->data_list)
+		return ;
+	i = data->mem_size;
+	mem = _daft_old_mem_node(data, i--);
+	while (mem)
+	{
+		if (data->data_list[i]->edit)
+			_daft_edit_hash_file(data->data_list[i], i);
+		mem = _daft_old_mem_node(data, i--);
 	}
 }

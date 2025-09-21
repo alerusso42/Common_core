@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:11:28 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/21 11:14:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/21 16:07:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	*_daft_get_horiz_matr(t_daft_data *data, t_daft_list *file, char *key)
 	char	**matr;
 
 	matr = split_values(file, key, data->minimal_alloc_size);
-	FREE(key);
 	data->mem.ptr = matr;
 	return (matr);
 }
