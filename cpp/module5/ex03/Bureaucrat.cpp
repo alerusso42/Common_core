@@ -117,7 +117,12 @@ int	Bureaucrat::signForm(AForm &form)
 	else
 		this->print_form_error(form, exit_code);
 	return (exit_code);
-	
+}
+
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	if (!form.execute(*this))
+		std::cout << this->name << " executed " << form.getName() << std::endl;
 }
 
 void	Bureaucrat::print_form_error(AForm &form, int error)

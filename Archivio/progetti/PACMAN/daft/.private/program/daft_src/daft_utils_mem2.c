@@ -6,13 +6,12 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 16:14:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:35:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
 
-static t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n);
 static void			_daft_free_old_mem(t_daft_mem *mem);
 
 int		_daft_add_mem(t_daft_data *data)
@@ -32,6 +31,7 @@ int		_daft_add_mem(t_daft_data *data)
 		data->old_mem = list;
 	list = _daft_old_mem_node(data, INT_MAX);
 	*list = data->mem;
+	data->data_list[list->file]->edit = true;
 	data->mem_size++;
 	return (0);
 }

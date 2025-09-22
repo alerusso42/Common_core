@@ -28,9 +28,16 @@ int main2()
 
 int	main()
 {
-	Intern someRandomIntern;
-	AForm* rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-	if (!rrf) { std::cerr << "Form not created\n"; return 1; }
+	Intern 		someRandomIntern;
+	Bureaucrat	er_gabibbo(120, "ER GABIBBO");
+	AForm* 		rrf;
+
+	std::srand(random_gen());
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	if (!rrf)
+		return (std::cerr << "\033[31mForm does not exist.\033[0m" << std::endl, 1);
+	er_gabibbo.signForm(*rrf);
+	er_gabibbo.executeForm(*rrf);
 	delete rrf;
 	return (0);
 }

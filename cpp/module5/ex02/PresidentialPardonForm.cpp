@@ -32,7 +32,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
+int	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	try
 	{
@@ -43,8 +43,9 @@ void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 		e.print();
 		std::cout << executor.getName() << " cannot exec " << this->getName();
 		std::cout << std::endl;
-		return ;
+		return (1);
 	}
 	std::cout << this->target << " has been pardoned by Zaphod Beeblebrox";
 	std::cout << std::endl;
+	return (0);
 }

@@ -17,8 +17,8 @@ HEADER = includes/*.h
 OBJ := $(patsubst %.c, $(O_DIR)/%.o, $(SRC))
 
 NAME = pacman
-LIB = daft/daft.a
-#LIB = daft/.private/program/daft_src/*.c daft/.private/program/Libft/*.c
+#LIB = daft/daft.a
+LIB = daft/.private/program/daft_src/*.c daft/.private/program/prep_src/*.c daft/.private/program/Libft/*.c
 
 COMP = cc -Wall -Wextra -Werror -g
 

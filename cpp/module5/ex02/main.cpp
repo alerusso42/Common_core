@@ -17,12 +17,13 @@
 */
 int main() 
 {
-	Bureaucrat	b("Mega Rayquaza", 25);
+	Bureaucrat	b("Mega Rayquaza", 4);
 	AForm	*f1 = new PresidentialPardonForm("Gabibbo");
 
 	std::srand(random_gen());
 	b.signForm(*f1);
 	f1->execute(b);
+	b.executeForm(*f1);
 	delete f1;
 	return 0;
 }

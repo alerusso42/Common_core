@@ -32,7 +32,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 	return (*this);
 }
 
-void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
+int	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
 	try
 	{
@@ -43,7 +43,7 @@ void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 		e.print();
 		std::cout << executor.getName() << " cannot exec " << this->getName();
 		std::cout << std::endl;
-		return ;
+		return (1);
 	}
 	std::cout << "Drill sound\n";
 	if (std::rand() % 2)
@@ -51,4 +51,5 @@ void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 	else
 		std::cout << "\033[33m robotomization failed...\033[0m";
 	std::cout << std::endl;
+	return (0);
 }

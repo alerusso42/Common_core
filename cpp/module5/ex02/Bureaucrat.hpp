@@ -52,6 +52,7 @@ public:
 	void			decrement(void);
 	void			check_grade(void);
 	int				signForm(AForm &form);
+	void			executeForm(AForm const & form);
 	void			GradeTooHighException(void);
 	void			GradeTooLowException(void);
 };

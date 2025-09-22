@@ -32,7 +32,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+int	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
 	fstream	stream;
 	string	filename;
@@ -46,15 +46,16 @@ void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 		e.print();
 		std::cout << executor.getName() << " cannot exec " << this->getName();
 		std::cout << std::endl;
-		return ;
+		return (1);
 	}
 	filename.append(this->target).append("_shrubbery");
 	stream.open(filename.c_str(), std::ios::app);
 	if (stream.fail())
-		return ;
+		return (0);
 	stream << "\nTree made with love by " << executor.getName();
 	stream << "\n" TREE << std::endl;
 	stream.close();
 	std::cout << "WOW! " << executor.getName() << " Made an amazing tree!";
 	std::cout << std::endl;
+	return (0);
 }

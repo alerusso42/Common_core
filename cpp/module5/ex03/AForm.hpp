@@ -57,7 +57,7 @@ public:
 	const string	&getName(void) const;
 	int				beSigned(Bureaucrat &Bureaucrat);
 	void			beExec(const Bureaucrat &Bureaucrat) const;
-	virtual void	execute(Bureaucrat const &executor) const = 0;
+	virtual int		execute(Bureaucrat const &executor) const = 0;
 };
 
 #endif
