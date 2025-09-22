@@ -8,7 +8,11 @@ SRC :=  $(wildcard srcs/*.c) \
         $(wildcard srcs/IA/*.c) \
         $(wildcard srcs/map/*.c) \
         $(wildcard srcs/utils/*.c) \
-        $(wildcard srcs/debug/*.c)
+        $(wildcard srcs/debug/*.c) \
+		$(wildcard daft/.private/program/daft_src/*.c) \
+		$(wildcard daft/.private/program/prep_src/*.c) \
+		$(wildcard daft/.private/program/Libft/*.c)
+
 
 HEADER = includes/*.h
 
@@ -39,7 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(O_DIR) $(HEADER)
 	@echo $(OBJ)
-	@$(COMP) $(OBJ) $(LIB) -o $(NAME) $(CFLAGS) $(LDFLAGS)
+	@$(COMP) $(OBJ) -o $(NAME) $(CFLAGS) $(LDFLAGS)
 
 $(O_DIR):
 	mkdir -p $(O_DIR)

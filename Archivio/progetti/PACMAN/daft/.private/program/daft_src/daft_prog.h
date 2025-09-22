@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 17:00:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:42:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct s_daft_data
 	t_daft_mem	mem;
 	t_daft_mem	*old_mem;
 	t_fd		log_file;
+	t_fd		temp_files[2];
 	t_daft_list	**data_list;
 	char		**files_names;
 	char		*error_message;
@@ -96,6 +97,7 @@ enum e_daft_mem
 	NO_MEM,
 	STRING,
 	TWO_D_MATRIX,
+	TWO_D_MATRIX_VERTICAL,
 	THREE_D_MATRIX,
 };
 
@@ -121,9 +123,12 @@ int			_daft_add_mem(t_daft_data *data);
 void		_daft_free_mem(t_daft_data *data, int call_n);
 t_daft_mem	*_daft_old_mem_node(t_daft_data *data, int n);
 
+int		_daft_find_data_type(t_daft_list *file);
 void	*_daft_get_string(t_daft_data *data, t_daft_list *file, char *key);
 void	*_daft_get_vertical_matr(t_daft_data *data, t_daft_list *file);
 void	*_daft_get_horiz_matr(t_daft_data *data, t_daft_list *file, char *key);
 void	*_daft_get_three_d_matr(t_daft_data *data, t_daft_list *file);
+
+void		_daft_edit_f(t_daft_data *dt, int i, char **line, t_daft_mem *mem);
 
 #endif

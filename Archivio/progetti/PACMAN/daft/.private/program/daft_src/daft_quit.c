@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/22 10:34:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/22 19:43:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static void	update_filedata(t_daft_data *data)
 		if (data->data_list[i]->edit)
 		{
 			;//update_files
+			//delete mem
 			_daft_edit_hash_file(data->data_list[i], i);
 		}
 		++i;

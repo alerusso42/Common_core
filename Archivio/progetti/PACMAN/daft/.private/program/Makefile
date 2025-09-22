@@ -29,7 +29,7 @@ LIBFT_SRC := \
 # ------------------------------------------------
 # 2) Collect every .c under src/ 
 # ------------------------------------------------
-PREP_SRC := $(wildcard $(ROOT)/prep_src/*.c)
+PREP_SRC := $(ROOT)/main.c $(wildcard $(ROOT)/prep_src/*.c)
 DAFT_SRC := $(wildcard $(ROOT)/daft_src/*.c)
 
 # ------------------------------------------------

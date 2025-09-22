@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/21 16:10:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:27:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
 static char	*check_key(const char *search, char field_sep[], t_fd *fd);
-static void	*select_data_file(t_daft_data *data, t_daft_list *file, char *key);
+static void	*select_mem_type(t_daft_data *data, t_daft_list *file, char *key);
 
 /*
 //REVIEW -	daft_get
@@ -106,24 +106,27 @@ static char	*check_key(const char *search, char field_sep[], t_fd *fd)
 	return (NULL);
 }
 
-static void	*select_data_file(t_daft_data *data, t_daft_list *file, char *key)
+static void	*select_mem_type(t_daft_data *data, t_daft_list *file, char *key)
 {
-	if (file->multiple_lines == false && file->split_values == false)
+	int	type;
+
+	type = _daft_find_data_type(file);
+	if (STRING)
 	{
 		data->mem.type = STRING;
 		return (_daft_get_string(data, file, key));
 	}
-	else if (file->multiple_lines == true && file->split_values == false)
+	else if (TWO_D_MATRIX)
 	{
 		data->mem.type = TWO_D_MATRIX;
 		return (_daft_get_vertical_matr(data, file));
 	}
-	else if (file->multiple_lines == false && file->split_values == true)
+	else if (TWO_D_MATRIX_VERTICAL)
 	{
 		data->mem.type = TWO_D_MATRIX;
 		return (_daft_get_horiz_matr(data, file, key));
 	}
-	else if (file->multiple_lines == true && file->split_values == true)
+	else if (THREE_D_MATRIX)
 	{
 		data->mem.type = THREE_D_MATRIX;
 		return (_daft_get_three_d_matr(data, file));
