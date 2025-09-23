@@ -6,15 +6,16 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:59:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 11:36:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 12:15:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
 
-static int	ft_alloc(char ***strings, const char *s, char c, int size[2]);
+static int	ft_alloc(char ***strings, const char *s, char c, int size[3]);
 static int	how_many_strings(const char *str, char c, int *s_n, int *i);
 static void	ft_copy(char **strings, const char *str, char c, int str_num);
+static int	add_new_strings(char **strings, int size[3]);
 
 /*
 int main(int argc, char *argv[])
@@ -37,32 +38,24 @@ int main(int argc, char *argv[])
 	return (0);
 }*/
 
-char	**_daft_split(char const *s, char c, int string_size)
+char	**_daft_split(char const *s, char c, int string_size, int matr_size)
 {
 	char	**strings;
-	char	**saveposition_pointer;
 	int		i;
-	int		size[2];
+	int		size[3];
 
+	size[2] = matr_size;
 	strings = NULL;
 	if (how_many_strings((char *)s, c, &size[0], &i) != 0)
 		return (NULL);
 	size[1] = string_size + 1;
-	if ((ft_alloc(&strings, s, c, size) == 42) && (strings))
+	if ((ft_alloc(&strings, s, c, size) == 42))
 	{
-		saveposition_pointer = strings;
-		*strings = 0;
-		while ((*strings))
-		{
-			FREE(*strings);
-			*strings = NULL;
-			strings++;
-		}
-		FREE(saveposition_pointer);
-		strings = NULL;
+		return (free_matrix(strings));
 	}
-	if (strings)
-		ft_copy(strings, (char *)s, c, size[0]);
+	ft_copy(strings, (char *)s, c, size[0]);
+	if (add_new_strings(strings, size) == 1)
+		return (free_matrix(strings));
 	return (strings);
 }
 
@@ -84,13 +77,13 @@ static int	how_many_strings(const char *str, char c, int *s_n, int *i)
 	return (0);
 }
 
-static int	ft_alloc(char ***strings, const char *s, char c, int size[2])
+static int	ft_alloc(char ***strings, const char *s, char c, int size[3])
 {
 	size_t	str_len;
 	int		i;
 	int		s_num;
 
-	*strings = (char **)ft_calloc((size[0] + 1), sizeof(char *));
+	*strings = (char **)ft_calloc((size[0] + size[2]), sizeof(char *));
 	if (*strings == NULL)
 		return (42);
 	s_num = 0;
@@ -118,6 +111,8 @@ static void	ft_copy(char **strings, const char *str, char c, int str_num)
 	int	i_str;
 	int	i_matrix;
 
+	if (!strings)
+		return ;
 	i_str = 0;
 	str_num = 0;
 	while (str[i_str] != '\0')
@@ -137,4 +132,22 @@ static void	ft_copy(char **strings, const char *str, char c, int str_num)
 			++str_num;
 	}
 	strings[str_num] = NULL;
+}
+
+static int	add_new_strings(char **strings, int size[3])
+{
+	int	i;
+	int	total_size;
+
+	i = 0;
+	total_size = size[0] + size[2] - 1;
+	while (i < total_size)
+	{
+		if (!strings[i])
+			strings[i] = (char *)ft_calloc((size[1] + 1), sizeof(char));
+		if (!strings[i])
+			return (1);
+		++i;
+	}
+	return (0);
 }

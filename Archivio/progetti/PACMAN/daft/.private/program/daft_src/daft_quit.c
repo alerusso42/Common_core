@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/22 19:43:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:23:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	update_filedata(t_daft_data *data);
 //REVIEW -	daft_quit
 //
 	Reset daft memory.
-	Always safe to calls, even multiple times.
+	Always safe to call, even multiple times.
 */
 void daft_quit(void)
 {
@@ -30,7 +30,6 @@ void daft_quit(void)
 	_daft_get_memory(NULL, true);
 	if (!data)
 		return ;
-	update_filedata(data);
 	update_filedata(data);
 	_daft_free_mem(data, -1);
 	del_filedata();
@@ -104,11 +103,11 @@ static void	update_filedata(t_daft_data *data)
 	while (data->data_list[i])
 	{
 		if (data->data_list[i]->edit)
-		{
-			;//update_files
-			//delete mem
+			_daft_update_data(data, i);
+		if (data->data_list[i]->append)
+			_daft_append_data(data, data->data_list[i], i);
+		if (data->data_list[i]->edit || data->data_list[i]->append)
 			_daft_edit_hash_file(data->data_list[i], i);
-		}
 		++i;
 	}
 }

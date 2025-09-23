@@ -209,6 +209,7 @@ mapfile -t real_files < <(
 	  ! -name "*.out" \
       ! -name "Makefile" \
       ! -name "*.md" \
+      ! -name "*.tmp" \
 	  ! -name "*.json" \
       -printf "%P\n"
 )

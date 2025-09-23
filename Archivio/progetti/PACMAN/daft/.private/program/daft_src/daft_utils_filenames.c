@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 10:00:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:20:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	parse_fnames(t_daft_data *data, char *line, int *matr_s)
 		++len;
 	cut_string(line, len, INT_MAX);
 	if (data->files_num == *matr_s)
-		if (_daft_resize_matr(&data->files_names, matr_s) == DAFT_LOG_MALLOC)
+		if (_daft_resize_matr(&data->files_names, matr_s, 1) == DAFT_LOG_MALLOC)
 			return (_daft_log(DAFT_LOG_MALLOC));
 	data->files_names[data->files_num] = ft_strjoin("/", line);
 	if (!data->files_names[data->files_num])

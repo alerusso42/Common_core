@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 11:39:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:01:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_daft_data	*_daft_get_memory(t_daft_data *new_data, bool update)
 //			Reallocs it, increasing its size.
 //			If old size (*size) is == 0, *size becomes 2;
 //			Else, *size is doubled.
-int			_daft_resize_matr(char ***old_matr, int *size)
+int			_daft_resize_matr(char ***old_matr, int *size, int min_alloc)
 {
 	char	**new_matr;
 	int		i;
@@ -38,7 +38,7 @@ int			_daft_resize_matr(char ***old_matr, int *size)
 		*size = 2;
 	else
 		*size = *size * 2;
-	new_matr = ft_calloc(*size + 1, sizeof(char *));
+	new_matr = ft_calloc(*size + min_alloc, sizeof(char *));
 	if (!new_matr)
 		return (FREE(*old_matr), DAFT_LOG_MALLOC);
 	i = 0;
@@ -81,7 +81,7 @@ int	_daft_add_node_back(t_daft_node	*list, int offset)
 //			Reallocs it, increasing its size.
 //			If old size (*size) is == 0, *size becomes 2;
 //			Else, *size is doubled.
-int	_daft_resize_three_d_matr(char ****old_matr, int *size)
+int	_daft_resize_three_d_matr(char ****old_matr, int *size, int min_alloc)
 {
 	char	***new_matr;
 	int		i;
@@ -92,7 +92,7 @@ int	_daft_resize_three_d_matr(char ****old_matr, int *size)
 		*size = 2;
 	else
 		*size = *size * 2;
-	new_matr = ft_calloc(*size + 1, sizeof(char **));
+	new_matr = ft_calloc(*size + min_alloc, sizeof(char **));
 	if (!new_matr)
 		return (FREE(*old_matr), DAFT_LOG_MALLOC);
 	i = 0;

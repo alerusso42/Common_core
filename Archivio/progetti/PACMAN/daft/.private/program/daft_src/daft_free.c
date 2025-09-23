@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 16:43:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 13:58:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:31:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,31 @@
 /*
 //REVIEW -	daft_get
 //
-	Free a memory returned by daft, in a call of daft_get.
-	Only calls that does not return NULL count; the count starts by 0.
-	If -1 is given, every allocated memory from start are freed; then, count
-	is reset to 0.
+	Free a memory returned by daft, in a call of daft_get() or daft_edit().
+	All memory got from daft are handled by an internal garbage
+	collector, and freed when daft_quit() is called.
+	However, if you need, you can free them safely before, passing
+	the memory to this function.
+
+	WARNING: 	if you free a ptr taken with daft_edit(), the file will not
+				be changed, since you erased the memory before calling
+				daft_quit().
 */
-void	daft_free(int daft_get_call)
+void	daft_free(void *mem)
 {
 	t_daft_data	*data;
+	int			i;
 
 	data = _daft_get_memory(NULL, false);
 	if (!data)
 		return ;
-	if (daft_get_call > data->mem_size)
+	if (!mem || !data->old_mem)
 		return ;
-	_daft_free_mem(data, daft_get_call);
+	i = 0;
+	while (data->old_mem[i].ptr)
+	{
+		if (mem == data->old_mem[i].ptr)
+			_daft_free_mem(data, i);
+		++i;
+	}
 }

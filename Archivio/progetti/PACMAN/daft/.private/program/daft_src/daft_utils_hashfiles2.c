@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/22 17:47:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 19:05:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	_daft_get_data2(t_daft_list *file)
 	char	*line;
 
 	line = gnl();
+	if (line)
+		file->first_node = (int)ft_atoi(line);
 	while (line)
 	{
 		if (get_one(&file->node[(int)ft_atoi(line)], line) != 0)

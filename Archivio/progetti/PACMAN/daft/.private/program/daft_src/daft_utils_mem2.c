@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:38:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/22 10:35:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:40:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		_daft_add_mem(t_daft_data *data)
 		data->old_mem = list;
 	list = _daft_old_mem_node(data, INT_MAX);
 	*list = data->mem;
-	data->data_list[list->file]->edit = true;
 	data->mem_size++;
 	return (0);
 }

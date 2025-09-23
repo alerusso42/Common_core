@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:36:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 14:36:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:02:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int 	daft_init(void)
 	data = ft_calloc(1, sizeof(t_daft_data));
 	if (!data)
 		return (DAFT_LOG_MALLOC);
+	data->mem_size = -1;
+	data->minimal_matrix_num = 1;
 	_daft_get_memory(data, true);
 	if (get_settings_file(data) != 0)
 		return (daft_quit(), data->last_error);

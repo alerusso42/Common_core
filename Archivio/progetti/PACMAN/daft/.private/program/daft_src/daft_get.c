@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/22 18:27:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:38:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
 static char	*check_key(const char *search, char field_sep[], t_fd *fd);
-static void	*select_mem_type(t_daft_data *data, t_daft_list *file, char *key);
 
 /*
 //REVIEW -	daft_get
@@ -79,7 +78,7 @@ static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
 	while (!key && current)
 	{
 		offset = current->offset;
-		SEEK(fd.p, offset, 0);
+		SEEK(fd.p, offset, RW_SEEK_SET);
 		key = check_key(s, f->field_sep, &fd);
 		current = current->next;
 	}
@@ -88,7 +87,7 @@ static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
 	dt->mem.file = dt->current_file;
 	dt->mem.hash = hash_result;
 	dt->mem.key = key;
-	return (select_data_file(dt, f, key));
+	return (_daft_select_mem_type(dt, f, key));
 }
 
 //	Check if key is right (for collisions).
@@ -106,27 +105,27 @@ static char	*check_key(const char *search, char field_sep[], t_fd *fd)
 	return (NULL);
 }
 
-static void	*select_mem_type(t_daft_data *data, t_daft_list *file, char *key)
+void	*_daft_select_mem_type(t_daft_data *data, t_daft_list *file, char *key)
 {
 	int	type;
 
 	type = _daft_find_data_type(file);
-	if (STRING)
+	if (type == STRING)
 	{
 		data->mem.type = STRING;
 		return (_daft_get_string(data, file, key));
 	}
-	else if (TWO_D_MATRIX)
+	else if (type == TWO_D_MATRIX)
 	{
 		data->mem.type = TWO_D_MATRIX;
 		return (_daft_get_vertical_matr(data, file));
 	}
-	else if (TWO_D_MATRIX_VERTICAL)
+	else if (type == TWO_D_MATRIX_VERTICAL)
 	{
 		data->mem.type = TWO_D_MATRIX;
 		return (_daft_get_horiz_matr(data, file, key));
 	}
-	else if (THREE_D_MATRIX)
+	else if (type == THREE_D_MATRIX)
 	{
 		data->mem.type = THREE_D_MATRIX;
 		return (_daft_get_three_d_matr(data, file));
