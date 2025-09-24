@@ -1,0 +1,237 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp											:+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/23 21:35:57 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/23 21:35:57 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "header.hpp"
+
+/*
+//SECTION - Explicit vs Implicit cast
+	double b = 0.54;
+Explicit cast: int a = (int) b
+Implicit cast int a = b
+
+//SECTION - Reinterpretation (identity) cast
+float	a = 420.042f;
+
+void	*b = &a;		// implicit reinterpretation cast
+void	*c = (void *)&a;// explicit reinterpretation cast
+
+void	*d = &a;		// implicit promotion
+void	*e = d;			// implicit demotion
+void	*f = (int *)d;	// Explicit demotion: best practice
+
+RESULT: float may be read as an int (using same bit notation).
+
+//SECTION - Type qualifier cast
+you can remove const by doing:
+
+int	const 	b	= 42;
+int			*c = (int *)&b;
+*c = 21;
+(undefined behaviour)
+
+//SECTION - Upcast, Downcast
+	class Parent	{};
+	class Child1: public Parent	{};
+	class Child2: public Parent	{};
+
+	Child1	a;
+
+	Parent	*b = &a;			//implicit reinterpretation cast
+	Parent	*c = (Parent *)&a;	//explicit reinterpretation cast
+	
+	Parent	*d = &a;			//implicit upcast: ok			
+	Child1	*e = d;				//implicit downcast: ERROR
+	Child2	*f = (Child2 *)d;	//explicit downcast: ok
+(void)a, (void)b, (void)c, (void)d, (void)e, (void)f;
+
+//SECTION - Static cast
+
+	number conversion
+	int	a = 42;
+
+	double	b = a;
+	int		c = b;						//implicit demotion
+	int		d = static_cast<int>(b);	//explicit demotion
+*/
+
+#include <iostream>
+# include <fstream>
+# include <string>
+# include <cstdlib>
+int main2() 
+{
+	if (1)
+{	
+	float	a = 420.042f;
+	a = 420.042f;
+	int		*i = (int *)&a;
+
+	std::cout << *i << std::endl;
+
+	int	*j = (reinterpret_cast<int *>(&a));
+	std::cout << *j << std::endl;
+}
+{
+	class Parent				{public: virtual ~Parent(void){}};
+	class Child1: public Parent	{};
+	class Child2: public Parent	{};
+	class Unrelated				{};
+
+	Child1	a;
+	Parent	*b = &a;			//implicit upcast
+	Parent	*c = b;	//implicit downcast, no
+	Parent	*d = static_cast<Child1 *>(b);	//explicit downcast, ok
+				
+	Unrelated	*e = reinterpret_cast<Unrelated *>(&a);	//explicit downcast: ok
+	(void)a, (void)b, (void)c, (void)d, (void)e;
+}
+{
+
+	struct S_aaa
+	{
+	};
+
+	class C_aaa
+	{
+		int	negrone;
+	};
+
+	
+
+struct Base { virtual ~Base() {} }; // polimorfismo = requisito per dynamic_cast
+struct Derived : Base { void hello() { std::cout << "Ciao da Derived\n"; } };
+struct Unrelated : Base { void boom() { std::cout << "Unrelated\n"; } };
+
+    Base* b = new Unrelated; // in realtà dietro c’è Unrelated
+
+    //static_cast: compila, man fallisce a runtime
+    Derived* d1 = static_cast<Derived*>(b);
+    d1->hello(); // chiamando Derived::hello() su un oggetto Unrelated
+
+    //dynamic_cast: controlla a runtime
+    Derived* d2 = dynamic_cast<Derived*>(b);
+    if (d2)
+        d2->hello();
+    else
+        std::cout << "dynamic_cast ha rilevato che non è un Derived\n";
+	
+    delete b;
+}
+{   
+	struct Base {
+    virtual void foo() { std::cout << "Base::foo\n"; }
+    virtual void bar() { std::cout << "Base::bar\n"; }
+	 
+	};
+	Base b1;
+    // reinterpretare l’indirizzo dell’oggetto come puntatore a void*
+    void** vptr = *(void***)&b1;
+
+    // vptr ora punta alla vtable
+    std::cout << "Indirizzo vtable: " << vptr << "\n";
+
+    // invocare manualmente la prima entry della vtable
+    typedef void(*Fun)(Base*);
+    Fun f = (Fun)vptr[0];
+    f(&b1); // chiama Base::foo}
+}
+{
+	float	a = 0.00000000000000000000000000000000000000000001f;
+
+	void	*b = &a;
+	int		*c = reinterpret_cast<int *>(b);
+	int		&d = reinterpret_cast<int &>(b);
+	(void)a, (void)b, (void)c, (void)d;
+
+	std::cout << a << std::endl;
+	std::cout << *(int *)b << std::endl;
+	std::cout << *c << std::endl;
+	std::cout << d << std::endl;
+}
+{
+	int	a = 42;
+
+	int	const 	*b = &a;
+	//int 		*c = b;
+	int			*d = const_cast<int *>(b);
+	*d -= 21;
+	std::cout << a << std::endl;
+	std::cout << *b << std::endl;
+	std::cout << *d << std::endl;
+}
+{
+	class main
+	{
+	private:
+		int	NonMiVedi;
+		int	NonMiVedi2;
+		int	NonMiVedi3;
+	public:
+		main() {NonMiVedi = 42; NonMiVedi2 = 4242; NonMiVedi3 = 0;};
+	};
+
+	main	m;
+	int	*class_ptr = (int *)&m;
+	std::cout << class_ptr[0] << std::endl;
+	std::cout << class_ptr[1] << std::endl;
+	for (int i; class_ptr[i]; i++)
+	{
+		std::cout << class_ptr[i] << std::endl;
+	}
+}
+{
+	class foo 
+	{
+		public:
+			foo(float const v) : _v(v){}
+			
+			float	getv(void)	{return this->_v;}
+			
+			operator	float()	{return this->_v;}
+			operator	int()	{return static_cast<int>(this->_v);}
+
+		private:
+			float	_v;
+	};
+
+	foo	a(420.024f);
+
+	float	b = a;
+	int		c = (int)a;
+
+	std::cout << a.getv() << std::endl;
+	std::cout << b << std::endl;
+	std::cout << c << std::endl;
+}
+return 0;
+}
+
+	class A {};
+	class B {};
+	class C {
+		public:
+					C(A const & _)	{return;}
+		explicit	C(B const & _)	{return;}
+	};
+
+void	f(C const & _)
+{return;}
+
+int	main()
+{
+
+	B	b;
+	f(A());
+	f((C)b);
+}
+
+

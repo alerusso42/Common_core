@@ -36,48 +36,6 @@ bool	check_str(std::string s, int (*func)(int), int expect_res, int pos)
 	return (0);
 }
 
-//	revert the content of a string
-std::string	ft_reverse(std::string s)
-{
-	int		i;
-	char	temp;
-
-	i = 0;
-	while (i < (int)s.size() / 2)
-	{
-		temp = s[i];
-		s[i] = s[s.size() - 1 - i];
-		s[s.size() - 1 - i] = temp;
-		i++;
-	}
-	return (s);
-}
-
-//	integer to ascii
-std::string	ft_itoa(int n)
-{
-	std::string	s;
-	bool	minus;
-
-	if (n == 0)
-	{
-		s += '0';
-		return (s);
-	}
-	minus = false;
-	if (n < 0)
-		minus = true;
-	while (n != 0)
-	{
-		s += ((char)std::abs(n % 10) + '0');
-		n /= 10;
-	}
-	if (minus == true)
-		s += '-';
-	s = ft_reverse(s);
-	return (s);
-}
-
 /*
 //REVIEW - valid_input
 
@@ -118,7 +76,48 @@ bool	ft_atoi(std::string s, int *n)
 		return (2);
 	if (check_str(s, std::isdigit, true, 1) == 1)
 		return (2);
-	*n = std::atoi(s.c_str());
+	if (n)
+		*n = std::atoi(s.c_str());
+	return (0);
+}
+
+//	Returns:
+//	0:	success
+//	1:	string is invalid
+//	2:	bad first char
+//	3:	invalid char in string
+//	4:	too many dots
+//	4:	string too big
+//#include <math.h>
+bool	valid_number(std::string s, bool is_float)
+{
+	int	i;
+	int	n_dots;
+
+	if (valid_input(s) == false)
+		return (1);
+	if (std::isdigit(s[0]) == false && s[0] != '+' && s[0] != '-')
+		return (2);
+	i = 1;
+	n_dots = 0;
+	while (s[i])
+	{
+		if (s[i] == '.')
+		{
+			if (!s[i + 1])
+				return (4);
+			n_dots += 1;
+		}
+		else if (std::isdigit(s[i]) == false && s[i + 1])
+			return (3);
+		i++;
+	}
+	if (s[i - 1] != 'f' && std::isdigit(s[i - 1] == false))
+		return (3);
+	if (n_dots > is_float)
+		return (4);
+	/*if (((u_int64_t)1 << max_bits) < (pow(10, i)))
+		return (5);*/
 	return (0);
 }
 

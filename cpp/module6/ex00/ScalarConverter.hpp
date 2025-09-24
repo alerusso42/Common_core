@@ -13,15 +13,23 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 # include "lib/lib.hpp"
+# include "limits.h"
+
+# define SPECIAL "-inff", "+inff", "nanf", "-inf", "+inf", "nan", ""
 
 class ScalarConverter
 {
 public:
 //	canonic form:
 	ScalarConverter();
-	~ScalarConverter();
+	virtual ~ScalarConverter();
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &other);
+
+	virtual	void	make_abstract(void)	const = 0;
+	static void		convert(string literal);
 };
+
+bool	special_cases(string s);
 
 #endif

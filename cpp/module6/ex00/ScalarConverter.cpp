@@ -13,25 +13,47 @@
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter()
-{
-
-}
+{}
 
 ScalarConverter::~ScalarConverter()
-{
-
-}
+{}
 
 ScalarConverter::ScalarConverter(const ScalarConverter &other)
-{ 
-	*this = other;
-}
+{(void)other;}
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
+{(void)other; return (*this);}
+
+void	ScalarConverter::convert(string literal)
 {
-	if (this != &other) 
+	double	n;
+	bool	special_case;
+
+	special_case = special_cases(literal);
+	n = std::atof(literal.c_str());
+	if (n <= 31 || n >= 127)
+		std::cout << "Not displayable\n";
+	else if (special_case)
+		std::cout << "Impossible\n";
+	else
+		std::cout << "char:\t" << static_cast<char>(n) << "\n";
+	if (special_case)
+		std::cout << "Impossible\n";
+	else
+		std::cout << "int:\t" << static_cast<int>(n) << "\n";
+	std::cout << "float:\t"<< static_cast<float>(n) << "\n";
+	std::cout << "double:\t"<< n;
+	std::cout << std::endl;
+}
+
+bool	special_cases(string s)
+{
+	string	special[]	= {SPECIAL};
+
+	for (int i = 0; special[i].empty() == false; i++)
 	{
-		// copy fields
+		if (s == special[i])
+			return (true);
 	}
-	return *this;
+	return (false);
 }

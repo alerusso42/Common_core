@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/18 16:18:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/24 18:52:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ string		ft_reverse(string s);
 bool		valid_input(string s);
 string		ft_itoa(int n);
 bool		ft_atoi(string s, int *n);
+bool		valid_number(std::string s, bool is_float);
 bool		check_str(std::string s, int (*func)(int), int expect_res, int pos);
 
 //	file
