@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:27:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/25 14:44:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/25 16:45:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static bool	ft_strchr(string s, string charset)
 
 void	convert_char(double n, int special_case, int type)
 {
+	(void)type;
 	std::cout << "char:\t";
 	if (special_case)
 		std::cout << "Impossible\n";
@@ -66,6 +67,7 @@ void	convert_char(double n, int special_case, int type)
 
 void	convert_int(double n, int special_case, int type)
 {
+	(void)type;
 	std::cout << "int:\t";
 	if (special_case)
 		std::cout << "Impossible\n";
@@ -75,12 +77,23 @@ void	convert_int(double n, int special_case, int type)
 
 void	convert_float(double n, int special_case, int type)
 {
-	(void)special_case;
+	(void)type;
+	if (special_case >= S_INFF && special_case <= S_NANF)
+		n = convert_special(special_case + S_NANF);	
 	std::cout << "float:\t"<< static_cast<float>(n) << "\n";
 }
 
 void	convert_double(double n, int special_case, int type)
 {
-	(void)special_case;
+	(void)type;
+	if (special_case >= S_INF && special_case <= S_NAN)
+		n = convert_special(special_case - S_NANF);
 	std::cout << "double:\t"<< n;
+}
+
+double	convert_special(int special_case)
+{
+	string	special[] = {SPECIAL};
+
+	return (std::atof(special[special_case].c_str()));
 }

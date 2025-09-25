@@ -59,5 +59,6 @@ void	convert_char(double n, int special_case, int type);
 void	convert_int(double n, int special_case, int type);
 void	convert_float(double n, int special_case, int type);
 void	convert_double(double n, int special_case, int type);
+double	convert_special(int special_case);
 
 #endif
