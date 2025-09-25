@@ -27,14 +27,17 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 void	ScalarConverter::convert(string literal)
 {
 	double	n;
-	bool	special_case;
+	int		special_case;
+	int		type;
 
+	type = find_type(literal);
+	(void)type;
 	special_case = special_cases(literal);
 	n = std::atof(literal.c_str());
-	if (n <= 31 || n >= 127)
-		std::cout << "Not displayable\n";
-	else if (special_case)
+	if (special_case)
 		std::cout << "Impossible\n";
+	else if (n <= 31 || n >= 127)
+		std::cout << "Not displayable\n";
 	else
 		std::cout << "char:\t" << static_cast<char>(n) << "\n";
 	if (special_case)
@@ -43,17 +46,17 @@ void	ScalarConverter::convert(string literal)
 		std::cout << "int:\t" << static_cast<int>(n) << "\n";
 	std::cout << "float:\t"<< static_cast<float>(n) << "\n";
 	std::cout << "double:\t"<< n;
-	std::cout << std::endl;
+	std::cout << "\n";
 }
 
-bool	special_cases(string s)
+int	special_cases(string s)
 {
 	string	special[]	= {SPECIAL};
 
 	for (int i = 0; special[i].empty() == false; i++)
 	{
 		if (s == special[i])
-			return (true);
+			return (i);
 	}
 	return (false);
 }
