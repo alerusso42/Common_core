@@ -15,7 +15,8 @@
 # include "lib/lib.hpp"
 # include "limits.h"
 
-# define SPECIAL "OK", "-inff", "+inff", "nanf", "-inf", "+inf", "nan", ""
+# define SPECIAL "OK", "inff", "-inff", "+inff", "nanf", "inf", \
+"-inf", "+inf", "nan", ""
 
 enum	e_types
 {
@@ -28,9 +29,11 @@ enum	e_types
 
 enum e_special
 {
-	S_INFF_MINUS = 1,
+	S_INFF = 1,
+	S_INFF_MINUS,
 	S_INFF_PLUS,
 	S_NANF,
+	S_INF,
 	S_INF_MINUS,
 	S_INF_PLUS,
 	S_NAN,
@@ -40,18 +43,21 @@ enum e_special
 class ScalarConverter
 {
 private:
-	virtual	void	make_abstract(void)	const = 0;
-public:
-//	canonic form:
+	//	canonic form:
 	ScalarConverter();
 	virtual ~ScalarConverter();
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &other);
-
+public:
 	static void		convert(string literal);
 };
 
 int		special_cases(string s);
-int		find_type(string s);
+int		find_type(string s, int special_case);
+
+void	convert_char(double n, int special_case, int type);
+void	convert_int(double n, int special_case, int type);
+void	convert_float(double n, int special_case, int type);
+void	convert_double(double n, int special_case, int type);
 
 #endif

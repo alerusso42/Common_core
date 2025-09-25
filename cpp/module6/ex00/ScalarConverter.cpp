@@ -30,22 +30,14 @@ void	ScalarConverter::convert(string literal)
 	int		special_case;
 	int		type;
 
-	type = find_type(literal);
-	(void)type;
 	special_case = special_cases(literal);
+	type = find_type(literal, special_case);
+	(void)type;
 	n = std::atof(literal.c_str());
-	if (special_case)
-		std::cout << "Impossible\n";
-	else if (n <= 31 || n >= 127)
-		std::cout << "Not displayable\n";
-	else
-		std::cout << "char:\t" << static_cast<char>(n) << "\n";
-	if (special_case)
-		std::cout << "Impossible\n";
-	else
-		std::cout << "int:\t" << static_cast<int>(n) << "\n";
-	std::cout << "float:\t"<< static_cast<float>(n) << "\n";
-	std::cout << "double:\t"<< n;
+	convert_char(n, special_case, type);
+	convert_int(n, special_case, type);
+	convert_float(n, special_case, type);
+	convert_double(n, special_case, type);
 	std::cout << "\n";
 }
 
