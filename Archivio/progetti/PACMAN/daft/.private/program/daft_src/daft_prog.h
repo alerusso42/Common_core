@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 00:23:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:39:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ enum e_daft_logs
 	DAFT_LOG_ALLOCSIZE,
 	DAFT_LOG_MISSFLAGS,
 	DAFT_LOG_NOMEM,
+	DAFT_LOG_KEYUSED,
 };
 
 enum e_daft_mem

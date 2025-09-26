@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:40:10 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/13 00:25:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 19:11:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_all(t_data *data)
 {
 	if (daft_init() != 0)
 		return (error(data, ER_DAFT));
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		return (error(data, ER_SDL));
 	data->sdl.win = SDL_CreateWindow(WIN_NAME, 0, 0, WIN_W, WIN_H, WIN_FLAGS);
 	if (!data->sdl.win)

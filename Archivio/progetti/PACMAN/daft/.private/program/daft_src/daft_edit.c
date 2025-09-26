@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:04:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/25 23:57:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:57:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*daft_edit(const char *search, int size, int mtr_number)
 		mtr_number = 1;
 	data = _daft_get_memory(NULL, false);
 	if (!data)
-		return (NULL);
+		return ((void)_daft_log(DAFT_LOG_NOMEM), NULL);
 	data->minimal_alloc_size = size;
 	data->minimal_matrix_num = mtr_number;
 	mem = daft_get(search);

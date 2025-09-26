@@ -6,13 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:28:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/25 23:43:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:57:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
 
 static void	*gen_sample(t_daft_data *data, t_daft_list *file, const char *key);
+static int	key_used(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
 
 /*
 //REVIEW -	daft_append
@@ -60,7 +61,7 @@ void	*daft_append(const char *key, int size, int mtr_number)
 		mtr_number = 1;
 	data = _daft_get_memory(NULL, false);
 	if (!data)
-		return (NULL);
+		return ((void)_daft_log(DAFT_LOG_NOMEM), NULL);
 	data->minimal_alloc_size = size;
 	data->minimal_matrix_num = mtr_number;
 	mem = gen_sample(data, data->data_list[data->current_file], key);
@@ -69,6 +70,21 @@ void	*daft_append(const char *key, int size, int mtr_number)
 	if (mem)
 		data->data_list[data->current_file]->append = true;
 	return (mem);
+}
+
+static int	key_used(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
+{
+	void	*key;
+
+	key = _daft_get_key(dt, f, s, fd);
+	dt->mem.hash = 0;
+	dt->mem.key = NULL;
+	if (key)
+	{
+		free(key);
+		return (true);
+	}
+	return (false);
 }
 
 static void	*gen_sample(t_daft_data *data, t_daft_list *file, const char *key)
@@ -82,6 +98,8 @@ static void	*gen_sample(t_daft_data *data, t_daft_list *file, const char *key)
 	fd = openfd(data->data_list[data->current_file]->filename, "r");
 	if (!fd.n)
 		return (NULL);
+	if (key_used(data, file, key, fd))
+		return (closefd(fd), _daft_log(DAFT_LOG_KEYUSED), NULL);
 	SEEK(fd.p, file->node[i]->offset, RW_SEEK_SET);
 	line = gnl();
 	if (!line)

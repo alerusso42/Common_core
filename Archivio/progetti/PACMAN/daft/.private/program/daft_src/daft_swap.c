@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:35:31 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/21 10:00:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:55:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	daft_swap(int enum_id)
 
 	data = _daft_get_memory(NULL, false);
 	if (!data)
-		return ;
+		return ((void)_daft_log(DAFT_LOG_NOMEM));
 	if (enum_id >= data->files_num || enum_id < 0)
 		return ;
 	data->current_file = enum_id;

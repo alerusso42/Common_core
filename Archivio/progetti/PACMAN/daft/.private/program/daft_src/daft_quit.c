@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 01:40:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:55:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void daft_quit(void)
 	data = _daft_get_memory(NULL, false);
 	_daft_get_memory(NULL, true);
 	if (!data)
-		return ;
+		return ((void)_daft_log(DAFT_LOG_NOMEM));
 	update_filedata(data);
 	_daft_free_mem(data, -1);
 	del_filedata();

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:03:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 02:04:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:58:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ TODO
 	[]	esport su android
 */
 
-int	main2()
+int	main()
 {
 	t_data	data;
 
@@ -98,7 +98,7 @@ int	main4()
 	return (0);
 }
 
-int	main()
+int	main5()
 {
 	srand((unsigned int)time(NULL));
 	
@@ -115,8 +115,6 @@ int	main()
 	ft_strlcpy(m1[7][4], "GABIBBOoo", 10);
 	ft_strlcpy(m1[8][5], "GABIBBOooo", 11);
 	ft_strlcpy(m1[9][6], "GABIBBOooo", 11);
-	daft_quit();
-	return (0);
 	daft_load();
 	m1 = daft_edit("CRAZY", 200, 100);
 	ft_strlcpy(m1[1][0], "WATER", 6);

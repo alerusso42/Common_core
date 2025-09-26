@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 00:23:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:53:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	daft_printerror(int log, t_fd fd);
 int	_daft_log(int log)
 {
 	t_daft_data	*data;
+	t_fd		log_file;
 
 	data = _daft_get_memory(NULL, false);
 	if (!data)
@@ -25,11 +26,11 @@ int	_daft_log(int log)
 		data->last_error = log;
 	if (data->conf.debug_log == false)
 		return (log);
-	if (!data->log_file.n)
-		data->log_file = openfd("daft.log", "w+");
-	if (!data->log_file.n)
-		return (DAFT_LOG_OPEN);
-	daft_printerror(log, data->log_file);
+	log_file = openfd("daft.log", "a+");
+	if (!log_file.n)
+		return (log);
+	daft_printerror(log, log_file);
+	closefd(log_file);
 	return (log);
 }
 
@@ -51,4 +52,6 @@ static void	daft_printerror(int log, t_fd fd)
 		fd_printf(fd, "Missing hash_data file.\n");
 	else if (log == DAFT_LOG_NOMEM)
 		fd_printf(fd, "Called a function without calling daft_init().\n");
+	else if (log == DAFT_LOG_KEYUSED)
+		fd_printf(fd, "Selected key has already been used.\n");
 }
