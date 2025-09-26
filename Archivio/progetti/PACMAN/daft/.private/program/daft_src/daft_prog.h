@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 19:25:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 00:23:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ enum e_daft_logs
 	DAFT_LOG_FILESETT,
 	DAFT_LOG_ALLOCSIZE,
 	DAFT_LOG_MISSFLAGS,
+	DAFT_LOG_NOMEM,
 };
 
 enum e_daft_mem
@@ -119,6 +120,7 @@ char		*_cat_string(char *src, char *catstr, size_t start, int which_free);
 int			_daft_hash(t_daft_list *file, const char *key);
 char		**_daft_split(char const *s, char c, int string_size, int matr_size);
 uint32_t	murmurhash2(const void *key, int len, uint32_t seed);
+char		*_daft_get_key(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
 char		*_daft_get_hash_filename(char *filename);
 int			_daft_edit_hash_file(t_daft_list *list, int f_num);
 int			_daft_prep_prog(char *fnames[2], char *flags, int f_num, int f_size);

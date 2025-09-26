@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:38:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 01:33:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static int	read_from_buff(char *buffer, char **old_content);
 
 //ANCHOR - gnl
 /*
-//	gnl read a file line by line, reading for BUFFER_SIZE defined in mfile.h
-	exceedes lines are saved in a stack matrix of [MAX_FILES][BUFFER_SIZE]
-//	file must be opened using openfd function
-//	file taken is last file opened with openfd.
-	You can use switch_filedata function to change file.
+//	gnl read a file line by line, reading for BUFFER_SIZE defined in mfile.h.
+//	exceedes lines are saved in a stack matrix of [MAX_FILES][BUFFER_SIZE]
+//	file must be opened using openfd() function.
+//	file taken is last file opened with openfd().
+	You can use switch_filedata() function to change file.
 
 	@input:		none
 	@return:	string allocated with malloc, that ends with \0 (NOT \n),
@@ -157,9 +157,9 @@ static int	read_from_buff(char *buffer, char **old_content)
 	return (0);
 }
 
-//ANCHOR - read_from_buffer
+//ANCHOR - read_from_file
 /*
-//	get chars already in buffer.
+//	get chars from file.
 
 	@input:		[char *buffer]
 				[t_fd fd]

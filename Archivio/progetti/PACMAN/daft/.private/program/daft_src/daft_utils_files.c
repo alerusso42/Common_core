@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:18:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 19:15:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:36:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	_daft_find_data_type(t_daft_list *file)
 	{
 		return (STRING);
 	}
-	else if (file->multiple_lines == true && file->split_values == false)
+	else if (file->multiple_lines == false && file->split_values == true)
 	{
 		return (TWO_D_MATRIX);
 	}
-	else if (file->multiple_lines == false && file->split_values == true)
+	else if (file->multiple_lines == true && file->split_values == false)
 	{
 		return (TWO_D_MATRIX_VERTICAL);
 	}

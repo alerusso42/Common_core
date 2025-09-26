@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 18:58:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 00:14:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	daft_quit(void);
 void	daft_swap(int enum_id);
 void	daft_free(void *mem);
 void	*daft_get(const char *search);
+int		daft_load(void);
 void	*daft_edit(const char *search, int size, int mtr_number);
-void	*daft_append(char *key, int size, int mtr_number);
+void	*daft_append(const char *key, int size, int mtr_number);
 
 //SECTION - enum
 

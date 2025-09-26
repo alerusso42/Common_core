@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:31:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 19:47:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 00:42:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	str_handler(t_daft_data *dt, int i, char **line, char *mem)
 static void	mtr_h_handler(t_daft_data *dt, int i, char **line, char **mem)
 {
 	int		j;
+	bool	first_comma;
 
 	if (**line == '#')
 		(void)fd_printf(dt->temp_files[1], "%s\n", *line);
@@ -76,12 +77,15 @@ static void	mtr_h_handler(t_daft_data *dt, int i, char **line, char **mem)
 		return ;
 	}
 	j = 0;
+	first_comma = false;
 	while (mem[j])
 	{
+		if (mem[j][0] && first_comma == true)
+			fd_printf(dt->temp_files[1], "%c", *dt->data_list[i]->values_sep);
+		else if (mem[j][0])
+			first_comma = true;
 		fd_printf(dt->temp_files[1], "%s", mem[j]);
 		++j;
-		if (mem[j] && mem[j][0])
-			fd_printf(dt->temp_files[1], "%c", *dt->data_list[i]->values_sep);
 	}
 	fd_printf(dt->temp_files[1], "\n");
 	FREE(*line);
@@ -96,7 +100,8 @@ static void	mtr_v_handler(t_daft_data *dt, int i, char **line, char **mem)
 	FREE(*line);
 	*line = gnl();
 	j = 0;
-	while (mem[j] && mem[j][0] && !ft_strchr(*line, *dt->data_list[i]->field_sep))
+	while (mem[j] && mem[j][0] && \
+		*line && !ft_strchr(*line, *dt->data_list[i]->field_sep))
 	{
 		len = sub_strlen(*line, dt->data_list[i]->key_value_sep, EXCLUDE);
 		if ((*line)[len])

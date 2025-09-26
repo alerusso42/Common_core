@@ -6,14 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/23 18:38:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/25 23:20:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
-
-static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd);
-static char	*check_key(const char *search, char field_sep[], t_fd *fd);
 
 /*
 //REVIEW -	daft_get
@@ -26,7 +23,7 @@ static char	*check_key(const char *search, char field_sep[], t_fd *fd);
 	1)	*nn**:	Returns a regular string (char *);
 	2)	*yn**:	Returns a 2D matrix(char **);
 	3)	*ny**:	Returns a 2D matrix(char **);
-	4)	*yy**:	Returns a 3D matrix(char **);
+	4)	*yy**:	Returns a 3D matrix(char ***);
 
 	Example:
 	...
@@ -46,6 +43,7 @@ void	*daft_get(const char *search)
 	t_daft_data	*data;
 	t_fd		fd;
 	void		*mem;
+	char		*key;
 
 	if (!search)
 		return (NULL);
@@ -55,54 +53,14 @@ void	*daft_get(const char *search)
 	fd = openfd(data->data_list[data->current_file]->filename, "r");
 	if (!fd.n)
 		return (NULL);
-	mem = get_mem(data, data->data_list[data->current_file], search, fd);
+	key = _daft_get_key(data, data->data_list[data->current_file], search, fd);
 	closefd(fd);
+	if (!key)
+		return (NULL);
+	mem = _daft_select_mem_type(data, data->data_list[data->current_file], key);
 	if (mem)
 		_daft_add_mem(data);
 	return (mem);
-}
-
-//	Gets hash from string
-static void	*get_mem(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
-{
-	int			hash_result;
-	int			offset;
-	t_daft_node	*current;
-	char		*key;
-
-	hash_result = _daft_hash(f, s);
-	if (!f->node[hash_result])
-		return (NULL);
-	key = NULL;
-	current = f->node[hash_result];
-	while (!key && current)
-	{
-		offset = current->offset;
-		SEEK(fd.p, offset, RW_SEEK_SET);
-		key = check_key(s, f->field_sep, &fd);
-		current = current->next;
-	}
-	if (!key)
-		return (NULL);
-	dt->mem.file = dt->current_file;
-	dt->mem.hash = hash_result;
-	dt->mem.key = key;
-	return (_daft_select_mem_type(dt, f, key));
-}
-
-//	Check if key is right (for collisions).
-static char	*check_key(const char *search, char field_sep[], t_fd *fd)
-{
-	char	*key;
-
-	key = gnl();
-	if (!key)
-		return (NULL);
-	if (!ft_strncmp(search, key, sub_strlen(key, field_sep, EXCLUDE)))
-		return (key);
-	FREE(key);
-	reset_fd(*fd);
-	return (NULL);
 }
 
 void	*_daft_select_mem_type(t_daft_data *data, t_daft_list *file, char *key)
@@ -118,12 +76,12 @@ void	*_daft_select_mem_type(t_daft_data *data, t_daft_list *file, char *key)
 	else if (type == TWO_D_MATRIX)
 	{
 		data->mem.type = TWO_D_MATRIX;
-		return (_daft_get_vertical_matr(data, file));
+		return (_daft_get_horiz_matr(data, file, key));
 	}
 	else if (type == TWO_D_MATRIX_VERTICAL)
 	{
 		data->mem.type = TWO_D_MATRIX;
-		return (_daft_get_horiz_matr(data, file, key));
+		return (_daft_get_vertical_matr(data, file));
 	}
 	else if (type == THREE_D_MATRIX)
 	{

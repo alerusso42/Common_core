@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 10:00:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 00:23:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ static void	daft_printerror(int log, t_fd fd)
 		fd_printf(fd, "Missing SETTINGS.md file.\n");
 	else if (log == DAFT_LOG_FILESETT)
 		fd_printf(fd, "Missing hash_data file.\n");
+	else if (log == DAFT_LOG_NOMEM)
+		fd_printf(fd, "Called a function without calling daft_init().\n");
 }

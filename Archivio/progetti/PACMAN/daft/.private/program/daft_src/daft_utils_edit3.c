@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:31:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 19:23:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 00:30:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	mtr_h_handler(t_daft_data *dt, int i, char **line, char **mem)
 	{
 		fd_printf(dt->temp_files[1], "%s", mem[j]);
 		++j;
-		if (mem[j] && mem[j][0])
+		if (mem[j - 1][0] && mem[j] && mem[j][0])
 			fd_printf(dt->temp_files[1], "%c", *dt->data_list[i]->values_sep);
 	}
 	fd_printf(dt->temp_files[1], "\n");

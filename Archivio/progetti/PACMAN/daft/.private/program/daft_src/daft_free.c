@@ -6,14 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 16:43:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 14:31:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/25 23:08:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
 
 /*
-//REVIEW -	daft_get
+//REVIEW -	daft_free
 //
 	Free a memory returned by daft, in a call of daft_get() or daft_edit().
 	All memory got from daft are handled by an internal garbage
@@ -21,9 +21,9 @@
 	However, if you need, you can free them safely before, passing
 	the memory to this function.
 
-	WARNING: 	if you free a ptr taken with daft_edit(), the file will not
-				be changed, since you erased the memory before calling
-				daft_quit().
+	WARNING: 	if you free a ptr taken with daft_edit() or daft_append(),
+				the file content will not be changed, since you erased
+				the memory before calling daft_quit().
 */
 void	daft_free(void *mem)
 {

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:03:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 19:52:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 02:04:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	test_print(char ***matr)
 	}
 }
 
-int	main()
+int	main3()
 {
 	srand((unsigned int)time(NULL));
 	
@@ -62,10 +62,73 @@ int	main()
 	if (daft_init())
 		return (1);
 	daft_swap(POKEDEX);
-	m1 = daft_append("CALYREX", 9, 2);
+	m1 = daft_append("CRAZY", 9, 2);
 	ft_strlcpy(m1[1][0], "FIRE", 5);
 	ft_strlcpy(m1[1][1], "FIGHT", 6);
 	ft_strlcpy(m1[1][2], "GABIBBO", 8);
+	daft_quit();
+	return (0);
+}
+
+int	main4()
+{
+	srand((unsigned int)time(NULL));
+	
+	char	**m1;
+
+	if (daft_init())
+		return (1);
+	daft_swap(MEDIA_LIST);
+	m1 = daft_append("CRAZY", 20, 10);
+	ft_strlcpy(m1[1], "FIRE", 5);
+	ft_strlcpy(m1[2], "FIGHT", 6);
+	ft_strlcpy(m1[3], "GABIBBO", 8);
+	daft_load();
+	m1 = daft_edit("CRAZY", 20, 10);
+	ft_strlcpy(m1[1], "WATER", 5);
+	ft_strlcpy(m1[2], "FOOO", 6);
+	ft_strlcpy(m1[3], "MEGA_GABIBBO", 13);
+	daft_load();
+	m1 = daft_get("CRAZY");
+	for (int i = 0; m1[i]; i++)
+	{
+		printf("%s\n", m1[i]);
+	}
+	daft_quit();
+	return (0);
+}
+
+int	main()
+{
+	srand((unsigned int)time(NULL));
+	
+	char	***m1;
+
+	if (daft_init())
+		return (1);
+	daft_swap(POKEDEX);
+	m1 = daft_append("CRAZY", 200, 100);
+	ft_strlcpy(m1[1][0], "FIRE", 5);
+	ft_strlcpy(m1[1][1], "FIGHT", 6);
+	ft_strlcpy(m1[5][2], "GABIBBO", 8);
+	ft_strlcpy(m1[6][3], "GABIBBOo", 9);
+	ft_strlcpy(m1[7][4], "GABIBBOoo", 10);
+	ft_strlcpy(m1[8][5], "GABIBBOooo", 11);
+	ft_strlcpy(m1[9][6], "GABIBBOooo", 11);
+	daft_quit();
+	return (0);
+	daft_load();
+	m1 = daft_edit("CRAZY", 200, 100);
+	ft_strlcpy(m1[1][0], "WATER", 6);
+	ft_strlcpy(m1[1][1], "FIRE", 5);
+	ft_strlcpy(m1[5][2], "RAYQUAZ", 8);
+	ft_strlcpy(m1[6][3], "RAYQUAZo", 8);
+	ft_strlcpy(m1[7][4], "RAYQUAZoo", 8);
+	ft_strlcpy(m1[8][5], "RAYQUAZooo", 8);
+	ft_strlcpy(m1[9][6], "RAYQUAZooo", 8);
+	daft_load();
+	m1 = daft_get("CRAZY");
+	test_print(m1);
 	daft_quit();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/12 23:52:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/26 01:11:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <malloc.h>
-#include <SDL2/SDL.h>
 #include "libft.h"
 
 char		*ft_convert_base(char *nbr, char *base_from, char *base_to);

@@ -8,6 +8,7 @@ DEFAULT_FLAGS->:ny:,
 HASH_SIZE->1.3
 DEBUG_LOG->y
 LIBFT->
+ANDROID->
 
 #SECTION - Files flags and enums
 #	OPTIONAL: Choose the enum names of your files, 
