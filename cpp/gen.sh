@@ -107,16 +107,16 @@ $class::~$class()
 
 $class::$class(const $class &other)
 { 
-	*this = other;
+	(void)other;
 }
 
 $class &$class::operator=(const $class &other)
 {
 	if (this != &other) 
 	{
-		// copy fields
+		// add field
 	}
-	return *this;
+	return (*this);
 }
 EOF
 

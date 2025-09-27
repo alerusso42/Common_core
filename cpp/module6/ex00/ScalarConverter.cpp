@@ -32,7 +32,7 @@ void	ScalarConverter::convert(string literal)
 
 	special_case = special_cases(literal);
 	type = find_type(literal, special_case);
-	if (type == T_CHAR && literal.length() == 1)
+	if (type == T_CHAR && literal.length() == 1 && !ft_isdigit(literal[0]))
 		n = literal[0];
 	else
 		n = std::atof(literal.c_str());
