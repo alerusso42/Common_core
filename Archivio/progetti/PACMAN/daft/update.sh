@@ -11,8 +11,8 @@ UPDATE="update.sh"
 PWD="/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
 
 # Directory in which to store all hash files (relative or absolute path)
-HASH_DIR=".private/hash_data"
-PROG_DIR="./.private/program"
+HASH_DIR="data/hash_data"
+PROG_DIR="./program"
 
 # Markers in SETTINGS.md that delimit the FLAGS and ENUM sections
 MARKER="# -- FLAGS -- #"
@@ -57,7 +57,7 @@ TMPFILE=$(mktemp)
    		 # 2) Insert the new #define immediately after the globals marker
    		 sed -i "/\/\/SECTION - Global variables/ a \
 		#define DAFT_PWD $current_pwd" "$DAFT_HEADER"
-		(cd .private/program && make re) || exit 2
+		(cd "$PROG_DIR" && make re) || exit 2
 		echo -ne "\e[34mDone!\n\e[0m"
 		sed -i "s|^PWD=.*|PWD=${current_pwd}|" "$UPDATE"
 		pwd_changed=1
@@ -302,7 +302,7 @@ fi
 # STEP 10: Build or update hash files for each data file
 # -----------------------------------------------------------------------------
 i="-1"
-(cd .private/program && make)
+(cd "$PROG_DIR" && make)
 for file in "${real_files[@]}"; do
 	((++i))
     clean="${file#data/}"

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:03:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 18:58:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:25:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ TODO
 	[]	esport su android
 */
 
-int	main()
+int	main1()
 {
 	t_data	data;
 
@@ -98,7 +98,7 @@ int	main4()
 	return (0);
 }
 
-int	main5()
+int	main()
 {
 	srand((unsigned int)time(NULL));
 	

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 18:55:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:44:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,5 @@ static void	update_filedata(t_daft_data *data)
 			_daft_edit_hash_file(data->data_list[i], i);
 		++i;
 	}
+	closefd(openfd(DAFT_PWD"/file.tmp", "w"));
 }

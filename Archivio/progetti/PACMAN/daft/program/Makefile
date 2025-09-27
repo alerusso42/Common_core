@@ -7,7 +7,7 @@ O_DIR := obj
 LIBFT_OBJ_DIR := $(O_DIR)/Libft_obj
 PREP_OBJ_DIR := $(O_DIR)/prep_obj
 DAFT_OBJ_DIR := $(O_DIR)/daft_obj
-DAFT_H := ../../daft.h
+DAFT_H := ../daft.h
 
 # Project root (current directory)
 ROOT := .
@@ -51,7 +51,7 @@ DAFT_OBJ := $(patsubst ./daft_src/%.c,$(DAFT_OBJ_DIR)/%.o,$(DAFT_SRC)) $(LIBFT_O
 # 6) Our final files:
 # ------------------------------------------------
 PREP := prep.out
-DAFT := ../../daft.a
+DAFT := ../daft.a
 
 # ------------------------------------------------
 # 7) Compiler + flags

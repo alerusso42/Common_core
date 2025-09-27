@@ -6,12 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 00:14:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:18:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DAFT_H
 # define DAFT_H
+
+# include "program/Libft/all.h"
 
 /*WARNING: 	don't modify this file directly!
 			modify SETTINGS.md instead!

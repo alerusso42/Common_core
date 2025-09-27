@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 11:23:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:05:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ char	*_daft_get_hash_filename(char *filename)
 	}
 	if (!filename[i])
 		return (NULL);
-	i += 5;
-	return (_cat_string(filename, ".private/hash_", i, 0));
+	i += 10;
+	return (_cat_string(filename, "hash_data/", i, 0));
 }
 
 //	Inner flags and the maximum hash value are saved.

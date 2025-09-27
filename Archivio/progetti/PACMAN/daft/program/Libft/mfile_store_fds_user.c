@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 16:26:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:40:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ t_fd	openfd(const char *filename, const char *permissions)
 	data->fds[i].p = OPEN(filename, permissions);
 	if (!data->fds[i].p)
 	{
-		return (closefd(data->fds[i]), (t_fd){0});
+		data->fds[i].n = 0;
+		return ((t_fd){0});
 	}
 	data->filenames[i] = ft_strdup(filename);
 	if (!data->filenames[i])
-	{
 		return (closefd(data->fds[i]), (t_fd){0});
-	}
 	data->curr_fd = data->fds[i];
 	data->curr_file = data->filenames[i];
 	if (data->curr_fd.n > data->last)

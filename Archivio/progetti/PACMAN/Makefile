@@ -9,9 +9,9 @@ SRC :=  $(wildcard srcs/*.c) \
         $(wildcard srcs/map/*.c) \
         $(wildcard srcs/utils/*.c) \
         $(wildcard srcs/debug/*.c) \
-		$(wildcard daft/.private/program/daft_src/*.c) \
-		$(wildcard daft/.private/program/prep_src/*.c) \
-		$(wildcard daft/.private/program/Libft/*.c)
+		$(wildcard daft/program/daft_src/*.c) \
+		$(wildcard daft/program/prep_src/*.c) \
+		$(wildcard daft/program/Libft/*.c)
 
 
 HEADER = includes/*.h
@@ -22,7 +22,7 @@ OBJ := $(patsubst %.c, $(O_DIR)/%.o, $(SRC))
 
 NAME = pacman
 #LIB = daft/daft.a
-LIB = daft/.private/program/daft_src/*.c daft/.private/program/prep_src/*.c daft/.private/program/Libft/*.c
+LIB = daft/program/daft_src/*.c daft/program/prep_src/*.c daft/program/Libft/*.c
 
 COMP = cc -Wall -Wextra -Werror -g
 
@@ -57,15 +57,16 @@ build/obj/%.o: %.c
 
 clean:
 	rm -rf $(O_DIR)
+	rm -f *.log
 
 fclean: clean
 	rm -f $(NAME)
 	printf 1
-	$(MAKE) fclean -C daft/.private/program
+	$(MAKE) fclean -C daft/program
 
 daft: 
 	printf 2
-	$(MAKE) -C daft/.private/program
+	$(MAKE) -C daft/program
 
 re: fclean daft all
 .PHONY: daft

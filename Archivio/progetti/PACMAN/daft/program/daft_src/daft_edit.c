@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:04:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 18:57:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 22:15:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 	On success, returns the current data in the file; you can modify
 	it as you want.
 	When daft_load() or daft_quit() are called, every buffer returned with
-	daft_edit() overrides the files old content. After this, the buffers
-	are freed.
+	daft_edit() overrides the files old content.
 	Parameters:	
 				key:		the key of the data you need to modify;
 				size:		the size in memory of the strings allocated;
@@ -46,7 +45,7 @@
 
 	If key does not exist, daft_edit() fails.
 	If daft_edit is called on the same key multiple times, only most
-	recent called is considered; others are just ignored.
+	recent call is considered; others are just ignored.
 */
 void	*daft_edit(const char *search, int size, int mtr_number)
 {

@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 18:39:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 22:55:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DAFT_PROG_H
 # define DAFT_PROG_H
-# include "../../../daft.h"
+# include "../../daft.h"
 # include "../Libft/all.h"
 
 # define SEED 42
