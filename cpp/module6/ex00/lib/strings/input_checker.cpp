@@ -87,7 +87,7 @@ bool	ft_atoi(std::string s, int *n)
 //	2:	bad first char
 //	3:	invalid char in string
 //	4:	too many dots
-//	4:	string too big
+//	4:	.f
 //#include <math.h>
 bool	valid_number(std::string s, bool is_float)
 {
@@ -96,6 +96,8 @@ bool	valid_number(std::string s, bool is_float)
 
 	if (valid_input(s) == false)
 		return (1);
+	if (s.length() == 1 && s[0] > 31 && s[0] < 127)
+		return (0);
 	if (std::isdigit(s[0]) == false && s[0] != '+' && s[0] != '-')
 		return (2);
 	i = 1;
@@ -104,11 +106,11 @@ bool	valid_number(std::string s, bool is_float)
 	{
 		if (s[i] == '.')
 		{
-			if (!s[i + 1])
+			if (!s[i + 1] || s[i + 1] == 'f')
 				return (4);
 			n_dots += 1;
 		}
-		else if (std::isdigit(s[i]) == false && s[i + 1])
+		else if (std::isdigit(s[i]) == false && (s[i] != 'f' || s[i + 1]))
 			return (3);
 		i++;
 	}
@@ -116,8 +118,6 @@ bool	valid_number(std::string s, bool is_float)
 		return (3);
 	if (n_dots > is_float)
 		return (4);
-	/*if (((u_int64_t)1 << max_bits) < (pow(10, i)))
-		return (5);*/
 	return (0);
 }
 

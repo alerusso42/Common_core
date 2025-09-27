@@ -55,12 +55,25 @@ public:
 	static void		convert(string literal);
 };
 
+//SECTION ScalarConverter.cpp
+
 int		special_cases(string s);
 int		find_type(string s, int special_case);
+
+//SECTION overflow.cpp
+
 bool	float_out_of_range(double n);
 int		overflow_check(string s);
 
+//SECTION utils.cpp
+
 bool	ft_strchr(string s, string charset);
+int		ft_isdigit(char c);
+string	put_dot(int type, bool f);
+bool	decimal_not_zero(string s);
+
+//SECTION convert.cpp
+
 void	convert_char(double n, int special_case, int type);
 void	convert_int(double n, int special_case, int type);
 void	convert_float(double n, int special_case, int type);

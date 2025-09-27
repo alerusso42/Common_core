@@ -6,13 +6,11 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:27:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 12:00:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:43:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "ScalarConverter.hpp"
-
-//DBL_MAX
 
 bool	ft_strchr(string s, string charset)
 {
@@ -34,69 +32,36 @@ bool	ft_strchr(string s, string charset)
 	return (false);
 }
 
-void	convert_char(double n, int special_case, int type)
+string	put_dot(int type, bool f)
 {
-	(void)type;
-	std::cout << "char:\t";
-	if (type == T_OVERFLOW)
-		std::cout << "Impossible (overflow/underflow)\n";
-	else if (special_case)
-		std::cout << "Impossible\n";
-	else if (n <= 31 || n >= 127)
-		std::cout << "Not displayable\n";
-	else
-		std::cout << static_cast<char>(n) << "\n";
+	string	s;
+
+	s.clear();
+	if (type == T_CHAR || type == T_INT)
+		s += ".0";
+	if (f)
+		s += "f";
+	return (s);
 }
 
-void	convert_int(double n, int special_case, int type)
+bool	decimal_not_zero(string s)
 {
-	(void)type;
-	std::cout << "int:\t";
-	if (type == T_OVERFLOW)
-		std::cout << "Impossible (overflow/underflow)\n";
-	else if (special_case)
-		std::cout << "Impossible\n";
-	else
-		std::cout << static_cast<int>(n) << "\n";
-}
+	int	i;
 
-void	convert_float(double n, int special_case, int type)
-{
-	std::cout << "float\t";
-	if (type == T_OVERFLOW)
-		std::cout << "Impossible (overflow/underflow)\n";
-	else if (special_case)
+	i = s.find(".");
+	if (i < 0)
+		return (false);
+	++i;
+	while (s[i])
 	{
-		if (type == T_DOUBLE && special_case)
-			convert_special(special_case - S_HALF);
-		else
-			convert_special(special_case);
+		if (s[i] != '0' && s[i] != 'f')
+			return (true);
+		++i;
 	}
-	else if (type != T_DOUBLE)
-		std::cout << static_cast<float>(n) << "\n";
-	else
-		std::cout << "Impossible (overflow/underflow)\n";
+	return (false);
 }
 
-void	convert_double(double n, int special_case, int type)
+int	ft_isdigit(char c)
 {
-	std::cout << "double\t";
-	if (type == T_OVERFLOW)
-		std::cout << "Impossible (overflow/underflow)\n";
-	else if (special_case)
-	{
-		if (type == T_FLOAT && special_case)
-			convert_special(special_case + S_HALF);
-		else
-			convert_special(special_case);
-	}
-	else
-		std::cout << n << "\n";
-}
-
-void	convert_special(int special_case)
-{
-	string	special[] = {SPECIAL};
-
-	std::cout << special[special_case] << "\n";
+	return ((c >= '0' || c <= '9') * c);
 }

@@ -2,7 +2,8 @@ NAME =	 		program
 SRC	=	 		main.cpp \
 				ScalarConverter.cpp \
 				utils.cpp \
-				overflow.cpp
+				overflow.cpp \
+				convert.cpp
 
 LIB_SRC	= 		error/Error.cpp \
 	files/sed.cpp \
