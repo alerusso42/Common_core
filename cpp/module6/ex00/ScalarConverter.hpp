@@ -14,6 +14,7 @@
 # define SCALARCONVERTER_HPP
 # include "lib/lib.hpp"
 # include "limits.h"
+# include "cfloat"
 
 # define SPECIAL "OK", "inff", "-inff", "+inff", "nanf", "inf", \
 "-inf", "+inf", "nan", ""
@@ -24,6 +25,7 @@ enum	e_types
 	T_INT,
 	T_FLOAT,
 	T_DOUBLE,
+	T_OVERFLOW,
 	T_TOTAL,
 };
 
@@ -38,6 +40,7 @@ enum e_special
 	S_INF_PLUS,
 	S_NAN,
 	S_TOTAL,
+	S_HALF = S_TOTAL / 2,
 };
 
 class ScalarConverter
@@ -54,11 +57,14 @@ public:
 
 int		special_cases(string s);
 int		find_type(string s, int special_case);
+bool	float_out_of_range(double n);
+int		overflow_check(string s);
 
+bool	ft_strchr(string s, string charset);
 void	convert_char(double n, int special_case, int type);
 void	convert_int(double n, int special_case, int type);
 void	convert_float(double n, int special_case, int type);
 void	convert_double(double n, int special_case, int type);
-double	convert_special(int special_case);
+void	convert_special(int special_case);
 
 #endif

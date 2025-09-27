@@ -32,7 +32,6 @@ void	ScalarConverter::convert(string literal)
 
 	special_case = special_cases(literal);
 	type = find_type(literal, special_case);
-	(void)type;
 	n = std::atof(literal.c_str());
 	convert_char(n, special_case, type);
 	convert_int(n, special_case, type);
@@ -51,4 +50,27 @@ int	special_cases(string s)
 			return (i);
 	}
 	return (false);
+}
+
+int		find_type(string s, int special_case)
+{
+	double	n;
+	if (!special_case && overflow_check(s))
+		return (T_OVERFLOW);
+	if (special_case)
+	{
+		if (special_case >= S_INFF && special_case <= S_NANF)
+			return (T_FLOAT);
+		return (T_DOUBLE);
+	}
+	else if (ft_strchr(s, ".f") == false)
+	{
+		if (std::atoi(s.c_str()) <= UCHAR_MAX)
+			return (T_CHAR);
+		return (T_INT);
+	}
+	n = std::atof(s.c_str());
+	if (float_out_of_range(n) == false)
+		return (T_FLOAT);
+	return (T_DOUBLE);
 }
