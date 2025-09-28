@@ -37,10 +37,10 @@ $(NAME): $(SRC) $(LIB) $(HEADER)
 	$(C) $(CFLAGS) $(SRC) $(LIB) -o $(NAME)
 
 clean:
-	rm -rf $(NAME)
-
+	
 fclean: clean
 	rm -f *_shrubbery
+
 re: fclean all
 
 run: 

@@ -53,6 +53,7 @@
 		"span": "cpp",
 		"ctime": "cpp",
 		"iomanip": "cpp",
-		"scalarconverter.hpp": "c"
+		"scalarconverter.hpp": "c",
+		"notes+tests": "cpp"
 	}
 }

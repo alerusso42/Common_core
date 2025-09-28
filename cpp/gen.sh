@@ -188,9 +188,10 @@ all: \$(NAME)
 	\$(C) \$(CFLAGS) \$(SRC) \$(LIB) -o \$(NAME)
 
 clean:
-	rm -rf \$(NAME)
+	@printf "no objects for %s\n" \$(NAME)
 
-fclean: clean
+fclean:
+	rm -rf \$(NAME)
 
 re: fclean all
 

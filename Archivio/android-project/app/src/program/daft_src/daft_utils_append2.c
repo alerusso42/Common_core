@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:31:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 00:42:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/28 14:10:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	_daft_append_f(t_daft_data *dt, int i, char **line, t_daft_mem *mem)
 		}
 		case (THREE_D_MATRIX) :
 		{
+			//logg(ft_strjoin_free(ft_strdup("stampa:\t"), ft_itoa(WRITE(dt->temp_files[1].p, "TESTTT", sizeof(char), 6))));
 			fd_printf(dt->temp_files[1], "%s\n", mem->key);
 			mtr_3d_handler(dt, i, line, (char ***)mem->ptr);
 		}

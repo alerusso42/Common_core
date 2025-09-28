@@ -7,9 +7,10 @@ all: $(NAME)
 $(NAME): $(SRC)
 	g++ -Wall -Wextra -Werror -std=c++98 $(SRC) $(HEADER)
 
-clean: 
-	rm $(NAME)
+clean:
+	@printf "no objects for %s\n" "$(NAME)"
 
-fclean: clean
+fclean:
+	rm -rf $(NAME)
 
 re: fclean all
