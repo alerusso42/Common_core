@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 23:03:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/18 23:05:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:36:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include "SDL.h"
 # include <stdbool.h>
-# include "../main/daft/daft.h"
-# include "../main/daft/.private/program/Libft/libft.h"
+# include "../daft.h"
+# include "../program/Libft/libft.h"
 
 int 	daft_init(void);
 void	daft_quit(void);
 void	daft_swap(int enum_id);
 void	*daft_get(const char *search);
+void	logg(char *s);
 
 enum	e_utils
 {

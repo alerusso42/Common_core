@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"cstdint": "c",
-		"header.h": "c"
+		"header.h": "c",
+		"sdl.h": "c",
+		"daft_prog.h": "c"
 	}
 }

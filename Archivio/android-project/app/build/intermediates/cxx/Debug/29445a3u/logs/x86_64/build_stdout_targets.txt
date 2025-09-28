@@ -1,4 +1,6 @@
 Android NDK: WARNING:/home/alerusso/Common_core/Archivio/android-project/app/jni/Android.mk:cpufeatures: LOCAL_LDLIBS is always ignored for static libraries    
 make: Nothing to be done for 'SDL2'.
 [x86_64] Compile        : main <= main.c
+[x86_64] Compile        : daft <= daft_get.c
+[x86_64] StaticLibrary  : libdaft.a
 [x86_64] SharedLibrary  : libmain.so

@@ -26,6 +26,8 @@ ANDROID->y
 # -- FLAGS -- #
 data/enemies->:ny:,
 data/media_list->:ny:,
+data/pokedex->]yy=,
 # -- ENUM -- #
 data/enemies->ENEMIES
 data/media_list->MEDIA_LIST
+data/pokedex->POXEDEX

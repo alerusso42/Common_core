@@ -6,20 +6,18 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 03:00:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/19 00:47:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/28 11:22:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../src/include/header.h"
-#include <android/log.h>
 
-#define LOG_TAG "DAFT"
-
-int	main()
+int	main1()
 {
 	t_data	data;
 	char	**test;
 
+	logg("start");
 	data = (t_data){0};
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		return (printf("CRASH!!!!!"), 1);
@@ -32,14 +30,14 @@ int	main()
 	SDL_GetWindowSize(data.win, &data.wscreen, &data.hscreen);
 	if (init_txtr(&data) != 0)
 		return (printf("CRASH!!!!!"), 1);
-	app_loop(&data);
+	logg("app loop..");
+	//app_loop(&data);
 	SDL_Quit();
 	free_txtr(&data);
 	if (daft_init() != 0)
 		return (1);
 	daft_swap(ENEMIES);
 	test = daft_get("RED");
-	__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "s: %s\n", test[1]);
 	if (ft_strncmp(test[0], "3", 12) == 0 || ft_strncmp(test[0], "RED", 12) == 0)
 		SDL_Delay(4000);
 	daft_quit();
@@ -154,4 +152,63 @@ void	reset_buff(t_touch *touch)
 		touch->text[i] = 0;
 	touch->text_len = 0;
 	touch->text_left = sizeof(touch->text) - 1;
+}
+
+void	test_print(char ***matr)
+{
+	int	i, j;
+
+	i = 0;
+	while (matr[i])
+	{
+		j = 0;
+		while (matr[i][j])
+		{
+			logg(matr[i][j]);
+			//printf("%s\n", matr[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+int	main()
+{
+	srand((unsigned int)time(NULL));
+	
+	char	***m1;
+
+	if (daft_init())
+		return (1);
+	daft_swap(POKEDEX);
+	m1 = daft_append("CRAZY", 200, 100);
+	ft_strlcpy(m1[1][0], "FIRE", 5);
+	logg("io inizio eh..");
+	ft_strlcpy(m1[1][1], "FIGHT", 6);
+	ft_strlcpy(m1[5][2], "GABIBBO", 8);
+	ft_strlcpy(m1[6][3], "GABIBBOo", 9);
+	ft_strlcpy(m1[7][4], "GABIBBOoo", 10);
+	ft_strlcpy(m1[8][5], "GABIBBOooo", 11);
+	ft_strlcpy(m1[9][6], "GABIBBOooo", 11);
+	logg("load..");
+	daft_load();
+	m1 = daft_edit("CRAZY", 200, 100);
+	logg("fase edit..");
+	if (!m1)
+		logg("fallimento..");
+	ft_strlcpy(m1[1][0], "WATER", 6);
+	ft_strlcpy(m1[1][1], "FIRE", 5);
+	ft_strlcpy(m1[5][2], "RAYQUAZ", 8);
+	ft_strlcpy(m1[6][3], "RAYQUAZo", 8);
+	ft_strlcpy(m1[7][4], "RAYQUAZoo", 8);
+	ft_strlcpy(m1[8][5], "RAYQUAZooo", 8);
+	ft_strlcpy(m1[9][6], "RAYQUAZooo", 8);
+	daft_load();
+	m1 = daft_get("CRAZY");
+	logg("fase get..");
+	if (!m1)
+		logg("fallimento..");
+	test_print(m1);
+	daft_quit();
+	return (0);
 }
