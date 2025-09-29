@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 18:27:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/29 10:14:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/29 21:43:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Array<T>::Array(u_int32_t size)
 	this->_size = size;
 	for (u_int32_t i = 0; i < size + 1; i++)
 	{
-		this->_data[i] = (T)0;
+		this->_data[i] = T();
 	}
 }
 
@@ -82,7 +82,8 @@ Array<T> &Array<T>::operator=(const Array &other)
 
 	if (this == &other) 
 		return (*this);
-	this->_size = other.get_size();
+	delete [] this->_data;
+	this->_size = other.size();
 	if (this->_size == 0)
 	{
 		this->_data = NULL;
@@ -102,7 +103,7 @@ Array<T> &Array<T>::operator=(const Array &other)
 }
 
 template	<typename T>
-int	Array<T>::size(void) const
+u_int32_t	Array<T>::size(void) const
 {
 	return (this->_size);
 }
@@ -114,13 +115,19 @@ const T	*Array<T>::get_data(void) const
 }
 
 template	<typename T>
-T	&Array<T>::operator[](int index)
+T	&Array<T>::operator[](u_int32_t index)
 {
-	if (index < 0)
-		throw (Error(EX_NEGATIVE_INDEX));
-	else if (index > this->_size - 1)
+	if (index > this->_size - 1)
 		throw (Error(EX_OUT_BOUND));
 	return (this->_data[index]);
+}
+
+template	<typename T>
+void	Array<T>::print(void) const
+{
+	for (u_int32_t i = 0; i < this->_size; i++)
+		std::cout << this->_data[i] << "\n";
+	std::cout << std::flush;
 }
 
 #endif

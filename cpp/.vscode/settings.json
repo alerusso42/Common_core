@@ -54,6 +54,8 @@
 		"ctime": "cpp",
 		"iomanip": "cpp",
 		"scalarconverter.hpp": "c",
-		"notes+tests": "cpp"
+		"notes+tests": "cpp",
+		"list": "cpp",
+		"map": "cpp"
 	}
 }

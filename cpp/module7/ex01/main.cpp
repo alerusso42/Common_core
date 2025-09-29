@@ -13,7 +13,10 @@
 # include "iter.hpp"
 # include "test.tpp"
 
-int main1()
+//SECTION - ft_toupper, ft_tolower = 	non const
+//			print_upper, print_lower = 	const
+//			ft_tolower, print_lower =	template function
+int main()
 {
 	char	s[ARR_LENGTH] = "minuscolo";
 
@@ -28,6 +31,9 @@ int main1()
 	return (0);
 }
 
+//SECTION - ft_positive, ft_negative = 			non const
+//			print_positive, print_negative = 	const
+//			ft_negative, print_negative =		template function
 int main2()
 {
 	int	s[ARR_LENGTH] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
@@ -47,6 +53,7 @@ int main2()
 	return (0);
 }
 
+//SECTION - using to_lower with numbers
 int main3()
 {
 	int	s[ARR_LENGTH] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
@@ -62,6 +69,7 @@ int main3()
 	return (0);
 }
 
+//SECTION - only const function
 int main4()
 {
 	const int	s[ARR_LENGTH] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
@@ -76,6 +84,7 @@ int main4()
 	return (0);
 }
 
+//SECTION - only const function
 int main5()
 {
 	const char	s[ARR_LENGTH] = "minuscolo";
@@ -90,6 +99,7 @@ int main5()
 	return (0);
 }
 
+//SECTION - example with type string
 int main6()
 {
 	string	s[ARR_LENGTH] = {STRINGS};

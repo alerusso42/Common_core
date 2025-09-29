@@ -12,11 +12,14 @@
 
 # include "header.hpp"
 
+# define STRINGS "012", "345", "678", "901", ""
+
+//SECTION - Empty array
 int main() 
 {
 	try
 	{
-		Array<int>	arr(UINT_MAX / 2);
+		Array<int>	arr;
 		arr[0] = 42;
 	}
 	catch(const Error &e)
@@ -41,7 +44,7 @@ int main2()
 	return (0);
 }
 
-//SECTION - string Array
+//SECTION - string Array with argc
 int main3(int argc, char *argv[])
 {
 	if (argc == 1)
@@ -53,7 +56,50 @@ int main3(int argc, char *argv[])
 	{
 		Array<string>	arr(argc);
 		for (int i = 1; i < argc; i++)
-			arr[i] = argv[i];
+			arr[i - 1] = argv[i];
+		arr.print();
+	}
+	catch(const Error &e)
+	{
+		e.print();
+	}
+	return (0);
+}
+
+//SECTION - string Array with macro
+int main4()
+{
+	string	strings[] = {STRINGS};
+	try
+	{
+		Array<string>	arr(2);
+		for (int i = 1; strings[i].empty() == false; i++)
+			arr[i - 1] = strings[i];
+		arr.print();
+	}
+	catch(const Error &e)
+	{
+		e.print();
+	}
+	return (0);
+}
+
+//SECTION - copy of an array
+int main5()
+{
+	string	strings[] = {STRINGS};
+	try
+	{
+		Array<string>	arr(5);
+		Array<string>	arr_copy(5);
+		for (int i = 1; strings[i].empty() == false; i++)
+			arr[i - 1] = strings[i];
+		arr_copy = arr;
+		arr_copy[0] = "Guarda mamma sono diverso";
+		std::cout << "\033[32mPrint of the original:\n\033[0m";
+		arr.print();
+		std::cout << "\033[33mPrint of the copy:\n\033[0m";
+		arr_copy.print();
 	}
 	catch(const Error &e)
 	{
