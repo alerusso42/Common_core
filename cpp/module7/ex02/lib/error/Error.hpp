@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 19:19:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/29 09:41:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ typedef	std::string	string;
 
 enum e_error
 {
-	EX_GRADE_HIGH,
-	EX_GRADE_LOW,
-	EX_NOT_SIGN,
+	EX_BAD_SIZE,
+	EX_OUT_BOUND,
+	EX_NEGATIVE_INDEX,
+	EX_ALLOC,
 	EX_NUM,
 };
 

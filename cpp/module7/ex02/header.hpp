@@ -14,6 +14,7 @@
 # define HEADER_HPP
 /* Auto-generated header aggregator */
 # include "lib/lib.hpp"
-#include "Array.hpp"
+# include "Array.hpp"
+# include "limits.h"
 
 #endif

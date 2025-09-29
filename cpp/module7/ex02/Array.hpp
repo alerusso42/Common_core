@@ -26,14 +26,17 @@ private:
 	};
 public:
 //	canonic form:
-	Array<T>();
+	Array<T>(void);
 	Array<T>(u_int32_t size);
 	~Array();
 	Array(const Array &other);
 	Array &operator=(const Array &other);
 
-	int	get_index(void) const;
-	int	get_size(void) const;
+	int		size(void) const;
+	const T	*get_data(void) const;
+	T		&operator[](int index);
 };
+
+# include "Array.tpp"
 
 #endif

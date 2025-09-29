@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 19:20:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/29 09:41:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ string	Error::get_msg(int type)
 {
 	string	s;
 
-	if (type == EX_GRADE_HIGH)
-		s = "Grade too high";
-	else if (type == EX_GRADE_LOW)
-		s = "Grade too low";
-	else if (type == EX_NOT_SIGN)
-		s = "Form NOT sign";
+	if (type == EX_BAD_SIZE)
+		s = "Specified size is too big.";
+	else if (type == EX_OUT_BOUND)
+		s = "Element is out of bounds";
+	else if (type == EX_NEGATIVE_INDEX)
+		s = "Negative index is not allowed";
+	else if (type == EX_ALLOC)
+		s = "Allocation failed";
 	else
 		s = "Unknown";
 	return (s);
