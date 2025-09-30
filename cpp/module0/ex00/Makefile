@@ -5,7 +5,7 @@ HEADER	=
 all: $(NAME)
 
 $(NAME): $(SRC)
-	g++ -Wall -Wextra -Werror -std=c++98 $(SRC) $(HEADER)
+	c++ -Wall -Wextra -Werror -std=c++98 $(SRC)  
 
 clean:
 	@printf "no objects for %s\n" "$(NAME)"

@@ -9,12 +9,12 @@ LIB_SRC	= 		files/sed.cpp \
 LIB	= 		$(addprefix lib/, $(LIB_SRC))
 HEADER = 		header.hpp
 
-C =		 g++
+C =		 c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(LIB) $(HEADER)
+$(NAME): $(SRC) $(LIB)  
 	$(C) $(CFLAGS) $(SRC) $(LIB) -o $(NAME)
 
 clean:

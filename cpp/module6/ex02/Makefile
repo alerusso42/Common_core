@@ -26,12 +26,12 @@ HEADER = 		header.hpp \
 			Base.hpp
 
 
-C =		 g++
+C =		 c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(LIB) $(HEADER)
+$(NAME): $(SRC) $(LIB)  
 	$(C) $(CFLAGS) $(SRC) $(LIB) -o $(NAME)
 
 clean:

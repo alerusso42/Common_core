@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 22:18:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 12:29:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/30 11:56:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,13 @@ static int	get_files(string &filename, fstream &old_fd, fstream &new_fd)
 static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_s)
 {
 	string	line;
+	bool	no_differencies;
 
-	if (!old_s.compare(new_s))
-		return (0);
+	no_differencies = (old_s.compare(new_s) == 0);
 	while (std::getline(old_fd, line))
 	{
-		line_replace(line, old_s, new_s);
+		if (no_differencies == false)
+			line_replace(line, old_s, new_s);
 		new_fd.write(line.c_str(), line.size());
 		new_fd.write("\n", 1);
 	}
@@ -113,13 +114,8 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 }
 
 /*
-	1)	an iterator of line is got from ft_strnstr.
-		that iterator points to the first occurence of to_replace in line.
-	2)	if an occurence is found, line is erased starting from iterator
-		to to_replace length.
-	3)	then, replaced is inserted using its own iterators in the
-		occurence.
-	4)	ft_strnstr searches until all occurences are found.
+	erase it, insert it, find it.
+	Until the end.
 */
 static void	line_replace(string &line, string &to_replace, string &replacer)
 {
