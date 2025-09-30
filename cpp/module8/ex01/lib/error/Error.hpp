@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:33:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:48:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum e_error
 	EX_OUT_BOUND,
 	EX_NEGATIVE_INDEX,
 	EX_ALLOC,
+	EX_SINGLE_ELEM,
 	EX_NUM,
 };
 

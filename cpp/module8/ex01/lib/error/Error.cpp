@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:32:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:49:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ string	Error::get_msg(int type)
 		s = "Negative index is not allowed";
 	else if (type == EX_ALLOC)
 		s = "Allocation failed";
+	else if (type == EX_SINGLE_ELEM)
+		s = "Calling Span functions with less than 2 elements is not allowed";
 	else
 		s = "Unknown";
 	return (s);

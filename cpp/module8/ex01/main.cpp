@@ -14,5 +14,20 @@
 
 int main() 
 {
-	return (0);
+	Span	span(4);
+
+	random_seed();
+	try
+	{
+		span.addNumber(0);
+		span.addNumber(2);
+		span.addNumber(4);
+		std::cout << span.shortestSpan() << "\n";
+		std::cout << span.longestSpan() << "\n";
+	}
+	catch(const Error& e)
+	{
+		e.print();
+	}
+	std::cout << std::endl;
 }

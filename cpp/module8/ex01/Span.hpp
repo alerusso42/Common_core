@@ -13,6 +13,7 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 # include "lib/lib.hpp"
+# include "limits.h"
 # include "vector"
 # include "list"
 # include "algorithm"
@@ -20,6 +21,7 @@
 class Span
 {
 private:
+	u_int32_t			_size;
 	u_int32_t			_capacity;
 	std::vector<int>	_data;
 	enum e_Span
@@ -34,6 +36,8 @@ public:
 	Span(const Span &other);
 	Span &operator=(const Span &other);
 
+	void	addNumber(void);
+	void	addNumber(int number);
 	int		shortestSpan(void);
 	int		longestSpan(void);
 	void	generate(void);
