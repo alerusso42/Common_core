@@ -56,14 +56,39 @@ LOCAL_STATIC_LIBRARIES := cpufeatures
 LOCAL_LDLIBS := -llog -landroid -lOpenSLES -lGLESv1_CM -lGLESv2
 include $(BUILD_SHARED_LIBRARY)
 
+# --- libdaft ---
+include $(CLEAR_VARS)
+LOCAL_MODULE := libdaft
+
+# Tutti i sorgenti .c nelle cartelle specificate
+DAFT_PATH := $(LOCAL_PATH)/../src/program
+LOCAL_SRC_FILES := \
+    $(wildcard $(DAFT_PATH)/Libft/*.c) \
+    $(wildcard $(DAFT_PATH)/daft_src/*.c) \
+    $(wildcard $(DAFT_PATH)/prep_src/*.c)
+
+# Include headers (aggiungi qui se ne hai di dedicati)
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/SDL2/include \
+    $(DAFT_PATH)/Libft \
+    $(DAFT_PATH)/daft_src \
+    $(DAFT_PATH)/prep_src \
+	$(DAFT_PATH)/../
+
+include $(BUILD_STATIC_LIBRARY)
+
+
 # --- main ---
 include $(CLEAR_VARS)
 LOCAL_MODULE := main
 PROJ_PATH	:= ../src/
 LOCAL_SRC_FILES := 	$(addprefix $(PROJ_PATH), \
 					main.c \
-					utils/file.c)
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/SDL2/include
+					utils/file.c \
+					utils/debug.c)
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/SDL2/include \
+					$(DAFT_PATH)/../../
+LOCAL_STATIC_LIBRARIES := libdaft
 LOCAL_SHARED_LIBRARIES := SDL2
 LOCAL_LDLIBS := -llog -landroid -lOpenSLES -lGLESv1_CM -lGLESv2
 include $(BUILD_SHARED_LIBRARY)
