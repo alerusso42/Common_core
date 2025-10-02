@@ -1,2 +1,0 @@
-/home/alerusso/Common_core/Archivio/android-project/app/jni/Android.mk
-/home/alerusso/Common_core/Archivio/android-project/app/jni/Application.mk

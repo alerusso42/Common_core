@@ -1,2 +1,0 @@
-/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/armeabi-v7a/objs-debug/daft//home/alerusso/Common_core/Archivio/android-project/app/jni/__/src/program/Libft/piscine_find_next_prime.o: \
-  /home/alerusso/Common_core/Archivio/android-project/app/jni/../src/program/Libft/piscine_find_next_prime.c
