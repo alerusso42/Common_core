@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 10:15:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:15:21 by alerusso         ###   ########.fr       */
+/*   Created: 2025/10/02 16:52:00 by alerusso          #+#    #+#             */
+/*   Updated: 2025/10/02 16:52:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 
 int main() 
 {
-	Span	span(42);
-
-	random_seed();
-	try
-	{
-		span.addNumber(0);
-		span.addNumber(4);
-		span.addNumber(2);
-		span.generate();
-		std::cout << span.shortestSpan() << "\n";
-		std::cout << span.longestSpan() << "\n";
-	}
-	catch(const Error& e)
-	{
-		e.print();
-	}
-	std::cout << std::endl;
+	std::cout << "Program start" << std::endl;
+	return 0;
 }

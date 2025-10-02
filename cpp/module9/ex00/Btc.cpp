@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   Btc.cpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 10:15:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:15:21 by alerusso         ###   ########.fr       */
+/*   Created: 2025/10/02 16:52:00 by alerusso          #+#    #+#             */
+/*   Updated: 2025/10/02 16:52:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#include "Btc.hpp"
 
-int main() 
+Btc::Btc()
 {
-	Span	span(42);
 
-	random_seed();
-	try
+}
+
+Btc::~Btc()
+{
+
+}
+
+Btc::Btc(const Btc &other)
+{ 
+	(void)other;
+}
+
+Btc &Btc::operator=(const Btc &other)
+{
+	if (this != &other) 
 	{
-		span.addNumber(0);
-		span.addNumber(4);
-		span.addNumber(2);
-		span.generate();
-		std::cout << span.shortestSpan() << "\n";
-		std::cout << span.longestSpan() << "\n";
+		// add field
 	}
-	catch(const Error& e)
-	{
-		e.print();
-	}
-	std::cout << std::endl;
+	return (*this);
 }

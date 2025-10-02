@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   Point.cpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 10:15:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:15:21 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#include "../lib.hpp"
 
-int main() 
+Point::Point() : x(0), y(0)
+{}
+
+Point::Point(Fixed const x, Fixed const y) : x(x), y(y)
+{}
+
+Point::~Point()
+{}
+
+Point::Point(const Point &other) : x(other.x), y(other.y)
+{ 
+}
+
+Point &Point::operator=(const Point &other)
 {
-	Span	span(42);
+	(void)other;
+	return (*this);
+}
 
-	random_seed();
-	try
-	{
-		span.addNumber(0);
-		span.addNumber(4);
-		span.addNumber(2);
-		span.generate();
-		std::cout << span.shortestSpan() << "\n";
-		std::cout << span.longestSpan() << "\n";
-	}
-	catch(const Error& e)
-	{
-		e.print();
-	}
-	std::cout << std::endl;
+void	Point::get_coords(Fixed coords[2]) const
+{
+	coords[X] = this->x;
+	coords[Y] = this->y;
 }

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp											:+:      :+:    :+:   */
+/*   Point.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 10:15:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:15:21 by alerusso         ###   ########.fr       */
+/*   Created: 2025/09/10 11:33:05 by alerusso          #+#    #+#             */
+/*   Updated: 2025/09/10 11:33:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
+# include "fpoint/Fixed.hpp"
 
-int main() 
+class Point
 {
-	Span	span(42);
+private:
+	Fixed const	x;
+	Fixed const	y;
+public:
+	Point();
+	Point(Fixed const x, Fixed const y);
+	~Point();
+	Point(const Point &other);
+	Point &operator=(const Point &other);
+	void	get_coords(Fixed coords[2]) const;
+};
 
-	random_seed();
-	try
-	{
-		span.addNumber(0);
-		span.addNumber(4);
-		span.addNumber(2);
-		span.generate();
-		std::cout << span.shortestSpan() << "\n";
-		std::cout << span.longestSpan() << "\n";
-	}
-	catch(const Error& e)
-	{
-		e.print();
-	}
-	std::cout << std::endl;
-}
+#endif

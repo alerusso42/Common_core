@@ -15,8 +15,8 @@
 Span::Span(): _data(0)
 {
 	this->_size = 0;
-	this->_data.clear();
 	this->_capacity = 0;
+	std::generate(this->_data.begin(), this->_data.end(), std::rand);
 }
 
 Span::Span(u_int32_t capacity): _data(capacity)
@@ -25,6 +25,7 @@ Span::Span(u_int32_t capacity): _data(capacity)
 	if (capacity > this->SPAN_MAXSIZE)
 		throw (Error(EX_BAD_SIZE));
 	this->_capacity = capacity;
+	std::generate(this->_data.begin(), this->_data.end(), std::rand);
 }
 
 Span::~Span()
@@ -73,19 +74,16 @@ void	Span::addNumber(int number)
 
 int		Span::shortestSpan(void)
 {
-	int							shortest;
-	std::vector<int>::iterator	it;
+	int	shortest;
 
 	shortest = INT_MAX;
 	if (_capacity < 2)
 		throw (Error(EX_SINGLE_ELEM));
 	std::sort(this->_data.begin(), this->_data.end());
-	it = this->_data.begin();
-	while ((it + 1) != this->_data.end())
+	for (std::vector<int>::iterator i = _data.begin(); i + 1 != _data.end(); ++i)
 	{
-		if (*(it + 1) - *it < shortest)
-			shortest = *(it + 1) - *it;
-		++it;
+		if (*(i + 1) - *i < shortest)
+			shortest = *(i + 1) - *i;
 	}
 	return (shortest);
 }
@@ -102,7 +100,7 @@ int		Span::longestSpan(void)
 		throw (Error(EX_SINGLE_ELEM));
 	std::sort(this->_data.begin(), this->_data.end());
 	it = this->_data.begin();
-	while (it != this->_data.end())
+	while (it < this->_data.end())
 	{
 		if (*it < shortest)
 			shortest = *it;

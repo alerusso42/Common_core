@@ -184,7 +184,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 all: \$(NAME)
 
-\$(NAME): \$(SRC) \$(LIB) \ 
+\$(NAME): \$(SRC) \$(LIB)
 	\$(C) \$(CFLAGS) \$(SRC) \$(LIB) -o \$(NAME)
 
 clean:
