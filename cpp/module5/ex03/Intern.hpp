@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:56:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 22:45:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ class	RobotomyRequestForm;
 class	ShrubberyCreationForm;
 class	Intern;
 
-typedef AForm	*(Intern::*forms_list)(string const &);
+typedef AForm	*(Intern::*forms_list)(std::string const &);
 
 class Intern
 {
 private:
-	string		*types_allowed;
+	std::string	 	*types_allowed;
 	forms_list	*forms;
 	void		types_get(void);
 	int			type_num;
@@ -36,11 +36,11 @@ public:
 	Intern(const Intern &other);
 	Intern	&operator=(const Intern &other);
 
-	AForm	*makeForm(string type, string target);
-	AForm	*makePresidentialPardon(string const &);
-	AForm	*makeRobotomyRequest(string const &);
-	AForm	*makeShrubberyCreation(string const &);
-	AForm	*makeNothing(string const &);
+	AForm	*makeForm(std::string type, std::string target);
+	AForm	*makePresidentialPardon(std::string const &);
+	AForm	*makeRobotomyRequest(std::string const &);
+	AForm	*makeShrubberyCreation(std::string const &);
+	AForm	*makeNothing(std::string const &);
 };
 
 #endif

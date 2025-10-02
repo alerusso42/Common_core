@@ -18,10 +18,10 @@
 class RobotomyRequestForm : public AForm
 {
 private:
-	string	target;
+	std::string	 target;
 public:
 //	canonic form:
-	RobotomyRequestForm(const string &s);
+	RobotomyRequestForm(const std::string &s);
 	~RobotomyRequestForm();
 	RobotomyRequestForm(const RobotomyRequestForm &other);
 	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);

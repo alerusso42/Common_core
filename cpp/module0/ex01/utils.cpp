@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:30:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 11:21:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //REVIEW - valid_search
 
 Valid search checks if:
-	-	the string is invalid; 
+	-	the std::string is invalid; 
 	-	atoi fails; 
 	-	index is over PHONE_SIZE or lower zero;
 	-	contact selected is empty.
@@ -28,7 +28,7 @@ Valid search checks if:
 //		 the class is definied in std.
 //		 therefore, this works only for std:: methods.
 */
-bool	valid_search(PhoneBook *phone, string s, int *index)
+bool	valid_search(PhoneBook *phone, std::string s, int *index)
 {
 	if (valid_input(s) == false)
 		return (false);

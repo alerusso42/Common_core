@@ -1,17 +1,17 @@
 #include "../lib.hpp"
 
 /*
-        Cut a string from start to end (included).
+        Cut a std::string from start to end (included).
 
         Example:
 
-        string = "Hello world!"
+        std::string = "Hello world!"
         start = 5
         end = 5
 
-        string becomes: "Helloworld!\0"
+        std::string becomes: "Helloworld!\0"
 */
-int     cut_string(string string, size_t start, size_t end)
+int     cut_string(std::string string, size_t start, size_t end)
 {
         unsigned int    temp;
         unsigned int    temp1;

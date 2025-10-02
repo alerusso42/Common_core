@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 22:18:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 11:56:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 
 #include "../lib.hpp"
 # define USAGE_SED "This program mimics sed. You must give 3 parameters:\n\
-the filename;\n string to replace;\n replacement string\n"
+the filename;\n std::string to replace;\n replacement string\n"
 
-static int	get_files(string &filename, fstream &old_fd, fstream &new_fd);
-static void	line_replace(string &line, string &to_replace, string &replacer);
-static int	sed_parsing(string &filename, string &to_replace, string &replacer);
-static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_s);
+static int	get_files(std::string &filename, fstream &old_fd, fstream &new_fd);
+static void	line_replace(std::string &line, std::string &to_replace, std::string &replacer);
+static int	sed_parsing(std::string &filename, std::string &to_replace, std::string &replacer);
+static int	replace(fstream &old_fd, fstream &new_fd, std::string &old_s, std::string &new_s);
 
 /*
 	sed creates a new file, named filename.replace, in which every occurence of
-	to_replace string are replaced with replacer string.
+	to_replace std::string are replaced with replacer string.
 
 	returns 1 on error, 0 on correct execution.
 */
-int	sed(string filename, string to_replace, string replacer)
+int	sed(std::string filename, std::string to_replace, std::string replacer)
 {
 	fstream	old_fd;
 	fstream	new_fd;
@@ -50,7 +50,7 @@ int	sed(string filename, string to_replace, string replacer)
 }
 
 //	replacer can be empty.
-static int	sed_parsing(string &filename, string &to_replace, string &replacer)
+static int	sed_parsing(std::string &filename, std::string &to_replace, std::string &replacer)
 {
 	if (!valid_input(filename) || !valid_input(to_replace))
 		return (1);
@@ -72,9 +72,9 @@ std::ios::trunc → tronca a zero
 
 std::ios::binary → modalità binaria
 */
-static int	get_files(string &filename, fstream &old_fd, fstream &new_fd)
+static int	get_files(std::string &filename, fstream &old_fd, fstream &new_fd)
 {
-	string	new_file;
+	std::string	 new_file;
 
 	old_fd.open(filename.c_str(), std::ios::in);
 	if (old_fd.fail())
@@ -91,15 +91,15 @@ static int	get_files(string &filename, fstream &old_fd, fstream &new_fd)
 }
 
 /*
-	first, a string is read until \n.
-	then, that string is first modified by line_replace, 
+	first, a std::string is read until \n.
+	then, that std::string is first modified by line_replace, 
 	then written on .replace file.
 	
 	this is done until eof.
 */
-static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_s)
+static int	replace(fstream &old_fd, fstream &new_fd, std::string &old_s, std::string &new_s)
 {
-	string	line;
+	std::string	 line;
 	bool	no_differencies;
 
 	no_differencies = (old_s.compare(new_s) == 0);
@@ -117,7 +117,7 @@ static int	replace(fstream &old_fd, fstream &new_fd, string &old_s, string &new_
 	erase it, insert it, find it.
 	Until the end.
 */
-static void	line_replace(string &line, string &to_replace, string &replacer)
+static void	line_replace(std::string &line, std::string &to_replace, std::string &replacer)
 {
 	size_t	i;
 

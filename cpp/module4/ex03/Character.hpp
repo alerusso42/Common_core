@@ -25,18 +25,18 @@ private:
 	{
 		INV_SIZE = 4,
 	};
-	string		name;
+	std::string	 	name;
 	AMateria	*inventory[INV_SIZE + 1];
 	int			curr_item;
 public:
 //	canonic form:
 	Character();
-	Character(string s);
+	Character(std::string s);
 	~Character();
 	Character(const Character &other);
 	Character &operator=(const Character &other);
 
-	string const &getName() const;
+	std::string const &getName() const;
 
 	void	equip(AMateria* m);
 	void	unequip(int idx);

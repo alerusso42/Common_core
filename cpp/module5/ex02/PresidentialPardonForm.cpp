@@ -12,7 +12,7 @@
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(const string &s) : AForm(25, 5)
+PresidentialPardonForm::PresidentialPardonForm(const std::string &s) : AForm(25, 5)
 {
 	this->target = s;
 }

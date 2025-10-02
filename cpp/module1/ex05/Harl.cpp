@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 17:43:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	Harl::error(void)
 void	Harl::empty(void)
 {}
 
-void	Harl::complain(string s)
+void	Harl::complain(std::string s)
 {
 	int	level;
 

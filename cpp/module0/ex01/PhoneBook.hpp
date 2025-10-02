@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:10:02 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 11:20:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef class PhoneBook
 
 void	print_guide(void);
 void	reset_contact(Contact *phone);
-void	execute(string s, PhoneBook *phone);
-bool	valid_search(PhoneBook *phone, string s, int *index);
+void	execute(std::string s, PhoneBook *phone);
+bool	valid_search(PhoneBook *phone, std::string s, int *index);
 void	print_phonebook(PhoneBook *phone);
 
 //	It was me, DIO!

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/30 10:37:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	Zombie::announce(void)
 	std::cout << name << ": " << MSG << std::endl;
 }
 
-Zombie::Zombie(string zombie_name, bool alloc_heap)
+Zombie::Zombie(std::string zombie_name, bool alloc_heap)
 {
 	heap = alloc_heap;
 	name = zombie_name;

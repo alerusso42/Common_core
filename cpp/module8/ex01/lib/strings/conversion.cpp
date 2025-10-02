@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 18:08:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/24 18:08:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <cstdlib>
 
 //	revert the content of a string
-std::string	ft_reverse(std::string s)
+std::string	 	 ft_reverse(std::string s)
 {
 	int		i;
 	char	temp;
@@ -32,9 +32,9 @@ std::string	ft_reverse(std::string s)
 }
 
 //	integer to ascii
-std::string	ft_itoa(int n)
+std::string	 	 ft_itoa(int n)
 {
-	std::string	s;
+	std::string	 	 s;
 	bool	minus;
 
 	if (n == 0)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   std::string.cpp                                         :+:      :+:    :+:   */
+/* std::string	 .cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -66,7 +66,7 @@ bool	valid_input(std::string s)
 
 //	Returns:
 //	0:	success
-//	1:	string is invalid
+//	1:	std::string is invalid
 //	2:	non digit char in s
 bool	ft_atoi(std::string s, int *n)
 {
@@ -83,7 +83,7 @@ bool	ft_atoi(std::string s, int *n)
 
 //	Returns:
 //	0:	success
-//	1:	string is invalid
+//	1:	std::string is invalid
 //	2:	bad first char
 //	3:	invalid char in string
 //	4:	too many dots

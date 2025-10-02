@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/15 20:50:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@
 #include <string>
 #include <cstdlib>
 
-typedef	std::string	string;
+  
 
 class Zombie
 {
 public:
 	void	announce(void);
 	bool	empty(void);
-	void	set(string name, bool heap);
-	Zombie(const string &name, bool heap);
+	void	set(std::string name, bool heap);
+	Zombie(const std::string &name, bool heap);
 	Zombie();
 	~Zombie();
 private:
-	string	name;
+	std::string	 name;
 	bool	heap;
 };
 
-Zombie	*newZombie(string name);
-void 	randomChump(string name);
+Zombie	*newZombie(std::string name);
+void 	randomChump(std::string name);
 Zombie* zombieHorde(int N, std::string name);
 
 # define MSG "BraiiiiiiinnnzzzZ..."

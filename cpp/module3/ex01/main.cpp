@@ -14,7 +14,7 @@
 
 int main() 
 {
-	string		random_names[] = {RAND_NAMES};
+	std::string	 	random_names[] = {RAND_NAMES};
 	std::srand(random_gen());
 	ScavTrap	scav(random_names[std::rand() % 3]);
 	ScavTrap	scav1(random_names[std::rand() % 3]);

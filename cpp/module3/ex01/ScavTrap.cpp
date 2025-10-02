@@ -23,7 +23,7 @@ ScavTrap::ScavTrap() : ClapTrap(name)
 	std::cout << "\033[0m";
 }
 
-ScavTrap::ScavTrap(string name) : ClapTrap(name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	this->hit_points = 100;
 	this->energy_points = 50;

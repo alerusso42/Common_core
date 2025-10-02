@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:42:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 13:42:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	convert_double(double n, int special_case, int type)
 
 void	convert_special(int special_case)
 {
-	string	special[] = {SPECIAL};
+	std::string	 special[] = {SPECIAL};
 
 	std::cout << special[special_case] << "\n";
 }

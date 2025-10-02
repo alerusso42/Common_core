@@ -72,7 +72,7 @@ void		MateriaSource::learnMateria(AMateria *obj)
 	this->creator[obj->getIdx()] = obj;
 }
 
-AMateria	*MateriaSource::createMateria(string const &type)
+AMateria	*MateriaSource::createMateria(std::string const &type)
 {
 	int	idx;
 

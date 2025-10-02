@@ -25,15 +25,6 @@ Span::Span(u_int32_t capacity): _data(capacity)
 	if (capacity > this->SPAN_MAXSIZE)
 		throw (Error(EX_BAD_SIZE));
 	this->_capacity = capacity;
-	if (capacity == 0)
-	{
-		this->_data.clear();
-		return ;
-	}
-	for (u_int32_t i = 0; i < _capacity + 1; i++)
-	{
-		this->_data[i] = 0;
-	}
 }
 
 Span::~Span()
@@ -68,7 +59,7 @@ void	Span::addNumber(void)
 {
 	if (this->_size == this->_capacity)
 		throw (Error(EX_OUT_BOUND));
-	this->_data.push_back(std::rand());
+	this->_data[_size] = std::rand();
 	this->_size++;
 }
 
@@ -76,7 +67,7 @@ void	Span::addNumber(int number)
 {
 	if (this->_size == this->_capacity)
 		throw (Error(EX_OUT_BOUND));
-	this->_data.push_back(number);
+	this->_data[_size] = number;
 	this->_size++;
 }
 

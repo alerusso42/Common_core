@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   std::string.cpp                                         :+:      :+:    :+:   */
+/* std::string	 .cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -37,7 +37,7 @@ bool	check_str(std::string s, int (*func)(int), int expect_res, int pos)
 }
 
 //	revert the content of a string
-std::string	ft_reverse(std::string s)
+std::string	 	 ft_reverse(std::string s)
 {
 	int		i;
 	char	temp;
@@ -54,9 +54,9 @@ std::string	ft_reverse(std::string s)
 }
 
 //	integer to ascii
-std::string	ft_itoa(int n)
+std::string	 	 ft_itoa(int n)
 {
-	std::string	s;
+	std::string	 	 s;
 	bool		minus;
 
 	if (n == 0)
@@ -108,7 +108,7 @@ bool	valid_input(std::string s)
 
 //	Returns:
 //	0:	success
-//	1:	string is invalid
+//	1:	std::string is invalid
 //	2:	non digit char in s
 bool	ft_atoi(std::string s, int *n)
 {

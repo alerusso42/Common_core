@@ -27,7 +27,7 @@ enum e_types
 class AMateria
 {
 private:
-	string	type;
+	std::string	 type;
 	int		type_val;
 protected:
 	AMateria();
@@ -37,12 +37,12 @@ public:
 	virtual ~AMateria();
 
 	std::string const & getType() const; //Returns the materia type
-	void				setType(string const newtype);
+	void				setType(std::string const newtype);
 	int					getIdx() const;
 	virtual AMateria* 	clone() const = 0;
 	virtual void 		use(ICharacter& target);
 };
 
-int	AMateria_type_finder(const string &s);
+int	AMateria_type_finder(const std::string &s);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(const string &s) : AForm(145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &s) : AForm(145, 137)
 {
 	this->target = s;
 }
@@ -35,7 +35,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 int	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
 	fstream	stream;
-	string	filename;
+	std::string	 filename;
 
 	try
 	{

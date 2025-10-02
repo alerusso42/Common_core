@@ -20,11 +20,11 @@ protected:
 	AAnimal();
 	AAnimal(const AAnimal &other);
 	AAnimal &operator=(const AAnimal &other);
-	string	type;
+	std::string	 type;
 public:
 	virtual ~AAnimal();
 
-	const string	&getType() const;
+	const std::string	 &getType() const;
 	virtual void	makeSound() const;
 };
 

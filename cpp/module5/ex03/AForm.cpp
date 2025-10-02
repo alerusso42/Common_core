@@ -53,10 +53,10 @@ AForm &AForm::operator=(const AForm &other)
 	return *this;
 }
 
-string	AForm::rand_name()
+std::string	 AForm::rand_name()
 {
-	string	name;
-	string	temp;
+	std::string	 name;
+	std::string	 temp;
 
 	name.append("FORM_");
 	for (int i = 0; i < 3; i++)
@@ -90,7 +90,7 @@ void	AForm::GradeTooLowException(void) const
 	throw (Error(EX_GRADE_LOW));
 }
 
-const string	&AForm::getName(void) const
+const std::string	 &AForm::getName(void) const
 {
 	return (this->name);
 }

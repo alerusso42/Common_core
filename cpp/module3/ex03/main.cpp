@@ -14,7 +14,7 @@
 
 int main()
 {
-	string		random_names[] = {RAND_NAMES};
+	std::string	 	random_names[] = {RAND_NAMES};
 	std::srand(random_gen());
 	DiamondTrap	d(random_names[std::rand() % 3]);
 

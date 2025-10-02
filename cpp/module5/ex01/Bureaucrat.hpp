@@ -20,7 +20,7 @@
 # include "lib/lib.hpp"
 # include "Form.hpp"
 
-typedef std::string	string;
+typedef std::string	 	 string;
 
 class Form;
 
@@ -31,21 +31,21 @@ private:
 	{
 		LOWEST_GRADE = 150,
 	};
-	const string	name;
+	const std::string	 name;
 	int				grade;
 	void			print_form_error(Form &form, int error);
 public:
 //	canonic form:
 	Bureaucrat();
-	Bureaucrat(string name);
+	Bureaucrat(std::string name);
 	Bureaucrat(int grade);
-	Bureaucrat(string name, int grade);
-	Bureaucrat(int grade, string name);
+	Bureaucrat(std::string name, int grade);
+	Bureaucrat(int grade, std::string name);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &other);
 
-	const string	getName(void) const;
+	const std::string	 getName(void) const;
 	int				getGrade(void) const;
 	int				getLowestGrade(void) const;
 	void			increment(void);

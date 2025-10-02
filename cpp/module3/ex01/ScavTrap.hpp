@@ -22,7 +22,7 @@ private:
 	Fixed	point;
 public:
 	ScavTrap();
-	ScavTrap(string name);
+	ScavTrap(std::string name);
 	~ScavTrap();
 	ScavTrap(const ScavTrap &other);
 	ScavTrap &operator=(const ScavTrap &other);

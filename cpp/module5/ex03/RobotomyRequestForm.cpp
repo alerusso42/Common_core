@@ -12,7 +12,7 @@
 
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(const string &s) : AForm(72, 45)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &s) : AForm(72, 45)
 {
 	this->target = s;
 }

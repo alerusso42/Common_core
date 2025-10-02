@@ -14,7 +14,7 @@
 
 Character::Character()
 {
-	string	names[] = {RAND_NAMES};
+	std::string	 names[] = {RAND_NAMES};
 
 	for (int i = 0; i < INV_SIZE; i++)
 		this->inventory[i] = NULL;
@@ -23,7 +23,7 @@ Character::Character()
 	this->curr_item = 0;
 }
 
-Character::Character(string s)
+Character::Character(std::string s)
 {
 	for (int i = 0; i < INV_SIZE; i++)
 		this->inventory[i] = NULL;
@@ -64,7 +64,7 @@ public:
 };
 */
 
-string const &Character::getName() const
+std::string const &Character::getName() const
 {
 	return (this->name);
 }

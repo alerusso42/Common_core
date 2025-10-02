@@ -38,11 +38,11 @@ private:
 	bool			sign;
 	const int		grade_sign;
 	const int		grade_exec;
-	const string	name;
+	const std::string	 name;
 	void			GradeTooHighException(void) const;
 	void			GradeTooLowException(void) const;
 	void			check_grade(int grade);
-	string			rand_name(void);
+	std::string	 		rand_name(void);
 protected:
 	int				getGradeExec(void) const;
 	int				getGradeSign(void) const;
@@ -54,7 +54,7 @@ public:
 	AForm(const AForm &other);
 	AForm &operator=(const AForm &other);
 
-	const string	&getName(void) const;
+	const std::string	 &getName(void) const;
 	int				beSigned(Bureaucrat &Bureaucrat);
 	void			beExec(const Bureaucrat &Bureaucrat) const;
 	virtual int		execute(Bureaucrat const &executor) const = 0;

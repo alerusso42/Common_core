@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/18 16:24:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	Error::print(void) const
 	std::cerr << "[" << this->_code << "]\033[0m" << std::endl;
 }
 
-string	Error::get_msg(int type)
+std::string	 Error::get_msg(int type)
 {
-	string	s;
+	std::string	 s;
 
 	if (type == EX_GRADE_HIGH)
 		s = "Grade too high";

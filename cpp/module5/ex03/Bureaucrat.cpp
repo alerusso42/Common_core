@@ -18,7 +18,7 @@ Bureaucrat::Bureaucrat() : name("giorgio")
 	this->grade = this->LOWEST_GRADE;
 }
 
-Bureaucrat::Bureaucrat(string name) : name(name)
+Bureaucrat::Bureaucrat(std::string name) : name(name)
 {
 	this->grade = this->LOWEST_GRADE;
 }
@@ -29,13 +29,13 @@ Bureaucrat::Bureaucrat(int grade) : name("giorgio")
 	check_grade();
 }
 
-Bureaucrat::Bureaucrat(int grade, string name) : name(name)
+Bureaucrat::Bureaucrat(int grade, std::string name) : name(name)
 {
 	this->grade = grade;
 	check_grade();
 }
 
-Bureaucrat::Bureaucrat(string name, int grade) : name(name)
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name)
 {
 	this->grade = grade;
 	check_grade();
@@ -76,7 +76,7 @@ void	Bureaucrat::decrement(void)
 	check_grade();
 }
 
-const string	Bureaucrat::getName(void) const
+const std::string	 Bureaucrat::getName(void) const
 {
 	return (this->name);
 }

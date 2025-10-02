@@ -19,10 +19,10 @@
 class PresidentialPardonForm : public AForm
 {
 private:
-	string	target;
+	std::string	 target;
 public:
 //	canonic form:
-	PresidentialPardonForm(const string &s);
+	PresidentialPardonForm(const std::string &s);
 	~PresidentialPardonForm();
 	PresidentialPardonForm(const PresidentialPardonForm &other);
 	PresidentialPardonForm &operator=(const PresidentialPardonForm &other);

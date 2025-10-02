@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/26 15:36:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 class Weapon
 {
 public:
-	Weapon(string type);
+	Weapon(std::string type);
 	Weapon();
 	~Weapon();
-	const	string	&getType();
-	void			setType(string new_type);
+	const	std::string	 &getType();
+	void			setType(std::string new_type);
 private:
-	string	type;
+	std::string	 type;
 };
 
 #endif

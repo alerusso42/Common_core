@@ -22,7 +22,7 @@ FragTrap::FragTrap() : ClapTrap(name)
 	std::cout << "\033[0m";
 }
 
-FragTrap::FragTrap(string name) : ClapTrap(name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->hit_points = 100;
 	this->energy_points = 100;

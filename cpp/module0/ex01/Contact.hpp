@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 09:12:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 11:20:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
 # define PHONE_SIZE 8
 # define FIELD_SIZE 10
 
-typedef	std::string	string;
+  
 
 typedef class Contact
 {
 	private:
-		string	*entry_list[ENTRY_NUM + 1];
-		string	first_name;
-		string	last_name;
-		string	nickname;
-		string	phone_number;
-		string	darkest_secret;
+		std::string	 *entry_list[ENTRY_NUM + 1];
+		std::string	 first_name;
+		std::string	 last_name;
+		std::string	 nickname;
+		std::string	 phone_number;
+		std::string	 darkest_secret;
 	public:
 		Contact();
 		~Contact();
 
 		bool			empty() const;
-		string			**get_list();
-		const string	get_dark(void) const;
+		std::string	 		**get_list();
+		const std::string	 get_dark(void) const;
 		void			add(void);
-		bool			add_info(string *dest, string msg, bool numeric);
+		bool			add_info(std::string *dest, std::string msg, bool numeric);
 		void			reset_contact(void);
 }	Contact;
 

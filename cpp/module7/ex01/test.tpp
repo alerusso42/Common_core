@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.tpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 16:08:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/28 18:20:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ std::ostream	&operator<<(std::ostream &stream, const int *array)
 	return (stream);
 }
 
-std::ostream	&operator<<(std::ostream &stream, string *array)
+std::ostream	&operator<<(std::ostream &stream, std::string *array)
 {
 	for (int i = 0; i < ARR_LENGTH; i++)
 		stream << array[i] << "|";
@@ -129,7 +129,7 @@ std::ostream	&operator<<(std::ostream &stream, string *array)
 	return (stream);
 }
 
-std::ostream	&operator<<(std::ostream &stream, const string *array)
+std::ostream	&operator<<(std::ostream &stream, const std::string *array)
 {
 	for (int i = 0; i < ARR_LENGTH; i++)
 		stream << array[i] << "|";;

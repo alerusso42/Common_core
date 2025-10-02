@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/08/31 22:55:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 #include <cstdlib>
 #include <errno.h>
 
-typedef	std::string				string;
+typedef	std::string	 	 			string;
 typedef	std::fstream			fstream;
 typedef	std::string::iterator	iterator;
 
 //	lib
 
-string		ft_reverse(string s);
-bool		valid_input(string s);
-string		ft_itoa(int n);
-bool		ft_atoi(string s, int *n);
+std::string	 	ft_reverse(std::string s);
+bool		valid_input(std::string s);
+std::string	 	ft_itoa(int n);
+bool		ft_atoi(std::string s, int *n);
 bool		check_str(std::string s, int (*func)(int), int expect_res, int pos);
-int     	cut_string(string string, size_t start, size_t end);
-iterator	ft_strnstr(string &big, string &little, size_t len);
-int			sed(string filename, string to_replace, string replacer);
+int     	cut_string(std::string string, size_t start, size_t end);
+iterator	ft_strnstr(std::string &big, std::string &little, size_t len);
+int			sed(std::string filename, std::string to_replace, std::string replacer);
 
 //	It was me, DIO!
 # define DIO "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⠀⠀⠀⠀⠀⠘⠀⣷⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n\

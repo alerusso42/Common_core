@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 09:11:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 11:07:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 PHONE_SIZE must be at least 1
 
 1)	Print guide prints the instruction;
-2)	Takes a string in input using getline.
+2)	Takes a std::string in input using getline.
 	while its invalid, ask it again;
 3)	if input is "exit", return.
 	else, execute a command.
 */
 int main()
 {
-	string		s;
+	std::string	 	s;
 	PhoneBook	phone;
 
 	if (PHONE_SIZE <= 0)
@@ -47,7 +47,7 @@ int main()
 
 //	First_free_index select from the phone the first free space,
 //	or the oldest occupied space.
-void	execute(string s, PhoneBook *phone)
+void	execute(std::string s, PhoneBook *phone)
 {
 	if (s.compare("ADD") == 0 || s.compare("add") == 0)
 		phone->add();

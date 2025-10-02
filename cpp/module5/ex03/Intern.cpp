@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/22 09:48:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Intern.hpp"
 
-typedef AForm	*(Intern::*forms_list)(string const &);
+typedef AForm	*(Intern::*forms_list)(std::string const &);
 
 Intern::Intern()
 {
@@ -58,7 +58,7 @@ Intern	&Intern::operator=(const Intern &other)
 	return (*this);
 }
 
-AForm	*Intern::makeForm(string type, string target)
+AForm	*Intern::makeForm(std::string type, std::string target)
 {
 	int	i;
 
@@ -76,7 +76,7 @@ void	Intern::types_get(void)
 {
 	if (this->type_num != 0)
 		return ;
-	string	types[] = {FORM_NAMES};
+	std::string	 types[] = {FORM_NAMES};
 	int		i;
 
 	i = 0;
@@ -92,22 +92,22 @@ void	Intern::types_get(void)
 	}
 }
 
-AForm	*Intern::makePresidentialPardon(string const &target)
+AForm	*Intern::makePresidentialPardon(std::string const &target)
 {
 	return (new PresidentialPardonForm(target));
 }
 
-AForm	*Intern::makeRobotomyRequest(string const &target)
+AForm	*Intern::makeRobotomyRequest(std::string const &target)
 {
 	return (new RobotomyRequestForm(target));
 }
 
-AForm	*Intern::makeShrubberyCreation(string const &target)
+AForm	*Intern::makeShrubberyCreation(std::string const &target)
 {
 	return (new ShrubberyCreationForm(target));
 }
 
-AForm	*Intern::makeNothing(string const &target)
+AForm	*Intern::makeNothing(std::string const &target)
 {
 	(void)target;
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/30 10:35:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "error/Error.hpp"
 # include "data_struct/array/Array.hpp"
 
-typedef	std::string				string;
+typedef	std::string	 	 			string;
 typedef	std::fstream			fstream;
 typedef	std::string::iterator	iterator;
 
@@ -34,20 +34,20 @@ enum e_general
 
 //	string
 
-void		print_error(string s);
-void		tty_putstr(string s, int x, int y);
+void		print_error(std::string s);
+void		tty_putstr(std::string s, int x, int y);
 void		tty_clear(void);
 
-string		ft_reverse(string s);
-bool		valid_input(string s);
-string		ft_itoa(int n);
-bool		ft_atoi(string s, int *n);
+std::string	 	ft_reverse(std::string s);
+bool		valid_input(std::string s);
+std::string	 	ft_itoa(int n);
+bool		ft_atoi(std::string s, int *n);
 bool		valid_number(std::string s, bool is_float);
 bool		check_str(std::string s, int (*func)(int), int expect_res, int pos);
 
 //	file
 
-int			sed(string filename, string to_replace, string replacer);
+int			sed(std::string filename, std::string to_replace, std::string replacer);
 
 //	math
 

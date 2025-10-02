@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 11:03:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ Phone must have at least one contact.
 
 1)	First, the entire phonebook is printed;
 2)	Valid search checks if:
-	-	the string is invalid; 
-	-	stoi (=string to integer) fails; 
+	-	the std::string is invalid; 
+	-	stoi (=std::string to integer) fails; 
 	-	index is over PHONE_SIZE or lower zero;
 	-	contact selected is empty.
 3)	Lastly, every contact is printed, with a '\n'. 
@@ -50,7 +50,7 @@ Phone must have at least one contact.
 */
 void	PhoneBook::search(void)
 {
-	string	s;
+	std::string	 s;
 	int		index;
 	int		i;
 

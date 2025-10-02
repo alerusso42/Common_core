@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:27:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 13:43:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "ScalarConverter.hpp"
 
-bool	ft_strchr(string s, string charset)
+bool	ft_strchr(std::string s, std::string charset)
 {
 	int	i;
 	int	j;
@@ -32,9 +32,9 @@ bool	ft_strchr(string s, string charset)
 	return (false);
 }
 
-string	put_dot(int type, bool f)
+std::string	 put_dot(int type, bool f)
 {
-	string	s;
+	std::string	 s;
 
 	s.clear();
 	if (type == T_CHAR || type == T_INT)
@@ -44,7 +44,7 @@ string	put_dot(int type, bool f)
 	return (s);
 }
 
-bool	decimal_not_zero(string s)
+bool	decimal_not_zero(std::string s)
 {
 	int	i;
 

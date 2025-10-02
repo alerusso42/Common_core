@@ -27,7 +27,7 @@ ClapTrap::ClapTrap(void)
 	++counter;
 }
 
-ClapTrap::ClapTrap(string name)
+ClapTrap::ClapTrap(std::string name)
 {
 	this->name = name.append(ft_itoa(counter));
 	this->hit_points = 10;
@@ -67,7 +67,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 	return *this;
 }
 
-string	&ClapTrap::getname()
+std::string	 &ClapTrap::getname()
 {
 	return (this->name);
 }

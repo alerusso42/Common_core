@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 09:18:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 11:20:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	Contact::add(void)
 	while (add_info(&this->darkest_secret, "Secret???", false) == false);
 }
 
-//	Add an entry string dest in a contact. Prints a message before input.
-bool	Contact::add_info(string *dest, string msg, bool numeric)
+//	Add an entry std::string dest in a contact. Prints a message before input.
+bool	Contact::add_info(std::string *dest, std::string msg, bool numeric)
 {
-	string	s;
+	std::string	 s;
 
 	std::cout << msg << std::endl;
 	std::getline(std::cin, s);
@@ -75,12 +75,12 @@ bool	Contact::empty() const
 	return (this->first_name.empty());
 }
 
-string	**Contact::get_list()
+std::string	 **Contact::get_list()
 {
 	return (this->entry_list);
 }
 
-const string	Contact::get_dark(void) const
+const std::string	 Contact::get_dark(void) const
 {
 	return (this->darkest_secret);
 }

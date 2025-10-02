@@ -24,7 +24,7 @@ ScalarConverter::ScalarConverter(const ScalarConverter &other)
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 {(void)other; return (*this);}
 
-void	ScalarConverter::convert(string literal)
+void	ScalarConverter::convert(std::string literal)
 {
 	double	n;
 	int		special_case;
@@ -43,9 +43,9 @@ void	ScalarConverter::convert(string literal)
 	std::cout << "\n";
 }
 
-int	special_cases(string s)
+int	special_cases(std::string s)
 {
-	string	special[]	= {SPECIAL};
+	std::string	 special[]	= {SPECIAL};
 
 	for (int i = 0; special[i].empty() == false; i++)
 	{
@@ -55,7 +55,7 @@ int	special_cases(string s)
 	return (false);
 }
 
-int		find_type(string s, int special_case)
+int		find_type(std::string s, int special_case)
 {
 	double	n;
 

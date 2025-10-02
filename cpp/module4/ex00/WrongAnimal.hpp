@@ -17,13 +17,13 @@
 class WrongAnimal
 {
 protected:
-	string	type;
+	std::string	 type;
 public:
 	WrongAnimal();
 	virtual ~WrongAnimal();
 	WrongAnimal(const WrongAnimal &other);
 	WrongAnimal &operator=(const WrongAnimal &other);
-	string			&getType();
+	std::string	 		&getType();
 	void	makeSound() const;
 };
 

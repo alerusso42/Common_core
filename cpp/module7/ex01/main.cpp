@@ -102,7 +102,7 @@ int main5()
 //SECTION - example with type string
 int main6()
 {
-	string	s[ARR_LENGTH] = {STRINGS};
+	std::string	 s[ARR_LENGTH] = {STRINGS};
 
 	std::cout << "original matrix:\n";
 	std::cout << s;

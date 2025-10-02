@@ -22,7 +22,7 @@ typedef struct Data
 		uintptr_t	password;
 		void		*foto_piedi_gabibbo;
 	public:
-		string	questa_struct_non_contiene_dati_confidenziali;
+		std::string	 questa_struct_non_contiene_dati_confidenziali;
 		Data();
 		~Data();
 }	Data;

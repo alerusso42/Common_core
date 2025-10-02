@@ -47,7 +47,7 @@ void AMateria::use(ICharacter& target)
 	std::cout << std::endl;
 }
 
-void	AMateria::setType(string const newtype)
+void	AMateria::setType(std::string const newtype)
 {
 	this->type_val = AMateria_type_finder(newtype);
 	this->type = newtype;
@@ -63,7 +63,7 @@ int	AMateria::getIdx() const
 	return (this->type_val);
 }
 
-int	AMateria_type_finder(const string &s)
+int	AMateria_type_finder(const std::string &s)
 {
 	if (!s.compare("ice"))
 		return (ICE);

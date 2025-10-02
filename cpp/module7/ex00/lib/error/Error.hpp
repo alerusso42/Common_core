@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Error.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 19:19:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <string>
 # include <cstdlib>
 
-typedef	std::string	string;
+  
 
 enum e_error
 {
@@ -33,7 +33,7 @@ class Error : public std::runtime_error
 {
 	private:
 		int		_code;
-		string	get_msg(int type);
+		std::string	 get_msg(int type);
 		int		get_code();
 	public:
 		Error(int code);

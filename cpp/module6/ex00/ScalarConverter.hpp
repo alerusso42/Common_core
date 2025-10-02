@@ -52,25 +52,25 @@ private:
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &other);
 public:
-	static void		convert(string literal);
+	static void		convert(std::string literal);
 };
 
 //SECTION ScalarConverter.cpp
 
-int		special_cases(string s);
-int		find_type(string s, int special_case);
+int		special_cases(std::string s);
+int		find_type(std::string s, int special_case);
 
 //SECTION overflow.cpp
 
 bool	float_out_of_range(double n);
-int		overflow_check(string s);
+int		overflow_check(std::string s);
 
 //SECTION utils.cpp
 
-bool	ft_strchr(string s, string charset);
+bool	ft_strchr(std::string s, std::string charset);
 int		ft_isdigit(char c);
-string	put_dot(int type, bool f);
-bool	decimal_not_zero(string s);
+std::string	 put_dot(int type, bool f);
+bool	decimal_not_zero(std::string s);
 
 //SECTION convert.cpp
 

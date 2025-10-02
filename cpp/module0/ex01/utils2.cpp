@@ -6,14 +6,14 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 11:18:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 10:52:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 static void	print_line(int len);
-static void	print_one(string s);
+static void	print_one(std::string s);
 static void	print_entries_name(void);
 
 /*
@@ -63,7 +63,7 @@ static void	print_entries_name(void)
 	NULL
 };
 	int			i;
-	string		s;
+	std::string	 	s;
 
 	i = 0;
 	while (entries[i])
@@ -90,8 +90,8 @@ static void	print_line(int len)
 	std::cout << std::endl << std::endl;
 }
 
-//	If the string surpasses FIELD_SIZE, last character is set to '.'
-static void	print_one(string s)
+//	If the std::string surpasses FIELD_SIZE, last character is set to '.'
+static void	print_one(std::string s)
 {
 	int	spaces;
 

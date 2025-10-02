@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:37:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/09 14:49:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:33:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main()
 
 int main(int argc, char *argv[]) 
 {
-	std::string	s;
+	std::string	 	 s;
 	int			i;
 	int			j;
 

@@ -19,10 +19,10 @@
 class DiamondTrap : public FragTrap, public ScavTrap
 {
 private:
-	string	name;
+	std::string	 name;
 public:
 	DiamondTrap();
-	DiamondTrap(string name);
+	DiamondTrap(std::string name);
 	~DiamondTrap();
 	DiamondTrap(const DiamondTrap &other);
 	DiamondTrap &operator=(const DiamondTrap &other);

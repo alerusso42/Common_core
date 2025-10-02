@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Error.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/29 23:24:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	Error::print(void) const
 	std::cerr << "[" << this->_code << "]\033[0m" << std::endl;
 }
 
-string	Error::get_msg(int type)
+std::string	 Error::get_msg(int type)
 {
-	string	s;
+	std::string	 s;
 
 	if (type == EX_NOT_FOUND)
 		s = "Not found";

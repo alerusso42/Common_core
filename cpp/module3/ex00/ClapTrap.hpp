@@ -20,13 +20,13 @@ class ClapTrap
 private:
 	void death(void);
 	void no_energy(void);
-	string	name;
+	std::string	 name;
 	int		hit_points;
 	int		energy_points;
 	int		attack_damage;
 public:
 	ClapTrap();
-	ClapTrap(string name);
+	ClapTrap(std::string name);
 	~ClapTrap();
 	ClapTrap(const ClapTrap &other);
 	ClapTrap &operator=(const ClapTrap &other);

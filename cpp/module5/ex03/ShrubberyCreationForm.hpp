@@ -18,10 +18,10 @@
 class ShrubberyCreationForm : public AForm
 {
 private:
-	string	target;
+	std::string	 target;
 public:
 //	canonic form:
-	ShrubberyCreationForm(const string &s);
+	ShrubberyCreationForm(const std::string &s);
 	~ShrubberyCreationForm();
 	ShrubberyCreationForm(const ShrubberyCreationForm &other);
 	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);

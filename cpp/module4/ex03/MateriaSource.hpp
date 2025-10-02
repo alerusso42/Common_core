@@ -18,7 +18,7 @@
 # include "Cure.hpp"
 # include "Ice.hpp"
 
-//typedef AMateria* (*Creator)(string const &);
+//typedef AMateria* (*Creator)(std::string const &);
 
 class MateriaSource : public IMateriaSource
 {
@@ -39,7 +39,7 @@ public:
 	MateriaSource &operator=(const MateriaSource &other);
 
 	void		learnMateria(AMateria *obj);
-	AMateria	*createMateria(string const &type);
+	AMateria	*createMateria(std::string const &type);
 };
 
 #endif

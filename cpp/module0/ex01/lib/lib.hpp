@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/12 13:28:03 by codespace        ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 #include <cstdlib>
 #include <errno.h>
 
-typedef	std::string	string;
+  
 
 //	lib
 
-string	ft_reverse(string s);
-bool	valid_input(string s);
-string	ft_itoa(int n);
-bool	ft_atoi(string s, int *n);
-bool	check_str(string s, int (*func)(int), int expect_res);
+std::string	 ft_reverse(std::string s);
+bool	valid_input(std::string s);
+std::string	 ft_itoa(int n);
+bool	ft_atoi(std::string s, int *n);
+bool	check_str(std::string s, int (*func)(int), int expect_res);
 
 //	It was me, DIO!
 # define DIO "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡀⠀⠀⠀⠀⠀⠘⠀⣷⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n\

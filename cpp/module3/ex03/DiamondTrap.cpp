@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:46:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/11 19:30:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ DiamondTrap::DiamondTrap(): ClapTrap()
 	std::cout << "\033[0m";
 }
 
-DiamondTrap::DiamondTrap(string name): ClapTrap(name), FragTrap(name), ScavTrap(name)
+DiamondTrap::DiamondTrap(std::string name): ClapTrap(name), FragTrap(name), ScavTrap(name)
 {
 	this->name = name;
 	this->name.append(ft_itoa(this->n));

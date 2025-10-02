@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/17 14:19:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # include "HumanA.hpp"
 # include "HumanB.hpp"
 
-HumanB::HumanB(string name) 
+HumanB::HumanB(std::string name) 
 {
 	this->name = name;
+	this->weapon = NULL;
 }
 
 HumanB::~HumanB(void)

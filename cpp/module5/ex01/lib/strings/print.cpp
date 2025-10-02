@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:29:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/15 16:33:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	tty_clear(void)
 	std::cout << "\033[0J" << std::flush;// 0J: clear from position to end
 }
 
-void	tty_putstr(string s, int x, int y)
+void	tty_putstr(std::string s, int x, int y)
 {
 	std::cout << "\033[" << y << ";" << x << "H" << s;//033[y;xH
 }
 
-void	print_error(string s)
+void	print_error(std::string s)
 {
 	std::cerr << "\033[31m";//red
 	std::cerr << s;

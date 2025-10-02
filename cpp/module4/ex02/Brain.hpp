@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:34:02 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/15 08:58:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ private:
 		IDEAS = 100,	
 	};
 protected:
-	string	ideas[Brain::IDEAS + 1];
+	std::string	 ideas[Brain::IDEAS + 1];
 public:
 	Brain();
-	Brain(string s);
+	Brain(std::string s);
 	~Brain();
 	Brain(const Brain &other);
 	Brain &operator=(const Brain &other);

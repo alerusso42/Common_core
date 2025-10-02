@@ -44,7 +44,7 @@ int main2()
 	return (0);
 }
 
-//SECTION - string Array with argc
+//SECTION - std::string Array with argc
 int main3(int argc, char *argv[])
 {
 	if (argc == 1)
@@ -66,10 +66,10 @@ int main3(int argc, char *argv[])
 	return (0);
 }
 
-//SECTION - string Array with macro
+//SECTION - std::string Array with macro
 int main4()
 {
-	string	strings[] = {STRINGS};
+	std::string	 strings[] = {STRINGS};
 	try
 	{
 		Array<string>	arr(2);
@@ -87,7 +87,7 @@ int main4()
 //SECTION - copy of an array
 int main5()
 {
-	string	strings[] = {STRINGS};
+	std::string	 strings[] = {STRINGS};
 	try
 	{
 		Array<string>	arr(5);

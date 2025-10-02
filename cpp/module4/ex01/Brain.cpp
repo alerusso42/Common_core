@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:33:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/15 09:00:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 Brain::Brain()
 {
-	string	random_ideas[] = {RAND_IDEAS};
+	std::string	 random_ideas[] = {RAND_IDEAS};
 	int	i;
 	int	random;
 
@@ -34,7 +34,7 @@ Brain::Brain()
 	}
 }
 
-Brain::Brain(string s)
+Brain::Brain(std::string s)
 {
 	int	i;
 

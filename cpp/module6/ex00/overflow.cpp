@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 11:30:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 13:04:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-int	overflow_check(string s)
+int	overflow_check(std::string s)
 {
 	long long int	n;
 	int				i;

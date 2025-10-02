@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:51:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/15 15:07:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	term_column(term *t)
 	t->column++;
 }
 
-void	term_putstr(term *t, string s, int x, int y)
+void	term_putstr(term *t, std::string s, int x, int y)
 {
 	(void)t;
 	std::cout << "\033[" << y << ";" << x << "H" << s;
