@@ -3,6 +3,16 @@
 		"cstdint": "c",
 		"header.h": "c",
 		"sdl.h": "c",
-		"daft_prog.h": "c"
+		"daft_prog.h": "c",
+		"sdl_error.h": "c",
+		"sdl_video.h": "c",
+		"sdl_audio.h": "c",
+		"sdl_mixer.h": "c",
+		"maps.h": "c",
+		"pacman.h": "c",
+		"bfs.h": "c",
+		"mus.h": "c",
+		"lib.h": "c",
+		"sdl_image.h": "c"
 	}
 }

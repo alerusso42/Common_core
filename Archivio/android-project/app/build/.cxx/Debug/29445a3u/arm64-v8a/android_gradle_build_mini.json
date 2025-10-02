@@ -51,6 +51,25 @@
       "output": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/arm64-v8a/libmain.so",
       "runtimeFiles": []
     },
+    "SDL2_mixer-debug-arm64-v8a": {
+      "artifactName": "SDL2_mixer",
+      "buildCommandComponents": [
+        "/home/alerusso/Android/Sdk/ndk/25.1.8937393/ndk-build",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003d/home/alerusso/Common_core/Archivio/android-project/app/jni/Android.mk",
+        "NDK_APPLICATION_MK\u003d/home/alerusso/Common_core/Archivio/android-project/app/jni/Application.mk",
+        "APP_ABI\u003darm64-v8a",
+        "NDK_ALL_ABIS\u003darm64-v8a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003d/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj",
+        "NDK_LIBS_OUT\u003d/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib",
+        "APP_PLATFORM\u003dandroid-19",
+        "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/arm64-v8a/libSDL2_mixer.so"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/arm64-v8a/libSDL2_mixer.so",
+      "runtimeFiles": []
+    },
     "daft-debug-arm64-v8a": {
       "artifactName": "daft",
       "buildCommandComponents": [
@@ -87,6 +106,25 @@
       ],
       "abi": "arm64-v8a",
       "output": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/arm64-v8a/libSDL2.so",
+      "runtimeFiles": []
+    },
+    "SDL2_image-debug-arm64-v8a": {
+      "artifactName": "SDL2_image",
+      "buildCommandComponents": [
+        "/home/alerusso/Android/Sdk/ndk/25.1.8937393/ndk-build",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003d/home/alerusso/Common_core/Archivio/android-project/app/jni/Android.mk",
+        "NDK_APPLICATION_MK\u003d/home/alerusso/Common_core/Archivio/android-project/app/jni/Application.mk",
+        "APP_ABI\u003darm64-v8a",
+        "NDK_ALL_ABIS\u003darm64-v8a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003d/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj",
+        "NDK_LIBS_OUT\u003d/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib",
+        "APP_PLATFORM\u003dandroid-19",
+        "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/arm64-v8a/libSDL2_image.so"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/obj/local/arm64-v8a/libSDL2_image.so",
       "runtimeFiles": []
     },
     "cpufeatures-debug-arm64-v8a": {

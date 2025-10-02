@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/28 10:57:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/02 00:03:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,19 @@ static void	daft_printerror(int log, t_fd fd)
 		fd_printf(fd, "Called a function without calling daft_init().\n");
 	else if (log == DAFT_LOG_KEYUSED)
 		fd_printf(fd, "Selected key has already been used.\n");
+}
+
+#include <android/log.h>
+
+void	logg(char *s)
+{
+	static int	c;
+
+	if (s)
+		__android_log_print(ANDROID_LOG_ERROR, "DAFT", "Log %d:\t%s\n", c, s);
+	else
+		__android_log_print(ANDROID_LOG_ERROR, "DAFT", "Log %d\n", c);
+	++c;
 }
 
 static void	android_print(int log)

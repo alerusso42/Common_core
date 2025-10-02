@@ -9,4 +9,6 @@
   NDK_LIBS_OUT=/home/alerusso/Common_core/Archivio/android-project/app/build/intermediates/cxx/Debug/29445a3u/lib \
   APP_PLATFORM=android-19 \
   SDL2 \
+  SDL2_image \
+  SDL2_mixer \
   main
