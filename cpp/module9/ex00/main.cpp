@@ -11,9 +11,12 @@
 /* ************************************************************************** */
 
 # include "header.hpp"
+# include <map>
 
 int main() 
 {
+	std::map<Btc, double>	m;
+
 	std::cout << "Program start" << std::endl;
 	return 0;
 }

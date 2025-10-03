@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/03 19:07:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void		print_error(std::string s);
 void		tty_putstr(std::string s, int x, int y);
 void		tty_clear(void);
 
-std::string	 	ft_reverse(std::string s);
+std::string	ft_reverse(std::string s);
 bool		valid_input(std::string s);
-std::string	 	ft_itoa(int n);
-bool		ft_atoi(std::string s, int *n);
+std::string	ft_itoa(int n);
+int			ft_atoi(std::string s, int *n);
+int			ft_atoi(std::string s, int *n, int pos);
 bool		valid_number(std::string s, bool is_float);
 bool		check_str(std::string s, int (*func)(int), int expect_res, int pos);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Error.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/03 19:18:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ std::string	 Error::get_msg(int type)
 {
 	std::string	 s;
 
-	if (type == EX_BAD_SIZE)
-		s = "Specified size is too big.";
-	else if (type == EX_OUT_BOUND)
-		s = "Element is out of bounds";
-	else if (type == EX_NEGATIVE_INDEX)
-		s = "Negative index is not allowed";
-	else if (type == EX_ALLOC)
-		s = "Allocation failed";
-	else if (type == EX_SINGLE_ELEM)
-		s = "Calling Span functions with less than 2 elements is not allowed";
+	if (type == EX_BAD_TIME)
+		s = "Bad time in database";
+	else if (type == EX_BAD_VALUE)
+		s = "Bad value in database";
+	else if (type == EX_TOO_MANY_FIELDS)
+		s = "Database entry must have two field: data and bitcoin value";
+	else if (type == EX_FILE)
+		s = "Open failed. Probably for second database file";
+	else if (type == EX_NUMERIC_RANGE)
+		s = "Values must be positive integer/float ranging from 0 to 10k";
 	else
 		s = "Unknown";
 	return (s);

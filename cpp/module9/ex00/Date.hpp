@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Btc.cpp											:+:      :+:    :+:   */
+/*   Date.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,28 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Btc.hpp"
+#ifndef DATE_HPP
+# define DATE_HPP
+# include "lib/lib.hpp"
+# include <map>
 
-Btc::Btc()
+class Date
 {
-
-}
-
-Btc::~Btc()
-{
-
-}
-
-Btc::Btc(const Btc &other)
-{ 
-	(void)other;
-}
-
-Btc &Btc::operator=(const Btc &other)
-{
-	if (this != &other) 
+private:
+	enum e_date
 	{
-		// add field
-	}
-	return (*this);
-}
+		T_YEAR,
+		T_MONTH,
+		T_DAY,
+		T_HOUR,
+		T_MINUTE,
+		T_SECOND,
+		T_ALL,
+	};
+	int32_t	_datas[T_ALL + 1];
+	int32_t	_year;
+	int32_t	_month;
+	int32_t	_day;
+	int8_t	_hour;
+	int8_t	_minute;
+	int8_t	_second;
+	bool		_has_seconds;
+public:
+//	canonic form:
+	Date(string date);
+	Date(string date, bool has_seconds);
+	Date(int32_t year, int32_t month, int32_t day);
+	~Date();
+	Date(const Date &other);
+	Date &operator=(const Date &other);
+};
+
+#endif

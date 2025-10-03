@@ -68,7 +68,7 @@ bool	valid_input(std::string s)
 //	0:	success
 //	1:	std::string is invalid
 //	2:	non digit char in s
-bool	ft_atoi(std::string s, int *n)
+int	ft_atoi(std::string s, int *n)
 {
 	if (valid_input(s) == false)
 		return (1);
@@ -78,6 +78,27 @@ bool	ft_atoi(std::string s, int *n)
 		return (2);
 	if (n)
 		*n = std::atoi(s.c_str());
+	return (0);
+}
+
+//	Returns:
+//	0:	success
+//	1:	std::string is invalid
+//	2:	non digit char in s
+//	3:	pos is invalid
+//	N can be NULL.
+int	ft_atoi(std::string s, int *n, int pos)
+{
+	if (s.length() <= pos)
+		return (3);
+	if (valid_input(s) == false)
+		return (1);
+	if (std::isdigit(s[pos]) == false && s[pos] != '+' && s[pos] != '-')
+		return (2);
+	if (std::isdigit(s[pos]) == false && std::isdigit(s[pos]) == false)
+		return (2);
+	if (n)
+		*n = std::atoi(s.c_str() + pos);
 	return (0);
 }
 

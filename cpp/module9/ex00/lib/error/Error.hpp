@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Error.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/03 19:17:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 enum e_error
 {
-	EX_BAD_SIZE,
-	EX_OUT_BOUND,
-	EX_NEGATIVE_INDEX,
-	EX_ALLOC,
-	EX_SINGLE_ELEM,
+	EX_BAD_TIME,
+	EX_BAD_VALUE,
+	EX_TOO_MANY_FIELDS,
+	EX_FILE,
+	EX_NUMERIC_RANGE,
 	EX_NUM,
 };
 
