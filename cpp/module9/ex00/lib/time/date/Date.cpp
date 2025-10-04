@@ -139,6 +139,25 @@ void	Date::add_field(int32_t datas[])
 	this->_second = check_clock(datas[T_SECOND]);
 }
 
+void	Date::make_calendar(int32_t calendar[]) const
+{
+	int32_t	i;
+
+	i = 1;
+	calendar[i++] = C_JANUARY;
+	calendar[i++] = C_FEBRUARY;
+	calendar[i++] = C_MARCH;
+	calendar[i++] = C_APRIL;
+	calendar[i++] = C_MAY;
+	calendar[i++] = C_JUNE;
+	calendar[i++] = C_JULY;
+	calendar[i++] = C_AUGUST;
+	calendar[i++] = C_SEPTEMBER;
+	calendar[i++] = C_OCTOBER;
+	calendar[i++] = C_NOVEMBER;
+	calendar[i++] = C_DECEMBER;
+}
+
 //SECTION - Public
 //SECTION - getters
 

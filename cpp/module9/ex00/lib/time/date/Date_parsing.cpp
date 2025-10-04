@@ -33,25 +33,12 @@ int32_t	Date::check_month(int32_t month) const
 int32_t	Date::check_day(int32_t day) const
 {
 	int32_t	calendar[C_ALL + 1];
-	int32_t	i;
 
 	if (day < R_DAY_MIN)
 		throw (Error(EX_DATE_DAY_LOW, ERROR_DATE));
 	if (this->_month == FEBRUARY)
 		return (check_bisestile(day));
-	i = 1;
-	calendar[i++] = C_JANUARY;
-	calendar[i++] = C_FEBRUARY;
-	calendar[i++] = C_MARCH;
-	calendar[i++] = C_APRIL;
-	calendar[i++] = C_MAY;
-	calendar[i++] = C_JUNE;
-	calendar[i++] = C_JULY;
-	calendar[i++] = C_AUGUST;
-	calendar[i++] = C_SEPTEMBER;
-	calendar[i++] = C_OCTOBER;
-	calendar[i++] = C_NOVEMBER;
-	calendar[i++] = C_DECEMBER;
+	make_calendar(calendar);
 	if (day > calendar[this->_month])
 		throw (Error(EX_DATE_DAY_HIGH, ERROR_DATE));
 	return (day);

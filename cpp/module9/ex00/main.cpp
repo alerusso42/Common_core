@@ -10,9 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+# include "BitcoinExchange.hpp"
 
-int main()
+int	main(int argc, char *argv[])
+{
+	std::map<Date, double>	map;
+
+	if (argc != 2)
+		return (print_error("Error: could not open file"), 1);
+	else if (valid_input((std::string)argv[1]) != true)
+		return (print_error("Error: could not open file"), 1);
+	try
+	{
+		read_database(map, DATABASE_NAME);
+		print_input(map, argv[1]);
+	}
+	catch(const Error& e)
+	{
+		e.print();
+	}
+	return (0);
+}
+
+int main2()
 {
 	std::map<Date, double>	m;
 
@@ -29,11 +49,12 @@ int main()
 	}
 	(void)m;
 	std::cout << sizeof(Date) << std::endl;
-	return 0;
+	return (0);
 }
 
-int main2() 
+int main3() 
 {
 	std::cout << sizeof(Date) << std::endl;
+	std::cout << sizeof(size_t) << std::endl;
 	return (0);
 }

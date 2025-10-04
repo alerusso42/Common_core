@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/04 19:55:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/04 23:08:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@
 
 enum e_error_main
 {
+	EX_OPEN_DATABASE,
+	EX_OPEN_INPUT,
+	EX_EMPTY_DATABASE,
+	EX_EMPTY_INPUT,
 	EX_BAD_VALUE,
 	EX_TOO_MANY_FIELDS,
-	EX_FILE,
+	EX_TOO_FEW_FIELDS,
 	EX_NUMERIC_RANGE,
+	EX_TOO_OLD,
 	EX_NUM,
 };
 
@@ -62,6 +67,7 @@ enum e_error_date
 	EX_DATE_CLOCK_HIGH,
 	EX_DATE_BISESTILE,
 	EX_DATE_RANGE_END,
+	EX_DATE_ALTER,
 	EX_DATE_NUM,
 };
 

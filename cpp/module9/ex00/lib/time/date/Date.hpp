@@ -19,6 +19,8 @@ class Date
 private:
 	void	add_field(int32_t datas[]);
 	int32_t	find_difference(const Date &other) const;
+	void	alter_values(Date &date, int32_t value);
+	void	make_calendar(int32_t calendar[]) const;
 protected:
 	enum e_date
 	{
@@ -97,6 +99,10 @@ public:
 	bool	operator>(const Date &other) const;
 	bool	operator>=(const Date &other) const;
 	bool	operator==(const Date &other) const;
+	Date	&operator++(void);
+	Date	&operator--(void);
+	Date	operator++(int post);
+	Date	operator--(int post);
 
 	//SECTION - print
 	void	basic_print(std::ostream &ostream) const;

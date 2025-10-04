@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/04 20:09:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/05 00:03:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,24 @@ std::string	 Error::get_msg_main_code(int type)
 {
 	std::string	 s;
 
-	if (type == EX_BAD_VALUE)
+	if (type == EX_EMPTY_DATABASE)
+		s = "Database is empty.";
+	else if (type == EX_EMPTY_INPUT)
+		s = "Input file is empty.";
+	else if (type == EX_BAD_VALUE)
 		s = "Bitcoin has bad value.";
-	else if (type == EX_ARRAY_OUT_BOUND)
+	else if (type == EX_TOO_MANY_FIELDS)
 		s = "Entry has too many fields";
-	else if (type == EX_ARRAY_NEGATIVE_INDEX)
-		s = "Cannot open file";
-	else if (type == EX_ARRAY_ALLOC)
+	else if (type == EX_TOO_FEW_FIELDS)
+		s = "Entry has too few fields";
+	else if (type == EX_OPEN_DATABASE)
+		s = "Cannot open database";
+	else if (type == EX_OPEN_INPUT)
+		s = "Cannot open input file";
+	else if (type == EX_NUMERIC_RANGE)
 		s = "Bitcoin range does not allowed input value";
+	else if (type == EX_TOO_OLD)
+		s = "Bitcoin date is too old for database";
 	else
 		s = "Unknown";
 	return (s);
@@ -66,7 +76,7 @@ std::string	 Error::get_msg(int type, int section)
 		case (ERROR_ARRAY) :
 			return ((std::string)"Array:\t" + get_msg_array(type));
 		case (ERROR_DATE) :
-			return ((std::string)"Array:\t" + get_msg_array(type));
+			return ((std::string)"Date:\t" + get_msg_date(type));
 		default :
 			return ("Bad section");
 	}
@@ -98,22 +108,14 @@ std::string	 Error::get_msg_date(int type)
 	if (type == EX_DATE_BAD)
 		s = "Bad time";
 	else if (type == EX_DATE_NEGATIVE)
-		s = "Negative time in database";
+		s = "Negative time not allowed";
 	else if (type > EX_DATE_RANGE_START && type < EX_DATE_RANGE_END)
 	{
-		s = "Out of range time value in database:\t";
+		s = "Out of range time value:\t";
 		s += time_range_msg(type);
 	}
-	else if (type == EX_DATE_YEAR_LOW)
-		s = "Out of range time value in database: year too low";
-	else if (type == EX_BAD_VALUE)
-		s = "Bad value in database";
-	else if (type == EX_TOO_MANY_FIELDS)
-		s = "Database entry must have two field: data and bitcoin value";
-	else if (type == EX_FILE)
-		s = "Open failed. Probably for second database file";
-	else if (type == EX_NUMERIC_RANGE)
-		s = "Values must be positive integer/float ranging from 0 to 10k";
+	else if (type == EX_DATE_ALTER)
+		s = "Operation made the Date class go out of range";
 	else
 		s = "Unknown";
 	return (s);

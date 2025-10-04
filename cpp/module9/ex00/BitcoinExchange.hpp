@@ -15,8 +15,19 @@
 /* Auto-generated header aggregator */
 # include "lib/lib.hpp"
 # include "map"
+# include <fstream>
 
 # define SEPARATOR_DATABASE ","
 # define SEPARATOR_INPUT " | "
+# define DATABASE_NAME "data.csv"
+
+enum e_bitcoin_ranges
+{
+	BITCOIN_MIN = 0,
+	BITCOIN_MAX = 1000,
+};
+
+void	read_database(std::map<Date, double> &map, std::string database_name);
+void	print_input(std::map<Date, double> &map, std::string input_name);
 
 #endif

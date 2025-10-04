@@ -42,6 +42,46 @@ int32_t	Date::find_difference(const Date &other) const
 	return (0);
 }
 
+static bool	alter_one(int32_t *time, int32_t value, int32_t min, int32_t max);
+
+/*
+	For now it works only with 1 and -1
+*/
+void	Date::alter_values(Date &date, int32_t value)
+{
+	int32_t	calendar[C_ALL + 1];
+
+	if (date._has_clock)
+	{
+		if (alter_one((int32_t *)&date._second, value, R_CLOCK_MIN, R_CLOCK_MAX) == true)
+			return ;
+		if (alter_one((int32_t *)&date._minute, value, R_CLOCK_MIN, R_CLOCK_MAX) == true)
+			return ;
+		if (alter_one((int32_t *)&date._hour, value, R_HOUR_MIN, R_HOUR_MAX) == true)
+			return ;
+	}
+	make_calendar(calendar);
+	if (alter_one(&date._day, value, R_DAY_MIN, calendar[date._month]) == true)
+		return ;
+	if (alter_one(&date._month, value, R_MONTH_MIN, R_MONTH_MAX) == true)
+		return ;
+	if (alter_one(&date._year, value, R_YEAR_MIN, R_YEAR_MAX) == true)
+		return ;
+	throw (Error(EX_DATE_ALTER, ERROR_DATE));
+}
+
+static bool	alter_one(int32_t *time, int32_t value, int32_t min, int32_t max)
+{
+		*time += value;
+		if (*time < min)
+			*time = max;
+		else if (*time > max)
+			*time = min;
+		else
+			return (true);
+		return (false);
+}
+
 bool	Date::operator<(const Date &other) const
 {
 	return (find_difference(other) == -1);
@@ -65,6 +105,37 @@ bool	Date::operator>=(const Date &other) const
 bool	Date::operator==(const Date &other) const
 {
 	return (find_difference(other) == 0);
+}
+
+Date	&Date::operator++(void)
+{
+	alter_values(*this, +1);
+	return (*this);
+}
+
+Date	&Date::operator--(void)
+{
+	alter_values(*this, -1);
+	return (*this);
+}
+
+Date	Date::operator++(int post)
+{
+	Date	before(*this);
+
+	(void)post;
+	alter_values(*this, +1);
+	return (before);
+}
+
+Date	Date::operator--(int post)
+{
+	Date	before(*this);
+
+	(void)post;
+	before = *this;
+	alter_values(*this, -1);
+	return (before);
 }
 
 std::ostream	&operator<<(std::ostream &stream, const Date &date)
