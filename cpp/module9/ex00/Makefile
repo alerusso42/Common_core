@@ -1,6 +1,6 @@
-NAME =	 		program
+NAME =	 		btc
 SRC	=	 		main.cpp \
-				Btc.cpp
+				BitcoinExchange.cpp \
 
 LIB_SRC	= 		data_struct/array/Array.cpp \
 	error/Error.cpp \
@@ -14,11 +14,13 @@ LIB_SRC	= 		data_struct/array/Array.cpp \
 	strings/conversion.cpp \
 	strings/input_checker.cpp \
 	strings/print.cpp \
+	time/date/Date.cpp \
+	time/date/Date_operator.cpp \
+	time/date/Date_parsing.cpp
 
 LIB	= 		$(addprefix lib/, $(LIB_SRC))
 
-HEADER = 		header.hpp \
-			Btc.hpp
+HEADER = 		header.hpp
 
 
 C =		 c++

@@ -12,11 +12,13 @@
 
 #ifndef DATE_HPP
 # define DATE_HPP
-# include "lib/lib.hpp"
-# include <map>
+# include "../../lib.hpp"
 
 class Date
 {
+private:
+	void	add_field(int32_t datas[]);
+	int32_t	find_difference(const Date &other) const;
 protected:
 	enum e_date
 	{
@@ -27,6 +29,7 @@ protected:
 		T_MINUTE,
 		T_SECOND,
 		T_ALL,
+		T_ARRAY,
 	};
 	enum e_ranges
 	{
@@ -34,6 +37,9 @@ protected:
 		R_YEAR_MAX =	2100,
 		R_MONTH_MIN = 	1,
 		R_MONTH_MAX = 	12,
+		R_DAY_MIN =		1,
+		R_HOUR_MIN = 	0,
+		R_HOUR_MAX = 	23,
 		R_CLOCK_MIN = 	0,
 		R_CLOCK_MAX = 	59,
 		R_ALL,
@@ -53,6 +59,7 @@ protected:
 		C_NOVEMBER = 	30,
 		C_DECEMBER = 	31,
 		C_ALL =			12,
+		FEBRUARY = 2,
 	};
 	int32_t	_year;
 	int32_t	_month;
@@ -60,19 +67,41 @@ protected:
 	int8_t	_hour;
 	int8_t	_minute;
 	int8_t	_second;
-	bool	_has_seconds;
-	void	check_year(int32_t year);
-	void	check_month(int32_t month);
-	void	check_day(int32_t day);
-	void	check_clock(int32_t clock);
+	int8_t	_separator;
+	bool	_has_clock;
+
+	int32_t	check_year(int32_t year) const;
+	int32_t	check_month(int32_t month) const;
+	int32_t	check_day(int32_t day) const;
+	int32_t	check_hour(int32_t hour) const;
+	int32_t	check_clock(int32_t clock) const;
+	int32_t	check_bisestile(int32_t bisestile) const;
 public:
 //	canonic form:
-	Date(string date, char separator);
-	Date(string date, char separator, bool has_seconds);
+	Date(std::string date, char separator);
+	Date(std::string date, char separator, bool has_seconds);
 	Date(int32_t year, int32_t month, int32_t day);
+	Date(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second);
 	~Date();
 	Date(const Date &other);
 	Date &operator=(const Date &other);
+
+	//SECTION - getters
+	int32_t	*get_date(int32_t fields[]) const;
+	int32_t	*get_date(int32_t fields[], bool get_clock) const;
+	bool	get_clock_bool(void) const;
+
+	//SECTION - operator overloads
+	bool	operator<(const Date &other) const;
+	bool	operator<=(const Date &other) const;
+	bool	operator>(const Date &other) const;
+	bool	operator>=(const Date &other) const;
+	bool	operator==(const Date &other) const;
+
+	//SECTION - print
+	void	basic_print(std::ostream &ostream) const;
 };
+
+std::ostream	&operator<<(std::ostream &stream, const Date &date);
 
 #endif

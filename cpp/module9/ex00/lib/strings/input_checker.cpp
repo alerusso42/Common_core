@@ -52,7 +52,7 @@ bool	valid_input(std::string s)
 
 	if (s.empty() == true)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
-	if (s.size() >= 311)
+	if (s.size() >= 300)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 	i = 0;
 	while (s[i])
@@ -89,7 +89,9 @@ int	ft_atoi(std::string s, int *n)
 //	N can be NULL.
 int	ft_atoi(std::string s, int *n, int pos)
 {
-	if (s.length() <= pos)
+	if (pos < 0)
+		return (3);
+	if (s.length() <= (size_t)pos)
 		return (3);
 	if (valid_input(s) == false)
 		return (1);

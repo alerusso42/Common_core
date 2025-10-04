@@ -14,6 +14,9 @@
 # define HEADER_HPP
 /* Auto-generated header aggregator */
 # include "lib/lib.hpp"
-#include "Btc.hpp"
+# include "map"
+
+# define SEPARATOR_DATABASE ","
+# define SEPARATOR_INPUT " | "
 
 #endif

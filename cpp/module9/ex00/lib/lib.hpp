@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/10/03 19:07:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/04 20:05:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "math/Point.hpp"
 # include "error/Error.hpp"
 # include "data_struct/array/Array.hpp"
+# include "time/date/Date.hpp"
 
-typedef	std::string	 	 			string;
 typedef	std::fstream			fstream;
 typedef	std::string::iterator	iterator;
 

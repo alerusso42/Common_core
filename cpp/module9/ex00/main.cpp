@@ -11,12 +11,29 @@
 /* ************************************************************************** */
 
 # include "header.hpp"
-# include <map>
 
-int main() 
+int main()
 {
-	std::map<Btc, double>	m;
+	std::map<Date, double>	m;
 
-	std::cout << "Program start" << std::endl;
+	try
+	{
+		Date	date("2004-03-31", '-', false);
+		std::cout << date << std::endl;
+		date.basic_print(std::cout);
+		std::cout << std::endl;
+	}
+	catch(const Error &e)
+	{
+		e.print();
+	}
+	(void)m;
+	std::cout << sizeof(Date) << std::endl;
 	return 0;
+}
+
+int main2() 
+{
+	std::cout << sizeof(Date) << std::endl;
+	return (0);
 }

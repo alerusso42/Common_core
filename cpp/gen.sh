@@ -107,15 +107,16 @@ $class::~$class()
 
 $class::$class(const $class &other)
 { 
-	(void)other;
+	if (this == &other)
+		return ;
+	// add field
 }
 
 $class &$class::operator=(const $class &other)
 {
-	if (this != &other) 
-	{
-		// add field
-	}
+	if (this == &other)
+		return (*this); 
+	// add field
 	return (*this);
 }
 EOF
@@ -136,8 +137,8 @@ cat >> "$DEST_DIR/main.cpp" <<EOF
 
 int main() 
 {
-	std::cout << "Program start" << std::endl;
-	return 0;
+	std::cout << "\033[32mCompilation ok\033[0m" << std::endl;
+	return (0);
 }
 EOF
 
