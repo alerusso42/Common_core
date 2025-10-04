@@ -12,56 +12,16 @@
 
 #include "Date.hpp"
 
-Date::Date(string date, char separator)
+void	Date::check_year(int32_t year)
 {
-	int32_t	datas[T_ALL + 1];
-	size_t	pos;
-	int		i;
-
-	pos = 0;
-	i = 0;
-	while (date[i] && i != T_HOUR)
-	{
-		if (ft_atoi(date, &datas[i], pos) != 0)
-			throw Error(EX_TIME_BAD);
-		else if (&datas[i] < 0)
-			throw Error(EX_TIME_NEGATIVE);
-		pos = date.find_first_of(separator, pos);
-		if (pos == date.npos && i != T_HOUR)
-			throw Error(EX_TIME_BAD);
-		pos += 1;
-		++i;
-	}
-	check_year(datas[T_YEAR]);
-	check_month(datas[T_MONTH]);
-	check_day(datas[T_DAY]);
+	if (year < R_YEAR_MIN)
 }
 
-Date::Date(string date, char separator, bool has_seconds)
-{
+void	Date::check_month(int32_t month)
+{}
 
-}
+void	Date::check_day(int32_t day)
+{}
 
-Date::Date(int32_t year, int32_t month, int32_t day)
-{
-
-}
-
-Date::~Date()
-{
-
-}
-
-Date::Date(const Date &other)
-{ 
-	(void)other;
-}
-
-Date &Date::operator=(const Date &other)
-{
-	if (this != &other) 
-	{
-		// add field
-	}
-	return (*this);
-}
+void	Date::check_day(int32_t day)
+{}

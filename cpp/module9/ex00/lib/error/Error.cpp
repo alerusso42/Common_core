@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/03 19:18:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/04 08:54:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,16 @@ std::string	 Error::get_msg(int type)
 {
 	std::string	 s;
 
-	if (type == EX_BAD_TIME)
+	if (type == EX_TIME_BAD)
 		s = "Bad time in database";
+	if (type == EX_TIME_NEGATIVE)
+		s = "Negative time in database";
+	if (type > EX_TIME_RANGE_START && type < EX_TIME_RANGE_END)
+	{
+		s = "Out of range time value in database";
+	}
+	if (type == EX_TIME_YEAR_LOW)
+		s = "Out of range time value in database: year too low";
 	else if (type == EX_BAD_VALUE)
 		s = "Bad value in database";
 	else if (type == EX_TOO_MANY_FIELDS)

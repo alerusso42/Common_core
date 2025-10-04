@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/03 19:17:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/04 08:54:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@
 
 enum e_error
 {
-	EX_BAD_TIME,
+	EX_TIME_BAD,
+	EX_TIME_NEGATIVE,
+	EX_TIME_RANGE_START,
+	EX_TIME_YEAR_LOW,
+	EX_TIME_YEAR_HIGH,
+	EX_TIME_MONTH_LOW,
+	EX_TIME_MONTH_HIGH,
+	EX_TIME_DAY_LOW,
+	EX_TIME_DAY_HIGH,
+	EX_TIME_CLOCK_LOW,
+	EX_TIME_CLOCK_HIGH,
+	EX_TIME_RANGE_END,
 	EX_BAD_VALUE,
 	EX_TOO_MANY_FIELDS,
 	EX_FILE,
