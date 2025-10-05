@@ -20,6 +20,8 @@
 # define SEPARATOR_DATABASE ","
 # define SEPARATOR_INPUT " | "
 # define DATABASE_NAME "data.csv"
+# define DATABASE_DIR "data"
+# define INPUT_DIR "input"
 
 enum e_bitcoin_ranges
 {

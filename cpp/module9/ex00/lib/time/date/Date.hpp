@@ -21,6 +21,7 @@ private:
 	int32_t	find_difference(const Date &other) const;
 	void	alter_values(Date &date, int32_t value);
 	void	make_calendar(int32_t calendar[]) const;
+	void	make_calendar(const Date &other, int32_t calendar[]) const;
 protected:
 	enum e_date
 	{
@@ -61,6 +62,7 @@ protected:
 		C_NOVEMBER = 	30,
 		C_DECEMBER = 	31,
 		C_ALL =			12,
+		C_ARRAY = 		14,
 		FEBRUARY = 2,
 	};
 	int32_t	_year;
@@ -78,6 +80,7 @@ protected:
 	int32_t	check_hour(int32_t hour) const;
 	int32_t	check_clock(int32_t clock) const;
 	int32_t	check_bisestile(int32_t bisestile) const;
+	bool	is_bisestile(int32_t day) const;
 public:
 //	canonic form:
 	Date(std::string date, char separator);
@@ -103,6 +106,10 @@ public:
 	Date	&operator--(void);
 	Date	operator++(int post);
 	Date	operator--(int post);
+	Date	&operator+=(int32_t value);
+	Date	&operator-=(int32_t value);
+	Date	operator+(int32_t value);
+	Date	operator-(int32_t value);
 
 	//SECTION - print
 	void	basic_print(std::ostream &ostream) const;

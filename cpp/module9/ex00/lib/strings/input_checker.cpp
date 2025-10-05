@@ -43,7 +43,7 @@ Return true(1) if success, else false(0)
 input is invalid when:
 
 1)	Is empty;
-2)	Its size surpasses 1000;
+2)	Its size surpasses INPUT_MAX;
 3)	It has non printable characters.
 */
 bool	valid_input(std::string s)
@@ -52,7 +52,7 @@ bool	valid_input(std::string s)
 
 	if (s.empty() == true)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
-	if (s.size() >= 300)
+	if (s.size() >= 30)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 	i = 0;
 	while (s[i])
@@ -97,7 +97,7 @@ int	ft_atoi(std::string s, int *n, int pos)
 		return (1);
 	if (std::isdigit(s[pos]) == false && s[pos] != '+' && s[pos] != '-')
 		return (2);
-	if (std::isdigit(s[pos]) == false && std::isdigit(s[pos]) == false)
+	if (std::isdigit(s[pos]) == false && std::isdigit(s[pos + 1]) == false)
 		return (2);
 	if (n)
 		*n = std::atoi(s.c_str() + pos);

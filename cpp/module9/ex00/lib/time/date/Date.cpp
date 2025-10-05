@@ -143,9 +143,13 @@ void	Date::make_calendar(int32_t calendar[]) const
 {
 	int32_t	i;
 
-	i = 1;
+	i = 0;
+	calendar[i++] = C_DECEMBER;
 	calendar[i++] = C_JANUARY;
-	calendar[i++] = C_FEBRUARY;
+	if (is_bisestile(this->_year) == true)
+		calendar[i++] = C_FEBRUARY + 1;
+	else
+		calendar[i++] = C_FEBRUARY;
 	calendar[i++] = C_MARCH;
 	calendar[i++] = C_APRIL;
 	calendar[i++] = C_MAY;
@@ -156,6 +160,31 @@ void	Date::make_calendar(int32_t calendar[]) const
 	calendar[i++] = C_OCTOBER;
 	calendar[i++] = C_NOVEMBER;
 	calendar[i++] = C_DECEMBER;
+	calendar[i++] = C_JANUARY;
+}
+
+void	Date::make_calendar(const Date &other, int32_t calendar[]) const
+{
+	int32_t	i;
+
+	i = 0;
+	calendar[i++] = C_DECEMBER;
+	calendar[i++] = C_JANUARY;
+	if (is_bisestile(other._year) == true)
+		calendar[i++] = C_FEBRUARY + 1;
+	else
+		calendar[i++] = C_FEBRUARY;
+	calendar[i++] = C_MARCH;
+	calendar[i++] = C_APRIL;
+	calendar[i++] = C_MAY;
+	calendar[i++] = C_JUNE;
+	calendar[i++] = C_JULY;
+	calendar[i++] = C_AUGUST;
+	calendar[i++] = C_SEPTEMBER;
+	calendar[i++] = C_OCTOBER;
+	calendar[i++] = C_NOVEMBER;
+	calendar[i++] = C_DECEMBER;
+	calendar[i++] = C_JANUARY;
 }
 
 //SECTION - Public
@@ -210,6 +239,8 @@ void	Date::basic_print(std::ostream &ostream) const
 	{
 		if (i != 0)
 			ostream << this->_separator;
+		if (fields[i] < 10)
+			ostream << "0";
 		ostream << fields[i];
 	}
 }

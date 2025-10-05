@@ -43,13 +43,14 @@ int32_t	Date::find_difference(const Date &other) const
 }
 
 static bool	alter_one(int32_t *time, int32_t value, int32_t min, int32_t max);
+static bool	alter_one(int32_t *time, int32_t value, int32_t min, int32_t cal[], int32_t mon);
 
 /*
 	For now it works only with 1 and -1
 */
 void	Date::alter_values(Date &date, int32_t value)
 {
-	int32_t	calendar[C_ALL + 1];
+	int32_t	calendar[C_ARRAY];
 
 	if (date._has_clock)
 	{
@@ -60,8 +61,8 @@ void	Date::alter_values(Date &date, int32_t value)
 		if (alter_one((int32_t *)&date._hour, value, R_HOUR_MIN, R_HOUR_MAX) == true)
 			return ;
 	}
-	make_calendar(calendar);
-	if (alter_one(&date._day, value, R_DAY_MIN, calendar[date._month]) == true)
+	make_calendar(date, calendar);
+	if (alter_one(&date._day, value, R_DAY_MIN, calendar, date._month) == true)
 		return ;
 	if (alter_one(&date._month, value, R_MONTH_MIN, R_MONTH_MAX) == true)
 		return ;
@@ -80,6 +81,31 @@ static bool	alter_one(int32_t *time, int32_t value, int32_t min, int32_t max)
 		else
 			return (true);
 		return (false);
+}
+
+static bool	alter_one(int32_t *time, int32_t value, int32_t min, int32_t cal[], int32_t mon)
+{
+		*time += value;
+		if (*time < min)
+			*time = cal[mon - 1];
+		else if (*time > cal[mon])
+			*time = min;
+		else
+			return (true);
+		return (false);
+}
+
+static void	normalize_op(int32_t value, int32_t *op, int32_t *reverse_sign)
+{
+	if (value < 0)
+	{
+		*op *= -1;
+		*reverse_sign = 1;
+	}
+	else
+	{
+		*reverse_sign = -1;
+	}
 }
 
 bool	Date::operator<(const Date &other) const
@@ -136,6 +162,72 @@ Date	Date::operator--(int post)
 	before = *this;
 	alter_values(*this, -1);
 	return (before);
+}
+
+Date	&Date::operator+=(int32_t value)
+{
+	int32_t	op = +1;
+	int32_t	reverse_sign;
+
+	if (value == 0)
+		return (*this);
+	normalize_op(value, &op, &reverse_sign);
+	while (value)
+	{
+		alter_values(*this, reverse_sign);
+		value += reverse_sign;
+	}
+	return (*this);
+}
+
+Date	&Date::operator-=(int32_t value)
+{
+	int32_t	op = -1;
+	int32_t	reverse_sign;
+
+	if (value == 0)
+		return (*this);
+	normalize_op(value, &op, &reverse_sign);
+	while (value)
+	{
+		alter_values(*this, reverse_sign);
+		value += reverse_sign;
+	}
+	return (*this);
+}
+
+Date	Date::operator+(int32_t value)
+{
+	Date	date(*this);
+	int32_t	op = +1;
+	int32_t	reverse_sign;
+
+	if (value == 0)
+		return (date);
+	normalize_op(value, &op, &reverse_sign);
+	while (value)
+	{
+		alter_values(date, op);
+		value += reverse_sign;
+	}
+	return (date);
+}
+
+Date	Date::operator-(int32_t value)
+{
+	Date	date(*this);
+	int32_t	op = -1;
+	int32_t	reverse_sign;
+
+	if (value == 0)
+		return (date);
+	normalize_op(value, &op, &reverse_sign);
+	while (value)
+	{
+		alter_values(date, op);
+		value += reverse_sign;
+	}
+	return (date);
 }
 
 std::ostream	&operator<<(std::ostream &stream, const Date &date)
