@@ -52,7 +52,7 @@ bool	valid_input(std::string s)
 
 	if (s.empty() == true)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
-	if (s.size() >= 300)
+	if (s.size() >= 30)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 	i = 0;
 	while (s[i])
