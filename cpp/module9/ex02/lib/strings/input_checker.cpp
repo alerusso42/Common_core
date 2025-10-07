@@ -52,7 +52,7 @@ bool	valid_input(std::string s)
 
 	if (s.empty() == true)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
-	if (s.size() >= 1000000)
+	if (s.size() >= 100000)
 		return (std::cerr << "\033[1;31mBad value\n\033[0m", false);
 	i = 0;
 	while (s[i])
@@ -123,9 +123,9 @@ bool	valid_number(std::string s, bool is_float)
 		return (0);
 	if (std::isdigit(s[0]) == false && s[0] != '+' && s[0] != '-')
 		return (2);
-	i = 1;
+	i = 0;
 	n_dots = 0;
-	while (s[i])
+	while (s[i] && s[i] != ' ')
 	{
 		if (s[i] == '.')
 		{
