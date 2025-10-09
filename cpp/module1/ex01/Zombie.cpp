@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/07 09:58:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ Zombie::Zombie(const std::string &name, bool heap)
 Zombie::~Zombie()
 {
 	if (heap == true)
-		std::cout << name << "bleah, heap! Disgusting." << std::endl;
+		std::cout << name << " bleah, heap! Disgusting." << std::endl;
 	else
 		std::cout << name << " has been eaten!" << std::endl;
 }

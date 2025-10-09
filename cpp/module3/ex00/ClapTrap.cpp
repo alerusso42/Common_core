@@ -12,24 +12,23 @@
 
 #include "ClapTrap.hpp"
 
-int	n;
-
 ClapTrap::ClapTrap(void)
 {
-	this->name = ft_itoa(n);
+	this->name = "name";
 	this->hit_points = 10;
 	this->energy_points = 10;
-	this->attack_damage = 10;
+	this->attack_damage = 0;
 	std::cout << this->name << " is born.." << std::endl;
-	++n;
 }
 
 ClapTrap::ClapTrap(std::string name)
 {
+	static int	n;
+
 	this->name = name.append(ft_itoa(n));
 	this->hit_points = 10;
 	this->energy_points = 10;
-	this->attack_damage = 10;
+	this->attack_damage = 0;
 	std::cout << "\033[32m";
 	std::cout << this->name << ":\tconstructor" << std::endl;
 	std::cout << "\033[0m";
@@ -65,10 +64,8 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->hit_points <= 0)
-		return (this->death());
-	if (this->energy_points <= 0)
-		return (this->no_energy());
+	if (is_ko())
+		return ;
 	std::cout << "attack():\t" << name << " attacks " << target << std::endl;
 }
 
@@ -80,8 +77,8 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->energy_points <= 0)
-		return (this->no_energy());
+	if (is_ko())
+		return ;
 	this->hit_points += amount;
 	std::cout << "beRepaired():\t" << name << " gains " << amount << std::endl;
 }
@@ -94,4 +91,14 @@ void ClapTrap::death(void)
 void ClapTrap::no_energy(void)
 {
 	std::cout << this->name << " IS tired.. give him a break!" << std::endl;
+}
+
+bool	ClapTrap::is_ko(void)
+{
+	if (this->hit_points <= 0)
+		return (this->death(), true);
+	else if (this->energy_points <= 0)
+		return (this->no_energy(), true);
+	this->energy_points--;
+	return (false);
 }

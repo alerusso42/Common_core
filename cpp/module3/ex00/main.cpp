@@ -15,7 +15,7 @@
 int main() 
 {
 	std::string	 	random_names[] = {RAND_NAMES};
-	ClapTrap	clap;
+	ClapTrap	clap(random_names[std::rand() % 3]);
 
 	std::srand(random_gen());
 	clap.attack(random_names[std::rand() % 3]);

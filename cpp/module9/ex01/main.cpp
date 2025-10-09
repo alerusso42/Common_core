@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.hpp"
+# include "RPN.hpp"
 
 /*REVIEW - RPN
 	//SECTION - what this program does

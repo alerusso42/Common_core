@@ -28,6 +28,7 @@ public:
 	DiamondTrap &operator=(const DiamondTrap &other);
 	void 		whoAmI();
 	void 		print_stats();
+	bool		is_ko(void);
 };
 
 #endif

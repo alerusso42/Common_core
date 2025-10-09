@@ -14,6 +14,8 @@
 # define FRAGTRAP_HPP
 # include "ClapTrap.hpp"
 
+class ClapTrap;
+
 class FragTrap : public ClapTrap
 {
 public:
@@ -22,7 +24,9 @@ public:
 	~FragTrap();
 	FragTrap(const FragTrap &other);
 	FragTrap &operator=(const FragTrap &other);
-	void highFivesGuys(void);
+
+	void	highFivesGuys(void);
+	bool	is_ko(void);
 };
 
 #endif

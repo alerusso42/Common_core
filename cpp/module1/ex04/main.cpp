@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:52:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/01 10:10:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/07 10:12:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 (INPUT FILE) ifstream			ofstream (OUTPUT FILE)
 				|					|
 				|					|
-				-------fstream-------
+				-------std::fstream-------
 				(input + output file)
 				
 1	
@@ -50,7 +50,7 @@ This data type represents the input file stream
 and is used to read information from files.
 
 3	
-fstream O_RDWR
+std::fstream O_RDWR
 
 This data type represents the file stream generally, 
 and has the capabilities of both ofstream and 

@@ -19,15 +19,15 @@ class ScavTrap : public ClapTrap
 {
 private:
 	bool	guard_mode;
-	Fixed	point;
 public:
 	ScavTrap();
 	ScavTrap(std::string name);
 	~ScavTrap();
 	ScavTrap(const ScavTrap &other);
 	ScavTrap &operator=(const ScavTrap &other);
-	void guardGate();
-	void attack(const std::string& target);
+	void			guardGate();
+	void 			attack(const std::string& target);
+	bool			is_ko(void);
 };
 
 #endif

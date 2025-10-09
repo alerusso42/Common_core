@@ -19,5 +19,6 @@ int main()
 	DiamondTrap	d(random_names[std::rand() % 3]);
 
 	d.print_stats();
+	d.attack(random_names[std::rand() % 3]);
 	return (0);
 }

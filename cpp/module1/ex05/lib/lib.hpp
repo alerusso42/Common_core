@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:22:02 by codespace         #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/07 10:13:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <errno.h>
 
 typedef	std::string	 	 			string;
-typedef	std::fstream			fstream;
 typedef	std::string::iterator	iterator;
 
 //	lib

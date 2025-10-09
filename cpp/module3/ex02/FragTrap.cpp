@@ -25,8 +25,8 @@ FragTrap::FragTrap()
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->hit_points = 100;
-	this->energy_points = 50;
-	this->attack_damage = 20;
+	this->energy_points = 100;
+	this->attack_damage = 30;
 	std::cout << "\033[32m";
 	std::cout << this->name << ":\tFragTrap constructor!" << std::endl;
 	std::cout << "\033[0m";
@@ -61,5 +61,17 @@ FragTrap &FragTrap::operator=(const FragTrap &other)
 
 void FragTrap::highFivesGuys(void)
 {
+	if (is_ko())
+		return ;
 	std::cout << this->name << "\tHIGH FIVES GUYS!" << std::endl;
+}
+
+bool	FragTrap::is_ko(void)
+{
+	if (this->hit_points <= 0)
+		return (this->death(), true);
+	else if (this->energy_points <= 0)
+		return (this->no_energy(), true);
+	this->energy_points--;
+	return (false);
 }

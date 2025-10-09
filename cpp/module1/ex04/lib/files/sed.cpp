@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 22:18:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/07 10:12:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # define USAGE_SED "This program mimics sed. You must give 3 parameters:\n\
 the filename;\n std::string to replace;\n replacement string\n"
 
-static int	get_files(std::string &filename, fstream &old_fd, fstream &new_fd);
+static int	get_files(std::string &filename, std::fstream &old_fd, std::fstream &new_fd);
 static void	line_replace(std::string &line, std::string &to_replace, std::string &replacer);
 static int	sed_parsing(std::string &filename, std::string &to_replace, std::string &replacer);
-static int	replace(fstream &old_fd, fstream &new_fd, std::string &old_s, std::string &new_s);
+static int	replace(std::fstream &old_fd, std::fstream &new_fd, std::string &old_s, std::string &new_s);
 
 /*
 	sed creates a new file, named filename.replace, in which every occurence of
@@ -33,8 +33,8 @@ static int	replace(fstream &old_fd, fstream &new_fd, std::string &old_s, std::st
 */
 int	sed(std::string filename, std::string to_replace, std::string replacer)
 {
-	fstream	old_fd;
-	fstream	new_fd;
+	std::fstream	old_fd;
+	std::fstream	new_fd;
 	int		exit_code;
 
 	if (sed_parsing(filename, to_replace, replacer) == 1)
@@ -72,7 +72,7 @@ std::ios::trunc → tronca a zero
 
 std::ios::binary → modalità binaria
 */
-static int	get_files(std::string &filename, fstream &old_fd, fstream &new_fd)
+static int	get_files(std::string &filename, std::fstream &old_fd, std::fstream &new_fd)
 {
 	std::string	 new_file;
 
@@ -97,7 +97,7 @@ static int	get_files(std::string &filename, fstream &old_fd, fstream &new_fd)
 	
 	this is done until eof.
 */
-static int	replace(fstream &old_fd, fstream &new_fd, std::string &old_s, std::string &new_s)
+static int	replace(std::fstream &old_fd, std::fstream &new_fd, std::string &old_s, std::string &new_s)
 {
 	std::string	 line;
 	bool	no_differencies;

@@ -15,6 +15,7 @@
 //	subject
 int main()
 {
+	std::srand(random_gen());
 Animal* animal = new Animal();
 const Animal* j = new Dog();
 const Animal* i = new Cat();

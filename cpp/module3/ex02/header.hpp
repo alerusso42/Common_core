@@ -14,6 +14,8 @@
 # define HEADER_HPP
 /* Auto-generated header aggregator */
 # include "lib/lib.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include "ClapTrap.hpp"
 
 #endif

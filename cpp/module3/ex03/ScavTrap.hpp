@@ -29,11 +29,12 @@ protected:
 public:
 	ScavTrap();
 	ScavTrap(std::string name);
-	~ScavTrap();
+	virtual	~ScavTrap();
 	ScavTrap(const ScavTrap &other);
 	ScavTrap &operator=(const ScavTrap &other);
 	void guardGate();
 	void attack(const std::string& target);
+	virtual bool	is_ko(void);
 };
 
 # include "FragTrap.hpp"

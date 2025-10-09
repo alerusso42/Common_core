@@ -12,7 +12,7 @@
 
 # include "header.hpp"
 
-int main() 
+int main()
 {
 	std::string	 	random_names[] = {RAND_NAMES};
 	std::srand(random_gen());

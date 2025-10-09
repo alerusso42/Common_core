@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:27:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/05 19:28:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/09 09:20:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.hpp"
+#include "RPN.hpp"
 
 static void		parsing(std::string &expr);
 static void		operate(std::stack<int32_t>	&stack, int8_t op, int32_t pos);

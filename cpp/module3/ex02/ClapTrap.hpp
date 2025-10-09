@@ -12,7 +12,7 @@
 
 #ifndef CLAPTRAP_HPP
 # define CLAPTRAP_HPP
-# include "header.hpp"
+# include "lib/lib.hpp"
 # define RAND_NAMES "Giovannino", "Giovanna", "Giovannone"
 
 //	root class
@@ -33,9 +33,11 @@ public:
 	ClapTrap(const ClapTrap &other);
 	ClapTrap &operator=(const ClapTrap &other);
 	std::string	 &getname();
-	void attack(const std::string& target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
+
+	void 			attack(const std::string& target);
+	void 			takeDamage(unsigned int amount);
+	void 			beRepaired(unsigned int amount);
+	virtual bool	is_ko(void);
 };
 
 # include "ScavTrap.hpp"

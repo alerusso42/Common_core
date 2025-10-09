@@ -12,7 +12,7 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap(name)
+ScavTrap::ScavTrap() : ClapTrap("name")
 {
 	this->hit_points = 100;
 	this->energy_points = 50;
@@ -65,6 +65,8 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 
 void ScavTrap::guardGate()
 {
+	if (is_ko())
+		return ;
 	if (this->guard_mode)
 	{
 		std::cout << this->name << "\tis already in guardgate." << std::endl;
@@ -77,5 +79,17 @@ void ScavTrap::guardGate()
 
 void ScavTrap::attack(const std::string& target)
 {
+	if (is_ko())
+		return ;
 	std::cout << this->name << " SCAV BOMB ON\t" << target << std::endl;
+}
+
+bool	ScavTrap::is_ko(void)
+{
+	if (this->hit_points <= 0)
+		return (this->death(), true);
+	else if (this->energy_points <= 0)
+		return (this->no_energy(), true);
+	this->energy_points--;
+	return (false);
 }

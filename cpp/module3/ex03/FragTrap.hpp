@@ -26,10 +26,11 @@ protected:
 public:
 	FragTrap();
 	FragTrap(std::string name);
-	~FragTrap();
+	virtual	~FragTrap();
 	FragTrap(const FragTrap &other);
 	FragTrap &operator=(const FragTrap &other);
 	void highFivesGuys(void);
+	virtual bool	is_ko(void);
 };
 
 # include "DiamondTrap.hpp"
