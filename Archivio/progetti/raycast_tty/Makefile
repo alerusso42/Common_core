@@ -6,18 +6,20 @@
 #    By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/10 22:06:56 by alerusso          #+#    #+#              #
-#    Updated: 2025/10/10 23:21:05 by alerusso         ###   ########.fr        #
+#    Updated: 2025/10/12 17:35:16 by alerusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME :=		ray_tty
 
 SRC := 		$(wildcard srcs/*.cpp)
-CLASSES := 	$(wildcard classes/Term/*.cpp)
+CLASSES := 	$(wildcard classes/Term/*.cpp) \
+			$(wildcard classes/Map/*.cpp)
 LIB := 		$(shell echo -n $$(cd includes/lib/ && make list))
 CPP :=		$(SRC) $(CLASSES) $(LIB)
 
-HPP :=		$(wildcard classes/Term/*.hpp)
+HPP :=		$(wildcard classes/Term/*.hpp) \
+			$(wildcard classes/Map/*.hpp)
 
 COMP := 	g++ -Wall -Wextra -Werror -std=c++11 -g
 
@@ -32,7 +34,7 @@ $(NAME): 	$(CPP) $(HPP)
 clean:
 	
 fclean:
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 	

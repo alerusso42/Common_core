@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   commands.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Creattyed: 2025/10/10 21:58:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/12 18:21:02 by alerusso         ###   ########.fr       */
+/*   Created: 2025/10/12 14:32:55 by alerusso          #+#    #+#             */
+/*   Updated: 2025/10/12 18:21:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/raycast_tty.hpp"
 
-int	main(void)
+void	commands(Term *tty)
 {
-	Term		tty;
-	const char	*raw_map[] = {SAMPLE_MAP};
-	Map			map((const int8_t **)raw_map);
-
-	map.print();
-	std::this_thread::sleep_for(std::chrono::seconds(3));
-	while (tty.is_active() == true)
-	{
-		commands(&tty);
-		tty.clear();
-		tty.test_screen();
-		tty.render();
-		std::this_thread::sleep_for(std::chrono::milliseconds(tty.FRAME_RATE));
-	}
-	std::cout << "\033[9999;9999H";
-	return (0);
+	if (tty->key(tty->KEY_W))
+		tty->test_input(1);
+	else if (tty->key(tty->KEY_S))
+		tty->test_input(-1);
+	else if (tty->key(tty->KEY_Q))
+		tty->turn_down();
 }

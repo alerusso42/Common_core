@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:26:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/11 00:54:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:30:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RAYCAST_TTY
 
 # include "lib/lib.hpp"
+# include <stdarg.h>
 # include <iostream>
 # include <fstream>
 # include <string>
@@ -34,5 +35,8 @@
 //classes
 
 # include "../classes/Term/Term.hpp"
+# include "../classes/Map/Map.hpp"
+
+void	commands(Term *tty);
 
 #endif

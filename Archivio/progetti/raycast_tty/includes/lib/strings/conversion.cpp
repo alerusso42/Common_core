@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 18:08:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/05 15:18:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:14:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,6 @@ std::string	 	 ft_itoa(int n)
 		s += '-';
 	s = ft_reverse(s);
 	return (s);
-}
-
-# include <sstream>
-
-template <typename T>
-std::string	to_string(T data)
-{
-	std::ostringstream	stream;
-
-	stream << data;
-	return (stream.str());
 }
 
 #if __cplusplus < 201103L

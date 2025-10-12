@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:22:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/11 01:07:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:58:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 Term::Term()
 {
-	this->_init_tty_size();
+	this->_init_tty_settings();
+	this->_update_tty_size();
 	this->_column = 0;
-	this->randomize_height();
+	this->_randomize_height();
+	this->_term_on = true;
+	this->_thread_input = std::thread(_input_thread, this);
 }
 
 Term::~Term()
-{}
+{
+	this->_mutex_input.lock();
+	this->_term_on = false;
+	this->_mutex_input.unlock();
+	this->_thread_input.join();
+#if defined(__linux__) || defined(__APPLE__)
+	tcsetattr(STDIN_FILENO, TCSANOW, &this->_oldt);
+#endif
+}
 
 Term::Term(const Term &other)
 {
@@ -30,6 +41,8 @@ Term::Term(const Term &other)
 	this->_height = other._height;
 	this->_term_x = other._term_x;
 	this->_term_y = other._term_y;
+	this->_term_on = true;
+	this->_thread_input = std::thread(_input_thread, this);
 }
 
 Term	&Term::operator=(const Term &other)
@@ -40,27 +53,9 @@ Term	&Term::operator=(const Term &other)
 	this->_height = other._height;
 	this->_term_x = other._term_x;
 	this->_term_y = other._term_y;
+	this->_term_on = true;
+	this->_thread_input = std::thread(_input_thread, this);
 	return (*this);
-}
-
-void	Term::_init_tty_size(void)
-{
-	char	s[20];
-	int		i;
-
-	std::cout << "press ENTER" << std::endl << std::flush;
-	std::cout << "\033[999;999H";//set position ESC[{line};{column}H
-	std::cout << "\033[6n";// print current position on std::cout
-	std::cin.get(s, 19);
-	i = 0;
-	while (s[i] < '0' || s[i] > '9')
-		++i;
-	this->_term_y = std::atoi(&s[i]);
-	while (s[i] != ';')
-		++i;
-	this->_term_x = std::atoi(&s[++i]);
-	std::cout << "terminal size is:" << this->_term_x << "," << this->_term_y;
-	std::cout << std::endl;
 }
 
 void	Term::render(void) const
@@ -102,7 +97,7 @@ void	Term::test_column()
 	this->_column++;
 }
 
-void	Term::randomize_height(void)
+void	Term::_randomize_height(void)
 {
 	random_seed();
 	this->_height = std::rand() % this->_term_y;
