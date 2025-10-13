@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:22:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 09:48:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:17:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 Term::Term()
 {
+	std::ofstream	stream(LOG, std::ios_base::in | std::ios_base::trunc);
 	this->_init_tty_settings();
 	this->_update_tty_size();
 	this->_column = 0;
+	this->screen_distance = (float)(this->_term_x / (2 * std::tan(FOV_RAD / 2)));
 	this->_term_on = true;
 	this->_thread_input = std::thread(_input_thread, this);
 }
@@ -39,6 +41,7 @@ Term::Term(const Term &other)
 	this->_column = other._column;
 	this->_term_x = other._term_x;
 	this->_term_y = other._term_y;
+	this->screen_distance = other.screen_distance;
 	this->_term_on = true;
 	this->_thread_input = std::thread(_input_thread, this);
 }
@@ -50,6 +53,7 @@ Term	&Term::operator=(const Term &other)
 	this->_column = other._column;
 	this->_term_x = other._term_x;
 	this->_term_y = other._term_y;
+	this->screen_distance = other.screen_distance;
 	this->_term_on = true;
 	this->_thread_input = std::thread(_input_thread, this);
 	return (*this);

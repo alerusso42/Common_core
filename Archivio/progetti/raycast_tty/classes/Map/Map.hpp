@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:06:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 10:01:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 19:37:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,15 @@ public:
 	int32_t	&operator()(int32_t pos[2], bool mode);
 
 	void	move_player(int32_t value, bool x_plane);
-	void	rotate_player(Fixed &value, bool x_plane);
+	void	rotate_player(Fixed value, bool x_plane);
 };
+
+void	debug_print(std::string s, ...);
 
 # define SAMPLE_MAP "111111111\0",\
 					"100000001\0",\
 					"100000001\0",\
-					"1000P0001\0",\
+					"100000P01\0",\
 					"100000001\0",\
 					"100000001\0",\
 					"111111111\0",\

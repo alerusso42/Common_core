@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:22:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 09:49:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:17:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <mutex>
 # include <thread>
 # include <map>
+# include <math.h>
 #ifdef _WIN32
 # include <conio.h>
 # include <windows.h>
@@ -33,6 +34,14 @@
 #else
 # error "OS has not terminal support"
 #endif
+
+# ifndef FOV
+#  define FOV 60
+#  define PI 3.1415926535
+# define FOV_RAD FOV * (PI / 180)
+# endif
+
+#define LOG "logfile"
 
 class Term
 {
@@ -66,6 +75,7 @@ public:
 	Term(const Term &other);
 	Term	&operator=(const Term &other);
 
+	Fixed	screen_distance;
 	enum e_term_general
 	{
 		FRAME_RATE =	(int32_t)((float)1000 / (float)FPS),

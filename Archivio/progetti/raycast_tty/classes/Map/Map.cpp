@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:33:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 09:55:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 19:00:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,15 +138,28 @@ Fixed	Map::get_player_pov(void) const
 
 void	Map::move_player(int32_t value, bool x_plane)
 {
+	int32_t	temp;
+
 	if (this->_p_coord[X] < 0 || this->_p_coord[Y] < 0)
 		return ;
 	if (x_plane)
-		this->_p_coord[X] += value;
+		temp = this->_p_coord[X] + value;
 	else
-		this->_p_coord[Y] += value;
+		temp = this->_p_coord[Y] + value;
+	if (temp < 0)
+		temp = 0;
+	else if (x_plane && temp > (int32_t)this->_x_size)
+		return ;
+	else if (!x_plane && temp > (int32_t)this->_y_size)
+		return ;
+	if (x_plane)
+		this->_p_coord[X] = temp;
+	else
+		this->_p_coord[Y] = temp;
+	debug_print("MOVED PLAYER.\n");
 }
 
-void	Map::rotate_player(Fixed &value, bool x_plane)
+void	Map::rotate_player(Fixed value, bool x_plane)
 {
 	if (x_plane)
 		this->_p_pov[X] += value;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 08:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 10:17:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:05:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	raycast(Term &tty, Map &map)
 	map.setmode(map.Mpixel);
 	tty.get_size(&x_size, &y_size);
 	p_pov = map.get_player_pov();
-	for (int32_t i = 0; i < x_size; i++)
+	p_pov += (float)((RADIANT) * FOV / 2);
+	for (int32_t i = x_size; i >= 0; --i)
 	{
 		angle = (float)((RADIANT * i) / x_size) * FOV;
-		angle += p_pov;
+		angle -= p_pov;
 		hit_finder(map, angle, hit_coord);
 		tty.draw_column(heigth_finder(map, angle, hit_coord, tty));
+		debug_print("hit coords:\t%d;\t%d\n", hit_coord[X], hit_coord[Y]);
 	}
 	map.setmode(map.Mdata);
 }
@@ -46,7 +48,7 @@ static void	hit_finder(Map &map, Fixed &angle, int32_t hit_coord[2])
 	coord[X] = hit_coord[X];
 	coord[Y] = hit_coord[Y];
 	step[X] = std::cos(angle.toFloat());
-	step[Y] = std::sin(angle.toFloat());
+	step[Y] = std::sin(angle.toFloat()) * -1;
 	while (the_wall_checker(map, coord) == false)
 	{
 		coord[X] += step[X];
@@ -79,5 +81,6 @@ static int32_t	heigth_finder(Map &map, Fixed &angle, int32_t hit[2], Term &tty)
 	ry = hit[Y];
 	ray = (float)sqrt(pow((float)(rx - px), 2) + pow((float)(ry - py), 2));
 	ray *= std::cos(angle.toFloat() - map.get_player_pov().toFloat());//fisheye
-	return ((int32_t)tty.get_size_y() * 15 / ray.toFloat());
+	ray = ((float)tty.get_size_y() * tty.screen_distance.toFloat()) / ray.toFloat();
+	return (ray.toInt());
 }

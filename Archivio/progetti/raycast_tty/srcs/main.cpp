@@ -24,6 +24,7 @@ int	main(void)
 	{
 		commands(tty, map);
 		tty.clear();
+		debug_print("Starting render\n");
 		raycast(tty, map);
 		tty.render();
 		std::this_thread::sleep_for(std::chrono::milliseconds(tty.FRAME_RATE));
