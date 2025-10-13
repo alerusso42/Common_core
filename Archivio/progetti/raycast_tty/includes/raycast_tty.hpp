@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:26:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/12 17:30:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 09:55:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "lib/lib.hpp"
 # include <stdarg.h>
+# include <math.h>
 # include <iostream>
 # include <fstream>
 # include <string>
@@ -37,6 +38,11 @@
 # include "../classes/Term/Term.hpp"
 # include "../classes/Map/Map.hpp"
 
-void	commands(Term *tty);
+# define PI 3.1415926535
+# define FOV 60
+# define RADIANT ((PI * 2) / 360)
+
+void	commands(Term &tty, Map &map);
+void	raycast(Term &tty, Map &map);
 
 #endif

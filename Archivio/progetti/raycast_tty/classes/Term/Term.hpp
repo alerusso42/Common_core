@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:22:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/12 18:26:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 09:49:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ private:
 	int32_t		_term_x;
 	int32_t		_term_y;
 	int32_t		_column;
-	int32_t		_height;
 	bool		_term_on;
 
-	void	_randomize_height(void);
 	void	_update_tty_size(void);
 	void	_init_tty_settings(void);
 public:
@@ -81,8 +79,15 @@ public:
 		KEY_A =		'a',
 		KEY_Q =		'q',
 	};
+	//SECTION - getters/setters
+
+	void	get_size(int32_t *x, int32_t *y);
+	int32_t	get_size_x(void);
+	int32_t	get_size_y(void);
+
 	//SECTION - class functions
-	void	render(void) const;
+
+	void	render(void);
 	void	clear(void) const;
 	bool	is_active(void);
 	void	turn_down(void);
@@ -91,9 +96,8 @@ public:
 	bool	key(u_int32_t number, ...);
 	
 	//SECTION - testing
-	void		test_column(void);
+	void		draw_column(int32_t heigth);
 	void		test_screen(void);
-	void		test_input(int32_t modifier);
 	void		get_input(void);
 	void		set_input(const u_int64_t &other);
 };

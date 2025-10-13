@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:33:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/12 17:59:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 09:55:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,74 @@ void	Map::_allocate_map(int32_t x, int32_t y)
 	}
 }
 
+void	Map::_set_player(void)
+{
+	this->_p_coord[X] = -1;
+	this->_p_coord[Y] = -1;
+	this->_p_pov[X] = 0;
+	this->_p_pov[Y] = 0;
+	for (u_int32_t y = 0; y < this->_y_size; y++)
+	{
+		for (u_int32_t x = 0; x < this->_x_size; x++)
+		{
+			if (this->_map[y][x] == S_PLAYER)
+			{
+				this->_p_coord[X] = x;
+				this->_p_coord[Y] = y;
+				return ;
+			}
+		}
+	}
+}
+
+bool	Map::get_player_pos(int32_t *x, int32_t *y) const
+{
+	if (this->_p_coord[X] < 0 || this->_p_coord[Y] < 0)
+		return (1);
+	if (x)
+		*x = this->_p_coord[X];
+	if (y)
+		*y = this->_p_coord[Y];
+	if (this->_mode_pixel == true)
+	{
+		*x *= BLOCK;
+		*y *= BLOCK;
+	}
+	return (0);
+}
+
+void	Map::get_player_pov(Fixed *x, Fixed *y) const
+{
+	if (x)
+		*x = this->_p_pov[X];
+	if (y)
+		*y = this->_p_pov[Y];
+}
+
+Fixed	Map::get_player_pov(void) const
+{
+	return (this->_p_pov[X]);
+}
+
+void	Map::move_player(int32_t value, bool x_plane)
+{
+	if (this->_p_coord[X] < 0 || this->_p_coord[Y] < 0)
+		return ;
+	if (x_plane)
+		this->_p_coord[X] += value;
+	else
+		this->_p_coord[Y] += value;
+}
+
+void	Map::rotate_player(Fixed &value, bool x_plane)
+{
+	if (x_plane)
+		this->_p_pov[X] += value;
+	else
+		this->_p_pov[Y] += value;
+}
+
+
 void	Map::fill(const int8_t **map)
 {
 	int32_t	x = 0;
@@ -101,6 +169,7 @@ void	Map::fill(const int8_t **map)
 		for (int32_t j = 0; j < x; j++)
 			this->_map[i][j] = map[i][j];
 	}
+	this->_set_player();
 }
 
 void	Map::fill(const int8_t **map, int32_t x, int32_t y)
@@ -110,6 +179,7 @@ void	Map::fill(const int8_t **map, int32_t x, int32_t y)
 		for (int32_t j = 0; j < x; j++)
 			this->_map[i][j] = map[i][j];
 	}
+	this->_set_player();
 }
 
 void	Map::print(void) const

@@ -19,12 +19,12 @@ int	main(void)
 	Map			map((const int8_t **)raw_map);
 
 	map.print();
-	std::this_thread::sleep_for(std::chrono::seconds(3));
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 	while (tty.is_active() == true)
 	{
-		commands(&tty);
+		commands(tty, map);
 		tty.clear();
-		tty.test_screen();
+		raycast(tty, map);
 		tty.render();
 		std::this_thread::sleep_for(std::chrono::milliseconds(tty.FRAME_RATE));
 	}

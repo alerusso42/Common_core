@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 23:18:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/12 18:30:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/13 09:49:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,6 @@ bool	Term::key(u_int32_t number, ...)
 	}
 	va_end(list);
 	return (false);
-}
-
-void	Term::test_input(int32_t modifier)
-{
-	this->_height += modifier;
 }
 
 void	Term::turn_down(void)
