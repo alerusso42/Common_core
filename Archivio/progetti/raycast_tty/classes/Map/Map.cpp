@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:33:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 19:00:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 21:37:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	Map::_set_player(void)
 {
 	this->_p_coord[X] = -1;
 	this->_p_coord[Y] = -1;
-	this->_p_pov[X] = 0;
+	this->_p_pov[X] = (float)(PI / 2);
 	this->_p_pov[Y] = 0;
 	for (u_int32_t y = 0; y < this->_y_size; y++)
 	{

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 08:07:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 20:05:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 21:50:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,27 @@
 static void		hit_finder(Map &map, Fixed &angle, int32_t hit_coord[2]);
 static bool		the_wall_checker(Map &map, Fixed coord[2]);
 static int32_t	heigth_finder(Map &map, Fixed &angle, int32_t hit[2], Term &tty);
+static void		normalize_angle(Fixed &angle);
 
 void	raycast(Term &tty, Map &map)
 {
 	int32_t	x_size;
 	int32_t	y_size;
-	Fixed	p_pov;
+	Fixed	angle_rotation;
 	Fixed	angle;
 	int32_t	hit_coord[2];
 
 	map.setmode(map.Mpixel);
 	tty.get_size(&x_size, &y_size);
-	p_pov = map.get_player_pov();
-	p_pov += (float)((RADIANT) * FOV / 2);
+	angle = map.get_player_pov() + (float)((RADIANT) * (FOV / 2));
+	angle_rotation = (float)((RADIANT) / x_size) * FOV;
 	for (int32_t i = x_size; i >= 0; --i)
 	{
-		angle = (float)((RADIANT * i) / x_size) * FOV;
-		angle -= p_pov;
+		normalize_angle(angle);
 		hit_finder(map, angle, hit_coord);
 		tty.draw_column(heigth_finder(map, angle, hit_coord, tty));
-		debug_print("hit coords:\t%d;\t%d\n", hit_coord[X], hit_coord[Y]);
+		debug_print("hit coords:\t%d;\t%d\n", hit_coord[X] / 64, hit_coord[Y] / 64);
+		angle -= angle_rotation;
 	}
 	map.setmode(map.Mdata);
 }
@@ -80,7 +81,15 @@ static int32_t	heigth_finder(Map &map, Fixed &angle, int32_t hit[2], Term &tty)
 	rx = hit[X];
 	ry = hit[Y];
 	ray = (float)sqrt(pow((float)(rx - px), 2) + pow((float)(ry - py), 2));
-	ray *= std::cos(angle.toFloat() - map.get_player_pov().toFloat());//fisheye
+	ray *= std::cos(angle.toFloat() - map.get_player_pov().toFloat());
 	ray = ((float)tty.get_size_y() * tty.screen_distance.toFloat()) / ray.toFloat();
 	return (ray.toInt());
+}
+
+static void		normalize_angle(Fixed &angle)
+{
+	if (angle < 0)
+		angle += (float)(PI * 2);
+	else if (angle > (float)(PI * 2))
+		angle -= (float)(PI * 2);
 }

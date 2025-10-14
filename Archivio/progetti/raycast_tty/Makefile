@@ -6,7 +6,7 @@
 #    By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/10 22:06:56 by alerusso          #+#    #+#              #
-#    Updated: 2025/10/12 17:35:16 by alerusso         ###   ########.fr        #
+#    Updated: 2025/10/14 22:34:27 by alerusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,13 @@ clean:
 	
 fclean:
 	rm -f $(NAME)
+	rm -f logfile
+	rm -f massif*
+
+sanity:
+	$(COMP) -fsanitize=address -fno-omit-frame-pointer $(CPP) -o $(NAME)
+	./$(NAME)
+
 
 re: fclean all
 	

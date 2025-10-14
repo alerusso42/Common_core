@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:22:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 20:17:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 22:16:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 Term::Term()
 {
-	std::ofstream	stream(LOG, std::ios_base::in | std::ios_base::trunc);
 	this->_init_tty_settings();
 	this->_update_tty_size();
 	this->_column = 0;
@@ -99,7 +98,7 @@ void	Term::draw_column(int32_t heigth)
 	this->_column++;
 }
 
-void	Term::get_size(int32_t *x, int32_t *y)
+void	Term::get_size(int32_t *x, int32_t *y) const
 {
 	if (x)
 		*x = this->_term_x;
@@ -107,12 +106,12 @@ void	Term::get_size(int32_t *x, int32_t *y)
 		*y = this->_term_x;
 }
 
-int32_t	Term::get_size_x(void)
+int32_t	Term::get_size_x(void) const
 {
 	return (this->_term_x);
 }
 
-int32_t	Term::get_size_y(void)
+int32_t	Term::get_size_y(void) const
 {
 	return (this->_term_y);
 }

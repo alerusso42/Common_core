@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:06:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 19:37:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 22:14:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@
 #  include <sys/ioctl.h>
 # else
 #  error "OS has not terminal support"
+# endif
+# ifndef FOV
+#  define FOV 60
+#  define PI 3.1415926535
+# define FOV_RAD FOV * (PI / 180)
 # endif
 
 class Map
@@ -88,9 +93,15 @@ public:
 void	debug_print(std::string s, ...);
 
 # define SAMPLE_MAP "111111111\0",\
+					"100010001\0",\
+					"101000101\0",\
 					"100000001\0",\
 					"100000001\0",\
-					"100000P01\0",\
+					"100000001\0",\
+					"1000P0001\0",\
+					"100000001\0",\
+					"100000001\0",\
+					"100000001\0",\
 					"100000001\0",\
 					"100000001\0",\
 					"111111111\0",\

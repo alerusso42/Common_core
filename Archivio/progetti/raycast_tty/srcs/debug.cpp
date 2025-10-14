@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 17:55:06 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 18:29:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 22:27:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 
 static void	interpreter(std::ofstream &stream, int8_t type, va_list &list);
 
+void	init_debug_file(void)
+{
+	if (DEBUG == false)
+		return ;
+	std::ofstream	stream(LOG, std::ios_base::in | std::ios_base::trunc\
+	 | std::ios_base::trunc);
+}
+
 void	debug_print(std::string s, ...)
 {
 	va_list			list;
 	std::ofstream	stream(LOG, std::ios_base::app);
 
-	if (stream.fail())
+	if (DEBUG == false || stream.fail())
 		return ;
 	va_start(list, s);
 	for (typename std::string::iterator it = s.begin(); it != s.end(); it++)

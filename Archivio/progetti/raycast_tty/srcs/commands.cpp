@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 14:32:55 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 18:54:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 21:35:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	commands(Term &tty, Map &map)
 	if (tty.key(tty.KEY_S))
 		map.move_player(1, false);
 	if (tty.key(tty.KEY_A))
-		map.rotate_player(-1, true);
+		map.move_player(-1, true);
 	if (tty.key(tty.KEY_D))
-		map.rotate_player(1, true);
+		map.move_player(1, true);
 	if (tty.key(tty.KEY_Q))
 		tty.turn_down();
 }

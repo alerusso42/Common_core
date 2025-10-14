@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:26:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 20:17:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 22:26:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,27 @@
 #else
 # error "OS has not terminal support"
 #endif
+//SECTION - math macro
+
 # define FOV 60
 # define PI 3.1415926535
 # define RADIANT ((PI * 2) / 360)
 # define FOV_RAD FOV * (PI / 180)
-//classes
+
+//SECTION - other macro
+
+# define DEBUG false
+
+//SECTION - classes
 
 # include "../classes/Term/Term.hpp"
 # include "../classes/Map/Map.hpp"
 
+//SECTION - functions
+
 void	commands(Term &tty, Map &map);
 void	raycast(Term &tty, Map &map);
 void	debug_print(std::string s, ...);
+void	init_debug_file(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:22:09 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/13 20:17:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/14 22:04:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ public:
 	};
 	//SECTION - getters/setters
 
-	void	get_size(int32_t *x, int32_t *y);
-	int32_t	get_size_x(void);
-	int32_t	get_size_y(void);
+	void	get_size(int32_t *x, int32_t *y) const;
+	int32_t	get_size_x(void) const;
+	int32_t	get_size_y(void) const;
 
 	//SECTION - class functions
 
