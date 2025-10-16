@@ -25,12 +25,6 @@ Dog::~Dog()
 	std::cout << "Dog " << this->type << ":\tDestructor" << std::endl;
 }
 
-Dog::~Dog()
-{
-	delete this->ideas;
-	std::cout << "Dog " << this->type << ":\tDestructor" << std::endl;
-}
-
 Dog::Dog(const Dog &other) : AAnimal()
 {
 	if (this == &other)
