@@ -26,8 +26,13 @@ Cat::~Cat()
 }
 
 Cat::Cat(const Cat &other) : Animal()
-{ 
+{
+	if (this == &other)
+		return ;
 	this->type = other.type;
+	this->ideas = new Brain();
+	*this->ideas = *other.ideas;
+
 }
 
 Cat &Cat::operator=(const Cat &other)
@@ -35,6 +40,7 @@ Cat &Cat::operator=(const Cat &other)
 	if (this != &other)
 	{
 		this->type = other.type;
+		*this->ideas = *other.ideas;
 	}
 	return (*this);
 }

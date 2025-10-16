@@ -18,8 +18,8 @@
 
 class Cure : public AMateria
 {
-private:
-	Cure	*_last_clone;
+//private:
+//	Cure	*_last_clone;
 public:
 //	canonic form:
 	Cure();

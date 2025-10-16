@@ -13,7 +13,6 @@
 # include "header.hpp"
 
 //SECTION subject main
-/*
 int main()
 {
 IMateriaSource* src = new MateriaSource();
@@ -32,7 +31,7 @@ delete bob;
 delete me;
 delete src;
 return 0;
-}*/
+}
 
 /*SECTION materia not created
 int	main()

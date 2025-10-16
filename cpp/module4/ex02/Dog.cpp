@@ -25,18 +25,20 @@ Dog::~Dog()
 	std::cout << "Dog " << this->type << ":\tDestructor" << std::endl;
 }
 
-Dog::Dog(const Dog &other) : AAnimal()
-{ 
-	this->type = other.type;
+Dog::~Dog()
+{
+	delete this->ideas;
+	std::cout << "Dog " << this->type << ":\tDestructor" << std::endl;
 }
 
-Dog &Dog::operator=(const Dog &other)
+Dog::Dog(const Dog &other) : AAnimal()
 {
-	if (this != &other)
-	{
-		this->type = other.type;
-	}
-	return (*this);
+	if (this == &other)
+		return ;
+	this->type = other.type;
+	this->ideas = new Brain();
+	*this->ideas = *other.ideas;
+
 }
 
 void	Dog::makeSound() const

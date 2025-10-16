@@ -26,8 +26,13 @@ Dog::~Dog()
 }
 
 Dog::Dog(const Dog &other) : Animal()
-{ 
+{
+	if (this == &other)
+		return ;
 	this->type = other.type;
+	this->ideas = new Brain();
+	*this->ideas = *other.ideas;
+
 }
 
 Dog &Dog::operator=(const Dog &other)
@@ -35,6 +40,7 @@ Dog &Dog::operator=(const Dog &other)
 	if (this != &other)
 	{
 		this->type = other.type;
+		*this->ideas = *other.ideas;
 	}
 	return (*this);
 }
