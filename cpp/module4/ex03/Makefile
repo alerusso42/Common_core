@@ -15,9 +15,8 @@ LIB_SRC	= 		files/sed.cpp \
 	math/fpoint/fixed_func.cpp \
 	math/fpoint/fixed_operator.cpp \
 	math/random.cpp \
-	math/test.cpp \
 	strings/input_checker.cpp \
-	strings/print.cpp \
+	strings/print.cpp
 
 LIB	= 		$(addprefix lib/, $(LIB_SRC))
 

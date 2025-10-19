@@ -31,10 +31,9 @@ int	main(void)
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	while (tty.is_active() == true)
 	{
-		commands(tty, map);
 		tty.clear();
+		commands(tty, map);
 		debug_print("Starting render\n");
-		raycast(tty, map);
 		tty.render();
 		std::this_thread::sleep_for(std::chrono::milliseconds(tty.FRAME_RATE));
 	}
