@@ -1,0 +1,23 @@
+#SECTION - install
+
+1)	put this directory on $HOME.
+	you can put it on other path, but you need to:
+	-	go to convert.sh
+	-	change ROOT variable at the top of the script
+	-	you can change this directory name, too.
+	IMPORTANT:	update next steps names with the modified ones.
+2)	put to .bashrc:	
+PATH="$PATH:$HOME/piskel_converter/"
+
+3)	source $HOME/.bashrc
+
+#SECTION - usage
+
+#	this script converts all gifs in the gifs directory.
+#	old results are moved in old_res.
+#	results are put in the res directory, nested in subfolder.
+#	after the conversion, all gifs are moved to old_gif.
+
+#SECTION - !WARNINGS!
+
+-	gif names must not have spaces.

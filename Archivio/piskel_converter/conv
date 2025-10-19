@@ -1,0 +1,71 @@
+#!/bin/bash
+#	this script converts all gifs in the gifs directory.
+#	old results are moved in old_res.
+#	results are put in the res directory, nested in subfolder.
+#	after the conversion, all gifs are moved to old_gif.
+
+#SECTION - settings
+
+NAME="conv"
+DNAME="piskel_converter"
+ROOT="$HOME/$DNAME"
+OUT_FORMAT="xpm"
+
+SILENT=true
+
+#SECTION - global variables (don't touch)
+
+USAGE="	\033[32mUsage 1:\033[0m convert all files in the gif directory\n\
+		1)	put your gifs on $HOME/gif_converter/gifs directory;\n
+		2)	run convert without arguments;\n\
+		3)	go to $HOME/gif_converter/res directory;\n\
+		4)	take your converted files.\n\n\
+		\033[32mUsage 2:\033[0m convert specified files\n\
+		1)	run convert specifing the gifs.\n\
+		gifs will be deleted, converted files will appear.\n\
+		A copy of the gif will be saved in $HOME/gif_converter/old_gif directory.\n
+		\n\033[32mOther commands:\033[0m\n\
+		\033[32m--help || help\033[0m:	shows this message.\n\
+		\033[32mclean\033[0m:	reset old_gif and old_res directories.\n\
+		\033[32mfclean\033[0m:	reset all directories.\n"
+
+D_GIF="gifs"
+D_OLD_GIF="old_gifs"
+D_RES="res"
+D_OLD_RES="old_res"
+PWD="$(pwd)"
+SRCS="$ROOT/srcs"
+
+chmod +x "$SRCS"/*
+source "$SRCS/utils.sh"
+source "$SRCS/store_files.sh"
+
+#SECTION - main
+#NOTE - steps
+#	1)	run other commands
+#	2)	install ImageMagick if not present
+#	3)	moves all old content to OLD DIRS
+#	4)	if no arguments, converts all D_GIF contents in D_RES;
+#		else, converts specified files
+#	5)	convert is the command that invoke ImageMagick
+if [[ "$1" == "--help" || "$1" == "help" ]]; then
+	error
+elif [ "$1" == "clean" ]; then
+	clean
+elif [ "$1" == "fclean" ]; then
+	fclean
+fi
+which convert || install_magik
+j=0
+mv "$ROOT/$D_RES/"* "$ROOT/$D_OLD_RES" 2>/dev/null
+if [ -z "$1" ]; then
+	read_dir
+else
+	read_files
+fi
+j=0
+for file in "${files_path[@]}"
+do
+	convert $file "${out_dir[$j]}"/"${files[$j]}"%02d."$OUT_FORMAT"
+done
+mv "$ROOT/$D_GIF"/* "$ROOT/$D_OLD_GIF"
