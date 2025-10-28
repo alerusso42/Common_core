@@ -124,3 +124,9 @@ void	AForm::beExec(const Bureaucrat &Bureaucrat) const
 	if (this->sign == false)
 		throw Error(EX_NOT_SIGN);
 }
+
+std::ostream	&operator<<(std::ostream &stream, AForm &form)
+{
+	stream << form.getName();
+	return (stream);
+}

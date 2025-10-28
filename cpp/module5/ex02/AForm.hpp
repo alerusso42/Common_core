@@ -60,4 +60,6 @@ public:
 	virtual int		execute(Bureaucrat const &executor) const = 0;
 };
 
+std::ostream	&operator<<(std::ostream &stream, AForm &form);
+
 #endif

@@ -93,6 +93,19 @@ void	Form::GradeTooLowException(void)
 	throw (Error(EX_GRADE_LOW));
 }
 
+bool	Form::getSign(void) const
+{
+	return (this->sign);
+}
+int	Form::getGradeExec(void) const
+{
+	return (this->grade_exec);
+}
+int	Form::getGradeSign(void) const
+{
+	return (this->grade_exec);
+}
+
 const std::string	 &Form::getName(void)
 {
 	return (this->name);
@@ -108,4 +121,10 @@ int	Form::beSigned(Bureaucrat &Bureaucrat)
 		this->GradeTooLowException();
 	this->sign = true;
 	return (0);
+}
+
+std::ostream	&operator<<(std::ostream &stream, Form &form)
+{
+	stream << form.getName();
+	return (stream);
 }

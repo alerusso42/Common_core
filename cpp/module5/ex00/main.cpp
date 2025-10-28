@@ -13,7 +13,7 @@
 #include "Bureaucrat.hpp"
 
 //SECTION - cannot decrement
-int main1()
+int main()
 {
 	Bureaucrat	b(150);
 

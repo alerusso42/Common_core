@@ -36,10 +36,11 @@ private:
 	const int		grade_exec;
 	const int		grade_sign;
 	const std::string	 name;
+
 	void			GradeTooHighException(void);
 	void			GradeTooLowException(void);
 	void			check_grade(int grade);
-	std::string	 		rand_name(void);
+	std::string	 	rand_name(void);
 public:
 //	canonic form:
 	Form();
@@ -48,8 +49,13 @@ public:
 	Form(const Form &other);
 	Form &operator=(const Form &other);
 
-	const std::string	 &getName(void);
-	int				beSigned(Bureaucrat &Bureaucrat);
+	bool				getSign(void) const;
+	int					getGradeExec(void) const;
+	int					getGradeSign(void) const;
+	const std::string	&getName(void);
+	int					beSigned(Bureaucrat &Bureaucrat);
 };
+
+std::ostream	&operator<<(std::ostream &stream, Form &form);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:56:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:09:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ typedef AForm	*(Intern::*forms_list)(std::string const &);
 class Intern
 {
 private:
+	AForm	*makePresidentialPardon(std::string const &);
+	AForm	*makeRobotomyRequest(std::string const &);
+	AForm	*makeShrubberyCreation(std::string const &);
+	AForm	*makeNothing(std::string const &);
+
 	std::string	 	*types_allowed;
 	forms_list	*forms;
 	void		types_get(void);
@@ -37,10 +42,6 @@ public:
 	Intern	&operator=(const Intern &other);
 
 	AForm	*makeForm(std::string type, std::string target);
-	AForm	*makePresidentialPardon(std::string const &);
-	AForm	*makeRobotomyRequest(std::string const &);
-	AForm	*makeShrubberyCreation(std::string const &);
-	AForm	*makeNothing(std::string const &);
 };
 
 #endif
