@@ -25,7 +25,7 @@ public:
 	virtual ~AAnimal();
 
 	const std::string	 &getType() const;
-	virtual void	makeSound() const;
+	virtual void	makeSound() const = 0;
 };
 
 # include "Dog.hpp"

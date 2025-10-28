@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:33:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/28 09:31:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Brain::Brain()
 		this->ideas[i] = random_ideas[random];
 		++i;
 	}
+	std::cout << "Brain :\t\tconstructor" << std::endl;
 }
 
 Brain::Brain(std::string s)
@@ -44,10 +45,13 @@ Brain::Brain(std::string s)
 		this->ideas[i] = s;
 		++i;
 	}
+	std::cout << "Brain :\t\tconstructor" << std::endl;
 }
 
 Brain::~Brain()
-{}
+{
+	std::cout << "Brain:\t\tdestructor" << std::endl;
+}
 
 Brain::Brain(const Brain &other)
 {
@@ -59,6 +63,7 @@ Brain::Brain(const Brain &other)
 		this->ideas[i] = other.ideas[i];
 		++i;
 	}
+	std::cout << "Brain :\t\tconstructor" << std::endl;
 }
 
 Brain &Brain::operator=(const Brain &other)

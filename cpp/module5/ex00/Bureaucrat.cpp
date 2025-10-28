@@ -45,7 +45,7 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.name)
 { 
-	this->grade = grade;
+	this->grade = other.grade;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
@@ -100,10 +100,12 @@ std::ostream&	operator<<(std::ostream& fd, const Bureaucrat &b)
 
 void	Bureaucrat::GradeTooHighException(void)
 {
+	this->grade = 1;
 	throw (Error(EX_GRADE_HIGH));
 }
 
 void	Bureaucrat::GradeTooLowException(void)
 {
+	this->grade = this->LOWEST_GRADE;
 	throw (Error(EX_GRADE_LOW));
 }

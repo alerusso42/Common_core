@@ -16,12 +16,15 @@
 Form::Form() : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
 name(rand_name())
 {
+	(void)grade_exec;
 	this->sign = false;
 }
 
 Form::Form(int exec, int sign) : grade_exec(exec), grade_sign(sign), \
 name(rand_name())
 {
+	(void)grade_exec;
+
 	this->sign = false;
 	if (exec <= 0 || sign <= 0)
 	{

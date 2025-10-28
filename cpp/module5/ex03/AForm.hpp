@@ -26,6 +26,7 @@ enum e_failures
 	F_ALREADY_SIGN,
 	F_BAD_BUREAUCRAT,
 	F_GRADE_LOW,
+	F_BAD_FORM,
 };
 
 class AForm

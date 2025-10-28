@@ -70,7 +70,7 @@ int main()
 	Bureaucrat	b(124);
 	Form 		f1(42, 42);
 
-	Bureaucrat	b1(41, "GOKU SUPER SAIYAN 104");
+	Bureaucrat	b1(43, "GOKU SUPER SAIYAN 104");
 	b.signForm(f1);
 	b1.signForm(f1);
 	return (0);

@@ -15,7 +15,7 @@
 /*
 	SIGN	25;	EXEC	5	
 */
-int main() 
+int TEST2main() 
 {
 	Bureaucrat	b("Mega Rayquaza", 4);
 	AForm	*f1 = new PresidentialPardonForm("Gabibbo");
@@ -31,9 +31,9 @@ int main()
 /*
 	SIGN	72;	EXEC	45	
 */
-int TEST2main() 
+int TEST3main() 
 {
-	Bureaucrat	b("Mega Rayquaza", 1);
+	Bureaucrat	b("Mega Rayquaza", 100);
 	AForm	*f1 = new RobotomyRequestForm("Ezio Greggio");
 
 	std::srand(random_gen());
@@ -46,10 +46,10 @@ int TEST2main()
 /*
 	SIGN	145;	EXEC	137	
 */
-int TEST3main() 
+int main() 
 {
-	Bureaucrat	b("Mega Rayquaza", 1);
-	AForm	*f1 = new ShrubberyCreationForm("Gerry Scotti");
+	Bureaucrat	b("Portguase ACE", 1);
+	AForm	*f1 = new ShrubberyCreationForm("GOL D. ROGER");
 
 	std::srand(random_gen());
 	b.signForm(*f1);

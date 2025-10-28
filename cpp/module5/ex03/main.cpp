@@ -12,21 +12,23 @@
 
 # include "header.hpp"
 
-int main2() 
+int main() 
 {
 	Intern someRandomIntern;
 	AForm *rrf;
 
 	std::srand(random_gen());
-	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-	Bureaucrat	b("Mega Rayquaza", 25);
+	rrf = someRandomIntern.makeForm("residential pardon", "Bender");
+	if (!rrf)
+		return (print_error("Form does not exist."), 1);
+	Bureaucrat	b("Mega Rayquaza", 1);
 	b.signForm(*rrf);
 	rrf->execute(b);
 	delete rrf;
 	return (0);
 }
 
-int	main()
+int	main2()
 {
 	Intern 		someRandomIntern;
 	Bureaucrat	er_gabibbo(120, "ER GABIBBO");

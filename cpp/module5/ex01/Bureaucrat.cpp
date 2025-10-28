@@ -46,7 +46,7 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.name)
 { 
-	this->grade = grade;
+	this->grade = other.grade;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
@@ -147,10 +147,12 @@ void	Bureaucrat::print_form_error(Form &form, int error)
 
 void	Bureaucrat::GradeTooHighException(void)
 {
+	this->grade = 1;
 	throw (Error(EX_GRADE_HIGH));
 }
 
 void	Bureaucrat::GradeTooLowException(void)
 {
+	this->grade = this->LOWEST_GRADE;
 	throw (Error(EX_GRADE_LOW));
 }

@@ -27,11 +27,12 @@ enum e_types
 class AMateria
 {
 private:
-	std::string	 type;
 	int		type_val;
 protected:
 	AMateria();
 	AMateria(const AMateria &other);
+
+	std::string	 type;
 public:
 	AMateria(std::string const &type);
 	virtual ~AMateria();

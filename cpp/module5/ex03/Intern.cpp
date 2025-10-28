@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:20:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Intern::Intern()
 {
 	this->type_num = 0;
 	this->types_get();
-	this->forms = new forms_list[this->type_num];
+	this->forms = new forms_list[this->type_num + 1];
 	this->forms[0] = &Intern::makePresidentialPardon;
 	this->forms[1] = &Intern::makeRobotomyRequest;
 	this->forms[2] = &Intern::makeShrubberyCreation;
@@ -34,8 +34,8 @@ Intern::~Intern()
 Intern::Intern(const Intern &other)
 {
 	this->type_num = other.type_num;
-	this->types_allowed = new string[this->type_num];
-	this->forms = new forms_list[this->type_num];
+	this->types_allowed = new std::string[this->type_num];
+	this->forms = new forms_list[this->type_num + 1];
 	for (int i = 0; i < this->type_num; i++)
 	{
 		this->types_allowed[i] = other.types_allowed[i];
@@ -48,8 +48,8 @@ Intern	&Intern::operator=(const Intern &other)
 	if (this == &other)
 		return (*this);
 	this->type_num = other.type_num;
-	this->types_allowed = new string[this->type_num];
-	this->forms = new forms_list[this->type_num];
+	this->types_allowed = new string[this->type_num + 1];
+	this->forms = new forms_list[this->type_num + 1];
 	for (int i = 0; i < this->type_num; i++)
 	{
 		this->types_allowed[i] = other.types_allowed[i];
@@ -82,8 +82,8 @@ void	Intern::types_get(void)
 	i = 0;
 	while (!types[i].empty())
 		++i;
-	this->type_num = i + 1;
-	this->types_allowed = new string[this->type_num];
+	this->type_num = i;
+	this->types_allowed = new std::string[this->type_num + 1];
 	i = 0;
 	while (!types[i].empty())
 	{
