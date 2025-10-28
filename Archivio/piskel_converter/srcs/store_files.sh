@@ -22,10 +22,12 @@ read_files()
 
 read_dir()
 {
+	echo "test"
 	cd $ROOT/$D_GIF || error "project not found"\
 	&&	files=$(echo *); cd $OLDPWD
 	if [[ "${files[0]}" == "*" ]]; then
 		error "$D_GIF is empty."
+	fi
 	i=0
 	for file in "${files[@]}"
 	do
@@ -34,5 +36,4 @@ read_dir()
 		files[$i]="${files[$i]%.gif}"
 		((++i))
 	done
-	fi
 }
