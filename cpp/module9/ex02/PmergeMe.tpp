@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/07 01:17:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:06:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static void	insert(T &big, T &little, int32_t pos);
 template <typename T>
 void	sort(T &big)
 {
-	T		little;
-	int32_t	size_half;
+	T			little;
+	int32_t		size_half;
+	Jacobsthal	sequence;
 
 	if (big.size() <= 1)
 		return ;
@@ -31,12 +32,16 @@ void	sort(T &big)
 	for (int32_t i = 0; i < size_half; i++)
 		merge(big, little, i + (big[i] > big[i + 1]));
 	sort(big);
-	for (int32_t i = 0; i < size_half; i++)
+	for (int32_t i = 0; i < size_half; i = sequence.next())
 	{
-		u_int32_t j = 0;
-		while (little[0] > big[j] && j < big.size())
-			j++;
-		insert(big, little, j);
+		u_int32_t j = sequence.prev();
+		while (i >= sequence.prev() && i >= 0)
+		{		
+			while (little[0] > big[j] && j < big.size())
+				j++;
+			insert(big, little, j);
+			i--;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:27:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/09 09:20:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:15:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int32_t	rpn(std::string expr)
 	std::stack<int32_t>	stack;
 
 	parsing(expr);
-	for (typename std::string::iterator i = expr.begin(); i != expr.end(); i++)
+	for (std::string::iterator i = expr.begin(); i != expr.end(); i++)
 	{
 		if (std::isdigit(*i))
 			stack.push(*i - '0');
@@ -31,13 +31,15 @@ int32_t	rpn(std::string expr)
 	}
 	if (stack.empty() == true)
 		throw (Error(EX_EMPTY_STACK));
+	else if (stack.size() != 1)
+		throw (Error(EX_MULTIPLE_RESULT));
 	else
 		return (stack.top());
 }
 
 static void	parsing(std::string &expr)
 {
-	for (typename std::string::iterator i = expr.begin(); i != expr.end(); i++)
+	for (std::string::iterator i = expr.begin(); i != expr.end(); i++)
 	{
 		if (std::strchr(RPN_CHARS, *i) == NULL)
 			throw (Error(EX_INVALID_CHAR, 0, *i));

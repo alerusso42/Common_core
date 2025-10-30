@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Error.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/05 19:16:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:01:40 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ std::string	 Error::get_msg_main_code(int type)
 		s = "Accepted chars are: digit + \"+-*/\". Found";
 	else if (type == EX_EMPTY_STACK)
 		s = "Operation impossible: stack is empty";
+	else if (type == EX_MULTIPLE_RESULT)
+		s = "Operation impossible: more than one result in the expression";
 	else if (type == EX_DIVISION)
 		s = "Operation impossible: division for zero. Position";
 	return (s);

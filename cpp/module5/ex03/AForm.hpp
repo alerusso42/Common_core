@@ -44,9 +44,6 @@ private:
 	void			GradeTooLowException(void) const;
 	void			check_grade(int grade);
 	std::string	 		rand_name(void);
-protected:
-	int				getGradeExec(void) const;
-	int				getGradeSign(void) const;
 public:
 //	canonic form:
 	AForm();
@@ -55,10 +52,14 @@ public:
 	AForm(const AForm &other);
 	AForm &operator=(const AForm &other);
 
-	const std::string	 &getName(void) const;
-	int				beSigned(Bureaucrat &Bureaucrat);
-	void			beExec(const Bureaucrat &Bureaucrat) const;
-	virtual int		execute(Bureaucrat const &executor) const = 0;
+	const std::string	&getName(void) const;
+	int					getSign(void) const;
+	int					getGradeExec(void) const;
+	int					getGradeSign(void) const;
+
+	int					beSigned(Bureaucrat &Bureaucrat);
+	void				beExec(const Bureaucrat &Bureaucrat) const;
+	virtual int			execute(Bureaucrat const &executor) const = 0;
 };
 
 std::ostream	&operator<<(std::ostream &stream, AForm &form);

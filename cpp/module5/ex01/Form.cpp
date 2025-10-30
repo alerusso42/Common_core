@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp											:+:      :+:    :+:   */
+/*   Form.hpp											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,121 +10,58 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
+#ifndef FORM_HPP
+# define FORM_HPP
+# include "lib/lib.hpp"
+# include "Bureaucrat.hpp"
 
-Form::Form() : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
-name(rand_name())
+# define FORM_NAMES "presidential pardon", "robotomy request", \
+					"shrubbery creation", ""
+
+class Bureaucrat;
+
+enum e_failures
 {
-	(void)grade_exec;
-	this->sign = false;
-}
+	F_CORRECT,
+	F_ALREADY_SIGN,
+	F_BAD_BUREAUCRAT,
+	F_GRADE_LOW,
+	F_BAD_FORM,
+};
 
-Form::Form(int exec, int sign) : grade_exec(exec), grade_sign(sign), \
-name(rand_name())
+class Form
 {
-	(void)grade_exec;
-
-	this->sign = false;
-	if (exec <= 0 || sign <= 0)
+private:
+	enum e_form
 	{
-		std::cerr << "\033[31mBad form: grade too high."; 
-		std:: cerr << "\nCatch this, or die." << std::endl;
-		this->GradeTooHighException();
-	}
-	else if (exec > LOWEST_GRADE || sign > LOWEST_GRADE)
-	{
-		std::cerr << "\033[31mBad form: grade too low."; 
-		std:: cerr << "\nCatch this, or die." << std::endl;
-		this->GradeTooLowException();
-	}
-}
+		LOWEST_GRADE = 150,
+	};
+	bool			sign;
+	const int		grade_sign;
+	const int		grade_exec;
+	const std::string	 name;
+	void			GradeTooHighException(void) const;
+	void			GradeTooLowException(void) const;
+	void			check_grade(int grade);
+	std::string	 		rand_name(void);
+public:
+//	canonic form:
+	Form();
+	Form(int sign, int exec);
+	virtual	~Form();
+	Form(const Form &other);
+	Form &operator=(const Form &other);
 
-Form::~Form()
-{}
+	const std::string	&getName(void) const;
+	int					getSign(void) const;
+	int					getGradeExec(void) const;
+	int					getGradeSign(void) const;
 
-Form::Form(const Form &other) : grade_exec(LOWEST_GRADE), grade_sign(LOWEST_GRADE), \
-name(rand_name())
-{
-	this->sign = other.sign;
-	(void)other;
-}
+	int					beSigned(Bureaucrat &Bureaucrat);
+	void				beExec(const Bureaucrat &Bureaucrat) const;
+	virtual int			execute(Bureaucrat const &executor) const = 0;
+};
 
-Form &Form::operator=(const Form &other)
-{
-	this->sign = other.sign;
-	return *this;
-}
+std::ostream	&operator<<(std::ostream &stream, Form &form);
 
-std::string	 Form::rand_name()
-{
-	std::string	 name;
-	std::string	 temp;
-
-	name.append("FORM_");
-	for (int i = 0; i < 3; i++)
-	{
-		temp = (char)((std::rand() % 255) % 26 + 'a');
-		name.append(temp);
-	}
-	for (int i = 0; i < 3; i++)
-	{
-		temp = (char)((std::rand() % 255) % 10 + '0');
-		name.append(temp);
-	}
-	return (name);
-}
-
-void	Form::check_grade(int grade)
-{
-	if (grade > LOWEST_GRADE)
-		this->GradeTooLowException();
-	else if (grade <= 0)
-		this->GradeTooHighException();
-}
-
-void	Form::GradeTooHighException(void)
-{
-	throw (Error(EX_GRADE_HIGH));
-}
-
-void	Form::GradeTooLowException(void)
-{
-	throw (Error(EX_GRADE_LOW));
-}
-
-bool	Form::getSign(void) const
-{
-	return (this->sign);
-}
-int	Form::getGradeExec(void) const
-{
-	return (this->grade_exec);
-}
-int	Form::getGradeSign(void) const
-{
-	return (this->grade_exec);
-}
-
-const std::string	 &Form::getName(void)
-{
-	return (this->name);
-}
-
-int	Form::beSigned(Bureaucrat &Bureaucrat)
-{
-	if (this->sign)
-		return (F_ALREADY_SIGN);
-	if (Bureaucrat.getGrade() > Bureaucrat.getLowestGrade())
-		return (F_BAD_BUREAUCRAT);
-	if (Bureaucrat.getGrade() > this->grade_sign)
-		this->GradeTooLowException();
-	this->sign = true;
-	return (0);
-}
-
-std::ostream	&operator<<(std::ostream &stream, Form &form)
-{
-	stream << form.getName();
-	return (stream);
-}
+#endif

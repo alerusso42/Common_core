@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Error.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/05 18:36:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:00:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ enum e_error_main
 {
 	EX_INVALID_CHAR,
 	EX_EMPTY_STACK,
+	EX_MULTIPLE_RESULT,
 	EX_DIVISION,
 	EX_NUM,
 };

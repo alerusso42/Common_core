@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/07 01:32:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:33:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define PMERGEME_HPP
 # include "lib/lib.hpp"
 # include <vector>
+# include <deque>
 # include <list>
 # include <sys/time.h>
+# include "Jacobsthal.hpp"
 
 template <typename T>
 void	sort(T &big);
@@ -29,7 +31,7 @@ template <typename T, typename F>
 void	print_time(T &container, F &function, std::string container_name);
 
 # include "PmergeMe.tpp"
-# include "PmergeMe_list.tpp"
+//# include "PmergeMe_list.tpp"
 # include "utils.tpp"
 
 # define ERROR_ARGV "Please insert a list of integer to sort (as one argument)"

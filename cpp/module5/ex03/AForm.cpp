@@ -105,6 +105,11 @@ int	AForm::getGradeSign(void) const
 	return (this->grade_sign);
 }
 
+int	AForm::getSign(void) const
+{
+	return (this->sign);
+}
+
 int	AForm::beSigned(Bureaucrat &Bureaucrat)
 {
 	if (this->sign)
@@ -127,6 +132,10 @@ void	AForm::beExec(const Bureaucrat &Bureaucrat) const
 
 std::ostream	&operator<<(std::ostream &stream, AForm &form)
 {
-	stream << form.getName();
+	stream << "name:\t" << form.getName();
+	stream << "\nsign:\t" << form.getSign();
+	stream << "\nGradeExec:\t" << form.getGradeExec();
+	stream << "\nGradeSign:\t" << form.getGradeSign();
+	stream << std::endl;
 	return (stream);
 }
