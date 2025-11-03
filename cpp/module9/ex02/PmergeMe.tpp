@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/03 22:09:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:45:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	insert(T &big, T &little, int32_t pos_lit, int32_t pos_big)
 	little.erase(little.begin() + pos_lit);
 }
 
+//NOTE - provare a fare binary_search seguendo un ordine invertito
 template <typename T>
 static int32_t	binary_search(T &big, T &little, int32_t pos)
 {
