@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Jacobsthal.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:59:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/30 16:55:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:37:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ public:
 
 	int32_t	next();
 	int32_t	prev() const;
+	int32_t	curr() const;
 };
 
 #endif

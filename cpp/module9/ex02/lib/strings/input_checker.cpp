@@ -123,7 +123,7 @@ bool	valid_number(std::string s, bool is_float)
 		return (0);
 	if (std::isdigit(s[0]) == false && s[0] != '+' && s[0] != '-')
 		return (2);
-	i = 0;
+	i = (s[0] == '+' || s[0] == '-');
 	n_dots = 0;
 	while (s[i] && s[i] != ' ')
 	{

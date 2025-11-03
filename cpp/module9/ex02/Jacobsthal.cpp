@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Jacobsthal.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:59:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/30 17:09:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:53:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,18 @@ Jacobsthal	Jacobsthal::operator=(const Jacobsthal &other)
 
 int32_t	Jacobsthal::next(void)
 {
-	this->_c = (this->_a * 2 + this->_b);
 	this->_a = this->_b;
 	this->_b = this->_c;
-	return (this->_c);
+	this->_c = (this->_a * 2 + this->_b);
+	return (this->_c - 1);
 }
 
 int32_t	Jacobsthal::prev(void) const
 {
-	return (this->_b);
+	return (this->_b - 1);
+}
+
+int32_t	Jacobsthal::curr(void) const
+{
+	return (this->_c - 1);
 }
