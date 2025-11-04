@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:42:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:31:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:15:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	convert_float(double n, int special_case, int type)
 			convert_special(special_case);
 	}
 	else if (type != T_DOUBLE)
-		std::cout << static_cast<float>(n) << put_dot(type, true) << "\n";
+		std::cout << n << put_dot(type, true) << "\n";
 	else
 		std::cout << "Impossible (overflow/underflow)\n";
 }
