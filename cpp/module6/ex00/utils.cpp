@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:27:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:18:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	ft_strchr(std::string s, std::string charset)
 	while (s[i])
 	{
 		j = 0;
-		while (s[j])
+		while (charset[j])
 		{
 			if (s[i] == charset[j])
 				return (true);
@@ -63,5 +63,5 @@ bool	decimal_not_zero(std::string s)
 
 int	ft_isdigit(char c)
 {
-	return ((c >= '0' || c <= '9') * c);
+	return ((c >= '0' && c <= '9') * c);
 }

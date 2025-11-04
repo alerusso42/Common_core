@@ -15,6 +15,7 @@
 # include "lib/lib.hpp"
 # include "limits.h"
 # include "cfloat"
+# include "iomanip"
 
 # define SPECIAL "OK", "inff", "-inff", "+inff", "nanf", "inf", \
 "-inf", "+inf", "nan", ""

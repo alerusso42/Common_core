@@ -80,7 +80,7 @@ void identify(Base* p)
 It prints the actual type of the object referenced by p: "A", "B", or "C". Using a pointer
 inside this function is forbidden.
 */
-void identify(Base& p)
+void identify(Base &p)
 {
 	if (dynamic_cast<A *>(&p))
 		return (std::cout << "A", (void)0);

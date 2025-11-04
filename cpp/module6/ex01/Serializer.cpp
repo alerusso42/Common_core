@@ -48,7 +48,10 @@ Data* 		Serializer::deserialize(uintptr_t raw)
 }
 
 Data::Data()
-{}
+{
+	(void)this->foto_piedi_gabibbo;
+	(void)this->password;
+}
 
 Data::~Data()
 {}

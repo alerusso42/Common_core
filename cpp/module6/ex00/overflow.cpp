@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 11:30:12 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/02 14:35:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:03:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	overflow_check(std::string s)
 		i = s.length();
 	max_chars = 10 + (s[0] == '+' || s[0] == '-') + leading_zero;
 	if (i > max_chars)
-		return (true); 
+		return (true);
 	n = std::atoll(s.c_str());
 	if (n > INT_MAX || n < INT_MIN)
 		return (true);
