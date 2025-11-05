@@ -1,11 +1,14 @@
 #SECTION - Installation and preps
 
 [X]	Prepare directory
-[]	Read subject
-[]	Prepare TODO, study_list
-[]	Install docker
+[X]	Read subject
+[X]	Prepare TODO, study_list
+[X]	Install docker
 []	Set /home/alerusso/data directory
 
+#SECTION - tutorials
+
+[]	Nana crash tutorial docker
 
 #SECTION - General roadmap
 

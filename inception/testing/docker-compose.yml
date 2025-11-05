@@ -1,0 +1,35 @@
+version: '3'
+services:
+#ANCHOR --name mongodb
+  mongodb:
+    image: mongo
+#ANCHOR -p 27017:27017
+    ports:
+    - 27017:27017
+#ANCHOR -e MONGO_INITDB_ROOT_USERNAME=admin   -e MONGO_INITDB_ROOT_PASSWORD=password
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=password
+#ANCHOR --name mongo-express
+  mongo-express:
+    image: mongo-express
+#ANCHOR -p 8080:8080
+    ports:
+    - 8080:8080
+#ANCHOR -e ME_CONFIG_MONGODB_SERVER=mongodb -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    depends_on:
+      - mongodb
+  my-app:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - MONGO_DB_USERNAME=admin
+      - MONGO_DB_PWD=password
+    depends_on:
+      - mongodb
+# sudo docker run -d   --name mongo-express   --network mongo-network   -e ME_CONFIG_MONGODB_SERVER=mongodb   -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin   -e ME_CONFIG_MONGODB_ADMINPASSWORD=password   -p 8081:8081   mongo-express
