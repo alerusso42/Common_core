@@ -1,17 +1,24 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    utils.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/06 17:11:24 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/06 18:40:20 by alerusso42       ###   ########.fr        #
+#    Created: 2025/11/06 16:16:23 by alerusso42        #+#    #+#              #
+#    Updated: 2025/11/06 17:53:26 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian
-#ANCHOR prepare files
-RUN apt update && apt install -y nginx
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+#!bin/bash
+
+error()
+{
+	echo $1 $2
+	exit 1
+}
+
+include()
+{
+	source $1 2&> /dev/null  || error "Cannot find file" $1
+}

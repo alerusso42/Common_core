@@ -1,17 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    install.sh                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/06 17:11:24 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/06 18:40:20 by alerusso42       ###   ########.fr        #
+#    Created: 2025/11/06 14:47:12 by alerusso42        #+#    #+#              #
+#    Updated: 2025/11/06 18:00:49 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian
-#ANCHOR prepare files
-RUN apt update && apt install -y nginx
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
