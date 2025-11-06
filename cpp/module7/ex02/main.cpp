@@ -15,7 +15,7 @@
 # define STRINGS "012", "345", "678", "901", ""
 
 //SECTION - Empty array
-int main() 
+int main()
 {
 	try
 	{
