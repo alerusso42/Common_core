@@ -9,7 +9,7 @@ https://docs.docker.com/reference/compose-file/
 [X]	dockerfile
 [X]	dockerfile best practices
 [X]	how daemon works
-[]	PID 1
+[X]	PID 1
 []	domain name
 []	point to local IP address
 []	environment variables

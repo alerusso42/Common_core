@@ -12,11 +12,18 @@
 #                                                                              #
 # **************************************************************************** #
 
+ARG CONF_PATH="/etc/nginx/default.conf"
 FROM debian
 #ANCHOR prepare files
 RUN apt update && apt install -y nginx
 EXPOSE 80
+#ANCHOR creating directories in the image.
+#		CONF_PATH overrides default .conf file; /data stores web sources.
+RUN echo $CONF_PATH
+COPY nginx.conf $CONF_PATH
+RUN mkdir -p "/data" && mkdir -p "/data/www" && mkdir -p "/data/images"
 CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx"]
 
 #INSTRUCTION ["executable","param1","param2"] (exec form)
 #INSTRUCTION command param1 param2 (shell form)

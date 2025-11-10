@@ -7,3 +7,5 @@ services:
     ports: 
     - 80:80
     build: srcs/requirements/nginx/.
+    volumes:
+      - ./srcs/requirements/nginx/tools/html:/data/www
