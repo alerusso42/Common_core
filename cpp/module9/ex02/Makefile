@@ -2,6 +2,7 @@ NAME =	 		PmergeMe
 SRC	=	 		main.cpp \
 				PmergeMe.cpp \
 				Jacobsthal.cpp \
+				Pair.cpp
 
 LIB_SRC	= 		data_struct/array/Array.cpp \
 	error/Error.cpp \
