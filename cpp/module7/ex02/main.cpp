@@ -15,7 +15,7 @@
 # define STRINGS "012", "345", "678", "901", ""
 
 //SECTION - Empty array
-int main()
+int main1()
 {
 	try
 	{
@@ -85,7 +85,7 @@ int main4()
 }
 
 //SECTION - copy of an array
-int main5()
+int main()
 {
 	std::string	 strings[] = {STRINGS};
 	try
