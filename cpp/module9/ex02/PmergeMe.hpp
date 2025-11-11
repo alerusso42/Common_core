@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/30 16:33:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/11 11:50:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <vector>
 # include <deque>
 # include <list>
+# include <map>
 # include <sys/time.h>
 # include "Jacobsthal.hpp"
 
