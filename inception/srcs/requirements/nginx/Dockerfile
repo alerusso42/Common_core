@@ -12,16 +12,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-ARG CONF_PATH="/etc/nginx/default.conf"
+ARG CONF_PATH="/etc/nginx"
 FROM debian
 #ANCHOR prepare files
 RUN apt update && apt install -y nginx
 EXPOSE 80
 #ANCHOR creating directories in the image.
 #		CONF_PATH overrides default .conf file; /data stores web sources.
-RUN echo $CONF_PATH
-COPY nginx.conf $CONF_PATH
+COPY nginx.conf "/etc/nginx"
 RUN mkdir -p "/data" && mkdir -p "/data/www" && mkdir -p "/data/images"
+COPY "tools/html/welcome.html" "/data/www"
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+RUN wget https://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz
+RUN mv "wordpress" "/data/"
 CMD ["nginx", "-g", "daemon off;"]
 #CMD ["nginx"]
 
