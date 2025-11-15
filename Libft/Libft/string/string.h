@@ -6,23 +6,48 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 21:32:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/15 19:54:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRING_H
 # define STRING_H
+# include "stdbool.h"
+# include "stdio.h"
+# include "limits.h"
+# include "stdint.h"
+# include "string_macros.h"
+# include "string_methods.h"
 
-# include "../libft.h"
+typedef struct s_str			t_str;
+typedef struct s_str_methods	t_str_methods;
+typedef enum e_str_error		t_str_error;
+typedef int32_t					err;
 
-# define autoclean(T) T __attribute__((cleanup(clean_ ## T)))
-# define autoclean_ptr(T) T __attribute__((cleanup(clean_ ## T ## _ptr)))
-
-typedef struct s_str
+enum	e_str_error
 {
-//SECTION - private
-	char	*_buffer;
-//SECTION - public
-}	t_str;
+	E_EXIT_SUCCESS = EXIT_SUCCESS,
+	E_ALLOC,
+	E_PARAM,
+	E_ATOI_FAIL,
+};
+
+struct s_str
+{
+	t_str_methods	*m;
+	int8_t			*buff;
+	uintptr_t		begin;
+	uintptr_t		half;
+	uintptr_t		end;
+	int32_t			npos;
+	int32_t			len;
+	int32_t			i;
+	t_str_error		err;
+};
+
+struct s_str_methods
+{
+	STR_METHODS
+};
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 22:08:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/14 23:31:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:20:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ struct str
 	t_str	*this;
 	char	*buff;
 	int		len;
-	
+
 	void	(*printer)(char *s);
+	void	(*test)(t_str *str, char *s);
 };
 
 void	print_char(const char *s) {printf("%s\n", s);}
@@ -59,14 +60,13 @@ t_str	str_constructor(t_str *str, char *init)
 	str->buff = init;
 	str->len = strlen(init);
 	str->this = str;
+	str->test = test;
 	/*void	print_bind(char *s){
 		test(str, s);
 	}
 	str->printer = print_bind;*/
 	return (*str);
 }
-
-#define test(T) print_char(&string, T)
 
 int	main()
 {{
@@ -83,5 +83,5 @@ int	main()
 }
 	STR(string, "Mega Rayquaza");
 	print(string);
-	string.printer("ciao");
+	string.test(&string, "ciao");
 }

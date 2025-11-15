@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:24:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/15 17:00:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
 char	*ft_strdup(const char *str);
 
@@ -48,7 +48,7 @@ char	*ft_strdup(const char *str)
 		++n;
 	camillo = NULL;
 	n += 1;
-	camillo = (char *)ft_calloc(n, sizeof(char));
+	camillo = (char *)CALLOC(n, sizeof(char));
 	if (camillo == NULL)
 		return (0);
 	n = 0;
@@ -58,4 +58,17 @@ char	*ft_strdup(const char *str)
 		++n;
 	}
 	return (camillo);
+}
+
+t_str	*str_dup_char(t_str *this, const char *other)
+{
+	this->buff = (int8_t *)ft_strdup(other);
+	return (this);
+}
+
+t_str	*str_dup_str(t_str *this, t_str *other)
+{
+	FREE(this->buff);
+	this->buff = (int8_t *)ft_strdup((char *)other->buff);
+	return (this);
 }

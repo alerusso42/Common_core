@@ -6,13 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/05/31 10:06:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/15 19:55:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
+#include "string.h"
 #define TOO_MUCH_SIGNS 0
 #define TRUE 1
 
@@ -128,4 +126,37 @@ static long long int	ft_size(const char *str, long long int *i)
 	if (make_power == 0)
 		size_numb = 0;
 	return (size_numb);
+}
+
+# include <string.h>
+
+err		str_atoi(t_str *str, int *n)
+{
+	long long int	pow;
+	long long int	start;
+	long long int	res;
+
+	*n = 0;
+	res = 0;
+	pow = 1;
+	while (strchr(" \n\t\f\t\v\r", str->buff[str->i]))
+		str->i++;
+	start = str->i;
+	while (strchr("+-0123456789", str->buff[str->i]))
+		str->i++;
+	if (start == str->i)
+		return (E_ATOI_FAIL);
+	while (str->i-- != start)
+	{
+		res += (str->buff[str->i] + '0') * pow;
+		pow *= 10;
+	}
+	str->i = 0;
+	if (res == 2147483648 && str->buff[start] == '-')
+		*n = INT_MIN;
+	else if (res > 2147483647)
+		return (E_ATOI_FAIL);
+	else if (str->buff[start] == '-')
+		*n = res * -1;
+	return (EXIT_SUCCESS);
 }
