@@ -6,11 +6,11 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/16 07:10:22 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/16 12:36:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "other.h"
+#include "string.h"
 
 /*REVIEW - cat_string
 
@@ -54,4 +54,24 @@ static void	to_free(char *s1, char *s2, int which)
 		FREE(s1);
 	if (which == 2 || which >= 3)
 		FREE(s2);
+}
+
+t_str *str_cat_char(t_str *s, char *s2, int32_t n)
+{
+	int32_t i;
+	int32_t len;
+	char   *new_s;
+    //checks
+	len = ft_strlen(s2);
+	i = s->len + len - n;
+	new_s = ft_calloc(i + 1, sizeof(char));
+	if (!new_s)
+	    return (s->set_error(E_ALLOC));
+	ft_strlcpy(new_s, s->buff, s->i + 1);
+	ft_strlcpy(new_s + s->i, s2, INT_MAX);
+	if (s->buff[s->i])
+	    ft_strlcpy(new_s + s->i + len, s->buff + s->i, INT_MAX);
+	FREE(s->buff);
+	s->buff = new_s;
+	return (s);
 }
