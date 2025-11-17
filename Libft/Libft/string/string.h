@@ -6,16 +6,16 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/15 19:54:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:37:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRING_H
 # define STRING_H
-# include "stdbool.h"
-# include "stdio.h"
-# include "limits.h"
-# include "stdint.h"
+# include <stdbool.h>
+# include <unistd.h>
+# include <limits.h>
+# include <stdint.h>
 # include "string_macros.h"
 # include "string_methods.h"
 

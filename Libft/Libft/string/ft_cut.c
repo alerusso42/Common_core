@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cut.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/16 07:07:11 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/17 19:33:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "other.h"
+#include "string.h"
 
 /*
 	Cut a string from start to end (included).
@@ -49,6 +49,32 @@ int	cut_string(char *string, size_t start, size_t end)
 	}
 	string[temp1 - (end - start)] = 0;
 	return (0);
+}
+
+t_str	*str_cut(t_str *this, int32_t start, int32_t end)
+{
+	int32_t	temp;
+	int32_t	temp1;
+	int32_t	string_len;
+
+	end++;
+	if (str_check(this, this) || (start > end))
+		return (1);
+	string_len = this->len;
+	temp = start;
+	while ((start != end) && (this->buff[start] != 0))
+		this->buff[start++] = 0;
+	end = start;
+	start = temp;
+	temp = 0;
+	temp1 = string_len;
+	while (end != string_len--)
+	{
+		this->buff[start + temp] = this->buff[end + temp];
+		++temp;
+	}
+	this->buff[temp1 - (end - start)] = 0;
+	return (this);
 }
 
 /*

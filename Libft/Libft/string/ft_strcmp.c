@@ -1,3 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/17 19:07:11 by alerusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "string.h"
 
-str *str_cmp_char(t_str *)
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (!s1 || !s2)
+		return (s1 > s2 - s1 < s2);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		++s1;
+		++s2;
+	}
+	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+}
+
+int32_t	str_cmp_char(t_str *this, char *other)
+{
+	register int32_t	n1;
+
+	//checks
+	n1 = this->i;
+	while (this->buff[n1] && *other && this->buff[n1] == *other)
+	{
+		++n1;
+		++other;
+	}
+	return ((uint8_t)(this->buff[n1]) - (uint8_t)(*other));
+}
+
+int32_t	str_cmp_str(t_str *this, t_str *other)
+{
+	register int32_t	n1;
+	register int32_t	n2;
+
+	//checks
+	n1 = this->i;
+	n2 = other->i;
+	while (this->buff[n1] && other->buff[n2] \
+		&& this->buff[n1] == other->buff[n2])
+	{
+		++n1;
+		++n2;
+	}
+	return ((uint8_t)(this->buff[n1]) - (uint8_t)(other->buff[n2]));
+}

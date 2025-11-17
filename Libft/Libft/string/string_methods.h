@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/15 19:29:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:27:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef int32_t					err;
 t_str	str_constructor(t_str *str, char *init);
 err		_str_get_methods(t_str *s);
 t_str	*str_p_constructor(t_str *str, char *init);
+int		_str_set_error(t_str *str, int err, char *func_name);
+
+# define str_check(name, other)	STR_OVERLOAD_CHECK(str_check, name, other)
+bool	str_check_char(t_str *this, char *other);
+bool	str_check_str(t_str *this, t_str *other);
+bool	str_check_this(t_str *this, void *empty);
 
 # define str_m(name, ...)	t_str	*(*name)(t_str *, __VA_ARGS__);
 
@@ -74,12 +80,11 @@ t_str	*str_cat_char(t_str *this, char *other, int32_t n);
 t_str	*str_cat_str(t_str *this, t_str *other, int32_t n);
 
 #define cmp(name, T)      		STR_OVERLOAD(cmp, name, T)
-t_str 	*str_cmp_char(t_str *this, char *other);
-t_str 	*str_cmp_str(t_str *this, t_str *other);
+int32_t	str_cmp_char(t_str *this, char *other);
+int32_t	*str_cmp_str(t_str *this, t_str *other);
 
-#define cut(name, T1, T2, T3)	STR_OVERLOAD_3(cat, name, T1, T2, T3)
-t_str	*str_cut_char(t_str *this, char *other, int32_t n);
-t_str	*str_cut_str(t_str *this, t_str *other, int32_t n);
+#define cut(name, T1, T2)	str_cut(name, T1, T2)
+t_str	*str_cut(t_str *this, int32_t start, int32_t end);
 
 # define dup(name, T)			STR_OVERLOAD(dup, name, T)
 t_str	*str_dup_char(t_str *this, const char *other);
