@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/15 17:00:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:22:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ t_str	*str_dup_str(t_str *this, t_str *other)
 {
 	FREE(this->buff);
 	this->buff = (int8_t *)ft_strdup((char *)other->buff);
+	if (this->buff == NULL)
+		_str_set_error(this, E_ALLOC, NULL);
+	this->len = other->len;
 	return (this);
 }

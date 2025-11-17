@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:10:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:25:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_str *str_cat_str(t_str *s, t_str *s2, int32_t n)
 	int32_t i;
 	char   *new_s;
 
-	//checks
+	if (str_check(s, s2))
+		return (s);
 	i = s->len + s2->len - n;
 	new_s = ft_calloc(i + 1, sizeof(char));
 	if (!new_s)

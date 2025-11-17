@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/15 19:25:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:23:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_str	str_constructor(t_str *str, char *buff)
 		return (*str);
 	str->npos = UINT32_MAX;
 	str->len = get_len(str);
+	str->capacity = str->capacity;
 	str->begin = (uintptr_t)(void *)&str->buff;
 	str->half = (uintptr_t)(void *)&str->buff + (str->len / 2);
 	str->end = (uintptr_t)(void *)&str->buff + str->len;
