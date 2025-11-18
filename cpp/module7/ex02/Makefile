@@ -1,5 +1,5 @@
 NAME =	 		program
-SRC	=	 		main.cpp \
+SRC	=	 		main_corr.cpp \
 				Array.cpp
 
 LIB_SRC	= 		error/Error.cpp \

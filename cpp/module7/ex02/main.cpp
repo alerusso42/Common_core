@@ -14,9 +14,37 @@
 
 # define STRINGS "012", "345", "678", "901", ""
 
-//SECTION - Empty array
-int main1()
+void test1(const char *s);
+void test2(const char *s);
+void test3(const char *s);
+void test4(const char *s);
+void test5(const char *s);
+
+int	main(int argc, char **av)
 {
+	int	n;
+	int	curr = 1;
+
+	if (argc >= 2)
+		n = std::atoi(av[1]);
+	else
+		n = 42;
+	if (n == curr++ || n == 42)
+		test1("TEST 1:	Empty array\n");
+	if (n == curr++ || n == 42)
+		test2("TEST 2:	Size too big\n");
+	if (n == curr++ || n == 42)
+		test3("TEST 3:	std::string array KO\n");
+	if (n == curr++ || n == 42)
+		test4("TEST 4:	std::string array OK\n");
+	if (n == curr++ || n == 42)
+		test5("TEST 5:	Array copy\n");
+}
+
+//SECTION - Empty array
+void test1(const char *s)
+{
+	std::cout << s;
 	try
 	{
 		Array<int>	arr;
@@ -26,12 +54,12 @@ int main1()
 	{
 		e.print();
 	}
-	return (0);
 }
 
 //SECTION - size too big
-int main2()
+void test2(const char *s)
 {
+	std::cout << s;
 	try
 	{
 		Array<int>	arr(UINT_MAX / 2);
@@ -41,34 +69,12 @@ int main2()
 	{
 		e.print();
 	}
-	return (0);
-}
-
-//SECTION - std::string Array with argc
-int main3(int argc, char *argv[])
-{
-	if (argc == 1)
-	{
-		std::cerr << "\033[31mArgv must not be empty.\033[0m" << std::endl;
-		return (1);
-	}
-	try
-	{
-		Array<string>	arr(argc);
-		for (int i = 1; i < argc; i++)
-			arr[i - 1] = argv[i];
-		arr.print();
-	}
-	catch(const Error &e)
-	{
-		e.print();
-	}
-	return (0);
 }
 
 //SECTION - std::string Array with macro
-int main4()
+void test3(const char *s)
 {
+	std::cout << s;
 	std::string	 strings[] = {STRINGS};
 	try
 	{
@@ -81,17 +87,36 @@ int main4()
 	{
 		e.print();
 	}
-	return (0);
+}
+
+//SECTION - std::string Array with macro
+void test4(const char *s)
+{
+	std::cout << s;
+	std::string	 strings[] = {STRINGS};
+	try
+	{
+		Array<string>	arr(5);
+		for (int i = 1; strings[i].empty() == false; i++)
+			arr[i - 1] = strings[i];
+		arr.print();
+	}
+	catch(const Error &e)
+	{
+		e.print();
+	}
 }
 
 //SECTION - copy of an array
-int main()
+void test5(const char *s)
 {
+	std::cout << s;
 	std::string	 strings[] = {STRINGS};
 	try
 	{
 		Array<string>	arr(5);
 		Array<string>	arr_copy(5);
+		Array<string>	other_copy(arr);
 		for (int i = 1; strings[i].empty() == false; i++)
 			arr[i - 1] = strings[i];
 		arr_copy = arr;
@@ -105,5 +130,4 @@ int main()
 	{
 		e.print();
 	}
-	return (0);
 }
