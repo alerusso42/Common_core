@@ -15,19 +15,30 @@
 ARG CONF_PATH="/etc/nginx"
 FROM debian
 #ANCHOR prepare files
-RUN apt update && apt install -y nginx
-EXPOSE 80
+RUN apt update && apt install -y nginx && apt install -y openssl
 #ANCHOR creating directories in the image.
 #		CONF_PATH overrides default .conf file; /data stores web sources.
 COPY nginx.conf "/etc/nginx"
 RUN mkdir -p "/data" && mkdir -p "/data/www" && mkdir -p "/data/images"
 COPY "tools/html/welcome.html" "/data/www"
-RUN  apt-get update \
-  && apt-get install -y wget \
-  && rm -rf /var/lib/apt/lists/*
-RUN wget https://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz
-RUN mv "wordpress" "/data/"
-CMD ["nginx", "-g", "daemon off;"]
+
+#ANCHOR openssl
+#	1)	Creates ssl dir in nginx to store certificate and key
+#	2)	req -x509 		--->	Certificate type
+#	3)	nodes			--->	no private key password
+#	4)	days 365 		--->	Duration
+#	5)	newkey rsa:2048	--->	Generate private RSA key on 2048 bit
+#	6)	keyout nginx.key--->	Private key path
+#	7)	out nginx.cert	--->	Certificate path
+#	8)	CN=localhost	--->	Valid for domain CN
+RUN mkdir -p /etc/nginx/ssl && \ 
+	openssl req -x509 -nodes -days 365 \ 
+	-newkey rsa:2048 \ 
+	-keyout /etc/nginx/ssl/nginx.key \ 
+	-out /etc/nginx/ssl/nginx.crt \ 
+	-subj "/CN=localhost"
+
+CMD "nginx" "-g" "daemon off;"
 #CMD ["nginx"]
 
 #INSTRUCTION ["executable","param1","param2"] (exec form)

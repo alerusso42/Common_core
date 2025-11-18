@@ -1,0 +1,17 @@
+name: inception
+
+services:
+  nginx:
+#    network: inception
+    image: nginx
+    container_name: nginx
+    ports: 
+    - 443:443
+    build: requirements/nginx/.
+#  wordpress:
+#    network: inception
+#    image: wordpress
+#    container_name: wordpress
+#    ports :
+#    - 3000:3000
+#    build: requirements/wordpress/.

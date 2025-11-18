@@ -1,9 +1,0 @@
-name: inception
-
-services:
-  nginx:
-    image: nginx
-    container_name: nginx
-    ports: 
-    - 80:80
-    build: srcs/requirements/nginx/.
