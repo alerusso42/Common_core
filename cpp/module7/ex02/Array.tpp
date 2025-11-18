@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 18:27:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/06 16:21:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/18 12:08:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Array<T>::Array(void)
 }
 
 template	<typename T>
-Array<T>::Array(int32_t size)
+Array<T>::Array(u_int32_t size)
 {
 	if (size > this->ARRAY_MAXSIZE)
 		throw (Error(EX_BAD_SIZE));
@@ -40,7 +40,7 @@ Array<T>::Array(int32_t size)
 	if (!this->_data)
 		throw (Error(EX_ALLOC));
 	this->_size = size;
-	for (int32_t i = 0; i < size + 1; i++)
+	for (u_int32_t i = 0; i < size + 1; i++)
 	{
 		this->_data[i] = T();
 	}
@@ -53,33 +53,13 @@ TPP::~Array()
 
 TPP::Array(const Array &other)
 {
-	const T	*other_data;
-
-	if (this == &other) 
-		return ;
-	this->_size = other.get_size();
-	if (this->_size == 0)
-	{
-		this->_data = NULL;
-		return ;
-	}
-	if (this->_size > this->ARRAY_MAXSIZE)
-		throw (Error(EX_BAD_SIZE));
-	this->_data = new T[this->_size + 1];
-	if (!this->_data)
-		throw (Error(EX_ALLOC));
-	other_data = other.get_data();
-	for (int32_t i = 0; i < this->_size + 1; i++)
-	{
-		this->_data[i] = other_data[i];
-	}
+	this->_data = NULL;
+	*this = other;
 }
 
 template	<typename T>
 Array<T> &Array<T>::operator=(const Array &other)
 {
-	const T	*other_data;
-
 	if (this == &other) 
 		return (*this);
 	delete [] this->_data;
@@ -92,18 +72,15 @@ Array<T> &Array<T>::operator=(const Array &other)
 	if (this->_size > this->ARRAY_MAXSIZE)
 		throw (Error(EX_BAD_SIZE));
 	this->_data = new T[this->_size + 1];
-	if (!this->_data)
-		throw (Error(EX_ALLOC));
-	other_data = other.get_data();
-	for (int32_t i = 0; i < this->_size + 1; i++)
+	for (u_int32_t i = 0; i < this->_size + 1; i++)
 	{
-		this->_data[i] = other_data[i];
+		this->_data[i] = other._data[i];
 	}
 	return (*this);
 }
 
 template	<typename T>
-int32_t	Array<T>::size(void) const
+u_int32_t	Array<T>::size(void) const
 {
 	return (this->_size);
 }
@@ -115,9 +92,9 @@ const T	*Array<T>::get_data(void) const
 }
 
 template	<typename T>
-T	&Array<T>::operator[](int32_t index)
+T	&Array<T>::operator[](u_int32_t index)
 {
-	if (index > this->_size - 1)
+	if (index >= this->_size)
 		throw (Error(EX_OUT_BOUND));
 	return (this->_data[index]);
 }
@@ -125,7 +102,7 @@ T	&Array<T>::operator[](int32_t index)
 template	<typename T>
 void	Array<T>::print(void) const
 {
-	for (int32_t i = 0; i < this->_size; i++)
+	for (u_int32_t i = 0; i < this->_size; i++)
 		std::cout << this->_data[i] << "\n";
 	std::cout << std::flush;
 }
