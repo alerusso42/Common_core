@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:25:00 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/19 17:59:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,45 +54,4 @@ static void	to_free(char *s1, char *s2, int which)
 		FREE(s1);
 	if (which == 2 || which >= 3)
 		FREE(s2);
-}
-
-t_str *str_cat_str(t_str *s, t_str *s2, int32_t n)
-{
-	int32_t i;
-	char   *new_s;
-
-	if (str_check(s, s2))
-		return (s);
-	i = s->len + s2->len - n;
-	new_s = ft_calloc(i + 1, sizeof(char));
-	if (!new_s)
-		return (_str_set_error(s, E_ALLOC, NULL));
-	ft_strlcpy(new_s, s->buff, s->i + 1);
-	ft_strlcpy(new_s + s->i, s2, INT_MAX);
-	if (s->buff[s->i])
-		ft_strlcpy(new_s + s->i + s2->len, s->buff + s->i, INT_MAX);
-	FREE(s->buff);
-	s->buff = new_s;
-	return (s);
-}
-
-t_str *str_cat_char(t_str *s, char *s2, int32_t n)
-{
-	int32_t i;
-	int32_t len;
-	char   *new_s;
-
-	//checks
-	len = ft_strlen(s2);
-	i = s->len + len - n;
-	new_s = ft_calloc(i + 1, sizeof(char));
-	if (!new_s)
-		return (str_set_error(E_ALLOC));
-	ft_strlcpy(new_s, s->buff, s->i + 1);
-	ft_strlcpy(new_s + s->i, s2, INT_MAX);
-	if (s->buff[s->i])
-		ft_strlcpy(new_s + s->i + len, s->buff + s->i, INT_MAX);
-	FREE(s->buff);
-	s->buff = new_s;
-	return (s);
 }

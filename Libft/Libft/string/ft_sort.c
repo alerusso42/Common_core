@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   piscine_sort_int_tab.c                             :+:      :+:    :+:   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 20:16:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:20:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "string.h"
 
 void	ft_sort_int(int *tab, int size)
 {
@@ -52,6 +54,13 @@ void	ft_sort_str(char *tab)
 			}
 		}
 	}
+}
+
+void	str_sort(t_str *str)
+{
+	if (str_check(str, NULL))
+		return (_str_set_error(str, E_PARAM, "sort"));
+	ft_sort_str(str->buff);
 }
 
 /*

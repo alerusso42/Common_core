@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:47:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:09:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:04:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int32_t	str_ncmp_char(t_str *this, char *other, int32_t n)
 {
 	register int32_t	n1;
 
-	//checks
+	if (str_check(this, NULL) || n < 0)
+		return (_str_set_error(this, E_PARAM, "ncmp"));
 	n1 = this->i;
 	while (n && this->buff[n1] && *other && this->buff[n1] == *other)
 	{
@@ -44,7 +45,8 @@ int32_t	str_ncmp_str(t_str *this, t_str *other, int32_t n)
 	register int32_t	n1;
 	register int32_t	n2;
 
-	//checks
+	if (str_check(this, NULL) || n < 0)
+		return (_str_set_error(this, E_PARAM, "ncmp"));
 	n1 = this->i;
 	n2 = other->i;
 	while (n && this->buff[n1] && other->buff[n2] \

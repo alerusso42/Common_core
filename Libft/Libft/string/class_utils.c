@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:30:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:10:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	str_set_start_index(t_str *str, int i)
 	str->i = i;
 }
 
-int		_str_set_error(t_str *str, int err, char *func_name)
+t_str	*_str_set_error(t_str *str, int err, char *func_name)
 {
+	if (!str->buff == NULL)
+		return (str);
 	str->err = err;
 	switch (err)
 	{
@@ -37,35 +39,42 @@ int		_str_set_error(t_str *str, int err, char *func_name)
 		case (E_ATOI_FAIL) :
 			write(2, "String:\tAtoi has failed for this param->\t", 41);
 			write(2, func_name, ft_strlen(func_name));
+		case (E_NPOS) :
+			str->err = 0;
+			break ;
 	}
 	write(2, "\n", 1);
-	return (err);
+	return (str);
 }
 
-bool	str_check_char(t_str *this, char *other)
+bool	str_check_char(t_str *this, const char *other)
 {
-	if (this->err == E_ALLOC || !other)
+	if (this->err == E_ALLOC || !this->buff)
 		return (1);
-	if (this->i == this->npos)
-		return (1);
-	return (EXIT_SUCCESS);
+	else if (!other)
+		this->err = E_PARAM;
+	else if (this->i == this->npos)
+		this->err = E_NPOS;
+	return (this->err > 0);
 }
 
 bool	str_check_str(t_str *this, t_str *other)
 {
-	if (this->err == E_ALLOC || other->err == E_ALLOC)
+	if (this->err == E_ALLOC || !this->buff)
 		return (1);
-	if (this->i == this->npos || other->err == E_ALLOC)
-		return (1);
-	return (EXIT_SUCCESS);
+	else if (other->err == E_ALLOC)
+		this->err = E_PARAM;
+	else if (this->i == this->npos)
+		this->err = E_NPOS;
+	return (this->err > 0);
 }
 
 bool	str_check_this(t_str *this, void *empty)
 {
 	(void)empty;
-	if (this->err == E_ALLOC)
+	if (this->err == E_ALLOC || !this->buff)
 		return (1);
-	if (this->i == this->npos)
-		return (1);
-	return (EXIT_SUCCESS);
+	else if (this->i == this->npos)
+		this->err = E_NPOS;
+	return (this->err > 0);
 }

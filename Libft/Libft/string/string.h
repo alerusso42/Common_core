@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:22:48 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/19 18:35:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum	e_str_error
 	E_EXIT_SUCCESS = EXIT_SUCCESS,
 	E_ALLOC,
 	E_PARAM,
+	E_NPOS,
 	E_ATOI_FAIL,
 };
 
@@ -49,6 +50,12 @@ struct s_str
 struct s_str_methods
 {
 	STR_METHODS
+};
+
+enum	e_str
+{
+	INCLUDE,
+	EXCLUDE,
 };
 
 #endif

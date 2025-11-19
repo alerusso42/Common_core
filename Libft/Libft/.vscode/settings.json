@@ -2,6 +2,7 @@
 	"files.associations": {
 		"stdio.h": "c",
 		"malloc.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"typeinfo": "c"
 	}
 }

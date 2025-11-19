@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   piscine_strlowcase.c                               :+:      :+:    :+:   */
+/*   ft_uplowcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:00:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 20:20:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:10:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "string.h"
 
 void	ft_tolower(char *str)
 {
@@ -19,6 +19,29 @@ void	ft_tolower(char *str)
 		*str += ((*str >= 'A' && *str <= 'Z') * 32);
 		str++;
 	}
+}
+
+void	ft_toupper(char *str)
+{
+	while (str && *str)
+	{
+		*str -= ((*str >= 'a' && *str <= 'z') * 32);
+		str++;
+	}
+}
+
+void	str_lower(t_str *str)
+{
+	if (str_check(str, NULL))
+		return (_str_set_error(str, E_PARAM, "str_lower"));
+	ft_tolower(str->buff);
+}
+
+void	str_upper(t_str *str)
+{
+	if (str_check(str, NULL))
+		return (_str_set_error(str, E_PARAM, "str_upper"));
+	ft_toupper(str->buff);
 }
 
 /*

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/30 14:44:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:20:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <malloc.h>
-#include <stdlib.h>
-#include "libft.h"
+#include "string.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -41,6 +38,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substring[index] = '\0';
 	return (substring);
+}
+
+t_str	*str_substr(t_str *this, t_str *other, int32_t start, int32_t end)
+{
+	return (dup(this, other)->m->cut(this, start, end));
 }
 
 /*

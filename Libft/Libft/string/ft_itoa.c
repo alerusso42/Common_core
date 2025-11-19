@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:46:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:22:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:25:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 #define UN_BOTTO 100
 
 static char	*alloc_string(char *allocated_string, int num, int *index);
@@ -80,4 +80,13 @@ static char	*alloc_string(char *allocated_string, int num, int *index)
 		allocated_string[(*index)] = '0';
 	}
 	return (allocated_string);
+}
+
+t_str	*str_itoa(t_str *this, int32_t value)
+{
+	FREE(this->buff);
+	this->buff = ft_itoa((int)value);
+	if (!this->buff)
+		this->err = E_ALLOC;
+	return (this);
 }

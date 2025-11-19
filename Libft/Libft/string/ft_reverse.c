@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   piscine_rev_tab.c                                  :+:      :+:    :+:   */
+/*   ft_reverse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 20:14:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:19:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
 void	ft_rev_int(int *tab, int size)
 {
@@ -38,13 +38,32 @@ void	ft_rev_str(char *arr)
 	while (arr[j] != '\0')
 		++j;
 	--j;
-	if (arr[0] == '-')
-		++i;
+//	if (arr[0] == '-')
+//		++i;
 	while (i < j)
 	{
 		temp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = temp;
+		++i;
+		--j;
+	}
+}
+
+void	str_reverse(t_str *str)
+{
+	int		i;
+	int		j;
+	char	t;
+
+	if (str_check(str, NULL))
+		return (_str_set_error(str, E_PARAM, "reverse"));
+	j = str->len;
+	while (i < j)
+	{
+		t = str->buff[i];
+		str->buff[i] = str->buff[j];
+		str->buff[j] = t;
 		++i;
 		--j;
 	}

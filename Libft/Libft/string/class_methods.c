@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/15 19:26:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:39:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	_str_register_function(t_str_methods *m)
 	m->cmp_char = str_cmp_char;
 	m->cmp_str = str_cmp_str;
 	m->cut_char = str_cut_char;
-	m->cut_str = str_cut_str;
+	m->str_cut = str_cut;
 	m->dup_char = str_dup_char;
 	m->dup_str = str_dup_str;
 	m->find_chr = str_find_str;

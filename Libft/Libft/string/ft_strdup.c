@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:22:28 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/19 17:44:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ char	*ft_strdup(const char *str)
 	n = 0;
 	while (str[n] != '\0')
 		++n;
-	camillo = NULL;
-	n += 1;
-	camillo = (char *)CALLOC(n, sizeof(char));
+	camillo = (char *)ft_calloc(n + 1, sizeof(char));
 	if (camillo == NULL)
 		return (0);
 	n = 0;
@@ -62,16 +60,52 @@ char	*ft_strdup(const char *str)
 
 t_str	*str_dup_char(t_str *this, const char *other)
 {
-	this->buff = (int8_t *)ft_strdup(other);
+	int	i;
+	int	j;
+
+	if (!other)
+	{
+		FREE(this->buff);
+		this->buff = NULL;
+		this->capacity = 0;
+		this->len = 0;
+		return (this);
+	}
+	i = ft_strlen(other);
+	this->len = i;
+	if (this->capacity < i)
+		if (_str_reset(this, i)->err != 0)
+			return (this);
+	i = 0;
+	j = 0;
+	while (other[j])
+		this->buff[i++] = other[j++];
+	this->buff[i] = 0;
 	return (this);
 }
 
 t_str	*str_dup_str(t_str *this, t_str *other)
 {
-	FREE(this->buff);
-	this->buff = (int8_t *)ft_strdup((char *)other->buff);
-	if (this->buff == NULL)
-		_str_set_error(this, E_ALLOC, NULL);
-	this->len = other->len;
+	int	i;
+	int	j;
+
+	if (!other->buff)
+	{
+		FREE(this->buff);
+		this->buff = NULL;
+		this->capacity = 0;
+		this->len = 0;
+		return (this);
+	}
+	i = other->len;
+	this->len = i;
+	if (this->capacity < i)
+		if (_str_reset(this, i)->err != 0)
+			return (this);
+	i = 0;
+	j = 0;
+	while (other->buff[j])
+		this->buff[i++] = other->buff[j++];
+	this->buff[i] = 0;
 	return (this);
 }

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:33:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:56:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_str	*str_cut(t_str *this, int32_t start, int32_t end)
 	int32_t	string_len;
 
 	end++;
-	if (str_check(this, this) || (start > end))
+	if (str_check(this, this) || start > end || start < 0 || end < 0)
 		return (1);
 	string_len = this->len;
 	temp = start;
@@ -74,6 +74,7 @@ t_str	*str_cut(t_str *this, int32_t start, int32_t end)
 		++temp;
 	}
 	this->buff[temp1 - (end - start)] = 0;
+	this->len = this->len + (end - start - 1);
 	return (this);
 }
 

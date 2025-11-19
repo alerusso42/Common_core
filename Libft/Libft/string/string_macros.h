@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/17 19:25:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:43:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ typedef int32_t					err;
 		t_str*:	str_ ## f ## _str)(name, T1, T2, T3)
 
 # define STR_OVERLOAD_CHECK(f, name, T) _Generic((T), \
-		char*:	f ## _char,\
-		void*:	f ## _this,\
-		t_str*:	f ## _str)(name, T)
+		char*		:	f ## _char,\
+		const char*	:	f ## _char,\
+		void*		:	f ## _this,\
+		t_str*		:	f ## _str)(name, T)
 
 //SECTION - destructor
 
