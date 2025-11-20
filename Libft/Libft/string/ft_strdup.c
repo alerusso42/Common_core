@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 17:44:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:43:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strdup(const char *str)
 	n = 0;
 	while (str[n] != '\0')
 		++n;
-	camillo = (char *)ft_calloc(n + 1, sizeof(char));
+	camillo = (char *)CALLOC(n + 1, sizeof(char));
 	if (camillo == NULL)
 		return (0);
 	n = 0;
@@ -58,7 +58,7 @@ char	*ft_strdup(const char *str)
 	return (camillo);
 }
 
-t_str	*str_dup_char(t_str *this, const char *other)
+t_str	*str_sdup_char(t_str *this, const char *other)
 {
 	int	i;
 	int	j;
@@ -84,7 +84,7 @@ t_str	*str_dup_char(t_str *this, const char *other)
 	return (this);
 }
 
-t_str	*str_dup_str(t_str *this, t_str *other)
+t_str	*str_sdup_str(t_str *this, t_str *other)
 {
 	int	i;
 	int	j;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reverse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 18:19:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:19:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_rev_str(char *arr)
 	}
 }
 
-void	str_reverse(t_str *str)
+t_str	*str_reverse(t_str *str)
 {
 	int		i;
 	int		j;
@@ -67,6 +67,7 @@ void	str_reverse(t_str *str)
 		++i;
 		--j;
 	}
+	return (str);
 }
 
 /*

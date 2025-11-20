@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:25:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/04/17 21:25:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 20:35:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #define UN_BOTTO 100
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))

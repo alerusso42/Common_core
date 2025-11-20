@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 19:20:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while ((s[start + substring_lenght]) && (substring_lenght < len))
 		++substring_lenght;
 	size = substring_lenght;
-	substring = (char *)ft_calloc(size + 1, 1);
+	substring = (char *)CALLOC(size + 1, 1);
 	if (!substring)
 		return (NULL);
 	index = 0;
@@ -42,7 +42,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 t_str	*str_substr(t_str *this, t_str *other, int32_t start, int32_t end)
 {
-	return (dup(this, other)->m->cut(this, start, end));
+	return (sdup(this, other)->m->cut(this, start, end));
 }
 
 /*

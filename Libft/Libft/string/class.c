@@ -3,27 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   class.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 19:04:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:58:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-static t_str	*string_mother(t_str *curr);
+//static t_str	*string_mother(t_str *curr);
 size_t			ft_strlen(const char *s);
 
 t_str	str_constructor(t_str *str, char *buff)
 {
 	printf("%s\tconstructor\n", buff);
 	*str = (t_str){0};
+	str->capacity = -1;
 	if (_str_get_methods(str) != EXIT_SUCCESS)
 		return (*str);
-	if (dup(str, buff)->err != 0)
+	if (sdup(str, buff)->err != 0)
 		return (*str);
-	str->npos = UINT32_MAX;
+	str->npos = INT32_MAX;
 	_str_set(str);
 	return (*str);
 }
@@ -99,19 +100,40 @@ void	_str_set(t_str *this)
 
 t_str	*_str_reset(t_str *this, int i)
 {
-	this->capacity = i;
+	this->capacity = -1;
+	FREE(this->buff);
 	this->buff = CALLOC(i + 1, sizeof(char));
 	if (!this->buff)
-		return (_str_set_error(this, E_ALLOC, "dup"), 1);
+		return (_str_set_error(this, E_ALLOC, "dup"));
+	this->capacity = i;
 	_str_set(this);
 	return (this);
 }
 
+int	test1()
+{
+	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
+	STR(s2, "ROCKY");
+//	sdup(&s3, &s2)->m->join(&s3, &s1, 0);
+	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
+	return (0);
+}
+
+int	test2()
+{
+	STR(s, "MEGA_RAYQUAZA");
+
+	printf("BEGIN[%s][%ld]\n", (char *)s.begin, s.begin);
+	printf("HALF[%s][%ld]\n", (char *)s.half, s.half);
+	printf("END[%s][%ld]\n", (char *)s.end, s.end);
+
+	for (uintptr_t i = s.begin; i < s.half; i++)
+		*(char *)i = 'A';
+	printf("%s\n", s.buff);
+	return (0);
+}
+
 int	main()
 {
-	STR(s, "ROCKY1");
-	STR(s2, "ROCKY2");
-	STR(s3, "ROCKY3");
-	s3.m->dup_str(&s3, &s2);
-	return (0);
+	return (test2());
 }

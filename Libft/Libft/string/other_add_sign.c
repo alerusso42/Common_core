@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   other_add_sign.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:05:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:41:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "other.h"
+#include "../libft.h"
 
 int	add_sign_left(char **string, char sign)
 {
@@ -20,7 +20,7 @@ int	add_sign_left(char **string, char sign)
 	if ((!string) || (!*string))
 		return (1);
 	len = ft_strlen(*string);
-	new_string = (char *)ft_calloc(len + 2, sizeof(char));
+	new_string = (char *)CALLOC(len + 2, sizeof(char));
 	if (!new_string)
 		return (1);
 	new_string[0] = sign;
@@ -38,7 +38,7 @@ int	add_sign_right(char **string, char sign)
 	if ((!string) || (!*string))
 		return (1);
 	len = ft_strlen(*string);
-	new_string = (char *)ft_calloc(len + 3, sizeof(char));
+	new_string = (char *)CALLOC(len + 3, sizeof(char));
 	if (!new_string)
 		return (1);
 	new_string[len + 1] = 0;

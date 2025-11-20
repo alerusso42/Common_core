@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 17:59:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		++index;
 	size += index;
 	stringona = NULL;
-	stringona = (char *)ft_calloc(size + 1, 1);
+	stringona = (char *)CALLOC(size + 1, 1);
 	if (!stringona)
 		return (NULL);
 	index = 0;
@@ -49,11 +49,11 @@ t_str *str_join_str(t_str *s, t_str *s2, int32_t n)
 	if (str_check(s, s2) || n < 0)
 		return (_str_set_error(s, E_PARAM, "cat"));
 	i = s->len + s2->len - n;
-	new_s = ft_calloc(i + 1, sizeof(char));
+	new_s = CALLOC(i + 1, sizeof(char));
 	if (!new_s)
 		return (_str_set_error(s, E_ALLOC, NULL));
 	ft_strlcpy(new_s, s->buff, s->i + 1);
-	ft_strlcpy(new_s + s->i, s2, INT_MAX);
+	ft_strlcpy(new_s + s->i, s2->buff, INT_MAX);
 	if (s->buff[s->i])
 		ft_strlcpy(new_s + s->i + s2->len, s->buff + s->i, INT_MAX);
 	FREE(s->buff);
@@ -61,19 +61,19 @@ t_str *str_join_str(t_str *s, t_str *s2, int32_t n)
 	return (s);
 }
 
-t_str *str_join_char(t_str *s, char *s2, int32_t n)
+t_str *str_join_char(t_str *s, const char *s2, int32_t n)
 {
 	int32_t i;
 	int32_t len;
 	char   *new_s;
 
 	if (str_check(s, s2) || n < 0)
-		return (_str_set_error(s, E_PARAM, "cat"));
+		return (_str_set_error(s, E_PARAM, "join"));
 	len = ft_strlen(s2);
 	i = s->len + len - n;
-	new_s = ft_calloc(i + 1, sizeof(char));
+	new_s = CALLOC(i + 1, sizeof(char));
 	if (!new_s)
-		return (str_set_error(E_ALLOC));
+		return (_str_set_error(s, E_ALLOC, "join"));
 	ft_strlcpy(new_s, s->buff, s->i + 1);
 	ft_strlcpy(new_s + s->i, s2, INT_MAX);
 	if (s->buff[s->i])

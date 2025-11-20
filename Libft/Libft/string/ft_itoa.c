@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:46:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 16:25:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:19:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*alloc_string(char *allocated_string, int num, int *index)
 {
 	if (num < 0)
 		*index += 1;
-	allocated_string = (char *)ft_calloc((*index) + 2, sizeof(char));
+	allocated_string = (char *)CALLOC((*index) + 2, sizeof(char));
 	if (!allocated_string)
 		return (NULL);
 	if (num < 0)

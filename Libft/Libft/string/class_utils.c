@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 17:10:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:12:48 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	str_set_start_index(t_str *str, int i)
 
 t_str	*_str_set_error(t_str *str, int err, char *func_name)
 {
-	if (!str->buff == NULL)
+	if (str->buff == NULL)
 		return (str);
-	str->err = err;
+	if (!str->err)
+		str->err = err;
 	switch (err)
 	{
 		case (E_ALLOC) :
@@ -39,6 +40,7 @@ t_str	*_str_set_error(t_str *str, int err, char *func_name)
 		case (E_ATOI_FAIL) :
 			write(2, "String:\tAtoi has failed for this param->\t", 41);
 			write(2, func_name, ft_strlen(func_name));
+			break ;
 		case (E_NPOS) :
 			str->err = 0;
 			break ;

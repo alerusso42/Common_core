@@ -6,16 +6,17 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:25:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 11:02:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:41:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../executor.h"
+#include "../libft.h"
 
 /*REVIEW - _ft_strjoin_free
 
 //	Like strjoin, but frees both string.
 */
+/*
 char	*_ft_strjoin_free(char *s1, char *s2)
 {
 	char	*new_str;
@@ -32,7 +33,7 @@ char	*_ft_strjoin_free(char *s1, char *s2)
 	while (s2[index])
 		++index;
 	size += index;
-	new_str = (char *)ft_calloc(size + 2, sizeof(char));
+	new_str = (char *)CALLOC(size + 2, sizeof(char));
 	if (!new_str)
 		return (free(s1), free(s2), NULL);
 	index = -1;
@@ -42,9 +43,9 @@ char	*_ft_strjoin_free(char *s1, char *s2)
 	while (s2[++size])
 		new_str[index++] = s2[size];
 	return (free(s1), free(s2), new_str);
-}
+}*/
 
-int	_reverse_strncmp(char *s1, char *s2, int len)
+int	reverse_strncmp(char *s1, char *s2, int len)
 {
 	int	i;
 	int	j;
@@ -76,18 +77,4 @@ int	double_cmp(char *s1, char *s2, int s1_len, int ignore_n_char)
 	if (ft_strncmp(s1, s2, s1_len))
 		return (1);
 	return (0);
-}
-
-char	*remove_plus(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '+' && str[i] != '=')
-		++i;
-	if (str[i] == '+')
-		_cut_string(str + i, 0, 0);
-	return (str);
 }

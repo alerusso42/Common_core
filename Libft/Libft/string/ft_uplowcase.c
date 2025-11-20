@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_uplowcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:00:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 18:10:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 20:54:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ void	ft_toupper(char *str)
 	}
 }
 
-void	str_lower(t_str *str)
+t_str	*str_lower(t_str *str)
 {
 	if (str_check(str, NULL))
 		return (_str_set_error(str, E_PARAM, "str_lower"));
 	ft_tolower(str->buff);
+	return (str);
 }
 
-void	str_upper(t_str *str)
+t_str	*str_upper(t_str *str)
 {
 	if (str_check(str, NULL))
 		return (_str_set_error(str, E_PARAM, "str_upper"));
 	ft_toupper(str->buff);
+	return (str);
 }
 
 /*

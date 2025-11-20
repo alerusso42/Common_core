@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 18:35:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:42:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define STRING_H
 # include <stdbool.h>
 # include <unistd.h>
+# include <malloc.h>
 # include <limits.h>
 # include <stdint.h>
+# include "../libft.h"
 # include "string_macros.h"
 # include "string_methods.h"
 
@@ -36,7 +38,7 @@ enum	e_str_error
 struct s_str
 {
 	t_str_methods	*m;
-	int8_t			*buff;
+	char			*buff;
 	uintptr_t		begin;
 	uintptr_t		half;
 	uintptr_t		end;
@@ -50,12 +52,6 @@ struct s_str
 struct s_str_methods
 {
 	STR_METHODS
-};
-
-enum	e_str
-{
-	INCLUDE,
-	EXCLUDE,
 };
 
 #endif

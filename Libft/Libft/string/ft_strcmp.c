@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 18:04:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:07:30 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	if (!s1 || !s2)
-		return (s1 > s2 - s1 < s2);
+		return ((s1 > s2) - (s1 < s2));
 	while (*s1 && *s2 && *s1 == *s2)
 	{
 		++s1;
 		++s2;
 	}
+	if (!*s2)
+		return (0);
 	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }
 
@@ -29,7 +31,7 @@ int32_t	str_cmp_char(t_str *this, char *other)
 	register int32_t	n1;
 
 	if (str_check(this, NULL))
-		return (_str_set_error(this, E_PARAM, "cmp"));
+		return (_str_set_error(this, E_PARAM, "cmp"), 0);
 	n1 = this->i;
 	while (this->buff[n1] && *other && this->buff[n1] == *other)
 	{
@@ -45,7 +47,7 @@ int32_t	str_cmp_str(t_str *this, t_str *other)
 	register int32_t	n2;
 
 	if (str_check(this, NULL))
-		return (_str_set_error(this, E_PARAM, "cmp"));
+		return (_str_set_error(this, E_PARAM, "cmp"), 0);
 	n1 = this->i;
 	n2 = other->i;
 	while (this->buff[n1] && other->buff[n2] \

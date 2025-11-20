@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 17:59:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*cat_string(char *src, char *catstr, size_t start, int which_free)
 	if (i > start && !src[i])
 		return (to_free(src, catstr, which_free), NULL);
 	catstr_len = ft_strlen(catstr);
-	new = (char *)ft_calloc(ft_strlen(src) + catstr_len + 2, sizeof(char));
+	new = (char *)CALLOC(ft_strlen(src) + catstr_len + 2, sizeof(char));
 	if (new)
 	{
 		ft_strlcpy(new, src, start + 2);

@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 19:37:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:43:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-#include "../lib.h"
-# include "structs.h"
-# include "data/list/list.h"
 # ifndef FUN_MACROS
 #  define FUN_MACROS
-#  define MALLOC SDL_malloc
-#  define FREE SDL_free
-#  define WRITE writefd
-#  define READ readfd
-#  define SEEK SDL_RWseek
-#  define OPEN SDL_RWFromFile
-#  define CLOSE SDL_RWclose
-#  define SDL_RWops SDL_RWops
+#  define MALLOC malloc
+#  define CALLOC calloc
+#  define FREE free
+#  define WRITE write
+#  define READ read
+#  define SEEK seek
+#  define OPEN open
+#  define CLOSE close
+#  define SDL_RWops int
 # endif
+# include <stdint.h>
+# include <stdlib.h>
 
 typedef struct s_fd	t_fd;
 typedef long long int	t_int64;
@@ -73,10 +73,13 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_tolower(int c);
-int			ft_toupper(int c);
+
+int			sub_strlen(const char *s, const char *charset, int mode);
+int			sub_strcpy(char *dest, char *src, char *charset, int mode);
+
 //		LIST
 
+/*
 t_list		*ft_lstnew(void *content, void *type);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
@@ -88,6 +91,6 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //		PRINTF
 
-int			fd_printf(t_fd fd, const char *str, ...);
+int			fd_printf(t_fd fd, const char *str, ...);*/
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_methods.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 19:19:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:01:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,41 @@ bool	str_check_this(t_str *this, void *empty);
 
 # define STR_METHODS	\
 	int32_t	(*get_len)(t_str *);\
-	err		(*set_i)(t_str *);\
+	void	(*set_i)(t_str *, int32_t);\
 	int32_t	(*get_i)(t_str *);\
-	bool	(*atoi)(t_str *, int32_t *);\
-	str_m(cat_char, char *, int32_t)\
-	str_m(cat_str, t_str *, int32_t)\
-	str_m(cmp_char, char *)\
-	str_m(cmp_str, t_str *)\
+	int32_t	(*str_cmp_char)(t_str *, char *);\
+	int32_t	(*str_cmp_str)(t_str *, t_str *);\
 	str_m(str_cut, int32_t, int32_t)\
-	str_m(dup_char, char *)\
-	str_m(dup_str, t_str *)\
-	str_m(find_chr, char)\
-	str_m(find_char, char *, int32_t)\
-	str_m(find_str, t_str *, int32_t)\
-	str_m(itoa, int32_t)\
-	str_m(join_char, char *, int32_t n)\
-	str_m(join_str, t_str *, int32_t n)\
-	void	(*lower)(t_str *);\
-	str_m(ncmp_char, char *, int32_t)\
-	str_m(ncmp_str, t_str *, int32_t)\
-	void	(*reverse)(t_str *);\
-	str_m(rfind_chr, char)\
-	str_m(rfind_char, char *, int32_t)\
-	str_m(rfind_str, t_str *, int32_t)\
-	void	(*sort)(t_str *);\
-	str_m(sub_char, char *)\
-	str_m(sub_str, t_str *)\
-	str_m(trim_char, char *)\
-	str_m(trim_str, t_str *)\
-	void	(*upper)(t_str *);\
+	str_m(str_diff_chr, char)\
+	str_m(str_diff_char, const char *)\
+	str_m(str_diff_str, t_str *)\
+	str_m(str_find_chr, char)\
+	str_m(str_find_char, const char *)\
+	str_m(str_find_str, t_str *)\
+	str_m(str_first_chr, char)\
+	str_m(str_first_char, char *)\
+	str_m(str_first_str, t_str *)\
+	str_m(str_itoa, int32_t)\
+	str_m(str_join_char, const char *, int32_t n)\
+	str_m(str_join_str, t_str *, int32_t n)\
+	str_m(str_last_chr, char)\
+	str_m(str_last_char, char *)\
+	str_m(str_last_str, t_str *)\
+	t_str	*(*str_lower)(t_str *);\
+	int32_t	(*str_ncmp_char)(t_str *, char *, int32_t);\
+	int32_t	(*str_ncmp_str)(t_str *, t_str *, int32_t);\
+	t_str	*(*str_reverse)(t_str *);\
+	str_m(str_rdiff_chr, char)\
+	str_m(str_rdiff_char, const char *)\
+	str_m(str_rdiff_str, t_str *)\
+	str_m(str_rfind_chr, char)\
+	str_m(str_rfind_char, const char *)\
+	str_m(str_rfind_str, t_str *)\
+	str_m(str_sdup_char, const char *)\
+	str_m(str_sdup_str, t_str *)\
+	err		(*str_satoi)(t_str *, int32_t *);\
+	t_str	*(*str_sort)(t_str *);\
+	t_str	*(*str_upper)(t_str *);\
 
 # define get_len(name)		str_get_len(name)
 int		str_get_len(t_str *str);
@@ -73,58 +79,71 @@ int		str_get_start_index(t_str *str);
 # define set_i(name, T)		str_set_start_index(name, T)
 void	str_set_start_index(t_str *str, int i);
 
-# define atoi(name, T)	str_atoi(name, T)
-err		str_atoi(t_str *str, int *n);
-
 #define cmp(name, T)      		STR_OVERLOAD(cmp, name, T)
 int32_t	str_cmp_char(t_str *this, char *other);
-int32_t	*str_cmp_str(t_str *this, t_str *other);
+int32_t	str_cmp_str(t_str *this, t_str *other);
 
 #define cut(name, T1, T2)	str_cut(name, T1, T2)
 t_str	*str_cut(t_str *this, int32_t start, int32_t end);
 
-# define dup(name, T)			STR_OVERLOAD(dup, name, T)
-t_str	*str_dup_char(t_str *this, const char *other);
-t_str	*str_dup_str(t_str *this, t_str *other);
+# define diff(name, T1, T2)		STR_OVERLOAD_2(diff, name, T1)
+t_str	*str_diff_chr(t_str *this, char other);
+t_str	*str_diff_char(t_str *this, const char *other);
+t_str	*str_diff_str(t_str *this, t_str *other);
 
-# define find(name, T1, T2)		STR_OVERLOAD_2(find, name, T1)
+# define find(name, T)		STR_OVERLOAD(find, name, T)
 t_str	*str_find_chr(t_str *this, char other);
 t_str	*str_find_char(t_str *this, const char *other);
 t_str	*str_find_str(t_str *this, t_str *other);
 
+# define first(name, T1)		STR_OVERLOAD_2(first, name, T1)
+t_str	*str_first_chr(t_str *this, char other);
+t_str	*str_first_char(t_str *this, const char *other);
+t_str	*str_first_str(t_str *this, t_str *other);
+
 #define itoa(name, T)			STR_OVERLOAD(itoa, name, T)
 t_str	*str_itoa(t_str *this, int32_t value);
 
-#define join(name, T)			STR_OVERLOAD(join, name, T)
+#define join(name, T1, T2)			STR_OVERLOAD_2(join, name, T1, T2)
 t_str	*str_join_char(t_str *this, const char *other, int32_t n);
 t_str	*str_join_str(t_str *this, t_str *other, int32_t n);
 
+# define last(name, T1)		STR_OVERLOAD_2(last, name, T1)
+t_str	*str_last_chr(t_str *this, char other);
+t_str	*str_last_char(t_str *this, const char *other);
+t_str	*str_last_str(t_str *this, t_str *other);
+
 # define lower(name)			str_lower(name)
-void	str_lower(t_str *str);
+t_str	*str_lower(t_str *str);
 
 #define ncmp(name, T1, T2)  	STR_OVERLOAD_2(ncmp, name, T1, T2)
-t_str 	*str_ncmp_char(t_str *this, char *other, int32_t n);
-t_str 	*str_ncmp_str(t_str *this, t_str *other, int32_t n);
+int32_t	str_ncmp_char(t_str *this, char *other, int32_t n);
+int32_t	str_ncmp_str(t_str *this, t_str *other, int32_t n);
+
+# define rdiff(name, T1, T2)		STR_OVERLOAD_2(rdiff, name, T1)
+t_str	*str_rdiff_chr(t_str *this, char other);
+t_str	*str_rdiff_char(t_str *this, const char *other);
+t_str	*str_rdiff_str(t_str *this, t_str *other);
 
 # define reverse(name)			str_reverse(name)
-void	str_reverse(t_str *str);
+t_str	*str_reverse(t_str *str);
 
 # define rfind(name, T1)	STR_OVERLOAD_2(rfind, name, T1)
 t_str	*str_rfind_chr(t_str *this, char other);
 t_str	*str_rfind_char(t_str *this, const char *other);
 t_str	*str_rfind_str(t_str *this, t_str *other);
 
+# define satoi(name, T)	str_satoi(name, T)
+err		str_satoi(t_str *str, int *n);
+
+# define sdup(name, T)			STR_OVERLOAD(sdup, name, T)
+t_str	*str_sdup_char(t_str *this, const char *other);
+t_str	*str_sdup_str(t_str *this, t_str *other);
+
 # define sort(name)				str_sort(name)
-void	str_sort(t_str *str);
-
-# define sub(name, T1, T2, T3)			str_substr(name, T1, T2, T3)
-t_str	*str_substr(t_str *this, t_str *other, int32_t start, int32_t end);
-
-# define trim(name, T)			STR_OVERLOAD(trim, name, T)
-t_str	*str_trim_char(t_str *this, char *other);
-t_str	*str_trim_str(t_str *this, t_str *other);
+t_str	*str_sort(t_str *str);
 
 # define upper(name)			str_upper(name)
-void	str_upper(t_str *str);
+t_str	*str_upper(t_str *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 18:20:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:14:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ void	ft_sort_str(char *tab)
 	}
 }
 
-void	str_sort(t_str *str)
+t_str	*str_sort(t_str *str)
 {
 	if (str_check(str, NULL))
 		return (_str_set_error(str, E_PARAM, "sort"));
 	ft_sort_str(str->buff);
+	return (str);
 }
 
 /*

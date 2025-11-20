@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   other_sub_string_tools.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:24:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/03 12:11:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:20:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "other.h"
+#include "../libft.h"
 
 /*
     RULES:
@@ -72,7 +72,7 @@ void	copy_customset(char *dest, char *charset)
 	INCLUDE: Count until the char is in the charset.
 	EXCLUDE: Count until the char is NOT in the charset.
 */
-int	sub_strlen(char *s, char *charset, int mode)
+int	sub_strlen(const char *s, const char *charset, int mode)
 {
 	int	i;
 

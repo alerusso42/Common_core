@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:47:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 18:04:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:09:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	if (n == 0 || !s1 || !s2)
-		return (s1 > s2 - s1 < s2);
+		return ((s1 > s2) - (s1 < s2));
 	while ((--n) && (*s1 != '\0') && (*s2 != '\0') && (*s1 == *s2))
 	{
 		++s1;
@@ -29,7 +29,7 @@ int32_t	str_ncmp_char(t_str *this, char *other, int32_t n)
 	register int32_t	n1;
 
 	if (str_check(this, NULL) || n < 0)
-		return (_str_set_error(this, E_PARAM, "ncmp"));
+		return (_str_set_error(this, E_PARAM, "ncmp"), 0);
 	n1 = this->i;
 	while (n && this->buff[n1] && *other && this->buff[n1] == *other)
 	{
@@ -46,7 +46,7 @@ int32_t	str_ncmp_str(t_str *this, t_str *other, int32_t n)
 	register int32_t	n2;
 
 	if (str_check(this, NULL) || n < 0)
-		return (_str_set_error(this, E_PARAM, "ncmp"));
+		return (_str_set_error(this, E_PARAM, "ncmp"), 0);
 	n1 = this->i;
 	n2 = other->i;
 	while (n && this->buff[n1] && other->buff[n2] \

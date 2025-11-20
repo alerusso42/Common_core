@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reverse_diff.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:53:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 19:27:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c);
 
-t_str	*str_rdiff_chr(t_str *this, char other, int32_t n)
+t_str	*str_rdiff_chr(t_str *this, char other)
 {
 	int32_t	i;
 
@@ -30,7 +30,7 @@ t_str	*str_rdiff_chr(t_str *this, char other, int32_t n)
 	return (this);
 }
 
-t_str	*str_rdiff_char(t_str *this, const char *other, int32_t n)
+t_str	*str_rdiff_char(t_str *this, const char *other)
 {
 	int32_t	i;
 	int32_t	j;
@@ -54,7 +54,7 @@ t_str	*str_rdiff_char(t_str *this, const char *other, int32_t n)
 	return (this);
 }
 
-t_str	*str_rdiff_str(t_str *this, t_str *other, int32_t n)
+t_str	*str_rdiff_str(t_str *this, t_str *other)
 {
 	int32_t	i;
 
@@ -69,7 +69,7 @@ t_str	*str_rdiff_str(t_str *this, t_str *other, int32_t n)
 				break ;
 		i--;
 	}
-	other->buff = (int8_t *)other->begin;
+	other->buff = (char *)other->begin;
 	if (i <= 0)
 		this->i = this->npos;
 	else

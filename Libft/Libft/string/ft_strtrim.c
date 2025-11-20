@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:27:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/18 11:18:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 20:14:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <malloc.h>
-#include "libft.h"
+#include "../libft.h"
 #define TRUE 1
 #define FALSE 0
 

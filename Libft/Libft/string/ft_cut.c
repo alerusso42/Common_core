@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cut.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 17:56:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:10:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	cut_string(char *string, size_t start, size_t end)
 	unsigned int	temp1;
 	unsigned int	string_len;
 
-	end++;
 	if (!(string) || !(*string) || (start > end))
 		return (1);
 	string_len = 0;
@@ -59,7 +58,7 @@ t_str	*str_cut(t_str *this, int32_t start, int32_t end)
 
 	end++;
 	if (str_check(this, this) || start > end || start < 0 || end < 0)
-		return (1);
+		return (_str_set_error(this, E_PARAM, "cut"));
 	string_len = this->len;
 	temp = start;
 	while ((start != end) && (this->buff[start] != 0))

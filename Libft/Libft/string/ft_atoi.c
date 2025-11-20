@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/16 07:04:33 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/20 21:47:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+#include <string.h>
 
 static long long int	atoi_parse_result(long long int res, char sign);
 
@@ -33,7 +34,6 @@ int main()
 					if there are non digit characters, returns LLONG_MIN.
 */
 
-# include <string.h>
 long long int	ft_atoi(const char *nptr)
 {
 	long long int	pow;
@@ -64,7 +64,7 @@ long long int	ft_atoi(const char *nptr)
 }
 
 
-err		str_atoi(t_str *str, int *n)
+err		str_satoi(t_str *str, int *n)
 {
 	int				start;
 	long long int	res;
