@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 22:01:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:50:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ typedef struct s_str			t_str;
 typedef struct s_str_methods	t_str_methods;
 typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
+
+#define TEST(this, x) \
+    _Generic((x), \
+        char:         (this)->m->find((this), (void*)&(char){x}, 0), \
+        char*:        (this)->m->find((this), (void*)x, 1), \
+        const char*:  (this)->m->find((this), (void*)x, 2), \
+        t_str*:       (this)->m->find((this), (void*)x, 3) \
+    )
 
 t_str	str_constructor(t_str *str, char *init);
 err		_str_get_methods(t_str *s);
@@ -44,6 +52,7 @@ bool	str_check_this(t_str *this, void *empty);
 	str_m(str_diff_chr, char)\
 	str_m(str_diff_char, const char *)\
 	str_m(str_diff_str, t_str *)\
+	t_str *(*find)(t_str *this, void *x, int t);\
 	str_m(str_find_chr, char)\
 	str_m(str_find_char, const char *)\
 	str_m(str_find_str, t_str *)\

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 22:58:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:48:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,9 @@ int	test1()
 {
 	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
 	STR(s2, "ROCKY");
-//	sdup(&s3, &s2)->m->join(&s3, &s1, 0);
-	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
+	STR(s3, "");
+	sdup(&s3, &s2)->m->TEST(&s, &s2)->cut(&s, s.i, s.i + s2.len);
+//	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
 	return (0);
 }
 
