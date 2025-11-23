@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_methods.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/21 18:50:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/23 18:58:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ typedef struct s_str			t_str;
 typedef struct s_str_methods	t_str_methods;
 typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
-
-#define TEST(this, x) \
-    _Generic((x), \
-        char:         (this)->m->find((this), (void*)&(char){x}, 0), \
-        char*:        (this)->m->find((this), (void*)x, 1), \
-        const char*:  (this)->m->find((this), (void*)x, 2), \
-        t_str*:       (this)->m->find((this), (void*)x, 3) \
-    )
 
 t_str	str_constructor(t_str *str, char *init);
 err		_str_get_methods(t_str *s);
@@ -46,40 +38,39 @@ bool	str_check_this(t_str *this, void *empty);
 	int32_t	(*get_len)(t_str *);\
 	void	(*set_i)(t_str *, int32_t);\
 	int32_t	(*get_i)(t_str *);\
-	int32_t	(*str_cmp_char)(t_str *, char *);\
-	int32_t	(*str_cmp_str)(t_str *, t_str *);\
-	str_m(str_cut, int32_t, int32_t)\
-	str_m(str_diff_chr, char)\
-	str_m(str_diff_char, const char *)\
-	str_m(str_diff_str, t_str *)\
-	t_str *(*find)(t_str *this, void *x, int t);\
-	str_m(str_find_chr, char)\
-	str_m(str_find_char, const char *)\
-	str_m(str_find_str, t_str *)\
-	str_m(str_first_chr, char)\
-	str_m(str_first_char, char *)\
-	str_m(str_first_str, t_str *)\
-	str_m(str_itoa, int32_t)\
-	str_m(str_join_char, const char *, int32_t n)\
-	str_m(str_join_str, t_str *, int32_t n)\
-	str_m(str_last_chr, char)\
-	str_m(str_last_char, char *)\
-	str_m(str_last_str, t_str *)\
-	t_str	*(*str_lower)(t_str *);\
-	int32_t	(*str_ncmp_char)(t_str *, char *, int32_t);\
-	int32_t	(*str_ncmp_str)(t_str *, t_str *, int32_t);\
-	t_str	*(*str_reverse)(t_str *);\
-	str_m(str_rdiff_chr, char)\
-	str_m(str_rdiff_char, const char *)\
-	str_m(str_rdiff_str, t_str *)\
-	str_m(str_rfind_chr, char)\
-	str_m(str_rfind_char, const char *)\
-	str_m(str_rfind_str, t_str *)\
-	str_m(str_sdup_char, const char *)\
-	str_m(str_sdup_str, t_str *)\
-	err		(*str_satoi)(t_str *, int32_t *);\
-	t_str	*(*str_sort)(t_str *);\
-	t_str	*(*str_upper)(t_str *);\
+	int32_t	(*cmp_char)(t_str *, char *);\
+	int32_t	(*cmp_str)(t_str *, t_str *);\
+	str_m(*cut, int32_t, int32_t)\
+	str_m(*diff_chr, char)\
+	str_m(*diff_char, const char *)\
+	str_m(*diff_str, t_str *)\
+	str_m(*find_chr, char)\
+	str_m(*find_char, const char *)\
+	str_m(*find_str, t_str *)\
+	str_m(*first_chr, char)\
+	str_m(*first_char, char *)\
+	str_m(*first_str, t_str *)\
+	str_m(*itoa, int32_t)\
+	str_m(*join_char, const char *, int32_t n)\
+	str_m(*join_str, t_str *, int32_t n)\
+	str_m(*last_chr, char)\
+	str_m(*last_char, char *)\
+	str_m(*last_str, t_str *)\
+	t_str	*(*lower)(t_str *);\
+	int32_t	(*ncmp_char)(t_str *, char *, int32_t);\
+	int32_t	(*ncmp_str)(t_str *, t_str *, int32_t);\
+	t_str	*(*reverse)(t_str *);\
+	str_m(*rdiff_chr, char)\
+	str_m(*rdiff_char, const char *)\
+	str_m(*rdiff_str, t_str *)\
+	str_m(*rfind_chr, char)\
+	str_m(*rfind_char, const char *)\
+	str_m(*rfind_str, t_str *)\
+	str_m(*sdup_char, const char *)\
+	str_m(*sdup_str, t_str *)\
+	err		(*satoi)(t_str *, int32_t *);\
+	t_str	*(*sort)(t_str *);\
+	t_str	*(*upper)(t_str *);\
 
 # define get_len(name)		str_get_len(name)
 int		str_get_len(t_str *str);
