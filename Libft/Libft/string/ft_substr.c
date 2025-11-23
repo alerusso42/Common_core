@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/23 21:23:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 t_str	*str_substr(t_str *this, t_str *other, int32_t start, int32_t end)
 {
-	return (sdup(this, other)->m->cut(this, start, end));
+	return (sdup(this, other)->m->cut_str(this, start, end));
 }
 
 /*

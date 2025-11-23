@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/23 19:47:57 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/23 22:35:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	test1()
 	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
 	STR(s2, "ROCKY");
 	STR(s3, "");
-	sdup(&s3, &s2)->m->find_str(&s, &s2)->cut_str(&s, s.i, s.i + s2.len);
+	sdup(&s3, &s2)->m->find_str(&s, &s2)->m->cut_str(&s, s.i, s.i + s2.len);
 //	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
 	return (0);
 }
@@ -134,7 +134,25 @@ int	test2()
 	return (0);
 }
 
+#define STR_TYPE_t_str	str
+#define STR_TYPE_char	char
+
+#define TEST2(type, fname, s, T)	str_##fname##_##type(s, T)
+#define TEST1(type, fname, s, T)	TEST2(STR_TYPE_##type, fname, s, T)
+#define TEST(s, T)	TEST1(typeof_unqual(T), find, s, T)
+
+void	test3(void)
+{
+	STR(s, "str");
+	STR(s1, "str");
+	char	*c = "char";
+
+	TEST(s, s1);
+	TEST(s, c);
+}
+
 int	main()
 {
-	return (test2());
+	
+	return (test3()), 1;
 }
