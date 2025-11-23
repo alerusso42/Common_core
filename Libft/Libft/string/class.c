@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/23 19:02:57 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/23 19:47:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	test1()
 	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
 	STR(s2, "ROCKY");
 	STR(s3, "");
-	sdup(&s3, &s2)->m->find_str(&s, &s2)->cut(&s, s.i, s.i + s2.len);
+	sdup(&s3, &s2)->m->find_str(&s, &s2)->cut_str(&s, s.i, s.i + s2.len);
 //	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
 	return (0);
 }

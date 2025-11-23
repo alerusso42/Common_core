@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/23 18:58:45 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/23 19:47:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,37 @@ bool	str_check_this(t_str *this, void *empty);
 	int32_t	(*get_i)(t_str *);\
 	int32_t	(*cmp_char)(t_str *, char *);\
 	int32_t	(*cmp_str)(t_str *, t_str *);\
-	str_m(*cut, int32_t, int32_t)\
-	str_m(*diff_chr, char)\
-	str_m(*diff_char, const char *)\
-	str_m(*diff_str, t_str *)\
-	str_m(*find_chr, char)\
-	str_m(*find_char, const char *)\
-	str_m(*find_str, t_str *)\
-	str_m(*first_chr, char)\
-	str_m(*first_char, char *)\
-	str_m(*first_str, t_str *)\
-	str_m(*itoa, int32_t)\
-	str_m(*join_char, const char *, int32_t n)\
-	str_m(*join_str, t_str *, int32_t n)\
-	str_m(*last_chr, char)\
-	str_m(*last_char, char *)\
-	str_m(*last_str, t_str *)\
-	t_str	*(*lower)(t_str *);\
+	str_m(cut_str, int32_t, int32_t)\
+	str_m(diff_chr, char)\
+	str_m(diff_char, const char *)\
+	str_m(diff_str, t_str *)\
+	str_m(find_chr, char)\
+	str_m(find_char, const char *)\
+	str_m(find_str, t_str *)\
+	str_m(first_chr, char)\
+	str_m(first_char, char *)\
+	str_m(first_str, t_str *)\
+	str_m(itoa_str, int32_t)\
+	str_m(join_char, const char *, int32_t n)\
+	str_m(join_str, t_str *, int32_t n)\
+	str_m(last_chr, char)\
+	str_m(last_char, char *)\
+	str_m(last_str, t_str *)\
+	t_str	*(*lower_str)(t_str *);\
 	int32_t	(*ncmp_char)(t_str *, char *, int32_t);\
 	int32_t	(*ncmp_str)(t_str *, t_str *, int32_t);\
-	t_str	*(*reverse)(t_str *);\
-	str_m(*rdiff_chr, char)\
-	str_m(*rdiff_char, const char *)\
-	str_m(*rdiff_str, t_str *)\
-	str_m(*rfind_chr, char)\
-	str_m(*rfind_char, const char *)\
-	str_m(*rfind_str, t_str *)\
-	str_m(*sdup_char, const char *)\
-	str_m(*sdup_str, t_str *)\
-	err		(*satoi)(t_str *, int32_t *);\
-	t_str	*(*sort)(t_str *);\
-	t_str	*(*upper)(t_str *);\
+	t_str	*(*reverse_str)(t_str *);\
+	str_m(rdiff_chr, char)\
+	str_m(rdiff_char, const char *)\
+	str_m(rdiff_str, t_str *)\
+	str_m(rfind_chr, char)\
+	str_m(rfind_char, const char *)\
+	str_m(rfind_str, t_str *)\
+	str_m(sdup_char, const char *)\
+	str_m(sdup_str, t_str *)\
+	err		(*satoi_str)(t_str *, int32_t *);\
+	t_str	*(*sort_str)(t_str *);\
+	t_str	*(*upper_str)(t_str *);\
 
 # define get_len(name)		str_get_len(name)
 int		str_get_len(t_str *str);
