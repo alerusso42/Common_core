@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 18:04:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 22:55:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct s_str
 	int32_t			capacity;
 	int32_t			i;
 	t_str_error		err;
+	bool			heap;
 };
 
 struct s_str_methods

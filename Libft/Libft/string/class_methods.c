@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 21:06:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 22:53:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ static void	_str_register_function(t_str_methods *m)
 	m->str_satoi = str_satoi;
 	m->str_sdup = str_sdup;
 	m->str_sort = str_sort;
+	m->str_sfree = str_sfree;
+	m->str_srealloc = str_srealloc;
 	m->str_upper = str_upper;
 }

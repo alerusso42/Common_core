@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   class_utils.c                                      :+:      :+:    :+:   */
+/*   class_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:51:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 22:36:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_str	*_str_set_error(t_str *str, int err, char *func_name)
 	switch (err)
 	{
 		case (E_ALLOC) :
+			str->capacity = -1;
 			write(2, "String:\tFATAL:\tAllocation error", 31);
 			break ;
 		case (E_PARAM) :

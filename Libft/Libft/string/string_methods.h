@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 21:13:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:04:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
 
 t_str	str_constructor(t_str *str, char *init);
+void	_str_destructor(t_str *str);
 err		_str_get_methods(t_str *s);
 t_str	*str_p_constructor(t_str *str, char *init);
 t_str	*_str_set_error(t_str *str, int err, char *func_name);
 void	_str_set(t_str *this);
 t_str	*_str_reset(t_str *this, int i);
-t_str	*_str_realloc(t_str *this);
 bool	_str_identifier(const void *p);
 
 # define str_check(name, other)	STR_OVERLOAD_CHECK(str_check, name, other)
@@ -62,7 +62,9 @@ bool	str_check_this(t_str *this, const void *empty);
 	str_m(str_sdup, const void *)\
 	err		(*str_satoi)(t_str *, int32_t *);\
 	t_str	*(*str_sort)(t_str *);\
-	t_str	*(*str_upper)(t_str *);\
+	t_str	*(*str_sfree)(t_str *);\
+	str_m(str_srealloc, int32_t)\
+	t_str	*(*str_upper)(t_str *);
 
 # define get_len(name)		str_get_len(name)
 int		str_get_len(t_str *str);
@@ -168,6 +170,12 @@ t_str	*str_sdup_str(t_str *this, const t_str *other);
 
 # define sort(name)				str_sort(name)
 t_str	*str_sort(t_str *str);
+
+# define sfree(name)	str_sfree(name)
+t_str	*str_sfree(t_str *this);
+
+# define srealloc(name, ...)	str_srealloc(name, __VA_ARGS__)
+t_str	*str_srealloc(t_str *this, int32_t n);
 
 # define upper(name)			str_upper(name)
 t_str	*str_upper(t_str *str);

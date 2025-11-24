@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 18:04:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:02:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef int32_t					err;
 
 //	the function given to cleanup is called when the variable exits from its
 //	scope
-# define clean(base) __attribute__((cleanup(base ## _destructor)))
-# define clean_ptr(base) __attribute__((cleanup(base ## _ptr_destructor)))
+# define clean(base) __attribute__((cleanup(_ ## base ## _destructor)))
+# define clean_ptr(base) __attribute__((cleanup(_ ## base ## _ptr_destructor)))
 
 //SECTION - constructor
 

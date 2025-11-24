@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 21:15:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:15:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_str	str_constructor(t_str *str, char *buff)
 	*str = (t_str){0};
 	str->_str_identifier = _STR_IDENTIFIER;
 	str->capacity = -1;
+	str->heap = false;
 	if (_str_get_methods(str) != EXIT_SUCCESS)
 		return (*str);
 	if (sdup(str, buff)->err != 0)
@@ -82,7 +83,7 @@ void	str_ptr_destructor(t_str **str)
 	FREE(*str);
 }*/
 
-void	str_destructor(t_str *str)
+void	_str_destructor(t_str *str)
 {
 	printf("%s\tdestructor\n", str->buff);
 	_str_get_methods(NULL);
@@ -97,63 +98,4 @@ void	_str_set(t_str *this)
 	this->len = get_len(this);
 	this->err = 0;
 	this->i = 0;
-}
-
-int	test1()
-{
-	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
-	STR(s2, "ROCKY");
-	STR(s3, "");
-	sdup(&s3, &s2)->m->find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
-//	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
-	return (0);
-}
-
-int	test2()
-{
-	STR(s, "MEGA_RAYQUAZA");
-
-	printf("BEGIN[%s][%ld]\n", (char *)s.begin, s.begin);
-	printf("HALF[%s][%ld]\n", (char *)s.half, s.half);
-	printf("END[%s][%ld]\n", (char *)s.end, s.end);
-
-	for (uintptr_t i = s.begin; i < s.half; i++)
-		*(char *)i = 'A';
-	printf("%s\n", s.buff);
-	return (0);
-}
-
-int	test3(void)
-{
-	STR(trim_s, "str ");
-	STR(s1, "str Bosio");
-	STR(s2, "str Rayquaza");
-	char	*trim_c = "str ";
-
-	find(&s1, &trim_s)->m->cut(&s1, s1.i, trim_s.len);
-	find(&s2, trim_c)->m->cut(&s2, s2.i, ft_strlen(trim_c));
-	return (0);
-}
-
-int	test4(char **av)
-{
-	STR(s, "");
-
-	while (av && *av)
-	{
-		while (**av)
-		{
-			addr(&s, **av);
-			addl(&s, **av);
-			++(*av);
-		}
-		av += *av != NULL;
-	}
-	return (0);
-}
-
-int	main(int ac, char **av)
-{
-	(void)ac;
-	return (test4(av));
 }

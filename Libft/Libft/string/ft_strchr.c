@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:59:43 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 20:35:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:27:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ char	*ft_strchr(const char *s, int c)
 		}
 		++s;
 	}
-	if (c == 0)
-		return ((char *)s);
 	return (NULL);
 }
 

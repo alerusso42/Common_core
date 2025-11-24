@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:47:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:49:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,18 @@ long long int	ft_atoi(const char *nptr)
 	res = 0;
 	pow = 1;
 	i = 0;
-	while (strchr(" \n\t\f\t\v\r", nptr[i]))
+	while (ft_strchr(" \n\t\f\t\v\r", nptr[i]))
 		i++;
 	start = i;
 	if (nptr[i] == '+' || nptr[i] == '-')
 		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
+	if (!ft_strchr("0123456789", nptr[i++]))
 		return (LLONG_MAX);
-	while (strchr("0123456789", nptr[i]))
+	while (ft_strchr("0123456789", nptr[i]))
 		i++;
-	if (start == i)
-		return (E_ATOI_FAIL);
-	while (i != start)
+	while (i-- != start && !ft_strchr("+-", nptr[i]))
 	{
-		res += (nptr[i--] - '0') * pow;
+		res += (nptr[i] - '0') * pow;
 		pow *= 10;
 	}
 	return (atoi_parse_result(res, nptr[start]));
@@ -71,8 +69,6 @@ err		str_satoi(t_str *str, int *n)
 
 	*n = 0;
 	start = str->i;
-	while (strchr(" \n\t\f\t\v\r", str->buff[start]))
-		start++;
 	res = ft_atoi(str->buff + start);
 	if (res == LLONG_MAX)
 		return (E_ATOI_FAIL);
