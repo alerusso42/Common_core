@@ -6,11 +6,19 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:47:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:09:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:45:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+
+t_str	*str_ncmp(t_str *this, const void *other, int32_t n)
+{
+	if (_str_identifier(other) == true)
+		return (str_ncmp_str(this, other, n));
+	else
+		return (str_ncmp_char(this, other, n));
+}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

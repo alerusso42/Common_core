@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class_methods.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/23 19:50:15 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/24 09:56:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	_str_register_function(t_str_methods *m)//TYPEOF!!!
 	m->diff_str = str_diff_str;
 	m->sdup_char = str_sdup_char;
 	m->sdup_str = str_sdup_str;
+	m->find = str_find;
 	m->find_chr = str_find_chr;
 	m->find_char = str_find_char;
 	m->find_str = str_find_str;

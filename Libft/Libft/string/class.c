@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/23 22:35:28 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/24 10:06:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_str	str_constructor(t_str *str, char *buff)
 {
 	printf("%s\tconstructor\n", buff);
 	*str = (t_str){0};
+	str->_str_identifier = _STR_IDENTIFIER;
 	str->capacity = -1;
 	if (_str_get_methods(str) != EXIT_SUCCESS)
 		return (*str);
@@ -141,18 +142,22 @@ int	test2()
 #define TEST1(type, fname, s, T)	TEST2(STR_TYPE_##type, fname, s, T)
 #define TEST(s, T)	TEST1(typeof_unqual(T), find, s, T)
 
-void	test3(void)
-{
-	STR(s, "str");
-	STR(s1, "str");
-	char	*c = "char";
+t_str	*str_find(t_str *this, void *other);
 
-	TEST(s, s1);
-	TEST(s, c);
+int	test3(void)
+{
+	STR(s, "str1");
+	STR(s1, "str");
+	STR(s2, "str2");
+	char	*c = "str";
+
+	s.m->find(&s, &s1)->m->cut_str(&s, s.i, s1.len);
+	s.m->find(&s2, c)->m->cut_str(&s2, s.i, 3);
+	return (0);
 }
 
 int	main()
 {
 	
-	return (test3()), 1;
+	return (test3());
 }

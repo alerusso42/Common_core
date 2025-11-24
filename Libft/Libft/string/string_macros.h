@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_macros.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/19 15:43:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:42:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ typedef struct s_str			t_str;
 typedef struct s_str_methods	t_str_methods;
 typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
+
+# define _STR_IDENTIFIER ULLONG_MAX
 
 //REVIEW - STR_OVERLOAD
 /*
@@ -38,18 +40,6 @@ typedef int32_t					err;
 			f ## _ptr	---> example:	print_ptr
 	}
 */
-# define STR_OVERLOAD(f, name, T) _Generic((T), \
-		char*:	str_ ## f ## _char,\
-		t_str*:	str_ ## f ## _str)(name, T)
-
-# define STR_OVERLOAD_2(f, name, T1, T2) _Generic((T1), \
-		char*:	str_ ## f ## _char,\
-		t_str*:	str_ ## f ## _str)(name, T1, T2)
-
-# define STR_OVERLOAD_3(f, name, T1, T2, T3) _Generic((T1), \
-		char*:	str_ ## f ## _char,\
-		t_str*:	str_ ## f ## _str)(name, T1, T2, T3)
-
 # define STR_OVERLOAD_CHECK(f, name, T) _Generic((T), \
 		char*		:	f ## _char,\
 		const char*	:	f ## _char,\

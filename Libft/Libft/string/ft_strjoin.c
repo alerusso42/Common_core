@@ -6,11 +6,19 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:45:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+
+t_str	*str_join(t_str *this, const void *other, int32_t n)
+{
+	if (_str_identifier(other) == true)
+		return (str_join_str(this, other, n));
+	else
+		return (str_join_char(this, other, n));
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

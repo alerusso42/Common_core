@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 22:43:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:44:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,13 @@
 
 char	*ft_strdup(const char *str);
 
-/*
-int main(int argc, char *argv[])
+t_str	*str_sdup(t_str *this, const void *other)
 {
-    char    *string1;
-    char    *string2;
-    
-	if (argc != 2)
-	{
-		printf("Fai schifo;\n");
-		return (42);
-	}
-	printf("Stringa originale: %s\n", argv[1]);
-	string1 = strdup(argv[1]);
-    printf("strdup: %s\n", string1);	
-	string2 = ft_strdup(argv[1]);
-    printf("fake: %s\n", string2);
-    free(string1);
-    free(string2);
-	return (0);
-}*/
-//duplica una stringa usando la giusta memoria con malloc
+	if (_str_identifier(other) == true)
+		return (str_sdup_str(this, other));
+	else
+		return (str_sdup_char(this, other));
+}
 
 char	*ft_strdup(const char *str)
 {

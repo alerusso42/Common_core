@@ -6,11 +6,19 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:44:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+
+t_str	*str_last(t_str *this, const void *other)
+{
+	if (_str_identifier(other) == true)
+		return (str_last_str(this, other));
+	else
+		return (str_last_char(this, other));
+}
 
 t_str	*str_last_chr(t_str *this, char other)
 {

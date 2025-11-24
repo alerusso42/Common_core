@@ -6,11 +6,19 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:53:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:44:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+
+t_str	*str_diff(t_str *this, const void *other)
+{
+	if (_str_identifier(other) == true)
+		return (str_diff_str(this, other));
+	else
+		return (str_diff_char(this, other));
+}
 
 t_str	*str_diff_chr(t_str *this, char other)
 {

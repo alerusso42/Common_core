@@ -6,11 +6,19 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 22:07:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:44:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+
+t_str	*str_cmp(t_str *this, const void *other)
+{
+	if (_str_identifier(other) == true)
+		return (str_cmp_str(this, other));
+	else
+		return (str_cmp_char(this, other));
+}
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

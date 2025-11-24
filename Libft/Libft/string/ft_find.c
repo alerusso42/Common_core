@@ -6,13 +6,21 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:44:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
 int32_t	ft_strstr_int(const char *, const char *);
+
+t_str	*str_find(t_str *this, const void *other)
+{
+	if (_str_identifier(other) == true)
+		return (str_find_str(this, other));
+	else
+		return (str_find_char(this, other));
+}
 
 t_str	*str_find_chr(t_str *this, char other)
 {

@@ -6,13 +6,21 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:53:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:44:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
 char	*ft_strchr(const char *s, int c);
+
+t_str	*str_rdiff(t_str *this, const void *other)
+{
+	if (_str_identifier(other) == true)
+		return (str_rdiff_str(this, other));
+	else
+		return (str_rdiff_char(this, other));
+}
 
 t_str	*str_rdiff_chr(t_str *this, char other)
 {

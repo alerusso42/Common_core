@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:42:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 09:45:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ enum	e_str_error
 
 struct s_str
 {
+	uint64_t		_str_identifier;
 	t_str_methods	*m;
 	char			*buff;
 	uintptr_t		begin;
