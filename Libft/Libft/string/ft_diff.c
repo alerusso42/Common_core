@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:53:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:44:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:04:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_str	*str_diff_char(t_str *this, const char *other)
 	return (this);
 }
 
-t_str	*str_diff_str(t_str *this, t_str *other)
+t_str	*str_diff_str(t_str *this, const t_str *other)
 {
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "find"));

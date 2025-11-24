@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:44:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:07:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_str	*str_cmp(t_str *this, const void *other)
+int32_t	str_cmp(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)
 		return (str_cmp_str(this, other));
@@ -34,7 +34,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }
 
-int32_t	str_cmp_char(t_str *this, char *other)
+int32_t	str_cmp_char(t_str *this, const char *other)
 {
 	register int32_t	n1;
 
@@ -49,7 +49,7 @@ int32_t	str_cmp_char(t_str *this, char *other)
 	return ((uint8_t)(this->buff[n1]) - (uint8_t)(*other));
 }
 
-int32_t	str_cmp_str(t_str *this, t_str *other)
+int32_t	str_cmp_str(t_str *this, const t_str *other)
 {
 	register int32_t	n1;
 	register int32_t	n2;

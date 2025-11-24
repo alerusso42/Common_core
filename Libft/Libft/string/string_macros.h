@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:42:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:04:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
 
 # define _STR_IDENTIFIER ULLONG_MAX
+# define _STR_REALLOC_SIZE 32
 
 //REVIEW - STR_OVERLOAD
 /*
@@ -44,7 +45,8 @@ typedef int32_t					err;
 		char*		:	f ## _char,\
 		const char*	:	f ## _char,\
 		void*		:	f ## _this,\
-		t_str*		:	f ## _str)(name, T)
+		t_str*		:	f ## _str,\
+		const t_str*:	f ## _str)(name, T)
 
 //SECTION - destructor
 

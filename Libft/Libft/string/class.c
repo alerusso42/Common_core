@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:06:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:26:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	test1()
 	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
 	STR(s2, "ROCKY");
 	STR(s3, "");
-	sdup(&s3, &s2)->m->find_str(&s, &s2)->m->cut_str(&s, s.i, s.i + s2.len);
+	sdup(&s3, &s2)->m->find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
 //	find(&s, &s2)->m->cut(&s, s.i, s.i + s2.len);
 	return (0);
 }
@@ -135,29 +135,33 @@ int	test2()
 	return (0);
 }
 
-#define STR_TYPE_t_str	str
-#define STR_TYPE_char	char
-
-#define TEST2(type, fname, s, T)	str_##fname##_##type(s, T)
-#define TEST1(type, fname, s, T)	TEST2(STR_TYPE_##type, fname, s, T)
-#define TEST(s, T)	TEST1(typeof_unqual(T), find, s, T)
-
-t_str	*str_find(t_str *this, void *other);
-
 int	test3(void)
 {
-	STR(s, "str1");
-	STR(s1, "str");
-	STR(s2, "str2");
-	char	*c = "str";
+	STR(trim_s, "str ");
+	STR(s1, "str Bosio");
+	STR(s2, "str Rayquaza");
+	char	*trim_c = "str ";
 
-	s.m->find(&s, &s1)->m->cut_str(&s, s.i, s1.len);
-	s.m->find(&s2, c)->m->cut_str(&s2, s.i, 3);
+	find(&s1, &trim_s)->m->cut(&s1, s1.i, trim_s.len);
+	find(&s2, trim_c)->m->cut(&s2, s2.i, ft_strlen(trim_c));
 	return (0);
 }
 
-int	main()
+int	test4(char **av)
 {
-	
-	return (test3());
+	STR(s, "");
+
+	while (av && *av)
+	{
+		while (*av)
+			addr(&s, **av++);
+		av += *av != NULL;
+	}
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	(void)ac;
+	return (test4(av));
 }

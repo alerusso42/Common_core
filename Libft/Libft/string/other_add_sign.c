@@ -6,45 +6,40 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:05:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:41:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:13:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "string.h"
 
-int	add_sign_left(char **string, char sign)
+t_str	*str_addr(t_str *this, char c)
 {
-	size_t	len;
-	char	*new_string;
-
-	if ((!string) || (!*string))
-		return (1);
-	len = ft_strlen(*string);
-	new_string = (char *)CALLOC(len + 2, sizeof(char));
-	if (!new_string)
-		return (1);
-	new_string[0] = sign;
-	ft_strlcpy(new_string + 1, *string, ft_strlen(*string));
-	FREE(*string);
-	*string = new_string;
+	if (str_check(this, NULL))
+		return (_str_set_error(this, E_PARAM, "add_right"));
+	if (this->capacity != this->len)
+		if (_str_reset(this, this->capacity + _STR_REALLOC_SIZE))
+			return (this);
+	this->buff[this->len++] = c;
+	this->buff[this->len] = '\0';
 	return (0);
 }
 
-int	add_sign_right(char **string, char sign)
+t_str	*str_addl(t_str *this, char c)
 {
-	size_t	len;
-	char	*new_string;
+	int32_t	i;
 
-	if ((!string) || (!*string))
-		return (1);
-	len = ft_strlen(*string);
-	new_string = (char *)CALLOC(len + 3, sizeof(char));
-	if (!new_string)
-		return (1);
-	new_string[len + 1] = 0;
-	ft_strlcpy(new_string, *string, ft_strlen(*string));
-	new_string[len] = sign;
-	FREE(*string);
-	*string = new_string;
+	if (str_check(this, NULL) || c == '\0')
+		return (_str_set_error(this, E_PARAM, "add_left"));
+	if (this->capacity != this->len)
+		if (_str_reset(this, this->capacity + _STR_REALLOC_SIZE))
+			return (this);
+	this->buff[this->len + 1] = '\0';
+	i = this->len;
+	while (i)
+	{
+		this->buff[i] = this->buff[i - 1];
+		i--;
+	}
+	this->buff[0] = c;
 	return (0);
 }

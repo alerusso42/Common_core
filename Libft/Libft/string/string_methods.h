@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:40:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:21:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ t_str	*str_p_constructor(t_str *str, char *init);
 t_str	*_str_set_error(t_str *str, int err, char *func_name);
 void	_str_set(t_str *this);
 t_str	*_str_reset(t_str *this, int i);
-bool	_str_identifier(void *p);
+bool	_str_identifier(const void *p);
 
 # define str_check(name, other)	STR_OVERLOAD_CHECK(str_check, name, other)
 bool	str_check_char(t_str *this, const char *other);
-bool	str_check_str(t_str *this, t_str *other);
-bool	str_check_this(t_str *this, void *empty);
+bool	str_check_str(t_str *this, const t_str *other);
+bool	str_check_this(t_str *this, const void *empty);
 
 # define str_m(name, ...)	t_str	*(*name)(t_str *, __VA_ARGS__);
 
@@ -39,7 +39,9 @@ bool	str_check_this(t_str *this, void *empty);
 	int32_t	(*get_len)(t_str *);\
 	void	(*set_i)(t_str *, int32_t);\
 	int32_t	(*get_i)(t_str *);\
-	int32_t	(*cmp)(t_str *, void *);\
+	str_m(str_addl, char c)\
+	str_m(str_addr, char c)\
+	int32_t	(*str_cmp)(t_str *, const void *);\
 	str_m(str_cut, int32_t, int32_t)\
 	str_m(str_diff, const void *)\
 	str_m(str_find, const void *)\
@@ -64,58 +66,65 @@ int		str_get_start_index(t_str *str);
 # define set_i(name, T)		str_set_start_index(name, T)
 void	str_set_start_index(t_str *str, int i);
 
-#define cmp(name, ...)		str_cmp(name, __VA_ARGS__)
-int32_t	str_cmp_char(t_str *this, char *other);
-int32_t	str_cmp_str(t_str *this, t_str *other);
+# define addl(name, ...)	str_addl(name, __VA_ARGS__)
+t_str	*str_addl(t_str *this, char c);
 
-#define cut(name, T1, T2)	str_cut(name, T1, T2)
+# define addr(name, ...)	str_addr(name, __VA_ARGS__)
+t_str	*str_addr(t_str *this, char c);
+
+#define cmp(name, ...)		str_cmp(name, __VA_ARGS__)
+int32_t	str_cmp(t_str *this, const void *other);
+int32_t	str_cmp_char(t_str *this, const char *other);
+int32_t	str_cmp_str(t_str *this, const t_str *other);
+
+#define cut(name, ...)	str_cut(name, __VA_ARGS__)
 t_str	*str_cut(t_str *this, int32_t start, int32_t end);
 
 # define diff(name, ...)		str_diff(name, __VA_ARGS__)
 t_str	*str_diff(t_str *this, const void *other);
-t_str	*str_diff_chr(t_str *this, char other);
+t_str	*str_diff_chr(t_str *this, const char other);
 t_str	*str_diff_char(t_str *this, const char *other);
-t_str	*str_diff_str(t_str *this, t_str *other);
+t_str	*str_diff_str(t_str *this, const t_str *other);
 
 # define find(name, ...)		str_find(name, __VA_ARGS__)
 t_str	*str_find(t_str *this, const void *other);
 t_str	*str_find_chr(t_str *this, char other);
 t_str	*str_find_char(t_str *this, const char *other);
-t_str	*str_find_str(t_str *this, t_str *other);
+t_str	*str_find_str(t_str *this, const t_str *other);
 
 # define first(name, ...)		str_first(name, __VA_ARGS__)
 t_str	*str_first(t_str *this, const void *other);
 t_str	*str_first_chr(t_str *this, char other);
 t_str	*str_first_char(t_str *this, const char *other);
-t_str	*str_first_str(t_str *this, t_str *other);
+t_str	*str_first_str(t_str *this, const t_str *other);
 
-#define itoa(name, T)			STR_OVERLOAD(itoa, name, T)
+#define itoa(name, ...)			str_itoa(name, __VA_ARGS__)
 t_str	*str_itoa(t_str *this, int32_t value);
 
 #define join(name, ...)		str_join(name, __VA_ARGS__)
-t_str	*str_join(t_str *this, const void *other);
+t_str	*str_join(t_str *this, const void *other, int32_t n);
 t_str	*str_join_char(t_str *this, const char *other, int32_t n);
-t_str	*str_join_str(t_str *this, t_str *other, int32_t n);
+t_str	*str_join_str(t_str *this, const t_str *other, int32_t n);
 
 # define last(name, ...)		str_last(name, __VA_ARGS__)
-t_str	*str_last(t_str *this, void *other);
+t_str	*str_last(t_str *this, const void *other);
 t_str	*str_last_chr(t_str *this, char other);
 t_str	*str_last_char(t_str *this, const char *other);
-t_str	*str_last_str(t_str *this, t_str *other);
+t_str	*str_last_str(t_str *this, const t_str *other);
 
 # define lower(name)			str_lower(name)
 t_str	*str_lower(t_str *str);
 
 #define ncmp(name, ...)		str_ncmp(name, __VA_ARGS__)
-t_str	*str_ncmp(t_str *this, const void *other, int32_t n);
-int32_t	str_ncmp_char(t_str *this, char *other, int32_t n);
-int32_t	str_ncmp_str(t_str *this, t_str *other, int32_t n);
+int32_t	str_ncmp(t_str *this, const void *other, int32_t n);
+int32_t	str_ncmp_char(t_str *this, const char *other, int32_t n);
+int32_t	str_ncmp_str(t_str *this, const t_str *other, int32_t n);
 
 # define rdiff(name, ...)		str_rdiff(name, __VA_ARGS__)
 t_str	*str_rdiff(t_str *this, const void *other);
 t_str	*str_rdiff_chr(t_str *this, char other);
 t_str	*str_rdiff_char(t_str *this, const char *other);
-t_str	*str_rdiff_str(t_str *this, t_str *other);
+t_str	*str_rdiff_str(t_str *this, const t_str *other);
 
 # define reverse(name)			str_reverse(name)
 t_str	*str_reverse(t_str *str);
@@ -124,7 +133,7 @@ t_str	*str_reverse(t_str *str);
 t_str	*str_rfind(t_str *this, const void *other);
 t_str	*str_rfind_chr(t_str *this, char other);
 t_str	*str_rfind_char(t_str *this, const char *other);
-t_str	*str_rfind_str(t_str *this, t_str *other);
+t_str	*str_rfind_str(t_str *this, const t_str *other);
 
 # define satoi(name, T)	str_satoi(name, T)
 err		str_satoi(t_str *str, int *n);
@@ -132,7 +141,7 @@ err		str_satoi(t_str *str, int *n);
 # define sdup(name, ...)		str_sdup(name, __VA_ARGS__)
 t_str	*str_sdup(t_str *this, const void *other);
 t_str	*str_sdup_char(t_str *this, const char *other);
-t_str	*str_sdup_str(t_str *this, t_str *other);
+t_str	*str_sdup_str(t_str *this, const t_str *other);
 
 # define sort(name)				str_sort(name)
 t_str	*str_sort(t_str *str);

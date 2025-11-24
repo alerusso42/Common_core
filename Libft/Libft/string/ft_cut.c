@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 22:10:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:43:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_str	*str_cut(t_str *this, int32_t start, int32_t end)
 	int32_t	temp1;
 	int32_t	string_len;
 
-	end++;
 	if (str_check(this, this) || start > end || start < 0 || end < 0)
 		return (_str_set_error(this, E_PARAM, "cut"));
 	string_len = this->len;

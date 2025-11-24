@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 09:56:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:16:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,39 +54,25 @@ static err		_str_store_methods(t_str *s)
 	return (EXIT_SUCCESS);
 }
 
-static void	_str_register_function(t_str_methods *m)//TYPEOF!!!
+static void	_str_register_function(t_str_methods *m)
 {
-	m->satoi_str = str_satoi;
-//	m->cat_char = str_cat_char;
-//	m->cat_str = str_cat_str;
-	m->cmp_char = str_cmp_char;
-	m->cmp_str = str_cmp_str;
-	m->cut_str = str_cut;
-	m->diff_chr = str_diff_chr;
-	m->diff_char = str_diff_char;
-	m->diff_str = str_diff_str;
-	m->sdup_char = str_sdup_char;
-	m->sdup_str = str_sdup_str;
-	m->find = str_find;
-	m->find_chr = str_find_chr;
-	m->find_char = str_find_char;
-	m->find_str = str_find_str;
-	m->get_i = str_get_start_index;
-	m->get_len = str_get_len;
-	m->itoa_str = str_itoa;
-	m->join_char = str_join_char;
-	m->join_str = str_join_str;
-	m->lower_str = str_lower;
-	m->ncmp_char = str_ncmp_char;
-	m->ncmp_str = str_ncmp_str;
-	m->reverse_str = str_reverse;
-	m->rdiff_chr = str_rdiff_chr;
-	m->rdiff_char = str_rdiff_char;
-	m->rdiff_str = str_rdiff_str;
-	m->rfind_chr = str_rfind_chr;
-	m->rfind_char = str_rfind_char;
-	m->rfind_str = str_rfind_str;
-	m->set_i = str_set_start_index;
-	m->sort_str = str_sort;
-	m->upper_str = str_upper;
+	m->str_addl = str_addl;
+	m->str_addr = str_addr;
+	m->str_cmp = str_cmp;
+	m->str_cut = str_cut;
+	m->str_diff = str_diff;
+	m->str_find = str_find;
+	m->str_first = str_first;
+	m->str_itoa = str_itoa;
+	m->str_join = str_join;
+	m->str_last = str_last;
+	m->str_lower = str_lower;
+	m->str_ncmp = str_ncmp;
+	m->str_rdiff = str_rdiff;
+	m->str_reverse = str_reverse;
+	m->str_rfind = str_rfind;
+	m->str_satoi = str_satoi;
+	m->str_sdup = str_sdup;
+	m->str_sort = str_sort;
+	m->str_upper = str_upper;
 }

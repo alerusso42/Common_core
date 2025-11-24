@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:05:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:44:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:02:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_str	*str_sdup_char(t_str *this, const char *other)
 	return (this);
 }
 
-t_str	*str_sdup_str(t_str *this, t_str *other)
+t_str	*str_sdup_str(t_str *this, const t_str *other)
 {
 	int	i;
 	int	j;

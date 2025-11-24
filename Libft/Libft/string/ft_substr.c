@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:29:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:58:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substring);
 }
 
-t_str	*str_substr(t_str *this, t_str *other, int32_t start, int32_t end)
+t_str	*str_substr(t_str *this, const t_str *other, int32_t start, int32_t end)
 {
 	return (sdup(this, other)->m->cut(this, start, end));
 }

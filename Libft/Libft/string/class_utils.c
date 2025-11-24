@@ -6,21 +6,11 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 22:12:48 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:51:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
-
-int		str_get_start_index(t_str *str)
-{
-	return (str->i);
-}
-
-void	str_set_start_index(t_str *str, int i)
-{
-	str->i = i;
-}
 
 t_str	*_str_set_error(t_str *str, int err, char *func_name)
 {
@@ -60,7 +50,7 @@ bool	str_check_char(t_str *this, const char *other)
 	return (this->err > 0);
 }
 
-bool	str_check_str(t_str *this, t_str *other)
+bool	str_check_str(t_str *this, const t_str *other)
 {
 	if (this->err == E_ALLOC || !this->buff)
 		return (1);
@@ -71,7 +61,7 @@ bool	str_check_str(t_str *this, t_str *other)
 	return (this->err > 0);
 }
 
-bool	str_check_this(t_str *this, void *empty)
+bool	str_check_this(t_str *this, const void *empty)
 {
 	(void)empty;
 	if (this->err == E_ALLOC || !this->buff)

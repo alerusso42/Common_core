@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 10:45:01 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:01:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (stringona);
 }
 
-t_str *str_join_str(t_str *s, t_str *s2, int32_t n)
+t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)
 {
 	int32_t i;
 	char   *new_s;
