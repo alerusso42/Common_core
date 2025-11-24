@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 18:21:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:13:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_str	*str_p_constructor(t_str *str, char *init);
 t_str	*_str_set_error(t_str *str, int err, char *func_name);
 void	_str_set(t_str *this);
 t_str	*_str_reset(t_str *this, int i);
+t_str	*_str_realloc(t_str *this);
 bool	_str_identifier(const void *p);
 
 # define str_check(name, other)	STR_OVERLOAD_CHECK(str_check, name, other)
@@ -42,15 +43,19 @@ bool	str_check_this(t_str *this, const void *empty);
 	str_m(str_addl, char c)\
 	str_m(str_addr, char c)\
 	int32_t	(*str_cmp)(t_str *, const void *);\
+	str_m(str_cpy, const void *)\
 	str_m(str_cut, int32_t, int32_t)\
 	str_m(str_diff, const void *)\
+	str_m(str_excpy, const void *, const void *)\
 	str_m(str_find, const void *)\
 	str_m(str_first, const void *)\
+	str_m(str_incpy, const void *, const void *)\
 	str_m(str_itoa, int32_t)\
 	str_m(str_join, const void *, int32_t n)\
 	str_m(str_last, const void *)\
 	t_str	*(*str_lower)(t_str *);\
 	int32_t	(*str_ncmp)(t_str *, const void *, int32_t);\
+	str_m(str_ncpy, const void *, int32_t, int32_t)\
 	t_str	*(*str_reverse)(t_str *);\
 	str_m(str_rdiff, const void *)\
 	str_m(str_rfind, const void *)\
@@ -77,6 +82,11 @@ int32_t	str_cmp(t_str *this, const void *other);
 int32_t	str_cmp_char(t_str *this, const char *other);
 int32_t	str_cmp_str(t_str *this, const t_str *other);
 
+# define cpy(name, ...)		str_cpy(name, __VA_ARGS__)
+t_str	*str_cpy(t_str *this, const void *other);
+t_str	*str_cpy_char(t_str *this, const char *other);
+t_str	*str_cpy_str(t_str *this, const t_str *other);
+
 #define cut(name, ...)	str_cut(name, __VA_ARGS__)
 t_str	*str_cut(t_str *this, int32_t start, int32_t end);
 
@@ -85,6 +95,9 @@ t_str	*str_diff(t_str *this, const void *other);
 t_str	*str_diff_chr(t_str *this, const char other);
 t_str	*str_diff_char(t_str *this, const char *other);
 t_str	*str_diff_str(t_str *this, const t_str *other);
+
+# define excpy(name, ...)	str_excpy(name, __VA_ARGS__)
+t_str	*str_excpy(t_str *this, const void *other, const void *set);
 
 # define find(name, ...)		str_find(name, __VA_ARGS__)
 t_str	*str_find(t_str *this, const void *other);
@@ -97,6 +110,11 @@ t_str	*str_first(t_str *this, const void *other);
 t_str	*str_first_chr(t_str *this, char other);
 t_str	*str_first_char(t_str *this, const char *other);
 t_str	*str_first_str(t_str *this, const t_str *other);
+
+# define incpy(name, ...)	str_incpy(name, __VA_ARGS__)
+t_str	*str_incpy(t_str *this, const void *other, const void *set);
+t_str	*str_scpy_char(t_str *this, const char *other, const char *set, int m);
+t_str	*str_scpy_str(t_str *this, const t_str *other, const char *set, int m);
 
 #define itoa(name, ...)			str_itoa(name, __VA_ARGS__)
 t_str	*str_itoa(t_str *this, int32_t value);
@@ -119,6 +137,11 @@ t_str	*str_lower(t_str *str);
 int32_t	str_ncmp(t_str *this, const void *other, int32_t n);
 int32_t	str_ncmp_char(t_str *this, const char *other, int32_t n);
 int32_t	str_ncmp_str(t_str *this, const t_str *other, int32_t n);
+
+# define ncpy(name, ...)	str_ncpy(name, __VA_ARGS__)
+t_str	*str_ncpy(t_str *this, const void *other, int32_t start, int32_t n);
+t_str	*str_ncpy_char(t_str *this, const char *other, int32_t strt, int32_t n);
+t_str	*str_ncpy_str(t_str *this, const t_str *other, int32_t strt, int32_t n);
 
 # define rdiff(name, ...)		str_rdiff(name, __VA_ARGS__)
 t_str	*str_rdiff(t_str *this, const void *other);

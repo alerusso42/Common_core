@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:24:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:20:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:07:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	sub_strlen(const char *s, const char *charset, int mode)
 	INCLUDE: Copy until the char is in the charset.
 	EXCLUDE: Copy until the char is NOT in the charset.
 */
-int	sub_strcpy(char *dest, char *src, char *charset, int mode)
+int	sub_strcpy(char *dest, const char *src, const char *charset, int mode)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:43:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:07:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 int			sub_strlen(const char *s, const char *charset, int mode);
-int			sub_strcpy(char *dest, char *src, char *charset, int mode);
+int	sub_strcpy(char *dest, const char *src, const char *charset, int mode);
 
 //		LIST
 

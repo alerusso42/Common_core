@@ -1,45 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   class_utils2.c                                     :+:      :+:    :+:   */
+/*   ft_excpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 09:46:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:48:04 by alerusso         ###   ########.fr       */
+/*   Created: 2025/11/24 20:03:32 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/24 20:24:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-bool	_str_identifier(const void *p)
+t_str	*str_excpy(t_str *this, const void *other, const void *set)
 {
-	const uint8_t	*s;
-	uint64_t		id;
-	int8_t			bytes;
+	const char	*charset;
 
-	if (!p)
-		return (false);
-	s = (const uint8_t *)p;
-	id = _STR_IDENTIFIER;
-	bytes = sizeof(uint64_t);
-	while (bytes)
-	{
-		if (*s != (id & 255))
-			return (false);
-		bytes--;
-		++s;
-		id >>= 8;
-	}
-	return (true);
-}
-
-int		str_get_start_index(t_str *str)
-{
-	return (str->i);
-}
-
-void	str_set_start_index(t_str *str, int i)
-{
-	str->i = i;
+	if (_str_identifier(set) == true)
+		charset = ((const t_str *)set)->buff;
+	else
+		charset = (const char *)set;
+	if (_str_identifier(other) == true)
+		return (str_scpy_str(this, other, charset, EXCLUDE));
+	else
+		return (str_scpy_char(this, other, charset, EXCLUDE));
 }

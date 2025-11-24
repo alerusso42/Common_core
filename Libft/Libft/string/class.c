@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 18:26:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:15:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,6 @@ void	_str_set(t_str *this)
 	this->i = 0;
 }
 
-t_str	*_str_reset(t_str *this, int i)
-{
-	this->capacity = -1;
-	FREE(this->buff);
-	this->buff = CALLOC(i + 1, sizeof(char));
-	if (!this->buff)
-		return (_str_set_error(this, E_ALLOC, "dup"));
-	this->capacity = i;
-	_str_set(this);
-	return (this);
-}
-
 int	test1()
 {
 	STR(s, "ROCKI ROCK ROOCKY CKY OCKY ROCK YROCKY ROCCKY AAA");
@@ -153,8 +141,12 @@ int	test4(char **av)
 
 	while (av && *av)
 	{
-		while (*av)
-			addr(&s, **av++);
+		while (**av)
+		{
+			addr(&s, **av);
+			addl(&s, **av);
+			++(*av);
+		}
 		av += *av != NULL;
 	}
 	return (0);

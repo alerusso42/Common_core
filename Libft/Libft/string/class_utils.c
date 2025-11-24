@@ -5,68 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:51:03 by alerusso         ###   ########.fr       */
+/*   Created: 2025/11/24 09:46:42 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/24 21:16:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_str	*_str_set_error(t_str *str, int err, char *func_name)
+//SECTION - public
+
+int		str_get_start_index(t_str *str)
 {
-	if (str->buff == NULL)
-		return (str);
-	if (!str->err)
-		str->err = err;
-	switch (err)
+	return (str->i);
+}
+
+void	str_set_start_index(t_str *str, int i)
+{
+	str->i = i;
+}
+
+//SECTION - private
+
+bool	_str_identifier(const void *p)
+{
+	const uint8_t	*s;
+	uint64_t		id;
+	int8_t			bytes;
+
+	if (!p)
+		return (false);
+	s = (const uint8_t *)p;
+	id = _STR_IDENTIFIER;
+	bytes = sizeof(uint64_t);
+	while (bytes)
 	{
-		case (E_ALLOC) :
-			write(2, "String:\tFATAL:\tAllocation error", 31);
-			break ;
-		case (E_PARAM) :
-			write(2, "String:\tbad parameter in function\t", 34);
-			write(2, func_name, ft_strlen(func_name));
-			break ;
-		case (E_ATOI_FAIL) :
-			write(2, "String:\tAtoi has failed for this param->\t", 41);
-			write(2, func_name, ft_strlen(func_name));
-			break ;
-		case (E_NPOS) :
-			str->err = 0;
-			break ;
+		if (*s != (id & 255))
+			return (false);
+		bytes--;
+		++s;
+		id >>= 8;
 	}
-	write(2, "\n", 1);
-	return (str);
+	return (true);
 }
 
-bool	str_check_char(t_str *this, const char *other)
+t_str	*_str_reset(t_str *this, int i)
 {
-	if (this->err == E_ALLOC || !this->buff)
-		return (1);
-	else if (!other)
-		this->err = E_PARAM;
-	else if (this->i == this->npos)
-		this->err = E_NPOS;
-	return (this->err > 0);
+	this->capacity = -1;
+	FREE(this->buff);
+	this->buff = CALLOC(i + 1, sizeof(char));
+	if (!this->buff)
+		return (_str_set_error(this, E_ALLOC, "dup"));
+	this->capacity = i;
+	_str_set(this);
+	return (this);
 }
 
-bool	str_check_str(t_str *this, const t_str *other)
+t_str	*_str_realloc(t_str *this)
 {
-	if (this->err == E_ALLOC || !this->buff)
-		return (1);
-	else if (other->err == E_ALLOC)
-		this->err = E_PARAM;
-	else if (this->i == this->npos)
-		this->err = E_NPOS;
-	return (this->err > 0);
-}
+	char	*temp;
 
-bool	str_check_this(t_str *this, const void *empty)
-{
-	(void)empty;
-	if (this->err == E_ALLOC || !this->buff)
-		return (1);
-	else if (this->i == this->npos)
-		this->err = E_NPOS;
-	return (this->err > 0);
+	this->capacity = -1;
+	temp = this->buff;
+	this->buff = CALLOC(this->capacity + _STR_REALLOC_SIZE + 1, sizeof(char));
+	if (!this->buff)
+		return (_str_set_error(this, E_ALLOC, "_realloc"));
+	if (!temp)
+		return (this);
+	sub_strcpy(this->buff, temp, "", EXCLUDE);
+	FREE(temp);
+	this->capacity = this->capacity + _STR_REALLOC_SIZE;
+	_str_set(this);
+	return (this);
 }

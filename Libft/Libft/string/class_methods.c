@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 18:16:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:06:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,19 @@ static void	_str_register_function(t_str_methods *m)
 	m->str_addl = str_addl;
 	m->str_addr = str_addr;
 	m->str_cmp = str_cmp;
+	m->str_cpy = str_cpy;
 	m->str_cut = str_cut;
 	m->str_diff = str_diff;
+	m->str_excpy = str_excpy;
 	m->str_find = str_find;
 	m->str_first = str_first;
+	m->str_incpy = str_incpy;
 	m->str_itoa = str_itoa;
 	m->str_join = str_join;
 	m->str_last = str_last;
 	m->str_lower = str_lower;
 	m->str_ncmp = str_ncmp;
+	m->str_ncpy = str_ncpy;
 	m->str_rdiff = str_rdiff;
 	m->str_reverse = str_reverse;
 	m->str_rfind = str_rfind;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:05:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 18:13:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:17:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_str	*str_addr(t_str *this, char c)
 {
 	if (str_check(this, NULL))
 		return (_str_set_error(this, E_PARAM, "add_right"));
-	if (this->capacity != this->len)
-		if (_str_reset(this, this->capacity + _STR_REALLOC_SIZE))
+	if (this->capacity == this->len)
+		if (_str_realloc(this)->err != 0)
 			return (this);
 	this->buff[this->len++] = c;
 	this->buff[this->len] = '\0';
@@ -30,11 +30,11 @@ t_str	*str_addl(t_str *this, char c)
 
 	if (str_check(this, NULL) || c == '\0')
 		return (_str_set_error(this, E_PARAM, "add_left"));
-	if (this->capacity != this->len)
-		if (_str_reset(this, this->capacity + _STR_REALLOC_SIZE))
+	if (this->capacity == this->len)
+		if (_str_realloc(this)->err != 0)
 			return (this);
 	this->buff[this->len + 1] = '\0';
-	i = this->len;
+	i = this->len++;
 	while (i)
 	{
 		this->buff[i] = this->buff[i - 1];
