@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 23:15:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/25 22:34:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,4 @@ void	_str_destructor(t_str *str)
 	printf("%s\tdestructor\n", str->buff);
 	_str_get_methods(NULL);
 	FREE(str->buff);
-}
-
-void	_str_set(t_str *this)
-{
-	this->begin = (uintptr_t)(void *)this->buff;
-	this->half = (uintptr_t)(void *)this->buff + (this->len >> 1);
-	this->end = (uintptr_t)(void *)this->buff + this->len;
-	this->len = get_len(this);
-	this->err = 0;
-	this->i = 0;
 }

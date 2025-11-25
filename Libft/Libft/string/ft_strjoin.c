@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:01:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:31:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)
 	int32_t i;
 	char   *new_s;
 
-	if (str_check(s, s2) || n < 0)
-		return (_str_set_error(s, E_PARAM, "cat"));
+	if (str_check(s, s2) || n < 0 || n > s2->len)
+		return (_str_set_error(s, E_PARAM, "join"));
 	i = s->len + s2->len - n;
 	new_s = CALLOC(i + 1, sizeof(char));
 	if (!new_s)
@@ -66,6 +66,7 @@ t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)
 		ft_strlcpy(new_s + s->i + s2->len, s->buff + s->i, INT_MAX);
 	FREE(s->buff);
 	s->buff = new_s;
+	s->len = i;
 	return (s);
 }
 
@@ -78,6 +79,8 @@ t_str *str_join_char(t_str *s, const char *s2, int32_t n)
 	if (str_check(s, s2) || n < 0)
 		return (_str_set_error(s, E_PARAM, "join"));
 	len = ft_strlen(s2);
+	if (len < n)
+		return (_str_set_error(s, E_PARAM, "join"));
 	i = s->len + len - n;
 	new_s = CALLOC(i + 1, sizeof(char));
 	if (!new_s)
@@ -88,6 +91,7 @@ t_str *str_join_char(t_str *s, const char *s2, int32_t n)
 		ft_strlcpy(new_s + s->i + len, s->buff + s->i, INT_MAX);
 	FREE(s->buff);
 	s->buff = new_s;
+	s->len = i;
 	return (s);
 }
 

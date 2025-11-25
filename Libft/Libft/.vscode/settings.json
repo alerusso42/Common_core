@@ -3,6 +3,7 @@
 		"stdio.h": "c",
 		"malloc.h": "c",
 		"libft.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"string.h": "c"
 	}
 }

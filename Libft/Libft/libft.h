@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 21:07:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/25 23:03:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ int	sub_strcpy(char *dest, const char *src, const char *charset, int mode);
 
 //		LIST
 
-/*
-t_list		*ft_lstnew(void *content, void *type);
-void		ft_lstadd_front(t_list **lst, t_list *new);
-int			ft_lstsize(t_list *lst);
-t_list		*ft_lstlast(t_list *lst);
-void		ft_lstadd_back(t_list **lst, t_list *new);
-void		ft_lstdelone(t_list *lst, void (*del)(void *));
-void		ft_lstclear(t_list **lst, void (*del)(void *));
-void		ft_lstiter(t_list *lst, void (*f)(void *));
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+t_list		*lst_new(void *content);
+void		lst_front(t_list **lst, t_list *new);
+int			lst_size(t_list *lst);
+t_list		*lst_last(t_list *lst);
+void		lst_back(t_list **lst, t_list *new);
+void		lst_delone(t_list *lst, void (*del)(void *));
+void		lst_clear(t_list **lst, void (*del)(void *));
+void		lst_iter(t_list *lst, void (*f)(void *));
+t_list		*lst_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //		PRINTF
 
-int			fd_printf(t_fd fd, const char *str, ...);*/
+//int			fd_printf(t_fd fd, const char *str, ...);
 
 #endif

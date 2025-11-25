@@ -30,7 +30,7 @@ t_str	*str_scpy_char(t_str *this, const char *other, const char *set, int m)
 {
 	if (str_check(this, other) || !set || \
 	(int32_t)ft_strlen(other) > this->capacity - this->i)
-		return (_str_set_error(this, E_PARAM, "find"));
+		return (_str_set_error(this, E_PARAM, "scpy"));
 	sub_strcpy(this->buff + this->i, other, set, m);
 	return (this);
 }
@@ -39,7 +39,7 @@ t_str	*str_scpy_str(t_str *this, const t_str *other, const char *set, int m)
 {
 	if (str_check(this, other) || !set || \
 	other->len > this->capacity - this->i)
-		return (_str_set_error(this, E_PARAM, "find"));
+		return (_str_set_error(this, E_PARAM, "scpy"));
 	sub_strcpy(this->buff + this->i, other->buff, set, m);
 	return (this);
 }

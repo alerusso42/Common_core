@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:19:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/25 22:24:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ t_str	*str_reverse(t_str *str)
 
 	if (str_check(str, NULL))
 		return (_str_set_error(str, E_PARAM, "reverse"));
-	j = str->len;
+	i = 0;
+	j = str->len - 1;
 	while (i < j)
 	{
 		t = str->buff[i];

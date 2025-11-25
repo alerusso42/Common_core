@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:43:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 23:09:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/25 20:45:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,11 @@ t_str	*str_srealloc(t_str *this, int32_t n)
 t_str	*str_sfree(t_str *this)
 {
 	if (!this)
-		return (this);
-	if (this->heap == false)
-	{
-		FREE(this->buff);
-		this->buff = NULL;
-		this->capacity = -1;
-	}
-	else
-		_str_destructor(this);
+		return (NULL);
+	FREE(this->buff);
+	this->buff = NULL;
 	this->capacity = -1;
-	return (this);
+	if (this->heap)
+		sfree(this);
+	return (NULL);
 }

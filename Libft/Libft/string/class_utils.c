@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 09:46:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 22:43:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/25 22:33:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,14 @@ t_str	*_str_reset(t_str *this, int i)
 	this->capacity = i;
 	_str_set(this);
 	return (this);
+}
+
+void	_str_set(t_str *this)
+{
+	this->begin = (uintptr_t)(void *)this->buff;
+	this->half = (uintptr_t)(void *)this->buff + (this->len >> 1);
+	this->end = (uintptr_t)(void *)this->buff + this->len;
+	this->len = get_len(this);
+	this->err = 0;
+	this->i = 0;
 }
