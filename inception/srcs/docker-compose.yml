@@ -5,14 +5,14 @@ volumes:
     name: wordpress
     driver: local
     driver_opts:
-      device: /home/data/wordpress
+      device: volumes/wordpress
       o: bind
       type: none
   mariadb:
     name: mariadb
     driver: local
     driver_opts:
-      device: /home/data/mariadb
+      device: volumes/mariadb
       o: bind
       type: none
 
@@ -30,7 +30,7 @@ services:
       - 443:443
     volumes: 
     - wordpress:/var/www/html
-    depends on: 
+    depends_on: 
     - wordpress
     networks:
     - inception
@@ -51,8 +51,10 @@ services:
     build: requirements/wordpress/.
     volumes: 
     - wordpress:/var/www/html
-    depends on: 
-    - wordpress
+    depends_on: 
+    - mariadb
+    env_file:
+    - .env
     networks:
     - inception
     restart: always

@@ -20,7 +20,6 @@ RUN apt update && apt install -y nginx && apt install -y openssl
 #		CONF_PATH overrides default .conf file; /data stores web sources.
 COPY nginx.conf "/etc/nginx/conf.d"
 RUN mkdir -p "/data/www" && mkdir -p "/data/images"
-COPY "tools/html/welcome.html" "/data/www"
 
 #ANCHOR openssl
 #	1)	Creates ssl dir in nginx to store certificate and key

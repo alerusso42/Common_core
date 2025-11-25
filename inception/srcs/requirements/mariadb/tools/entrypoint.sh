@@ -2,7 +2,7 @@
 set -e
 
 # First run: init database only first time
-if [ ! -d RAYQUAZA ]; then
+if [ ! -e RAYQUAZA ]; then
 	touch RAYQUAZA
     echo "[INFO] Initializing database..."
 
