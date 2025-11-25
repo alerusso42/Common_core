@@ -14,17 +14,18 @@
 
 int main() 
 {
-	Span	span(42);
+	Span	span(3);
 
 	random_seed();
 	try
 	{
-		span.addNumber(0);
-		span.addNumber(4);
-		span.addNumber(2);
+		span.addNumber(24);
+		span.addNumber(42);
+		span.addNumber(880);
 		span.generate();
-		std::cout << span.shortestSpan() << "\n";
-		std::cout << span.longestSpan() << "\n";
+		span.print();
+		std::cout << "shortestSpan:\t" << span.shortestSpan() << "\n";
+		std::cout << "longestSpan:\t" << span.longestSpan() << "\n";
 	}
 	catch(const Error& e)
 	{

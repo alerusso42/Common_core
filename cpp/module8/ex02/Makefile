@@ -1,5 +1,5 @@
 # PROGRAM NAME
-NAME =	test
+NAME =	program
 
 # SRCS
 SRC = main.cpp

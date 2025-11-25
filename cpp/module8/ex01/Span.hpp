@@ -38,6 +38,7 @@ public:
 
 	void	addNumber(void);
 	void	addNumber(int number);
+	void	print(void) const;
 	int		shortestSpan(void);
 	int		longestSpan(void);
 	void	generate(void);

@@ -72,6 +72,13 @@ void	Span::addNumber(int number)
 	this->_size++;
 }
 
+void	Span::print(void) const
+{
+	std::cout << "Span::print: size is\t" << this->_size << std::endl;
+	for (u_int32_t i = 0; i != this->_size; i++)
+		std::cout << "data[" << i << "]:\t" << this->_data[i] << std::endl;
+}
+
 int		Span::shortestSpan(void)
 {
 	int	shortest;
@@ -100,7 +107,7 @@ int		Span::longestSpan(void)
 		throw (Error(EX_SINGLE_ELEM));
 	std::sort(this->_data.begin(), this->_data.end());
 	it = this->_data.begin();
-	while (it < this->_data.end())
+	for (int len = this->_size; len != 0; len--)
 	{
 		if (*it < shortest)
 			shortest = *it;
@@ -113,7 +120,7 @@ int		Span::longestSpan(void)
 
 void	Span::generate(void)
 {
-	if (this->_size == this->_capacity)
+	if (this->_capacity == 0)
 		throw (Error(EX_OUT_BOUND));
 	this->_size = this->_capacity;
 	std::generate(this->_data.begin(), this->_data.end(), std::rand);
