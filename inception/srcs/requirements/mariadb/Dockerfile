@@ -6,11 +6,11 @@
 #    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 11:58:16 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/20 16:20:37 by alerusso42       ###   ########.fr        #
+#    Updated: 2025/11/25 11:01:44 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian
+FROM debian:trixie
 
 # ANCHOR - sources
 # https://mariadb.com/docs
@@ -26,6 +26,7 @@ RUN apt install -y mariadb-server mariadb-client galera-4 gettext-base
 
 # Create run directory
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+RUN chown -R mysql:mysql /var/lib/mysql
 
 # Copy scripts
 COPY tools/init.sql /tmp/init.sql
