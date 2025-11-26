@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   lst_add_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/24 22:40:12 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/25 23:01:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+void	lst_back(t_list **lst, t_list *new)
 {
-	t_list	*new_node;
+	t_list	*pointer;
 
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	if ((lst) && (*lst))
+	{
+		pointer = lst_last(*lst);
+		pointer->next = new;
+	}
+	else
+		*lst = new;
+	_head_upd(t_hlist *head, )
 }

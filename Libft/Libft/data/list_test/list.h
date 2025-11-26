@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2025/11/12 19:34:47 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/26 16:41:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#ifndef LIST_H
+# define LIST_H
 
-t_list	*lst_new(void *content)
+# include "../../libft.h"
+# include "stdbool.h"
+
+typedef struct	s_hlist
 {
-	t_list	*new_node;
+	void	*p;
+	void	*half;
+	void	*last;
+	int32_t	len;
+	bool	fail;
+}				t_hlist;
 
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
-}
+typedef struct	s_list
+{
+	t_list	*next;
+	t_list	*prev;
+	void	*content;
+}				t_list;
+
+typedef struct s_list2
+{
+	t_list	*next;
+	t_list	*prev;
+	void	*content1;
+	void	*content2;
+}				t_list2;
+
+#endif

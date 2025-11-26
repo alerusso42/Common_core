@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:42:29 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ t_list	*lst_new(void *content)
 		return (NULL);
 	new_node->content = content;
 	new_node->next = NULL;
-	new_node->prev = NULL;
 	return (new_node);
 }

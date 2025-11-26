@@ -6,11 +6,11 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:15:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/25 22:27:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:30:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../string.h"
+#include "string.h"
 
 void	psection(char *s)
 {
@@ -129,7 +129,22 @@ int	test7()
 	return (0);
 }
 
-int	test8(char *n1, char *n2)
+int	test8()
+{
+	ptest("Heap and garbage collector");
+
+	t_str	*s1;
+	t_str	*s2;
+	t_str	*s3;
+
+	if (str_new(&s1, "s1") || str_new(&s2, "s2") || str_new(&s3, "s3"))
+		return (str_terminate(), 1);
+	str_delete(s1);
+	str_terminate();
+	return (0);
+}
+
+int	test_join(char *n1, char *n2)
 {
 	ptest("Join");
 
@@ -172,9 +187,10 @@ int	main(int ac, char **av)
 	test5();
 	test6();
 	test7();
+	test8();
 	if (ac < 3)
 		return (0);
 	test_sum(av[1], av[2]);
-	test8(av[1], av[2]);
+	test_join(av[1], av[2]);
 	return (0);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   lst_iter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/24 22:40:56 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/25 22:43:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+void	lst_iter(t_list *lst, void (*f)(void *))
 {
-	t_list	*new_node;
-
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	if (lst)
+	{
+		while (lst->next)
+		{
+			if (lst->content)
+				f(lst->content);
+			lst = lst->next;
+		}
+		if (lst->content)
+			f(lst->content);
+	}
 }

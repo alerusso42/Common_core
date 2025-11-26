@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/25 23:03:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:00:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 # endif
 # include <stdint.h>
 # include <stdlib.h>
+# include "data/list/list.h"
 
 typedef struct s_fd	t_fd;
-typedef long long int	t_int64;
+typedef struct s_list	t_list;
 
 enum e_charsets
 {
@@ -41,7 +42,7 @@ enum e_charsets
 	INCLUDE,
 };
 
-t_int64		ft_atoi(const char *nptr);
+int64_t		ft_atoi(const char *nptr);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isalnum(int c);
@@ -75,7 +76,7 @@ char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 int			sub_strlen(const char *s, const char *charset, int mode);
-int	sub_strcpy(char *dest, const char *src, const char *charset, int mode);
+int			sub_strcpy(char *dest, const char *src, const char *charset, int mode);
 
 //		LIST
 

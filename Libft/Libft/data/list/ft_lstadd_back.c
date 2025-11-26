@@ -16,10 +16,11 @@ void	lst_back(t_list **lst, t_list *new)
 {
 	t_list	*pointer;
 
-	if ((lst) && (*lst))
+	if (lst && *lst && new)
 	{
 		pointer = lst_last(*lst);
 		pointer->next = new;
+		new->prev = pointer;
 	}
 	else
 		*lst = new;

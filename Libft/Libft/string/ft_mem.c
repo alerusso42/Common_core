@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:43:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/25 20:45:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:35:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ t_str	*str_srealloc(t_str *this, int32_t n)
 	return (this);
 }
 
-t_str	*str_sfree(t_str *this)
+t_str	*str_delete(t_str *this)
 {
 	if (!this)
 		return (NULL);
+	if (this->_garbage_coll_node)
+		return (lst_delone(this->_garbage_coll_node, _str_destructor), NULL);
 	FREE(this->buff);
 	this->buff = NULL;
 	this->capacity = -1;
-	if (this->heap)
-		sfree(this);
+	
 	return (NULL);
 }

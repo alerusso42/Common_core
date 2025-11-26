@@ -6,22 +6,21 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/25 22:34:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:39:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-//static t_str	*string_mother(t_str *curr);
-size_t			ft_strlen(const char *s);
+static void	_str_garbage_collector(t_str *p);
 
-t_str	str_constructor(t_str *str, char *buff)
+t_str	_str_constructor(t_str *str, const char *buff)
 {
 	printf("%s\tconstructor\n", buff);
 	*str = (t_str){0};
 	str->_str_identifier = _STR_IDENTIFIER;
 	str->capacity = -1;
-	str->heap = false;
+	str->set = str_set_start_index;
 	if (_str_get_methods(str) != EXIT_SUCCESS)
 		return (*str);
 	if (sdup(str, buff)->err != 0)
@@ -31,61 +30,44 @@ t_str	str_constructor(t_str *str, char *buff)
 	return (*str);
 }
 
-/*
-t_str	str_ptr_constructor(t_str *str, char *buff)
+bool	str_new(t_str **str, const char *buff)
 {
-	printf("%s\tconstructor\n", buff);
-	*str = (t_str){0};
-	if (_str_get_methods(str) != EXIT_SUCCESS)
-		return (*str);
-	if (dup(str, buff)->err != 0)
-		return (*str);
-	str->npos = UINT32_MAX;
-	_str_set(str);
-	return (*str);
+	*str = CALLOC(1, sizeof(t_str));
+	if (!*str)
+		return (EXIT_FAILURE);
+	_str_constructor(*str, buff);
+	_str_garbage_collector(*str);
+	return (EXIT_SUCCESS);
 }
 
-static int		realloc_mother(t_str **str, int *size, int len)
+static void	_str_garbage_collector(t_str *p)
 {
-	
-}
+	static t_list	*garbage_list;
 
-static t_str	*string_mother(t_str *curr)
-{
-	static int		size;
-	static int		len;
-	static t_str	*mother;
-
-	if (curr == (t_str *)1)
+	if (!p)
+		return (lst_clear(&garbage_list, _str_destructor));
+	else if (p == (void *)1 && garbage_list)
 	{
-		while (len)
-			FREE(mother[--len].buff);
-		size = 0;
-		return (FREE(mother), NULL);
+		garbage_list = garbage_list->next;
+		return ;
 	}
-	else if (!curr)
-	{
-		if ((!mother || size == len) \
-		&& realloc_mother(&mother, &size, len) != 0)
-			return (NULL);
-		return (&mother[len++]);
-	}
-	if (curr && !mother)
-		return (NULL);
-	
+	p->_garbage_coll_node = lst_new(p);
+	lst_back(&garbage_list, p->_garbage_coll_node);
 }
 
-void	str_ptr_destructor(t_str **str)
+void	_str_destructor(void *str)
 {
-	printf("%s\tdestructor\n", (*str)->buff);
+	printf("%s\tdestructor\n", ((t_str *)str)->buff);
 	_str_get_methods(NULL);
-	FREE((*str)->buff);
-	FREE(*str);
-}*/
+	FREE(((t_str *)str)->buff);
+	if (((t_str *)str)->_garbage_coll_node)
+	{
+		_str_garbage_collector((t_str *)1);
+		FREE(str);
+	}
+}
 
-void	_str_destructor(t_str *str)
+void	str_terminate(void)
 {
-	printf("%s\tdestructor\n", str->buff);
-	_str_get_methods(NULL);
-	FREE(str->buff);
+	_str_garbage_collector(NULL);
 }

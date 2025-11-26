@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstinit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2025/11/26 15:35:18 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/26 16:40:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+t_hlist	*lst_init(void *content)
 {
-	t_list	*new_node;
+	t_hlist	*init;
 
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
+	init = ft_calloc(1, sizeof(t_hlist));
+	if (!init)
 		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	init->p = lst_new(content);
+	if (!init->p)
+		return (FREE(init), NULL);
+	init->last = init->p;
+	init->half = init->p;
+	init->len = 1;
+	return (init);
 }

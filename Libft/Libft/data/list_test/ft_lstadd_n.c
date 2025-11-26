@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2025/11/26 15:32:57 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/26 16:01:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+void	lst_addn(t_hlist *head, void *content, int32_t n)
 {
-	t_list	*new_node;
+	t_list	*lst;
+	t_list	*next;
+	int32_t	i;
 
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
+	if (!head || n < 0)
 		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	lst = head->p;
+	i = n;
+	while (i-- && lst)
+		lst = lst->next;
+	if (!lst)
+		return ;
+	next = lst->next;
+	lst->next = lst_new(content);
+	if (!lst->next)
+	{
+		head->fail = true;
+		lst->next = next;
+		return ;
+	}
+	lst->next->next = next;
 }

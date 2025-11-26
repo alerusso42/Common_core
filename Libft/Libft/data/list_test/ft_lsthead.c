@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lsthead.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2025/11/26 16:02:00 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/26 16:45:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+void	_head_upd(t_hlist *head, int32_t variation, void *last)
 {
-	t_list	*new_node;
-
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	if (!head || !variation)
+		return ;
+	if (last)
+		((t_list2 *)head->last)->next = last;
+	head->len += variation;
+	if (head->len == 0)
+	{
+		*head = (t_hlist){0};
+		return ;
+	}
+	if (head->len % 2)
+		head->half = ((t_list *)head->half)->next;
 }

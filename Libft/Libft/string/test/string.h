@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:24:29 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 17:59:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:16:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <malloc.h>
 # include <limits.h>
 # include <stdint.h>
-# include "../libft.h"
-# include "string_macros.h"
-# include "string_methods.h"
+# include "../../libft.h"
+# include "../string_macros.h"
+# include "../string_methods.h"
 
 typedef struct s_str			t_str;
 typedef struct s_str_methods	t_str_methods;

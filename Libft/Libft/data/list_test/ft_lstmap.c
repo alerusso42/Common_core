@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/24 22:41:03 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/25 22:56:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_node;
+	t_list	*new_lst;
+	t_list	*prev;
 
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
+	if (!lst)
 		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	new_lst = lst_new(lst->content);
+	if (!new_lst)
+		return (NULL);
+	while (lst)
+	{
+		lst_back(&new_lst, lst_new(lst->content));
+		prev = lst;
+		lst = lst->next;
+		if (del)
+			del(lst);
+	}
+	lst_iter(new_lst, *f);
+	return (new_lst);
 }

@@ -18,4 +18,5 @@ void	lst_front(t_list **lst, t_list *new)
 		return ;
 	new->next = *lst;
 	*lst = new;
+	new->next->prev = new;
 }

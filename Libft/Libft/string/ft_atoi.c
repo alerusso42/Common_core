@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 23:49:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:01:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main()
 					if there are non digit characters, returns LLONG_MIN.
 */
 
-long long int	ft_atoi(const char *nptr)
+int64_t	ft_atoi(const char *nptr)
 {
 	long long int	pow;
 	long long int	res;

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 23:04:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:10:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,18 @@ typedef struct s_str_methods	t_str_methods;
 typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
 
-t_str	str_constructor(t_str *str, char *init);
-void	_str_destructor(t_str *str);
+//public:
+
+bool	str_new(t_str **str, const char *buff);
+t_str	*str_delete(t_str *this);
+void	str_terminate(void);
+t_str	*str_set_start_index(t_str *str, int32_t i);
+
+//private:
+
+t_str	_str_constructor(t_str *str, const char *init);
+void	_str_destructor(void *str);
 err		_str_get_methods(t_str *s);
-t_str	*str_p_constructor(t_str *str, char *init);
 t_str	*_str_set_error(t_str *str, int err, char *func_name);
 void	_str_set(t_str *this);
 t_str	*_str_reset(t_str *this, int i);
@@ -65,13 +73,6 @@ bool	str_check_this(t_str *this, const void *empty);
 	t_str	*(*str_sfree)(t_str *);\
 	str_m(str_srealloc, int32_t)\
 	t_str	*(*str_upper)(t_str *);
-
-# define get_len(name)		str_get_len(name)
-int		str_get_len(t_str *str);
-# define get_i(name)		str_get_start_index(name)
-int		str_get_start_index(t_str *str);
-# define set_i(name, T)		str_set_start_index(name, T)
-void	str_set_start_index(t_str *str, int i);
 
 # define addl(name, ...)	str_addl(name, __VA_ARGS__)
 t_str	*str_addl(t_str *this, char c);

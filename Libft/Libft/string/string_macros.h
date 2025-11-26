@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 23:02:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:50:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ typedef int32_t					err;
 //SECTION - constructor
 
 //	to call the constructor:	STR(variable_name, "initial buffer"), OR:
-//								STR_P(variable_name, "initial buffer)
+//								t_str	*s;
+//								str_new(&s, "initial buffer")
 //
 //	in the first case, the object t_str is allocated on the stack (t_str);
 //	in the second case, is allocated on the heap (t_str *).
 //
 //	first should be used as: 	string.print(&string);
 //	second should be used as: 	string->print(string);
-# define STR(name, init) t_str clean(str) name = str_constructor(&name, init)
-# define STR_P(name, init) t_str clean(str) *name = str_p_constructor(name, init)
+# define STR(name, init) t_str clean(str) name = _str_constructor(&name, init)
 
 # ifndef SYSCALLS
 #  define SYSCALLS

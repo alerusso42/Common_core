@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_clear.c                                      :+:      :+:    :+:   */
+/*   lst_delone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:40:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 19:46:43 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/24 22:40:30 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/12 19:46:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void	lst_clear(t_list **lst, void (*del)(void *))
+void	lst_delone(t_list *lst, void (*del)(void *))
 {
-	t_list	*node_pointer;
+	if (del)
+		del(lst->content);
+	FREE(lst);
+}
+
+void	lst_del(t_list *lst, void (*del)(void *))
+{
+	t_list	*next;
+	t_list	*prev;
 
 	if (!lst)
 		return ;
-	while (*lst)
-	{
-		node_pointer = (*lst)->next;
-		lst_delone(*lst, *del);
-		*lst = node_pointer;
-	}
-	*lst = NULL;
+	prev = lst->prev;
+	next = lst->next;
+	if (del)
+		del(lst->content);
+	FREE(lst);
+	if (prev)
+		prev->next = next;
 }

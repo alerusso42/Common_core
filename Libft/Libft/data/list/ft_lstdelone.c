@@ -14,7 +14,13 @@
 
 void	lst_delone(t_list *lst, void (*del)(void *))
 {
+	t_list	*temp = lst->next;
+	(void)temp;
 	if (del)
 		del(lst->content);
+	if (lst->next)
+		lst->next->prev = lst->prev;
+	if (lst->prev)
+		lst->prev->next = lst->next;
 	FREE(lst);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   lst_clear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 22:27:38 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:22:47 by alerusso         ###   ########.fr       */
+/*   Created: 2024/11/24 22:40:44 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/12 19:46:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list	*lst_new(void *content)
+void	lst_clear(t_list **lst, void (*del)(void *))
 {
-	t_list	*new_node;
+	t_list	*node_pointer;
 
-	new_node = (t_list *)MALLOC(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		node_pointer = (*lst);
+		(*lst) = (*lst)->next;
+		lst_delone(node_pointer, *del);
+	}
+	lst_delone((*lst), *del);
 }
