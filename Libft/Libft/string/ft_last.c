@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_last.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:33:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:40:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_last
+/*
+	Reversely advances the index of the string object until one of the 
+	characters from another string object or a char pointer is found.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_last(str, other);		|
+			|	//OR						|
+			|	last(str, other);			|
+			|	//OR						|
+			|	str->m->last(&str, other);	|
+			*-------------------------------*
+*/
 t_str	*str_last(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)

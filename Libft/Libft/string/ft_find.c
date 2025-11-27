@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:27:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:37:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 
 int32_t	ft_strstr_int(const char *, const char *);
 
+//ANCHOR - str_find
+/*
+	Finds the first occurrence of another string object or a char pointer
+	in the current string object.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_find(str, other);		|
+			|	//OR						|
+			|	find(str, other);			|
+			|	//OR						|
+			|	str->m->find(&str, other);	|
+			*-------------------------------*
+*/
 t_str	*str_find(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)

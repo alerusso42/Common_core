@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cut.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:57 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:43:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:35:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ int	cut_string(char *string, size_t start, size_t end)
 	return (0);
 }
 
+//ANCHOR - str_cut
+/*
+	Cut a string object from start to end.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[int32_t start]--->	start index to cut from
+				[int32_t end]----->	end index to cut to
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	[int32_t temp]------->	temporary variable for start
+				[int32_t temp1]------->	temporary variable for string length
+				[int32_t string_len]->	length of the string
+	@usage:	*-----------------------------------*
+			|	str_cut(str, start, end);		|
+			|	//OR							|
+			|	cut(str, start, end);			|
+			|	//OR							|
+			|	str->m->cut(&str, start, end);	|
+			*-----------------------------------*
+*/
 t_str	*str_cut(t_str *this, int32_t start, int32_t end)
 {
 	int32_t	temp;

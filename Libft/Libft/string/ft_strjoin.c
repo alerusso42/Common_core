@@ -3,15 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:12:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:43:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_join
+/*
+	Appends the content of another string object or a char pointer
+	to the current string object.
+
+	@INDEX:		SET INDEX TO END OF JOINED CONTENT!
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+				[int32_t n]------->	number of characters to skip from other
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_join(str, other, n);	|
+			|	//OR						|
+			|	join(str, other, n);		|
+			|	//OR						|
+			|	str->m->join(&str, other, n);|
+			*-------------------------------*
+*/
 t_str	*str_join(t_str *this, const void *other, int32_t n)
 {
 	if (_str_identifier(other) == true)

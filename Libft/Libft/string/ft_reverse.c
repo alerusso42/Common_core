@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reverse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/25 22:24:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:42:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,23 @@ void	ft_rev_str(char *arr)
 	}
 }
 
+//ANCHOR - str_reverse
+/*
+	Reverses the content of the string object's buffer.
+
+	@input:		[t_str *str]----->	pointer to string object
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	[int i]----------->	start index
+				[int j]----------->	end index
+				[char t]---------->	temporary char for swapping
+	@usage:	*-------------------------------*	
+			|	str_reverse(str);			|
+			|	//OR						|
+			|	reverse(str);				|
+			|	//OR						|
+			|	str->m->reverse(&str);		|
+			*-------------------------------*
+*/
 t_str	*str_reverse(t_str *str)
 {
 	int		i;
@@ -70,14 +87,3 @@ t_str	*str_reverse(t_str *str)
 	}
 	return (str);
 }
-
-/*
-int	main(void)
-{
-	int	tab[1] = {0};
-	int	size;
-
-	size = 1;
-	ft_rev_int_tab(tab, size);
-	return (0);
-}*/

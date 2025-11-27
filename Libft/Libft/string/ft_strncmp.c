@@ -3,15 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:47:19 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:05:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:44:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_ncmp
+/*
+	Compares up to n characters of the string object's buffer
+	with another string object or a char pointer.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+				[int32_t n]------->	number of characters to compare
+	@return:	[int32_t]------->	result of comparison
+	@variables:	none
+	@usage:	*-------------------------------------------*	
+			|	int res = str_ncmp(str, other, n);		|
+			|	//OR									|
+			|	int res = ncmp(str, other, n);			|
+			|	//OR									|
+			|	int res = str->m->ncmp(&str, other, n);	|
+			*-------------------------------------------*
+*/
 int32_t	str_ncmp(t_str *this, const void *other, int32_t n)
 {
 	if (_str_identifier(other) == true)

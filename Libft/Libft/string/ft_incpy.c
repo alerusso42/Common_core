@@ -12,6 +12,27 @@
 
 #include "string.h"
 
+//ANCHOR - str_incpy
+/*
+	Copies characters from another string object or a char pointer
+	into the current string object, while characters belong to the given set.
+
+	@INDEX:	SET INDEX TO END OF COPIED CONTENT!
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+				[const void *set]-->	pointer to another string object
+									or a char pointer representing the set
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*---------------------------------------*	
+			|	str_incpy(str, other, set);		|
+			|	//OR								|
+			|	incpy(str, other, set);			|
+			|	//OR								|
+			|	str->m->incpy(&str, other, set);|
+			*---------------------------------------*
+*/
 t_str	*str_incpy(t_str *this, const void *other, const void *set)
 {
 	const char	*charset;
@@ -31,7 +52,7 @@ t_str	*str_scpy_char(t_str *this, const char *other, const char *set, int m)
 	if (str_check(this, other) || !set || \
 	(int32_t)ft_strlen(other) > this->capacity - this->i)
 		return (_str_set_error(this, E_PARAM, "scpy"));
-	sub_strcpy(this->buff + this->i, other, set, m);
+	this->i += sub_strcpy(this->buff + this->i, other, set, m);
 	return (this);
 }
 
@@ -40,6 +61,6 @@ t_str	*str_scpy_str(t_str *this, const t_str *other, const char *set, int m)
 	if (str_check(this, other) || !set || \
 	other->len > this->capacity - this->i)
 		return (_str_set_error(this, E_PARAM, "scpy"));
-	sub_strcpy(this->buff + this->i, other->buff, set, m);
+	this->i += sub_strcpy(this->buff + this->i, other->buff, set, m);
 	return (this);
 }

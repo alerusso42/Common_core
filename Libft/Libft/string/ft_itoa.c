@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:46:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:19:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:39:42 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
-#define UN_BOTTO 100
-
-static char	*alloc_string(char *allocated_string, int num, int *index);
-
-/*
-int	main(int argc, char *argv[])
-{
-	int		num;
-	char	*str;
-	
-	if (argc < 2)
-	{
-		printf("ARGV[1] = num");
-		return (0);
-	}
-	num = atoi(argv[1]);
-	str = (char *)malloc(UN_BOTTO);
-	if (!str)
-		return (2);
-	printf("\nItoa di %d: %s\n", num, ft_itoa(num, str));
-	free(str);
-	return (0);
-}*/
 
 char	*ft_itoa(int num)
 {
@@ -82,6 +59,22 @@ static char	*alloc_string(char *allocated_string, int num, int *index)
 	return (allocated_string);
 }
 
+//ANCHOR - str_itoa
+/*
+	Converts an integer to a string and stores it in the string object.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[int32_t value]--->	integer value to convert
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_itoa(str, value);		|
+			|	//OR						|
+			|	itoa(str, value);			|
+			|	//OR						|
+			|	str->m->itoa(&str, value);	|
+			*-------------------------------*
+*/
 t_str	*str_itoa(t_str *this, int32_t value)
 {
 	FREE(this->buff);

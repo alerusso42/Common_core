@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:07:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:45:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_cmp
+/*
+	Compares  the string object's buffer
+	with another string object or a char pointer.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[int32_t]------->	result of comparison
+	@variables:	none
+	@usage:	*-------------------------------------------*	
+			|	int res = str_cmp(str, other);		|
+			|	//OR									|
+			|	int res = cmp(str, other);			|
+			|	//OR									|
+			|	int res = str->m->cmp(&str, other);	|
+			*-------------------------------------------*
+*/
 int32_t	str_cmp(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)

@@ -3,17 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reverse_diff.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:53:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:32:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:36:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-char	*ft_strchr(const char *s, int c);
+//ANCHOR - str_rdiff
+/*
+	Reversely advances the index of the string object while the current 
+	character does not belong to the given string or char pointer.
 
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_rdiff(str, other);		|
+			|	//OR						|
+			|	rdiff(str, other);			|
+			|	//OR						|
+			|	str->m->rdiff(&str, other);	|
+			*-------------------------------*
+*/
 t_str	*str_rdiff(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)

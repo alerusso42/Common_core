@@ -3,15 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 20:03:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 08:36:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:28:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_cpy
+/*
+	Copies the content of another string object or a char pointer
+	into the current string object.
+
+	@INDEX:	SET INDEX TO END OF COPIED CONTENT!
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_cpy(str, other);		|
+			|	//OR						|
+			|	cpy(str, other);			|
+			|	//OR						|
+			|	str->m->cpy(&str, other);	|
+			*-------------------------------*
+*/
 t_str	*str_cpy(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)

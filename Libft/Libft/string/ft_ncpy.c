@@ -12,6 +12,28 @@
 
 #include "string.h"
 
+//ANCHOR - str_ncpy
+/*
+	Copies up to n characters from another string object or a char pointer
+	into the current string object, starting from a given index.
+
+	@INDEX:	SET INDEX TO END OF COPIED CONTENT!
+	@ALLOC:	DOES NOT REALLOC! IN CASE OF OVERFLOW, RETURNS ERROR!
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+				[int32_t start]--->	start index in other to copy from
+				[int32_t n]------->	number of characters to copy
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*---------------------------------------*	
+			|	str_ncpy(str, other, start, n);		|
+			|	//OR								|
+			|	ncpy(str, other, start, n);			|
+			|	//OR								|
+			|	str->m->ncpy(&str, other, start, n);|
+			*---------------------------------------*
+*/
 t_str	*str_ncpy(t_str *this, const void *other, int32_t start, int32_t n)
 {
 	if (_str_identifier(other) == true)

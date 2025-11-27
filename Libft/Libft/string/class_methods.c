@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class_methods.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:22:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:15:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 static err		_str_store_methods(t_str *s);
 static void		_str_register_function(t_str_methods *m);
 
+//ANCHOR - _str_get_methods
+/*
+//	!!!This function is private! It shouldn't be used!
+
+//	Sets internal function pointers.
+
+	@input:		[t_str *this]----->	pointer to string object
+	@return:	string error code
+	@variables:	none
+*/
 err	_str_get_methods(t_str *s)
 {
 	if (s == NULL)
@@ -23,6 +33,17 @@ err	_str_get_methods(t_str *s)
 	return (s->err);
 }
 
+//ANCHOR - _str_store_methods
+/*
+//	!!!This function is private! It shouldn't be used!
+
+//	Sets or frees the internal methods structure.
+
+	@input:		[t_str *s]------>	pointer to string object
+	@return:	[string error code]
+	@variables:	[static int32_t str_allocated]->number of string objects
+				[static t_str_methods *methods]->pointer to methods structure
+*/
 static err		_str_store_methods(t_str *s)
 {
 	static int32_t			str_allocated;
@@ -54,6 +75,16 @@ static err		_str_store_methods(t_str *s)
 	return (EXIT_SUCCESS);
 }
 
+//ANCHOR - _str_register_function
+/*
+//	!!!This function is private! It shouldn't be used!
+
+//	Registers all string methods into the methods structure.
+
+	@input:		[t_str_methods *m]-->pointer to methods structure
+	@return:	none
+	@variables:	none
+*/
 static void	_str_register_function(t_str_methods *m)
 {
 	m->str_addl = str_addl;

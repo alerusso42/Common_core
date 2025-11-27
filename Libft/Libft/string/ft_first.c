@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_first.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:04:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:38:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_first
+/*
+	Advances the index of the string object until one of the characters 
+	from another string object or a char pointer is found.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_first(str, other);		|
+			|	//OR						|
+			|	first(str, other);			|
+			|	//OR						|
+			|	str->m->first(&str, other);	|
+			*-------------------------------*
+*/
 t_str	*str_first(t_str *this, const void *other)
 {
 	if (_str_identifier(other) == true)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 08:32:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:01:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 static void	_str_garbage_collector(t_str *p, bool delete);
 
+//ANCHOR - _Str_constructor
+/*
+	!!!This function is private! It shouldn't be used!
+	To init a string stack object:
+	@usage:	*-------------------------------*	
+			|	STR(name, "BUFFER");		|
+			|	//code ...					|
+			*-------------------------------*
+//REVIEW - Initialize a stack string object.
+*/
 t_str	_str_constructor(t_str *str, const char *buff)
 {
 	printf("%s\tconstructor\n", buff);
@@ -30,6 +40,23 @@ t_str	_str_constructor(t_str *str, const char *buff)
 	return (*str);
 }
 
+//ANCHOR - str_new
+/*
+//	Initialize a heap string object.
+
+	@input:		[t_str **str]----->	pointer to string object
+				[const char *buff]->initial buffer content
+	@return:	[bool]----------->	success or failure
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	t_str *str;					|
+			|	str_new(&str, "BUFFER");	|
+			|	//code ...					|
+			|	str_delete(&str);			|
+			|	//OR, global delete needed:	|
+			|	str_terminate();			|
+			*-------------------------------*
+*/
 bool	str_new(t_str **str, const char *buff)
 {
 	*str = CALLOC(1, sizeof(t_str));
@@ -40,23 +67,57 @@ bool	str_new(t_str **str, const char *buff)
 	return (EXIT_SUCCESS);
 }
 
+//ANCHOR - _str_garbage_collector
+/*
+	!!!This function is private! It shouldn't be used!
+	
+	This is the garbage collection of heap string objects.
+
+	@input:		[t_str **str]----->	pointer to string object
+				[bool delete]----->	flag to indicate deletion
+	@return:	none
+	@variables:	[static t_list *garbage_list]--->	list of allocated strings;
+	
+//REVIEW
+//	1)	If delete is false, a new node is created in garbage_list;
+	2)	If p is NULL, all allocated strings are deleted;
+	3)	If p is the head of the list,
+		the head of the list is moved forward.
+*/
 static void	_str_garbage_collector(t_str *p, bool delete)
 {
 	static t_list	*garbage_list;
 
-	if (!p && delete)
+	if (delete == false)
+	{
+		p->_garbage_coll_node = lst_new(p);
+		lst_back(&garbage_list, p->_garbage_coll_node);
+		return ;
+	}
+	if (!p)
 		return (lst_clear(&garbage_list, _str_destructor));
-	else if (delete && p->_garbage_coll_node == garbage_list)
+	else if (p->_garbage_coll_node == garbage_list)
 	{
 		garbage_list = garbage_list->next;
 		return ;
 	}
-	else if (delete)
-		return ;
-	p->_garbage_coll_node = lst_new(p);
-	lst_back(&garbage_list, p->_garbage_coll_node);
 }
 
+//ANCHOR - _str_destructor
+/*
+	!!!This function is private! It shouldn't be used!
+
+	Destructor for both stack and heap string objects.
+
+	@input:		[void *str]----->	pointer to string object
+	@return:	none
+	@variables:	none
+	
+//REVIEW
+//	If the string is heap allocated,
+	it calls the garbage collector to remove it from the list
+	and frees the string object itself.
+*/
 void	_str_destructor(void *str)
 {
 	printf("%s\tdestructor\n", ((t_str *)str)->buff);
@@ -69,6 +130,18 @@ void	_str_destructor(void *str)
 	}
 }
 
+//ANCHOR - str_new
+/*
+//	Destroys all heap string objects.
+	Always safe to call.
+
+	@input:		none
+	@return:	none
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_terminate();			|
+			*-------------------------------*
+*/
 void	str_terminate(void)
 {
 	_str_garbage_collector(NULL, true);

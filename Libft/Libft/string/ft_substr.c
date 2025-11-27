@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:13:25 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:58:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:46:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_substr
+/*
+	Extracts a substring from another string object.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const t_str *other]->pointer to another string object
+				[int32_t start]--->	start index for substring
+				[int32_t end]----->	end index for substring
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_substr(str, other, start, end);|
+			|	//OR						|
+			|	substr(str, other, start, end);	|
+			|	//OR						|
+			|	str->m->substr(&str, other, start, end);|
+			*-------------------------------*
+*/
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	index;

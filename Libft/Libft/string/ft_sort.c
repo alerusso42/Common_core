@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:26:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 21:14:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:43:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ void	ft_sort_str(char *tab)
 	}
 }
 
+//ANCHOR - str_sort
+/*
+	Sort in ascii order the content of the string object's buffer.
+
+	@input:		[t_str *str]----->	pointer to string object
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	[int i]----------->	start index
+				[int j]----------->	end index
+				[char t]---------->	temporary char for swapping
+	@usage:	*-------------------------------*	
+			|	str_reverse(str);			|
+			|	//OR						|
+			|	reverse(str);				|
+			|	//OR						|
+			|	str->m->reverse(&str);		|
+			*-------------------------------*
+*/
 t_str	*str_sort(t_str *str)
 {
 	if (str_check(str, NULL))

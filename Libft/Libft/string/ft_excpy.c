@@ -12,6 +12,28 @@
 
 #include "string.h"
 
+//ANCHOR - str_excpy
+/*
+	Copies characters from another string object or a char pointer
+	into the current string object, until a character from the given set .
+	is found.
+
+	@INDEX:	SET INDEX TO END OF COPIED CONTENT!
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+				[const void *set]-->	pointer to another string object
+									or a char pointer representing the set
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*---------------------------------------*	
+			|	str_incpy(str, other, set);		|
+			|	//OR								|
+			|	incpy(str, other, set);			|
+			|	//OR								|
+			|	str->m->incpy(&str, other, set);|
+			*---------------------------------------*
+*/
 t_str	*str_excpy(t_str *this, const void *other, const void *set)
 {
 	const char	*charset;

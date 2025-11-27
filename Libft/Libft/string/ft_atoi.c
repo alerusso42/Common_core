@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:25:46 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 17:01:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:24:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,6 @@
 #include <string.h>
 
 static long long int	atoi_parse_result(long long int res, char sign);
-
-/*
-int main()
-{
-    char    str[30] = "  \f\n\r \t \v ++-2147483646";
-    int     number;
-
-    number = atoi(str);
-    printf("originale: %d\n", number);
-    number = ft_atoi(str);
-    printf("replica: %d\n", number);
-    return (0);
-}
-*/
-
-/*
-	Atoi modified: 	if there are too much signs, returns LLONG_MAX;
-					if there are non digit characters, returns LLONG_MIN.
-*/
 
 int64_t	ft_atoi(const char *nptr)
 {
@@ -61,7 +42,28 @@ int64_t	ft_atoi(const char *nptr)
 	return (atoi_parse_result(res, nptr[start]));
 }
 
+//ANCHOR - str_satoi
+/*
+	Converts the string object's buffer to an integer.
 
+	@input:		[t_str *str]----->	pointer to string object
+				[int *n]--------->	pointer to store the result
+	@return:	[string error code]
+	@variables:	[int start]------->		start index for conversion
+				[long long int res]->	result of conversion
+	@usage:	*-------------------------------*	
+			|	int n;						|
+			|	if (str_satoi(str, &n) != 0)|
+			|		//Handle error			|
+			|	//OR						|
+			|	if (str_satoi(str, &n) != 0)|
+			|		//Handle error			|
+			|	//OR						|
+			|	str->m->satoi(str, &n);		|
+			|	if (str->err != 0)			|
+			|		//Handle error			|
+			*-------------------------------*
+*/
 err		str_satoi(t_str *str, int *n)
 {
 	int				start;
