@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   daft_prog.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 22:55:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:33:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DAFT_PROG_H
 # define DAFT_PROG_H
 # include "../../daft.h"
-# include "../Libft/all.h"
+# include "../prep_src/daft_prep.h"
 
 # define SEED 42
 # define DAFT_REPLACE DAFT_PWD"/replace"
@@ -109,7 +109,8 @@ enum e_daft_mem
 
 int			_daft_save_config(t_daft_data *data);
 int			_daft_save_fnames(t_daft_data *data);
-int			_daft_get_data(t_daft_list *file, char *filename);
+char		*_daft_get_flags(int fnum);
+int			_daft_get_data(t_daft_list *file, char *filename, int fnum);
 int			_daft_get_data2(t_daft_list *file);
 int			_daft_log(int log);
 int			_daft_start_list(t_daft_node **list, int offset);

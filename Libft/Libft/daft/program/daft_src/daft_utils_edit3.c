@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_edit3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:31:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 00:30:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:25:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	str_handler(t_daft_data *dt, int i, char **line, char *mem)
 		return ;
 	}
 	len = sub_strlen(*line, dt->data_list[i]->key_value_sep, EXCLUDE);
-	writefd(dt->temp_files[1].p, *line, sizeof(char), len + 1);
+	writefd(dt->temp_files[1], *line, len + 1);
 	fd_printf(dt->temp_files[1], "%s\n", mem);
 	FREE(*line);
 	*line = gnl();
@@ -75,7 +75,7 @@ static void	mtr_h_handler(t_daft_data *dt, int i, char **line, char **mem)
 		return ;
 	}
 	len = sub_strlen(*line, dt->data_list[i]->key_value_sep, EXCLUDE);
-	writefd(dt->temp_files[1].p, *line, sizeof(char), len + 1);
+	writefd(dt->temp_files[1], *line, len + 1);
 	j = 0;
 	while (mem[j])
 	{

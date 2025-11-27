@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_debug.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 18:53:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:35:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	_daft_log(int log)
 	log_file = openfd("daft.log", "a+");
 	if (!log_file.n)
 		return (log);
-	daft_printerror(log, log_file);
+	daft_printerror(log, (t_fd){2, 2});
 	closefd(log_file);
 	return (log);
 }

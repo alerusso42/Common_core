@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_append.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:28:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 18:57:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:23:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	*gen_sample(t_daft_data *data, t_daft_list *file, const char *key)
 		return (NULL);
 	if (key_used(data, file, key, fd))
 		return (closefd(fd), _daft_log(DAFT_LOG_KEYUSED), NULL);
-	SEEK(fd.p, file->node[i]->offset, RW_SEEK_SET);
+	SEEK(fd.p, file->node[i]->offset, SEEK_SET);
 	line = gnl();
 	if (!line)
 		return (closefd(fd), NULL);

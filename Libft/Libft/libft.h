@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:53:40 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/27 17:29:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@
 # endif
 # include <stdint.h>
 # include <stdlib.h>
+# include "files/mfile.h"
+# include "daft/daft.h"
 # include "data/list/list.h"
 # include "printf/ft_printf.h"
+# include "string/string.h"
 
 typedef struct s_fd	t_fd;
 typedef struct s_list	t_list;

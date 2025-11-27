@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 08:43:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:49:27 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/27 19:55:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_open(const char *filename, const char *perm)
 	else if (*perm == 'r')
 		mode = O_RDONLY;
 	else if (*perm == 'w' && perm[1] == '+')
-		mode = O_RDWR | O_CREAT;
+		mode = O_RDWR | O_TRUNC | O_CREAT;
 	else if (*perm == 'w')
 		mode = O_WRONLY | O_TRUNC;
 	else if (*perm == 'a' && perm[1] == '+')
@@ -60,7 +60,7 @@ int	ft_open(const char *filename, const char *perm)
 		mode = O_RDWR | O_APPEND;
 	else
 		return (fd_printf((t_fd){2, 2}, "ft_open: flag %s is not allowed.\n", perm));
-	if (mode & O_APPEND)
+	if (mode & O_CREAT)
 		fd = open(filename, mode, 777);
 	else
 		fd = open(filename, mode);

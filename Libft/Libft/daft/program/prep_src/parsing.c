@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:49:22 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 14:58:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:56:38 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,19 @@ int	_daft_prep_prog(char *filenames[2], char *flags, int f_num, int f_size)
 	t_daft_prep	data;
 
 	data = (t_daft_prep){0};
-	data.hash_size = f_size;
 	data.file_num = f_num;
 	data.flags = flags;
 	*data.separator = *flags;
 	data.data_fd = openfd(filenames[0], "r");
 	if (!data.data_fd.n)
 		_daft_prep_error(&data, ER_OPEN);
-	data.hash_fd = openfd(filenames[1], "w");
-	if (!data.data_fd.n)
+	data.hash_fd = openfd(filenames[1], "w+");
+	if (!data.hash_fd.n)
 		_daft_prep_error(&data, ER_OPEN);
+	if (!f_size)
+		data.hash_size = (int)(file_size(&data) * 1.3f);
+	else
+		data.hash_size = f_size;
 	_daft_prep_alloc_memory(&data);
 	switch_filedata(data.data_fd);
 	_daft_fill_hash_table(&data);

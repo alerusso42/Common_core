@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   daft.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 23:18:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:16:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DAFT_H
 # define DAFT_H
 
-# include "program/Libft/all.h"
+# include "../libft.h"
 
 /*WARNING: 	don't modify this file directly!
 			modify SETTINGS.md instead!
@@ -40,6 +40,8 @@ typedef enum e_daft_db
 }	t_daft_db;
 
 //SECTION - Global variables
-#define DAFT_PWD "/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
+# ifndef DAFT_PWD
+#  define DAFT_PWD "media"
+# endif
 
 #endif

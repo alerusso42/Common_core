@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_append.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:07:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/25 22:54:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:24:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	append(t_daft_data *dt, t_daft_mem *mem, int fn)
 {
 	char	*line;
 
-	SEEK(dt->temp_files[0].p, mem->offset, RW_SEEK_SET);
+	SEEK(dt->temp_files[0].p, mem->offset, SEEK_SET);
 	line = gnl();
 	if (!line)
 	{

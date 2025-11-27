@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:43:50 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/21 11:11:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:26:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	collision_adder(t_daft_prep *data, int hash_pos)
 	while (data->collision[i])
 		++i;
 	data->collision[i] = hash_pos;
-    ft_putstr_fd(" ", data->hash_fd.p);
+    ft_putstr_fd(" ", data->hash_fd);
 }
 
 static void	collision_reset(t_daft_prep *data, int struct_i)
@@ -76,12 +76,12 @@ static void	collision_reset(t_daft_prep *data, int struct_i)
 		data->collision[i] = 0;
 		++i;
 	}
-	ft_putstr_fd("\n", data->hash_fd.p);
+	ft_putstr_fd("\n", data->hash_fd);
 	temp = ft_itoa(struct_i);
 	if (!temp)
 		_daft_prep_error(data, ER_MALLOC);
-	ft_putstr_fd(temp, data->hash_fd.p);
-	ft_putstr_fd(" :\t", data->hash_fd.p);
+	ft_putstr_fd(temp, data->hash_fd);
+	ft_putstr_fd(" :\t", data->hash_fd);
 	free(temp);
 }
 

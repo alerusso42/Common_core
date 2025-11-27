@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_key.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 22:55:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 01:35:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:24:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*_daft_get_key(t_daft_data *dt, t_daft_list *f, const char *s, t_fd fd)
 	while (!key && current)
 	{
 		offset = current->offset;
-		SEEK(fd.p, offset, RW_SEEK_SET);
+		SEEK(fd.p, offset, SEEK_SET);
 		key = check_key(s, f->field_sep, &fd);
 		current = current->next;
 	}

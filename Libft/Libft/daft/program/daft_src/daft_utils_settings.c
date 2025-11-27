@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_settings.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 10:01:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:35:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,43 @@ static int	parse_config(t_daft_data *data, char *line)
 			data->conf.debug_log = true;
 	}
 	return (0);
+}
+
+static char	*cut_flag(char *flag);
+
+char	*_daft_get_flags(int fnum)
+{
+	char	*line;
+	bool	start_count;
+	t_fd	settings_file;
+
+	start_count = false;
+	settings_file = openfd(DAFT_PWD"/SETTINGS.md", "r");
+	if (!settings_file.n)
+		return (_daft_log(DAFT_LOG_SETT), NULL);
+	line = gnl();
+	while (line)
+	{
+		if (!ft_strncmp(line, "# -- FLAGS -- #", 15))
+			start_count = true;
+		FREE(line);
+		line = gnl();
+		if (start_count == true && fnum-- == 0)
+			break ;
+	}
+	closefd(settings_file);
+	if (!line)
+		return (NULL);
+	return (cut_flag(line));
+}
+
+static char	*cut_flag(char *flag)
+{
+	int		i;
+
+	i = sub_strlen(flag, ">", EXCLUDE);
+	if (!flag[i])
+		return (FREE(flag), NULL);
+	cut_string(flag, 0, i + 1);
+	return (flag);
 }

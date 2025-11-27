@@ -6,9 +6,12 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:13:36 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:27:51 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/27 17:24:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+void	*free_matrix(char **matrix);
+void	*free_three_d_matrix(char ***matrix);
 
 // Memoria statica usata ---> (BUFFER_SIZE + 1) * ((MAX_FILES + 1) * 20)
 #ifndef MFILE_H

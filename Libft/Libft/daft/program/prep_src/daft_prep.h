@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   daft_prep.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:48:32 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/21 11:11:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:18:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DAFT_PREP_H
 # define DAFT_PREP_H
-# include "../Libft/all.h"
+# include "../../daft.h"
 # define SEED 42
 
 typedef struct s_daft_hash

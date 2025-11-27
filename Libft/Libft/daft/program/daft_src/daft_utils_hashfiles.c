@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_hashfiles.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:06:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 23:05:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:37:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@ static int	alloc_list(t_daft_list *file, int alloc_size);
 //	Inner flags for the file are stored in file, named as the file,
 //	but stored in another directory: .private/hash_data.
 //	.private/hash_data stores the offset in which data must be searched.
-int	_daft_get_data(t_daft_list *file, char *filename)
+int	_daft_get_data(t_daft_list *file, char *filename, int fnum)
 {
 	char	*hash_filename;
 
+	file->filename = filename;
 	hash_filename = _daft_get_hash_filename(filename);
 	if (!hash_filename)
 		return (_daft_log(DAFT_LOG_MALLOC));
 	file->filedata = openfd(hash_filename, "r");
+	if (!file->filedata.n)
+		_daft_edit_hash_file(file, fnum);
+	file->filedata = openfd(hash_filename, "r");
 	FREE(hash_filename);
 	if (!file->filedata.n)
 		return (_daft_log(DAFT_LOG_OPEN));
-	file->filename = filename;
 	if (preparations(file) != 0)
 		return (closefd(file->filedata), 1);
 	if (_daft_get_data2(file) != 0)
@@ -42,16 +45,17 @@ int	_daft_get_data(t_daft_list *file, char *filename)
 char	*_daft_get_hash_filename(char *filename)
 {
 	int		i;
+	int		len;
 
 	i = 0;
-	while (filename[i] && ft_strncmp(filename + i, "daft/data/", 10))
-	{
+	len = ft_strlen(DAFT_PWD"/data/");
+	while (filename[i] && ft_strncmp(filename + i, DAFT_PWD"/data/", len))
 		++i;
-	}
 	if (!filename[i])
 		return (NULL);
-	i += 10;
-	return (_cat_string(filename, "hash_data/", i, 0));
+	while (filename[i] && ft_strncmp(filename + i, "data/", 5))
+		++i;
+	return (_cat_string(filename, "hash_", i, 0));
 }
 
 //	Inner flags and the maximum hash value are saved.

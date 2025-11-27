@@ -6,12 +6,14 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:23:59 by codespace         #+#    #+#             */
-/*   Updated: 2025/11/27 17:06:08 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/27 17:21:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "files/mfile.h"
+
+//  clear;cc -Wall -Wextra -Werror -g ./test_io.c data/list/*.c mem/*.c string/*.c printf/*.c files/*.c
 
 //NOTE - test main
 #define TEST "test.c"

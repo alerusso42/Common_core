@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:36:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 22:32:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:00:37 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int 	daft_init(void)
 	data = ft_calloc(1, sizeof(t_daft_data));
 	if (!data)
 		return (DAFT_LOG_MALLOC);
+	data->conf.debug_log = true;
 	data->mem_size = -1;
 	data->minimal_matrix_num = 1;
 	_daft_get_memory(data, true);
 	if (get_settings_file(data) != 0)
-		return (daft_quit(), data->last_error);
+		return (daft_quit(), 1);
 	if (get_database_file(data) != 0)
-		return (daft_quit(), data->last_error);
+		return (daft_quit(), 1);
 	return (0);
 }
 
@@ -88,7 +89,7 @@ static int	get_database_file(t_daft_data *data)
 		data->data_list[i] = ft_calloc(1, sizeof(t_daft_list));
 		if (!data->data_list[i])
 			return (_daft_log(DAFT_LOG_MALLOC));
-		if (_daft_get_data(data->data_list[i], data->files_names[i]) != 0)
+		if (_daft_get_data(data->data_list[i], data->files_names[i], i) != 0)
 			return (data->last_error);
 		++i;
 	}
