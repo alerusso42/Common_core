@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mfile_a_gnl.c                                      :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:38:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 01:33:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:02:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mfile_gnl.h"
+#include "mfile.h"
 
 char		*get_static_buffer(int fd, bool reset, bool reset_all);
 static void	read_from_file(char *buffer, t_fd fd, char **new_line);
@@ -71,7 +71,7 @@ char	*gnl(void)
 	if (read_from_buff(buffer, &old_content) == 1)
 		return (old_content);
 	read_from_file(buffer, fd, &new_line);
-	new_line = ft_strjoin_which(old_content, new_line, 3);
+	new_line = ft_strjoin_free(old_content, new_line, 3);
 	return (new_line);
 }
 
@@ -148,12 +148,12 @@ static int	read_from_buff(char *buffer, char **old_content)
 		return (1);
 	sub_strcpy(s, buffer, "\n", EXCLUDE);
 	if (*old_content)
-		*old_content = ft_strjoin_which(*old_content, s, 3);
+		*old_content = ft_strjoin_free(*old_content, s, 3);
 	else
 		*old_content = s;
 	if (buffer[i] == '\n')
-		return (cut_string(buffer, 0, i), 1);
-	cut_string(buffer, 0, i);
+		return (cut_string(buffer, 0, i + 1), 1);
+	cut_string(buffer, 0, i + 1);
 	return (0);
 }
 
@@ -188,14 +188,14 @@ static void	read_from_file(char *buffer, t_fd fd, char **new_line)
 	while (ft_strchr(buffer, '\n') == NULL)
 	{
 		if (*buffer)
-			*new_line = ft_strjoin_which(*new_line, buffer, 1);
+			*new_line = ft_strjoin_free(*new_line, buffer, 1);
 		if (*buffer && *new_line)
 			(*new_line)[bytes_read] = 0;
 		bytes_read += readfd(fd, buffer, BUFFER_SIZE);
 		diff = bytes_read - diff;
 		if (diff != BUFFER_SIZE)
 		{
-			cut_string(buffer, diff, BUFFER_SIZE);
+			cut_string(buffer, diff, BUFFER_SIZE + 1);
 			break ;
 		}
 		diff = bytes_read;

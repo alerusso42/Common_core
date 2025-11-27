@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 17:00:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:53:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@
 #  define MALLOC malloc
 #  define CALLOC calloc
 #  define FREE free
-#  define WRITE write
-#  define READ read
-#  define SEEK seek
-#  define OPEN open
+#  define WRITE writefd
+#  define READ readfd
+#  define SEEK lseek
+#  define OPEN ft_open
 #  define CLOSE close
 #  define SDL_RWops int
 # endif
 # include <stdint.h>
 # include <stdlib.h>
 # include "data/list/list.h"
+# include "printf/ft_printf.h"
 
 typedef struct s_fd	t_fd;
 typedef struct s_list	t_list;
@@ -56,10 +57,6 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
-void		ft_putchar_fd(char c, SDL_RWops *fd);
-void		ft_putendl_fd(char *s, SDL_RWops *fd);
-void		ft_putnbr_fd(int n, SDL_RWops *fd);
-void		ft_putstr_fd(char *s, SDL_RWops *fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
@@ -68,6 +65,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin_free(char *s1, char *s2, int mode);
 size_t		ft_strlen(const char *s);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -92,6 +90,6 @@ void		lst_iter(t_list *lst, void (*f)(void *));
 t_list		*lst_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //		PRINTF
 
-//int			fd_printf(t_fd fd, const char *str, ...);
+int			cut_string(char *string, size_t start, size_t end);
 
 #endif

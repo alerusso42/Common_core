@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_uplowcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:00:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/20 20:54:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:26:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	ft_toupper(char *str)
 	}
 }
 
+//ANCHOR - str_lower
+/*
+	Converts all characters in the string to lowercase.
+
+	@input:		[t_str *str]----->	pointer to string object
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_lower(str);			|
+			|	//OR						|
+			|	lower(str);				|
+			|	//OR						|
+			|	str->m->lower(&str);	|
+			*-------------------------------*
+*/
 t_str	*str_lower(t_str *str)
 {
 	if (str_check(str, NULL))
@@ -38,6 +53,21 @@ t_str	*str_lower(t_str *str)
 	return (str);
 }
 
+//ANCHOR - str_lower
+/*
+	Converts all characters in the string to uppercase.
+
+	@input:		[t_str *str]----->	pointer to string object
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_lower(str);			|
+			|	//OR						|
+			|	lower(str);				|
+			|	//OR						|
+			|	str->m->lower(&str);	|
+			*-------------------------------*
+*/
 t_str	*str_upper(t_str *str)
 {
 	if (str_check(str, NULL))

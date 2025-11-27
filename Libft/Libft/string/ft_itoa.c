@@ -6,11 +6,13 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:46:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:39:42 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/27 16:28:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
+
+static char	*alloc_string(char *allocated_string, int num, int *index);
 
 char	*ft_itoa(int num)
 {

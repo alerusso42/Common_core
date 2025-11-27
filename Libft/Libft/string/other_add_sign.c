@@ -3,15 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   other_add_sign.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:05:18 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 23:00:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:28:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
+//ANCHOR - str_addr
+/*
+	Adds a character to the end of the string.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[char c]--------->	character to add
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_addr(str, 'A');		|
+			|	//OR						|
+			|	add_right(str, 'A');		|
+			|	//OR						|
+			|	str->m->add_right(&str, 'A');|
+			*-------------------------------*
+*/
 t_str	*str_addr(t_str *this, char c)
 {
 	if (str_check(this, NULL))
@@ -24,6 +40,22 @@ t_str	*str_addr(t_str *this, char c)
 	return (0);
 }
 
+//ANCHOR - str_addl
+/*
+	Adds a character to the start of the string.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[char c]--------->	character to add
+	@return:	[t_str *]--------->	pointer to this
+	@variables:	none
+	@usage:	*-------------------------------*	
+			|	str_addr(str, 'A');		|
+			|	//OR						|
+			|	add_right(str, 'A');		|
+			|	//OR						|
+			|	str->m->add_right(&str, 'A');|
+			*-------------------------------*
+*/
 t_str	*str_addl(t_str *this, char c)
 {
 	int32_t	i;

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 14:54:41 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/12 23:16:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:17:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putchar_fd(char c, SDL_RWops *fd)
+void	ft_putchar_fd(char c, t_fd fd)
 {
-	WRITE(fd, &c, sizeof(char), 1);
+	WRITE(fd, &c, 1);
 }
 
 /*

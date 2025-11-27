@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:05:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:39:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:43:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
-#include <malloc.h>
-#include <fcntl.h>
-
+#include "../libft.h"
 
 /*
 int	main()

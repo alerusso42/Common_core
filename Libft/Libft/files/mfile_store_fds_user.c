@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_store_fds_user.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:46:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 23:40:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:38:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mfile_gnl.h"
+#include "mfile.h"
 
 t_fd	openfd(const char *filename, const char *permissions)
 {
@@ -21,7 +21,7 @@ t_fd	openfd(const char *filename, const char *permissions)
 	data = fd_database(0);
 	i = fd_indexation();
 	if (!data->fds[i].n)
-		return ((t_fd){NULL, 0});
+		return ((t_fd){0});
 	data->fds[i].p = OPEN(filename, permissions);
 	if (!data->fds[i].p)
 	{

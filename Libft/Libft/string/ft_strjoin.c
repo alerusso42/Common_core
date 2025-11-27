@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:43:48 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/27 17:00:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,25 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*s2)
 		stringona[index++] = *s2++;
 	return (stringona);
+}
+
+char	*ft_strjoin_free(char *s1, char *s2, int mode)
+{
+	char	*join;
+
+	if (s1 && !s2)
+		join = ft_strdup(s1);
+	else if (!s1 && s2)
+		join = ft_strdup(s2);
+	else
+		join = ft_strjoin(s1, s2);
+	if (mode == 1)
+		FREE(s1);
+	else if (mode == 2)
+		FREE(s2);
+	else if (mode > 2)
+		FREE(s1), FREE(s2);
+	return (join);
 }
 
 t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)

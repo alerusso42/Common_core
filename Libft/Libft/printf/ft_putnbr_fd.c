@@ -3,63 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:42:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/12 23:16:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:21:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static void	ft_putnbr(int num, SDL_RWops *fd);
-static void	print(char *str, SDL_RWops *fd);
-
-void	ft_putnbr_fd(int n, SDL_RWops *fd)
-{
-	ft_putnbr(n, fd);
-}
-
-static void	ft_putnbr(int num, SDL_RWops *fd)
+void	ft_putnbr_fd(int n, t_fd fd)
 {
 	char	str[12];
 	int		temp_num;
 	int		index;
 
 	index = 0;
-	if (num < 0)
+	if (n < 0)
 		str[index++] = '-';
-	if (num == 0)
+	if (n == 0)
 		str[index] = '0';
-	temp_num = num;
+	temp_num = n;
 	while ((temp_num > 9) || (temp_num < -9))
 	{
 		index++;
 		temp_num /= 10;
 	}
 	str[index + 1] = '\0';
-	while (num != 0)
+	while (n != 0)
 	{
-		if (num < 0)
-			str[index--] = (((num % 10) * -1) + 48);
+		if (n < 0)
+			str[index--] = (((n % 10) * -1) + 48);
 		else
-			str[index--] = ((num % 10) + 48);
-		num /= 10;
+			str[index--] = ((n % 10) + 48);
+		n /= 10;
 	}
-	print(str, fd);
-}
-
-// Printa una stringa con SDL_write.
-static void	print(char *str, SDL_RWops *fd)
-{
-	int	index;
-
-	index = 0;
-	while (str[index] != '\0')
-	{
-		WRITE(fd, &str[index], sizeof(char), 1);
-		++index;
-	}
+	WRITE(fd, str, ft_strlen(str));
 }
 
 /*

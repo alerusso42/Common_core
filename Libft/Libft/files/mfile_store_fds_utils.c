@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_store_fds_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 08:43:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:48:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:49:27 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mfile_gnl.h"
+#include "mfile.h"
 
 int				fd_indexation(void);
 t_manage_fds	*fd_database(bool delete);
@@ -39,6 +39,34 @@ t_manage_fds	*fd_database(bool delete)
 		data = (t_manage_fds){0};
 	}
 	return (&data);
+}
+
+int	ft_open(const char *filename, const char *perm)
+{
+	int	mode;
+	int	fd;
+
+	if (*perm == 'r' && perm[1] == '+')
+		mode = O_RDONLY | O_CREAT;	
+	else if (*perm == 'r')
+		mode = O_RDONLY;
+	else if (*perm == 'w' && perm[1] == '+')
+		mode = O_RDWR | O_CREAT;
+	else if (*perm == 'w')
+		mode = O_WRONLY | O_TRUNC;
+	else if (*perm == 'a' && perm[1] == '+')
+		mode = O_RDWR | O_APPEND | O_CREAT;
+	else if (*perm == 'a')
+		mode = O_RDWR | O_APPEND;
+	else
+		return (fd_printf((t_fd){2, 2}, "ft_open: flag %s is not allowed.\n", perm));
+	if (mode & O_APPEND)
+		fd = open(filename, mode, 777);
+	else
+		fd = open(filename, mode);
+	if (fd == -1)
+		return (0);
+	return (fd);
 }
 
 /*

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   printf_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/08 15:47:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:19:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdarg.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
 static int	type_print(char type, va_list ptr, t_fd fd);
 static void	ft_putnbr(int num, t_fd fd);
@@ -59,7 +57,7 @@ int	fd_printf(t_fd fd, const char *str, ...)
 				print("/UNKNOWN SPECIFIER/", fd);
 		}
 		else
-			WRITE(fd.p, &str[index], sizeof(char), 1);
+			WRITE(fd, &str[index], 1);
 		++index;
 	}
 	va_end(ptr);
@@ -75,7 +73,7 @@ int	type_print(char type, va_list ptr, t_fd fd)
 	if (type == 'c')
 	{
 		c = (char)va_arg(ptr, int);
-		WRITE(fd.p, &c, sizeof(char), 1);
+		WRITE(fd, &c, 1);
 	}
 	else if (type == 's')
 	{
@@ -127,13 +125,13 @@ static void	print(char *str, t_fd fd)
 
 	if (!str)
 	{
-		WRITE(fd.p, "(NULL)", sizeof(char), 6);
+		WRITE(fd, "(NULL)", 6);
 		return ;
 	}
 	index = 0;
 	while (str[index] != '\0')
 	{
-		WRITE(fd.p, &str[index], sizeof(char), 1);
+		WRITE(fd, &str[index], 1);
 		++index;
 	}
 }

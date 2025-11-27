@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mfile_reset_fd.c                                   :+:      :+:    :+:   */
+/*   reset_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:41:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/12 23:23:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:15:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mfile_gnl.h"
+#include "mfile.h"
 
 /*
 	reset_fd reimposta read all'inizio del file, e contemporaneamente

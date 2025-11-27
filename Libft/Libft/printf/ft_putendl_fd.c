@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:32:48 by alerusso          #+#    #+#             */
-/*   Updated: 2025/07/12 23:16:40 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:17:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putendl_fd(char *s, SDL_RWops *fd)
+void	ft_putendl_fd(char *s, t_fd fd)
 {
-	while (*s)
-		WRITE(fd, s++, sizeof(char), 1);
-	WRITE(fd, "\n", sizeof(char), 1);
+	WRITE(fd, s, ft_strlen(s));
 }
 
 /*
