@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:10:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:21:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ bool	str_check_this(t_str *this, const void *empty);
 	int32_t	(*get_i)(t_str *);\
 	str_m(str_addl, char c)\
 	str_m(str_addr, char c)\
+	str_m(str_app, const void *)\
 	int32_t	(*str_cmp)(t_str *, const void *);\
 	str_m(str_cpy, const void *)\
 	str_m(str_cut, int32_t, int32_t)\
@@ -62,6 +63,7 @@ bool	str_check_this(t_str *this, const void *empty);
 	str_m(str_join, const void *, int32_t n)\
 	str_m(str_last, const void *)\
 	t_str	*(*str_lower)(t_str *);\
+	str_m(str_push, const void *)\
 	int32_t	(*str_ncmp)(t_str *, const void *, int32_t);\
 	str_m(str_ncpy, const void *, int32_t, int32_t)\
 	t_str	*(*str_reverse)(t_str *);\
@@ -72,6 +74,7 @@ bool	str_check_this(t_str *this, const void *empty);
 	t_str	*(*str_sort)(t_str *);\
 	t_str	*(*str_sfree)(t_str *);\
 	str_m(str_srealloc, int32_t)\
+	str_m(str_trim, int32_t)\
 	t_str	*(*str_upper)(t_str *);
 
 # define addl(name, ...)	str_addl(name, __VA_ARGS__)
@@ -79,6 +82,11 @@ t_str	*str_addl(t_str *this, char c);
 
 # define addr(name, ...)	str_addr(name, __VA_ARGS__)
 t_str	*str_addr(t_str *this, char c);
+
+# define app(name, ...)		str_app(name, __VA_ARGS__)
+t_str	*str_app(t_str *this, const void *other);
+t_str 	*str_app_str(t_str *s, const t_str *s2);
+t_str 	*str_app_char(t_str *s, const char *s2);
 
 #define cmp(name, ...)		str_cmp(name, __VA_ARGS__)
 int32_t	str_cmp(t_str *this, const void *other);
@@ -146,6 +154,11 @@ t_str	*str_ncpy(t_str *this, const void *other, int32_t start, int32_t n);
 t_str	*str_ncpy_char(t_str *this, const char *other, int32_t strt, int32_t n);
 t_str	*str_ncpy_str(t_str *this, const t_str *other, int32_t strt, int32_t n);
 
+# define push(name, ...)		str_push(name, __VA_ARGS__)
+t_str	*str_push(t_str *this, const void *other);
+t_str 	*str_push_str(t_str *s, const t_str *s2);
+t_str 	*str_push_char(t_str *s, const char *s2);
+
 # define rdiff(name, ...)		str_rdiff(name, __VA_ARGS__)
 t_str	*str_rdiff(t_str *this, const void *other);
 t_str	*str_rdiff_chr(t_str *this, char other);
@@ -177,6 +190,9 @@ t_str	*str_sfree(t_str *this);
 
 # define srealloc(name, ...)	str_srealloc(name, __VA_ARGS__)
 t_str	*str_srealloc(t_str *this, int32_t n);
+
+# define trim(name, ...)		str_trim(name, __VA_ARGS__)
+t_str	*str_trim(t_str *this, int32_t n);
 
 # define upper(name)			str_upper(name)
 t_str	*str_upper(t_str *str);

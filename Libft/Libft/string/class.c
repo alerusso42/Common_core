@@ -6,13 +6,13 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:39:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 08:32:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-static void	_str_garbage_collector(t_str *p);
+static void	_str_garbage_collector(t_str *p, bool delete);
 
 t_str	_str_constructor(t_str *str, const char *buff)
 {
@@ -36,21 +36,23 @@ bool	str_new(t_str **str, const char *buff)
 	if (!*str)
 		return (EXIT_FAILURE);
 	_str_constructor(*str, buff);
-	_str_garbage_collector(*str);
+	_str_garbage_collector(*str, false);
 	return (EXIT_SUCCESS);
 }
 
-static void	_str_garbage_collector(t_str *p)
+static void	_str_garbage_collector(t_str *p, bool delete)
 {
 	static t_list	*garbage_list;
 
-	if (!p)
+	if (!p && delete)
 		return (lst_clear(&garbage_list, _str_destructor));
-	else if (p == (void *)1 && garbage_list)
+	else if (delete && p->_garbage_coll_node == garbage_list)
 	{
 		garbage_list = garbage_list->next;
 		return ;
 	}
+	else if (delete)
+		return ;
 	p->_garbage_coll_node = lst_new(p);
 	lst_back(&garbage_list, p->_garbage_coll_node);
 }
@@ -62,12 +64,12 @@ void	_str_destructor(void *str)
 	FREE(((t_str *)str)->buff);
 	if (((t_str *)str)->_garbage_coll_node)
 	{
-		_str_garbage_collector((t_str *)1);
+		_str_garbage_collector(((t_str *)str), true);
 		FREE(str);
 	}
 }
 
 void	str_terminate(void)
 {
-	_str_garbage_collector(NULL);
+	_str_garbage_collector(NULL, true);
 }

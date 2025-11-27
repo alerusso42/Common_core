@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:15:28 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:30:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:25:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ int	test8()
 	if (str_new(&s1, "s1") || str_new(&s2, "s2") || str_new(&s3, "s3"))
 		return (str_terminate(), 1);
 	str_delete(s1);
+	str_delete(s2);
+	str_delete(s3);
 	str_terminate();
 	return (0);
 }
@@ -148,8 +150,10 @@ int	test_join(char *n1, char *n2)
 {
 	ptest("Join");
 
-	STR(m, n2);
-	join(&m, " with ", 0)->m->join(&m, n1, 0)->m->join(&m, "Sum of ", 0);
+	STR(s, n1);
+	join(&s, "    Sum of ", 4)->m->push(&s, " with ")->m->push(&s, n2);
+	STR(s2, "//TERRA_DI_MEZZO");
+	s.set(&s, s.len / 2)->m->join(&s, &s2, 0)->m->find(&s, NULL)->m->trim(&s, s2.len);
 	return (0);
 }
 

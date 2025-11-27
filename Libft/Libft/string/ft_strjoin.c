@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/25 21:31:31 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:12:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ t_str *str_join_str(t_str *s, const t_str *s2, int32_t n)
 	if (!new_s)
 		return (_str_set_error(s, E_ALLOC, NULL));
 	ft_strlcpy(new_s, s->buff, s->i + 1);
-	ft_strlcpy(new_s + s->i, s2->buff, INT_MAX);
+	ft_strlcpy(new_s + s->i, s2->buff + n, INT_MAX);
 	if (s->buff[s->i])
-		ft_strlcpy(new_s + s->i + s2->len, s->buff + s->i, INT_MAX);
+		ft_strlcpy(new_s + s->i + s2->len - n, s->buff + s->i, INT_MAX);
 	FREE(s->buff);
 	s->buff = new_s;
 	s->len = i;
+	s->i += s2->len - n;
 	return (s);
 }
 
@@ -86,12 +87,13 @@ t_str *str_join_char(t_str *s, const char *s2, int32_t n)
 	if (!new_s)
 		return (_str_set_error(s, E_ALLOC, "join"));
 	ft_strlcpy(new_s, s->buff, s->i + 1);
-	ft_strlcpy(new_s + s->i, s2, INT_MAX);
+	ft_strlcpy(new_s + s->i, s2 + n, INT_MAX);
 	if (s->buff[s->i])
-		ft_strlcpy(new_s + s->i + len, s->buff + s->i, INT_MAX);
+		ft_strlcpy(new_s + s->i + len - n, s->buff + s->i, INT_MAX);
 	FREE(s->buff);
 	s->buff = new_s;
 	s->len = i;
+	s->i += len - n;
 	return (s);
 }
 

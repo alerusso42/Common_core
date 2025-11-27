@@ -33,6 +33,7 @@ t_str	*str_ncpy_char(t_str *this, const char *other, int32_t strt, int32_t n)
 	{
 		this->buff[i++] = other[j++];
 	}
+	this->i = i;
 	return (this);
 }
 
@@ -49,5 +50,6 @@ t_str	*str_ncpy_str(t_str *this, const t_str *other, int32_t strt, int32_t n)
 	{
 		this->buff[i++] = other->buff[j++];
 	}
+	this->i = i;
 	return (this);
 }

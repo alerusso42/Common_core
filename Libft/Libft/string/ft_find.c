@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:44:16 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 17:04:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:27:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_str	*str_find_chr(t_str *this, char other)
 
 t_str	*str_find_char(t_str *this, const char *other)
 {
-	if (str_check(this, NULL))
+	if (str_check(this, other))
 		return (_str_set_error(this, E_PARAM, "find"));
 	this->i = ft_strstr_int(this->buff, other);
 	return (this);
@@ -44,7 +44,7 @@ t_str	*str_find_char(t_str *this, const char *other)
 
 t_str	*str_find_str(t_str *this, const t_str *other)
 {
-	if (str_check(this, NULL))
+	if (str_check(this, other))
 		return (_str_set_error(this, E_PARAM, "find"));
 	this->i = ft_strstr_int(this->buff, other->buff);
 	return (this);

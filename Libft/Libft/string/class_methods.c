@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 18:15:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:22:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	_str_register_function(t_str_methods *m)
 {
 	m->str_addl = str_addl;
 	m->str_addr = str_addr;
+	m->str_app = str_app;
 	m->str_cmp = str_cmp;
 	m->str_cpy = str_cpy;
 	m->str_cut = str_cut;
@@ -72,6 +73,7 @@ static void	_str_register_function(t_str_methods *m)
 	m->str_lower = str_lower;
 	m->str_ncmp = str_ncmp;
 	m->str_ncpy = str_ncpy;
+	m->str_push = str_push;
 	m->str_rdiff = str_rdiff;
 	m->str_reverse = str_reverse;
 	m->str_rfind = str_rfind;
@@ -80,5 +82,6 @@ static void	_str_register_function(t_str_methods *m)
 	m->str_sort = str_sort;
 	m->str_sfree = str_delete;
 	m->str_srealloc = str_srealloc;
+	m->str_trim = str_trim;
 	m->str_upper = str_upper;
 }
