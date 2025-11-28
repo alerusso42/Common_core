@@ -6,7 +6,7 @@
 #    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 14:21:59 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/25 15:25:09 by alerusso42       ###   ########.fr        #
+#    Updated: 2025/11/28 10:28:25 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/www/html
+
+EXPOSE 9000
 
 COPY tools/init.sh /
 RUN chmod 755 /init.sh

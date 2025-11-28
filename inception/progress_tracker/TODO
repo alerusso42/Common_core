@@ -14,4 +14,4 @@
 
 [X]	Run nginx (HTML with empty body)
 []	Set up Wordpress
-[]	Set up mariadb
+[X]	Set up mariadb
