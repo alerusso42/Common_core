@@ -25,7 +25,7 @@ void	debug_print(std::map<Date, double> map);
 //	Example can be found in data/ and input/.
 
 	//SECTION - resolution
-	The general idea: usins a std::map, my favourite data type,
+	The general idea: usins a std::map (I love it)
 	to store database and sort it;
 	then, read the input file, and search the dates in the std::map.
 
@@ -41,7 +41,7 @@ void	debug_print(std::map<Date, double> map);
 	such as invalid day, year below/above limits, unformatted param,
 	Date throws exception with explicit message. 
 */
-int	main(int argc, char *argv[])
+int	main1(int argc, char *argv[])
 {
 	std::map<Date, double>	map;
 
@@ -202,7 +202,7 @@ int	main9()
 }
 
 // testing over Date class
-int	main10()
+int	main()
 {
 	Date	date1((std::string)"2022-01-12", '-');
 	Date	date2((std::string)"2022-01-12", '-');
@@ -224,7 +224,7 @@ void	debug_print(std::map<Date, double> map)
 	u_int32_t	count;
 
 	count = 0;
-	for (typename std::map<Date, double>::iterator i = map.begin(); i != map.end(); i++)
+	for (std::map<Date, double>::iterator i = map.begin(); i != map.end(); i++)
 	{
 		std::cout << "pair[" << count << "]:\n";
 		std::cout << i->first << "|" << i->second << "\n";
