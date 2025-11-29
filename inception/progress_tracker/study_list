@@ -12,12 +12,12 @@ https://docs.docker.com/reference/compose-file/
 [X]	PID 1
 []	domain name
 []	point to local IP address
-[]	environment variables
-[]	.env
+[X]	environment variables
+[X]	.env
 [X]	nginx
 []	mariadb
 []	wordpress
-[]	port 443
+[X]	port 443
 []	TLSv1.2/1.3 protocol
 
 

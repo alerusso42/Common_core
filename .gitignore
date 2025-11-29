@@ -1,1 +1,2 @@
-inception/srcs/volumes/
+inception/srcs/volumes/mariadb/*
+inception/srcs/volumes/wordpress/*

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 18:08:06 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/25 15:58:51 by alerusso42       ###   ########.fr        #
+#    Updated: 2025/11/29 15:31:24 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,3 +20,7 @@ daemon:
 
 clean:
 	(clear ; cd srcs && docker compose down -v)
+
+fclean:
+	(clear ; cd srcs && \
+	docker system prune -a -f)

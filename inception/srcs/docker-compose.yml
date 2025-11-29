@@ -40,17 +40,21 @@ services:
     build: requirements/mariadb/.
     volumes:
     - mariadb:/var/lib/mysql
+    expose:
+      - "3306"
     env_file:
       - .env
     networks:
     - inception
-    restart: always
+    restart: on-failure
   wordpress:
     image: wordpress
     container_name: wordpress
     build: requirements/wordpress/.
     volumes: 
     - wordpress:/var/www/html
+    expose:
+      - "9000"
     depends_on: 
     - mariadb
     env_file:
