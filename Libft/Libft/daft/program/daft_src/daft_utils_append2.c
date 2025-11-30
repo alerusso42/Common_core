@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:31:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/26 00:42:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:55:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	_daft_append_f(t_daft_data *dt, int i, char **line, t_daft_mem *mem)
 static void	str_handler(t_daft_data *dt, int i, char **line, char *mem)
 {
 	if (**line == '#')
-		(void)fd_printf(dt->temp_files[1], "%s\n", *line);
+		fd_printf(dt->temp_files[1], "%s\n", *line);
 	if (**line == '#' || !ft_strchr(*line, *dt->data_list[i]->key_value_sep))
 	{
 		FREE(*line);

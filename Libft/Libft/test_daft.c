@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_daft.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 17:21:47 by codespace         #+#    #+#             */
-/*   Updated: 2025/11/27 20:04:27 by codespace        ###   ########.fr       */
+/*   Updated: 2025/11/30 20:22:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ int	main()
 		while (matr[i][j])
 		{
 			printf("%s\n", matr[i][j]);
+			j++;
+		}
+		i++;
+	}
+	char	***add = daft_append("SQUALO", 0, 0);
+	if (!matr)
+		return (daft_quit(), 1);
+	i = 0;
+	while (add[i])
+	{
+		j = 0;
+		while (add[i][j])
+		{
+			printf("%s\n", add[i][j]);
 			j++;
 		}
 		i++;
