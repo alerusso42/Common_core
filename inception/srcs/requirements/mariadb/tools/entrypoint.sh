@@ -27,4 +27,4 @@ if [ ! -e RAYQUAZA ]; then
     mysqladmin shutdown
 fi
 
-exec mysqld --user=mysql
+exec mariadbd-safe --user=wp_user

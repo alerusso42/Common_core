@@ -60,9 +60,6 @@ fi
 # 3. Sistema permessi per Nginx + php-fpm
 chown -R www-data:www-data /var/www/html
 
-# 4. Porta php-fpm 8.4 in modalità TCP su 9000 (NON socket)
-sed -i "s|listen = .*|listen = 9000|" /etc/php/8.4/fpm/pool.d/www.conf
-
 # Assicura che gli errori vadano in foreground
 sed -i "s|^;daemonize = yes|daemonize = no|" /etc/php/8.4/fpm/php-fpm.conf
 
