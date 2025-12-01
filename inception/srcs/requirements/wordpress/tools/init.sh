@@ -47,7 +47,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --allow-root
 
         chmod 777 /var/www/html/wp-content
-         wp user create $login $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD --allow-root
+         wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD --allow-root
     wp theme install twentyfifteen
 
     wp theme activate twentyfifteen

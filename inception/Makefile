@@ -6,7 +6,7 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 18:08:06 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/30 10:09:53 by codespace        ###   ########.fr        #
+#    Updated: 2025/12/01 09:45:18 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ fclean:
 	docker system prune -a -f --volumes && \
 	sudo rm -rf volumes/mariadb/* volumes/wordpress/* && \
 	echo "\033[32mFull reset done.\033[0m")
+
+re: fclean daemon
 
 logs:
 	@if [ -z $$cont ]; then \

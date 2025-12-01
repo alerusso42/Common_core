@@ -1,4 +1,4 @@
-# name: inception
+# name: inception 
 
 volumes:
   wordpress:
@@ -36,6 +36,7 @@ services:
     - inception
     restart: always
   mariadb:
+    image: mariadb
     container_name: mariadb
     build: requirements/mariadb/.
     volumes:

@@ -2,12 +2,13 @@
 set -e
 
 # First run: init database only first time
-if [ ! -e RAYQUAZA ]; then
-	touch RAYQUAZA
+if [ ! -e /var/lib/mysql/RAYQUAZA ]; then
+	touch /var/lib/mysql/RAYQUAZA
     echo "[INFO] Initializing database..."
 
 	#init empty database
     mariadb-install-db --user=mysql --ldata=/var/lib/mysql
+    #mariadb-upgrade --user=mysql --ldata=/var/lib/mysql
 
     envsubst < /tmp/init.sql > /tmp/init-final.sql
 
@@ -27,4 +28,5 @@ if [ ! -e RAYQUAZA ]; then
     mysqladmin shutdown
 fi
 
-exec mariadbd-safe --user=wp_user
+#exec mariadbd-safe --user=mysql
+exec mariadbd --user=mysql --console
