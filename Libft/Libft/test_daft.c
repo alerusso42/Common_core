@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 17:21:47 by codespace         #+#    #+#             */
-/*   Updated: 2025/11/30 20:22:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/01 09:26:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main()
 		i++;
 	}
 	char	***add = daft_append("SQUALO", 0, 0);
-	if (!matr)
+	if (!add)
 		return (daft_quit(), 1);
 	i = 0;
 	while (add[i])

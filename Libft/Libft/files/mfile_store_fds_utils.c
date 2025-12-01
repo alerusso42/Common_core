@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mfile_store_fds_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 08:43:17 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 19:55:59 by codespace        ###   ########.fr       */
+/*   Updated: 2025/12/01 09:23:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_open(const char *filename, const char *perm)
 	else
 		return (fd_printf((t_fd){2, 2}, "ft_open: flag %s is not allowed.\n", perm));
 	if (mode & O_CREAT)
-		fd = open(filename, mode, 777);
+		fd = open(filename, mode, 0777);
 	else
 		fd = open(filename, mode);
 	if (fd == -1)
