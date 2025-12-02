@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 18:08:06 by alerusso42        #+#    #+#              #
-#    Updated: 2025/12/01 09:45:18 by codespace        ###   ########.fr        #
+#    Updated: 2025/12/02 11:05:58 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,15 @@ logs:
 	@if [ -z $$cont ]; then \
 		echo "\033[31musage: make logs cont=name\033[0m" ; \
 		exit 2; \
-		fi
-	@(cd srcs && docker logs $$cont)
+	fi
+	@if [ [ $$cont != "all" ] ]; then \
+		(cd srcs && docker logs $$cont);
+	@else
+		(cd srcs && \
+		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
+		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
+		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
+		);
 
 exec:
 	@if [ -z $$cont ]; then \
