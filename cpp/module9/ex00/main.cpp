@@ -46,7 +46,7 @@ int	main(int argc, char *argv[])
 	std::map<Date, double>	map;
 
 	if (argc != 2)
-		return (print_error("Error: could not open file"), 1);
+		return (std::cout << USAGE, 1);
 	else if (valid_input((std::string)argv[1]) != true)
 		return (print_error("Error: could not open file"), 1);
 	try
@@ -76,7 +76,7 @@ int main3(int argc, char *argv[])
 	std::map<Date, double>	map;
 
 	if (argc != 2)
-		return (print_error("Error: could not open file"), 1);
+			return (std::cout << USAGE, 1);
 	else if (valid_input((std::string)argv[1]) != true)
 		return (print_error("Error: could not open file"), 1);
 	try
@@ -98,7 +98,7 @@ int main4(int argc, char *argv[])
 	std::map<Date, double>	map;
 
 	if (argc != 2)
-		return (print_error("Error: could not open file"), 1);
+			return (std::cout << USAGE, 1);
 	else if (valid_input((std::string)argv[1]) != true)
 		return (print_error("Error: could not open file"), 1);
 	try

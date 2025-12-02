@@ -32,4 +32,13 @@ enum e_bitcoin_ranges
 void	read_database(std::map<Date, double> &map, std::string database_name);
 void	print_input(std::map<Date, double> &map, std::string input_name);
 
+# define USAGE "\033[32mwhat btc does\033[33m\n\
+btc is a database with bitcoin prices over time.\n\
+It takes a file as input with argv:\n\
+the files must store a list of pair Date | number_bitcoin_bought\n\
+the database prints the values of number_bitcoin_bought * price at Date.\n\
+database file has a similar structure: Date,price\n\
+They are both is .csv format.\n\
+Example can be found in data/ and input/.\033[0m\n"
+
 #endif
