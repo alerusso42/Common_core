@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:51:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/28 09:12:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:44:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ void	Pair::add(int32_t p1, int32_t p2)
 	this->_size += 1;
 }
 
-//	incrementing insertions in this field is incorrect.
-//	for the pmerge algorythm is correct, because when Pair::find is
-//	called, the element is inserted, so removed from the pair.
 int32_t	Pair::find(int32_t pos)
 {
 	if (this->_error == E_ALLOC)
@@ -78,6 +75,11 @@ int32_t	Pair::find(int32_t pos)
 	if (this->_buffer[pos + this->_insertions] == -1)
 		return ((void)this->error(this->E_EMPTY), INT_MAX);
 	return (this->_buffer[pos + this->_insertions++]);
+}
+
+void	Pair::rm(void)
+{
+	this->_insertions += 1;
 }
 
 int32_t	Pair::error() const

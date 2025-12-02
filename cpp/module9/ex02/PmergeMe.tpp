@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/11 16:26:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:21:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 # include "PmergeMe.hpp"
 
 template <typename T>
-static void	merge(T &big, T &little, int32_t pos, Pair &pairs);
+static void	merge(T &big, T &little, int32_t pos);
 template <typename T>
 static void	insert(T &big, T &little, int32_t pos_lit, int32_t pos_big);
 template <typename T>
 static int32_t	binary_search(T &big, T &little, int32_t pos, Pair &pairs);
+template <typename T>
+static void		create_pairs(T &big, T &little, Pair &pairs);
 
 template <typename T>
 void	sort(T &big)
@@ -32,8 +34,9 @@ void	sort(T &big)
 	if (big.size() <= 1)
 		return ;
 	size_half = big.size() / 2;
+	create_pairs(big, pairs);
 	for (int32_t i = 0; i < size_half; i += 1)
-		merge(big, little, i + (big[i] > big[i + 1]), pairs);
+		merge(big, little, i + (big[i] > big[i + 1]));
 	sort(big);
 	for (int32_t i = sequence.next(); i < (int32_t)little.size(); i = sequence.next())
 	{
@@ -45,11 +48,10 @@ void	sort(T &big)
 }
 
 template <typename T>
-static void	merge(T &big, T &little, int32_t pos, Pair &pairs)
+static void	merge(T &big, T &little, int32_t pos)
 {
 	little.push_back(*(big.begin() + pos));
 	big.erase(big.begin() + pos);
-	pairs.add(little.size() - 1, pos * 2);
 }
 
 template <typename T>
@@ -60,14 +62,31 @@ static void	insert(T &big, T &little, int32_t pos_lit, int32_t pos_big)
 }
 
 template <typename T>
-static int32_t	binary_search(T &big, T &little, int32_t pos, Pair &pairs)
+static int32_t	binary_search(T &big, T &little, int32_t pos_lit, Pair &pairs)
 {
-	int32_t	i = 0;
+	int32_t	pos_big = 0;
 
-	for (; i < pairs.find(pos); i++)
-		if (little[pos] <= big[i] || i == (int32_t)big.size() - 1)
-			return (i);
-	return (i);
+	for (; pos_big < pairs.find(pos_lit); pos_big++)
+		if (little[pos_lit] <= big[pos_big] || pos_big == (int32_t)big.size() - 1)
+			break ;
+	//pairs.rm();
+	return (pos_big);
+}
+
+template <typename T>
+static void		create_pairs(T &big, Pair &pairs)
+{
+	size_t	lit_i;
+
+	lit_i = 0;
+	for (size_t big_i = 0; big_i + 1 < big.size(); big_i += 2)
+	{
+		if (big[big_i] < big[big_i + 1])
+			pairs.add(lit_i, big_i);
+		else
+			pairs.add(lit_i, big_i + 1);
+		lit_i += 1;
+	}
 }
 
 #endif

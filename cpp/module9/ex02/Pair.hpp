@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:51:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/11 16:28:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:41:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ public:
 	Pair	operator=(Pair &other);
 
 	void	add(int32_t p1, int32_t p2);
+	void	rm(void);
 	int32_t	find(int32_t pos);
 	int32_t	error() const;
 	int32_t	error(int32_t val);

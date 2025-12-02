@@ -12,6 +12,8 @@
 
 # include "PmergeMe.hpp"
 
+//./PmergeMe  -1 7 7 7 -8
+//./PmergeMe  5 6 7 9 -10 0
 int main(int argc, char *argv[])
 {
 	std::vector<int32_t>	vector;
