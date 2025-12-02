@@ -41,7 +41,7 @@ void	debug_print(std::map<Date, double> map);
 	such as invalid day, year below/above limits, unformatted param,
 	Date throws exception with explicit message. 
 */
-int	main1(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	std::map<Date, double>	map;
 
@@ -202,7 +202,7 @@ int	main9()
 }
 
 // testing over Date class
-int	main()
+int	main10()
 {
 	Date	date1((std::string)"2022-01-12", '-');
 	Date	date2((std::string)"2022-01-12", '-');
