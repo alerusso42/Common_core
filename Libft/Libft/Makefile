@@ -1,64 +1,88 @@
 NAME = libft.a
-CC = cc
 OBJ_DIR = obj_dir
-SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c \
-	ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
-	ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
-	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
-	ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_putnbr_fd.c ft_calloc.c ft_strdup.c
-SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
-	ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-	ft_lstiter.c ft_lstmap.c
-SRC_GAME = game_bfs.c game_bfs_copy.c game_bfs_draw.c game_bfs_utils.c
-SRC_MFILE = mfile_find_line.c mfile_get_next_line_original.c \
-			mfile_get_n_line.c mfile_gnl.c \
-			mfile_gnl_utils1.c mfile_gnl_utils2.c \
-			mfile_hold_space.c mfile.main.c mfile_num_line.c \
-			mfile_read_all_line.c mfile_read_line.c mfile_reset_fd.c \
-			mfile_set_maximum_word_len.c \
-			mfile_write_line.c mfile_initiate_file.c \
-			mfile_store_fds_user.c mfile_store_fds_utils.c 
-SRC_OTHER = other_add_sign.c other_cut_string.c other_del_pointer.c \
-			other_free_matrix.c other_move_sign.c other_realloc.c \
-			other_strjoin_free.c other_sub_string_tools.c \
-			other_trim_only.c
-SRC_PISCINE =	piscine_capitalize.c piscine_conver_base1.c \
-				piscine_convert_base2.c piscine_factorial.c \
-				piscine_find_next_prime.c piscine_is_lower.c \
-				piscine_isprime.c piscine_is_upper.c piscine_power.c \
-				piscine_rev_tab.c piscine_sort_int_tab.c piscine_sqrt.c \
-				piscine_strlowcase.c
-SRC_PRINTF =	printf_light.c printf_fd.c
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-OBJ_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
-OBJ_GAME = $(addprefix $(OBJ_DIR)/, $(SRC_GAME:.c=.o))
-OBJ_MFILE = $(addprefix $(OBJ_DIR)/, $(SRC_MFILE:.c=.o))
-OBJ_OTHER = $(addprefix $(OBJ_DIR)/, $(SRC_OTHER:.c=.o))
-OBJ_PISCINE = $(addprefix $(OBJ_DIR)/, $(SRC_PISCINE:.c=.o))
-OBJ_PRINTF = $(addprefix $(OBJ_DIR)/, $(SRC_PRINTF:.c=.o))
 
-CFLAGS = -Wall -Wextra -Werror -g -I$(HOME)/libs/SDL/include
-LFLAGS = -L$(HOME)/.local/bin/ -lSDL3
+SRC_ALGORYTHM =	$(shell ls algorythm/bfs | grep .c) 
+SRC_CHECKS =	$(shell ls checks | grep .c)
+SRC_DAFT =	$(shell ls daft/program/daft_src | grep .c) $(shell ls daft/program/prep_src | grep .c)
+SRC_DATA =	$(shell ls data/list | grep .c) $(shell ls data/matrix_2 | grep .c)
+SRC_FILES =	$(shell ls files | grep .c)
+SRC_MATH =	$(shell ls math | grep .c)
+SRC_MEM =	$(shell ls mem | grep .c)
+SRC_PRINTF =	$(shell ls printf | grep .c)
+SRC_STRING =	$(shell ls string | grep .c)
 
-$(NAME): $(OBJ) $(OBJ_BONUS) $(OBJ_PRINTF)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ) $(OBJ_BONUS) $(OBJ_PRINTF) $(LFLAGS)
+ALL =				$(SRC_ALGORYTHM) $(SRC_CHECKS) $(SRC_DAFT) $(SRC_DATA) $(SRC_FILES) $(SRC_MATH) $(SRC_MEM) $(SRC_PRINTF) $(SRC_STRING)
+MODULE_ALGORYTHM = 	$(SRC_ALGORYTHM) $(SRC_DATA) $(SRC_MEM)
+MODULE_CHECKS = 	$(SRC_CHECKS)
+MODULE_DAFT = 		$(SRC_DAFT) $(SRC_CHECKS) $(SRC_FILES) $(SRC_MATH) $(SRC_MEM) $(SRC_PRINTF) $(SRC_STRING)
+MODULE_FILES = 		$(SRC_DAFT) $(SRC_CHECKS) $(SRC_FILES) $(SRC_MATH) $(SRC_MEM) $(SRC_PRINTF) $(SRC_STRING)
+MODULE_MATH = 		$(SRC_MATH)
+MODULE_MEM = 		$(SRC_MEM) $(SRC_STRING)
+MODULE_PRINTF = 	$(SRC_PRINTF) $(SRC_STRING)
+MODULE_STRING = 	$(SRC_STRING) $(SRC_CHECKS) $(SRC_DATA) $(SRC_MEM) $(SRC_PRINTF)
+
+OBJ_ALL = $(addprefix $(OBJ_DIR)/, $(ALL:.c=.o))
+OBJ_ALGORYTHM = $(addprefix $(OBJ_DIR)/, $(MODULE_ALGORYTHM:.c=.o))
+OBJ_CHECKS = $(addprefix $(OBJ_DIR)/, $(MODULE_CHECKS:.c=.o))
+OBJ_DAFT = $(addprefix $(OBJ_DIR)/, $(MODULE_DAFT:.c=.o))
+OBJ_DATA = $(addprefix $(OBJ_DIR)/, $(MODULE_DATA:.c=.o))
+OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(MODULE_FILES:.c=.o))
+OBJ_MATH = $(addprefix $(OBJ_DIR)/, $(MODULE_MATH:.c=.o))
+OBJ_MEM = $(addprefix $(OBJ_DIR)/, $(MODULE_MEM:.c=.o))
+OBJ_PRINTF = $(addprefix $(OBJ_DIR)/, $(MODULE_PRINTF:.c=.o))
+OBJ_STRING = $(addprefix $(OBJ_DIR)/, $(MODULE_STRING:.c=.o))
+
+CFLAGS = -Wall -Wextra -Werror -g
+LFLAGS = 
+CC = cc
+
+$(NAME): $(OBJ_ALL)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_ALL) $(LFLAGS)
+
+all: $(NAME)
+
+algorythm: $(OBJ_ALGORYTHM)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_ALGORYTHM) $(LFLAGS)	
+
+checks: $(OBJ_CHECKS)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_CHECKS) $(LFLAGS)	
+
+daft: $(OBJ_DAFT)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_DAFT) $(LFLAGS)
+
+data: $(OBJ_DATA)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_DATA) $(LFLAGS)
+
+files: $(OBJ_FILES)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_FILES) $(LFLAGS)
+
+math: $(OBJ_MATH)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_MATH) $(LFLAGS)
+
+mem: $(OBJ_MEM)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_MEM) $(LFLAGS)
+
+printf: $(OBJ_PRINTF)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_PRINTF) $(LFLAGS)
+
+string: $(OBJ_STRING)
+	ar rcs $(NAME) $(CFLAGS) $(OBJ_STRING) $(LFLAGS)
+
+help:
+	echo -e "\033[33mList of all modules:\n"\
+			"all,\n"\
+			"algorythm,\n"\
+			"checks,\n"\
+			"daft,\n"\
+			"data,\n"\
+			"files,\n"\
+			"math,\n"\
+			"mem,\n"\
+			"printf,\n"\
+			"string,\n\033[0m"
 
 $(OBJ_DIR) : 
 	mkdir -p $(OBJ_DIR)
-
-piscine: $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_PRINTF)
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_PRINTF)
-
-other: $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF)
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF)
-
-mfile: $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE)
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE)
-
-all: $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE) $(OBJ_GAME)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ) $(OBJ_BONUS) $(OBJ_PISCINE) $(OBJ_OTHER) $(OBJ_PRINTF) $(OBJ_MFILE) $(OBJ_GAME) $(LFLAGS)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -73,4 +97,4 @@ fclean: clean
 re: fclean all
 
 
-.PHONY: all clean fclean re piscine other mfile
+.PHONY: help
