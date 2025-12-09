@@ -116,7 +116,7 @@ $(OBJ_DIR) :
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f *.o *.txt *.out
