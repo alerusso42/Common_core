@@ -28,5 +28,6 @@ if [ ! -e /var/lib/mysql/RAYQUAZA ]; then
     mysqladmin shutdown
 fi
 
+sed -i 's/^bind-address.*/bind-address = wordpress/' /etc/mysql/mariadb.conf.d/50-server.cnf
 #exec mariadbd-safe --user=mysql
 exec mariadbd --user=mysql --console

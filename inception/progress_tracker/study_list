@@ -11,7 +11,7 @@ https://docs.docker.com/reference/compose-file/
 [X]	how daemon works
 [X]	PID 1
 []	domain name
-[]	point to local IP address
+[X]	point to local IP address
 [X]	environment variables
 [X]	.env
 [X]	nginx

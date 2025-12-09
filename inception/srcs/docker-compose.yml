@@ -62,4 +62,4 @@ services:
     - .env
     networks:
     - inception
-    restart: always
+    restart: no

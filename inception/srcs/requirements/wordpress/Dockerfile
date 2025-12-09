@@ -6,7 +6,9 @@ RUN apt-get update && apt-get upgrade && apt-get install -y \
     php-zip \
     php-redis \
     curl \
-    vim
+    vim \
+    iputils-ping \
+    mariadb-client
 
 RUN ls /etc/php | head -n1
 

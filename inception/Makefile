@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 18:08:06 by alerusso42        #+#    #+#              #
-#    Updated: 2025/12/02 11:05:58 by alerusso42       ###   ########.fr        #
+#    Updated: 2025/12/09 14:10:51 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ logs:
 		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
 		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
 		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
-		);
+		);\
+	fi
 
 exec:
 	@if [ -z $$cont ]; then \

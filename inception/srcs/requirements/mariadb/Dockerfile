@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 11:58:16 by alerusso42        #+#    #+#              #
-#    Updated: 2025/11/25 11:01:44 by alerusso42       ###   ########.fr        #
+#    Updated: 2025/12/09 15:47:35 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ FROM debian:trixie
 # ANCHOR - sources
 # https://mariadb.com/docs
 # https://mariadb.com/docs/server/mariadb-quickstart-guides/installing-mariadb-server-guide
+
+#/etc/mysql/mariadb.conf.d/50-server.cnf
 
 #ANCHOR - install 
 RUN apt update 
