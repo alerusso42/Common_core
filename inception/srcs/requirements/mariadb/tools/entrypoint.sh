@@ -25,11 +25,11 @@ if [ ! -e /var/lib/mysql/RAYQUAZA ]; then
     mysql < /tmp/init-final.sql
 
 	#turn down database
-    mysqladmin -u root -p "$WP_ADMIN_PWD" shutdown
+    mysqladmin -u root -p"$WP_ADMIN_PWD" shutdown
 
 	wait "$pid"
 fi
 
-sed -i 's/^bind-address.*/bind-address = wordpress/' /etc/mysql/mariadb.conf.d/50-server.cnf
+sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 #exec mariadbd-safe --user=mysql
 exec mariadbd --user=mysql --console
