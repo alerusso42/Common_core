@@ -25,3 +25,16 @@ void	lst_back(t_list **lst, t_list *new)
 	else
 		*lst = new;
 }
+
+void	lst2_back(t_list2 **lst, t_list2 *new)
+{
+	t_list2	*pointer;
+
+	if (lst && *lst && new)
+	{
+		pointer = lst2_last(*lst);
+		pointer->next = new;
+	}
+	else
+		*lst = new;
+}

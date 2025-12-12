@@ -21,3 +21,13 @@ t_list	*lst_last(t_list *lst)
 	}
 	return (lst);
 }
+
+t_list2	*lst2_last(t_list2 *lst)
+{
+	if (lst)
+	{
+		while (lst->next)
+			lst = lst->next;
+	}
+	return (lst);
+}

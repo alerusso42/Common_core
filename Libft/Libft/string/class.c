@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:01:18 by codespace        ###   ########.fr       */
+/*   Updated: 2025/12/12 19:25:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static void	_str_garbage_collector(t_str *p, bool delete)
 	else if (p->_garbage_coll_node == garbage_list)
 	{
 		garbage_list = garbage_list->next;
-		return ;
 	}
 }
 

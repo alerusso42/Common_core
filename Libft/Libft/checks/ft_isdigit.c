@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2024/11/29 10:44:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:36:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#define TRUE 1
-#define FALSE 0
+#include "../libft.h"
 
 int	ft_isdigit(int c)
 {
 	if ((c >= '0') && (c <= '9'))
-		return (TRUE);
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }
 
 /*
@@ -28,7 +26,7 @@ int	main()
 	char	c;
 
 	c = '^';
-	if (ft_isdigit((int)c) == TRUE)
+	if (ft_isdigit((int)c) == true)
 		printf("\nTRUE\n");
 	else
 		printf("\nFALSE\n");

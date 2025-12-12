@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 17:29:22 by codespace        ###   ########.fr       */
+/*   Updated: 2025/12/12 18:39:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 typedef struct s_fd	t_fd;
 typedef struct s_list	t_list;
+typedef struct s_list2	t_list2;
 
 enum e_charsets
 {
@@ -81,7 +82,6 @@ int			sub_strcpy(char *dest, const char *src, const char *charset, int mode);
 
 //		LIST
 
-
 t_list		*lst_new(void *content);
 void		lst_front(t_list **lst, t_list *new);
 int			lst_size(t_list *lst);
@@ -90,7 +90,16 @@ void		lst_back(t_list **lst, t_list *new);
 void		lst_delone(t_list *lst, void (*del)(void *));
 void		lst_clear(t_list **lst, void (*del)(void *));
 void		lst_iter(t_list *lst, void (*f)(void *));
-t_list		*lst_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+t_list2		*lst2_new(void *content1, void *content2);
+void		lst2_front(t_list2 **lst, t_list2 *new);
+int			lst2_size(t_list2 *lst);
+t_list2		*lst2_last(t_list2 *lst);
+void		lst2_back(t_list2 **lst, t_list2 *new);
+void		lst2_delone(t_list2 *lst, void (*del)(void *));
+void		lst2_clear(t_list2 **lst, void (*del)(void *));
+void		lst2_iter(t_list2 *lst, void (*f)(void *));
+
 //		PRINTF
 
 int			cut_string(char *string, size_t start, size_t end);

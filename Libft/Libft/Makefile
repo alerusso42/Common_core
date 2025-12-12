@@ -61,42 +61,40 @@ OBJ_STRING = $(addprefix $(OBJ_DIR)/, $(MODULE_STRING:.c=.o))
 
 #SECTION -	commands
 
-$(NAME): test $(OBJ_ALL)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_ALL) $(LFLAGS)
+$(NAME): $(OBJ_ALL)
+	ar rcs $(NAME)  $(OBJ_ALL)
 
-test: 
-#	echo $(OBJ_ALL)
-	clear
-	@echo $(OBJ_ALL)
+count: 
+	@echo $(OBJ_ALL) | wc -w
 
 all: $(NAME)
 
 algorythm: $(OBJ_ALGORYTHM)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_ALGORYTHM) $(LFLAGS)	
+	ar rcs $(NAME) $(OBJ_ALGORYTHM)
 
 checks: $(OBJ_CHECKS)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_CHECKS) $(LFLAGS)	
+	ar rcs $(NAME) $(OBJ_CHECKS)	
 
 daft: $(OBJ_DAFT)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_DAFT) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_DAFT)
 
 data: $(OBJ_DATA)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_DATA) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_DATA)
 
 files: $(OBJ_FILES)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_FILES) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_FILES)
 
 math: $(OBJ_MATH)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_MATH) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_MATH)
 
 mem: $(OBJ_MEM)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_MEM) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_MEM)
 
 printf: $(OBJ_PRINTF)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_PRINTF) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_PRINTF)
 
 string: $(OBJ_STRING)
-	ar rcs $(NAME) $(CFLAGS) $(OBJ_STRING) $(LFLAGS)
+	ar rcs $(NAME) $(OBJ_STRING)
 
 help:
 	@echo "\033[33mList of all modules:\n"\
@@ -119,7 +117,7 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o *.txt *.out
+	rm -f *.o *.txt *.out *.log
 	rm -rf $(OBJ_DIR)/*
 
 fclean: clean
@@ -127,5 +125,4 @@ fclean: clean
 
 re: fclean all
 
-
-.PHONY: help
+.PHONY: help files

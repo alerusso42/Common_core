@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:51:51 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 19:38:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:34:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	del_free(void *ptr)
 /*
 	A store to the list used for bfs.
 */
-t_list	*store_list(t_list *list, int mode)
+t_list2	*store_list(t_list2 *list, int mode)
 {
-	static t_list	*store_list;
+	static t_list2	*store_list;
 
 	if (mode == 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:12:06 by codespace        ###   ########.fr       */
+/*   Updated: 2025/12/12 19:44:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ bool	str_check_str(t_str *this, const t_str *other)
 	return (this->err > 0);
 }
 
-//ANCHOR - str_check_str
+//ANCHOR - str_check_this
 /*
 
 //	!!!This function is private! It shouldn't be used!

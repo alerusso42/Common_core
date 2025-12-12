@@ -20,3 +20,11 @@ void	lst_front(t_list **lst, t_list *new)
 	*lst = new;
 	new->next->prev = new;
 }
+
+void	lst2_front(t_list2 **lst, t_list2 *new)
+{
+	if (!new || !lst || !*lst)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}

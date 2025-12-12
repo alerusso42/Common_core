@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:58:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 19:44:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:33:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_bfs
 	int			distance;
 }				t_bfs;
 
-t_list		*store_list(t_list *list, int mode);
+t_list2		*store_list(t_list2 *list, int mode);
 void		del_free(void *ptr);
 int			draw_path(t_bfs *bfs);
 void		bfs(t_bfs *bfs);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/12 19:41:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:34:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	find_distance(t_bfs *bfs, int x, int y, int distance);
 static int	process_one(t_bfs *bfs);
-static int	bfs_loop(t_bfs *bfs, t_list *list);
+static int	bfs_loop(t_bfs *bfs, t_list2 *list);
 
 //SECTION -	EXCHANGE DATA FROM YOUR STRUCT TO bfs_stuff
 //			explaination at the end of the file
@@ -55,8 +55,8 @@ int	get_best_path(t_data *data, int enemy_num)
 */
 static int	find_distance(t_bfs *bfs, int x, int y, int distance)
 {
-	t_list	*new;
-	t_list	*list;
+	t_list2	*new;
+	t_list2	*list;
 	int			*x_alloc;
 	int			*y_alloc;
 
@@ -71,13 +71,13 @@ static int	find_distance(t_bfs *bfs, int x, int y, int distance)
 		return (1);
 	*x_alloc = x;
 	*y_alloc = y;
-	new = ft_lstnew((void *)x_alloc, (void *)y_alloc);
+	new = lst2_new((void *)x_alloc, (void *)y_alloc);
 	if (!new)
 		return (FREE(x_alloc), FREE(y_alloc), 1);
 	list = store_list(NULL, 1);
 	if (bfs->map[y][x].distance[bfs->n] != -1)
 		bfs->map[y][x].distance[bfs->n] = distance + 1;
-	ft_lstadd_back(&list, new);
+	lst2_back(&list, new);
 	return (0);
 }
 
@@ -113,15 +113,15 @@ static int	process_one(t_bfs *bfs)
 		see the -1, recognizing it as the start position;
 	3)	We process one node. Then we go to the next.
 */
-static int	bfs_loop(t_bfs *bfs, t_list *list)
+static int	bfs_loop(t_bfs *bfs, t_list2 *list)
 {
 	int	*x;
 	int	*y;
 
 	while (list)
 	{
-		x = (int *)list->content;
-		y = (int *)list->type;
+		x = (int *)list->content1;
+		y = (int *)list->content2;
 		bfs->x = *x;
 		bfs->y = *y;
 		bfs->distance = bfs->map[bfs->y][bfs->x].distance[bfs->n];
@@ -147,8 +147,8 @@ static int	bfs_loop(t_bfs *bfs, t_list *list)
 */
 void	bfs(t_bfs *bfs)
 {
-	t_list		*list;
-	t_list		*tail;
+	t_list2		*list;
+	t_list2		*tail;
 	int				*x;
 	int				*y;
 
@@ -163,13 +163,13 @@ void	bfs(t_bfs *bfs)
 	*y = bfs->en_y;
 	bfs->x = *x;
 	bfs->y = *y;
-	list = ft_lstnew((void *)x, (void *)y);
+	list = lst2_new((void *)x, (void *)y);
 	if (!list)
 		return (FREE(x), FREE(y));
 	tail = list;
 	store_list(list, 0);
 	bfs_loop(bfs, list);
-	ft_lstclear(&tail, del_free);
+	lst2_clear(&tail, del_free);
 }
 
 /*
