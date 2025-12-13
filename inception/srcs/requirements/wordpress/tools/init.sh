@@ -50,6 +50,13 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --dbpass="$WP_USER_PWD" \
         --dbhost="$WP_DB_HOST" \
         --allow-root
+    
+    sed -i '/Add any custom values between this line and the "stop editing" line./r /dev/stdin' /var/www/html/wp-config.php <<'EOF'
+
+define('FORCE_SSL_ADMIN', true);
+$_SERVER['HTTPS'] = 'on';
+
+EOF
 
     # --- 6. Installa WordPress ---
     echo -e "\033[32m[WP] Installazione WordPress\033[0m"
@@ -69,7 +76,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 else
     echo -e "\033[33m[WP] WordPress già installato, salto\033[0m"
 fi
-
 # --- 8. Avvia PHP-FPM ---
 echo -e "\033[32m[PHP-FPM] Avvio PHP-FPM in foreground\033[0m"
 exec /usr/sbin/php-fpm8.4 -F
