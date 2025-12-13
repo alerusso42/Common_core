@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 23:45:30 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/07 01:41:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/13 11:31:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ void	print_container(T &container, bool before)
 	std::cout << std::endl;
 }
 
+template <typename T>
+void	check_container_sorting(T &container)
+{
+	T	biggest(2);
+
+	biggest[0] = container[0];
+	for (size_t i = 0; i < container.size(); i++)
+	{
+		if (container[i] < biggest[0])
+		{
+			std::cout << "\033[31mCRITICAL ERROR! CONTAINER IS NOT SORTED!!!";
+			std::cout << "\033[0m\n" << "\033[32mBad position:\033[0m" << i;
+			std::cout << "\n\033[32mValue:\033[0m" << container[i] << std::endl;
+			throw Error(EX_SORT_FAILED);
+		}
+		else
+		{
+			biggest[0] = container[i];
+		}
+	}
+}
+
 template <typename T, typename F>
 void	print_time(T &container, F &function, std::string container_name)
 {
@@ -79,6 +101,7 @@ void	print_time(T &container, F &function, std::string container_name)
 	start = clock.tv_usec + (clock.tv_sec / 10e6);
 	function(container);
 	gettimeofday(&clock, NULL);
+	check_container_sorting(container);
 	end = clock.tv_usec + (clock.tv_sec / 10e6);
 	std::cout << "Time to process a range of ";
 	std::cout << container.size();

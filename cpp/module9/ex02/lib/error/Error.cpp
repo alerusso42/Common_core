@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:06:34 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/07 01:04:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/13 10:34:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 //SECTION - Message list
 /*
-	EX_INVALID_CHAR,
-	EX_EMPTY_STACK,
-	EX_DIVISION,
+	EX_SORT_FAILED
 */
 std::string	 Error::get_msg_main_code(int type)
 {
 	std::string	 s;
 
-	if (type == EX_REPEATED)
-		s = "Cannot repeat numbers. Repeated:";
+	if (type == EX_SORT_FAILED)
+		s = "DIE!";
 	return (s);
 }
 

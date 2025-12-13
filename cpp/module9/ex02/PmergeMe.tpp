@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/02 17:21:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/13 10:48:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static int32_t	binary_search(T &big, T &little, int32_t pos_lit, Pair &pairs)
 {
 	int32_t	pos_big = 0;
 
-	for (; pos_big < pairs.find(pos_lit); pos_big++)
+	for (; big[pos_big] != pairs.find(pos_lit); pos_big++)
 		if (little[pos_lit] <= big[pos_big] || pos_big == (int32_t)big.size() - 1)
 			break ;
-	//pairs.rm();
+	pairs.rm(pos_lit);
 	return (pos_big);
 }
 
@@ -81,10 +81,7 @@ static void		create_pairs(T &big, Pair &pairs)
 	lit_i = 0;
 	for (size_t big_i = 0; big_i + 1 < big.size(); big_i += 2)
 	{
-		if (big[big_i] < big[big_i + 1])
-			pairs.add(lit_i, big_i);
-		else
-			pairs.add(lit_i, big_i + 1);
+		pairs.add(lit_i, big[big_i] + (big[big_i] < big[big_i + 1]));
 		lit_i += 1;
 	}
 }

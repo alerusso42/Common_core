@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:04:52 by alerusso          #+#    #+#             */
-/*   Updated: 2025/10/07 01:03:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/13 10:19:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ To add error section:
 */
 enum e_error_main
 {
-	EX_REPEATED,
+	EX_SORT_FAILED,
 	EX_NUM,
 };
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/11 14:47:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/13 10:20:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ template <typename T>
 void	fill_container(T &container, int argc, char *argv[]);
 template <typename T>
 void	print_container(T &container, bool before);
+template <typename T>
+void	check_container_sorting(T &container);
 template <typename T, typename F>
 void	print_time(T &container, F &function, std::string container_name);
 

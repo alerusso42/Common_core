@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pair.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:51:47 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/02 15:44:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/13 10:48:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ Pair::Pair(int32_t size)
 	this->_capacity = size;
 	this->_error = 0;
 	this->_size = 0;
-	this->_insertions = 0;
 	this->_alloc();
 }
 	
@@ -45,7 +44,6 @@ Pair	Pair::operator=(Pair &other)
 	this->_capacity = other._capacity;
 	this->_size = other._size;
 	this->_error = other._error;
-	this->_insertions = other._insertions;
 	if (this->_error == this->E_ALLOC)
 		return (*this);
 	this->_copy(this->_buffer, other._buffer);
@@ -69,24 +67,33 @@ void	Pair::add(int32_t p1, int32_t p2)
 int32_t	Pair::find(int32_t pos)
 {
 	if (this->_error == E_ALLOC)
-		return (-1);
-	if (pos + this->_insertions >= this->_capacity)
-		return ((void)this->error(this->E_OUT_RANGE), INT_MAX);
-	if (this->_buffer[pos + this->_insertions] == -1)
-		return ((void)this->error(this->E_EMPTY), INT_MAX);
-	return (this->_buffer[pos + this->_insertions++]);
+		return (PAIR_EMPTY);
+	if (pos >= this->_capacity)
+		return ((void)this->error(this->E_OUT_RANGE), PAIR_EMPTY);
+	return (this->_buffer[pos]);
 }
 
-void	Pair::rm(void)
+void	Pair::rm(int32_t p1)
 {
-	this->_insertions += 1;
+	int32_t	i;
+
+	if (this->_error == E_ALLOC)
+		return ;
+	if (p1 >= this->_capacity)
+		return ;
+	for (i = p1; i + 1 < this->_size; i++)
+	{
+		this->_buffer[i] = this->_buffer[i + 1];
+	}
+	this->_buffer[i] = PAIR_EMPTY;
+	this->_size -= 1;
 }
 
 int32_t	Pair::error() const
 {
 	if (this->_error == E_OK)
 		return (0);
-	return (INT_MAX);
+	return (PAIR_EMPTY);
 	std::cerr << "\033[31m";
 	switch (this->_error)
 	{
@@ -123,7 +130,7 @@ void	Pair::_realloc()
 		return ;
 	}
 	for (int32_t i = this->_capacity / 2; i < this->_capacity; i++)
-		temp[i] = -1;
+		temp[i] = PAIR_EMPTY;
 	this->_copy(temp, this->_buffer);
 	delete[] this->_buffer;
 	this->_buffer = temp;
@@ -136,7 +143,7 @@ void	Pair::_alloc()
 		this->_error = this->E_ALLOC;
 	for (int32_t i = 0; i < this->_capacity; i++)
 	{
-		this->_buffer[i] = -1;
+		this->_buffer[i] = PAIR_EMPTY;
 	}
 }
 
