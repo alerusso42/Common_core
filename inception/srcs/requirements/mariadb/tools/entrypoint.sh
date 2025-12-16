@@ -30,7 +30,5 @@ if [ ! -e /var/lib/mysql/RAYQUAZA ]; then
 	wait "$pid"
 fi
 
-#Se mettiamo 0.0.0.0:9000 ---> 504 Gateway Time-out
 sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
-#exec mariadbd-safe --user=mysql
 exec mariadbd --user=mysql --console
