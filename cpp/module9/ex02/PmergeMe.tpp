@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 21:30:03 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/13 10:48:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/16 09:23:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		create_pairs(T &big, Pair &pairs)
 	lit_i = 0;
 	for (size_t big_i = 0; big_i + 1 < big.size(); big_i += 2)
 	{
-		pairs.add(lit_i, big[big_i] + (big[big_i] < big[big_i + 1]));
+		pairs.add(lit_i, big[big_i + (big[big_i] > big[big_i + 1])]);
 		lit_i += 1;
 	}
 }

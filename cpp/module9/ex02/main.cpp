@@ -12,7 +12,7 @@
 
 # include "PmergeMe.hpp"
 
-int main2(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	std::vector<int32_t>	vector;
 	std::deque<int32_t>		deque;
@@ -56,10 +56,10 @@ int	brutal_testing(int max_size)
 	return (0);
 }
 
-int main()
+int main2()
 {
-	int	times = 100000;
-	int	max_size = 1000;
+	int	times = 1000;
+	int	max_size = 5;
 
 	random_seed();
 	while (times--)
