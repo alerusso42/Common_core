@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 11:58:16 by alerusso42        #+#    #+#              #
-#    Updated: 2025/12/09 15:47:35 by codespace        ###   ########.fr        #
+#    Updated: 2025/12/16 12:20:02 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FROM debian:trixie
 #/etc/mysql/mariadb.conf.d/50-server.cnf
 
 #ANCHOR - install 
-RUN apt update 
+RUN apt update
 # Install
 RUN apt install -y mariadb-server mariadb-client galera-4 gettext-base
 

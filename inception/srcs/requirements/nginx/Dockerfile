@@ -12,8 +12,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-ARG CONF_PATH="/etc/nginx"
-FROM debian
+FROM debian:trixie
+
+#ARG CONF_PATH="/etc/nginx"
 #ANCHOR prepare files
 RUN apt update && apt install -y nginx && apt install -y openssl
 #ANCHOR creating directories in the image.
