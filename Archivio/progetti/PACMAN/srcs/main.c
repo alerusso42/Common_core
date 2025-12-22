@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:03:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 23:25:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2025/12/22 22:25:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ TODO
 	[]	esport su android
 */
 
-int	main1()
+int	main()
 {
 	t_data	data;
 
 	data = (t_data){0};
 	srand((unsigned int)time(NULL));
 	getter(&data, true);
+	SDL_setenv("SDL_AUDIODRIVER", "dummy", 1);
 	if (init_all(&data) != 0)
 		return (data.last_error);
 	game_loop(&data);
@@ -98,7 +99,7 @@ int	main4()
 	return (0);
 }
 
-int	main()
+int	main5()
 {
 	srand((unsigned int)time(NULL));
 	
