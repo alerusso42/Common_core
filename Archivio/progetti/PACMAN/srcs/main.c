@@ -26,7 +26,6 @@ int	main()
 	data = (t_data){0};
 	srand((unsigned int)time(NULL));
 	getter(&data, true);
-	SDL_setenv("SDL_AUDIODRIVER", "dummy", 1);
 	if (init_all(&data) != 0)
 		return (data.last_error);
 	game_loop(&data);

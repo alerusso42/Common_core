@@ -8,16 +8,16 @@
       "intelliSenseMode": "gcc-x64",
       "includePath": [
         "${workspaceFolder}/**",
-        "/home/alerusso/libs/SDL/install/include",
-        "/home/alerusso/libs/SDL_mixer/install/include",
-        "/home/alerusso/libs/SDL_image/install/include"
+        "/home/alerusso42/libs/SDL/install/include",
+        "/home/alerusso42/libs/SDL_mixer/install/include",
+        "/home/alerusso42/libs/SDL_image/install/include"
       ],
       "browse": {
         "path": [
           "${workspaceFolder}",
-          "/home/alerusso/libs/SDL/install/include",
-          "/home/alerusso/libs/SDL_image/install/include",
-          "/home/alerusso/libs/SDL_mixer/install/include"
+          "/home/alerusso42/libs/SDL/install/include",
+          "/home/alerusso42/libs/SDL_image/install/include",
+          "/home/alerusso42/libs/SDL_mixer/install/include"
         ]
       }
     }

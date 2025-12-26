@@ -26,8 +26,11 @@ LIB = daft/program/daft_src/*.c daft/program/prep_src/*.c daft/program/Libft/*.c
 
 COMP = cc -Wall -Wextra -Werror -g
 
+CFLAGS += $(shell pkg-config --cflags sdl2 SDL2_mixer SDL2_image)
+LDFLAGS = $(shell pkg-config --libs sdl2 SDL2_mixer SDL2_image) -lm
+
 # Include paths
-CFLAGS += \
+#CFLAGS += \
   -I$(HOME)/libs/SDL2/SDL_mixer/include/ \
   -I$(HOME)/libs/SDL2/SDL_image/include/ \
   -I$(HOME)/libs/SDL2/SDL/include
@@ -35,7 +38,7 @@ CFLAGS += \
 #LDFLAGS = $(shell pkg-config --libs --cflags sdl3 sdl3-mixer sdl3-image)
 
 # Library paths and linking
-LDFLAGS = 	-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2 \
+#LDFLAGS = 	-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2 \
   			-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2_mixer \
 			-L$(HOME)/.local/bin/sdl -lSDL2 -lSDL2_image -lm  \
 

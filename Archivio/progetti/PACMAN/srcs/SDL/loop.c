@@ -43,8 +43,8 @@ void	init_loop(t_data *data)
 	map_render(data, true);
 	animations(data);
 	SDL_RenderPresent(data->sdl.render);
-	SDL_Delay(10);
 	Mix_PlayChannel(1, data->sdl.sound[SO_PACMAN_BEGINNING], 0);
+	SDL_Delay(10);
 	Mix_ChannelFinished(set_sound_ending);
 	//wait_sound_ending(data);
 	Mix_PlayMusic(data->sdl.mus[MUS_MAIN], 0);

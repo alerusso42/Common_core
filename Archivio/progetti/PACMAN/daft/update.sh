@@ -8,7 +8,7 @@ SETTINGS="SETTINGS.md"
 DAFT_HEADER="daft.h"
 
 UPDATE="update.sh"
-PWD="/home/alerusso/Common_core/Archivio/progetti/PACMAN/daft"
+PWD="/home/alerusso42/Common_core/Archivio/progetti/PACMAN/daft"
 
 # Directory in which to store all hash files (relative or absolute path)
 HASH_DIR="data/hash_data"
