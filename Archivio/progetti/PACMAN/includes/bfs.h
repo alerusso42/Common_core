@@ -61,11 +61,11 @@ typedef struct s_bfs
 	int			distance;
 }				t_bfs;
 
-t_typelist	*store_list(t_typelist *list, int mode);
-void		del_free(void *ptr);
-int			draw_path(t_bfs *bfs);
-void		bfs(t_bfs *bfs);
-void		clean_bfs(t_bfs *bfs, int enemy_num);
-int			get_best_path(t_data *data, int enemy_num);
+t_list2	*store_list(t_list2 *list, int mode);
+void	del_free(void *ptr);
+int		draw_path(t_bfs *bfs);
+void	bfs(t_bfs *bfs);
+void	clean_bfs(t_bfs *bfs, int enemy_num);
+int		get_best_path(t_data *data, int enemy_num);
 
 #endif

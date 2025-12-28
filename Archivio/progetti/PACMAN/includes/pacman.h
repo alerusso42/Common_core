@@ -14,8 +14,7 @@
 # define PACMAN_H
 
 # include "lib.h"
-# include "../daft/program/Libft/all.h"
-# include "../daft/daft.h"
+# include "../Libft/libft.h"
 # include "media/mus.h"
 # include "media/sound.h"
 # include "media/textures.h"

@@ -9,10 +9,6 @@ SRC :=  $(wildcard srcs/*.c) \
         $(wildcard srcs/map/*.c) \
         $(wildcard srcs/utils/*.c) \
         $(wildcard srcs/debug/*.c) \
-		$(wildcard daft/program/daft_src/*.c) \
-		$(wildcard daft/program/prep_src/*.c) \
-		$(wildcard daft/program/Libft/*.c)
-
 
 HEADER = includes/*.h
 
@@ -21,8 +17,10 @@ HEADER = includes/*.h
 OBJ := $(patsubst %.c, $(O_DIR)/%.o, $(SRC))
 
 NAME = pacman
-#LIB = daft/daft.a
-LIB = daft/program/daft_src/*.c daft/program/prep_src/*.c daft/program/Libft/*.c
+LIB_PATH = Libft
+LIB = $(LIB_PATH)/libft.a
+
+#LIB = daft/program/daft_src/*.c daft/program/prep_src/*.c daft/program/Libft/*.c
 
 COMP = cc -Wall -Wextra -Werror -g
 
@@ -44,15 +42,18 @@ LDFLAGS = $(shell pkg-config --libs sdl2 SDL2_mixer SDL2_image) -lm
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(O_DIR) $(HEADER)
+$(NAME): $(OBJ) $(O_DIR) $(HEADER) $(LIB)
 	@echo $(OBJ)
-	@$(COMP) $(OBJ) -o $(NAME) $(CFLAGS) $(LDFLAGS)
+	@$(COMP) $(OBJ) $(LIB) -o $(NAME) $(CFLAGS) $(LDFLAGS)
 
 $(O_DIR):
 	mkdir -p $(O_DIR)
 
 $(O_DIR)%.o: $(ROOT)/srcs/%.c | $(O_DIR)
 	$(COMP) $(CFLAGS) -c $< -o $@
+
+$(LIB):
+	$(MAKE) -C $(LIB_PATH)
 
 build/obj/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -65,11 +66,10 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	printf 1
-	$(MAKE) fclean -C daft/program
+	$(MAKE) fclean -C $(LIB_PATH)
 
 daft: 
 	printf 2
-	$(MAKE) -C daft/program
+	$(MAKE) -C $(LIB_PATH)
 
 re: fclean daft all
-.PHONY: daft

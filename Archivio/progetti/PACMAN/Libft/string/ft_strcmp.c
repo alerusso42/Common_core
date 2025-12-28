@@ -1,0 +1,86 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 18:50:37 by alerusso          #+#    #+#             */
+/*   Updated: 2025/11/27 09:45:32 by codespace        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "string.h"
+
+//ANCHOR - str_cmp
+/*
+	Compares  the string object's buffer
+	with another string object or a char pointer.
+
+	@input:		[t_str *this]----->	pointer to string object
+				[const void *other]->pointer to another string object
+									or a char pointer
+	@return:	[int32_t]------->	result of comparison
+	@variables:	none
+	@usage:	*-------------------------------------------*	
+			|	int res = str_cmp(str, other);		|
+			|	//OR									|
+			|	int res = cmp(str, other);			|
+			|	//OR									|
+			|	int res = str->m->cmp(&str, other);	|
+			*-------------------------------------------*
+*/
+int32_t	str_cmp(t_str *this, const void *other)
+{
+	if (_str_identifier(other) == true)
+		return (str_cmp_str(this, other));
+	else
+		return (str_cmp_char(this, other));
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (!s1 || !s2)
+		return ((s1 > s2) - (s1 < s2));
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		++s1;
+		++s2;
+	}
+	if (!*s2)
+		return (0);
+	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+}
+
+int32_t	str_cmp_char(t_str *this, const char *other)
+{
+	register int32_t	n1;
+
+	if (str_check(this, NULL))
+		return (_str_set_error(this, E_PARAM, "cmp"), 0);
+	n1 = this->i;
+	while (this->buff[n1] && *other && this->buff[n1] == *other)
+	{
+		++n1;
+		++other;
+	}
+	return ((uint8_t)(this->buff[n1]) - (uint8_t)(*other));
+}
+
+int32_t	str_cmp_str(t_str *this, const t_str *other)
+{
+	register int32_t	n1;
+	register int32_t	n2;
+
+	if (str_check(this, NULL))
+		return (_str_set_error(this, E_PARAM, "cmp"), 0);
+	n1 = this->i;
+	n2 = other->i;
+	while (this->buff[n1] && other->buff[n2] \
+		&& this->buff[n1] == other->buff[n2])
+	{
+		++n1;
+		++n2;
+	}
+	return ((uint8_t)(this->buff[n1]) - (uint8_t)(other->buff[n2]));
+}

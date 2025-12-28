@@ -27,8 +27,9 @@ static void	print_error(t_data *data, int type)
 {
 	if (!data->debug_file.n)
 		data->debug_file = openfd(ERROR_FILE, "w+");
-	if (data->debug_file.n)
-		fd_printf(data->debug_file, "#------#\n");
+	if (!data->debug_file.n)
+		return ;
+	fd_printf(data->debug_file, "#------#\n");
 	if (type == ER_OK)
 		fd_printf(data->debug_file, "No errors.\n");
 	else if (type == ER_MALLOC)

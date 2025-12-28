@@ -27,9 +27,9 @@ void	del_free(void *ptr)
 /*
 	A store to the list used for bfs.
 */
-t_typelist	*store_list(t_typelist *list, int mode)
+t_list2	*store_list(t_list2 *list, int mode)
 {
-	static t_typelist	*store_list;
+	static t_list2	*store_list;
 
 	if (mode == 0)
 	{
