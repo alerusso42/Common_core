@@ -22,7 +22,7 @@ void *malloc_file(size_t size, const char *file)
 	fd = open(file, O_RDWR);
 	if (fd < 0)
 		return (NULL);
-	p = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+	p = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	close(fd);
 	if (!p || p == (void *)(-1))
 		return (NULL);
@@ -40,7 +40,7 @@ void *malloc_virtualfile(size_t size, const char *file)
 	fd = open(file, O_RDWR);
 	if (fd < 0)
 		return (NULL);
-	p = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	p = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
 	close(fd);
 	if (!p || p == (void *)(-1))
 		return (NULL);
@@ -76,5 +76,21 @@ void *malloc_anonymous(size_t size)
 	p = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 	if (!p || p == (void *)(-1))
 		return (NULL);
+	return (p);
+}
+
+void *malloc(size_t size)
+{
+	void		*p;
+	static long	min;
+	static int	offset;
+
+	min = sysconf(_SC_PAGESIZE);
+	p = mmap(NULL, size, PROT_READ | PROT_WRITE, \
+		MAP_PRIVATE | MAP_ANONYMOUS, 0, offset);
+	VALGRIND_MALLOCLIKE_BLOCK(p, size, 0, 0);
+	if (p == (void *)-1)
+		return (NULL);
+	offset = size + (min - size % min);
 	return (p);
 }
