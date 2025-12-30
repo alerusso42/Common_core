@@ -19,9 +19,9 @@ int	main()
 	char		*s;
 	const int	size = 7;
 
-	perror("Checking errno... ");
+	perror("Checking errno...");
 	s = malloc(size + 1);
-	perror("Checking errno... ");
+	perror("Checking errno...");
 	if (!s)
 		return (perror("Error\n"), 1);
 	for (int i = 0; i < size; i++)

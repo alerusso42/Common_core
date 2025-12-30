@@ -14,6 +14,7 @@
 # define FT_MALLOC_H
 
 # include <stdlib.h>
+# include <malloc.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/mman.h>
@@ -22,6 +23,11 @@
 
 //FIXME - da togliere!
 #include <valgrind/memcheck.h>
+
+typedef struct s_alloc
+{
+	
+}	t_alloc;
 
 void *malloc(size_t size);
 void free(void *ptr);
@@ -35,5 +41,7 @@ void *malloc_file(size_t size, const char *file);
 void *malloc_virtualfile(size_t size, const char *file);
 void *malloc_tempfile(size_t size);
 void *malloc_anonymous(size_t size);
+
+extern 
 
 #endif
