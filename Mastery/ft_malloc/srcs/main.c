@@ -13,6 +13,7 @@
 # include "../includes/ft_malloc.h"
 
 void	test();
+void	print_extreme(long long *p, bool print);
 
 int	main()
 {
@@ -31,6 +32,7 @@ int	main()
 	write(1, "\n", 1);
 	free(s);
 	test();
+	print_extreme(NULL, true);
 }
 
 #include "../libft.h"

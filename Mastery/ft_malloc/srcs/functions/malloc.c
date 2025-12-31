@@ -78,6 +78,9 @@ void *malloc_anonymous(size_t size)
 		return (NULL);
 	return (p);
 }
+#include "../../libft.h"
+
+void	print_extreme(long long *p, bool print);
 
 void *malloc(size_t size)
 {
@@ -91,6 +94,24 @@ void *malloc(size_t size)
 	VALGRIND_MALLOCLIKE_BLOCK(p, size, 0, 0);
 	if (p == (void *)-1)
 		return (NULL);
+	print_extreme(p, false);
 	offset = size + (min - size % min);
 	return (p);
+}
+
+void	print_extreme(long long *p, bool print)
+{
+	static long long	*lowest = (long long *)((1UL << 63) - 1);
+	static long long	*biggest = (long long *)0;
+
+	if (print)
+	{
+		ft_printf(1, "Biggest: %d; Lowest: %d\n", biggest, lowest);
+	}
+	if (!p)
+		return ;
+	if (p < lowest)
+		lowest = p;
+	else if (p > biggest)
+		biggest = p;
 }
