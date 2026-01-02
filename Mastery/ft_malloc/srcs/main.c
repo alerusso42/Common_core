@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 # include "../includes/ft_malloc.h"
+# include "../all.h"
 
 void	test();
 void	print_extreme(long long *p, bool print);
@@ -20,6 +21,7 @@ int	main()
 	char		*s;
 	const int	size = 7;
 
+	ft_printf(1, "pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
 	perror("Checking errno...");
 	s = malloc(size + 1);
 	perror("Checking errno...");
@@ -35,13 +37,12 @@ int	main()
 	print_extreme(NULL, true);
 }
 
-#include "../libft.h"
 void	test()
 {
 	int	i;
 	int	j;
 
-	daft_init();
+	daft_init("media", "SETTINGS.md");
     daft_swap(2);
 	char	***matr = daft_get("CALYREX");
 	if (!matr)

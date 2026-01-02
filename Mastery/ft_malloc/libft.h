@@ -6,19 +6,42 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/31 13:34:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 14:21:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
+# ifndef FUN_MACROS
+#  define FUN_MACROS
+#  define MALLOC malloc
+#  define CALLOC calloc
+#  define FREE free
+#  define WRITE writefd
+#  define READ readfd
+#  define SEEK lseek
+#  define OPEN ft_open
+#  define CLOSE close
+#  define SDL_RWops int
+# endif
 # include <stdint.h>
-#include <stdbool.h>
+# include <stdlib.h>
 
 typedef struct s_fd	t_fd;
 typedef struct s_list	t_list;
 typedef struct s_list2	t_list2;
+typedef struct s_manage_fds	t_manage_fds;
+
+enum e_charsets
+{
+	ALPHA,
+	UPPER_ALPHA,
+	LOWER_ALPHA,
+	DIGIT,
+	ALPHANUM,
+	EXCLUDE,
+	INCLUDE,
+};
 
 int64_t		ft_atoi(const char *nptr);
 void		ft_bzero(void *s, size_t n);
@@ -75,43 +98,41 @@ void		lst2_iter(t_list2 *lst, void (*f)(void *));
 
 //		PRINTF
 
+void	ft_putchar_fd(char c, t_fd fd);
+void	ft_putendl_fd(char *s, t_fd fd);
+void	ft_putnbr_fd(int n, t_fd fd);
+void	ft_putstr_fd(char *s, t_fd fd);
+int		fd_printf(t_fd fd, const char *str, ...);
+int	    ft_printf(int fd, const char *str, ...);
+
 int			cut_string(char *string, size_t start, size_t end);
 
-int     daft_init(void);
-void    daft_quit(void);
-void    daft_swap(int enum_id);
-void    daft_free(void *mem);
-void    *daft_get(const char *search);
-int             daft_load(void);
-void    *daft_edit(const char *search, int size, int mtr_number);
-void    *daft_append(const char *key, int size, int mtr_number);
+//	FILE
 
-void    ft_putchar_fd(char c, t_fd fd);
-void    ft_putendl_fd(char *s, t_fd fd);
-void    ft_putnbr_fd(int n, t_fd fd);
-void    ft_putstr_fd(char *s, t_fd fd);
-int             fd_printf(t_fd fd, const char *str, ...);
-int         ft_printf(int fd, const char *str, ...);
+t_fd			openfd(const char *filename, const char *permissions);
+int				ft_open(const char *filename, const char *perm);
+t_manage_fds	*fd_database(bool);
+int				get_filedata(t_fd *fd, char **filename);
+void			del_filedata(void);
+int				switch_filedata(t_fd fd);
+int				fd_indexation(void);
+void			closefd(t_fd fd);
+int				read_curr(t_manage_fds *data, int count);
+int				readfd(t_fd	fd, char *buff, int count);
+char			*get_static_buffer(int fd, bool reset, bool reset_all);
+char			*gnl();
+int				writefd(t_fd fd, const char *s, size_t len);
+int				reset_fd(t_fd fd);
 
-typedef struct s_fd	t_fd;
-typedef struct s_manage_fds	t_manage_fds;
+// DAFT
 
-
-//              SDL_SUPPORT
-
-t_fd                    openfd(const char *filename, const char *permissions);
-int                             ft_open(const char *filename, const char *perm);
-t_manage_fds    *fd_database(bool);
-int                             get_filedata(t_fd *fd, char **filename);
-void                    del_filedata(void);
-int                             switch_filedata(t_fd fd);
-int                             fd_indexation(void);
-void                    closefd(t_fd fd);
-int                             read_curr(t_manage_fds *data, int count);
-int                             readfd(t_fd     fd, char *buff, int count);
-char                    *get_static_buffer(int fd, bool reset, bool reset_all);
-char                    *gnl();
-int                             writefd(t_fd fd, const char *s, size_t len);
-int                             reset_fd(t_fd fd);
+int 	daft_init(const char *path, const char *settings_filename);
+void	daft_quit(void);
+void	daft_swap(int enum_id);
+void	daft_free(void *mem);
+void	*daft_get(const char *search);
+int		daft_load(void);
+void	*daft_edit(const char *search, int size, int mtr_number);
+void	*daft_append(const char *key, int size, int mtr_number);
 
 #endif

@@ -23153,3 +23153,28 @@ Category=Gulp
 Pokedex=It's so strong that it can knock out some opponents in a single hit, but it also may forget what it's battling midfight.
 Generation=8
 #-------------------------------
+
+IR_GABIBBO]
+Name=Cramorant
+Types=FLYING,WATER
+BaseStats=70,85,55,85,85,95
+GenderRatio=Female50Percent
+GrowthRate=Medium
+BaseExp=166
+EVs=SPECIAL_DEFENSE,2
+CatchRate=45
+Happiness=50
+Abilities=GULPMISSILE
+Moves=1,BELCH,1,PECK,1,STOCKPILE,1,SWALLOW,1,SPITUP,7,WATERGUN,14,FURYATTACK,21,PLUCK,28,DIVE,35,DRILLPECK,42,AMNESIA,49,THRASH,56,HYDROPUMP
+TutorMoves=AGILITY,AIRSLASH,AMNESIA,ASSURANCE,ATTRACT,BLIZZARD,BRAVEBIRD,CAPTIVATE,CONFIDE,DIVE,DOUBLETEAM,DUALWINGBEAT,ENDURE,FACADE,FLY,FRUSTRATION,GIGAIMPACT,HIDDENPOWER,HURRICANE,HYDROPUMP,HYPERBEAM,ICEBEAM,ICYWIND,LIQUIDATION,MIMIC,NATURALGIFT,PROTECT,RAINDANCE,REST,RETURN,REVERSAL,ROUND,SCALD,SECRETPOWER,SLEEPTALK,SNORE,STEELWING,SUBSTITUTE,SUPERPOWER,SURF,SWAGGER,THIEF,THROATCHOP,TOXIC,UPROAR,WEATHERBALL,WHIRLPOOL
+EggMoves=AERIALACE,AQUARING,DEFOG,FEATHERDANCE,ROOST
+EggGroups=Water1,Flying
+HatchSteps=5120
+Height=0.8
+Weight=18.0
+Color=Blue
+Shape=Winged
+Category=Gulp
+Pokedex=It's so strong that it can knock out some opponents in a single hit, but it also may forget what it's battling midfight.
+Generation=8
+#-------------------------------
