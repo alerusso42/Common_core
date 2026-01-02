@@ -1,4 +1,4 @@
-#	This file is a setting file for the database used for program.
+#	Daft settings file.
 
 #SECTION - General settings
 #	Hash size:	1 means hash result are on a range from 0 to file_len.

@@ -6,12 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:07:01 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/27 23:44:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 11:47:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "daft_prog.h"
 
+static void	free_conf(t_daft_conf *conf);
 static void	free_filedata(t_daft_list *filedata);	
 static void	update_filedata(t_daft_data *data);
 
@@ -32,6 +33,7 @@ void daft_quit(void)
 		return ((void)_daft_log(DAFT_LOG_NOMEM));
 	update_filedata(data);
 	_daft_free_mem(data, -1);
+	free_conf(&data->conf);
 	del_filedata();
 	data->files_names = free_matrix(data->files_names);
 	FREE(data->conf.default_flags);
@@ -50,6 +52,18 @@ void daft_quit(void)
 	FREE(data->data_list);
 	data->data_list = NULL;
 	FREE(data);
+}
+
+static void	free_conf(t_daft_conf *conf)
+{
+	FREE(conf->path);
+	FREE(conf->sett_path);
+	FREE(conf->tmp_path);
+	FREE(conf->log_path);
+	conf->path = NULL;
+	conf->sett_path = NULL;
+	conf->tmp_path = NULL;
+	conf->log_path = NULL;
 }
 
 //	Filedata is the struct of files inner data (flags, filenames, hash data).
@@ -110,5 +124,5 @@ static void	update_filedata(t_daft_data *data)
 			_daft_edit_hash_file(data->data_list[i], i);
 		++i;
 	}
-	closefd(openfd(DAFT_PWD"/file.tmp", "w"));
+	closefd(openfd(data->conf.tmp_path, "w"));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 17:16:05 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 12:46:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 //SECTION - functions prototypes
 
-int 	daft_init(void);
+int 	daft_init(const char *path, const char *settings_filename);
 void	daft_quit(void);
 void	daft_swap(int enum_id);
 void	daft_free(void *mem);
@@ -38,10 +38,5 @@ typedef enum e_daft_db
 	MEDIA_LIST,
 	POKEDEX,
 }	t_daft_db;
-
-//SECTION - Global variables
-# ifndef DAFT_PWD
-#  define DAFT_PWD "media"
-# endif
 
 #endif

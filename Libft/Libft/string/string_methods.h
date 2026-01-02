@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_methods.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 13:23:44 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:21:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 11:59:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_str	*str_set_start_index(t_str *str, int32_t i);
 
 t_str	_str_constructor(t_str *str, const char *init);
 void	_str_destructor(void *str);
-err		_str_get_methods(t_str *s);
+err		_str_get_methods(t_str *s, bool reset);
 t_str	*_str_set_error(t_str *str, int err, char *func_name);
 void	_str_set(t_str *this);
 t_str	*_str_reset(t_str *this, int i);

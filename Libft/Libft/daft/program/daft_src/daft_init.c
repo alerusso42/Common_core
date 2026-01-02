@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:36:58 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 19:00:37 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 12:45:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,31 @@ static int	get_settings_file(t_daft_data *data);
 static int	get_database_file(t_daft_data *data);
 
 /*
-//REVIEW -	daft_get
+//REVIEW -	daft_init
 //
+	You must give as a parameter:
+	1)	the path of your data directory;
+	2)	the name of the settings file.
 	Initialize daft memory.
 	Returns 0 on success.
-	On failure, creates a log file named daft_log, 
-	writing on it the issue, and returns an integer
-	different than 0, based on a enum called e_daft_logs.
 */
-int 	daft_init(void)
+int 	daft_init(const char *path, const char *settings_filename)
 {
 	t_daft_data	*data;
+	char		*temp;
 
-	if (_daft_get_memory(NULL, false))
-		return (0);
+	if (_daft_get_memory(NULL, false) || !path || !settings_filename)
+		return (_daft_log(DAFT_LOG_USAGE));
 	data = ft_calloc(1, sizeof(t_daft_data));
 	if (!data)
 		return (DAFT_LOG_MALLOC);
 	data->conf.debug_log = true;
+	data->conf.path = ft_strdup(path);
+	temp = ft_strjoin(path, "/");
+	data->conf.sett_path = ft_strjoin(temp, settings_filename);
+	FREE(temp);
+	data->conf.tmp_path = ft_strjoin(path, "/tmp.dft");
+	//data->conf.log_path = ft_strjoin(path, "/log.dft"); //to log in a file
 	data->mem_size = -1;
 	data->minimal_matrix_num = 1;
 	_daft_get_memory(data, true);
@@ -44,7 +51,6 @@ int 	daft_init(void)
 	return (0);
 }
 
-//	DAFT_PWD is updated upon launching the update script.
 //	All setting file is read, searching for the two section of
 //	settings.
 static int	get_settings_file(t_daft_data *data)
@@ -52,7 +58,7 @@ static int	get_settings_file(t_daft_data *data)
 	char	*line;
 	t_fd	settings_file;
 
-	settings_file = openfd(DAFT_PWD"/SETTINGS.md", "r");
+	settings_file = openfd(data->conf.sett_path, "r");
 	if (!settings_file.n)
 		return (_daft_log(DAFT_LOG_SETT));
 	line = gnl();

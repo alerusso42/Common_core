@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_settings.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 19:35:49 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 11:22:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ static int	parse_config(t_daft_data *data, char *line)
 
 static char	*cut_flag(char *flag);
 
-char	*_daft_get_flags(int fnum)
+char	*_daft_get_flags(t_daft_data *data, int fnum)
 {
 	char	*line;
 	bool	start_count;
-	t_fd	settings_file;
+	t_fd	sett_fd;
 
 	start_count = false;
-	settings_file = openfd(DAFT_PWD"/SETTINGS.md", "r");
-	if (!settings_file.n)
+	sett_fd = openfd(data->conf.sett_path, "r");
+	if (!sett_fd.n)
 		return (_daft_log(DAFT_LOG_SETT), NULL);
 	line = gnl();
 	while (line)
@@ -84,7 +84,7 @@ char	*_daft_get_flags(int fnum)
 		if (start_count == true && fnum-- == 0)
 			break ;
 	}
-	closefd(settings_file);
+	closefd(sett_fd);
 	if (!line)
 		return (NULL);
 	return (cut_flag(line));

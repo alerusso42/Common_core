@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_macros.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/26 17:50:04 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 12:11:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef int32_t					err;
 # define _STR_IDENTIFIER ULLONG_MAX
 # define _STR_REALLOC_SIZE 32
 
+# define STR_DEBUG false
+# if STR_DEBUG == false
+#  define STR_LOG(error, ...) ft_printf(2, error, ##__VA_ARGS__)
+# else 
+# define STR_LOG(error, ...) (void)0
+# endif
 //REVIEW - STR_OVERLOAD
 /*
 	f:	 	the name of the function

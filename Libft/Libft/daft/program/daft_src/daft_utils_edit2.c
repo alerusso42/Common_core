@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:55:49 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 11:38:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 11:00:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	_daft_update_data(t_daft_data *data, int i)
 	char		*line;
 	t_daft_mem	*edit;
 
-	if (_daft_open_files(data, data->data_list[i]->filename, DAFT_PWD"/file.tmp"))
+	if (_daft_open_files(data, data->data_list[i]->filename, data->conf.tmp_path))
 		return (1);
 	line = gnl();
 	while (line)
@@ -71,7 +71,7 @@ static void	rewrite_data(t_daft_data *data, int i)
 {
 	char	*line;
 
-	if (_daft_open_files(data, DAFT_PWD"/file.tmp", data->data_list[i]->filename))
+	if (_daft_open_files(data, data->conf.tmp_path, data->data_list[i]->filename))
 		return ;
 	line = gnl();
 	while (line)

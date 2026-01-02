@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:55:45 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/12 19:25:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 12:09:55 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	_str_garbage_collector(t_str *p, bool delete);
 */
 t_str	_str_constructor(t_str *str, const char *buff)
 {
-	printf("%s\tconstructor\n", buff);
+	STR_LOG("%s\tconstructor\n", buff);
 	*str = (t_str){0};
 	str->_str_identifier = _STR_IDENTIFIER;
 	str->capacity = -1;
 	str->set = str_set_start_index;
-	if (_str_get_methods(str) != EXIT_SUCCESS)
+	if (_str_get_methods(str, false) != EXIT_SUCCESS)
 		return (*str);
 	if (sdup(str, buff)->err != 0)
 		return (*str);
@@ -119,8 +119,8 @@ static void	_str_garbage_collector(t_str *p, bool delete)
 */
 void	_str_destructor(void *str)
 {
-	printf("%s\tdestructor\n", ((t_str *)str)->buff);
-	_str_get_methods(NULL);
+	STR_LOG("%s\tdestructor\n", ((t_str *)str)->buff);
+	_str_get_methods(NULL, false);
 	FREE(((t_str *)str)->buff);
 	if (((t_str *)str)->_garbage_coll_node)
 	{
@@ -144,4 +144,5 @@ void	_str_destructor(void *str)
 void	str_terminate(void)
 {
 	_str_garbage_collector(NULL, true);
+	_str_get_methods(NULL, true);
 }

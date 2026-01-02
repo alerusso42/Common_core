@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_edit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 09:23:26 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 19:41:39 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 11:30:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	_daft_edit_hash_file(t_daft_list *list, int f_num)
 	if (!fnames[1])
 		return (_daft_log(DAFT_LOG_MALLOC));
 	if (*list->field_sep == 0)
-		flags = _daft_get_flags(f_num);
+		flags = _daft_get_flags(_daft_get_memory(NULL, false), f_num);
 	else
 	{
 		flags = ft_calloc(6, sizeof(char));

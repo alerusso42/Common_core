@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:36:07 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 17:00:26 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 12:21:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (stringona);
 }
 
+/*
+MODE select which str should freed
+MODE 0: free none
+MODE 1:	free s1
+MODE 2:	free s2
+MODE 3:	free both
+*/
 char	*ft_strjoin_free(char *s1, char *s2, int mode)
 {
 	char	*join;

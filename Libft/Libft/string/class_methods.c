@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   class_methods.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:15:11 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 12:10:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-static err		_str_store_methods(t_str *s);
+static err		_str_store_methods(t_str *s, bool reset);
 static void		_str_register_function(t_str_methods *m);
 
 //ANCHOR - _str_get_methods
@@ -25,11 +25,11 @@ static void		_str_register_function(t_str_methods *m);
 	@return:	string error code
 	@variables:	none
 */
-err	_str_get_methods(t_str *s)
+err	_str_get_methods(t_str *s, bool reset)
 {
 	if (s == NULL)
-		return (_str_store_methods(NULL));
-	s->err = _str_store_methods(s);
+		return (_str_store_methods(NULL, reset));
+	s->err = _str_store_methods(s, reset);
 	return (s->err);
 }
 
@@ -44,7 +44,7 @@ err	_str_get_methods(t_str *s)
 	@variables:	[static int32_t str_allocated]->number of string objects
 				[static t_str_methods *methods]->pointer to methods structure
 */
-static err		_str_store_methods(t_str *s)
+static err		_str_store_methods(t_str *s, bool reset)
 {
 	static int32_t			str_allocated;
 	static t_str_methods	*methods;
@@ -53,9 +53,9 @@ static err		_str_store_methods(t_str *s)
 	{
 		if (str_allocated != 0)
 			str_allocated -= 1;
-		if (str_allocated == 0)
+		if (str_allocated == 0 && reset)
 		{
-			printf("Since no more string exists, methods are freed.\n");
+			STR_LOG("Since no more string exists, methods are freed.\n");
 			FREE(methods);
 			methods = NULL;
 		}
@@ -63,7 +63,7 @@ static err		_str_store_methods(t_str *s)
 	}
 	if (!methods)
 	{
-		printf("Allocating %zu bytes for methods\n", sizeof(t_str_methods));
+		STR_LOG("Allocating %zu bytes for methods\n", sizeof(t_str_methods));
 		methods = CALLOC(1, sizeof(t_str_methods));
 		if (!methods)
 			return (E_ALLOC);

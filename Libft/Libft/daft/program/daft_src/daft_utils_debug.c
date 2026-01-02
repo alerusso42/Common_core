@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_debug.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 17:35:06 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 12:44:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,25 @@ int	_daft_log(int log)
 
 	data = _daft_get_memory(NULL, false);
 	if (!data)
-		return (log);
+		return (daft_printerror(log, (t_fd){2, 2}), log);
 	if (log > DAFT_ERRORS)
 		data->last_error = log;
 	if (data->conf.debug_log == false)
 		return (log);
-	log_file = openfd("daft.log", "a+");
+	if (data->conf.log_path)
+		log_file = openfd("daft.log", "a+");
+	else
+		log_file = (t_fd){2, 2};
 	if (!log_file.n)
 		return (log);
-	daft_printerror(log, (t_fd){2, 2});
+	daft_printerror(log, log_file);
 	closefd(log_file);
 	return (log);
 }
 
 static void	daft_printerror(int log, t_fd fd)
 {
+	fd_printf(fd, "\033[31mDaft log: \033[0m");
 	if (log == DAFT_LOG_ALLOCSIZE)
 		fd_printf(fd, "Missing or invalid allocsize in hash_data.\n");
 	else if (log == DAFT_LOG_ATOI)
@@ -54,4 +58,7 @@ static void	daft_printerror(int log, t_fd fd)
 		fd_printf(fd, "Called a function without calling daft_init().\n");
 	else if (log == DAFT_LOG_KEYUSED)
 		fd_printf(fd, "Selected key has already been used.\n");
+	else if (log == DAFT_LOG_USAGE)
+		fd_printf(fd, "invalid use of daft_init. Correct use:\n \
+if (daft_init(data_path, setting_filename) != 0)\n\treturn (EXIT_FAILURE);\n");
 }

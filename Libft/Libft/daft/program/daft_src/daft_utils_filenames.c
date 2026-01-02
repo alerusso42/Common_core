@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:50:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 11:20:29 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/02 11:01:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	parse_fnames(t_daft_data *data, char *line, int *matr_s);
 
-//	This function takes the filenames from SETTINGS.md, and saves them
+//	This function takes the filenames from settings file, and saves them
 //	in a char ** matrix.
 //	Skips all lines found after the delimiter "# -- FLAGS -- #"
 //	that are either empty or comments '#'.
@@ -45,9 +45,8 @@ int	_daft_save_fnames(t_daft_data *data)
 	return (0);
 }
 
-//	Trim flags (->), resize matrix if necessary, compose file using
-//	the macro DAFT_PWD (updated with the script), and increase
-//	data->files_num.
+//	Trim flags (->), resize matrix if necessary, 
+//increase data->files_num.
 static int	parse_fnames(t_daft_data *data, char *line, int *matr_s)
 {
 	int		len;
@@ -67,7 +66,7 @@ static int	parse_fnames(t_daft_data *data, char *line, int *matr_s)
 		return (_daft_log(DAFT_LOG_MALLOC));
 	temp = data->files_names[data->files_num];
 	data->files_names[data->files_num] = \
-	ft_strjoin(DAFT_PWD, data->files_names[data->files_num]);
+	ft_strjoin(data->conf.path, data->files_names[data->files_num]);
 	if (!data->files_names[data->files_num])
 		return (FREE(temp), _daft_log(DAFT_LOG_MALLOC));
 	FREE(temp);

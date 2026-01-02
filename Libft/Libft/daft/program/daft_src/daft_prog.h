@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_prog.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 19:33:58 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/02 12:31:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../prep_src/daft_prep.h"
 
 # define SEED 42
-# define DAFT_REPLACE DAFT_PWD"/replace"
 
 typedef struct s_daft_data	t_daft_data;
 typedef struct s_daft_conf	t_daft_conf;
@@ -28,6 +27,10 @@ typedef unsigned int		t_bool;
 struct s_daft_conf
 {
 	char	*default_flags;
+	char	*path;
+	char	*sett_path;
+	char	*tmp_path;
+	char	*log_path;
 	t_bool	debug_log;
 };
 
@@ -90,6 +93,7 @@ enum e_daft_logs
 	DAFT_LOG_OPEN,
 	DAFT_LOG_ATOI,
 	DAFT_LOG_MALLOC,
+	DAFT_LOG_USAGE,
 	DAFT_LOG_SETT,
 	DAFT_LOG_FILESETT,
 	DAFT_LOG_ALLOCSIZE,
@@ -109,7 +113,7 @@ enum e_daft_mem
 
 int			_daft_save_config(t_daft_data *data);
 int			_daft_save_fnames(t_daft_data *data);
-char		*_daft_get_flags(int fnum);
+char		*_daft_get_flags(t_daft_data *data, int fnum);
 int			_daft_get_data(t_daft_list *file, char *filename, int fnum);
 int			_daft_get_data2(t_daft_list *file);
 int			_daft_log(int log);
