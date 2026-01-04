@@ -1,7 +1,7 @@
 NAME := a.out
 FILE := test_file
 
-SRC := $(shell ls ./srcs/*.c ./srcs/functions/*.c)
+SRC := $(shell ls ./srcs/*.c ./srcs/functions/*.c ./srcs/utils/*.c)
 
 comp := cc -Wall -Wextra -Werror -g \
 		$(SRC) libft.a -o $(NAME)

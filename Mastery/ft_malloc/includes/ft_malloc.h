@@ -19,10 +19,19 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <limits.h>
 # include <sys/mman.h>
 # include <sys/unistd.h>
 # include <sys/fcntl.h>
 
+int	    ft_printf(int fd, const char *str, ...);
+
+# define DEBUG true
+# if DEBUG == true
+#  define PRINT(s, ...) ft_printf(1, s, ##__VA_ARGS__)
+# else
+#  define PRINT(s, ...)	(void)0
+# endif
 //FIXME - da togliere!
 #include <valgrind/memcheck.h>
 
@@ -41,19 +50,21 @@ typedef struct s_alloc
 	uintptr_t	ptr_start;
 	uintptr_t	ptr_curr;
 	int			pagesize;
+	int			offset;
 }	t_alloc;
 
 typedef struct s_info
 {
 	size_t	bytes;
 	size_t	kernel_offset;
-};	t_info;
+}	t_info;
 
+# define ALLOC_MAX_SIZE (UINT_MAX - (unsigned long)sizeof(t_info))
 enum e_alloc
 {
-	ALLOC_TINY = (1 << 8) - 1,
-	ALLOC_SMALL = (1 << 16) - 1,
-	ALLOC_LARGE = (1 << 24) - 1,
+	ALLOC_TINY = (1 << 8),
+	ALLOC_SMALL = (1 << 16),
+	ALLOC_LARGE = (1 << 24),
 };
 
 enum e_alloc_flags
@@ -79,6 +90,6 @@ void *malloc_anonymous(size_t size);
 //SECTION - utils
 
 t_alloc	*_global_data(bool reset);
-int		round_page(int n, int pagesize);
+int	round_page(int n, int pagesize);
 
 #endif

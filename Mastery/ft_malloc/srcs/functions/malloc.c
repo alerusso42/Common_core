@@ -85,31 +85,24 @@ void	print_extreme(long long *p, bool print);
 void *malloc(size_t size)
 {
 	void		*p;
-	static long	min;
-	static void	*start;
-	static int	offset;
-	static void	*curr;
+	t_alloc		*data;
 
-	if (!start)
-	{
-		min = sysconf(_SC_PAGE_SIZE);
-		start = mmap(NULL, 1, PROT_RDWR, MAP_AP, 0, offset);
-		ft_printf(1, "START ADDRESS: %d\n", (long long)start);
-		offset = min;
-		curr = start + offset;
-	}
-	if (!start)
+	data = _global_data(false);
+	if (!data)
 		return (NULL);
-	ft_printf(1, "offset: %d; next addr: %d", offset, (long long)curr);
-	p = mmap(curr, size, PROT_RDWR, MAP_APF, -1, offset);
-	ft_printf(1, ";real addr: %d\n", (long long)p);
+	if (size > ALLOC_MAX_SIZE)
+		return (PRINT("size too large\n"), NULL);
+	size += sizeof(t_info);
+	PRINT("offset: %d; next addr: %d", data->offset, data->ptr_curr);
+	p = mmap((void *)data->ptr_curr, size, PROT_RDWR, MAP_APF, -1, data->offset);
+	PRINT(";real addr: %d\n", (long long)p);
 	VALGRIND_MALLOCLIKE_BLOCK(p, size, 0, 0);
 	if (p == (void *)-1)
-		return (ft_printf(2, "failure!\n"), NULL);
+		return (PRINT("failure!\n"), NULL);
 	print_extreme(p, false);
-	offset = size + (min - size % min);
-	curr += offset;
-	return (p);
+	data->offset = round_page(size, data->pagesize);
+	*(t_info *)data->ptr_curr = (t_info){size, (uintptr_t)p - data->ptr_curr};
+	return (p + sizeof(t_info));
 }
 
 void	print_extreme(long long *p, bool print)

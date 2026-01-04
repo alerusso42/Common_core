@@ -23,9 +23,9 @@ int	main()
 
 	ft_printf(1, "stack starts with: %d,%d\n", (long long)&s, (long long)&size);
 	ft_printf(1, "pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
-	perror("Checking errno...");
+	//perror("Checking errno...");
 	s = malloc(size + 1);
-	perror("Checking errno...");
+	//perror("Checking errno...");
 	if (!s)
 		return (perror("Error\n"), 1);
 	for (int i = 0; i < size; i++)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/04 12:57:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:21:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ this works only if pagesize is a power of 2
 */
 int	round_page(int n, int pagesize)
 {
-	return (n + pagesize - 1 & ~(pagesize - 1));
+	return ((n + pagesize - 1) & ~(pagesize - 1));
 }
 
 //always return alloc global data.
@@ -40,14 +40,21 @@ int	round_page(int n, int pagesize)
 t_alloc	*_global_data(bool reset)
 {
 	static t_alloc	data;
+	(void)reset;
 
-	if (reset)
+	if (!data.pagesize)
 	{
 		data = (t_alloc){0};
 		data.pagesize = sysconf(_SC_PAGE_SIZE);
 		data.limits.tiny = round_page(ALLOC_TINY, data.pagesize);
 		data.limits.small = round_page(ALLOC_SMALL, data.pagesize);
 		data.limits.large = round_page(ALLOC_LARGE, data.pagesize);
+		data.ptr_start = (uintptr_t)mmap(NULL, 1, PROT_RDWR, MAP_AP, 0, 0);
+		data.ptr_curr = data.ptr_start;
+		data.offset = data.pagesize;
+		PRINT("START ADDRESS: %d\n", data.ptr_start);
 	}
+	if (!data.ptr_start)
+		return (NULL);
 	return (&data);
 }
