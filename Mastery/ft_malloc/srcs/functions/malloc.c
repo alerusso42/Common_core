@@ -90,11 +90,10 @@ void *malloc(size_t size)
 	static int	offset;
 	static void	*curr;
 
-	min = sysconf(_SC_PAGE_SIZE);
 	if (!start)
 	{
-		start = mmap(NULL, 1, PROT_READ | PROT_WRITE, \
-		MAP_PRIVATE | MAP_ANONYMOUS, 0, offset);
+		min = sysconf(_SC_PAGE_SIZE);
+		start = mmap(NULL, 1, PROT_RDWR, MAP_AP, 0, offset);
 		ft_printf(1, "START ADDRESS: %d\n", (long long)start);
 		offset = min;
 		curr = start + offset;
@@ -102,7 +101,7 @@ void *malloc(size_t size)
 	if (!start)
 		return (NULL);
 	ft_printf(1, "offset: %d; next addr: %d", offset, (long long)curr);
-	p = mmap((void*)(long long)start + offset, size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, offset);
+	p = mmap(curr, size, PROT_RDWR, MAP_APF, -1, offset);
 	ft_printf(1, ";real addr: %d\n", (long long)p);
 	VALGRIND_MALLOCLIKE_BLOCK(p, size, 0, 0);
 	if (p == (void *)-1)

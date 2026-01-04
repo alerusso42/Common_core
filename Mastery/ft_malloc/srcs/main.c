@@ -21,6 +21,7 @@ int	main()
 	char		*s;
 	const int	size = 7;
 
+	ft_printf(1, "stack starts with: %d,%d\n", (long long)&s, (long long)&size);
 	ft_printf(1, "pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
 	perror("Checking errno...");
 	s = malloc(size + 1);
@@ -35,6 +36,8 @@ int	main()
 	free(s);
 	test();
 	print_extreme(NULL, true);
+	ft_printf(1, "");
+	ft_printf(1, "Program end!");
 }
 
 void	test()
