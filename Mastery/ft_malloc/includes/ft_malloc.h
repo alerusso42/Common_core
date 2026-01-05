@@ -24,11 +24,11 @@
 # include <sys/unistd.h>
 # include <sys/fcntl.h>
 
-int	    ft_printf(int fd, const char *str, ...);
+int	ft_printf(const char *str, ...);
 
 # define DEBUG true
 # if DEBUG == true
-#  define PRINT(s, ...) ft_printf(1, s, ##__VA_ARGS__)
+#  define PRINT(s, ...) ft_printf(s, ##__VA_ARGS__)
 # else
 #  define PRINT(s, ...)	(void)0
 # endif
@@ -45,10 +45,10 @@ typedef struct s_sizelimit
 typedef struct s_alloc
 {
 	t_sizelimit	limits;
-	uintptr_t	ptr_max;
-	uintptr_t	ptr_min;
-	uintptr_t	ptr_start;
-	uintptr_t	ptr_curr;
+	void 		*ptr_max;
+	void 		*ptr_min;
+	void 		*ptr_start;
+	void 		*ptr_curr;
 	int			pagesize;
 	int			offset;
 }	t_alloc;

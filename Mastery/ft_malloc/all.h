@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 14:32:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 23:50:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,14 +171,18 @@ typedef struct s_list2
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-typedef struct s_fd t_fd;
+typedef struct s_fd 	t_fd;
+typedef struct s_str 	t_str;
 
 void	ft_putchar_fd(char c, t_fd fd);
 void	ft_putendl_fd(char *s, t_fd fd);
 void	ft_putnbr_fd(int n, t_fd fd);
 void	ft_putstr_fd(char *s, t_fd fd);
-int		fd_printf(t_fd fd, const char *str, ...);
-int	    ft_printf(int fd, const char *str, ...);
+int     tfd_printf(t_fd fd, const char *str, ...);
+int     fd_printf(int fd, const char *str, ...);
+int     ft_printf(const char *str, ...);
+int     err_printf(const char *str, ...);
+int     str_printf(t_str *buff, const char *str, ...);
 
 #endif
 /* ************************************************************************** */
@@ -606,8 +610,11 @@ void	ft_putchar_fd(char c, t_fd fd);
 void	ft_putendl_fd(char *s, t_fd fd);
 void	ft_putnbr_fd(int n, t_fd fd);
 void	ft_putstr_fd(char *s, t_fd fd);
-int		fd_printf(t_fd fd, const char *str, ...);
-int	    ft_printf(int fd, const char *str, ...);
+int     tfd_printf(t_fd fd, const char *str, ...);
+int     fd_printf(int fd, const char *str, ...);
+int     ft_printf(const char *str, ...);
+int     err_printf(const char *str, ...);
+int     str_printf(t_str *buff, const char *str, ...);
 
 int			cut_string(char *string, size_t start, size_t end);
 

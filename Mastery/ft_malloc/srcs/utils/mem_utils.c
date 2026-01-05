@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/04 15:21:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 00:43:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ t_alloc	*_global_data(bool reset)
 		data.limits.tiny = round_page(ALLOC_TINY, data.pagesize);
 		data.limits.small = round_page(ALLOC_SMALL, data.pagesize);
 		data.limits.large = round_page(ALLOC_LARGE, data.pagesize);
-		data.ptr_start = (uintptr_t)mmap(NULL, 1, PROT_RDWR, MAP_AP, 0, 0);
+		data.ptr_start = mmap(NULL, 10000000, PROT_RDWR, MAP_AP, 0, 0);
 		data.ptr_curr = data.ptr_start;
 		data.offset = data.pagesize;
-		PRINT("START ADDRESS: %d\n", data.ptr_start);
+		PRINT("START ADDRESS: %p\n", data.ptr_start);
 	}
 	if (!data.ptr_start)
 		return (NULL);

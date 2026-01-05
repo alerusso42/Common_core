@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:58:50 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 21:24:55 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 23:40:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ enum e_ansi_codes
 	C_WHITE = 37,
 	B_WHITE = 47,
 	C_GRAY = 90,
-	C_PINK = 95,
 	B_GRAY = 100,
+	C_PINK = 95,
 	B_PINK = 105,
 };
 

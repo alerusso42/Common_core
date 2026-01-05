@@ -91,17 +91,18 @@ void *malloc(size_t size)
 	if (!data)
 		return (NULL);
 	if (size > ALLOC_MAX_SIZE)
-		return (PRINT("size too large\n"), NULL);
+		return (PRINT("$Rsize too large$Z\n"), NULL);
 	size += sizeof(t_info);
-	PRINT("offset: %d; next addr: %d", data->offset, data->ptr_curr);
-	p = mmap((void *)data->ptr_curr, size, PROT_RDWR, MAP_APF, -1, data->offset);
-	PRINT(";real addr: %d\n", (long long)p);
+	PRINT("$Goffset$Z: %d; $Gnext addr$Z: %p", data->offset, data->ptr_curr);
+	p = mmap(data->ptr_curr, size, PROT_RDWR, MAP_APF, -1, data->offset);
+	PRINT("$G;real addr$Z: %p\n", p);
 	VALGRIND_MALLOCLIKE_BLOCK(p, size, 0, 0);
 	if (p == (void *)-1)
-		return (PRINT("failure!\n"), NULL);
+		return (PRINT("$RAllocation failure!$Z\n"), NULL);
 	print_extreme(p, false);
 	data->offset = round_page(size, data->pagesize);
-	*(t_info *)data->ptr_curr = (t_info){size, (uintptr_t)p - data->ptr_curr};
+	*(t_info *)p = (t_info){data->offset, p - data->ptr_curr};
+	data->ptr_curr = p + data->offset;
 	return (p + sizeof(t_info));
 }
 
@@ -112,7 +113,7 @@ void	print_extreme(long long *p, bool print)
 
 	if (print)
 	{
-		ft_printf(1, "Biggest: %d; Lowest: %d\n", biggest, lowest);
+		ft_printf("Biggest: %d; Lowest: %d\n", biggest, lowest);
 	}
 	if (!p)
 		return ;

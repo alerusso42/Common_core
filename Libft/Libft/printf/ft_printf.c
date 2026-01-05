@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 21:25:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 23:39:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	type_print(t_ft_printf *data)
 			print_char(data, '%');
 			break ;
 		default :
-			return (print_str(data, "/UNKNOWN ANSICODE/"));
+			return (print_str(data, "/UNKNOWN TYPE/"));
 	}
 	data->s++;
 }
@@ -84,7 +84,7 @@ static void	ansi_print(t_ft_printf *data)
 		return ;
 	ansi_type = ansi_table[(int)*data->s - ' '];
 	if (ansi_type == 255)
-		return ;
+		return (print_str(data, "/UNKNOWN ANSICODE/"));
 	ansi_flags = 0;
 	if (ft_isalnum(*data->s) == false)
 		ansi_flags |= ANSI_ARGS;
