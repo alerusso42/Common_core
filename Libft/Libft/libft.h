@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 14:18:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 17:55:24 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define MALLOC malloc
 #  define CALLOC calloc
 #  define FREE free
-#  define WRITE writefd
+#  define WRITE write
 #  define READ readfd
 #  define SEEK lseek
 #  define OPEN ft_open
@@ -57,6 +57,8 @@ int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
 char		*ft_itoa(int num);
+void		ft_itoa_stack(char *str, int64_t num);
+void		ft_uitoa_stack(char *str, uint64_t num);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
@@ -103,14 +105,19 @@ void		lst2_iter(t_list2 *lst, void (*f)(void *));
 
 //		PRINTF
 
-void	ft_putchar_fd(char c, t_fd fd);
+/*void	ft_putchar_fd(char c, t_fd fd);
 void	ft_putendl_fd(char *s, t_fd fd);
 void	ft_putnbr_fd(int n, t_fd fd);
 void	ft_putstr_fd(char *s, t_fd fd);
 int		fd_printf(t_fd fd, const char *str, ...);
-int	    ft_printf(int fd, const char *str, ...);
+int	    ft_printf(int fd, const char *str, ...);*/
 
 int			cut_string(char *string, size_t start, size_t end);
+
+//	MATH
+
+int	int_size(int64_t n);
+int	uint_size(uint64_t n);
 
 //	FILE
 

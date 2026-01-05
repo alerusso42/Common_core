@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:16:24 by codespace         #+#    #+#             */
-/*   Updated: 2025/11/27 17:06:12 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/05 17:51:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 
 #include "../libft.h"
 #include "../files/mfile.h"
+#include "../string/string.h"
 
 typedef struct s_fd t_fd;
+typedef struct s_str t_str;
 
 void	ft_putchar_fd(char c, t_fd fd);
 void	ft_putendl_fd(char *s, t_fd fd);
 void	ft_putnbr_fd(int n, t_fd fd);
 void	ft_putstr_fd(char *s, t_fd fd);
-int		fd_printf(t_fd fd, const char *str, ...);
-int	    ft_printf(int fd, const char *str, ...);
+int		tfd_printf(t_fd fd, const char *str, ...);
+int		fd_printf(int fd, const char *str, ...);
+int	    ft_printf(const char *str, ...);
+int		err_printf(const char *str, ...);
+int		str_printf(t_str *buff, const char *str, ...);
 
 #endif

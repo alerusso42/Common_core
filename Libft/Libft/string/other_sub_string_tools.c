@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_sub_string_tools.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:24:24 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/24 21:07:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 22:42:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

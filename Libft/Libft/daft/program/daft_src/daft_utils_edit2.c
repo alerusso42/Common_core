@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:55:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 11:00:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 17:42:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	_daft_update_data(t_daft_data *data, int i)
 			_daft_edit_f(data, i, &line, edit);
 		else
 		{
-			fd_printf(data->temp_files[1], "%s\n", line);
+			tfd_printf(data->temp_files[1], "%s\n", line);
 			FREE(line);
 			line = gnl();
 		}
@@ -76,7 +76,7 @@ static void	rewrite_data(t_daft_data *data, int i)
 	line = gnl();
 	while (line)
 	{
-		fd_printf(data->temp_files[1], "%s\n", line);
+		tfd_printf(data->temp_files[1], "%s\n", line);
 		FREE(line);
 		line = gnl();
 	}

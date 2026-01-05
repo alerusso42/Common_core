@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 12:11:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 23:12:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ typedef enum e_str_error		t_str_error;
 typedef int32_t					err;
 
 # define _STR_IDENTIFIER ULLONG_MAX
-# define _STR_REALLOC_SIZE 32
+# define _STR_REALLOC_SIZE 64
 
 # define STR_DEBUG false
-# if STR_DEBUG == false
-#  define STR_LOG(error, ...) ft_printf(2, error, ##__VA_ARGS__)
+# if STR_DEBUG == true
+#  define STR_LOG(error, ...) err_printf(error, ##__VA_ARGS__)
 # else 
-# define STR_LOG(error, ...) (void)0
+#  define STR_LOG(error, ...) (void)0
 # endif
 //REVIEW - STR_OVERLOAD
 /*

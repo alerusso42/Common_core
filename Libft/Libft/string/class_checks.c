@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/12 19:44:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 22:20:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@ t_str	*_str_set_error(t_str *str, int err, char *func_name)
 	{
 		case (E_ALLOC) :
 			str->capacity = -1;
-			write(2, "String:\tFATAL:\tAllocation error", 31);
+			err_printf("String:\tFATAL:\tAllocation error");
 			break ;
 		case (E_PARAM) :
-			write(2, "String:\tbad parameter in function\t", 34);
-			write(2, func_name, ft_strlen(func_name));
+			err_printf("String:\tbad parameter in function\t");
+			err_printf(func_name);
 			break ;
 		case (E_ATOI_FAIL) :
-			write(2, "String:\tAtoi has failed for this param->\t", 41);
-			write(2, func_name, ft_strlen(func_name));
+			err_printf("String:\tAtoi has failed for this param->\t");
+			err_printf(func_name);
 			break ;
 		case (E_NPOS) :
 			str->err = 0;
 			break ;
 	}
-	write(2, "\n", 1);
+	err_printf("\n");
 	return (str);
 }
 

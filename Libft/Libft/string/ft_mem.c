@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:43:14 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 09:42:09 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/05 22:23:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_str	*str_srealloc(t_str *this, int32_t n)
 		return (_str_set_error(this, E_ALLOC, "_realloc"));
 	if (!temp)
 		return (this);
-	ncpy(this, temp, 0, n);
+	ncpy(this, temp, 0, this->len);
 	FREE(temp);
 	this->capacity = n;
 	_str_set(this);

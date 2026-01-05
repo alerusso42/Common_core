@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:46:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:28:57 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/05 17:52:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,53 @@ t_str	*str_itoa(t_str *this, int32_t value)
 	if (!this->buff)
 		this->err = E_ALLOC;
 	return (this);
+}
+
+void	ft_itoa_stack(char *str, int64_t num)
+{
+	int64_t	temp_num;
+	int		index;
+
+	index = 0;
+	if (num < 0)
+		str[index++] = '-';
+	if (num == 0)
+		str[index] = '0';
+	temp_num = num;
+	while ((temp_num > 9) || (temp_num < -9))
+	{
+		index++;
+		temp_num /= 10;
+	}
+	str[index + 1] = '\0';
+	while (num != 0)
+	{
+		if (num < 0)
+			str[index--] = (((num % 10) * -1) + 48);
+		else
+			str[index--] = ((num % 10) + 48);
+		num /= 10;
+	}
+}
+
+void	ft_uitoa_stack(char *str, uint64_t num)
+{
+	uint64_t	temp_num;
+	int			index;
+
+	index = 0;
+	if (num == 0)
+		str[index] = '0';
+	temp_num = num;
+	while (temp_num > 9)
+	{
+		index++;
+		temp_num /= 10;
+	}
+	str[index + 1] = '\0';
+	while (num != 0)
+	{
+		str[index--] = ((num % 10) + 48);
+		num /= 10;
+	}
 }

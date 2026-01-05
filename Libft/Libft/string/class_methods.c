@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 12:10:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 22:17:13 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static err		_str_store_methods(t_str *s, bool reset)
 	}
 	if (!methods)
 	{
-		STR_LOG("Allocating %zu bytes for methods\n", sizeof(t_str_methods));
+		STR_LOG("Allocating %u bytes for methods\n", sizeof(t_str_methods));
 		methods = CALLOC(1, sizeof(t_str_methods));
 		if (!methods)
 			return (E_ALLOC);

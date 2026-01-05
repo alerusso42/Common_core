@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:07:11 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/30 20:13:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/05 17:40:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	append(t_daft_data *dt, t_daft_mem *mem, int fn)
 		_daft_free_mem(dt, dt->mem.add);
 		return ;
 	}
-	fd_printf(dt->temp_files[1], "\n");
+	tfd_printf(dt->temp_files[1], "\n");
 	_daft_append_f(dt, fn, &line, mem);
 	FREE(line);
 }

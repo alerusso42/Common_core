@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_edit3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:31:20 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 17:25:44 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/05 17:43:04 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static void	str_handler(t_daft_data *dt, int i, char **line, char *mem)
 
 	if (**line == '#' || !ft_strchr(*line, *dt->data_list[i]->key_value_sep))
 	{
-		(void)fd_printf(dt->temp_files[1], "%s\n", *line);
+		(void)tfd_printf(dt->temp_files[1], "%s\n", *line);
 		FREE(*line);
 		*line = gnl();
 		return ;
 	}
 	len = sub_strlen(*line, dt->data_list[i]->key_value_sep, EXCLUDE);
 	writefd(dt->temp_files[1], *line, len + 1);
-	fd_printf(dt->temp_files[1], "%s\n", mem);
+	tfd_printf(dt->temp_files[1], "%s\n", mem);
 	FREE(*line);
 	*line = gnl();
 }
@@ -69,7 +69,7 @@ static void	mtr_h_handler(t_daft_data *dt, int i, char **line, char **mem)
 
 	if (**line == '#' || !ft_strchr(*line, *dt->data_list[i]->key_value_sep))
 	{
-		(void)fd_printf(dt->temp_files[1], "%s\n", *line);
+		(void)tfd_printf(dt->temp_files[1], "%s\n", *line);
 		FREE(*line);
 		*line = gnl();
 		return ;
@@ -79,12 +79,12 @@ static void	mtr_h_handler(t_daft_data *dt, int i, char **line, char **mem)
 	j = 0;
 	while (mem[j])
 	{
-		fd_printf(dt->temp_files[1], "%s", mem[j]);
+		tfd_printf(dt->temp_files[1], "%s", mem[j]);
 		++j;
 		if (mem[j - 1][0] && mem[j] && mem[j][0])
-			fd_printf(dt->temp_files[1], "%c", *dt->data_list[i]->values_sep);
+			tfd_printf(dt->temp_files[1], "%c", *dt->data_list[i]->values_sep);
 	}
-	fd_printf(dt->temp_files[1], "\n");
+	tfd_printf(dt->temp_files[1], "\n");
 	FREE(*line);
 	*line = gnl();
 }
@@ -93,7 +93,7 @@ static void	mtr_v_handler(t_daft_data *dt, int i, char **line, char **mem)
 {
 	int		j;
 
-	fd_printf(dt->temp_files[1], "%s\n", *line);
+	tfd_printf(dt->temp_files[1], "%s\n", *line);
 	FREE(*line);
 	*line = gnl();
 	j = 0;
@@ -108,7 +108,7 @@ static void	mtr_3d_handler(t_daft_data *dt, int i, char **line, char ***mem)
 {
 	int		j;
 
-	fd_printf(dt->temp_files[1], "%s\n", *line);
+	tfd_printf(dt->temp_files[1], "%s\n", *line);
 	FREE(*line);
 	*line = gnl();
 	j = 0;

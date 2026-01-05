@@ -3,135 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:54:30 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/05 21:25:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_data.h"
 
-static int	type_print(char type, va_list ptr, int fd);
-static void	ft_putnbr(int num, int fd);
-static void	print(char *str, int fd);
+static void	type_print(t_ft_printf *data);
+static void	ansi_print(t_ft_printf *data);
 
-/*
-int	main(void)
+int	_ft_printf(int fd, const char *str, t_str *buff, va_list *ptr)
 {
-	char	c;
-	int		x;
-	char	*str;
+	t_ft_printf	data;
 
-	c = 'A'; 
-	x = -42;
-	str = "Vincere e vinceremo";
-	printf("Char:%c\n Int:%d\n Char *:%s\n", c, x, str);
-	printf("Stringa custom: \n");
-	ft_printf("Char:%c\n Int:%d\n Char *:%s\n", c, x, str);
-	return (0);
-}
-*/
-
-/*
-	A lighter and faster version of my ft_printf project.
-
-	It takes an fd as argument.
-*/
-int	ft_printf(int fd, const char *str, ...)
-{
-	int		index;
-	va_list	ptr;
-
-	if (!str)
+	if (!str || !ptr || (fd == -1 && !buff))
+		return (0);
+	data = (t_ft_printf){0};
+	data.buff = buff;
+	data.args = ptr;
+	data.s = str;
+	data.fd = fd;
+	while (*data.s != '\0')
 	{
-		return (1);
-	}
-	index = 0;
-	va_start(ptr, str);
-	while (str[index] != '\0')
-	{
-		if ((str[index] == '%') && (str[index + 1] != '\0'))
+		if (*data.s == '%')
+			type_print(&data);
+		else if (*data.s == '$')
+			ansi_print(&data);
+		else
 		{
-			if (type_print(str[++index], ptr, fd) == 1)
-				print("/UNKNOWN SPECIFIER/", fd);
+			print_char(&data, *data.s);
+			data.s++;
 		}
-		else
-			write(fd, &str[index], 1);
-		++index;
 	}
-	va_end(ptr);
-	return (0);
+	return (data.len);
 }
 
-int	type_print(char type, va_list ptr, int fd)
+static void	type_print(t_ft_printf *data)
 {
-	char	c;
-	char	*s;
-	int		d;
-
-	if (type == 'c')
+	data->s++;
+	switch (*data->s)
 	{
-		c = (char)va_arg(ptr, int);
-		write(fd, &c, 1);
+		case 'c' :
+			print_char(data, (char)va_arg(*data->args, int));
+			break ;
+		case 's' :
+			print_str(data, (char *)va_arg(*data->args, char *));
+			break ;
+		case 'd' :
+			print_int(data, (int)va_arg(*data->args, int64_t));
+			break ;
+		case 'u' :
+			print_uint(data, (int)va_arg(*data->args, uint64_t));
+			break ;
+		case 'p' :
+			print_uint(data, (int)va_arg(*data->args, uint64_t));
+			break ;
+		case '%' :
+			print_char(data, '%');
+			break ;
+		default :
+			return (print_str(data, "/UNKNOWN ANSICODE/"));
 	}
-	else if (type == 's')
-	{
-		s = (char *)va_arg(ptr, char *);
-		print(s, fd);
-	}
-	else if (type == 'd')
-	{
-		d = (int)va_arg(ptr, int);
-		ft_putnbr(d, fd);
-	}
-	else
-		return (1);
-	return (0);
+	data->s++;
 }
 
-static void	ft_putnbr(int num, int fd)
+static void	ansi_print(t_ft_printf *data)
 {
-	char	str[12];
-	int		temp_num;
-	int		index;
+	static const uint8_t	ansi_table['~' - ' '] = FT_PRINTF_ANSI_TABLE;
+	uint8_t					ansi_flags;
+	char					result[MAX_ANSI_SIZE];
+	int						len;
+	uint8_t					ansi_type;
 
-	index = 0;
-	if (num < 0)
-		str[index++] = '-';
-	if (num == 0)
-		str[index] = '0';
-	temp_num = num;
-	while ((temp_num > 9) || (temp_num < -9))
-	{
-		index++;
-		temp_num /= 10;
-	}
-	str[index + 1] = '\0';
-	while (num != 0)
-	{
-		if (num < 0)
-			str[index--] = (((num % 10) * -1) + 48);
-		else
-			str[index--] = ((num % 10) + 48);
-		num /= 10;
-	}
-	print(str, fd);
-}
-
-static void	print(char *str, int fd)
-{
-	int	index;
-
-	if (!str)
-	{
-		write(fd, "(NULL)", 6);
+	PRINTF_DEBUG("\033[32mPRINTF_DEBUG\033[0m: cursor: %s\n", data->s);
+	data->s++;
+	if (*data->s < 32)
 		return ;
-	}
-	index = 0;
-	while (str[index] != '\0')
-	{
-		write(fd, &str[index], 1);
-		++index;
-	}
+	ansi_type = ansi_table[(int)*data->s - ' '];
+	if (ansi_type == 255)
+		return ;
+	ansi_flags = 0;
+	if (ft_isalnum(*data->s) == false)
+		ansi_flags |= ANSI_ARGS;
+	else if (ft_isalpha(*data->s) == true)
+		ansi_flags |= ANSI_M_SEPARATOR;
+	data->s++;
+	len = ansi_fill(data, ansi_flags, ansi_type, result);
+	print_str_len(data, result, len);
+	data->len -= len;
+	*result = '\\';
+	PRINTF_DEBUG("\033[31mPRINTF_DEBUG\033[0m: ansi result: %s\n", result);
 }

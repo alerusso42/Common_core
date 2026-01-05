@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   num_size.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 15:31:06 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 16:28:50 by alerusso         ###   ########.fr       */
+/*   Created: 2026/01/05 17:07:48 by alerusso          #+#    #+#             */
+/*   Updated: 2026/01/05 18:23:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdint.h>
 
-void	ft_putstr_fd(char *s, t_fd fd)
+int	int_size(int64_t n)
 {
-	WRITE(fd.p, s, ft_strlen(s));
+	int	len;
+
+	if (!n)
+		return (1);
+	len = 0;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
 }
 
-/*
-int	main()
+int	uint_size(uint64_t n)
 {
-	int		fd;
+	int	len;
 
-	fd = open("testoh.txt", O_RDWR);
-	if (fd == -1)
+	if (!n)
 		return (1);
-	ft_putstr_fd("fd:", fd);
-	close(fd);
-	return (0);
-}*/
+	len = 0;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}

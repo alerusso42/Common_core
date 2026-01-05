@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:42:50 by alerusso          #+#    #+#             */
-/*   Updated: 2025/11/27 16:21:47 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/05 16:28:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_putnbr_fd(int n, t_fd fd)
 			str[index--] = ((n % 10) + 48);
 		n /= 10;
 	}
-	WRITE(fd, str, ft_strlen(str));
+	WRITE(fd.p, str, ft_strlen(str));
 }
 
 /*
