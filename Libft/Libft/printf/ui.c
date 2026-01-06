@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:38:26 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 21:55:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 17:14:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ int	str_printf(t_str *buff, const char *str, ...)
 }
 
 /*
-interpreta % = specificatori di formato
+Interpreta:
+	-	% = specificatori di formato
+	-	$ = ansi code
+	-	? = funzioni
+//ANCHOR -  % = specificatori di formato
 %c = char
 %d = long long signed int
 %u = long long unsigned int
 %p = puntatori
 
-interpreta $ = ansi code
+//ANCHOR -  $ = ansi code
 esempio: "$R ciao!"	->	setta come colore font red, scrive ciao
 esempio: "$\\5"		->	scende 5 colonne in basso
 esempio: "$#2"		->	pulisce lo schermo
@@ -77,7 +81,6 @@ cmd||effect								|ansi code
 2	|restore_position					|	\033[u
 //SECTION ARGS
 !	|clear (pulisce schermo)			|	\033[0J | OPPURE 1J 2J 3J
-?	|sleep								|	-
 |#|	|clearLine (pulisce linea corrente)	|	\033[0K | OPPURE 1K 2K
 /	|Up									|	\033[A
 \\	|Down								|	\033[B
@@ -111,6 +114,20 @@ W	|white (bianco)						|	\033[37m
 X	|hidden (testo invisibile)			|	\033[8m
 Y	|yellow (giallo)					|	\033[33m
 Z	|reset								|	\033[0m
+
+//ANCHOR -  ? = Function
+
+-	Può ricevere puntatori a funzioni ed eseguirle
+-	Può prendere da 0 a massimo 3 argomenti
+-	Gli argomenti possono essere puntatori (%p) o variabili senza puntatore (%d)
+-	Le variabili senza puntatore non devono avere size > 8 bytes
+
+Sintassi: 	
+			ft_printf("?%p?", function)
+			ft_printf("?%p-%d-%p", function, 42, "ciao!")
+			ft_printf("?%p-42-ciao!", function")
+Esempio: ft_printf("aspetto %d secondi... ?%p-%d?fine attesa!\n", time, sleep, time);
+Esempio: ft_printf("?%p-%d-%p?", main, ac, av);
 */
 int	ft_printf(const char *str, ...)
 {

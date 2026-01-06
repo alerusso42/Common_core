@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:28:04 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 22:20:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:00:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,16 @@ t_str	*_str_set_error(t_str *str, int err, char *func_name)
 */
 bool	str_check_char(t_str *this, const char *other)
 {
-	if (this->err == E_ALLOC || !this->buff)
-		return (1);
+	if (this->err == E_ALLOC)
+		return (E_ALLOC);
+	else if (!this->buff)
+	{
+		if (str_srealloc(this, 0)->err != 0)
+		{
+			this->err = E_ALLOC;
+			return (E_ALLOC);
+		}
+	}
 	else if (!other)
 		this->err = E_PARAM;
 	else if (this->i == this->npos)
@@ -90,8 +98,16 @@ bool	str_check_char(t_str *this, const char *other)
 */
 bool	str_check_str(t_str *this, const t_str *other)
 {
-	if (this->err == E_ALLOC || !this->buff)
+	if (this->err == E_ALLOC)
 		return (1);
+	else if (!this->buff)
+	{
+		if (str_srealloc(this, 0) != 0)
+		{
+			this->err = E_ALLOC;
+			return (E_ALLOC);
+		}
+	}
 	else if (other->err == E_ALLOC)
 		this->err = E_PARAM;
 	else if (this->i == this->npos)
@@ -113,8 +129,16 @@ bool	str_check_str(t_str *this, const t_str *other)
 bool	str_check_this(t_str *this, const void *empty)
 {
 	(void)empty;
-	if (this->err == E_ALLOC || !this->buff)
+	if (this->err == E_ALLOC)
 		return (1);
+	else if (!this->buff)
+	{
+		if (str_srealloc(this, 0) != 0)
+		{
+			this->err = E_ALLOC;
+			return (E_ALLOC);
+		}
+	}
 	else if (this->i == this->npos)
 		this->err = E_NPOS;
 	return (this->err > 0);

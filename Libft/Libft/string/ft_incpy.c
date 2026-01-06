@@ -49,18 +49,25 @@ t_str	*str_incpy(t_str *this, const void *other, const void *set)
 
 t_str	*str_scpy_char(t_str *this, const char *other, const char *set, int m)
 {
-	if (str_check(this, other) || !set || \
-	(int32_t)ft_strlen(other) > this->capacity - this->i)
+	int32_t	len;
+
+	len = (int32_t)ft_strlen(other);
+	if (str_check(this, other) || !set)
 		return (_str_set_error(this, E_PARAM, "scpy"));
+	if (len > this->capacity - this->i)
+		if (str_srealloc(this, len + _STR_REALLOC_SIZE) != 0)
+			return (_str_set_error(this, E_ALLOC, "scpy"));
 	this->i += sub_strcpy(this->buff + this->i, other, set, m);
 	return (this);
 }
 
 t_str	*str_scpy_str(t_str *this, const t_str *other, const char *set, int m)
 {
-	if (str_check(this, other) || !set || \
-	other->len > this->capacity - this->i)
+	if (str_check(this, other) || !set)
 		return (_str_set_error(this, E_PARAM, "scpy"));
+	if (other->len > this->capacity - this->i)
+		if (str_srealloc(this, other->len + _STR_REALLOC_SIZE) != 0)
+			return (_str_set_error(this, E_ALLOC, "scpy"));
 	this->i += sub_strcpy(this->buff + this->i, other->buff, set, m);
 	return (this);
 }

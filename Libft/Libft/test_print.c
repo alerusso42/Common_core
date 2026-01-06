@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:35:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 13:00:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:53:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@ static void	header(const char *name);
 void		test_args(int ac, char **av);
 void		test_rect(void);
 void		test_buff(void);
+static void	line(char c, int times);
 
 int	main(int ac, char **av)
 {
+	static int	stop;
 	(void)ac, (void)av;
 
-	ft_printf("$\\");
 	header("args");
 	test_args(ac, av);
+	if (stop++ != 0)
+		return (ft_printf("$RFermo lì campione!$Z\n"));
+	ft_printf("$\\");
 	header("clear");
 	ft_printf("$!2$0");
 	header("column test");
@@ -34,8 +38,16 @@ int	main(int ac, char **av)
 	header("buffer test");
 	test_buff();
 	header("command test");
-	const int time = 3;
+	const int time = 1;
 	ft_printf("aspetto %d secondi... ?%p-%d?fine attesa!\n", time, sleep, time);
+	header("command test no args");
+	ft_printf("richiamando %p:\n?%p-richiamato?\n", header, header);
+	header("adesso richiamo il main!");
+	ft_printf("?%p-%d-%p?", main, ac, av);
+	header("adesso faccio due linee:");
+	ft_printf("?%p-94-12?$\\$<12?%p-%d-%d?\n", line, line, '-', 5);
+	header("Escape");
+	ft_printf("%%$$??\n");
 	str_terminate();
 }
 
@@ -57,8 +69,6 @@ void	test_args(int ac, char **av)
 	}
 	av = temp;
 }
-
-static void	line(char c, int times);
 
 void	test_rect(void)
 {

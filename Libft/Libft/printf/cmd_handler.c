@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 11:23:54 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 12:58:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:51:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	run_cmd(t_ft_printf *data, void *f, void **ptr_args, int64_t *val_args)
 			cmd_get_str(data, ptr_args, str_array, cmd_counter);
 		data->s += sub_strlen(data->s, "-?", EXCLUDE);
 	}
+	if (!*data->s)
+		return ;
 	if (cmd_counter == 3)
 		return (print_str_len(data, "/CMD ACCEPTS MAX 3 ARGS/", 25));
 	select_proto(data, f, ptr_args, val_args);

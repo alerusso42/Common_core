@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 12:54:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:59:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static void	ansi_print(t_ft_printf *data)
 
 	PRINTF_DEBUG("\033[32mPRINTF_DEBUG\033[0m: cursor: %s\n", data->s);
 	data->s++;
+	if (*data->s == '$')
+		return (print_char(data, '$'), data->s++, (void)0);
 	if (*data->s < 32)
 		return ;
 	ansi_type = ansi_table[(int)*data->s - ' '];

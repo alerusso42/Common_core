@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:43:14 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 22:23:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:24:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 t_str	*str_srealloc(t_str *this, int32_t n)
 {
 	char	*temp;
+	int		i;
 
 	if (n <= 0)
 		n = this->capacity + _STR_REALLOC_SIZE;
@@ -38,12 +39,15 @@ t_str	*str_srealloc(t_str *this, int32_t n)
 	this->buff = CALLOC(n + 1, sizeof(char));
 	if (!this->buff)
 		return (_str_set_error(this, E_ALLOC, "_realloc"));
-	if (!temp)
-		return (this);
-	ncpy(this, temp, 0, this->len);
-	FREE(temp);
 	this->capacity = n;
-	_str_set(this);
+	if (!temp)
+		return (_str_set(this), this);
+	i = this->i;
+	if (this->i > n)
+		i = n;
+	ncpy(this, temp, 0, this->len);
+	this->i = i;
+	FREE(temp);
 	return (this);
 }
 
