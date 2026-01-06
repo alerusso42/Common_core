@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:35:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 23:14:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 13:00:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int	main(int ac, char **av)
 	test_rect();
 	header("buffer test");
 	test_buff();
+	header("command test");
+	const int time = 3;
+	ft_printf("aspetto %d secondi... ?%p-%d?fine attesa!\n", time, sleep, time);
 	str_terminate();
 }
 

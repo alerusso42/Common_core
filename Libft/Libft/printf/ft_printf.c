@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 09:27:35 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 23:39:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/06 12:54:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	type_print(t_ft_printf *data);
 static void	ansi_print(t_ft_printf *data);
+static void	exec_cmd(t_ft_printf *data);
 
 int	_ft_printf(int fd, const char *str, t_str *buff, va_list *ptr)
 {
@@ -32,6 +33,8 @@ int	_ft_printf(int fd, const char *str, t_str *buff, va_list *ptr)
 			type_print(&data);
 		else if (*data.s == '$')
 			ansi_print(&data);
+		else if (*data.s == '?')
+			exec_cmd(&data);
 		else
 		{
 			print_char(&data, *data.s);
@@ -84,7 +87,7 @@ static void	ansi_print(t_ft_printf *data)
 		return ;
 	ansi_type = ansi_table[(int)*data->s - ' '];
 	if (ansi_type == 255)
-		return (print_str(data, "/UNKNOWN ANSICODE/"));
+		return (_error(data, "/UNKNOWN ANSICODE/", 19));
 	ansi_flags = 0;
 	if (ft_isalnum(*data->s) == false)
 		ansi_flags |= ANSI_ARGS;
@@ -96,4 +99,25 @@ static void	ansi_print(t_ft_printf *data)
 	data->len -= len;
 	*result = '\\';
 	PRINTF_DEBUG("\033[31mPRINTF_DEBUG\033[0m: ansi result: %s\n", result);
+}
+
+static void	exec_cmd(t_ft_printf *data)
+{
+	void	*f;
+	void	*ptr_args[3];
+	int64_t	val_args[3];
+
+	PRINTF_DEBUG("\033[32mPRINTF_DEBUG\033[0m: cmd: %s\n", data->s);
+	data->s++;
+	if (*data->s == '?')
+		return (print_char(data, *data->s++));
+	if (data->s[0] != '%' || data->s[1] != 'p')
+		return ;
+	f = va_arg(*data->args, void *);
+	data->s += 2;
+	if (*data->s != '-' && *data->s != '?')
+		return (_error(data, "/MISSING -/", 12));
+	run_cmd(data, f, ptr_args, val_args);
+	if (*data->s)
+		data->s++;
 }

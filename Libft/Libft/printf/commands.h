@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   commands.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/06 12:38:45 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/06 12:42:09 by alerusso         ###   ########.fr       */
+/*   Created: 2026/01/06 11:03:56 by alerusso          #+#    #+#             */
+/*   Updated: 2026/01/06 12:53:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_data.h"
+#ifndef COMMANDS_H
+# define COMMANDS_H
+# include "ft_printf_data.h"
 
-void	_error(t_ft_printf *data, char *err, int err_len)
+# define FUNC_CAST(...)	(void(*)(__VA_ARGS__))
+
+enum	e_ft_printf_func
 {
-	print_str_len(data, err, err_len);
-	data->s += sub_strlen(data->s, "", EXCLUDE);
-}
+	VOID = 0,
+	INT1 = 1 << 0,
+	INT2 = 1 << 1,
+	INT3 = 1 << 2,
+	PTR1 = 1 << 3,
+	PTR2 = 1 << 4,
+	PTR3 = 1 << 5,
+};
+
+#endif
