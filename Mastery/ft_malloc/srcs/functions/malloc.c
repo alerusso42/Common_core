@@ -80,7 +80,7 @@ void *malloc_anonymous(size_t size)
 }
 #include "../../all.h"
 
-void	print_extreme(long long *p, bool print);
+void	print_extreme(void *p, bool print);
 
 void *malloc(size_t size)
 {
@@ -106,14 +106,14 @@ void *malloc(size_t size)
 	return (p + sizeof(t_info));
 }
 
-void	print_extreme(long long *p, bool print)
+void	print_extreme(void *p, bool print)
 {
-	static long long	*lowest = (long long *)((1UL << 63) - 1);
-	static long long	*biggest = (long long *)0;
+	static void	*lowest = (long long *)((1UL << 63) - 1);
+	static void	*biggest = (long long *)0;
 
 	if (print)
 	{
-		ft_printf("Biggest: %d; Lowest: %d\n", biggest, lowest);
+		ft_printf("Biggest: %p; Lowest: %p\n", biggest, lowest);
 	}
 	if (!p)
 		return ;

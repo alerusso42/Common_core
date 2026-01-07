@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:50:27 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 23:12:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:02:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef int32_t					err;
 #  define SYSCALLS
 #  define FREE 		free
 #  define MALLOC	malloc
-#  define CALLOC	calloc
+#  define CALLOC	ft_calloc
 # endif
 
 # ifndef EXIT_SUCCESS

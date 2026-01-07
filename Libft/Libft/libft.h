@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 17:55:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/07 18:58:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # ifndef FUN_MACROS
 #  define FUN_MACROS
 #  define MALLOC malloc
-#  define CALLOC calloc
+#  define CALLOC ft_calloc
 #  define FREE free
 #  define WRITE write
 #  define READ readfd
