@@ -100,7 +100,7 @@ void *malloc(size_t size)
 	if (p == (void *)-1)
 		return (PRINT("$RAllocation failure!$Z\n"), NULL);
 	print_extreme(p, false);
-	data->offset = round_page(size, data->pagesize);
+	data->offset = (size_t)round_page(size, data->pagesize);
 	*(t_info *)p = (t_info){data->offset, p - data->ptr_curr};
 	data->ptr_curr = p + data->offset;
 	return (p + sizeof(t_info));
