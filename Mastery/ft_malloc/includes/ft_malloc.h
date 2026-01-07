@@ -51,6 +51,8 @@ typedef struct s_alloc
 	void 		*ptr_curr;
 	int			pagesize;
 	size_t		offset;
+	size_t		bytes_alloc;
+	size_t		bytes_freed;
 }	t_alloc;
 
 typedef struct s_info

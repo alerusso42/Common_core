@@ -38,6 +38,14 @@ int	main()
 	print_extreme(NULL, true);
 	ft_printf("");
 	ft_printf("Program end!");
+	ft_printf("Internal Leak check: ");
+	if ((_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed))
+		ft_printf("$GSuccess!$z\n");
+	else
+	{
+		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
+		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
+	}
 }
 
 void	test()

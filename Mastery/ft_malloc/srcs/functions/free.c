@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/07 18:48:26 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:59:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	_free(void *p)
 		perror("Munmap");
 	}
 	else
+	{
 		VALGRIND_FREELIKE_BLOCK(real_ptr, 0);
+		_global_data(false)->bytes_freed += size;
+	}
 	ft_printf("$Ydone.$Z\n");
 }

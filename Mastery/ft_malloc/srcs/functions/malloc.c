@@ -103,6 +103,7 @@ void *malloc(size_t size)
 	data->offset = (size_t)round_page(size, data->pagesize);
 	*(t_info *)p = (t_info){data->offset, p - data->ptr_curr};
 	data->ptr_curr = p + data->offset;
+	data->bytes_alloc += data->offset;
 	return (p + sizeof(t_info));
 }
 
