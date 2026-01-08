@@ -80,8 +80,6 @@ void *malloc_anonymous(size_t size)
 }
 #include "../../all.h"
 
-void	print_extreme(void *p, bool print);
-
 void *malloc(size_t size)
 {
 	void		*p;
@@ -99,7 +97,7 @@ void *malloc(size_t size)
 	VALGRIND_MALLOCLIKE_BLOCK(p, size, 0, 0);
 	if (p == (void *)-1)
 		return (PRINT("$RAllocation failure!$Z\n"), NULL);
-	print_extreme(p, false);
+	print_extreme(data, p, false);
 	data->offset = (size_t)round_page(size, data->pagesize);
 	*(t_info *)p = (t_info){data->offset, p - data->ptr_curr};
 	data->ptr_curr = p + data->offset;
@@ -107,19 +105,16 @@ void *malloc(size_t size)
 	return (p + sizeof(t_info));
 }
 
-void	print_extreme(void *p, bool print)
+void	print_extreme(void *p, t_alloc *dt, bool print)
 {
-	static void	*lowest = (long long *)((1UL << 63) - 1);
-	static void	*biggest = (long long *)0;
-
 	if (print)
 	{
-		ft_printf("Biggest: %p; Lowest: %p\n", biggest, lowest);
+		ft_printf("ptr_max: %p; ptr_min: %p\n", dt->ptr_max, dt->ptr_min);
 	}
 	if (!p)
 		return ;
-	if (p < lowest)
-		lowest = p;
-	else if (p > biggest)
-		biggest = p;
+	if (p < dt->ptr_min)
+		dt->ptr_min = p;
+	else if (p > dt->ptr_max)
+		dt->ptr_max = p;
 }

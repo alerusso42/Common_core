@@ -14,7 +14,14 @@
 # include "../all.h"
 
 void	test();
-void	print_extreme(long long *p, bool print);
+
+int	main2()
+{
+	char	*stringa = malloc_file(15, "per_malloc");
+	ft_strlcpy(stringa, "ciao", 5);
+	ft_printf(stringa);
+	return 1;
+}
 
 int	main()
 {
@@ -23,9 +30,9 @@ int	main()
 
 	ft_printf("stack starts with: %p,%p\n", &s, &size);
 	ft_printf("pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
-	//perror("Checking errno...");
+	perror("Checking errno...");
 	s = malloc(size + 1);
-	//perror("Checking errno...");
+	perror("Checking errno...");
 	if (!s)
 		return (perror("Error\n"), 1);
 	for (int i = 0; i < size; i++)
@@ -35,17 +42,18 @@ int	main()
 	write(1, "\n", 1);
 	free(s);
 	test();
-	print_extreme(NULL, true);
+	print_extreme(NULL, _global_data(false), true);
 	ft_printf("");
-	ft_printf("Program end!");
+	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
-	if ((_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed))
+	if (_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed)
 		ft_printf("$GSuccess!$z\n");
 	else
 	{
 		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
 		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
 	}
+	return (0);
 }
 
 void	test()
@@ -85,3 +93,19 @@ void	test()
 	}
 	daft_quit();
 }
+
+/*
+	first-freed
+	
+	++++
+	++
+	+
+	+-++-++-+-++-++++
+	/\
+   /  \
+  /    \
+ /\
+   \
+	\
+	 \
+*/

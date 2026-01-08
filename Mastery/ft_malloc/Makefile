@@ -1,10 +1,11 @@
 NAME := a.out
 FILE := test_file
+LIBFT := libft.a
 
 SRC := $(shell ls ./srcs/*.c ./srcs/functions/*.c ./srcs/utils/*.c)
 
 comp := cc -Wall -Wextra -Werror -g \
-		$(SRC) libft.a -o $(NAME)
+		$(SRC) $(LIBFT) -o $(NAME)
 
 
 $(NAME): $(SRC)
@@ -21,3 +22,6 @@ gdb: $(NAME)
 
 val: $(NAME)
 	valgrind --track-origins=yes --show-leak-kinds=all --leak-check=full ./a.out
+
+libft:
+	(cd ../../Libft/Libft/ && make re && cp libft.a $$OLDPWD && make fclean)

@@ -64,9 +64,9 @@ typedef struct s_info
 # define ALLOC_MAX_SIZE (UINT_MAX - (unsigned long)sizeof(t_info))
 enum e_alloc
 {
-	ALLOC_TINY = (1 << 8),
-	ALLOC_SMALL = (1 << 16),
-	ALLOC_LARGE = (1 << 24),
+	ALLOC_TINY = (1 << 9),
+	ALLOC_SMALL = (1 << 12),
+	ALLOC_LARGE = (1 << 15),
 };
 
 enum e_alloc_flags
@@ -92,6 +92,7 @@ void *malloc_anonymous(size_t size);
 //SECTION - utils
 
 t_alloc	*_global_data(bool reset);
-int	round_page(int n, int pagesize);
+int		round_page(int n, int pagesize);
+void	print_extreme(void *p, t_alloc *dt, bool print);
 
 #endif
