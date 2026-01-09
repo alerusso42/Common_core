@@ -37,8 +37,7 @@ int	main()
 	for (int i = 0; i < size; i++)
 		s[i] = 'A' + i;
 	s[size] = 0;
-	write(1, s, size);
-	write(1, "\n", 1);
+	ft_printf("%s\n", s);
 	free(s);
 	test();
 	print_extreme(NULL, _global_data(false), true);
