@@ -15,8 +15,8 @@ https://docs.docker.com/reference/compose-file/
 [X]	environment variables
 [X]	.env
 [X]	nginx
-[]	mariadb
-[]	wordpress
+[X]	mariadb
+[X]	wordpress
 [X]	port 443
 []	TLSv1.2/1.3 protocol
 

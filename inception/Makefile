@@ -3,18 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: alerusso42 <alerusso42@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 18:08:06 by alerusso42        #+#    #+#              #
-#    Updated: 2025/12/09 14:10:51 by codespace        ###   ########.fr        #
+#    Updated: 2026/01/09 12:23:42 by alerusso42       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+#Ricorda su nuove macchine di modificare il file /etc/hosts per alerusso.42.fr
 NAME=inception
+VOLUMES=$(HOME)/data
 
 $(NAME): 
+	echo $(VOLUMES)
+	mkdir -p $(VOLUMES)/wordpress $(VOLUMES)/mariadb
 	(clear; cd srcs && docker compose down; \
 	docker compose up --build)
+
+all: $(NAME)
+	
 
 daemon:
 	(clear; cd srcs && docker compose down; \
@@ -23,11 +30,13 @@ daemon:
 stop:
 	(clear ; cd srcs && docker compose down)
 
+clean: stop
+
 fclean:
 	(clear ; cd srcs && \
 	docker compose down -v && \
 	docker system prune -a -f --volumes && \
-	sudo rm -rf volumes/mariadb/* volumes/wordpress/* && \
+	sudo rm -rf $(VOLUMES)/wordpress/* $(VOLUMES)/mariadb/* && \
 	echo "\033[32mFull reset done.\033[0m")
 
 re: fclean daemon
@@ -38,12 +47,12 @@ logs:
 		exit 2; \
 	fi
 	@if [ [ $$cont != "all" ] ]; then \
-		(cd srcs && docker logs $$cont);
-	@else
+		(cd srcs && docker logs $$cont);\
+	else \
 		(cd srcs && \
 		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
-		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
-		echo -e "\033[32mnginx:\n\033[0m" ; docker logs nginx ;\
+		echo -e "\033[32mwordpress:\n\033[0m" ; docker logs wordpress ;\
+		echo -e "\033[32mmariadb:\n\033[0m" ; docker logs mariadb ;\
 		);\
 	fi
 
