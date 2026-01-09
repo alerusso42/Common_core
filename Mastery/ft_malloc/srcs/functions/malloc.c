@@ -12,3 +12,9 @@
 
 # include "../../includes/ft_malloc.h"
 
+void 	*malloc(uint32_t size)
+{
+	t_alloc	*data;
+
+	data = _global_data(false);
+}
