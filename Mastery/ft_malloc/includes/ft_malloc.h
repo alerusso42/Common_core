@@ -23,6 +23,7 @@
 # include <sys/mman.h>
 # include <sys/unistd.h>
 # include <sys/fcntl.h>
+# include "../all.h"
 
 int	ft_printf(const char *str, ...);
 
@@ -34,6 +35,26 @@ int	ft_printf(const char *str, ...);
 # endif
 //FIXME - da togliere!
 #include <valgrind/memcheck.h>
+
+typedef	struct s_mem
+{
+	size_t	size;
+	size_t	head_offset;//distanza da head
+	void	*ptr;
+	uint8_t	flags;
+}	t_mem;
+
+enum	e_mem_flags
+{
+	MEM_FREED = 1 << 0,
+	MEM_TINY = 1 << 1,
+};
+
+typedef	struct s_memzone
+{
+	void	*first_free_area;//a partire da sinistra, prima area disponibile
+	size_t	size;
+}	t_memzone;
 
 typedef struct s_sizelimit
 {
@@ -84,15 +105,15 @@ void *_realloc(void *ptr, size_t size);
 
 //SECTION - testing
 
-void *malloc_file(size_t size, const char *file);
-void *malloc_virtualfile(size_t size, const char *file);
-void *malloc_tempfile(size_t size);
-void *malloc_anonymous(size_t size);
+void 	*malloc_file(size_t size, const char *file);
+void 	*malloc_virtualfile(size_t size, const char *file);
+void 	*malloc_tempfile(size_t size);
+void	*malloc_anonymous(size_t size);
+void 	print_extreme(void *p, t_alloc *dt, bool print);
 
 //SECTION - utils
 
 t_alloc	*_global_data(bool reset);
 int		round_page(int n, int pagesize);
-void	print_extreme(void *p, t_alloc *dt, bool print);
 
 #endif

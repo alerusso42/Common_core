@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/09 15:21:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/09 15:17:50 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ int	round_page(int n, int pagesize)
 t_alloc	*_global_data(bool reset)
 {
 	static t_alloc	data;
+	(void)reset;
 
+	if (!data.pagesize)
+	{
+		data = (t_alloc){0};
+		data.pagesize = sysconf(_SC_PAGE_SIZE);
+		data.limits.tiny = round_page(ALLOC_TINY, data.pagesize);
+		data.limits.small = round_page(ALLOC_SMALL, data.pagesize);
+		data.limits.large = round_page(ALLOC_LARGE, data.pagesize);
+		data.ptr_start = mmap(NULL, 10000000, PROT_RDWR, MAP_AP, 0, 0);
+		data.ptr_curr = data.ptr_start;
+		data.offset = data.pagesize;
+		PRINT("START ADDRESS: %p\n", data.ptr_start);
+	}
+	if (!data.ptr_start)
+		return (NULL);
 	return (&data);
 }
