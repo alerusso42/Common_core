@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/ft_malloc.h"
+# include "../includes/malloc_internal.h"
 
 void	test();
 

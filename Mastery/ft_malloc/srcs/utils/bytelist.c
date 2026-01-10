@@ -6,9 +6,81 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 22:48:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/09 22:48:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/10 15:24:20 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/ft_malloc.h"
+# include "../../includes/malloc_internal.h"
 
+t_area	*bytelst_next(t_area *curr)
+{
+	if (!curr->next)
+		return (NULL);
+	return (curr + curr->next);
+}
+
+t_area	*bytelst_prev(t_area *curr)
+{
+	if (!curr->prev)
+		return (NULL);
+	return (curr - curr->prev);
+}
+
+t_memzone	*bytelst_head(t_area *curr)
+{
+	while (curr->prev)
+		curr -= curr->prev;
+	return ((t_memzone *)(void *)curr - sizeof(t_memzone));
+}
+
+/*
+BEFORE:			   <!!!!!!	!!!!!!>
+		Node 1		Node 2	Node 3	Node 4
+next|	25			11		109			0	
+prev|	0			25		11			109	
+info|	alloc.		freed	freed		alloc.
+AFTER:			   <!!!!!!>
+		Node 1		Node 2	Node 3
+next|	25			120		0
+prev|	0			25		120
+info|	alloc.		freed	alloc.
+*/
+t_area	*bytelst_merge(t_area *left, t_area *right)
+{
+	if (!left || !right)
+		return (error_malloc("bytelst_merge args error"));
+	left->next += right->next;
+	right = bytelst_next(right);
+	if (right)
+		right->prev = left->next;
+	return (left);
+}
+
+/*
+BEFORE:			   <!!!!!!>
+		Node 1		Node 2	Node 3
+next|	25			120		0
+prev|	0			25		120
+info|	alloc.		freed	alloc.
+AFTER:			   <!!!!!!	!!!!!!>
+		Node 1		Node 2	Node 3	Node 4
+next|	25			11		109			0	
+prev|	0			25		11			109	
+info|	alloc.		freed	freed		alloc.
+*/
+t_area	*bytelst_split(t_area *area, t_bytelist size)
+{
+	t_area	*next;
+	t_area	*new;
+
+	if (!area || size)
+		return (error_malloc("bytelst_split args error"));
+	next = bytelst_next(area);
+	new = (t_area *)(void *)area + size;
+	new->prev = size;
+	new->next = area->next - size;
+	area->next = size;
+	if (next)
+		next->prev = new->next;
+	return (new);
+}

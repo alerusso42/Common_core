@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/09 21:12:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/10 15:12:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/ft_malloc.h"
+# include "../../includes/malloc_internal.h"
 
 /*ANCHOR - round_page
 round n to a multiple of pagesize. The round is for excess.

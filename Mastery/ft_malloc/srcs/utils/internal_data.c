@@ -6,11 +6,11 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/09 21:25:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/10 15:12:23 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/ft_malloc.h"
+# include "../../includes/malloc_internal.h"
 
 static void	munmap_zone(t_alloc *mem, t_list *list);
 
