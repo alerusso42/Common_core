@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/10 16:44:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 05:39:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 	return (NULL);
 }
 
-void	area_freed(t_area *area)
+t_memzone	*area_freed(t_alloc *data, t_area *area)
 {
 	t_memzone	*zone;
 
@@ -47,7 +47,7 @@ void	area_freed(t_area *area)
 		zone->first_free_area = area;
 	if (zone->longest_chunk < area->next)
 		zone->longest_chunk = area->next;
-	zone->free_space -= area->next;
+	zone->free_space += area->next;
 	area->info |= MEM_FREED;
 	if (area->prev && bytelst_prev(area)->info & MEM_FREED)
 	{
@@ -57,6 +57,7 @@ void	area_freed(t_area *area)
 	{
 		bytelst_merge(area, bytelst_next(area));
 	}
+	return (zone);
 }
 
 t_area	*area_find_freed_block(t_area *area, void *ptr)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/10 15:12:23 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 04:57:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,32 @@ t_alloc	*_global_data(bool reset)
 		data = (t_alloc){0};
 		data.pagesize = sysconf(_SC_PAGESIZE);
 		if (!data.pagesize)
-			return (malloc_error("sysconf SC_PAGESIZE don't work"));
+			return (malloc_fatal("sysconf SC_PAGESIZE doesn't work"));
 		data.size_area.tiny = round_page(AREA_TINY, data.pagesize);
 		data.size_area.small = round_page(AREA_SMALL, data.pagesize);
 		data.size_area.large = ALLOC_MAX_SIZE;
 		data.size_zone.tiny = round_page(ZONE_TINY, data.pagesize);
 		data.size_zone.small = round_page(ZONE_SMALL, data.pagesize);
 		data.size_zone.large = ALLOC_MAX_SIZE;
+		data.header_size = sizeof(t_memzone) + sizeof(t_area);
 	}
 	return (&data);
 }
 
 void	malloc_munmap_data(t_alloc *data)
 {
+	uint32_t	temp;
+
 	if (data->zone_tiny)
 		munmap_zone(data, data->zone_tiny);
 	if (data->zone_small)
 		munmap_zone(data, data->zone_small);
 	if (data->zone_large)
 		munmap_zone(data, data->zone_large);
+	temp = data->pool.size;
+	if (munmap_syscall(data, data->pool.mem, data->pool.size) != 0)
+		malloc_error("munmap of memory pool failed!");
+	*data = (t_alloc){0};
 }
 
 static void	munmap_zone(t_alloc *data, t_list *list)
@@ -55,10 +62,8 @@ static void	munmap_zone(t_alloc *data, t_list *list)
 	{
 		zone = (t_memzone *)list->content;
 		size = zone->size;
-		if (munmap(zone, size) == 0)
-			data->bytes_freed += size;
-		else
-			malloc_error("munmap failed!");
+		if (munmap_syscall(data, zone, size) != 0)
+			malloc_error("munmap of zone failed!");
 		list = list->next;
 	}
 }
