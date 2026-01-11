@@ -14,13 +14,13 @@
 
 void	test();
 
-int	main2()
+/*int	main2()
 {
 	char	*stringa = malloc_file(15, "per_malloc");
 	ft_strlcpy(stringa, "ciao", 5);
 	ft_printf(stringa);
 	return 1;
-}
+}*/
 
 int	main()
 {
@@ -40,7 +40,7 @@ int	main()
 	ft_printf("%s\n", s);
 	free(s);
 	test();
-	print_extreme(NULL, _global_data(false), true);
+	//print_extreme(NULL, _global_data(false), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
 	if (_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed)

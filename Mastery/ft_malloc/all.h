@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/07 19:03:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 21:40:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	*free_three_d_matrix(char ***matrix);
 # include <stdlib.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include <malloc.h>
 # include <fcntl.h>
 # include <limits.h>
 
@@ -201,7 +200,6 @@ int     str_printf(t_str *buff, const char *str, ...);
 # define STRING_H
 # include <stdbool.h>
 # include <unistd.h>
-# include <malloc.h>
 # include <limits.h>
 # include <stdint.h>
 

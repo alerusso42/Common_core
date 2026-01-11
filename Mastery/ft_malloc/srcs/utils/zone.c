@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 05:47:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 22:04:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_area	*zone_area_freed(t_list *zones, void *ptr)
 	while (zones)
 	{
 		zone = (t_memzone *)zones->content;
-		if (ptr >= zone && ptr < zone + zone->size)
+		if (ptr >= (void *)zone && ptr < (void *)zone + zone->size)
 		{
 			area = (t_area *)zone + sizeof(t_memzone);
 			area = area_find_freed_block(area, ptr);
@@ -90,7 +90,7 @@ t_bytelist	zone_find_longest_chunk(t_memzone *zone)
 	t_area		*area;
 
 	record = 0;
-	area = zone + sizeof(t_memzone);
+	area = (t_area *)zone + sizeof(t_memzone);
 	while (area->next)
 	{
 		if (area->next > record)

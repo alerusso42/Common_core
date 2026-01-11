@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 05:04:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 22:03:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 	data->bytes_freed += len;
 	if (DEBUG == true)
 		VALGRIND_FREELIKE_BLOCK(ptr, 0);
+	return (EXIT_SUCCESS);
 }

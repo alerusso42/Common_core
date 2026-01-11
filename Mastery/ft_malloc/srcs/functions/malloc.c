@@ -14,7 +14,7 @@
 
 static void	*get_mem(t_alloc *dt, uint32_t size, t_list **zones, int zone_size);
 
-void 	*malloc(uint32_t size)
+void 	*malloc(size_t size)
 {
 	t_alloc		*data;
 	void		*ptr;

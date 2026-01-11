@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 05:39:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 22:01:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 	return (NULL);
 }
 
-t_memzone	*area_freed(t_alloc *data, t_area *area)
+t_memzone	*area_freed(t_area *area)
 {
 	t_memzone	*zone;
 
@@ -66,7 +66,7 @@ t_area	*area_find_freed_block(t_area *area, void *ptr)
 
 	while (area->next)
 	{
-		if (ptr >= area && ptr <= area + area->next)
+		if (ptr >= (void *)area && ptr <= (void *)area + area->next)
 		{
 			head = area + sizeof(t_area);
 			if (ptr != head)
@@ -78,4 +78,5 @@ t_area	*area_find_freed_block(t_area *area, void *ptr)
 		}
 		area = area + area->next;
 	}
+	return (NULL);
 }

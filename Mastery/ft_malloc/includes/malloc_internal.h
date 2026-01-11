@@ -6,13 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 06:03:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/11 21:59:03 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_INTERNAL_H
 # define MALLOC_INTERNAL_H
 
+# include "ft_malloc.h"
 # include <stdlib.h>
 # include <stdint.h>
 # include <stdbool.h>
@@ -22,7 +23,6 @@
 # include <sys/unistd.h>
 # include <sys/fcntl.h>
 # include "../all.h"
-# include "ft_malloc.h"
 
 int	ft_printf(const char *str, ...);
 
@@ -107,7 +107,7 @@ info|	alloc.		freed	alloc.				|
 
 */
 
-typedef	int32_t	t_bytelist;
+typedef	uint32_t	t_bytelist;
 
 /*
 	when malloc is called, a t_area node is created.
@@ -207,11 +207,9 @@ enum e_mmap_flags
 	MAP_APF = MAP_ANONYMOUS | MAP_PRIVATE | MAP_FIXED,
 };
 
-void 	*malloc(uint32_t size);
+void 	*malloc(size_t size);
 void 	free(void *ptr);
-void 	_free(void *ptr);
-void 	*_malloc(uint32_t size);
-void 	*_realloc(void *ptr, uint32_t size);
+void 	*realloc(void *ptr, size_t size);
 
 //SECTION - testing
 

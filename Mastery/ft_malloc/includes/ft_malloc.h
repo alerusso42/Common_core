@@ -13,14 +13,15 @@
 #ifndef FT_MALLOC_H
 # define FT_MALLOC_H
 # include <stdint.h>
-# include "../all.h"
+# include <stdbool.h>
+# include <stddef.h>
 # define MALLOC_WARNINGS true
 
 typedef struct s_alloc	t_alloc;
 
-void 	*malloc(uint32_t size);
+void 	*malloc(size_t size);
 void 	free(void *ptr);
-void 	*realloc(void *ptr, uint32_t size);
+void 	*realloc(void *ptr, size_t size);
 
 //FIXME - togliere: solo debug
 t_alloc	*_global_data(bool reset);
