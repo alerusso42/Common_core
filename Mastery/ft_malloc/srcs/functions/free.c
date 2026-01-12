@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 12:24:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 19:02:39 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void 	free(void *ptr)
 	data = _global_data(false);
 	if (data->error)
 		return ;
-	if (ptr >= data->pool.mem && ptr <= data->pool.mem)
-		return ((void)PRINT("attempt to free internal malloc data"));
+	if (ptr >= data->pool.mem && ptr <= data->pool.mem + data->pool.size)
+		return ;
 	area = ptr - sizeof(t_area);
 	if (area->info != 0 && area->info != 1)
 		free_correct_area(data, ptr);
@@ -60,7 +60,7 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
 	t_list	*temp;
 
-	if (zone->free_space != zone->size)
+	if (zone->first_free_area)
 		return ;
 	temp = zone->ptr_node;
 	lst_delone(zone->ptr_node, NULL);

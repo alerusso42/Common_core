@@ -40,20 +40,13 @@ void 	*malloc(size_t size)
 static void	*get_mem(t_alloc *dt, uint32_t size, t_list **zones, int zone_size)
 {
 	void	*ptr;
-	int		min_area_size;
 
-	if (zone_size == (int)dt->size_zone.tiny)
-		min_area_size = 1;
-	else if (zone_size == (int)dt->size_zone.small)
-		min_area_size = 2;
-	else
-		min_area_size = zone_size;
-	ptr = zone_area_alloc(*zones, size, min_area_size);
+	ptr = zone_area_alloc(*zones, size);
 	if (ptr)
 		return (ptr);
 	if (!zone_add(dt, zones, zone_size))
 		return (fatal_malloc("cannot allocate new zone"));
-	ptr = zone_area_alloc(*zones, size, min_area_size);
+	ptr = zone_area_alloc(*zones, size);
 	if (!ptr)
 		return (fatal_malloc("unexpected error in address selection"));
 	return (ptr);

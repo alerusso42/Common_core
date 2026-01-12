@@ -6,13 +6,13 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 13:22:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 22:36:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
-void	*zone_area_alloc(t_list *zones, uint32_t size, int area_size)
+void	*zone_area_alloc(t_list *zones, uint32_t size)
 {
 	t_memzone	*zone;
 	t_area		*area;
@@ -25,11 +25,11 @@ void	*zone_area_alloc(t_list *zones, uint32_t size, int area_size)
 		{
 			area = zone->first_free_area;
 			area = area_find_alloc_block(area, size);
-			if (!area)
-				return (NULL);
-			area_alloc(zone, area, size, area_size);
-			print_zone(zone);
-			return (((void *)area) + sizeof(t_area));
+			if (area)
+			{
+				area_alloc(zone, area, size);
+				return (((void *)area) + sizeof(t_area));
+			}
 		}
 		zones = zones->next;
 	}
@@ -75,18 +75,17 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	new_zone = (t_memzone *)node->content;
 	*new_zone = (t_memzone){0};
 	new_zone->free_space = size - sizeof(t_memzone);
+	new_zone->longest_chunk = new_zone->free_space;
 	new_zone->first_free_area = ((void *)new_zone) + sizeof(t_memzone);
 	*new_zone->first_free_area = (t_area){0};
 	new_zone->first_free_area->next = new_zone->free_space;
 	new_zone->first_free_area->info = MEM_FREED;
 	*((t_area *)(((void *)new_zone) + size)) = (t_area){0};
 	new_zone->index = lst_size(*zones);
-	new_zone->longest_chunk = new_zone->free_space;
 	new_zone->ptr_node = node;
-	new_zone->size = size;
+	new_zone->size = round_page(size, data->pagesize);
 	lst_front(zones, node);
 	data->bytes_alloc += size + sizeof(t_memzone);
-	print_zone(new_zone);
 	return (node);
 }
 
@@ -96,10 +95,12 @@ t_bytelist	zone_find_longest_chunk(t_memzone *zone)
 	t_area		*area;
 
 	record = 0;
-	area = ((void *)zone) + sizeof(t_memzone);
+	area = zone->first_free_area;
+	if (!area)
+		return (0);
 	while (area->next)
 	{
-		if (area->next > record)
+		if (area->info & MEM_FREED && area->next > record)
 			record = area->next;
 		area = ((void *)area) + area->next;
 	}

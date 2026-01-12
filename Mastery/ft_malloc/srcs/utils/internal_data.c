@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 09:49:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 19:13:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ t_alloc	*_global_data(bool reset)
 		data.pagesize = sysconf(_SC_PAGESIZE);
 		if (!data.pagesize)
 			return (fatal_malloc("sysconf SC_PAGESIZE doesn't work"));
-		data.size_area.tiny = round_page(AREA_TINY, data.pagesize);
-		data.size_area.small = round_page(AREA_SMALL, data.pagesize);
+		data.header_size = sizeof(t_memzone) + sizeof(t_area);
+		data.size_area.tiny = AREA_TINY;
+		data.size_area.small = AREA_SMALL;
 		data.size_area.large = ALLOC_MAX_SIZE;
-		data.size_zone.tiny = round_page(ZONE_TINY, data.pagesize);
-		data.size_zone.small = round_page(ZONE_SMALL, data.pagesize);
+		data.size_zone.tiny = ZONE_TINY - data.header_size;
+		data.size_zone.small = ZONE_SMALL - data.header_size;
 		data.size_zone.large = ALLOC_MAX_SIZE;
 		data.ptr_max = 0x0;
 		data.ptr_min = (void *)-1;
-		data.header_size = sizeof(t_memzone) + sizeof(t_area);
 	}
 	return (&data);
 }

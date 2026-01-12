@@ -22,6 +22,7 @@ typedef struct s_alloc	t_alloc;
 void 	*malloc(size_t size);
 void 	free(void *ptr);
 void 	*realloc(void *ptr, size_t size);
+void	show_alloc_mem();
 
 //FIXME - togliere: solo debug
 t_alloc	*_global_data(bool reset);

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 12:25:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 22:32:12 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ this works only if pagesize is a power of 2
 int	round_page(int n, int pagesize)
 {
 	return ((n + pagesize - 1) & ~(pagesize - 1));
+}
+
+uint32_t	align_addr(void *ptr)
+{
+	uintptr_t	addr;
+
+	addr = ptr;
+	return (ALIGN - (addr % ALIGN));
 }
 
 void	*error_malloc(char *s)
@@ -76,10 +84,12 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 	void	*ptr;
 
 	len = round_page(len, data->pagesize);
-	PRINT("$Ymmap$Z: allocating %d bytes\n", len);
+	PRINT("$Ymmap$Z: allocating %u bytes: ", len);
 	ptr = mmap(NULL, len, PROT_RDWR, MAP_AP, -1, 0);
 	if (ptr == (void *)-1)
 		return (NULL);
+	if (DEBUG_FLAG)
+		ft_printf("$B%p$Z\n", ptr);
 	if (data->ptr_max < ptr)
 		data->ptr_max = ptr;
 	if (data->ptr_min > ptr)
@@ -92,7 +102,7 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 
 bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 {
-	PRINT("$Ymunmap$Z: deallocating %d bytes from %p\n", len, ptr);
+	PRINT("$Ymunmap$Z: deallocating %d bytes from $B%p$Z\n", len, ptr);
 	if (munmap(ptr, len) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	data->bytes_freed += len;

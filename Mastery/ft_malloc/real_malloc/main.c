@@ -10,44 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/malloc_internal.h"
+# include "all.h"
 
 void	test();
 
-/*
-//FIXME
-1)	fixare main 2
-2)	fixare calcolo longest_chunk
-3)	stampa puntatore in esadecimale
-//TODO
-1)	allineamento pagina
-2)	realloc
-3)	pulizia codice
-4)	cartella con test automatizzati
-5)	show_alloc_mem_ex()		
-6)	environmental variables			
-*/
-int	main()
+/*int	main2()
 {
-	char	*p[100];
-	const int	size = 25;
+	char	*stringa = malloc_file(15, "per_malloc");
+	ft_strlcpy(stringa, "ciao", 5);
+	ft_printf(stringa);
+	return 1;
+}*/
 
-	for (int i = 0; i != 50; i++)
-		p[i] = malloc(size);
-	show_alloc_mem();
-	for (int i = 0; i != 25; i++)
-		free(p[i]);
-	show_alloc_mem();
-	for (int i = 50; i != 100; i++)
-		p[i] = malloc(size);
-	show_alloc_mem();
-	for (int i = 25; i != 100; i++)
-		free(p[i]);
-	show_alloc_mem();
-	return 0;
-}
-
-int	main2()
+int	main()
 {
 	char		*s;
 	const int	size = 7;
@@ -56,7 +31,6 @@ int	main2()
 	ft_printf("pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
 	perror("Checking errno...");
 	s = malloc(size + 1);
-	free(malloc((int)1e6));
 	perror("Checking errno...");
 	if (!s)
 		return (perror("Error\n"), 1);
@@ -69,13 +43,6 @@ int	main2()
 	//print_extreme(NULL, _global_data(false), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
-	if (_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed)
-		ft_printf("$GSuccess!$z\n");
-	else
-	{
-		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
-		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
-	}
 	return (0);
 }
 
@@ -84,7 +51,7 @@ void	test()
 	int	i;
 	int	j;
 
-	daft_init("media", "SETTINGS.md");
+	daft_init("../media", "SETTINGS.md");
     daft_swap(2);
 	char	***matr = daft_get("CALYREX");
 	if (!matr)

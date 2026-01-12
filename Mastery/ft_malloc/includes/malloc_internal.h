@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 13:23:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 22:32:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "ft_malloc.h"
 # include <stdlib.h>
 # include <stdint.h>
+# include <stdalign.h>
 # include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
@@ -50,6 +51,8 @@ int	ft_printf(const char *str, ...);
 
 //allocation bigger than UINT_MAX - sizeof(t_list *) causes underflow
 # define ALLOC_MAX_SIZE (UINT_MAX - (uint32_t)sizeof(t_list *))
+
+# define ALIGN alignof(max_align_t)
 
 /*SECTION - structs representation
 STRUCT		UTILITY				EXAMPLE
@@ -128,7 +131,7 @@ typedef	struct s_area
 	t_bytelist	next;
 	t_bytelist	prev;
 	uint8_t		info;
-}	t_area;
+}	__attribute__((aligned(ALIGN)))	t_area;
 
 enum	e_area_info
 {
@@ -148,7 +151,7 @@ typedef	struct s_memzone
 	uint32_t	free_space;
 	uint32_t	longest_chunk;//longest freed chunk
 	uint32_t	index;
-}	t_memzone;
+}	__attribute__((aligned(ALIGN)))	t_memzone;
 
 /*
 	stores the maximum size for every mmap area/zone type.
@@ -168,7 +171,7 @@ large allocation are bigger than ALLOC_SMALL rounded by pagesize.
 enum e_sizelimit_info
 {
 	POOL_SIZE = 120 * 32,//120: max t_memzone nodes; 32: sizeof(t_memzone)
-	AREA_NUM = 4,//2^AREA_NUM represents the number of areas in a zone
+	AREA_NUM = 4,//2^AREA_NUM modify the number of areas in a zone
 	ZONE_TINY = (1 << 12),
 	ZONE_SMALL = (1 << 18),
 	AREA_TINY = ZONE_TINY >> AREA_NUM,
@@ -217,6 +220,7 @@ enum e_mmap_flags
 void 	*malloc(size_t size);
 void 	free(void *ptr);
 void 	*realloc(void *ptr, size_t size);
+void	show_alloc_mem();
 
 //SECTION - testing
 
@@ -231,6 +235,7 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 t_alloc	*_global_data(bool reset);
 void	malloc_munmap_data(t_alloc *data);
 int		round_page(int n, int pagesize);
+uint32_t	align_addr(void *ptr);
 
 void	print_zone(t_memzone *zone);
 void	print_area(t_area *area);
@@ -248,13 +253,13 @@ t_memzone	*bytelst_head(t_area *curr);
 t_area	*bytelst_merge(t_area *left, t_area *right);
 t_area	*bytelst_split(t_area *area, t_bytelist size);
 
-void		*zone_area_alloc(t_list *zones, uint32_t size, int area_size);
+void		*zone_area_alloc(t_list *zones, uint32_t size);
 t_area		*zone_area_freed(t_list *zones, void *ptr);
 t_list		*zone_add(t_alloc *data, t_list **zones, uint32_t size);
 t_bytelist	zone_find_longest_chunk(t_memzone *zone);
 t_area		*zone_find_first_free_area(t_memzone *zone);
 
-void		area_alloc(t_memzone *, t_area *, t_bytelist, int);
+void		area_alloc(t_memzone *zone, t_area *area, t_bytelist size);
 t_area		*area_find_alloc_block(t_area *area, t_bytelist size);
 t_memzone	*area_freed(t_area *area);
 t_area		*area_find_freed_block(t_area *area, void *ptr);
