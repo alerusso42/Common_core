@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 22:48:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/10 15:24:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:59:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 
 t_area	*bytelst_next(t_area *curr)
 {
+	t_area	*area;
+
 	if (!curr->next)
 		return (NULL);
-	return (curr + curr->next);
+	area = ((void *)curr) + curr->next;
+	if (!area->next)
+		return (NULL);
+	return (area);
 }
 
 t_area	*bytelst_prev(t_area *curr)
 {
 	if (!curr->prev)
 		return (NULL);
-	return (curr - curr->prev);
+	return (((void *)curr) - curr->prev);
 }
 
 t_memzone	*bytelst_head(t_area *curr)
 {
 	while (curr->prev)
-		curr -= curr->prev;
-	return ((t_memzone *)(void *)curr - sizeof(t_memzone));
+		curr = ((void *)curr) - curr->prev;
+	return (((void *)curr) - sizeof(t_memzone));
 }
 
 /*
@@ -73,14 +78,17 @@ t_area	*bytelst_split(t_area *area, t_bytelist size)
 	t_area	*next;
 	t_area	*new;
 
-	if (!area || size)
+	if (!area || !size)
 		return (error_malloc("bytelst_split args error"));
 	next = bytelst_next(area);
-	new = (t_area *)(void *)area + size;
+	new = ((void *)area) + size;
+	new->info = MEM_FREED;
 	new->prev = size;
 	new->next = area->next - size;
 	area->next = size;
 	if (next)
+	{
 		next->prev = new->next;
+	}
 	return (new);
 }

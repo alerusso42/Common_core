@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 22:02:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 09:49:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_alloc	*_global_data(bool reset)
 {
 	static t_alloc	data;
 
-	if (data.pagesize == 0 || reset)
+	if (!data.error && (data.pagesize == 0 || reset))
 	{
 		data = (t_alloc){0};
 		data.pagesize = sysconf(_SC_PAGESIZE);
@@ -32,6 +32,8 @@ t_alloc	*_global_data(bool reset)
 		data.size_zone.tiny = round_page(ZONE_TINY, data.pagesize);
 		data.size_zone.small = round_page(ZONE_SMALL, data.pagesize);
 		data.size_zone.large = ALLOC_MAX_SIZE;
+		data.ptr_max = 0x0;
+		data.ptr_min = (void *)-1;
 		data.header_size = sizeof(t_memzone) + sizeof(t_area);
 	}
 	return (&data);

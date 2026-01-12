@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 21:59:03 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 13:23:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@
 
 int	ft_printf(const char *str, ...);
 
-# define DEBUG true
+# define DEBUG_FLAG true
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
-# if DEBUG == true
+# if DEBUG_FLAG == true
+#  define DEBUG(s, ...) ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
+# else
+#  define DEBUG(s, ...)	(void)0
+# endif
+# define PRINT_FLAG true
+# define PRINT_TIMESTAMP "$GMalloc: $Z"
+# if PRINT_FLAG == true
 #  define PRINT(s, ...) ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define PRINT(s, ...)	(void)0
@@ -225,6 +232,9 @@ t_alloc	*_global_data(bool reset);
 void	malloc_munmap_data(t_alloc *data);
 int		round_page(int n, int pagesize);
 
+void	print_zone(t_memzone *zone);
+void	print_area(t_area *area);
+
 void	*fatal_malloc(char *s);
 void	*error_malloc(char *s);
 void	*mmap_syscall(t_alloc *data, uint32_t len);
@@ -238,13 +248,13 @@ t_memzone	*bytelst_head(t_area *curr);
 t_area	*bytelst_merge(t_area *left, t_area *right);
 t_area	*bytelst_split(t_area *area, t_bytelist size);
 
-void		*zone_area_alloc(t_list *zones, uint32_t size);
+void		*zone_area_alloc(t_list *zones, uint32_t size, int area_size);
 t_area		*zone_area_freed(t_list *zones, void *ptr);
 t_list		*zone_add(t_alloc *data, t_list **zones, uint32_t size);
 t_bytelist	zone_find_longest_chunk(t_memzone *zone);
 t_area		*zone_find_first_free_area(t_memzone *zone);
 
-void		area_alloc(t_area *area, t_bytelist size);
+void		area_alloc(t_memzone *, t_area *, t_bytelist, int);
 t_area		*area_find_alloc_block(t_area *area, t_bytelist size);
 t_memzone	*area_freed(t_area *area);
 t_area		*area_find_freed_block(t_area *area, void *ptr);

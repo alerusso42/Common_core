@@ -14,17 +14,34 @@
 
 void	lst_front(t_list **lst, t_list *new)
 {
-	if (!new || !lst || !*lst)
+	if (!new || !lst)
 		return ;
-	new->next = *lst;
-	*lst = new;
-	new->next->prev = new;
+	if (*lst)
+	{
+		new->next = *lst;
+		*lst = new;
+		new->next->prev = new;
+	}
+	else
+	{
+		*lst = new;
+		new->next = NULL;
+		new->prev = NULL;
+	}
 }
 
 void	lst2_front(t_list2 **lst, t_list2 *new)
 {
-	if (!new || !lst || !*lst)
+	if (!new || !lst)
 		return ;
-	new->next = *lst;
-	*lst = new;
+	if (*lst)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
+	else
+	{
+		*lst = new;
+		new->next = NULL;
+	}
 }

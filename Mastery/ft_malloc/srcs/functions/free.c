@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 21:59:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:24:35 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void 	free(void *ptr)
 	t_area		*area;
 	t_memzone	*zone;
 
+	if (!ptr)
+		return ;
 	data = _global_data(false);
 	if (data->error)
 		return ;
@@ -48,7 +50,7 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 		PRINT("Free: ptr %p is invalid!\n", ptr);
 		return ;
 	}
-	else if (DEBUG == false)
+	else if (DEBUG_FLAG == false)
 	{
 		VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
 	}

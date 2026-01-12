@@ -6,33 +6,36 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 13:43:00 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 13:35:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
-void	area_alloc(t_area *area, t_bytelist size)
+void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size, int min_area)
 {
-	t_memzone	*zone;
+	uint32_t	area_size;
+	int			split_size;
 
-	zone = bytelst_head(area);
-	if (zone->first_free_area == area)
-		zone->first_free_area = zone_find_first_free_area(zone);
-	if (zone->longest_chunk == area->next)
-		zone->longest_chunk = zone_find_longest_chunk(zone);
+	area_size = area->next;
 	zone->free_space -= size;
 	area->info &= (~MEM_FREED);
-	bytelst_split(area, size);
+	split_size = ((int)area_size) - ((int)size) - sizeof(t_area);
+	if (split_size > 0 && split_size >= min_area)
+		bytelst_split(area, size);
+	if (zone->first_free_area == area)
+		zone->first_free_area = zone_find_first_free_area(zone);
+	if (zone->longest_chunk == area_size)
+		zone->longest_chunk = zone_find_longest_chunk(zone);
 }
 
 t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 {
 	while (area->next)
 	{
-		if (area->next >= size)
+		if (area->info & MEM_FREED && area->next >= size)
 			return (area);
-		area += area->next;
+		area = ((void *)area) + area->next;
 	}
 	error_malloc("area_find_alloc_block failure");
 	return (NULL);
@@ -41,6 +44,8 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 t_memzone	*area_freed(t_area *area)
 {
 	t_memzone	*zone;
+	t_area		*next;
+	t_area		*prev;
 
 	zone = bytelst_head(area);
 	if (zone->first_free_area > area)
@@ -49,13 +54,15 @@ t_memzone	*area_freed(t_area *area)
 		zone->longest_chunk = area->next;
 	zone->free_space += area->next;
 	area->info |= MEM_FREED;
-	if (area->prev && bytelst_prev(area)->info & MEM_FREED)
+	prev = bytelst_prev(area);
+	if (prev && prev->info & MEM_FREED)
 	{
-		area = bytelst_merge(bytelst_prev(area), area);
+		area = bytelst_merge(prev, area);
 	}
-	if (area->next && bytelst_next(area)->info & MEM_FREED)
+	next = bytelst_next(area);
+	if (next && next->info & MEM_FREED)
 	{
-		bytelst_merge(area, bytelst_next(area));
+		bytelst_merge(area, next);
 	}
 	return (zone);
 }

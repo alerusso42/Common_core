@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/ft_malloc.h"
-# include "../all.h"
+# include "test.h"
+# include "../../all.h"
 
 void	test();
 
@@ -60,7 +60,7 @@ void	test()
 	int	i;
 	int	j;
 
-	daft_init("media", "SETTINGS.md");
+	daft_init("../../media", "SETTINGS.md");
     daft_swap(2);
 	char	***matr = daft_get("CALYREX");
 	if (!matr)

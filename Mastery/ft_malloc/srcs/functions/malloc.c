@@ -30,7 +30,7 @@ void 	*malloc(size_t size)
 		ptr = get_mem(data, size, &data->zone_small, data->size_zone.small);
 	else
 		ptr = get_mem(data, size, &data->zone_tiny, data->size_zone.tiny);
-	if (DEBUG == false && ptr)
+	if (DEBUG_FLAG == false && ptr)
 	{
 		VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
 	}
@@ -40,13 +40,20 @@ void 	*malloc(size_t size)
 static void	*get_mem(t_alloc *dt, uint32_t size, t_list **zones, int zone_size)
 {
 	void	*ptr;
+	int		min_area_size;
 
-	ptr = zone_area_alloc(*zones, size);
+	if (zone_size == (int)dt->size_zone.tiny)
+		min_area_size = 1;
+	else if (zone_size == (int)dt->size_zone.small)
+		min_area_size = 2;
+	else
+		min_area_size = zone_size;
+	ptr = zone_area_alloc(*zones, size, min_area_size);
 	if (ptr)
 		return (ptr);
 	if (!zone_add(dt, zones, zone_size))
 		return (fatal_malloc("cannot allocate new zone"));
-	ptr = zone_area_alloc(*zones, size);
+	ptr = zone_area_alloc(*zones, size, min_area_size);
 	if (!ptr)
 		return (fatal_malloc("unexpected error in address selection"));
 	return (ptr);

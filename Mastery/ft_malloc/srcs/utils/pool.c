@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:30:46 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 04:18:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/12 09:16:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	*pool_alloc(t_alloc *data, uint32_t len)
 	data->pool.len += 1;
 	PRINT("pool usage: new %u, total %u, left %u\n", len, data->pool.bytes, \
 	data->pool.size - data->pool.bytes);
-	return (data->pool.mem + data->pool.bytes);
+	return (data->pool.mem + data->pool.bytes - len);
 }
