@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 11:17:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:55:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,17 @@ uint32_t	align_addr(void *ptr)
 
 void	*error_malloc(char *s)
 {
-	static bool	recursion_guard;
-
-	if (recursion_guard == true)
-	{
-		recursion_guard = false;
-		return (NULL);
-	}
-	err_printf("$RMalloc$Z:$R %s$Z\nPerror details: ", s);
-	recursion_guard = true;
-	perror(NULL);
-	recursion_guard = false;
+	err_printf("$RMalloc$Z:$R %s$Z\n", s);
 	return (NULL);
 }
 
 void	*fatal_malloc(char *s)
 {
-	static bool	recursion_guard;
 	t_alloc	*data;
 
-	if (recursion_guard == true)
-	{
-		recursion_guard = false;
-		return (NULL);
-	}
 	data = _global_data(false);
-	err_printf("Malloc, fatal: %s\nPerror details: ", s);
-	recursion_guard = true;
+	err_printf("Malloc, fatal: %s\n", s);
 	perror(NULL);
-	recursion_guard = false;
 	malloc_munmap_data(data);
 	data->error = true;
 	return (NULL);

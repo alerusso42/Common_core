@@ -47,7 +47,7 @@ int	main0()
 	return 0;
 }
 
-int	main()
+int	main2()
 {
 	char	*p[300];
 	const int	size = 1;
@@ -61,13 +61,14 @@ int	main()
 	return 0;
 }
 
-int	main2()
+int	main()
 {
 	char		*s;
 	const int	size = 7;
 
 	ft_printf("stack starts with: %p,%p\n", &s, &size);
 	ft_printf("pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
+	ft_printf("max align: %d\n", ALIGN);
 	perror("Checking errno...");
 	s = malloc(size + 1);
 	free(malloc((int)1e6));

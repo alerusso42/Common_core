@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:11:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 19:46:11 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:11:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	print_zone(t_memzone *zone)
 	t_area	*area;
 	int		i;
 
-	return ;
 	if (DEBUG_FLAG == false)
 		return ;
 	DEBUG("$Mprint zone %p:\n$Z", zone);

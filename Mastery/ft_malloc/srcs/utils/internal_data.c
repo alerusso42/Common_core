@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internal_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 19:13:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:50:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_alloc	*_global_data(bool reset)
 
 void	malloc_munmap_data(t_alloc *data)
 {
+	PRINT("$Ymunmap all$Z: freeing allocator memory\n");
 	if (data->zone_tiny)
 		munmap_zone(data, data->zone_tiny);
 	if (data->zone_small)

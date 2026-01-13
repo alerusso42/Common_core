@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 11:16:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:29:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 	uint32_t	area_size;
 	int			new_area_size;
 
-	print_zone(zone);
 	area_size = area->next;
 	zone->free_space -= size;
 	area->info &= (~MEM_FREED);
@@ -28,12 +27,17 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 		zone->first_free_area = zone_find_first_free_area(zone);
 	if (zone->longest_chunk == area_size)
 		zone->longest_chunk = zone_find_longest_chunk(zone);
+	//print_zone(zone);
+	//ft_printf("$R_______$Z\n");
+	//print_area(area);
 }
 
 t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 {
 	uint32_t	alignment;
 
+	if (!area)
+		return (NULL);
 	while (area->next)
 	{
 		if (area->info & MEM_FREED && area->next >= size)
@@ -55,7 +59,7 @@ t_memzone	*area_freed(t_area *area)
 	t_area		*prev;
 
 	zone = bytelst_head(area);
-	print_zone(zone);
+	//print_zone(zone);
 	if (zone->first_free_area > area)
 		zone->first_free_area = area;
 	if (zone->longest_chunk < area->next)
@@ -73,7 +77,10 @@ t_memzone	*area_freed(t_area *area)
 		bytelst_merge(area, next);
 	}
 	if (!area->prev && !bytelst_next(area))
+	{
 		zone->first_free_area = NULL;
+		zone->longest_chunk = 0;
+	}
 	return (zone);
 }
 

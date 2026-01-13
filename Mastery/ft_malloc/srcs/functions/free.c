@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 19:02:39 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:47:57 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,39 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 	}
 }
 
+static void	TEST(t_list *lst);
+
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
-	t_list	*temp;
-
 	if (zone->first_free_area)
 		return ;
-	temp = zone->ptr_node;
+	if (zone->ptr_node == data->zone_tiny)
+		data->zone_tiny = data->zone_tiny->next;
+	else if (zone->ptr_node == data->zone_small)
+		data->zone_small = data->zone_small->next;
+	else if (zone->ptr_node == data->zone_large)
+		data->zone_large = data->zone_large->next;
+	//t_list	*list = zone->ptr_node;
+	//ft_printf("$Bbefore deleting $Z%p $BFrom %p$Z: \n", zone, list);
+	//TEST(list);
 	lst_delone(zone->ptr_node, NULL);
-	if (temp == data->zone_tiny)
-		data->zone_tiny = NULL;
-	else if (temp == data->zone_small)
-		data->zone_small = NULL;
-	else if (temp == data->zone_large)
-		data->zone_large = NULL;
 	munmap_syscall(data, zone, zone->size);
-	if (!data->zone_tiny && !data->zone_small && !!data->zone_large)
-		malloc_munmap_data(data);
+	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
+		return malloc_munmap_data(data);
+	//ft_printf("$BAfter$Z\n");
+	TEST(NULL);
+}
+
+static void	TEST(t_list *list)
+{
+	if (!list)
+		return ;
+	while (list->prev)
+		list = list->prev;
+	while (list)
+	{
+		ft_printf("%p\n", list->content);
+		//print_zone(list->content);
+		list = list->next;
+	}
 }
