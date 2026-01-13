@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 22:32:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 11:17:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ uint32_t	align_addr(void *ptr)
 {
 	uintptr_t	addr;
 
-	addr = ptr;
+	addr = (uintptr_t)ptr;
 	return (ALIGN - (addr % ALIGN));
 }
 

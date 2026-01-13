@@ -27,7 +27,7 @@ void	test();
 5)	show_alloc_mem_ex()		
 6)	environmental variables			
 */
-int	main()
+int	main0()
 {
 	char	*p[100];
 	const int	size = 25;
@@ -42,6 +42,20 @@ int	main()
 		p[i] = malloc(size);
 	show_alloc_mem();
 	for (int i = 25; i != 100; i++)
+		free(p[i]);
+	show_alloc_mem();
+	return 0;
+}
+
+int	main()
+{
+	char	*p[300];
+	const int	size = 1;
+
+	for (int i = 0; i != 300; i++)
+		p[i] = malloc(size);
+	show_alloc_mem();
+	for (int i = 0; i != 300; i++)
 		free(p[i]);
 	show_alloc_mem();
 	return 0;

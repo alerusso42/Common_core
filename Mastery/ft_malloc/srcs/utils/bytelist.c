@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bytelist.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 22:48:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 16:59:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 11:15:56 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,15 @@ t_area	*bytelst_split(t_area *area, t_bytelist size)
 {
 	t_area	*next;
 	t_area	*new;
+	int		alignment;
 
 	if (!area || !size)
 		return (error_malloc("bytelst_split args error"));
 	next = bytelst_next(area);
 	new = ((void *)area) + size;
+	alignment = align_addr(new);
+	new = ((void *)(new)) + alignment;
+	size += alignment;
 	new->info = MEM_FREED;
 	new->prev = size;
 	new->next = area->next - size;

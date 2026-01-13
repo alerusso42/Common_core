@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   area.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 22:40:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 11:16:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 {
 	uint32_t	area_size;
-	uint32_t	alignment;
 	int			new_area_size;
-	t_area		*prev;
-//FIXME allineamento
+
 	print_zone(zone);
-	alignment = align_addr()
 	area_size = area->next;
 	zone->free_space -= size;
 	area->info &= (~MEM_FREED);
@@ -33,12 +30,6 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 		zone->longest_chunk = zone_find_longest_chunk(zone);
 }
 
-/*
-	oooooooooo	lc = 10
-	xxxxxooooo	lc = 5
-	xxxxxbbboo	lc = 2
-	ooooobbboo	lc = 5
-*/
 t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 {
 	uint32_t	alignment;
