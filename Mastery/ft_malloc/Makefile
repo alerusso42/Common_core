@@ -12,7 +12,7 @@ $(NAME): $(SRC)
 	$(comp)
 
 run: $(NAME)
-	./a.out
+	clear ; ./a.out
 
 print: $(NAME)
 	./a.out > $(FILE)

@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 16:47:57 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:37:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 	//t_list	*list = zone->ptr_node;
 	//ft_printf("$Bbefore deleting $Z%p $BFrom %p$Z: \n", zone, list);
 	//TEST(list);
+	show_alloc_mem();
 	lst_delone(zone->ptr_node, NULL);
 	munmap_syscall(data, zone, zone->size);
 	if (!data->zone_tiny && !data->zone_small && !data->zone_large)

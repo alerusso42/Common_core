@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 12:17:50 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:52:15 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static size_t	print_one(t_list *zones, char *name, int *index)
 			usr_ptr_end = ((void *)area) + area->next;
 			size = (size_t)area->next - sizeof(t_area);
 			total_size += size;
-			ft_printf("$C$$%d$Z = ", *index);
+			ft_printf("\033[%dm$$$C%d\033[0m = ", 31 + area->info, *index);
 			ft_printf("%p - %p : %u bytes\n", usr_ptr_start, usr_ptr_end, size);
 			area = bytelst_next(area);
 			(*index)++;
