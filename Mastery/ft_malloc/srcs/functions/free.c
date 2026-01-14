@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/14 09:50:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:16:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void 	free(void *ptr)
 
 	if (!ptr)
 		return ;
-	fd_printf(2, "%p\n", ptr);
+	//fd_printf(2, "%p\n", ptr);
 	data = _global_data(false);
 	if (data->error)
 		return ;
@@ -76,7 +76,7 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 	lst_delone(zone->ptr_node, NULL);
 	munmap_syscall(data, zone, zone->size);
 	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
-		return malloc_munmap_data(data);
+		return (malloc_munmap_data(data));
 	//ft_printf("$BAfter$Z\n");
 	TEST(NULL);
 }

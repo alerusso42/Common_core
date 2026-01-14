@@ -27,22 +27,68 @@ void	test();
 5)	show_alloc_mem_ex()		
 6)	environmental variables			
 */
-int	main0()
+
+void	fill(char **s, int size)
+{
+	static int	type = 'A';
+
+	fd_printf(2, "size %d\n", size);
+	*s = malloc(size + 1);
+	(*s)[size] = 0;
+	while (--size > 0)
+	{
+		(*s)[size] = type;
+	}
+	(*s)[0] = type;
+	if (type == 'Z')
+		type = 'A';
+	else
+		type++;
+}
+
+void	release(char *s)
+{
+	ft_printf("Print of %p:\t%s\n", s, s);
+	free(s);
+}
+
+int	get_size()
+{
+	char	*s = gnl();
+	int		size = ft_atoi(s);
+	free(s);
+	return (size);
+}
+
+#include <sys/time.h>
+int	main()
 {
 	char	*p[100];
-	const int	size = 25;
+	struct timeval	t;
+	void	*pt[4];
 
+	openfd("test_file", "r");
+	pt[0] = malloc(5);
+	pt[1] = malloc(15);
+	pt[2] = malloc(5000000);
+	free(pt[0]);
+	free(pt[1]);
+	free(pt[2]);
+	gettimeofday(&t, NULL);
+	srand(t.tv_sec);
+	const int	max_size = get_size();
+	fd_printf(2, "max size %d\n", max_size);
 	for (int i = 0; i != 50; i++)
-		p[i] = malloc(size);
+		fill(&p[i], get_size());
 	show_alloc_mem();
 	for (int i = 0; i != 25; i++)
-		free(p[i]);
+		release(p[i]);
 	show_alloc_mem();
 	for (int i = 50; i != 100; i++)
-		p[i] = malloc(size);
+		fill(&p[i], get_size());
 	show_alloc_mem();
 	for (int i = 25; i != 100; i++)
-		free(p[i]);
+		release(p[i]);
 	show_alloc_mem();
 	return 0;
 }
@@ -61,7 +107,7 @@ int	main2()
 	return 0;
 }
 
-int	main()
+int	main3()
 {
 	char		*s;
 	const int	size = 7;
