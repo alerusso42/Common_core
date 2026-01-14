@@ -11,6 +11,18 @@ comp := cc -Wall -Wextra -Werror -g \
 $(NAME): $(SRC)
 	$(comp)
 
+all: $(NAME)
+	
+
+clean: 
+
+
+fclean:
+	rm a.out
+
+re: fclean $(NAME)
+
+
 run: $(NAME)
 	clear ; ./a.out
 
