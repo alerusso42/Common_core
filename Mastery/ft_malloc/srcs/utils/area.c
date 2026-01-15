@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 17:20:19 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:41:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 {
 	uint32_t	area_size;
 	int			new_area_size;
+	//int			chunk;
 
 	area_size = area->next;
 	zone->empty = false;
@@ -25,7 +26,10 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 		bytelst_split(area, size);
 	if (zone->first_free_area == area)
 		zone->first_free_area = zone_find_first_free_area(zone);
+	//chunk = area->next;
 	zone->longest_chunk = zone_find_longest_chunk(zone);
+	//if (chunk > 0 && zone->longest_chunk == area_size)
+	//	zone->longest_chunk = new_area_size;
 	//print_zone(zone);
 	//ft_printf("$R_______$Z\n");
 	//print_area(area);
@@ -37,8 +41,8 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 	uint32_t	alignment;
 
 	if (!area)
+		//return (NULL);
 		return (NULL);
-		//return (abort(), NULL);
 	while (area->next)
 	{
 		if (area->info & MEM_FREED && area->next >= size)
@@ -62,7 +66,7 @@ t_memzone	*area_freed(t_area *area)
 
 	zone = bytelst_head(area);
 	//print_zone(zone);
-	if (zone->first_free_area > area)
+	if (!zone->first_free_area || zone->first_free_area > area)
 	{
 		zone->first_free_area = area;
 	}

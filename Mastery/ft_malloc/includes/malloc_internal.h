@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 17:35:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:07:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 int	ft_printf(const char *str, ...);
 
-# define DEBUG_FLAG true
+# define DEBUG_FLAG false
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
 # if DEBUG_FLAG == true
 #  define DEBUG(s, ...) fd_printf(2, DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG true
+# define PRINT_FLAG false
 # define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
 #  define PRINT(s, ...) ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)

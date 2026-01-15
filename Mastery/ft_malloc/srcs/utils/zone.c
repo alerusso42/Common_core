@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 17:21:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:00:43 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	*zone_area_alloc(t_list *zones, uint32_t size)
 {
 	t_memzone	*zone;
 	t_area		*area;
+	static int	EYE;
 
 	size += sizeof(t_area);
+	++EYE;
 	while (zones)
 	{
 		zone = (t_memzone *)zones->content;
@@ -30,6 +32,8 @@ void	*zone_area_alloc(t_list *zones, uint32_t size)
 				area_alloc(zone, area, size);
 				return (((void *)area) + sizeof(t_area));
 			}
+			else
+				print_zone(zone);
 		}
 		zones = zones->next;
 	}
@@ -113,11 +117,12 @@ t_area	*zone_find_first_free_area(t_memzone *zone)
 
 	//area = ((void *)zone + sizeof(t_memzone));
 	area = zone->first_free_area;
-	while (area->next)
+	while (area)
 	{
 		if (area->info & MEM_FREED)
 			return (area);
-		area = ((void *)area) + area->next;
+		area = bytelst_next(area);
 	}
+	zone->longest_chunk = 0;
 	return (NULL);
 }
