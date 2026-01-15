@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/14 13:16:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 11:53:34 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void 	free(void *ptr)
 	if (area->info != 0 && area->info != 1)
 		free_correct_area(data, ptr);
 	zone = area_freed(area);
+	//show_alloc_mem();
 	munmap_zone_if_empty(data, zone);
 }
 
@@ -61,7 +62,7 @@ static void	TEST(t_list *lst);
 
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
-	if (zone->first_free_area)
+	if (zone->free_space != zone->size)
 		return ;
 	if (zone->ptr_node == data->zone_tiny)
 		data->zone_tiny = data->zone_tiny->next;

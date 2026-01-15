@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   area.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 16:29:15 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:38:46 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 		bytelst_split(area, size);
 	if (zone->first_free_area == area)
 		zone->first_free_area = zone_find_first_free_area(zone);
-	if (zone->longest_chunk == area_size)
-		zone->longest_chunk = zone_find_longest_chunk(zone);
+	zone->longest_chunk = zone_find_longest_chunk(zone);
 	//print_zone(zone);
 	//ft_printf("$R_______$Z\n");
 	//print_area(area);
@@ -38,6 +37,7 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 
 	if (!area)
 		return (NULL);
+		//return (abort(), NULL);
 	while (area->next)
 	{
 		if (area->info & MEM_FREED && area->next >= size)
@@ -61,9 +61,9 @@ t_memzone	*area_freed(t_area *area)
 	zone = bytelst_head(area);
 	//print_zone(zone);
 	if (zone->first_free_area > area)
+	{
 		zone->first_free_area = area;
-	if (zone->longest_chunk < area->next)
-		zone->longest_chunk = area->next;
+	}
 	zone->free_space += area->next;
 	area->info |= MEM_FREED;
 	prev = bytelst_prev(area);
@@ -78,9 +78,10 @@ t_memzone	*area_freed(t_area *area)
 	}
 	if (!area->prev && !bytelst_next(area))
 	{
-		zone->first_free_area = NULL;
-		zone->longest_chunk = 0;
+		zone->free_space = zone->size;
 	}
+	if (zone->longest_chunk < area->next)
+		zone->longest_chunk = area->next + sizeof(t_area);
 	return (zone);
 }
 

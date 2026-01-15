@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/12 22:36:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:09:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	if (!node)
 		return (munmap_syscall(data, ptr, size), NULL);
 	node->content = ptr;
-	new_zone = (t_memzone *)node->content;
+	new_zone = node->content;
 	*new_zone = (t_memzone){0};
 	new_zone->free_space = size - sizeof(t_memzone);
 	new_zone->longest_chunk = new_zone->free_space;
@@ -111,6 +111,7 @@ t_area	*zone_find_first_free_area(t_memzone *zone)
 {
 	t_area	*area;
 
+	//area = ((void *)zone + sizeof(t_memzone));
 	area = zone->first_free_area;
 	while (area->next)
 	{

@@ -20,7 +20,7 @@ void	test();
 2)	fixare calcolo longest_chunk
 3)	stampa puntatore in esadecimale
 //TODO
-1)	allineamento pagina
+OK)	allineamento pagina
 2)	realloc
 3)	pulizia codice
 4)	cartella con test automatizzati
@@ -32,7 +32,7 @@ void	fill(char **s, int size)
 {
 	static int	type = 'A';
 
-	fd_printf(2, "size %d\n", size);
+	//fd_printf(2, "size %d\n", size);
 	*s = malloc(size + 1);
 	(*s)[size] = 0;
 	while (--size > 0)
@@ -48,48 +48,65 @@ void	fill(char **s, int size)
 
 void	release(char *s)
 {
-	ft_printf("Print of %p:\t%s\n", s, s);
+	//ft_printf("Print of %p:\t%s\n", s, s);
 	free(s);
 }
 
 int	get_size()
 {
+	//return (rand() % 12345);
 	char	*s = gnl();
+	if (!s)
+		return (rand() % 12345);
 	int		size = ft_atoi(s);
 	free(s);
 	return (size);
 }
-
+//((t_area *)(((void*)p[0]) - sizeof(t_area)))->info
 #include <sys/time.h>
-int	main()
+int	main1()
 {
 	char	*p[100];
 	struct timeval	t;
 	void	*pt[4];
-
-	openfd("test_file", "r");
-	pt[0] = malloc(5);
-	pt[1] = malloc(15);
-	pt[2] = malloc(5000000);
-	free(pt[0]);
-	free(pt[1]);
-	free(pt[2]);
+(void)pt;
+/*show_alloc_mem();
+pt[0] = malloc(5);
+show_alloc_mem();
+pt[1] = malloc(15);
+show_alloc_mem();
+pt[2] = malloc(5000000);
+show_alloc_mem();
+free(pt[0]);
+show_alloc_mem();
+free(pt[1]);
+show_alloc_mem();
+free(pt[2]);
+show_alloc_mem();*/
+	if (openfd("test_file1", "a+").p == 0)
+		return 1;
 	gettimeofday(&t, NULL);
 	srand(t.tv_sec);
 	const int	max_size = get_size();
-	fd_printf(2, "max size %d\n", max_size);
+	(void)max_size;
+	//fd_printf(2, "max size %d\n", max_size);
 	for (int i = 0; i != 50; i++)
+	{
 		fill(&p[i], get_size());
-	show_alloc_mem();
+		show_alloc_mem();
+	}
 	for (int i = 0; i != 25; i++)
+	{
+		show_alloc_mem();
 		release(p[i]);
-	show_alloc_mem();
+		show_alloc_mem();
+	}
 	for (int i = 50; i != 100; i++)
 		fill(&p[i], get_size());
-	show_alloc_mem();
+	//show_alloc_mem();
 	for (int i = 25; i != 100; i++)
 		release(p[i]);
-	show_alloc_mem();
+	//show_alloc_mem();
 	return 0;
 }
 
@@ -107,7 +124,7 @@ int	main2()
 	return 0;
 }
 
-int	main3()
+int	main()
 {
 	char		*s;
 	const int	size = 7;

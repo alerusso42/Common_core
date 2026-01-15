@@ -34,6 +34,7 @@ void 	*malloc(size_t size)
 	{
 		VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
 	}
+	//show_alloc_mem();
 	return (ptr);
 }
 
