@@ -18,6 +18,7 @@ void 	*malloc(size_t size)
 {
 	t_alloc		*data;
 	void		*ptr;
+	static int	cntr;
 
 	data = _global_data(false);
 	if (data->error)
@@ -35,6 +36,17 @@ void 	*malloc(size_t size)
 		VALGRIND_MALLOCLIKE_BLOCK(ptr, size, 0, false);
 	}
 	//show_alloc_mem();
+	(void)cntr;
+	/*if (cntr)
+		fd_printf(3, "%p |%d|\n", ptr, cntr++);
+	else
+		cntr++;*/
+	/*if (cntr == 2079)
+		data->DEBUG_VAR = ptr;
+	fd_printf(2, "%p |%d|\n", ptr, cntr++);
+	if (data->DEBUG_VAR && cntr == 2080)
+		fd_printf(2, "eccoci..\n");*/
+	cntr = 0;
 	return (ptr);
 }
 

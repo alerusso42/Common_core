@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 16:33:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:35:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,9 @@ typedef	struct s_memzone
 	void		*ptr_node;
 	t_area		*first_free_area;//first free area, starting from left
 	uint32_t	size;
-	uint32_t	free_space;
 	uint32_t	longest_chunk;//longest freed chunk
 	uint32_t	index;
+	uint8_t		empty;
 }	__attribute__((aligned(ALIGN)))	t_memzone;
 
 /*

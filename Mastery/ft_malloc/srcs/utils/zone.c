@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 12:09:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:21:18 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	node->content = ptr;
 	new_zone = node->content;
 	*new_zone = (t_memzone){0};
-	new_zone->free_space = size - sizeof(t_memzone);
-	new_zone->longest_chunk = new_zone->free_space;
+	new_zone->empty = true;
+	new_zone->longest_chunk = size - sizeof(t_memzone);
 	new_zone->first_free_area = ((void *)new_zone) + sizeof(t_memzone);
 	*new_zone->first_free_area = (t_area){0};
-	new_zone->first_free_area->next = new_zone->free_space;
+	new_zone->first_free_area->next = new_zone->longest_chunk;
 	new_zone->first_free_area->info = MEM_FREED;
 	*((t_area *)(((void *)new_zone) + size)) = (t_area){0};
 	new_zone->index = lst_size(*zones);

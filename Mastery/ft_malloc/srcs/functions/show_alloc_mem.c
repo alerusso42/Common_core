@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 11:42:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:22:41 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static size_t	print_one(t_list *zones, char *name, int *index)
 	total_size = 0;
 	while (zones)
 	{
-		ft_printf("$B%s$Z : %p , lc = %d\n", name, zones->content, ((t_memzone *)zones->content)->longest_chunk);
+		ft_printf("$B%s$Z : %p\n", name, zones->content);
 		area = ((void *)(zones->content)) + sizeof(t_memzone);
 		while (area)
 		{
@@ -49,7 +49,14 @@ static size_t	print_one(t_list *zones, char *name, int *index)
 			size = (size_t)area->next - sizeof(t_area);
 			total_size += size * (area->info == 0);
 			ft_printf("\033[%dm$$$C%d\033[0m = ", 31 + area->info, *index);
-			ft_printf("%p - %p : %u bytes\n", usr_ptr_start, usr_ptr_end, size);
+			ft_printf("%p - %p : %u bytes ", usr_ptr_start, usr_ptr_end, size);
+			if (!area->info && false)
+			{
+				ft_printf("memDump: ");
+				for (size_t i = sizeof(t_area); i != (size_t)area->next; i++)
+					ft_printf("%c", *(char *)(((void *)area) + i));
+			}
+			ft_printf("\n");
 			area = bytelst_next(area);
 			(*index)++;
 		}

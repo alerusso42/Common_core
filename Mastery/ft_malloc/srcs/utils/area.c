@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 12:38:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:20:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 	int			new_area_size;
 
 	area_size = area->next;
-	zone->free_space -= size;
+	zone->empty = false;
 	area->info &= (~MEM_FREED);
 	new_area_size = ((int)area_size) - ((int)size) - sizeof(t_area);
 	if (new_area_size > 0)
@@ -29,6 +29,7 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 	//print_zone(zone);
 	//ft_printf("$R_______$Z\n");
 	//print_area(area);
+	//show_alloc_mem();
 }
 
 t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
@@ -57,6 +58,7 @@ t_memzone	*area_freed(t_area *area)
 	t_memzone	*zone;
 	t_area		*next;
 	t_area		*prev;
+	static int	GOD;
 
 	zone = bytelst_head(area);
 	//print_zone(zone);
@@ -64,7 +66,6 @@ t_memzone	*area_freed(t_area *area)
 	{
 		zone->first_free_area = area;
 	}
-	zone->free_space += area->next;
 	area->info |= MEM_FREED;
 	prev = bytelst_prev(area);
 	if (prev && prev->info & MEM_FREED)
@@ -78,10 +79,11 @@ t_memzone	*area_freed(t_area *area)
 	}
 	if (!area->prev && !bytelst_next(area))
 	{
-		zone->free_space = zone->size;
+		zone->empty = true;
 	}
 	if (zone->longest_chunk < area->next)
-		zone->longest_chunk = area->next + sizeof(t_area);
+		zone->longest_chunk = area->next;
+	++GOD;
 	return (zone);
 }
 

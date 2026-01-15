@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 11:53:34 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:38:16 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void 	free(void *ptr)
 
 	if (!ptr)
 		return ;
-	//fd_printf(2, "%p\n", ptr);
 	data = _global_data(false);
 	if (data->error)
 		return ;
@@ -32,8 +31,9 @@ void 	free(void *ptr)
 	area = ptr - sizeof(t_area);
 	if (area->info != 0 && area->info != 1)
 		free_correct_area(data, ptr);
+	if (area->info &= MEM_FREED)
+		return (ft_printf("$RSei un pazzo!!$Z\n"), abort());
 	zone = area_freed(area);
-	//show_alloc_mem();
 	munmap_zone_if_empty(data, zone);
 }
 
@@ -62,7 +62,8 @@ static void	TEST(t_list *lst);
 
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
-	if (zone->free_space != zone->size)
+	
+	if (zone->empty == false)
 		return ;
 	if (zone->ptr_node == data->zone_tiny)
 		data->zone_tiny = data->zone_tiny->next;
@@ -70,15 +71,10 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 		data->zone_small = data->zone_small->next;
 	else if (zone->ptr_node == data->zone_large)
 		data->zone_large = data->zone_large->next;
-	//t_list	*list = zone->ptr_node;
-	//ft_printf("$Bbefore deleting $Z%p $BFrom %p$Z: \n", zone, list);
-	//TEST(list);
-	//show_alloc_mem();
 	lst_delone(zone->ptr_node, NULL);
 	munmap_syscall(data, zone, zone->size);
 	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
 		return (malloc_munmap_data(data));
-	//ft_printf("$BAfter$Z\n");
 	TEST(NULL);
 }
 
@@ -91,7 +87,6 @@ static void	TEST(t_list *list)
 	while (list)
 	{
 		ft_printf("%p\n", list->content);
-		//print_zone(list->content);
 		list = list->next;
 	}
 }

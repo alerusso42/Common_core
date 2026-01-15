@@ -4,7 +4,7 @@ LIBFT := libft.a
 
 SRC := $(shell ls ./srcs/*.c ./srcs/functions/*.c ./srcs/utils/*.c)
 
-comp := cc -Wall -Wextra -Werror -g \
+comp := cc -Wall -Wextra -Werror -g\
 		$(SRC) $(LIBFT) -o $(NAME)
 
 

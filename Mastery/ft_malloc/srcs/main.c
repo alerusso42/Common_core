@@ -12,11 +12,11 @@
 
 # include "../includes/malloc_internal.h"
 
-void	test();
+void	test(char *pokemon);
 
 /*
 //FIXME
-1)	fixare main 2
+OK)	fixare main 2
 2)	fixare calcolo longest_chunk
 3)	stampa puntatore in esadecimale
 //TODO
@@ -54,10 +54,11 @@ void	release(char *s)
 
 int	get_size()
 {
+	static int test;
 	//return (rand() % 12345);
 	char	*s = gnl();
 	if (!s)
-		return (rand() % 12345);
+		return (++test);
 	int		size = ft_atoi(s);
 	free(s);
 	return (size);
@@ -97,23 +98,28 @@ show_alloc_mem();*/
 	}
 	for (int i = 0; i != 25; i++)
 	{
-		show_alloc_mem();
 		release(p[i]);
 		show_alloc_mem();
 	}
 	for (int i = 50; i != 100; i++)
+	{
 		fill(&p[i], get_size());
-	//show_alloc_mem();
+		show_alloc_mem();
+	}
+	show_alloc_mem();
 	for (int i = 25; i != 100; i++)
+	{
 		release(p[i]);
-	//show_alloc_mem();
+		show_alloc_mem();
+	}
+	del_filedata();
 	return 0;
 }
 
 int	main2()
 {
 	char	*p[300];
-	const int	size = 1;
+	const int	size = 1234;
 
 	for (int i = 0; i != 300; i++)
 		p[i] = malloc(size);
@@ -124,11 +130,13 @@ int	main2()
 	return 0;
 }
 
-int	main()
+int	main(int ac, char **av)
 {
 	char		*s;
 	const int	size = 7;
 
+	if (ac == 1)
+		return (ft_printf("arg required: insert pokemon\n"));
 	ft_printf("stack starts with: %p,%p\n", &s, &size);
 	ft_printf("pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
 	ft_printf("max align: %d\n", ALIGN);
@@ -143,7 +151,7 @@ int	main()
 	s[size] = 0;
 	ft_printf("%s\n", s);
 	free(s);
-	test();
+	test(av[1]);
 	//print_extreme(NULL, _global_data(false), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
@@ -154,17 +162,21 @@ int	main()
 		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
 		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
 	}
+	del_filedata();
+	//show_alloc_mem();
 	return (0);
 }
 
-void	test()
+void	test(char *pokemon)
 {
 	int	i;
 	int	j;
+	int	fd;
+	fd = openfd("test_file", "w").p, (void)fd;
 
 	daft_init("media", "SETTINGS.md");
     daft_swap(2);
-	char	***matr = daft_get("CALYREX");
+	char	***matr = daft_get(pokemon);
 	if (!matr)
 		return (daft_quit());
 	i = 0;
@@ -173,12 +185,13 @@ void	test()
 		j = 0;
 		while (matr[i][j])
 		{
-			printf("%s\n", matr[i][j]);
+			ft_printf("%s\n", matr[i][j]);
 			j++;
 		}
 		i++;
 	}
 	char	***add = daft_append("SQUALO", 0, 0);
+	//show_alloc_mem();
 	if (!add)
 		return (daft_quit());
 	i = 0;
