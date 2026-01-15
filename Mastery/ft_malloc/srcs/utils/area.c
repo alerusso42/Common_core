@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 18:41:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 19:24:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 {
 	uint32_t	area_size;
 	int			new_area_size;
-	//int			chunk;
 
 	area_size = area->next;
 	zone->empty = false;
@@ -24,10 +23,19 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 	new_area_size = ((int)area_size) - ((int)size) - sizeof(t_area);
 	if (new_area_size > 0)
 		bytelst_split(area, size);
+	else
+		zone->blocks_freed -= 1;
 	if (zone->first_free_area == area)
 		zone->first_free_area = zone_find_first_free_area(zone);
-	//chunk = area->next;
-	zone->longest_chunk = zone_find_longest_chunk(zone);
+	if (zone->blocks_freed == 0)
+		zone->longest_chunk = 0;
+	else if (new_area_size > 0 && zone->blocks_freed == 1)
+		zone->longest_chunk = (uint32_t)new_area_size;
+	//else if (area->next > zone->longest_chunk)
+	//	zone->longest_chunk = area->next;
+	else
+		zone->longest_chunk = zone_find_longest_chunk(zone);
+	//zone->longest_chunk = zone_find_longest_chunk(zone);
 	//if (chunk > 0 && zone->longest_chunk == area_size)
 	//	zone->longest_chunk = new_area_size;
 	//print_zone(zone);
@@ -42,7 +50,7 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 
 	if (!area)
 		//return (NULL);
-		return (NULL);
+		return (abort(), NULL);
 	while (area->next)
 	{
 		if (area->info & MEM_FREED && area->next >= size)
@@ -65,6 +73,7 @@ t_memzone	*area_freed(t_area *area)
 	static int	GOD;
 
 	zone = bytelst_head(area);
+	zone->blocks_freed += 1;
 	//print_zone(zone);
 	if (!zone->first_free_area || zone->first_free_area > area)
 	{
@@ -75,11 +84,13 @@ t_memzone	*area_freed(t_area *area)
 	if (prev && prev->info & MEM_FREED)
 	{
 		area = bytelst_merge(prev, area);
+		zone->blocks_freed -= 1;
 	}
 	next = bytelst_next(area);
 	if (next && next->info & MEM_FREED)
 	{
 		bytelst_merge(area, next);
+		zone->blocks_freed -= 1;
 	}
 	if (!area->prev && !bytelst_next(area))
 	{

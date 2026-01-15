@@ -17,15 +17,17 @@ void	test(char *pokemon);
 /*
 //FIXME
 OK)	fixare main 2
-2)	fixare calcolo longest_chunk
+OK)	fixare calcolo longest_chunk
 3)	stampa puntatore in esadecimale
 //TODO
 OK)	allineamento pagina
+1)	testare pool_realloc
 2)	realloc
 3)	pulizia codice
 4)	cartella con test automatizzati
 5)	show_alloc_mem_ex()		
-6)	environmental variables			
+6)	environmental variables
+7)	create libreria ammodino come vuole il subject			
 */
 
 void	fill(char **s, int size)
@@ -118,14 +120,31 @@ show_alloc_mem();*/
 
 int	main2()
 {
-	char	*p[300];
-	const int	size = 1234;
+	const int	ptrs = 30;
+	char	*p[ptrs];
+	const int	size = 249;
 
-	for (int i = 0; i != 300; i++)
-		p[i] = malloc(size);
 	show_alloc_mem();
-	for (int i = 0; i != 300; i++)
+	for (int i = 0; i != ptrs / 2; i++)
+	{
+		show_alloc_mem();
+		p[i] = malloc(size);
+	}
+	for (int i = 0; i != ptrs / 4; i++)
+	{
+		show_alloc_mem();
 		free(p[i]);
+	}
+	for (int i = ptrs / 2; i != ptrs; i++)
+	{
+		show_alloc_mem();
+		p[i] = malloc(size);
+	}
+	for (int i = ptrs / 4; i != ptrs; i++)
+	{
+		show_alloc_mem();
+		free(p[i]);
+	}
 	show_alloc_mem();
 	return 0;
 }

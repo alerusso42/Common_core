@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 17:22:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:56:58 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static size_t	print_one(t_list *zones, char *name, int *index)
 	total_size = 0;
 	while (zones)
 	{
-		ft_printf("$B%s$Z : %p\n", name, zones->content);
+		ft_printf("$B%s$Z : %p, BF %d\n", name, zones->content, ((t_memzone *)zones->content)->blocks_freed);
 		area = ((void *)(zones->content)) + sizeof(t_memzone);
 		while (area)
 		{

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 18:00:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:50:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	new_zone->first_free_area->next = new_zone->longest_chunk;
 	new_zone->first_free_area->info = MEM_FREED;
 	*((t_area *)(((void *)new_zone) + size)) = (t_area){0};
-	new_zone->index = lst_size(*zones);
+	new_zone->blocks_freed = 1;
 	new_zone->ptr_node = node;
 	new_zone->size = round_page(size, data->pagesize);
 	lst_front(zones, node);

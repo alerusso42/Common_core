@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 18:07:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 19:12:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 int	ft_printf(const char *str, ...);
 
-# define DEBUG_FLAG false
+# define DEBUG_FLAG true
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
 # if DEBUG_FLAG == true
 #  define DEBUG(s, ...) fd_printf(2, DEBUG_TIMESTAMP s, ##__VA_ARGS__)
@@ -149,7 +149,7 @@ typedef	struct s_memzone
 	t_area		*first_free_area;//first free area, starting from left
 	uint32_t	size;
 	uint32_t	longest_chunk;//longest freed chunk
-	uint32_t	index;
+	uint32_t	blocks_freed;
 	uint8_t		empty;
 }	__attribute__((aligned(ALIGN)))	t_memzone;
 

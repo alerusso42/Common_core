@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/13 16:55:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/15 19:23:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 	ptr = mmap(NULL, len, PROT_RDWR, MAP_AP, -1, 0);
 	if (ptr == (void *)-1)
 		return (NULL);
-	if (DEBUG_FLAG)
-		ft_printf("$B%p$Z\n", ptr);
 	if (data->ptr_max < ptr)
 		data->ptr_max = ptr;
 	if (data->ptr_min > ptr)
