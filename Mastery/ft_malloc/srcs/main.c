@@ -118,7 +118,18 @@ show_alloc_mem();*/
 	return 0;
 }
 
-int	main2()
+void	__attribute__((constructor, used)) func()
+{
+	ft_printf("apro");
+}
+
+void	__attribute__((destructor, used)) func2()
+{
+	ft_printf("chiudo");
+}
+
+// -Wno-unused-result
+int	main()
 {
 	const int	ptrs = 30;
 	char	*p[ptrs];
@@ -149,7 +160,7 @@ int	main2()
 	return 0;
 }
 
-int	main(int ac, char **av)
+int	main3(int ac, char **av)
 {
 	char		*s;
 	const int	size = 7;

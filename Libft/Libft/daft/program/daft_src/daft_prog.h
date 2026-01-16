@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_prog.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/02 12:31:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/16 10:02:09 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ enum e_daft_logs
 	DAFT_LOG_MISSFLAGS,
 	DAFT_LOG_NOMEM,
 	DAFT_LOG_KEYUSED,
+	DAFT_LOG_ENUM_ID,
 };
 
 enum e_daft_mem

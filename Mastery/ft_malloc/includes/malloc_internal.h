@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 19:12:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/16 10:32:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,10 @@ enum	e_area_info
 	MEM_FREED = 1 << 0,
 };
 
+/*
+	___________AREA------AREA-----
+	...........
+*/
 /*
 	when mmap is called, a t_memzone node is created.
 	it represent mmaped zone data.
