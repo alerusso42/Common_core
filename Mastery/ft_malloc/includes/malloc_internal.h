@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/17 01:55:52 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/17 09:29:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 int	ft_printf(const char *str, ...);
 
-# define DEBUG_FLAG true
+# define DEBUG_FLAG false
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
 # if DEBUG_FLAG == true
 #  define DEBUG(s, ...) fd_printf(2, DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG true
+# define PRINT_FLAG false
 # define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
 #  define PRINT(s, ...) ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
@@ -174,7 +174,7 @@ large allocation are bigger than ALLOC_SMALL rounded by pagesize.
 */
 enum e_sizelimit_info
 {
-	POOL_SIZE = 120 * 32,//120: max t_memzone nodes; 32: sizeof(t_memzone)
+	POOL_SIZE = 120 * 24,//120: max t_memzone nodes; 24: sizeof(t_list)
 	AREA_NUM = 4,//2^AREA_NUM modify the number of areas in a zone
 	ZONE_TINY = (1 << 12),
 	ZONE_SMALL = (1 << 18),

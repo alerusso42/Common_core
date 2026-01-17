@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:30:46 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/17 02:15:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/17 09:32:38 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	print_list(t_list *lst)
 		lst = lst->next;
 		++EYE;
 	}
-	ft_printf("\b\b\b   \n");
+	ft_printf("\b\b\b   \n$GSIZE$Z: %d\n", EYE);
 }
 
 static bool	pool_realloc(t_alloc *data, uint32_t new_size)
@@ -74,21 +74,17 @@ static void	pool_reassign(t_alloc *data, t_pool *pool, int64_t diff)
 {
 	t_list		*list;
 	t_memzone	*zone;
-	void		*pool_mem;
 
-	pool_mem = pool->mem;
+	list = (t_list *)pool->mem;
 	for (uint32_t i = 0; i < pool->len; i++)
 	{
-		list = (t_list *)pool_mem;
 		zone = ((t_memzone *)list->content);
 		if (zone)
 		{
-			list->next = ((void *)zone->ptr_node->next) + diff;
-			list->prev = ((void *)zone->ptr_node->prev) + diff;
-			if (!zone->ptr_node->next)
-				list->next = NULL;
-			if (!zone->ptr_node->prev)
-				list->prev = NULL;
+			if (zone->ptr_node->next)
+				list->next = ((void *)list->next) + diff;
+			if (zone->ptr_node->prev)
+				list->prev = ((void *)list->prev) + diff;
 			zone->ptr_node = list;
 			if (!list->prev)
 			{
@@ -100,7 +96,7 @@ static void	pool_reassign(t_alloc *data, t_pool *pool, int64_t diff)
 					data->zone_large = list;
 			}
 		}
-		pool_mem += sizeof(t_list);
+		list++;
 	}
 }
 
