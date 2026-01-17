@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/16 10:32:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/17 01:55:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_printf(const char *str, ...);
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG false
+# define PRINT_FLAG true
 # define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
 #  define PRINT(s, ...) ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
@@ -149,7 +149,7 @@ enum	e_area_info
 */
 typedef	struct s_memzone
 {
-	void		*ptr_node;
+	t_list		*ptr_node;
 	t_area		*first_free_area;//first free area, starting from left
 	uint32_t	size;
 	uint32_t	longest_chunk;//longest freed chunk

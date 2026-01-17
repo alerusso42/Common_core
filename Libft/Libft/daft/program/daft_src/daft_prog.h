@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_prog.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:56:13 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/16 10:02:09 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/16 22:01:07 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ struct s_daft_list
 	char		*filename;
 	int			size;
 	int			first_node;
+	int			iterator;
 	char		field_sep[2];
 	char		key_value_sep[2];
 	char		values_sep[2];
@@ -94,6 +95,7 @@ enum e_daft_logs
 	DAFT_LOG_ATOI,
 	DAFT_LOG_MALLOC,
 	DAFT_LOG_USAGE,
+	DAFT_LOG_PARAM,
 	DAFT_LOG_SETT,
 	DAFT_LOG_FILESETT,
 	DAFT_LOG_ALLOCSIZE,
@@ -101,6 +103,7 @@ enum e_daft_logs
 	DAFT_LOG_NOMEM,
 	DAFT_LOG_KEYUSED,
 	DAFT_LOG_ENUM_ID,
+	DAFT_LOG_ITER,
 };
 
 enum e_daft_mem

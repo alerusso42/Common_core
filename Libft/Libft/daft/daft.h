@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:27:31 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/16 09:57:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/16 22:12:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define DAFT_H
 
 # include "../libft.h"
-# define DAFT_CURR_DATA -1
 
 /*WARNING: 	don't modify this file directly!
 			modify SETTINGS.md instead!
@@ -27,6 +26,7 @@ void	daft_quit(void);
 void	daft_swap(int enum_id);
 void	daft_free(void *mem);
 void	*daft_get(const char *search);
+bool	daft_iter(void **ptr);
 int		daft_load(void);
 void	*daft_edit(const char *search, int size, int mtr_number);
 void	*daft_append(const char *key, int size, int mtr_number);

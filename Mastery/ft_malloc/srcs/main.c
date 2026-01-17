@@ -12,7 +12,7 @@
 
 # include "../includes/malloc_internal.h"
 
-void	test(char *pokemon);
+void	test(void);
 
 /*
 //FIXME
@@ -129,7 +129,7 @@ void	__attribute__((destructor, used)) func2()
 }
 
 // -Wno-unused-result
-int	main()
+int	main2()
 {
 	const int	ptrs = 30;
 	char	*p[ptrs];
@@ -160,13 +160,14 @@ int	main()
 	return 0;
 }
 
-int	main3(int ac, char **av)
+int	main(int ac, char **av)
 {
+	(void)ac, (void)av;
 	char		*s;
 	const int	size = 7;
 
-	if (ac == 1)
-		return (ft_printf("arg required: insert pokemon\n"));
+	/*if (ac == 1)
+		return (ft_printf("arg required: insert pokemon\n"));*/
 	ft_printf("stack starts with: %p,%p\n", &s, &size);
 	ft_printf("pagesize: %d\n", sysconf(_SC_PAGE_SIZE));
 	ft_printf("max align: %d\n", ALIGN);
@@ -181,7 +182,7 @@ int	main3(int ac, char **av)
 	s[size] = 0;
 	ft_printf("%s\n", s);
 	free(s);
-	test(av[1]);
+	test();
 	//print_extreme(NULL, _global_data(false), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
@@ -197,45 +198,46 @@ int	main3(int ac, char **av)
 	return (0);
 }
 
-void	test(char *pokemon)
+void	print_3d(char ***);
+
+void	test(void)
 {
-	int	i;
-	int	j;
-	int	fd;
-	fd = openfd("test_file", "w").p, (void)fd;
+	char	***data;
 
 	daft_init("media", "SETTINGS.md");
-    daft_swap(2);
-	char	***matr = daft_get(pokemon);
-	if (!matr)
+	daft_init(NULL, NULL);
+    daft_swap(POKEDEX);
+	data = daft_get("CALYREX");
+	if (!data)
 		return (daft_quit());
-	i = 0;
-	while (matr[i])
+	print_3d(data);
+	data = daft_append("IR_GABIBBO", 0, 0);
+	print_3d(data);
+	for (int i = 0; i; i--)
 	{
-		j = 0;
-		while (matr[i][j])
-		{
-			ft_printf("%s\n", matr[i][j]);
-			j++;
-		}
-		i++;
-	}
-	char	***add = daft_append("SQUALO", 0, 0);
-	//show_alloc_mem();
-	if (!add)
-		return (daft_quit());
-	i = 0;
-	while (add[i])
-	{
-		j = 0;
-		while (add[i][j])
-		{
-			printf("%s\n", add[i][j]);
-			j++;
-		}
-		i++;
+		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_quit();
+		daft_quit();
+		daft_init("daft/DATA_DIR", "SETTINGS.md");
 	}
 	daft_quit();
+	daft_init("media", "SETTINGS.md");
+	daft_swap(POKEDEX);
+	while (daft_iter((void **)&data))
+		print_3d(data);
+	daft_quit();
+}
+
+void	print_3d(char ***s)
+{
+	if (s)
+	{
+		for (int i = 0; s[i]; i++)
+			for (int j = 0; s[i][j]; j++)
+				ft_printf("%s\n", s[i][j]);
+	}
 }
 
 /*

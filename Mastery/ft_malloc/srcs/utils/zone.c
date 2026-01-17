@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 18:50:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/17 01:25:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	ptr = mmap_syscall(data, size + sizeof(t_area));
 	if (!ptr)
 		return (error_malloc("zone_add: can't allocate memory\n"));
-	node = pool_alloc(data, sizeof(t_memzone));
+	node = pool_alloc(data, sizeof(t_list));
 	if (!node)
 		return (munmap_syscall(data, ptr, size), NULL);
 	node->content = ptr;

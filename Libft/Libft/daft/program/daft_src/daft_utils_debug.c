@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   daft_utils_debug.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:49:21 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/16 10:03:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/16 22:01:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ static void	daft_printerror(int log, t_fd fd)
 		tfd_printf(fd, "Selected key has already been used.\n");
 	else if (log == DAFT_LOG_ENUM_ID)
 		tfd_printf(fd, "Inserted enum_id is invalid.\n");
+	else if (log == DAFT_LOG_PARAM)
+		tfd_printf(fd, "Invalid param.\n");
+	else if (log == DAFT_LOG_ITER)
+		tfd_printf(fd, "daft_iter bug.\n");
 	else if (log == DAFT_LOG_USAGE)
 		tfd_printf(fd, "invalid use of daft_init. Correct use:\n \
 if (daft_init(data_path, setting_filename) != 0)\n\treturn (EXIT_FAILURE);\n");
