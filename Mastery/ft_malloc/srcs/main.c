@@ -232,6 +232,7 @@ void	test(void)
 
 void	print_3d(char ***s)
 {
+	return ;
 	if (s)
 	{
 		for (int i = 0; s[i]; i++)
