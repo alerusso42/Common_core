@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:11:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 19:14:35 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/19 22:54:08 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,17 @@ void	print_area(t_area *area)
 		return ;
 	ft_printf("{$Yprev$Z = %d}{$Gnext$Z = %d}{$Binfo$Z = %d}\
 	$U$Baddr$Z: $Z%p\n", area->prev, area->next, area->info, area);
+}
+
+void	print_list(t_list *lst)
+{
+	int	EYE = 0;
+
+	while (lst)
+	{
+		ft_printf("%p - ", lst);
+		lst = lst->next;
+		++EYE;
+	}
+	ft_printf("\b\b\b   \n$GSIZE$Z: %d\n", EYE);
 }

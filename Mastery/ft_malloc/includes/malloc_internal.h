@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/17 09:29:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 00:26:36 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef	struct s_area
 enum	e_area_info
 {
 	MEM_FREED = 1 << 0,
+	MEM_SET = 1 << 1,
 };
 
 /*
@@ -243,6 +244,7 @@ uint32_t	align_addr(void *ptr);
 
 void	print_zone(t_memzone *zone);
 void	print_area(t_area *area);
+void	print_list(t_list *lst);
 
 void	*fatal_malloc(char *s);
 void	*error_malloc(char *s);

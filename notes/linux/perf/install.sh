@@ -20,7 +20,7 @@ apt-get update
 
 # Installa la versione di perf specifica per il tuo kernel corrente
 # Installa anche binutils per il disassembling (objdump)
-apt-get install -y linux-tools-common linux-tools-generic linux-tools-$KERNEL_VERSION binutils
+apt-get install -y linux-tools-common linux-tools-generic linux-tools-$KERNEL_VERSION binutils linux-laptop-tools-common linux-laptop-tools-common
 
 echo "--- 3. Configurazione permessi del Kernel (Sysctl) ---"
 

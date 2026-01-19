@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 17:38:16 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 00:26:22 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void 	free(void *ptr)
 	if (ptr >= data->pool.mem && ptr <= data->pool.mem + data->pool.size)
 		return ;
 	area = ptr - sizeof(t_area);
-	if (area->info != 0 && area->info != 1)
+	if (area->info > MEM_FREED | MEM_SET)
 		free_correct_area(data, ptr);
 	if (area->info &= MEM_FREED)
 		return (ft_printf("$RSei un pazzo!!$Z\n"), abort());

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:30:46 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/17 09:32:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/19 22:54:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ static bool	pool_init(t_alloc *data, uint32_t pool_size)
 	return (EXIT_SUCCESS);
 }
 
-static void	print_list(t_list *lst)
-{
-	int	EYE = 0;
-
-	while (lst)
-	{
-		ft_printf("%p - ", lst);
-		lst = lst->next;
-		++EYE;
-	}
-	ft_printf("\b\b\b   \n$GSIZE$Z: %d\n", EYE);
-}
-
 static bool	pool_realloc(t_alloc *data, uint32_t new_size)
 {
 	t_pool	old_pool;
@@ -54,19 +41,10 @@ static bool	pool_realloc(t_alloc *data, uint32_t new_size)
 	data->pool.bytes = old_pool.bytes;
 	data->pool.len = old_pool.len;
 	data->pool.size = new_size;
-	print_list(data->zone_tiny);
-	print_list(data->zone_small);
-	print_list(data->zone_large);
 	pool_reassign(data, &data->pool, data->pool.mem - old_pool.mem);
-	print_list(data->zone_tiny);
-	print_list(data->zone_small);
-	print_list(data->zone_large);
 	if (munmap_syscall(data, old_pool.mem, old_pool.size) != 0)
 		return (error_malloc("pool: cannot free old pool"), EXIT_FAILURE);
 	PRINT("Success!\n");
-	print_list(data->zone_tiny);
-	print_list(data->zone_small);
-	print_list(data->zone_large);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,13 +6,14 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 18:56:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 00:20:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
-static size_t	print_one(t_list *zones, char *name, int *index);
+static size_t	print_zone(t_list *zones, char *name, int *index);
+static size_t	print_area(t_area *area, int *index);
 
 void	show_alloc_mem()
 {
@@ -29,19 +30,30 @@ void	show_alloc_mem()
 	ft_printf("$BTotal : %u bytes\n", total);
 }
 
-static size_t	print_one(t_list *zones, char *name, int *index)
+static size_t	print_zone(t_list *zones, char *name, int *index)
 {
-	t_area		*area;
+	size_t	size;
+	t_area	*area;
+
+	size = 0;
+	while (zones)
+	{
+		ft_printf("$B%s$Z : %p, BF %d\n", name, zones->content, ((t_memzone *)zones->content)->blocks_freed);
+		area = ((void *)(zones->content)) + sizeof(t_memzone);
+		size += print_area(area, index);
+		zones = zones->next;
+	}
+	return (size);
+}
+
+static size_t	print_area(t_area *area, int *index)
+{
 	t_area		*usr_ptr_start;
 	t_area		*usr_ptr_end;
 	size_t		size;
 	size_t		total_size;
 
 	total_size = 0;
-	while (zones)
-	{
-		ft_printf("$B%s$Z : %p, BF %d\n", name, zones->content, ((t_memzone *)zones->content)->blocks_freed);
-		area = ((void *)(zones->content)) + sizeof(t_memzone);
 		while (area)
 		{
 			usr_ptr_start = ((void *)area) + sizeof(t_area);
@@ -60,9 +72,6 @@ static size_t	print_one(t_list *zones, char *name, int *index)
 			area = bytelst_next(area);
 			(*index)++;
 		}
-		zones = zones->next;
-	}
-	return (total_size);
 }
 
 /*
