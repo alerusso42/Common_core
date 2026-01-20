@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overload.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 23:22:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 00:22:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:15:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void 	*reallocarray(void *ptr, size_t nmemb, size_t size)
 
 void	*memalign(size_t alignment, size_t size)
 {
-	if (alignment < sizeof(void *) || alignment & (alignment - 1) != 0)
+	if (alignment < sizeof(void *) || (alignment & (alignment - 1)) != 0)
 	{
 		WARNING("memalign: alignment %u must be pow of 2, >= sizeof(ptr)\n", \
 		alignment);

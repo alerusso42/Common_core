@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 00:26:22 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 12:03:59 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,32 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone);
 void 	free(void *ptr)
 {
 	t_alloc		*data;
-	t_area		*area;
 	t_memzone	*zone;
 
-	if (!ptr)
-		return ;
 	data = _global_data(false);
-	if (data->error)
-		return ;
-	if (ptr >= data->pool.mem && ptr <= data->pool.mem + data->pool.size)
-		return ;
-	area = ptr - sizeof(t_area);
-	if (area->info > MEM_FREED | MEM_SET)
-		free_correct_area(data, ptr);
-	if (area->info &= MEM_FREED)
-		return (ft_printf("$RSei un pazzo!!$Z\n"), abort());
-	zone = area_freed(area);
-	munmap_zone_if_empty(data, zone);
+	switch (identify_area(data, ptr))
+	{
+		case (MEM_ALLOC) :
+			zone = area_freed(ptr - sizeof(t_area));
+			munmap_zone_if_empty(data, zone);
+			break ;
+		case (MEM_FREED) :
+			return (WARNING("$RFree: $Z%p $Ralready freed$Z\n"));
+		case (MEM_INTERNAL) :
+			return ;
+		case (MEM_INVALID) :
+			free_correct_area(data, ptr);
+			break ;
+		case (MEM_ERROR) :
+			return ;
+	}
 }
 
 static void	free_correct_area(t_alloc *data, void *ptr)
 {
 	t_area	*area;
 
-	PRINT("Free: ptr %p is not correct!\n", ptr);
+	WARNING("Free: ptr %p is not correct!\n", ptr);
 	area = zone_area_freed(data->zone_tiny, ptr);
 	if (!area)
 		area = zone_area_freed(data->zone_small, ptr);
@@ -49,7 +51,7 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 		area = zone_area_freed(data->zone_large, ptr);
 	if (!area)
 	{
-		PRINT("Free: ptr %p is invalid!\n", ptr);
+		WARNING("Free: ptr %p is invalid!\n", ptr);
 		return ;
 	}
 	else if (DEBUG_FLAG == false)
@@ -57,8 +59,6 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 		VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
 	}
 }
-
-static void	TEST(t_list *lst);
 
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
@@ -75,18 +75,4 @@ static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 	munmap_syscall(data, zone, zone->size);
 	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
 		return (malloc_munmap_data(data));
-	TEST(NULL);
-}
-
-static void	TEST(t_list *list)
-{
-	if (!list)
-		return ;
-	while (list->prev)
-		list = list->prev;
-	while (list)
-	{
-		ft_printf("%p\n", list->content);
-		list = list->next;
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 00:26:36 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 12:04:37 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@
 
 int	ft_printf(const char *str, ...);
 
-# define DEBUG_FLAG false
+# define DEBUG_FLAG true
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
 # if DEBUG_FLAG == true
-#  define DEBUG(s, ...) fd_printf(2, DEBUG_TIMESTAMP s, ##__VA_ARGS__)
+#  define DEBUG(s, ...) (void)err_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG false
+# define PRINT_FLAG true
 # define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
-#  define PRINT(s, ...) ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
+#  define PRINT(s, ...) (void)ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define PRINT(s, ...)	(void)0
 # endif
 # if MALLOC_WARNINGS == true
-#  define WARNING(s, ...) err_printf(s, ##__VA_ARGS__)
+#  define WARNING(s, ...) (void)err_printf(s, ##__VA_ARGS__)
 # else
 #  define WARNING(s, ...)	(void)0
 # endif
@@ -135,8 +135,12 @@ typedef	struct s_area
 
 enum	e_area_info
 {
+	MEM_ALLOC = 0,
 	MEM_FREED = 1 << 0,
 	MEM_SET = 1 << 1,
+	MEM_ERROR = 1 << 6,
+	MEM_INVALID = 1 << 7,
+	MEM_INTERNAL = (1 << 8) - 1,
 };
 
 /*
@@ -237,10 +241,11 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 
 //SECTION - utils
 
-t_alloc	*_global_data(bool reset);
-void	malloc_munmap_data(t_alloc *data);
-int		round_page(int n, int pagesize);
+t_alloc		*_global_data(bool reset);
+void		malloc_munmap_data(t_alloc *data);
+int			round_page(int n, int pagesize);
 uint32_t	align_addr(void *ptr);
+uint32_t	identify_area(t_alloc *data, void *ptr);
 
 void	print_zone(t_memzone *zone);
 void	print_area(t_area *area);

@@ -120,12 +120,12 @@ show_alloc_mem();*/
 
 void	__attribute__((constructor, used)) func()
 {
-	ft_printf("apro");
+	ft_printf("apro\n");
 }
 
 void	__attribute__((destructor, used)) func2()
 {
-	ft_printf("chiudo");
+	ft_printf("chiudo\n");
 }
 
 // -Wno-unused-result
@@ -239,6 +239,30 @@ void	print_3d(char ***s)
 			for (int j = 0; s[i][j]; j++)
 				ft_printf("%s\n", s[i][j]);
 	}
+}
+
+int	main6()
+{
+	char	*base = "NEGRO";
+	size_t	base_len = ft_strlen(base);
+	size_t	n_append = 42;
+	size_t	cursor;
+	char	*s;
+
+	s = malloc(base_len);
+	s = realloc(s, base_len * 42 + 1);
+	for (size_t i = 0; i != n_append; i++)
+	{
+		cursor = i * base_len;
+		ft_strlcat(s + cursor, base, base_len + 1);
+	}
+	ft_printf("base: %s; s: %s\n", base, s);
+	free(s);
+	s = calloc(5, 10);
+	for (int i = 0; i != 65; i++)
+		write(1, &s[i], 1);
+	ft_printf("\n");
+	return 0;
 }
 
 /*

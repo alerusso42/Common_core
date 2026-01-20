@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 19:23:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 12:11:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,20 @@ bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 	if (DEBUG_FLAG == true)
 		VALGRIND_FREELIKE_BLOCK(ptr, 0);
 	return (EXIT_SUCCESS);
+}
+
+uint32_t	identify_area(t_alloc *data, void *ptr)
+{
+	t_area	*area;
+
+	if (data->error || !ptr)
+		return (MEM_ERROR);
+	if (ptr >= data->pool.mem && ptr <= data->pool.mem + data->pool.size)
+		return (MEM_INTERNAL);
+	area = ptr - sizeof(t_area);
+	if (area->info > (MEM_FREED | MEM_SET))
+		return (MEM_INVALID);
+	else if (area->info &= MEM_FREED)
+		return (MEM_FREED);
+	return (MEM_ALLOC);
 }

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   show_alloc_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 00:20:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/20 12:04:54 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
-static size_t	print_zone(t_list *zones, char *name, int *index);
-static size_t	print_area(t_area *area, int *index);
+static size_t	show_zone(t_list *zones, char *name, int *index);
+static size_t	show_area(t_area *area, int *index);
 
 void	show_alloc_mem()
 {
@@ -24,13 +24,13 @@ void	show_alloc_mem()
 	data = _global_data(false);
 	total = 0;
 	index = 0;
-	total += print_one(data->zone_tiny, "TINY", &index);
-	total += print_one(data->zone_small, "SMALL", &index);
-	total += print_one(data->zone_large, "LARGE", &index);
+	total += show_zone(data->zone_tiny, "TINY", &index);
+	total += show_zone(data->zone_small, "SMALL", &index);
+	total += show_zone(data->zone_large, "LARGE", &index);
 	ft_printf("$BTotal : %u bytes\n", total);
 }
 
-static size_t	print_zone(t_list *zones, char *name, int *index)
+static size_t	show_zone(t_list *zones, char *name, int *index)
 {
 	size_t	size;
 	t_area	*area;
@@ -40,13 +40,13 @@ static size_t	print_zone(t_list *zones, char *name, int *index)
 	{
 		ft_printf("$B%s$Z : %p, BF %d\n", name, zones->content, ((t_memzone *)zones->content)->blocks_freed);
 		area = ((void *)(zones->content)) + sizeof(t_memzone);
-		size += print_area(area, index);
+		size += show_area(area, index);
 		zones = zones->next;
 	}
 	return (size);
 }
 
-static size_t	print_area(t_area *area, int *index)
+static size_t	show_area(t_area *area, int *index)
 {
 	t_area		*usr_ptr_start;
 	t_area		*usr_ptr_end;
@@ -72,7 +72,13 @@ static size_t	print_area(t_area *area, int *index)
 			area = bytelst_next(area);
 			(*index)++;
 		}
+		return (total_size);
 }
+
+// void	show_alloc_mem(void *ptr)
+// {
+	
+// }
 
 /*
 # include "../../includes/malloc_internal.h"
