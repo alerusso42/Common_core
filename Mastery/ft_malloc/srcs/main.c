@@ -67,7 +67,7 @@ int	get_size()
 }
 //((t_area *)(((void*)p[0]) - sizeof(t_area)))->info
 #include <sys/time.h>
-int	main1()
+int	main()
 {
 	char	*p[100];
 	struct timeval	t;
@@ -86,33 +86,30 @@ free(pt[1]);
 show_alloc_mem();
 free(pt[2]);
 show_alloc_mem();*/
-	if (openfd("test_file1", "a+").p == 0)
-		return 1;
 	gettimeofday(&t, NULL);
 	srand(t.tv_sec);
-	const int	max_size = get_size();
-	(void)max_size;
+	const int	max_size = rand() % 5;
 	//fd_printf(2, "max size %d\n", max_size);
 	for (int i = 0; i != 50; i++)
 	{
-		fill(&p[i], get_size());
-		show_alloc_mem();
+		fill(&p[i], rand() % max_size);
+		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
 	}
 	for (int i = 0; i != 25; i++)
 	{
 		release(p[i]);
-		show_alloc_mem();
+		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
 	}
 	for (int i = 50; i != 100; i++)
 	{
-		fill(&p[i], get_size());
-		show_alloc_mem();
+		fill(&p[i], rand() % max_size);
+		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
 	}
-	show_alloc_mem();
+	show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
 	for (int i = 25; i != 100; i++)
 	{
 		release(p[i]);
-		show_alloc_mem();
+		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
 	}
 	del_filedata();
 	return 0;
@@ -135,32 +132,32 @@ int	main2()
 	char	*p[ptrs];
 	const int	size = 249;
 
-	show_alloc_mem();
+	show_alloc_mem_ex(256);
 	for (int i = 0; i != ptrs / 2; i++)
 	{
-		show_alloc_mem();
+		show_alloc_mem_ex(256);
 		p[i] = malloc(size);
 	}
 	for (int i = 0; i != ptrs / 4; i++)
 	{
-		show_alloc_mem();
+		show_alloc_mem_ex(256);
 		free(p[i]);
 	}
 	for (int i = ptrs / 2; i != ptrs; i++)
 	{
-		show_alloc_mem();
+		show_alloc_mem_ex(256);
 		p[i] = malloc(size);
 	}
 	for (int i = ptrs / 4; i != ptrs; i++)
 	{
-		show_alloc_mem();
+		show_alloc_mem_ex(256);
 		free(p[i]);
 	}
 	show_alloc_mem();
 	return 0;
 }
 
-int	main(int ac, char **av)
+int	main3(int ac, char **av)
 {
 	(void)ac, (void)av;
 	char		*s;

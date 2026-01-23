@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 12:04:37 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/23 22:34:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,9 @@ uint32_t	identify_area(t_alloc *data, void *ptr);
 void	print_zone(t_memzone *zone);
 void	print_area(t_area *area);
 void	print_list(t_list *lst);
+void	mem_dump_bit(t_area *area);
+void	mem_dump_hex(t_area *area);
+void	mem_dump_byte(t_area *area);
 
 void	*fatal_malloc(char *s);
 void	*error_malloc(char *s);
