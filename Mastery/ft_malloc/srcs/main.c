@@ -67,7 +67,7 @@ int	get_size()
 }
 //((t_area *)(((void*)p[0]) - sizeof(t_area)))->info
 #include <sys/time.h>
-int	main()
+int	main1()
 {
 	char	*p[100];
 	struct timeval	t;
@@ -157,7 +157,7 @@ int	main2()
 	return 0;
 }
 
-int	main3(int ac, char **av)
+int	main(int ac, char **av)
 {
 	(void)ac, (void)av;
 	char		*s;

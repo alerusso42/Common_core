@@ -39,6 +39,7 @@ t_alloc	*_global_data(bool reset)
 	return (&data);
 }
 
+//munmap of all malloc data
 void	malloc_munmap_data(t_alloc *data)
 {
 	PRINT("$Ymunmap all$Z: freeing allocator memory\n");
@@ -53,6 +54,7 @@ void	malloc_munmap_data(t_alloc *data)
 	*data = (t_alloc){0};
 }
 
+//munmap an entire list of tiny/small/big area
 static void	munmap_zone(t_alloc *data, t_list *list)
 {
 	t_memzone	*zone;

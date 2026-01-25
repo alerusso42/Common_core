@@ -144,10 +144,6 @@ enum	e_area_info
 };
 
 /*
-	___________AREA------AREA-----
-	...........
-*/
-/*
 	when mmap is called, a t_memzone node is created.
 	it represent mmaped zone data.
 	t_memzone nodes are gathered by t_alloc.
@@ -181,7 +177,7 @@ enum e_sizelimit_info
 {
 	POOL_SIZE = 120 * 24,//120: max t_memzone nodes; 24: sizeof(t_list)
 	AREA_NUM = 4,//2^AREA_NUM modify the number of areas in a zone
-	ZONE_TINY = (1 << 12),
+	ZONE_TINY = (1 << 13),
 	ZONE_SMALL = (1 << 18),
 	AREA_TINY = ZONE_TINY >> AREA_NUM,
 	AREA_SMALL = ZONE_SMALL >> AREA_NUM,
@@ -241,41 +237,41 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 
 //SECTION - utils
 
-t_alloc		*_global_data(bool reset);
-void		malloc_munmap_data(t_alloc *data);
-int			round_page(int n, int pagesize);
-uint32_t	align_addr(void *ptr);
-uint32_t	identify_area(t_alloc *data, void *ptr);
+t_alloc				*_global_data(bool reset);
+void				malloc_munmap_data(t_alloc *data);
+inline int			round_page(int n, int pagesize);
+inline uint32_t		align_addr(void *ptr);
+uint32_t			identify_area(t_alloc *data, void *ptr);
 
-void	print_zone(t_memzone *zone);
-void	print_area(t_area *area);
-void	print_list(t_list *lst);
-void	mem_dump_bit(t_area *area);
-void	mem_dump_hex(t_area *area);
-void	mem_dump_byte(t_area *area);
+void				print_zone(t_memzone *zone);
+void				print_area(t_area *area);
+void				print_list(t_list *lst);
+void				mem_dump_bit(t_area *area);
+void				mem_dump_hex(t_area *area);
+void				mem_dump_byte(t_area *area);
 
-void	*fatal_malloc(char *s);
-void	*error_malloc(char *s);
-void	*mmap_syscall(t_alloc *data, uint32_t len);
-bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len);
+void				*fatal_malloc(char *s);
+void				*error_malloc(char *s);
+void				*mmap_syscall(t_alloc *data, uint32_t len);
+bool				munmap_syscall(t_alloc *data, void *ptr, uint32_t len);
 
-void	*pool_alloc(t_alloc *data, uint32_t len);
+void				*pool_alloc(t_alloc *data, uint32_t len);
 
-t_area	*bytelst_next(t_area *curr);
-t_area	*bytelst_prev(t_area *curr);
-t_memzone	*bytelst_head(t_area *curr);
-t_area	*bytelst_merge(t_area *left, t_area *right);
-t_area	*bytelst_split(t_area *area, t_bytelist size);
+inline t_area		*bytelst_next(t_area *curr);
+inline t_area		*bytelst_prev(t_area *curr);
+inline t_memzone	*bytelst_head(t_area *curr);
+t_area				*bytelst_merge(t_area *left, t_area *right);
+t_area				*bytelst_split(t_area *area, t_bytelist size);
 
-void		*zone_area_alloc(t_list *zones, uint32_t size);
-t_area		*zone_area_freed(t_list *zones, void *ptr);
-t_list		*zone_add(t_alloc *data, t_list **zones, uint32_t size);
-t_bytelist	zone_find_longest_chunk(t_memzone *zone);
-t_area		*zone_find_first_free_area(t_memzone *zone);
+void				*zone_area_alloc(t_list *zones, uint32_t size);
+t_area				*zone_area_freed(t_list *zones, void *ptr);
+t_list				*zone_add(t_alloc *data, t_list **zones, uint32_t size);
+t_bytelist			zone_find_longest_chunk(t_memzone *zone);
+t_area				*zone_find_first_free_area(t_memzone *zone);
 
-void		area_alloc(t_memzone *zone, t_area *area, t_bytelist size);
-t_area		*area_find_alloc_block(t_area *area, t_bytelist size);
-t_memzone	*area_freed(t_area *area);
-t_area		*area_find_freed_block(t_area *area, void *ptr);
+void				area_alloc(t_memzone *zone, t_area *area, t_bytelist size);
+t_area				*area_find_alloc_block(t_area *area, t_bytelist size);
+t_memzone			*area_freed(t_area *area);
+t_area				*area_find_freed_block(t_area *area, void *ptr);
 
 #endif

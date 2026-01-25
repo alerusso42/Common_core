@@ -12,8 +12,40 @@
 
 # include "../../includes/malloc_internal.h"
 
+static bool	pool_init(t_alloc *data, uint32_t pool_size);
+static bool	pool_realloc(t_alloc *data, uint32_t new_size);
 static void	pool_reassign(t_alloc *data, t_pool *pool, int64_t diff);
 
+//used when a new mmap zone is created
+//the list with all the zones is expanded
+//memory needed by list is taken from the malloc memory pool
+void	*pool_alloc(t_alloc *data, uint32_t len)
+{
+	uint32_t	size;
+	uint32_t	new_size;
+
+	if (!data->pool.mem)
+	{
+		if (pool_init(data, POOL_SIZE) != EXIT_SUCCESS)
+			return (NULL);
+	}
+	size = data->pool.bytes + len;
+	new_size = data->pool.size;
+	if (size > new_size)
+	{
+		while (size > new_size)
+			new_size <<= 1;
+		if (pool_realloc(data, new_size) != EXIT_SUCCESS)
+			return (NULL);
+	}
+	data->pool.bytes += len;
+	data->pool.len += 1;
+	PRINT("pool usage: new %u, total %u, left %u\n", len, data->pool.bytes, \
+	data->pool.size - data->pool.bytes);
+	return (data->pool.mem + data->pool.bytes - len);
+}
+
+//malloc memory pool initialization
 static bool	pool_init(t_alloc *data, uint32_t pool_size)
 {
 	uint32_t	len;
@@ -28,6 +60,7 @@ static bool	pool_init(t_alloc *data, uint32_t pool_size)
 	return (EXIT_SUCCESS);
 }
 
+//expand malloc memory pool
 static bool	pool_realloc(t_alloc *data, uint32_t new_size)
 {
 	t_pool	old_pool;
@@ -48,6 +81,7 @@ static bool	pool_realloc(t_alloc *data, uint32_t new_size)
 	return (EXIT_SUCCESS);
 }
 
+//updates old list ptr with new ones
 static void	pool_reassign(t_alloc *data, t_pool *pool, int64_t diff)
 {
 	t_list		*list;
@@ -76,30 +110,4 @@ static void	pool_reassign(t_alloc *data, t_pool *pool, int64_t diff)
 		}
 		list++;
 	}
-}
-
-void	*pool_alloc(t_alloc *data, uint32_t len)
-{
-	uint32_t	size;
-	uint32_t	new_size;
-
-	if (!data->pool.mem)
-	{
-		if (pool_init(data, POOL_SIZE) != EXIT_SUCCESS)
-			return (NULL);
-	}
-	size = data->pool.bytes + len;
-	new_size = data->pool.size;
-	if (size > new_size)
-	{
-		while (size > new_size)
-			new_size <<= 1;
-		if (pool_realloc(data, new_size) != EXIT_SUCCESS)
-			return (NULL);
-	}
-	data->pool.bytes += len;
-	data->pool.len += 1;
-	PRINT("pool usage: new %u, total %u, left %u\n", len, data->pool.bytes, \
-	data->pool.size - data->pool.bytes);
-	return (data->pool.mem + data->pool.bytes - len);
 }

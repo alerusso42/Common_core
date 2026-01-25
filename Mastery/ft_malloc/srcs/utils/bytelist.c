@@ -12,7 +12,7 @@
 
 # include "../../includes/malloc_internal.h"
 
-t_area	*bytelst_next(t_area *curr)
+inline t_area	*bytelst_next(t_area *curr)
 {
 	t_area	*area;
 
@@ -24,14 +24,14 @@ t_area	*bytelst_next(t_area *curr)
 	return (area);
 }
 
-t_area	*bytelst_prev(t_area *curr)
+inline t_area	*bytelst_prev(t_area *curr)
 {
 	if (!curr->prev)
 		return (NULL);
 	return (((void *)curr) - curr->prev);
 }
 
-t_memzone	*bytelst_head(t_area *curr)
+inline t_memzone	*bytelst_head(t_area *curr)
 {
 	while (curr->prev)
 		curr = ((void *)curr) - curr->prev;

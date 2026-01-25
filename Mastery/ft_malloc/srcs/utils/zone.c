@@ -12,14 +12,13 @@
 
 # include "../../includes/malloc_internal.h"
 
+//used by malloc to give memory area to user
 void	*zone_area_alloc(t_list *zones, uint32_t size)
 {
 	t_memzone	*zone;
 	t_area		*area;
-	static int	EYE;
 
 	size += sizeof(t_area);
-	++EYE;
 	while (zones)
 	{
 		zone = (t_memzone *)zones->content;
@@ -27,19 +26,15 @@ void	*zone_area_alloc(t_list *zones, uint32_t size)
 		{
 			area = zone->first_free_area;
 			area = area_find_alloc_block(area, size);
-			if (area)
-			{
-				area_alloc(zone, area, size);
-				return (((void *)area) + sizeof(t_area));
-			}
-			else
-				print_zone(zone);
+			area_alloc(zone, area, size);
+			return (((void *)area) + sizeof(t_area));
 		}
 		zones = zones->next;
 	}
 	return (NULL);
 }
 
+//used by free when user gives a wrong memory ptr
 t_area	*zone_area_freed(t_list *zones, void *ptr)
 {
 	t_memzone	*zone;
@@ -63,6 +58,7 @@ t_area	*zone_area_freed(t_list *zones, void *ptr)
 	return (NULL);
 }
 
+//used when a new mmap zone is needed
 t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 {
 	t_list		*node;
@@ -93,6 +89,12 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	return (node);
 }
 
+//finds longest freed area in a zone
+//used when:
+/*
+1)	there are multiple freed areas in a zone
+2)	the current longest area is being allocated
+*/
 t_bytelist	zone_find_longest_chunk(t_memzone *zone)
 {
 	t_bytelist	record;
@@ -111,6 +113,7 @@ t_bytelist	zone_find_longest_chunk(t_memzone *zone)
 	return (record);
 }
 
+//used when the current first freed area is being allocated
 t_area	*zone_find_first_free_area(t_memzone *zone)
 {
 	t_area	*area;

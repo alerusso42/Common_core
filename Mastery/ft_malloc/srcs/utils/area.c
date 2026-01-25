@@ -31,26 +31,14 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 		zone->longest_chunk = 0;
 	else if (new_area_size > 0 && zone->blocks_freed == 1)
 		zone->longest_chunk = (uint32_t)new_area_size;
-	//else if (area->next > zone->longest_chunk)
-	//	zone->longest_chunk = area->next;
 	else
 		zone->longest_chunk = zone_find_longest_chunk(zone);
-	//zone->longest_chunk = zone_find_longest_chunk(zone);
-	//if (chunk > 0 && zone->longest_chunk == area_size)
-	//	zone->longest_chunk = new_area_size;
-	//print_zone(zone);
-	//ft_printf("$R_______$Z\n");
-	//print_area(area);
-	//show_alloc_mem();
 }
 
 t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 {
 	uint32_t	alignment;
 
-	if (!area)
-		//return (NULL);
-		return (abort(), NULL);
 	while (area->next)
 	{
 		if (area->info & MEM_FREED && area->next >= size)
@@ -74,7 +62,6 @@ t_memzone	*area_freed(t_area *area)
 
 	zone = bytelst_head(area);
 	zone->blocks_freed += 1;
-	//print_zone(zone);
 	if (!zone->first_free_area || zone->first_free_area > area)
 	{
 		zone->first_free_area = area;

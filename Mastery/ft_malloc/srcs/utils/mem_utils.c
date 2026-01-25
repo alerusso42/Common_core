@@ -30,12 +30,14 @@ pagesize - 1 = 4095		{00000111111111111}
 
 this works only if pagesize is a power of 2
 */
-int	round_page(int n, int pagesize)
+inline int	round_page(int n, int pagesize)
 {
 	return ((n + pagesize - 1) & ~(pagesize - 1));
 }
 
-uint32_t	align_addr(void *ptr)
+//used to aligned a pointer to max_align_t
+//same logic as round_page
+inline uint32_t	align_addr(void *ptr)
 {
 	uintptr_t	addr;
 
@@ -43,12 +45,14 @@ uint32_t	align_addr(void *ptr)
 	return (ALIGN - (addr % ALIGN));
 }
 
+//prints an error and returns NULL
 void	*error_malloc(char *s)
 {
 	err_printf("$RMalloc$Z:$R %s$Z\n", s);
 	return (NULL);
 }
 
+//prints an error, returns NULL, turn down malloc system
 void	*fatal_malloc(char *s)
 {
 	t_alloc	*data;
@@ -61,6 +65,8 @@ void	*fatal_malloc(char *s)
 	return (NULL);
 }
 
+//mmap a new zone with len bytes
+//updates internal malloc data
 void	*mmap_syscall(t_alloc *data, uint32_t len)
 {
 	void	*ptr;
@@ -80,6 +86,8 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 	return (ptr);
 }
 
+//munmap an old zone with len bytes
+//updates internal malloc data
 bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 {
 	PRINT("$Ymunmap$Z: deallocating %d bytes from $B%p$Z\n", len, ptr);
@@ -91,6 +99,7 @@ bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 	return (EXIT_SUCCESS);
 }
 
+//identify where a pointer given by user comes from
 uint32_t	identify_area(t_alloc *data, void *ptr)
 {
 	t_area	*area;
