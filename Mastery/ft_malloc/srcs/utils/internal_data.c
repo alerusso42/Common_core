@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internal_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 11:35:43 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:13:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ t_alloc	*_global_data(bool reset)
 }
 
 //munmap of all malloc data
-void	malloc_munmap_data(t_alloc *data)
+void __attribute__((destructor, used))	malloc_munmap_data(void)
 {
+	t_alloc	*data;
+
+	data = _global_data(false);
 	PRINT("$Ymunmap all$Z: freeing allocator memory\n");
 	if (data->zone_tiny)
 		munmap_zone(data, data->zone_tiny);
@@ -49,8 +52,6 @@ void	malloc_munmap_data(t_alloc *data)
 		munmap_zone(data, data->zone_small);
 	if (data->zone_large)
 		munmap_zone(data, data->zone_large);
-	if (munmap_syscall(data, data->pool.mem, data->pool.size) != 0)
-		error_malloc("munmap of memory pool failed!");
 	*data = (t_alloc){0};
 }
 
@@ -59,13 +60,15 @@ static void	munmap_zone(t_alloc *data, t_list *list)
 {
 	t_memzone	*zone;
 	uint32_t	size;
+	t_list		*next;
 
 	while (list)
 	{
 		zone = (t_memzone *)list->content;
 		size = zone->size;
+		next = list->next;
 		if (munmap_syscall(data, zone, size) != 0)
 			error_malloc("munmap of zone failed!");
-		list = list->next;
+		list = next;
 	}
 }

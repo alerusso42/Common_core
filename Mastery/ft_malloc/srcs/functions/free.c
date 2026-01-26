@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 12:03:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:15:02 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void 	free(void *ptr)
 			break ;
 		case (MEM_FREED) :
 			return (WARNING("$RFree: $Z%p $Ralready freed$Z\n"));
-		case (MEM_INTERNAL) :
-			return ;
 		case (MEM_INVALID) :
 			free_correct_area(data, ptr);
 			break ;
@@ -62,17 +60,19 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
-	
 	if (zone->empty == false)
 		return ;
-	if (zone->ptr_node == data->zone_tiny)
+	if (&zone->node == data->zone_tiny)
 		data->zone_tiny = data->zone_tiny->next;
-	else if (zone->ptr_node == data->zone_small)
+	else if (&zone->node == data->zone_small)
 		data->zone_small = data->zone_small->next;
-	else if (zone->ptr_node == data->zone_large)
+	else if (&zone->node == data->zone_large)
 		data->zone_large = data->zone_large->next;
-	lst_delone(zone->ptr_node, NULL);
+	if (zone->node.prev)
+		zone->node.prev->next = zone->node.next;
+	if (zone->node.next)
+		zone->node.next->prev = zone->node.prev;
 	munmap_syscall(data, zone, zone->size);
 	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
-		return (malloc_munmap_data(data));
+		return (malloc_munmap_data());
 }

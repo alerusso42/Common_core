@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/15 19:24:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 03:44:32 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_memzone	*area_freed(t_area *area)
 	t_memzone	*zone;
 	t_area		*next;
 	t_area		*prev;
-	static int	GOD;
 
 	zone = bytelst_head(area);
 	zone->blocks_freed += 1;
@@ -85,7 +84,6 @@ t_memzone	*area_freed(t_area *area)
 	}
 	if (zone->longest_chunk < area->next)
 		zone->longest_chunk = area->next;
-	++GOD;
 	return (zone);
 }
 

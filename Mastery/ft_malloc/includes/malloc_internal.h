@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 01:43:14 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:09:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ int	ft_printf(const char *str, ...);
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG true
+# define PRINT_FLAG false
 # define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
 #  define PRINT(s, ...) (void)ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define PRINT(s, ...)	(void)0
 # endif
+# define MALLOC_WARNINGS true
 # if MALLOC_WARNINGS == true
 #  define WARNING(s, ...) (void)err_printf(s, ##__VA_ARGS__)
 # else
@@ -140,7 +141,6 @@ enum	e_area_info
 	MEM_SET = 1 << 1,
 	MEM_ERROR = 1 << 6,
 	MEM_INVALID = 1 << 7,
-	MEM_INTERNAL = (1 << 8) - 1,
 };
 
 /*
@@ -150,7 +150,7 @@ enum	e_area_info
 */
 typedef	struct s_memzone
 {
-	t_list		*ptr_node;
+	t_list		node;//connection to other zones
 	t_area		*first_free_area;//first free area, starting from left
 	uint32_t	size;
 	uint32_t	longest_chunk;//longest freed chunk
@@ -175,33 +175,19 @@ large allocation are bigger than ALLOC_SMALL rounded by pagesize.
 */
 enum e_sizelimit_info
 {
-	POOL_SIZE = 120 * 24,//120: max t_memzone nodes; 24: sizeof(t_list)
 	AREA_NUM = 4,//2^AREA_NUM modify the number of areas in a zone
-	ZONE_TINY = (1 << 12),
+	ZONE_TINY = (1 << 13),
 	ZONE_SMALL = (1 << 18),
 	AREA_TINY = ZONE_TINY >> AREA_NUM,
 	AREA_SMALL = ZONE_SMALL >> AREA_NUM,
 };
-
-/*
-list content must be stored somewhere.
-pool is a memory pool for the list of t_memzone.
-*/
-typedef	struct s_pool
-{
-	void		*mem;
-	uint32_t	bytes;
-	uint32_t	len;
-	uint32_t	size;
-}	t_pool;
 
 typedef struct s_alloc
 {
 //SECTION - zone size info
 	t_sizelimit	size_zone;
 	t_sizelimit	size_area;
-//SECTION - zone memory pool and list
-	t_pool		pool;
+//SECTION - zone memory list
 	t_list		*zone_tiny;
 	t_list		*zone_small;
 	t_list		*zone_large;
@@ -238,7 +224,7 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 //SECTION - utils
 
 t_alloc				*_global_data(bool reset);
-void				malloc_munmap_data(t_alloc *data);
+void				malloc_munmap_data(void);
 int			round_page(int n, int pagesize);
 uint32_t		align_addr(void *ptr);
 uint32_t			identify_area(t_alloc *data, void *ptr);

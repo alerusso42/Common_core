@@ -21,8 +21,8 @@ OK)	fixare calcolo longest_chunk
 3)	stampa puntatore in esadecimale
 //TODO
 OK)	allineamento pagina
-1)	testare pool_realloc
-2)	realloc
+OK)	testare pool_realloc
+OK)	realloc
 3)	pulizia codice
 4)	cartella con test automatizzati
 5)	show_alloc_mem_ex()		
@@ -93,23 +93,23 @@ show_alloc_mem();*/
 	for (int i = 0; i != 50; i++)
 	{
 		fill(&p[i], rand() % max_size);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
 	for (int i = 0; i != 25; i++)
 	{
 		release(p[i]);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
 	for (int i = 50; i != 100; i++)
 	{
 		fill(&p[i], rand() % max_size);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
-	show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+	show_alloc_mem_ex(2);
 	for (int i = 25; i != 100; i++)
 	{
 		release(p[i]);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
 	del_filedata();
 	return 0;
@@ -189,7 +189,7 @@ int	main(int ac, char **av)
 	{
 		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
 		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
-		show_alloc_mem_ex(256);
+		//show_alloc_mem_ex(256);
 	}
 	del_filedata();
 	//show_alloc_mem();

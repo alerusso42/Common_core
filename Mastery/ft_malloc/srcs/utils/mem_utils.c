@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/24 23:43:45 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/26 04:10:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ void	*fatal_malloc(char *s)
 
 	data = _global_data(false);
 	err_printf("Malloc, fatal: %s\n", s);
-	perror(NULL);
-	malloc_munmap_data(data);
+	malloc_munmap_data();
 	data->error = true;
 	return (NULL);
 }
@@ -75,7 +74,9 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 	PRINT("$Ymmap$Z: allocating %u bytes: ", len);
 	ptr = mmap(NULL, len, PROT_RDWR, MAP_AP, -1, 0);
 	if (ptr == (void *)-1)
-		return (NULL);
+		return (fatal_malloc("mmap failure"));
+	if (PRINT_FLAG)
+		ft_printf("New ptr $B%p$Z created\n", ptr);
 	if (data->ptr_max < ptr)
 		data->ptr_max = ptr;
 	if (data->ptr_min > ptr)
@@ -106,8 +107,6 @@ uint32_t	identify_area(t_alloc *data, void *ptr)
 
 	if (data->error || !ptr)
 		return (MEM_ERROR);
-	if (ptr >= data->pool.mem && ptr <= data->pool.mem + data->pool.size)
-		return (MEM_INTERNAL);
 	area = ptr - sizeof(t_area);
 	if (area->info > (MEM_FREED | MEM_SET))
 		return (MEM_INVALID);
