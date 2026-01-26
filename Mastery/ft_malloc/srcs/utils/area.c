@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 03:44:32 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 05:14:47 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_memzone	*area_freed(t_area *area)
 	}
 	if (zone->longest_chunk < area->next)
 		zone->longest_chunk = area->next;
+	else if (DEBUG_FLAG == false)
+		VALGRIND_FREELIKE_BLOCK((void *)area + sizeof(t_area), 0);
 	return (zone);
 }
 

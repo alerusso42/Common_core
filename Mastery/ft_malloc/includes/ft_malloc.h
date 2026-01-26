@@ -43,6 +43,6 @@ void 	*valloc(size_t __size);
 void 	*pvalloc(size_t __size);
 
 //FIXME - togliere: solo debug
-t_alloc	*_global_data(bool reset);
+t_alloc	*_global_data();
 
 #endif

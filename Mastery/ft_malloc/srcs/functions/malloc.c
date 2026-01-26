@@ -19,7 +19,7 @@ void 	*malloc(size_t size)
 	t_alloc		*data;
 	void		*ptr;
 
-	data = _global_data(false);
+	data = _global_data();
 	if (data->error)
 		return (NULL);
 	if (size > data->size_area.large)

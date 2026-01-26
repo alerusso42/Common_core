@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 03:53:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:47:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	show_alloc_mem_ex(uint32_t flags)
 	size_t	total;
 	int		index;
 
-	data = _global_data(false);
+	data = _global_data();
 	total = 0;
 	index = 0;
 	total += show_zone(data->zone_tiny, "TINY", &index, flags);
@@ -76,7 +76,7 @@ static size_t	show_area(t_area *area, int *index, uint32_t flags)
 		usr_ptr_start = ((void *)area) + sizeof(t_area);
 		usr_ptr_end = ((void *)area) + area->next;
 		size = (size_t)area->next - sizeof(t_area);
-		total_size += size * (area->info == 0);
+		total_size += size * ((area->info & MEM_FREED) == 0);
 		ft_printf("\033[%dm$$$C%d\033[0m = ", 31 + area->info, *index);
 		ft_printf("%p - %p : %u bytes ", usr_ptr_start, usr_ptr_end, size);
 		mem_dump(area, flags);

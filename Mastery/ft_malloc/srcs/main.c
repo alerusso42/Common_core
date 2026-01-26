@@ -180,15 +180,15 @@ int	main(int ac, char **av)
 	ft_printf("%s\n", s);
 	free(s);
 	test();
-	//print_extreme(NULL, _global_data(false), true);
+	//print_extreme(NULL, _global_data(), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
-	if (_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed)
+	if (_global_data()->bytes_alloc == _global_data()->bytes_freed)
 		ft_printf("$GSuccess!$z\n");
 	else
 	{
-		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
-		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
+		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data()->bytes_alloc, _global_data()->bytes_freed);
+		ft_printf("Total leak: %d\n", _global_data()->bytes_alloc - _global_data()->bytes_freed);
 		//show_alloc_mem_ex(256);
 	}
 	del_filedata();
@@ -261,6 +261,21 @@ int	main6()
 		ft_printf("%c", s[i]);
 	ft_printf("\n");
 	return 0;
+}
+
+int	main7()//7
+{
+	void		*ptr;
+	int			stack_ptr;
+	uintptr_t	bad_ptr;
+
+	ptr = malloc(69);
+	free(NULL);
+	free(&stack_ptr);
+	free((void *)1);
+	bad_ptr = (uintptr_t)ptr + 1;
+	free((void *)bad_ptr);
+	free(ptr);
 }
 
 /*

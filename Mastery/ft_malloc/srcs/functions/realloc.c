@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 03:11:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:47:10 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void 	*realloc(void *ptr, size_t size)
 	t_alloc		*data;
 	t_area		*area;
 
-	data = _global_data(false);
+	data = _global_data();
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :

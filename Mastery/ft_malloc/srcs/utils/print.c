@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 21:57:55 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/23 23:33:33 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:27:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	mem_dump_bit(t_area *area)
 {
-	char	bits[9];
 	char	byte;
+	char	bits[9];
 
 	bits[8] = 0;
 	ft_printf("\nmemDumpBit: ");

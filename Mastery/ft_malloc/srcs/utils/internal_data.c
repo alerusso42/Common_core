@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:13:28 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:47:21 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	munmap_zone(t_alloc *mem, t_list *list);
 
 //always return alloc global data.
 //if reset is true, they are set to default values
-t_alloc	*_global_data(bool reset)
+t_alloc	*_global_data()
 {
 	static t_alloc	data;
 
-	if (!data.error && (data.pagesize == 0 || reset))
+	if (data.error == false && data.pagesize == 0)
 	{
 		data = (t_alloc){0};
 		data.pagesize = sysconf(_SC_PAGESIZE);
@@ -44,7 +44,7 @@ void __attribute__((destructor, used))	malloc_munmap_data(void)
 {
 	t_alloc	*data;
 
-	data = _global_data(false);
+	data = _global_data();
 	PRINT("$Ymunmap all$Z: freeing allocator memory\n");
 	if (data->zone_tiny)
 		munmap_zone(data, data->zone_tiny);
@@ -55,7 +55,7 @@ void __attribute__((destructor, used))	malloc_munmap_data(void)
 	*data = (t_alloc){0};
 }
 
-//munmap an entire list of tiny/small/big area
+//munmap an entire list of tiny/small/large area
 static void	munmap_zone(t_alloc *data, t_list *list)
 {
 	t_memzone	*zone;

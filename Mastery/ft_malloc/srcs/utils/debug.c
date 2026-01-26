@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:11:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/19 22:54:08 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 05:11:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,23 @@ void	print_list(t_list *lst)
 		++EYE;
 	}
 	ft_printf("\b\b\b   \n$GSIZE$Z: %d\n", EYE);
+}
+
+//prints an error and returns NULL
+void	*error_malloc(char *s)
+{
+	err_printf("$RMalloc$Z:$R %s$Z\n", s);
+	return (NULL);
+}
+
+//prints an error, returns NULL, turn down malloc system
+void	*fatal_malloc(char *s)
+{
+	t_alloc	*data;
+
+	data = _global_data();
+	err_printf("Malloc, fatal: %s\n", s);
+	malloc_munmap_data();
+	data->error = true;
+	return (NULL);
 }

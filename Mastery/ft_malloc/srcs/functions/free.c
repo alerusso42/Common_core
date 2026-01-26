@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:15:02 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 04:47:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void 	free(void *ptr)
 	t_alloc		*data;
 	t_memzone	*zone;
 
-	data = _global_data(false);
+	data = _global_data();
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :

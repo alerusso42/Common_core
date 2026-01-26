@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:09:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 05:26:17 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 int	ft_printf(const char *str, ...);
 
-# define DEBUG_FLAG true
+# define DEBUG_FLAG false
 # define DEBUG_TIMESTAMP "$GMalloc: $Z"
 # if DEBUG_FLAG == true
 #  define DEBUG(s, ...) (void)err_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
 # else
 #  define DEBUG(s, ...)	(void)0
 # endif
-# define PRINT_FLAG false
+# define PRINT_FLAG true
 # define PRINT_TIMESTAMP "$GMalloc: $Z"
 # if PRINT_FLAG == true
 #  define PRINT(s, ...) (void)ft_printf(DEBUG_TIMESTAMP s, ##__VA_ARGS__)
@@ -50,9 +50,6 @@ int	ft_printf(const char *str, ...);
 //FIXME - da togliere!
 #include <valgrind/memcheck.h>
 
-//allocation bigger than UINT_MAX - sizeof(t_list *) causes underflow
-# define ALLOC_MAX_SIZE (UINT_MAX - (uint32_t)sizeof(t_list *))
-
 # define ALIGN alignof(max_align_t)
 
 /*SECTION - structs representation
@@ -61,7 +58,7 @@ ________________________________________________________________________________
 t_alloc		|Stores:			|
 			|1)alloc. metadata	|bytes alloc./freed, pagesize*1, ...
 			|2)memzone size		|tiny, small, large block area/zone size
-			|3)t_memzone lists	|tiny, small, large area. memory given by t_pool
+			|3)t_memzone lists	|tiny, small, large area.
 			|					|
 t_memzone	|store:				|TINY_ZONE|SMALL_ZONE|TINY_ZONE|LARGE_ZONE|...|
 			|1)user data;		|	
@@ -139,8 +136,10 @@ enum	e_area_info
 	MEM_ALLOC = 0,
 	MEM_FREED = 1 << 0,
 	MEM_SET = 1 << 1,
+	MEM_FLAGS = (1 << 2) - 1,
 	MEM_ERROR = 1 << 6,
 	MEM_INVALID = 1 << 7,
+	MEM_NO_HEAP = 1 << 8,
 };
 
 /*
@@ -180,6 +179,7 @@ enum e_sizelimit_info
 	ZONE_SMALL = (1 << 18),
 	AREA_TINY = ZONE_TINY >> AREA_NUM,
 	AREA_SMALL = ZONE_SMALL >> AREA_NUM,
+	ALLOC_MAX_SIZE = (UINT_MAX - sizeof(t_memzone) - sizeof(t_area))
 };
 
 typedef struct s_alloc
@@ -223,41 +223,39 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 
 //SECTION - utils
 
-t_alloc				*_global_data(bool reset);
-void				malloc_munmap_data(void);
+t_alloc		*_global_data();
+void		malloc_munmap_data(void);
 int			round_page(int n, int pagesize);
-uint32_t		align_addr(void *ptr);
-uint32_t			identify_area(t_alloc *data, void *ptr);
+uint32_t	align_addr(void *ptr);
+uint32_t	identify_area(t_alloc *data, void *ptr);
 
-void				print_zone(t_memzone *zone);
-void				print_area(t_area *area);
-void				print_list(t_list *lst);
-void				mem_dump_bit(t_area *area);
-void				mem_dump_hex(t_area *area);
-void				mem_dump_byte(t_area *area);
+void		print_zone(t_memzone *zone);
+void		print_area(t_area *area);
+void		print_list(t_list *lst);
+void		mem_dump_bit(t_area *area);
+void		mem_dump_hex(t_area *area);
+void		mem_dump_byte(t_area *area);
 
-void				*fatal_malloc(char *s);
-void				*error_malloc(char *s);
-void				*mmap_syscall(t_alloc *data, uint32_t len);
-bool				munmap_syscall(t_alloc *data, void *ptr, uint32_t len);
-
-void				*pool_alloc(t_alloc *data, uint32_t len);
+void		*fatal_malloc(char *s);
+void		*error_malloc(char *s);
+void		*mmap_syscall(t_alloc *data, uint32_t len);
+bool		munmap_syscall(t_alloc *data, void *ptr, uint32_t len);
 
 t_area		*bytelst_next(t_area *curr);
 t_area		*bytelst_prev(t_area *curr);
 t_memzone	*bytelst_head(t_area *curr);
-t_area				*bytelst_merge(t_area *left, t_area *right);
-t_area				*bytelst_split(t_area *area, t_bytelist size);
+t_area		*bytelst_merge(t_area *left, t_area *right);
+t_area		*bytelst_split(t_area *area, t_bytelist size);
 
-void				*zone_area_alloc(t_list *zones, uint32_t size);
-t_area				*zone_area_freed(t_list *zones, void *ptr);
-t_list				*zone_add(t_alloc *data, t_list **zones, uint32_t size);
-t_bytelist			zone_find_longest_chunk(t_memzone *zone);
-t_area				*zone_find_first_free_area(t_memzone *zone);
+void		*zone_area_alloc(t_list *zones, uint32_t size);
+t_area		*zone_area_freed(t_list *zones, void *ptr);
+t_list		*zone_add(t_alloc *data, t_list **zones, uint32_t size);
+t_bytelist	zone_find_longest_chunk(t_memzone *zone);
+t_area		*zone_find_first_free_area(t_memzone *zone);
 
-void				area_alloc(t_memzone *zone, t_area *area, t_bytelist size);
-t_area				*area_find_alloc_block(t_area *area, t_bytelist size);
-t_memzone			*area_freed(t_area *area);
-t_area				*area_find_freed_block(t_area *area, void *ptr);
+void		area_alloc(t_memzone *zone, t_area *area, t_bytelist size);
+t_area		*area_find_alloc_block(t_area *area, t_bytelist size);
+t_memzone	*area_freed(t_area *area);
+t_area		*area_find_freed_block(t_area *area, void *ptr);
 
 #endif
