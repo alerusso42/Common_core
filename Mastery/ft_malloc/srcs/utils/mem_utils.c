@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 05:24:38 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:14:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ bool	munmap_syscall(t_alloc *data, void *ptr, uint32_t len)
 }
 
 //identify where a pointer given by user comes from
-//invalid ptr may cause crash if not on heap/stack
 uint32_t	identify_area(t_alloc *data, void *ptr)
 {
 	t_area	*area;
@@ -90,7 +89,7 @@ uint32_t	identify_area(t_alloc *data, void *ptr)
 	if (ptr < data->ptr_min || ptr > data->ptr_max)
 		return (MEM_NO_HEAP);
 	area = ptr - sizeof(t_area);
-	if ((area->info & (~MEM_FLAGS)) != 0)
+	if (align_addr(ptr) != 16 || (area->info & (~MEM_FLAGS)) != 0)
 		return (MEM_INVALID);
 	else if (area->info &= MEM_FREED)
 		return (MEM_FREED);

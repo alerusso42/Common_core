@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:47:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:20:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ void 	*realloc(void *ptr, size_t size)
 				return (ptr);
 			return (expand_mem(ptr, size));
 		case (MEM_FREED) :
-			WARNING("$RFree: $Z%p $Ralready freed$Z\n");
+			WARNING("$RRealloc: $Z%p $Ralready freed$Z\n");
 			return (malloc(size));
 		case (MEM_INVALID) :
-			WARNING("Realloc: invalid ptr\n");
+			WARNING("$RRealloc: $Zinvalid ptr\n");
 			return (expand_mem(ptr, size));
+		case (MEM_NO_HEAP) :
+			return (WARNING("$RRealloc: $Z%p$R is not a heap ptr$Z\n"), NULL);
 		case (MEM_ERROR) :
 			return (NULL);
 	}

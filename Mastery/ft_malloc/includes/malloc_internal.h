@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 05:26:17 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:24:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/mman.h>
 # include <sys/unistd.h>
 # include <sys/fcntl.h>
+# include <pthread.h>
 # include "../all.h"
 
 int	ft_printf(const char *str, ...);

@@ -157,7 +157,7 @@ int	main2()
 	return 0;
 }
 
-int	main(int ac, char **av)
+int	main3(int ac, char **av)
 {
 	(void)ac, (void)av;
 	char		*s;
@@ -263,7 +263,7 @@ int	main6()
 	return 0;
 }
 
-int	main7()//7
+int	main()//7
 {
 	void		*ptr;
 	int			stack_ptr;

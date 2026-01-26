@@ -6,19 +6,20 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:33 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:47:21 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:30:27 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
 static void	munmap_zone(t_alloc *mem, t_list *list);
+static bool	thread_safe(bool lock, bool destroy);
 
 //always return alloc global data.
 //if reset is true, they are set to default values
 t_alloc	*_global_data()
 {
-	static t_alloc	data;
+	static t_alloc			data;
 
 	if (data.error == false && data.pagesize == 0)
 	{
@@ -37,6 +38,22 @@ t_alloc	*_global_data()
 		data.ptr_min = (void *)-1;
 	}
 	return (&data);
+}
+
+static bool	thread_safe(bool lock, bool destroy)
+{
+	static pthread_mutex_t	*mutex;
+
+	if (!mutex)
+		mutex = pthread_mutex_init(mutex, NULL);
+	if (!mutex)
+		return (fatal_malloc("pthread_mutex_init failed"));
+	if (destroy == true)
+		pthread_mutex_destroy(mutex);
+	else if (lock == true)
+		pthread_mutex_lock(mutex);
+	else
+		pthread_mutex_unlock(mutex);
 }
 
 //munmap of all malloc data

@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:47:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:20:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void 	free(void *ptr)
 		case (MEM_INVALID) :
 			free_correct_area(data, ptr);
 			break ;
+		case (MEM_NO_HEAP) :
+			return (WARNING("$RFree: $Z%p$R is not a heap ptr$Z\n"));
 		case (MEM_ERROR) :
 			return ;
 	}
