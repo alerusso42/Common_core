@@ -189,6 +189,7 @@ int	main(int ac, char **av)
 	{
 		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
 		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
+		show_alloc_mem_ex(256);
 	}
 	del_filedata();
 	//show_alloc_mem();
@@ -257,7 +258,7 @@ int	main6()
 	free(s);
 	s = calloc(5, 10);
 	for (int i = 0; i != 65; i++)
-		write(1, &s[i], 1);
+		ft_printf("%c", s[i]);
 	ft_printf("\n");
 	return 0;
 }

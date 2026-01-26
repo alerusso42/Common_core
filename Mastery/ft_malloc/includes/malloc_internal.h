@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/23 22:34:10 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 01:43:14 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ enum e_sizelimit_info
 {
 	POOL_SIZE = 120 * 24,//120: max t_memzone nodes; 24: sizeof(t_list)
 	AREA_NUM = 4,//2^AREA_NUM modify the number of areas in a zone
-	ZONE_TINY = (1 << 13),
+	ZONE_TINY = (1 << 12),
 	ZONE_SMALL = (1 << 18),
 	AREA_TINY = ZONE_TINY >> AREA_NUM,
 	AREA_SMALL = ZONE_SMALL >> AREA_NUM,
@@ -239,8 +239,8 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 
 t_alloc				*_global_data(bool reset);
 void				malloc_munmap_data(t_alloc *data);
-inline int			round_page(int n, int pagesize);
-inline uint32_t		align_addr(void *ptr);
+int			round_page(int n, int pagesize);
+uint32_t		align_addr(void *ptr);
 uint32_t			identify_area(t_alloc *data, void *ptr);
 
 void				print_zone(t_memzone *zone);
@@ -257,9 +257,9 @@ bool				munmap_syscall(t_alloc *data, void *ptr, uint32_t len);
 
 void				*pool_alloc(t_alloc *data, uint32_t len);
 
-inline t_area		*bytelst_next(t_area *curr);
-inline t_area		*bytelst_prev(t_area *curr);
-inline t_memzone	*bytelst_head(t_area *curr);
+t_area		*bytelst_next(t_area *curr);
+t_area		*bytelst_prev(t_area *curr);
+t_memzone	*bytelst_head(t_area *curr);
 t_area				*bytelst_merge(t_area *left, t_area *right);
 t_area				*bytelst_split(t_area *area, t_bytelist size);
 

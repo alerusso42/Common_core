@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 00:38:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 01:45:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void 	*calloc(size_t nmemb, size_t size)
 {
-	size_t	total;
-	void	*ptr;
+	size_t		total;
+	void		*ptr;
+	uintptr_t	area;
 
 	total = nmemb * size;
 	if (!total)
@@ -32,6 +33,7 @@ void 	*calloc(size_t nmemb, size_t size)
 	if (!ptr)
 		return (NULL);
 	ft_memset(ptr, 0, total);
-	((t_area *)ptr - 1)->info |= MEM_SET;
+	area = ((uintptr_t)ptr) - sizeof(t_area);
+	((t_area *)area)->info |= MEM_SET;
 	return (ptr);
 }
