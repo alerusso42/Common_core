@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 15:20:44 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void 	free(void *ptr)
 	t_alloc		*data;
 	t_memzone	*zone;
 
-	data = _global_data();
+	thread_safe(MALL_THREAD_LOCK);
+	data = malloc_global_data();
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :
@@ -28,15 +29,18 @@ void 	free(void *ptr)
 			munmap_zone_if_empty(data, zone);
 			break ;
 		case (MEM_FREED) :
-			return (WARNING("$RFree: $Z%p $Ralready freed$Z\n"));
+			WARNING("$RFree: $Z%p $Ralready freed$Z\n");
+			break ;
 		case (MEM_INVALID) :
 			free_correct_area(data, ptr);
 			break ;
 		case (MEM_NO_HEAP) :
-			return (WARNING("$RFree: $Z%p$R is not a heap ptr$Z\n"));
+			WARNING("$RFree: $Z%p$R is not a heap ptr$Z\n");
+			break ;
 		case (MEM_ERROR) :
-			return ;
+			break ;
 	}
+	thread_safe(MALL_THREAD_UNLOCK);
 }
 
 static void	free_correct_area(t_alloc *data, void *ptr)

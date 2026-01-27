@@ -42,15 +42,15 @@ int	main()
 	write(1, "\n", 1);
 	free(s);
 	test();
-	print_extreme(NULL, _global_data(false), true);
+	print_extreme(NULL, malloc_global_data(false), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
-	if (_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed)
+	if (malloc_global_data(false)->bytes_alloc == malloc_global_data(false)->bytes_freed)
 		ft_printf("$GSuccess!$z\n");
 	else
 	{
-		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
-		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
+		ft_printf("$RLeak! $z%d allocated, %d freed\n", malloc_global_data(false)->bytes_alloc, malloc_global_data(false)->bytes_freed);
+		ft_printf("Total leak: %d\n", malloc_global_data(false)->bytes_alloc - malloc_global_data(false)->bytes_freed);
 	}
 	return (0);
 }

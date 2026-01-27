@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 17:29:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 22:16:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void *malloc(size_t size)
 	void		*p;
 	t_alloc		*data;
 
-	data = _global_data(false);
+	data = malloc_global_data(false);
 	if (!data)
 		return (NULL);
 	if (size > ALLOC_MAX_SIZE)

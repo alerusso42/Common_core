@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:39 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 15:24:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,14 @@ enum e_mmap_flags
 	MAP_APF = MAP_ANONYMOUS | MAP_PRIVATE | MAP_FIXED,
 };
 
+typedef enum e_malloc_thread_flag
+{
+	MALL_THREAD_LOCK = 1 << 0,
+	MALL_THREAD_UNLOCK = 1 << 1,
+	MALL_THREAD_CREATE = 1 << 2,
+	MALL_THREAD_DESTROY = 1 << 3,
+}	t_malloc_thread_flag;
+
 void 	*malloc(size_t size);
 void 	free(void *ptr);
 void 	*realloc(void *ptr, size_t size);
@@ -224,7 +232,8 @@ void 	print_extreme(void *p, t_alloc *dt, bool print);
 
 //SECTION - utils
 
-t_alloc		*_global_data();
+t_alloc		*malloc_global_data();
+void		thread_safe(t_malloc_thread_flag flags);
 void		malloc_munmap_data(void);
 int			round_page(int n, int pagesize);
 uint32_t	align_addr(void *ptr);

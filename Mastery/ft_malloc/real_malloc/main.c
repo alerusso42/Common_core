@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 	ft_printf("%s\n", s);
 	free(s);
 	test();
-	//print_extreme(NULL, _global_data(false), true);
+	//print_extreme(NULL, malloc_global_data(false), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
 	mData = mallinfo2();

@@ -157,7 +157,7 @@ int	main2()
 	return 0;
 }
 
-int	main3(int ac, char **av)
+int	main(int ac, char **av)
 {
 	(void)ac, (void)av;
 	char		*s;
@@ -180,15 +180,15 @@ int	main3(int ac, char **av)
 	ft_printf("%s\n", s);
 	free(s);
 	test();
-	//print_extreme(NULL, _global_data(), true);
+	//print_extreme(NULL, malloc_global_data(), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
-	if (_global_data()->bytes_alloc == _global_data()->bytes_freed)
+	if (malloc_global_data()->bytes_alloc == malloc_global_data()->bytes_freed)
 		ft_printf("$GSuccess!$z\n");
 	else
 	{
-		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data()->bytes_alloc, _global_data()->bytes_freed);
-		ft_printf("Total leak: %d\n", _global_data()->bytes_alloc - _global_data()->bytes_freed);
+		ft_printf("$RLeak! $z%d allocated, %d freed\n", malloc_global_data()->bytes_alloc, malloc_global_data()->bytes_freed);
+		ft_printf("Total leak: %d\n", malloc_global_data()->bytes_alloc - malloc_global_data()->bytes_freed);
 		//show_alloc_mem_ex(256);
 	}
 	del_filedata();
@@ -203,7 +203,6 @@ void	test(void)
 	char	***data;
 
 	daft_init("media", "SETTINGS.md");
-	daft_init(NULL, NULL);
     daft_swap(POKEDEX);
 	data = daft_get("CALYREX");
 	if (!data)
@@ -213,12 +212,12 @@ void	test(void)
 	print_3d(data);
 	for (int i = 0; i; i--)
 	{
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
 		daft_quit();
 		daft_quit();
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
 	}
 	daft_quit();
 	daft_init("media", "SETTINGS.md");
@@ -230,7 +229,6 @@ void	test(void)
 
 void	print_3d(char ***s)
 {
-	return ;
 	if (s)
 	{
 		for (int i = 0; s[i]; i++)
@@ -263,7 +261,7 @@ int	main6()
 	return 0;
 }
 
-int	main()//7
+int	main7()//7
 {
 	void		*ptr;
 	int			stack_ptr;

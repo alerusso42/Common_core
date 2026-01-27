@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:11:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 05:11:05 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*fatal_malloc(char *s)
 {
 	t_alloc	*data;
 
-	data = _global_data();
+	data = malloc_global_data();
 	err_printf("Malloc, fatal: %s\n", s);
 	malloc_munmap_data();
 	data->error = true;
