@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:20:43 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 01:42:46 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:01:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int 	map_init(t_map *ptr, size_t hash_size)
 		return (map_error(MAP_NOMEM, NULL));
 	ptr->hasher = map_default_hash;
 	ptr->hash_size = hash_size;
-	ptr->_priv.i = MAP_NPOS;
+	data.i = MAP_NPOS;
 	return (0);
 }

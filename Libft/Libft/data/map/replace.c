@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:22:21 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 16:32:06 by codespace        ###   ########.fr       */
+/*   Updated: 2026/02/08 19:52:03 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int map_replace(t_map *ptr, char *key, void *val)
 	lst_back(&ptr->data[data.i]->values, data.list);
 	ptr->size++;
 	ptr->data[data.i]->size++;
-	map_end_function(ptr);
 	return (0);
 }

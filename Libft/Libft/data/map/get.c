@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:20:46 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 01:59:56 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:59:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "map_internal.h"
 
 void 	*map_get(t_map *ptr, char *key)
 {
-	void	*val;
+	t_map_find_data	data;
 
 	if (!ptr || !key)
 		return (map_error(MAP_EINVAL, NULL));
-	if (map_find(ptr, key) == false)
+	if (_map_find(ptr, key, &data) == false)
 		return (map_error(MAP_NOTFOUND, key), NULL);
-	val = ptr->_priv.node->val;
-	map_end_function(ptr);
-	return (val);
+	return (data.value);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:24:15 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 02:03:42 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:01:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void 	map_del(t_map *ptr, char *key)
 {
+	t_map_find_data	data;
+
 	if (!ptr || !key)
 		return (map_error(MAP_EINVAL, NULL));
 	if (map_find(ptr, key) == false)
 		return (map_error(MAP_NOTFOUND, key), NULL);
-	if (ptr->_priv.list == ptr->data[ptr->_priv.i]->values)
-		ptr->data[ptr->_priv.i]->values = ptr->data[ptr->_priv.i]->values->next;
-	lst_delone(ptr->_priv.list, ptr->del);
+	if (data.list == ptr->data[data.i]->values)
+		ptr->data[data.i]->values = ptr->data[data.i]->values->next;
+	lst_delone(data.list, ptr->del);
 	ptr->size--;
-	if (ptr->data[ptr->_priv.i])
-		ptr->data[ptr->_priv.i]->size--;
-	map_end_function(ptr);
+	if (ptr->data[data.i])
+		ptr->data[data.i]->size--;
 }
