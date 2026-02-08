@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 21:55:16 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 16:29:25 by codespace        ###   ########.fr       */
+/*   Updated: 2026/02/08 22:06:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@ typedef struct s_map_val	t_map_val;
 typedef struct s_map_find_data
 {
     size_t	    i;
-    t_list      *list;
+    t_list      *node;
+    t_list      *head;
     char        *key;
     void        *value;
-}	t_map_find_data;
+}	t_map_find_val;
 
 # define map_error(code, data)	_map_error(ptr, code, data, __FUNCTION__)
 
 size_t	map_default_hash(const char *key);
 int		_map_error(t_map *ptr, int code, void *data, const char *caller);
-bool	_map_find(t_map *ptr, const char *key, t_map_find_data *val);
-int 	_map_add(t_map *ptr, char *key, void *val, t_map_find_data *data);
-int 	_map_replace(t_map *ptr, char *key, void *val, t_map_find_data *data);
-void 	*_map_get(t_map *ptr, char *key, t_map_find_data *data);
-void 	_map_del(t_map *ptr, char *key, t_map_find_data *data);
+bool	_map_find(t_map *ptr, const char *key, t_map_find_val *val);
+int 	_map_add(t_map *ptr, char *key, void *val, t_map_find_val *data);
+int 	_map_replace(t_map *ptr, char *key, void *val, t_map_find_val *data);
+void 	*_map_get(t_map *ptr, char *key, t_map_find_val *data);
+void 	_map_del(t_map *ptr, char *key, t_map_find_val *data);
 
 #endif

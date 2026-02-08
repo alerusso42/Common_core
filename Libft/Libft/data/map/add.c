@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 00:50:00 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 20:05:23 by codespace        ###   ########.fr       */
+/*   Updated: 2026/02/08 22:06:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int 	map_add(t_map *ptr, char *key, void *val)
 {
-	t_map_find_data	data;
+	t_map_find_val	data;
 
 	if (!ptr || !key || !val)
 		return (map_error(MAP_EINVAL, NULL));

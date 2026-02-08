@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:24:15 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 20:01:40 by codespace        ###   ########.fr       */
+/*   Updated: 2026/02/08 22:17:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void 	map_del(t_map *ptr, char *key)
 {
-	t_map_find_data	data;
+	t_map_find_val	val;
 
 	if (!ptr || !key)
 		return (map_error(MAP_EINVAL, NULL));
 	if (map_find(ptr, key) == false)
 		return (map_error(MAP_NOTFOUND, key), NULL);
-	if (data.list == ptr->data[data.i]->values)
-		ptr->data[data.i]->values = ptr->data[data.i]->values->next;
-	lst_delone(data.list, ptr->del);
+	if (val.node == ptr)
+		ptr->data[val.i]->values = ptr->data[val.i]->values->next;
+	lst_delone(val.list, ptr->del);
 	ptr->size--;
-	if (ptr->data[data.i])
-		ptr->data[data.i]->size--;
+	if (ptr->data[val.i])
+		ptr->data[val.i]->size--;
 }

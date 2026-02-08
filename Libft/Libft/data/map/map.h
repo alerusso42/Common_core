@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 21:55:16 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 15:30:03 by codespace        ###   ########.fr       */
+/*   Updated: 2026/02/08 22:14:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,18 @@ typedef struct s_map_val		t_map_val;
 `hash_size`	size of the data array
 `fail`		bool true if a critical error occured
  *### methods
- * |Action         |Function Prototype                                    |
- * |:--------------|:-----------------------------------------------------|
- * |:--------------|:-----------------------------------------------------|
- * | alloc data    | `int map_init(t_map *ptr, size_t hash_size)`			|
- * | free data     | `void map_free(t_map *ptr)`						    |
- * | clear data    | `void map_clear(t_map *ptr)`						    |
- * | add key if new| `int map_add(t_map *ptr, char *key, void *val)`		|
- * | add key       | `int map_replace(t_map *ptr, char *key, void *val)`	|
- * | get value     | `void *map_get(t_map *ptr, char *key)`				|
- * | delete key    | `void map_del(t_map *ptr, char *key)`				|
- * |:------------..|:-----------------------------------------------------|
+ * |Action         |Function Prototype                                      |
+ * |:--------------|:-------------------------------------------------------|
+ * |:--------------|:-------------------------------------------------------|
+ * | alloc data    | `int map_init(t_map *ptr, size_t hash_size)`		  	|
+ * | free data     | `void map_free(t_map *ptr)`						  	|
+ * | clear data    | `void map_clear(t_map *ptr)`						  	|
+ * | key exists?   | `bool map_find(t_map *ptr, const char *key)`			|
+ * | add key if new| `int map_add(t_map *ptr, char *key, void *new_val)`	|
+ * | add key       | `int map_replace(t_map *ptr, char *key, void *new_val)`|
+ * | get value     | `void *map_get(t_map *ptr, char *key)`			      	|
+ * | delete key    | `void map_del(t_map *ptr, char *key)`				  	|
+ * |:------------..|:-------------------------------------------------------|
  */
 struct s_map
 {
@@ -109,8 +110,9 @@ enum e_map_ret_codes
 int 	map_init(t_map *ptr, size_t hash_size);
 void 	map_free(t_map *ptr);
 void 	map_clear(t_map *ptr);
-int 	map_add(t_map *ptr, char *key, void *val);
-int 	map_replace(t_map *ptr, char *key, void *val);
+bool	map_find(t_map *ptr, const char *key);
+int 	map_add(t_map *ptr, char *key, void *new_val);
+int map_replace(t_map *ptr, char *key, void *new_val);
 void 	*map_get(t_map *ptr, char *key);
 void 	map_del(t_map *ptr, char *key);
 
