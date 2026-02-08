@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 21:55:16 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 01:42:58 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/08 15:30:03 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 
 typedef struct s_map			t_map;
 typedef struct s_map_values		t_map_values;
-typedef struct s_map_node		t_map_node;
-typedef struct s_map_private	t_map_private;
+typedef struct s_map_val		t_map_val;
 
 /**
  *## struct s_map
@@ -59,7 +58,7 @@ typedef struct s_map_private	t_map_private;
  * | delete key    | `void map_del(t_map *ptr, char *key)`				|
  * |:------------..|:-----------------------------------------------------|
  */
-typedef struct s_map
+struct s_map
 {
 	t_map_private	_priv;
 	size_t(*hasher)(char*);
@@ -68,12 +67,12 @@ typedef struct s_map
 	size_t			size;
 	size_t			hash_size;
 	bool			fail;
-}		t_map;
+};
 
 /*
 -	accessed from t_map::data by keys
 -	stores a list of values whose keys collide
--	nodes in the list are t_map_node (char *key/void *val pair)
+-	nodes in the list are t_map_val (char *key/void *val pair)
 -	size is the number of elements in the list
 */
 typedef struct s_map_values
@@ -82,18 +81,15 @@ typedef struct s_map_values
 	size_t	size;
 }		t_map_values;
 
-typedef struct s_map_node
+typedef struct s_map_val
 {
 	char	*key;
 	void	*val;
-}		t_map_node;
+}		t_map_val;
 
 //do not touch these data
 typedef struct s_map_private
 {
-	t_list		*list;
-	t_map_node	*node;
-	size_t		i;
 	size_t		it;
 }		t_map_private;
 

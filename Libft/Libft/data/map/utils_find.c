@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_find.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:37:21 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 01:54:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/08 15:31:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 // returns true if found
 // else false
-bool	map_find(t_map *ptr, const char *key)
+bool	map_find(t_map *ptr, const char *key, t_map_find_data *val)
 {
 	size_t		i;
 	t_list		*list;
-	t_map_node	*node;
+	t_map_val	*node;
 
 	i = ptr->hasher(key) % ptr->hash_size;
 	if (!ptr->data[i])
@@ -33,14 +33,11 @@ bool	map_find(t_map *ptr, const char *key)
 	}
 	if (!list)
 		return (map_error(MAP_NOTFOUND, key), false);
-	ptr->_priv.i = i;
-	ptr->_priv.list = list;
-	ptr->_priv.node = node;
+	if (!val)
+		return (true);
+	val->i = i;
+	val->list = list;
+	val->key = node->key;
+	val->value = node->val;
 	return (true);
-}
-
-void	map_end_function(t_map *ptr)
-{
-	ptr->_priv = (t_map_private){0};
-	ptr->_priv.i = MAP_NPOS;
 }
