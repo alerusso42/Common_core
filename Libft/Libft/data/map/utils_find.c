@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:37:21 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/09 12:47:06 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:12:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ bool	_map_find(t_map *ptr, const char *key, void *new_val, t_map_find_val *val)
 	val->node = val->head;
 	while (val->node)
 	{
-		if (ft_strncmp(key, ((t_map_val *)val->node)->key, INT_MAX) == 0)
+		if (ft_strncmp(key, ((t_map_val *)val->node->content)->key, INT_MAX) == 0)
 			break ;
 		val->node = val->node->next;
 	}
 	if (!val->node)
 		return (false);
-	val->pair.val = ((t_map_val *)val->node)->val;
+	val->pair.val = ((t_map_val *)val->node->content)->val;
 	return (true);
 }
 
