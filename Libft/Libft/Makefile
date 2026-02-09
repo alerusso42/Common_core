@@ -13,6 +13,7 @@ PATH_CHECKS =		checks
 PATH_DAFT_PREP =	daft/program/prep_src
 PATH_DAFT_PROG =	daft/program/daft_src
 PATH_DATA_MATR2 =	data/matrix_2
+PATH_DATA_MAP =		data/map
 PATH_DATA_LIST =	data/list
 PATH_FILES =		files
 PATH_MATH =			math
@@ -27,7 +28,8 @@ SRC_CHECKS =	$(addprefix $(PATH_CHECKS)/, $(shell ls $(PATH_CHECKS) | grep \\.c)
 SRC_DAFT =		$(addprefix $(PATH_DAFT_PREP)/, $(shell ls $(PATH_DAFT_PREP) | grep \\.c)) 	\
 				$(addprefix $(PATH_DAFT_PROG)/, $(shell ls $(PATH_DAFT_PROG) | grep \\.c))
 SRC_DATA =		$(addprefix $(PATH_DATA_MATR2)/, $(shell ls $(PATH_DATA_MATR2) | grep \\.c)) \
-				$(addprefix $(PATH_DATA_LIST)/, $(shell ls $(PATH_DATA_LIST) | grep \\.c))
+				$(addprefix $(PATH_DATA_LIST)/, $(shell ls $(PATH_DATA_LIST) | grep \\.c)) \
+				$(addprefix $(PATH_DATA_MAP)/, $(shell ls $(PATH_DATA_MAP) | grep \\.c))
 SRC_FILES =		$(addprefix $(PATH_FILES)/, $(shell ls $(PATH_FILES) | grep \\.c))
 SRC_MATH =		$(addprefix $(PATH_MATH)/, $(shell ls $(PATH_MATH) | grep \\.c))
 SRC_MEM =		$(addprefix $(PATH_MEM)/, $(shell ls $(PATH_MEM) | grep \\.c))

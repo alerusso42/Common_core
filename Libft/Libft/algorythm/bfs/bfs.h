@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:58:05 by alerusso          #+#    #+#             */
-/*   Updated: 2025/12/12 18:33:49 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:27:01 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # define BFS_MAX_DISTANCE 40
 # define BFS_OBSTACLE "1$E"
 
-typedef struct s_map	t_map;
+typedef struct Map	Map;
 
-typedef struct s_map
+typedef struct Map
 {
 	char	val;
 	char	*distance;
-}				t_map;
+}				Map;
 
 typedef struct s_data	t_data;
 
@@ -57,7 +57,7 @@ typedef struct s_data	t_data;
 
 typedef struct s_bfs
 {
-	t_map		**map;
+	Map		**map;
 	int			n;
 	int			mark;
 	int			en_x;

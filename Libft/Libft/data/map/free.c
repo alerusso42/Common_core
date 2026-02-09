@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 01:19:03 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 01:22:07 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 10:40:26 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void 	map_free(t_map *ptr)
 {
 	map_clear(ptr);
-	FREE(ptr->data);
+	FREE(ptr->values);
 	*ptr = (t_map){0};
+}
+
+void	_map_default_del(t_map_val *pair)
+{
+	FREE(pair->key);
 }

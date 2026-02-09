@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 21:55:16 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 22:14:43 by codespace        ###   ########.fr       */
+/*   Updated: 2026/02/09 12:33:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define MAP_LOG_BOOL true
 # define DEFAULT_SEED 42UL
 
-typedef struct s_map			t_map;
-typedef struct s_map_values		t_map_values;
-typedef struct s_map_val		t_map_val;
+typedef struct s_list		t_list;
+typedef struct s_map		t_map;
+typedef struct s_map_val	t_map_val;
 
 /**
  *## struct s_map
@@ -33,15 +33,30 @@ typedef struct s_map_val		t_map_val;
 - hasher function can be set by changing the variable `hasher`
   default is murmurhash
 - a delete function can be set by changing the variable `del`
-  default values are not freed
+  default: 	keys are freed with free
+  			values are not freed
+  EXAMPLE:
+  void	del(t_map_val *pair){free(key), custom_free(val);}
+  map.del = del;
   the delete function is called when:
   `map_clear` method is called
   `map_erase` method is called
   a critical error occured (map->fail set)
+- same for the alloc function
+  EXAMPLE:
+  int	alloc(t_map_val *pair, char *key, void *val)
+  {
+	pair->key = strdup(key), pair->val = custom_allocator(val);
+	if (!pair->key || !pair->val){free(key), custom_free(val), return 1;}
+	return 0;	
+  }
+  map.alloc = alloc;
  *### variables
-`hasher`	a ptr to the function that hash the keys {size_t(*)(char*)}
-`del`		a ptr to the function that free val data {void(*)(void*)}
-`data`		an array of t_map_values (list of element that collides)
+`hasher`	a ptr to the function that hash the keys {size_t(*)(const char*)}
+`alloc`		a ptr to the function that alloc t_map_val 
+			{(t_map_val*, char *key, void *val))}
+`del`		a ptr to the function that free t_map_val {void(*)(t_map_val*)}
+`values`	an array of values (list of element that collides)
 `size`		total number of element in the map
 `hash_size`	size of the data array
 `fail`		bool true if a critical error occured
@@ -61,27 +76,22 @@ typedef struct s_map_val		t_map_val;
  */
 struct s_map
 {
-	t_map_private	_priv;
-	size_t(*hasher)(char*);
-	void(*del)(void*);
-	t_map_values	**data;
+	size_t(*hasher)(const char*);
+	int(*alloc)(t_map_val*, char *key, void *val);
+	void(*del)(t_map_val*);
+	t_list			**values;
 	size_t			size;
 	size_t			hash_size;
 	bool			fail;
 };
 
 /*
--	accessed from t_map::data by keys
--	stores a list of values whose keys collide
--	nodes in the list are t_map_val (char *key/void *val pair)
--	size is the number of elements in the list
+-	accessed from t_map::values by keys
+-	t_list *values store a list of t_map_val
+-	these values' keys collide
+-	key is the char * used to access t_map::values
+-	val is the ptr of the data
 */
-typedef struct s_map_values
-{
-	t_list	*values;
-	size_t	size;
-}		t_map_values;
-
 typedef struct s_map_val
 {
 	char	*key;
@@ -112,7 +122,7 @@ void 	map_free(t_map *ptr);
 void 	map_clear(t_map *ptr);
 bool	map_find(t_map *ptr, const char *key);
 int 	map_add(t_map *ptr, char *key, void *new_val);
-int map_replace(t_map *ptr, char *key, void *new_val);
+int 	map_replace(t_map *ptr, char *key, void *new_val);
 void 	*map_get(t_map *ptr, char *key);
 void 	map_del(t_map *ptr, char *key);
 

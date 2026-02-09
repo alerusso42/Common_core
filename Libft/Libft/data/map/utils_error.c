@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:43:06 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 01:51:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:33:53 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_internal.h"
 
-int	_map_error(t_map *ptr, int code, void *data, const char *caller)
+int	__map_error(t_map *ptr, int code, void *data, const char *caller)
 {
 	MAP_LOG("Map Error:");
 	if (code > MAP_SECTION_CRITICAL)
@@ -37,6 +37,5 @@ int	_map_error(t_map *ptr, int code, void *data, const char *caller)
 		MAP_SWITCH_LOG("Allocation failure");
 	}
 	MAP_LOG("\n");
-	map_end_function(ptr);
 	return (code);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_bfs_copy.c                                    :+:      :+:    :+:   */
+/*   DEMO.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:02:59 by alerusso          #+#    #+#             */
-/*   Updated: 2025/02/24 12:15:12 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:26:45 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -482,7 +482,7 @@ void	prepare_bfs_2(t_bfs *bfs, int p_x, int p_y, t_position **position)
 	bfs->position = position;
 }
 
-static int	free_test_map(t_position ***position)
+static int	free_tesMap(t_position ***position)
 {
 	t_position	**save;
 	
@@ -499,7 +499,7 @@ static int	free_test_map(t_position ***position)
 	return (0);
 }
 
-static int	alloc_test_map(t_position ***position)
+static int	alloc_tesMap(t_position ***position)
 {
 	int	y;
 	int	total_size;
@@ -518,7 +518,7 @@ static int	alloc_test_map(t_position ***position)
 		(*position)[index] = (t_position *)ft_calloc\
 		(MAP_Y + 1, sizeof(t_position));
 		if (!(*position)[index])
-			return (free_test_map(position));
+			return (free_tesMap(position));
 		++index;
 	}
 	return (0);
@@ -532,7 +532,7 @@ int	main()
 
 	if (WALL <= 1)
 		return (printf("\nWALL deve essere minimo 2\n"));
-	if (alloc_test_map(&position) == 1)
+	if (alloc_tesMap(&position) == 1)
 		return (1);
 	initialize_map(position);
 	set_entity(position, 'P');
@@ -552,6 +552,6 @@ int	main()
 		printf("\n\nTrovato un path valido!\n");
 	if (is_valid_path == NO)
 		printf("\n\nNessun path valido!\n");
-	free_test_map(&position);
+	free_tesMap(&position);
 	exit(0);
 }*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_hash.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:17:49 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/08 00:56:54 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 10:47:33 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	_murmurhash2(const void *key, int len);
 
-size_t	map_default_hash(const char *key)
+size_t	_map_default_hash(const char *key)
 {
 	return (_murmurhash2(key, ft_strlen(key)));
 }
