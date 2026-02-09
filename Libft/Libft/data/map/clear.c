@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:20:51 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/09 14:22:27 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:00:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 void 	map_clear(t_map *ptr)
 {
-	for (size_t i = 0; ptr->size && i != ptr->hash_size; i++)
+	for (size_t i = 0; i != ptr->hash_size; i++)
 	{
 		if (ptr->values[i])
-		{
 			lst_clear(&ptr->values[i], (void(*)(void*))ptr->del);
-			ptr->size--;
-		}
 	}
-	if (ptr->size)
-		_map_error(MAP_BUG, &ptr->size);
 }

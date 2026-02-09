@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 21:55:16 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/09 12:33:45 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:54:52 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_map_val	t_map_val;
   default: 	keys are freed with free
   			values are not freed
   EXAMPLE:
-  void	del(t_map_val *pair){free(key), custom_free(val);}
+  void	del(t_map_val *pair){free(key), custom_free(val), free(pair);}
   map.del = del;
   the delete function is called when:
   `map_clear` method is called

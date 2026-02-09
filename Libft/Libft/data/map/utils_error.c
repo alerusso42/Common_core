@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:43:06 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/09 12:33:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:58:49 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	__map_error(t_map *ptr, int code, void *data, const char *caller)
 		MAP_SWITCH_LOG("Key %s already exist", data);
 	case MAP_NOTFOUND :
 		MAP_SWITCH_LOG("Key %s not found", data);
+	case MAP_BUG:
+		MAP_SWITCH_LOG("Bug: %s", data);
 	case MAP_EINVAL:
 	case MAP_INIT_EINVAL:
 		MAP_SWITCH_LOG("Bad parameter");

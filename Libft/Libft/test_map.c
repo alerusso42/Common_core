@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 12:12:08 by alerusso          #+#    #+#             */
-/*   Updated: 2026/02/09 12:39:18 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:07:44 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	del(t_map_val *pair)
 {
 	FREE(pair->key);
 	FREE(pair->val);
-}	
+	FREE(pair);
+}
 
 int	main()
 {
@@ -43,6 +44,8 @@ int	main()
 	map.del = del;
 	map_add(&map, "RED", RED);
 	map_add(&map, "GREEN", GREEN);
+	if (map_find(&map, "REDD") == true)
+		map_del(&map, "REDD");
 	map_add(&map, "BLUE", BLUE);
 	ft_printf("map values: RED{%s}GREEN{%s}BLUE{%s}\n", \
 	map_get(&map, "RED"), map_get(&map, "GREEN"), map_get(&map, "BLUE"));
