@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian:trixie
+FROM debian:bullseye
 
 # ANCHOR - sources
 # https://mariadb.com/docs

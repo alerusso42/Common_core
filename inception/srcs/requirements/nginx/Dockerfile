@@ -12,7 +12,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian:trixie
+FROM debian:bullseye
 
 #ARG CONF_PATH="/etc/nginx"
 #ANCHOR prepare files

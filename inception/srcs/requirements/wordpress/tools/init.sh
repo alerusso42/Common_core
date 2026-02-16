@@ -78,4 +78,4 @@ else
 fi
 #	8.	Avvia PHP-FPM
 echo -e "\033[32m[PHP-FPM] Avvio PHP-FPM in foreground\033[0m"
-exec /usr/sbin/php-fpm8.4 -F
+exec /usr/sbin/php-fpm7.4 -F
