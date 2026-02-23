@@ -32,7 +32,7 @@ stop:
 
 clean: stop
 
-fclean:
+fclean: clean
 	(clear ; cd srcs && \
 	docker-compose down -v && \
 	docker system prune -a -f --volumes && \
