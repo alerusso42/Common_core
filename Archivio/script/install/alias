@@ -1,0 +1,2 @@
+alias new="~/script/install/.sh"
+alias proglist="cat ~/script/install/list"

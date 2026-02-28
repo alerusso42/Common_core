@@ -1,0 +1,12 @@
+snap
+snapd
+code
+build_essential
+cmake
+libsd2-dev
+ibsd2-image-dev
+ibsd2-ttf-dev
+ibsd2-mixer-dev
+ibsd2-net-dev
+gdb
+valgrind
