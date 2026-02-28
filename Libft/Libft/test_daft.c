@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 17:21:47 by codespace         #+#    #+#             */
-/*   Updated: 2026/01/16 23:45:41 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/31 02:00:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main()
 {
 	char	***data;
 
-	daft_init("daft/DATA_DI", "SETTINGS.md");
+	daft_init("daft/DATA_DIR", "SETTINGS.md");
 	daft_init(NULL, NULL);
     daft_swap(POKEDEX);
 	data = daft_get("CALYREX");
@@ -48,10 +48,12 @@ int	main()
 
 void	print_3d(char ***s)
 {
-	if (s)
+	if (!s || 1)
+		return ;
+	for (int i = 0; s[i]; i++)
 	{
-		for (int i = 0; s[i]; i++)
-			for (int j = 0; s[i][j]; j++)
-				ft_printf("%s\n", s[i][j]);
+		ft_printf("$G%s$Z: ", s[i][0]);
+		for (int j = 1; s[i][j]; j++)
+			ft_printf("%s\n", s[i][j]);
 	}
 }

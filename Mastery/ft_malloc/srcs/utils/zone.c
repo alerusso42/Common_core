@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:31:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/17 01:25:51 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 02:19:05 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,13 @@ t_area	*zone_area_freed(t_list *zones, void *ptr)
 //used when a new mmap zone is needed
 t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 {
-	t_list		*node;
 	t_memzone	*new_zone;
 	void		*ptr;
 
 	ptr = mmap_syscall(data, size + sizeof(t_area));
 	if (!ptr)
 		return (error_malloc("zone_add: can't allocate memory\n"));
-	node = pool_alloc(data, sizeof(t_list));
-	if (!node)
-		return (munmap_syscall(data, ptr, size), NULL);
-	node->content = ptr;
-	new_zone = node->content;
+	new_zone = ptr;
 	*new_zone = (t_memzone){0};
 	new_zone->empty = true;
 	new_zone->longest_chunk = size - sizeof(t_memzone);
@@ -82,11 +77,11 @@ t_list	*zone_add(t_alloc *data, t_list **zones, uint32_t size)
 	new_zone->first_free_area->info = MEM_FREED;
 	*((t_area *)(((void *)new_zone) + size)) = (t_area){0};
 	new_zone->blocks_freed = 1;
-	new_zone->ptr_node = node;
 	new_zone->size = round_page(size, data->pagesize);
-	lst_front(zones, node);
+	new_zone->node.content = new_zone;
+	lst_front(zones, &new_zone->node);
 	data->bytes_alloc += size + sizeof(t_memzone);
-	return (node);
+	return (&new_zone->node);
 }
 
 //finds longest freed area in a zone

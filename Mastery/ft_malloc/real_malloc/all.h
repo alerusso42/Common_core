@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:58 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 21:40:53 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/26 02:42:51 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int				reset_fd(t_fd fd);
 
 //SECTION - functions prototypes
 
+bool	daft_iter(void **ptr);
 int 	daft_init(const char *path, const char *settings_filename);
 void	daft_quit(void);
 void	daft_swap(int enum_id);

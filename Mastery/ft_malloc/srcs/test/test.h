@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 17:21:38 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/11 22:19:24 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void *malloc_anonymous(size_t size);
 
 //SECTION - utils
 
-t_alloc	*_global_data(bool reset);
+t_alloc	*malloc_global_data(bool reset);
 int		round_page(int n, int pagesize);
 void	print_extreme(void *ptr, t_alloc *data, bool print);
 

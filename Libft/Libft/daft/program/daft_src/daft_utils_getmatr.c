@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:11:28 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/23 11:57:20 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/31 01:53:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ static void	*split_values(t_daft_data *data, t_daft_list *file, char *line)
 	i += sub_strlen(line + i, file->key_value_sep, INCLUDE);
 	matr = _daft_split(line + i, *file->values_sep, \
 	data->minimal_alloc_size, data->minimal_matrix_num);
+	if (!matr)
+		return (_daft_log(DAFT_LOG_MALLOC), NULL);
+	matr[0] = ft_calloc(data->minimal_alloc_size + i + 1, sizeof(char));
+	if (!matr[0])
+		return (free_matrix(matr), _daft_log(DAFT_LOG_MALLOC), NULL);
+	sub_strcpy(matr[0], line, file->key_value_sep, EXCLUDE);
 	return (matr);
 }
 

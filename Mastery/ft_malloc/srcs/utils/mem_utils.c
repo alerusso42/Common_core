@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 10:14:20 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/24 23:43:45 by codespace        ###   ########.fr       */
+/*   Updated: 2026/01/26 15:14:28 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,10 @@ inline int	round_page(int n, int pagesize)
 
 //used to aligned a pointer to max_align_t
 //same logic as round_page
+//returns aligned_ptr - ptr
 inline uint32_t	align_addr(void *ptr)
 {
-	uintptr_t	addr;
-
-	addr = (uintptr_t)ptr;
-	return (ALIGN - (addr % ALIGN));
-}
-
-//prints an error and returns NULL
-void	*error_malloc(char *s)
-{
-	err_printf("$RMalloc$Z:$R %s$Z\n", s);
-	return (NULL);
-}
-
-//prints an error, returns NULL, turn down malloc system
-void	*fatal_malloc(char *s)
-{
-	t_alloc	*data;
-
-	data = _global_data(false);
-	err_printf("Malloc, fatal: %s\n", s);
-	perror(NULL);
-	malloc_munmap_data(data);
-	data->error = true;
-	return (NULL);
+	return (ALIGN - (((uintptr_t)ptr) % ALIGN));
 }
 
 //mmap a new zone with len bytes
@@ -75,9 +53,11 @@ void	*mmap_syscall(t_alloc *data, uint32_t len)
 	PRINT("$Ymmap$Z: allocating %u bytes: ", len);
 	ptr = mmap(NULL, len, PROT_RDWR, MAP_AP, -1, 0);
 	if (ptr == (void *)-1)
-		return (NULL);
+		return (fatal_malloc("mmap failure"));
+	if (PRINT_FLAG)
+		ft_printf("New ptr $B%p$Z created\n", ptr);
 	if (data->ptr_max < ptr)
-		data->ptr_max = ptr;
+		data->ptr_max = ptr + len;
 	if (data->ptr_min > ptr)
 		data->ptr_min = ptr;
 	data->bytes_alloc += len;
@@ -106,10 +86,10 @@ uint32_t	identify_area(t_alloc *data, void *ptr)
 
 	if (data->error || !ptr)
 		return (MEM_ERROR);
-	if (ptr >= data->pool.mem && ptr <= data->pool.mem + data->pool.size)
-		return (MEM_INTERNAL);
+	if (ptr < data->ptr_min || ptr > data->ptr_max)
+		return (MEM_NO_HEAP);
 	area = ptr - sizeof(t_area);
-	if (area->info > (MEM_FREED | MEM_SET))
+	if (align_addr(ptr) != 16 || (area->info & (~MEM_FLAGS)) != 0)
 		return (MEM_INVALID);
 	else if (area->info &= MEM_FREED)
 		return (MEM_FREED);

@@ -21,8 +21,8 @@ OK)	fixare calcolo longest_chunk
 3)	stampa puntatore in esadecimale
 //TODO
 OK)	allineamento pagina
-1)	testare pool_realloc
-2)	realloc
+OK)	testare pool_realloc
+OK)	realloc
 3)	pulizia codice
 4)	cartella con test automatizzati
 5)	show_alloc_mem_ex()		
@@ -93,23 +93,23 @@ show_alloc_mem();*/
 	for (int i = 0; i != 50; i++)
 	{
 		fill(&p[i], rand() % max_size);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
 	for (int i = 0; i != 25; i++)
 	{
 		release(p[i]);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
 	for (int i = 50; i != 100; i++)
 	{
 		fill(&p[i], rand() % max_size);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
-	show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+	show_alloc_mem_ex(2);
 	for (int i = 25; i != 100; i++)
 	{
 		release(p[i]);
-		show_alloc_mem_ex(2 | MALL_SHOW_SILENT_FREED);
+		show_alloc_mem_ex(2);
 	}
 	del_filedata();
 	return 0;
@@ -180,15 +180,16 @@ int	main(int ac, char **av)
 	ft_printf("%s\n", s);
 	free(s);
 	test();
-	//print_extreme(NULL, _global_data(false), true);
+	//print_extreme(NULL, malloc_global_data(), true);
 	ft_printf("Program end!\n");
 	ft_printf("Internal Leak check: ");
-	if (_global_data(false)->bytes_alloc == _global_data(false)->bytes_freed)
+	if (malloc_global_data()->bytes_alloc == malloc_global_data()->bytes_freed)
 		ft_printf("$GSuccess!$z\n");
 	else
 	{
-		ft_printf("$RLeak! $z%d allocated, %d freed\n", _global_data(false)->bytes_alloc, _global_data(false)->bytes_freed);
-		ft_printf("Total leak: %d\n", _global_data(false)->bytes_alloc - _global_data(false)->bytes_freed);
+		ft_printf("$RLeak! $z%d allocated, %d freed\n", malloc_global_data()->bytes_alloc, malloc_global_data()->bytes_freed);
+		ft_printf("Total leak: %d\n", malloc_global_data()->bytes_alloc - malloc_global_data()->bytes_freed);
+		//show_alloc_mem_ex(256);
 	}
 	del_filedata();
 	//show_alloc_mem();
@@ -202,7 +203,6 @@ void	test(void)
 	char	***data;
 
 	daft_init("media", "SETTINGS.md");
-	daft_init(NULL, NULL);
     daft_swap(POKEDEX);
 	data = daft_get("CALYREX");
 	if (!data)
@@ -212,12 +212,12 @@ void	test(void)
 	print_3d(data);
 	for (int i = 0; i; i--)
 	{
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
 		daft_quit();
 		daft_quit();
-		daft_init("daft/DATA_DIR", "SETTINGS.md");
+		daft_init("media", "SETTINGS.md");
 	}
 	daft_quit();
 	daft_init("media", "SETTINGS.md");
@@ -229,7 +229,6 @@ void	test(void)
 
 void	print_3d(char ***s)
 {
-	return ;
 	if (s)
 	{
 		for (int i = 0; s[i]; i++)
@@ -257,9 +256,24 @@ int	main6()
 	free(s);
 	s = calloc(5, 10);
 	for (int i = 0; i != 65; i++)
-		write(1, &s[i], 1);
+		ft_printf("%c", s[i]);
 	ft_printf("\n");
 	return 0;
+}
+
+int	main7()//7
+{
+	void		*ptr;
+	int			stack_ptr;
+	uintptr_t	bad_ptr;
+
+	ptr = malloc(69);
+	free(NULL);
+	free(&stack_ptr);
+	free((void *)1);
+	bad_ptr = (uintptr_t)ptr + 1;
+	free((void *)bad_ptr);
+	free(ptr);
 }
 
 /*

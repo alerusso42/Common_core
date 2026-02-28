@@ -6,7 +6,7 @@
 /*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:59:37 by alerusso          #+#    #+#             */
-/*   Updated: 2025/09/23 12:15:30 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/31 01:44:19 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ char	**_daft_split(char const *s, char c, int string_size, int matr_size)
 	return (strings);
 }
 
+//string number starts from 1, because key is matr[0]
 static int	how_many_strings(const char *str, char c, int *s_n, int *i)
 {
 	if ((!str) || (c == 0))
 		return (1);
 	*i = 0;
-	*s_n = 0;
+	*s_n = 1;
 	while (str[*i] != '\0')
 	{
 		while ((str[*i] == c) && (str[*i] != '\0'))
@@ -86,7 +87,7 @@ static int	ft_alloc(char ***strings, const char *s, char c, int size[3])
 	*strings = (char **)ft_calloc((size[0] + size[2]), sizeof(char *));
 	if (*strings == NULL)
 		return (42);
-	s_num = 0;
+	s_num = 1;
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -106,6 +107,7 @@ static int	ft_alloc(char ***strings, const char *s, char c, int size[3])
 	return (0);
 }
 
+//index starts from 1, because key is matr[0]
 static void	ft_copy(char **strings, const char *str, char c, int str_num)
 {
 	int	i_str;
@@ -114,7 +116,7 @@ static void	ft_copy(char **strings, const char *str, char c, int str_num)
 	if (!strings)
 		return ;
 	i_str = 0;
-	str_num = 0;
+	str_num = 1;
 	while (str[i_str] != '\0')
 	{
 		i_matrix = 0;
@@ -134,12 +136,13 @@ static void	ft_copy(char **strings, const char *str, char c, int str_num)
 	strings[str_num] = NULL;
 }
 
+//index starts from 1, because key is matr[0]
 static int	add_new_strings(char **strings, int size[3])
 {
 	int	i;
 	int	total_size;
 
-	i = 0;
+	i = 1;
 	total_size = size[0] + size[2] - 1;
 	while (i < total_size)
 	{

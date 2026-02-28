@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/20 12:03:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void 	free(void *ptr)
 	t_alloc		*data;
 	t_memzone	*zone;
 
-	data = _global_data(false);
+	thread_safe(MALL_THREAD_LOCK);
+	data = malloc_global_data();
 	switch (identify_area(data, ptr))
 	{
 		case (MEM_ALLOC) :
@@ -28,15 +29,18 @@ void 	free(void *ptr)
 			munmap_zone_if_empty(data, zone);
 			break ;
 		case (MEM_FREED) :
-			return (WARNING("$RFree: $Z%p $Ralready freed$Z\n"));
-		case (MEM_INTERNAL) :
-			return ;
+			WARNING("$RFree: $Z%p $Ralready freed$Z\n");
+			break ;
 		case (MEM_INVALID) :
 			free_correct_area(data, ptr);
 			break ;
+		case (MEM_NO_HEAP) :
+			WARNING("$RFree: $Z%p$R is not a heap ptr$Z\n");
+			break ;
 		case (MEM_ERROR) :
-			return ;
+			break ;
 	}
+	thread_safe(MALL_THREAD_UNLOCK);
 }
 
 static void	free_correct_area(t_alloc *data, void *ptr)
@@ -62,17 +66,19 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
-	
 	if (zone->empty == false)
 		return ;
-	if (zone->ptr_node == data->zone_tiny)
+	if (&zone->node == data->zone_tiny)
 		data->zone_tiny = data->zone_tiny->next;
-	else if (zone->ptr_node == data->zone_small)
+	else if (&zone->node == data->zone_small)
 		data->zone_small = data->zone_small->next;
-	else if (zone->ptr_node == data->zone_large)
+	else if (&zone->node == data->zone_large)
 		data->zone_large = data->zone_large->next;
-	lst_delone(zone->ptr_node, NULL);
+	if (zone->node.prev)
+		zone->node.prev->next = zone->node.next;
+	if (zone->node.next)
+		zone->node.next->prev = zone->node.prev;
 	munmap_syscall(data, zone, zone->size);
 	if (!data->zone_tiny && !data->zone_small && !data->zone_large)
-		return (malloc_munmap_data(data));
+		return (malloc_munmap_data());
 }

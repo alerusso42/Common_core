@@ -25,7 +25,7 @@ typedef	enum e_show_alloc_mem_flags
 	MALL_SHOW_PRINT_BIT = 2,
 	MALL_SHOW_PRINT_HEX = 16,
 	MALL_SHOW_PRINT_BYTE = 256,
-	MALL_SHOW_SILENT_FREED = 1 << 9,
+	MALL_SHOW_FREED = 1 << 9,
 }		e_show_alloc_mem_flags;
 
 void 	*malloc(size_t size);
@@ -43,6 +43,6 @@ void 	*valloc(size_t __size);
 void 	*pvalloc(size_t __size);
 
 //FIXME - togliere: solo debug
-t_alloc	*_global_data(bool reset);
+t_alloc	*malloc_global_data();
 
 #endif
