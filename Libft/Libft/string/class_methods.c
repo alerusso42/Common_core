@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   class_methods.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 14:51:42 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/05 22:17:13 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/03/02 17:08:00 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static err		_str_store_methods(t_str *s, bool reset)
 	{
 		if (str_allocated != 0)
 			str_allocated -= 1;
-		if (str_allocated == 0 && reset)
+		if (str_allocated == 0 || reset)
 		{
 			STR_LOG("Since no more string exists, methods are freed.\n");
 			FREE(methods);

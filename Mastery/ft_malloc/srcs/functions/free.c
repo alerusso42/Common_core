@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 18:20:56 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/03/13 13:46:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 static void	free_correct_area(t_alloc *data, void *ptr);
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone);
 
+/// @brief mark the area as freed. 
+///			If the entire zone is empty, is sent to munmap.
+///			In case of errors, a warning is print on stderr (see malloc.h)
+/// @param ptr ptr to the start of the memory to free
 void 	free(void *ptr)
 {
 	t_alloc		*data;
@@ -43,6 +47,10 @@ void 	free(void *ptr)
 	thread_safe(MALL_THREAD_UNLOCK);
 }
 
+/// @brief finds the correct area to free, in case of errors.
+///			if ptr is not a heap ptr, this function is not called.
+/// @param data malloc data
+/// @param ptr ptr to the start of the memory to free
 static void	free_correct_area(t_alloc *data, void *ptr)
 {
 	t_area	*area;
@@ -64,6 +72,10 @@ static void	free_correct_area(t_alloc *data, void *ptr)
 	}
 }
 
+/// @brief if the mem to free is the head, head is updated.
+///	@attention if no memory exist in any list, the allocator data is munmap.
+/// @param data malloc data
+/// @param zone ptr of the zone to munmap
 static void	munmap_zone_if_empty(t_alloc *data, t_memzone *zone)
 {
 	if (zone->empty == false)

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   area.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:59:57 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 05:14:47 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/03/13 14:09:06 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
+/// @brief set an area as allocated.
+///			if there is enough space for another, area is split in two.
+/// @param zone ptr to the zone data
+/// @param area ptr to the area data
+/// @param size size of the area
 void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 {
 	uint32_t	area_size;
@@ -35,6 +40,10 @@ void	area_alloc(t_memzone *zone, t_area *area, t_bytelist size)
 		zone->longest_chunk = zone_find_longest_chunk(zone);
 }
 
+/// @brief finds the first available area of size bytes in a zone
+/// @param area ptr to the area data
+/// @param size size of the area
+/// @return first available area, NULL if an error occurred
 t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 {
 	uint32_t	alignment;
@@ -53,6 +62,10 @@ t_area	*area_find_alloc_block(t_area *area, t_bytelist size)
 	return (NULL);
 }
 
+/// @brief mark an area as freed; try merging it with left and right areas.
+///			if there are no nearby area, the zone is marked as empty.
+/// @param area ptr to the area data
+/// @return ptr to the zone data
 t_memzone	*area_freed(t_area *area)
 {
 	t_memzone	*zone;
@@ -89,6 +102,11 @@ t_memzone	*area_freed(t_area *area)
 	return (zone);
 }
 
+/// @brief used when a misaligned area is given to free.
+///			the correct ptr is found and returned.
+/// @param area ptr to the area data
+/// @param ptr ptr given by user
+/// @return ptr of correct area, NULL if search fails.
 t_area	*area_find_freed_block(t_area *area, void *ptr)
 {
 	void	*head;

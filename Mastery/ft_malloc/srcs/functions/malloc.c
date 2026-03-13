@@ -14,6 +14,9 @@
 
 static void	*get_mem(t_alloc *dt, uint32_t size, t_list **zones, int zone_size);
 
+/// @brief returns heap memory. Manages kernel syscall mmap internally.
+/// @param size bytes needed for memory chunk
+/// @return aligned ptr of heap memory, NULL if an error occurred
 void 	*malloc(size_t size)
 {
 	t_alloc		*data;
@@ -39,6 +42,13 @@ void 	*malloc(size_t size)
 	return (ptr);
 }
 
+/// @brief if there is an available area of size bytes, returns it.
+///			else, create a new zone calling mmap, then returns its first area.
+/// @param dt ptr of malloc data
+/// @param size bytes needed by user
+/// @param zones ptr to the list of zones (3: little, small, large zone lists)
+/// @param zone_size the total size of the zone.
+/// @return aligned ptr of heap memory, NULL if an error occurred
 static void	*get_mem(t_alloc *dt, uint32_t size, t_list **zones, int zone_size)
 {
 	void	*ptr;

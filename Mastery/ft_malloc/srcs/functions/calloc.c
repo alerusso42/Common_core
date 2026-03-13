@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alerusso <alessandro.russo.frc@gmail.co    +#+  +:+       +#+        */
+/*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:17 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/26 04:43:59 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/03/13 13:47:31 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/malloc_internal.h"
 
-//returns ptr with malloc. Size is nmemb * size
+/// @brief returns ptr with malloc. Size is nmemb * size
+/// @param nmemb number of elements to allocate
+/// @param size size in bytes of each element to allocate
+/// @return aligned ptr of heap memory, NULL if an error occurred
 void 	*calloc(size_t nmemb, size_t size)
 {
 	size_t		total;

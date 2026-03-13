@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:52:32 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/03/13 13:54:42 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static size_t	show_zone(t_list *zones, char *name, int *index, uint32_t flags);
 static size_t	show_area(t_area *area, int *index, uint32_t flags);
 static void		mem_dump(t_area *area, uint32_t flags);
 
+/// @brief wrapper to show_alloc_mem(flags)
 void	show_alloc_mem()
 {
 	show_alloc_mem_ex(0);
@@ -31,6 +32,17 @@ void	show_alloc_mem()
 	base 256 	(byte representation)
 	
 -	you can pass 1 to see all of them
+-	you can pass 512 to see memory marked as free.
+-	you SHOULD use this function using a bitmask of this enum:
+
+typedef	enum e_show_alloc_mem_flags
+{
+	MALL_SHOW_PRINT_ALL = 1,
+	MALL_SHOW_PRINT_BIT = 2,
+	MALL_SHOW_PRINT_HEX = 16,
+	MALL_SHOW_PRINT_BYTE = 256,
+	MALL_SHOW_FREED = 1 << 9,
+}		e_show_alloc_mem_flags;
 */
 void	show_alloc_mem_ex(uint32_t flags)
 {

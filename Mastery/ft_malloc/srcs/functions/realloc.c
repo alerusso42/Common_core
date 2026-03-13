@@ -6,7 +6,7 @@
 /*   By: alerusso <alerusso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:21:25 by alerusso          #+#    #+#             */
-/*   Updated: 2026/01/27 12:40:25 by alerusso         ###   ########.fr       */
+/*   Updated: 2026/03/13 13:52:11 by alerusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 static inline void	*expand_mem(void *ptr, size_t size);
 
+/// @brief expand ptr memory. 
+///			If size <= ptr.size, realloc does nothing.
+///			If there is available space near the ptr, ptr metadata are updated.
+///			Else, a new malloc call is performed, memcpy is called.
+/// @param ptr ptr to the start of the memory to realloc
+/// @param size bytes needed for memory chunk
+/// @return aligned ptr of heap memory, NULL if an error occurred
 void 	*realloc(void *ptr, size_t size)
 {
 	t_alloc		*data;
@@ -42,6 +49,11 @@ void 	*realloc(void *ptr, size_t size)
 	return (thread_safe(MALL_THREAD_UNLOCK), NULL);
 }
 
+/// @brief called when memory is not enough. 
+///			A malloc and memcpy call is performed.
+/// @param ptr ptr to the start of the old memory
+/// @param size bytes of the old memory
+/// @return aligned ptr of heap memory, NULL if an error occurred
 static inline void	*expand_mem(void *ptr, size_t size)
 {
 	void		*new_ptr;
